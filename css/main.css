@@ -1223,7 +1223,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #7398ac;
+  background: #6c0eff;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2601,7 +2601,7 @@ ul.breadcrumb li + li:last-child {
   margin-top: 16px;
 }
 body {
-  background: url("./images/Kona_gintama.jpg");
+  background: url("/images/Kona_gintama.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
