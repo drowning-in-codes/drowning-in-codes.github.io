@@ -1223,7 +1223,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #ff1cfb;
+  background: #7398ac;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2600,10 +2600,24 @@ ul.breadcrumb li + li:last-child {
 .back-to-top.back-to-top-on {
   margin-top: 16px;
 }
-code {
-  color: #ff7600;
-  background: #fbf7f8;
-  margin: 2px;
+body {
+  background: url("./images/Kona_gintama.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: 50% 50%;
+}
+.content-wrap {
+  opacity: 0.9;
+}
+.sidebar {
+  opacity: 0.9;
+}
+.header-inner {
+  background: rgba(255,255,255,0.9);
+}
+.popup {
+  opacity: 0.9;
 }
 .highlight,
 pre {
@@ -2619,4 +2633,11 @@ pre {
 .site-author-image:hover {
   -webkit-animation: swing 1s;
   animation: swing 1s;
+}
+.post {
+  margin-top: 60px;
+  margin-bottom: 60px;
+  padding: 25px;
+  -webkit-box-shadow: 0 0 5px rgba(202,203,203,0.5);
+  -moz-box-shadow: 0 0 5px rgba(202,203,204,0.5);
 }
