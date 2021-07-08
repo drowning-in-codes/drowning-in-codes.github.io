@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>C++与Qt开发入门_1.安装与下载</title>
+      <link href="2021/07/08/C++%E4%B8%8EQt%E5%BC%80%E5%8F%91%E5%85%A5%E9%97%A8_1.%E5%AE%89%E8%A3%85%E4%B8%8E%E4%B8%8B%E8%BD%BD/"/>
+      <url>2021/07/08/C++%E4%B8%8EQt%E5%BC%80%E5%8F%91%E5%85%A5%E9%97%A8_1.%E5%AE%89%E8%A3%85%E4%B8%8E%E4%B8%8B%E8%BD%BD/</url>
+      
+        <content type="html"><![CDATA[<p>闲来无事,我玩玩Qt.不过我看网上说这东西有点过时,还提到了Futter</p><p>不过我已经无所谓了</p><span id="more"></span><p>下载镜像网址</p><p><a href="https://links.jianshu.com/go?to=http%3A%2F%2Fdownload.qt.io%2Farchive%2Fqt%2F">http://download.qt.io/archive/qt/</a></p><p>安装可以参照<a href="https://links.jianshu.com/go?to=http%3A%2F%2Fdownload.qt.io%2Farchive%2Fqt%2F">http://download.qt.io/archive/qt/</a></p><p>我是vs2019+qt5.14</p><p>不过我在下载时遇到几个问题,在这里提出来</p><ol><li>我用了visual studio搭配Qt,所以需要vsaddin这个插件.既可以在那个镜像网址里下载(速度较快),也可以在vs里下载(我试了试,翻墙速度快很多)</li><li>如果用vs的话需要msvc,一般情况用MinGW.UWP是windows平台,这些据情况安装</li><li>如果vscode是2018或以上,qt5.14只有msvc2017,如果没有装msvc2017的话,套件会出现警告,不过影响不大</li></ol><p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210708205613.png" alt="image-20210708205605907"></p><ol><li>关于Qt for desktop,我之前记得应该有这个东西的,现在这版本没找到了。</li></ol><p>当我想打包程序时需要用到windeployqt(<a href="https://blog.csdn.net/my1324/article/details/103270782">Qt5程序打包发布（Windows版）（一）_my1324的博客-CSDN博客_qt打包发布windows</a>),照这个教程不太行</p><p>不过只要把相应编译器下包含windeployqt的文件夹bin设为环境变量path就行</p><p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210708210707.png" alt="image-20210708210707199" style="zoom: 67%;" /></p><p>这样就方便以后打包可执行程序了.</p><p>先入门大概写到这,后面慢慢琢磨</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> fun </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Qt </tag>
+            
+            <tag> C++ </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>课程资源分享</title>
       <link href="2021/07/08/%E8%AF%BE%E7%A8%8B%E8%B5%84%E6%BA%90%E5%88%86%E4%BA%AB/"/>
       <url>2021/07/08/%E8%AF%BE%E7%A8%8B%E8%B5%84%E6%BA%90%E5%88%86%E4%BA%AB/</url>
