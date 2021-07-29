@@ -1,0 +1,1177 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<script src="/live2d-widget/autoload.js"></script>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/blog_32px.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/blog_32px.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/blog_16px.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-pace-theme-barber-shop.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"sekyoro.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":240,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+<link href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css" rel="stylesheet">
+  <meta name="description" content="稀疏矩阵1.介绍概念：矩阵中大多数元素为0。 直观上讲非零元素低于5%。 零元素代表着没有意义的值，所以零元素较多情况下，用链表代替存储比二维数组要好很多。 下面介绍三种表示方法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="稀疏矩阵">
+<meta property="og:url" content="http://sekyoro.top/2021/04/20/%E7%A8%80%E7%96%8F%E7%9F%A9%E9%98%B5/index.html">
+<meta property="og:site_name" content="Sekyoro的博客小屋">
+<meta property="og:description" content="稀疏矩阵1.介绍概念：矩阵中大多数元素为0。 直观上讲非零元素低于5%。 零元素代表着没有意义的值，所以零元素较多情况下，用链表代替存储比二维数组要好很多。 下面介绍三种表示方法">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20210418161823660.png">
+<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20210418161944713.png">
+<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20210418163820144.png">
+<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20210418181608401.png">
+<meta property="article:published_time" content="2021-04-20T08:13:15.000Z">
+<meta property="article:modified_time" content="2021-04-20T15:00:19.749Z">
+<meta property="article:author" content="Sekyoro">
+<meta property="article:tag" content="data_structure">
+<meta property="article:tag" content="c">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20210418161823660.png">
+
+<link rel="canonical" href="http://sekyoro.top/2021/04/20/%E7%A8%80%E7%96%8F%E7%9F%A9%E9%98%B5/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+ 
+
+<script>
+  var OriginTitile = document.title;
+  var titleTime;
+  document.addEventListener("visibilitychange", function() {
+    if (document.hidden) {
+      document.title = "(つェ⊂)我藏好了哦~" + OriginTitile;
+      clearTimeout(titleTime);
+    } else {
+      document.title = "(*´∇｀*) 被你发现啦~" + OriginTitile;
+      titleTime = setTimeout(function() {
+        document.title = OriginTitile;
+      }, 2000);
+    }
+  });
+</script>
+
+
+
+  <script src="/js/src/activate-power-mode.min.js"></script>
+  <script>
+    POWERMODE.colorful = true;
+    POWERMODE.shake = false;
+    document.body.addEventListener('input', POWERMODE);
+  </script>
+
+
+  <title>稀疏矩阵 | Sekyoro的博客小屋</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+<!-- require JQuery -->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+<!-- require pjax -->
+<script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/index.min.js"></script>
+
+
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+   <script type="text/javascript" src="/js/src/fireworks.js"></script>
+
+
+  <div class="container use-motion">
+    <div class="headband"></div>
+	
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Sekyoro的博客小屋</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://sekyoro.top/2021/04/20/%E7%A8%80%E7%96%8F%E7%9F%A9%E9%98%B5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://i.loli.net/2021/05/17/YqoavnXdGTpPO9R.jpg">
+      <meta itemprop="name" content="Sekyoro">
+      <meta itemprop="description" content="什么也无法舍弃的人，什么也做不了.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sekyoro的博客小屋">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          稀疏矩阵
+        </h1>
+
+        <div class="post-meta">
+		
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-04-20 16:13:15 / 修改时间：23:00:19" itemprop="dateCreated datePublished" datetime="2021-04-20T16:13:15+08:00">2021-04-20</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/study/" itemprop="url" rel="index"><span itemprop="name">study</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>13k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>12 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="稀疏矩阵"><a href="#稀疏矩阵" class="headerlink" title="稀疏矩阵"></a>稀疏矩阵</h1><h2 id="1-介绍"><a href="#1-介绍" class="headerlink" title="1.介绍"></a>1.介绍</h2><p>概念：矩阵中大多数元素为0。</p>
+<p>直观上讲非零元素低于5%。</p>
+<p>零元素代表着没有意义的值，所以零元素较多情况下，用链表代替存储比二维数组要好很多。</p>
+<p>下面介绍三种表示方法</p>
+<span id="more"></span>
+<h2 id="2-三元组表示"><a href="#2-三元组表示" class="headerlink" title="2.三元组表示"></a>2.三元组表示</h2><p>只存储非零元素，由于非零元素位置不存在概率，则利用行，列，值的信息进行存储，这是容易想到的。</p>
+<script type="math/tex; mode=display">
+\left\{
+\begin{matrix}
+0 & 4 & 0 \\
+1 & 2 & 0 \\
+0 & 0 & 6 
+\end{matrix}
+\right\}\tag{1}</script><p>随便写个例子(虽然不满足稀疏矩阵定义)</p>
+<p>三元组表示法可以写为（假设起始行与列为1）一维数组。</p>
+<p>TSMatrix[0],TSMatrix[1],TSMatrix[2]</p>
+<p>数组元素为结构体Triple,结构体包含行列与值的信息</p>
+<p>三元组表中的元素是有序排列的。(按照行优先、行相同列大小方式)</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MaxSize 20000</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">        <span class="keyword">int</span>  i, j;		<span class="comment">/* 行号和列号 */</span></span><br><span class="line">        ElemType  elem;	<span class="comment">/* 元素值 */</span></span><br><span class="line">&#125;Triple;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">        Triple  data[MaxSize];</span><br><span class="line">        <span class="keyword">int</span>  mu, nu, tu;	<span class="comment">/* 行数、列数和非零元个数*/</span></span><br><span class="line">&#125;TSMatrix;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>这种表示法节省了空间</p>
+<h3 id="1-三元组表示法转置"><a href="#1-三元组表示法转置" class="headerlink" title="1.三元组表示法转置"></a>1.三元组表示法转置</h3><p>矩阵转置是将行(列)上的元素换到列(行)上</p>
+<p>不用三元组表示的话，利用两层for循环，效率O(m*n)</p>
+<p><strong>列序递增转置法</strong></p>
+<p>采用被转置矩阵三元组表A的列序递增进行转置，这样转置后的矩阵三元组表是以行序递增的。</p>
+<p>所以，先以被转置矩阵A的列为主序,内层为每个A矩阵的非零元素</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Status <span class="title">TransposeSMatrix</span> <span class="params">(TSMatrix M, TSMatrix *T)</span></span></span><br><span class="line"><span class="function"></span>&#123;<span class="comment">//M为被转置矩阵，T为转置后的矩阵</span></span><br><span class="line">    <span class="keyword">int</span>  p, q, col;</span><br><span class="line">    T-&gt;mu = M.nu;  T-&gt;nu = M.mu;  T-&gt;tu = M.tu;<span class="comment">//T的行数为M的列数</span></span><br><span class="line">    <span class="keyword">if</span> (T-&gt;tu)&#123;</span><br><span class="line">        q = <span class="number">0</span>;<span class="comment">//q可以计数,当转置一个后q+1</span></span><br><span class="line">        <span class="keyword">for</span> (col = <span class="number">0</span>; col&lt; M.nu; ++col)</span><br><span class="line">            <span class="keyword">for</span> (p = <span class="number">0</span>; p&lt; M.tu; ++p)<span class="comment">//p为三元组表元素的位置，for循环不断扫描三元组表,查看是否有元素的列数为col，若有则转置</span></span><br><span class="line">                <span class="keyword">if</span> (M.data[p].j == col) &#123;</span><br><span class="line">                    T-&gt;data[q].i = M.data[p].j;</span><br><span class="line">                    T-&gt;data[q].j = M.data[p].i;</span><br><span class="line">                    T-&gt;data[q].elem = M.data[p].elem;</span><br><span class="line">                    q++;</span><br><span class="line">                &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>算法时间效率O(M.nu×M.tu),for两层循环</p>
+<p>当矩阵中非零元个数tu和mu<em>nu同数量级时，则该算法的时间复杂度为O(M.mu</em>M.nu2）。因此该算法只适用于M.tu &lt;&lt; M.mu*M.nu的情况。</p>
+<p><strong>一次定位快速转置法</strong></p>
+<p>刚才的算法效率并不是很高，想要提高可以通过减少for循环</p>
+<p>如果能预先确定矩阵M中每一列（即T中的每一行）的第一个非零元素在T中的合适位置，那么在对M进行转置时就可以直接放到T中的恰当位置上去。为了确定这些位置，应先求得M的每一列中非零元的个数，进而求得每一列的第一个非零元在T中的位置。(M为被转置矩阵，T为转置后的矩阵)</p>
+<p>为了”一次定位”，需要知道</p>
+<ol>
+<li>待转置矩阵A中的每一列非零元素总数</li>
+<li>A中的每一列第一个非零元素在三元组表中位置</li>
+</ol>
+<p>对于第一个,就是转制后矩阵B每一行的非零元个数，设数组num[],则num[col]表示A的第col列非零元素个数;对于第二点,设pos[]，pos[col]表示A的第col列第一个非零元在<strong>B三元组表</strong>的位置。</p>
+<p>num[]比较好算，扫一遍三元组表，遇到col值便+1(数组下标法)</p>
+<p>pos[]要麻烦一点，它是三元组表中元素的位置,可以通过迭加计算</p>
+<p>pos[1] = 1（假设,这里也可以是0，随意了）</p>
+<p>pos[col] = pos[col-1] + num[col-1]</p>
+<p>具体做法是pos[col]是第col列第一个非零元在三元组表的顺序，当有一个元素加入到B时，则pos[col] = pos[col]+1,使pos[col]始终指向A中第col列中下一个非零元在B的正确存放位置。</p>
+<p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20210418161823660.png" alt="image-20210418161823660" style="zoom:80%;" /></p>
+<p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20210418161944713.png" alt="image-20210418161944713" style="zoom:80%;" /></p>
+<p>如上图</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Status <span class="title">FastTransposeSMatrix</span> <span class="params">(TSMatrix M, TSMatrix *T)</span></span></span><br><span class="line"><span class="function"></span>&#123;    <span class="keyword">int</span>   col, p, q, t;</span><br><span class="line">      T-&gt;mu = M.nu; T-&gt;nu = M.mu; T-&gt;tu = M.tu;</span><br><span class="line">      <span class="keyword">if</span> (T-&gt;tu) &#123;	</span><br><span class="line">            <span class="keyword">for</span> (col=<span class="number">0</span>; col&lt; M.nu; ++col)  num[col] = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span> (t = <span class="number">0</span>; t &lt; M.tu; ++t) <span class="comment">/*统计每列的非零元个数*/</span></span><br><span class="line">                  ++num[M.data[t].j];</span><br><span class="line">            cpot[<span class="number">0</span>] = <span class="number">0</span>; 	<span class="comment">/*计算每列第一个非零元转置后的位置*/</span></span><br><span class="line">          <span class="keyword">for</span> (col = <span class="number">1</span>; col &lt; M.nu; ++col)</span><br><span class="line">     cpot[col] = cpot[col<span class="number">-1</span>] +num[col<span class="number">-1</span>];</span><br><span class="line">            <span class="keyword">for</span> (p = <span class="number">0</span>; p &lt; M.tu; ++p)&#123;</span><br><span class="line">                  col = M.data[p].j; q = cpot[col];</span><br><span class="line">           T-&gt;data[q].i =M.data[p].j; </span><br><span class="line">          T-&gt;data[q].j = M.data[p].i;</span><br><span class="line">          T-&gt;data[q].elem =M.data[p].elem;</span><br><span class="line">              ++cpot[col];<span class="comment">//当一列有一个元素转置后，位置+1指向下一个该列非零元素</span></span><br><span class="line">            &#125;  <span class="comment">/* for */</span></span><br><span class="line">      &#125;  <span class="comment">/* if */</span></span><br><span class="line">      <span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>O(M.nu+M.tu)。<br>即使非零元个数与mu<em>nu同数量级，其时间复杂度为O(M.mu </em> M.nu)，与经典算法时间复杂度相同</p>
+<p><strong>总结</strong></p>
+<p>三元组顺序表（有序的双下标法）的特点：<br>（1）便于进行以行顺序处理的矩阵运算。<br>（2）若需按行号存取某一行的非零元，需从开始进行查找。</p>
+<h3 id="2-三元组表示法加法"><a href="#2-三元组表示法加法" class="headerlink" title="2.三元组表示法加法"></a>2.三元组表示法加法</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> maxsize 101</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">Tripe</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> data;</span><br><span class="line">    <span class="keyword">int</span> row;</span><br><span class="line">    <span class="keyword">int</span> col;</span><br><span class="line">&#125; Tripe;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">TSmatrix</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> num;</span><br><span class="line">    <span class="keyword">int</span> row,col;</span><br><span class="line">    Tripe Element[maxsize];</span><br><span class="line">&#125; TSmatrix, *pTsmatrix;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">initial</span><span class="params">(pTsmatrix)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(pTsmatrix, pTsmatrix, pTsmatrix)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">(pTsmatrix)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    pTsmatrix a = (pTsmatrix)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(TSmatrix));</span><br><span class="line">    pTsmatrix b = (pTsmatrix)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(TSmatrix));</span><br><span class="line">    pTsmatrix c = (pTsmatrix)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(TSmatrix));</span><br><span class="line">    <span class="keyword">int</span> r,col;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d %d&quot;</span>,&amp;r,&amp;col);</span><br><span class="line">    a-&gt;row = b-&gt;row = c-&gt;row = r;</span><br><span class="line">    a-&gt;col = b-&gt;col = c-&gt;col = col;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d %d&quot;</span>, &amp;a-&gt;num, &amp;b-&gt;num);</span><br><span class="line">    initial(a);</span><br><span class="line">    initial(b);</span><br><span class="line">    add(a, b, c);</span><br><span class="line">    print(c);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">(pTsmatrix result)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= result-&gt;num; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d %d %d\n&quot;</span>, result-&gt;Element[i].row, result-&gt;Element[i].col, result-&gt;Element[i].data);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(pTsmatrix a, pTsmatrix b, pTsmatrix c)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">1</span>, j = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> k = <span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span> ((i &lt;= a-&gt;num) &amp;&amp; (j &lt;= b-&gt;num))</span><br><span class="line">    &#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> ((a-&gt;Element[i].row == b-&gt;Element[j].row) &amp;&amp; (a-&gt;Element[i].col == b-&gt;Element[j].col))</span><br><span class="line">        &#123;<span class="comment">//两个非零元行相同列相同，则进行相加并判断值是否为0</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> ((a-&gt;Element[i].data + b-&gt;Element[j].data) == <span class="number">0</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                i++;</span><br><span class="line">                j++;<span class="comment">//值为0则不管，i,j递增</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                k++;</span><br><span class="line">                c-&gt;Element[k].data = a-&gt;Element[i].data + b-&gt;Element[j].data;</span><br><span class="line">                c-&gt;Element[k].row = a-&gt;Element[i].row;</span><br><span class="line">                c-&gt;Element[k].col = a-&gt;Element[i].col;</span><br><span class="line">                i++;</span><br><span class="line">                j++;<span class="comment">//值不为0,则赋值并递增i,j,k</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> ((a-&gt;Element[i].row &lt; b-&gt;Element[j].row) || (a-&gt;Element[i].row == b-&gt;Element[j].row &amp;&amp; (a-&gt;Element[i].col &lt; b-&gt;Element[j].col)))</span><br><span class="line">        &#123;<span class="comment">//若a的非零元行数小于b的非零元,意味着c = a+0 则直接将a的值赋给c</span></span><br><span class="line">        <span class="comment">//后面同理，因为a元素对应在b矩阵处值为0</span></span><br><span class="line">        <span class="comment">//i,k递增</span></span><br><span class="line">            k++;</span><br><span class="line">            c-&gt;Element[k].row = a-&gt;Element[i].row;</span><br><span class="line">            c-&gt;Element[k].col = a-&gt;Element[i].col;</span><br><span class="line">            c-&gt;Element[k].data = a-&gt;Element[i].data;</span><br><span class="line">            i++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;<span class="comment">//剩下的情况就是b矩阵的值的位置对应在a矩阵中的值为0</span></span><br><span class="line">        <span class="comment">//即 c = 0+b</span></span><br><span class="line">        <span class="comment">//j,k递增</span></span><br><span class="line">            k++;</span><br><span class="line">            c-&gt;Element[k].row = b-&gt;Element[j].row;</span><br><span class="line">            c-&gt;Element[k].col = b-&gt;Element[j].col;</span><br><span class="line">            c-&gt;Element[k].data = b-&gt;Element[j].data;</span><br><span class="line">            j++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> (i &lt;= a-&gt;num)</span><br><span class="line">    &#123;<span class="comment">//若a矩阵中还有未处理完的非零元，则直接加上</span></span><br><span class="line">        k++;</span><br><span class="line">        c-&gt;Element[k].row = a-&gt;Element[i].row;</span><br><span class="line">        c-&gt;Element[k].col = a-&gt;Element[i].col;</span><br><span class="line">        c-&gt;Element[k].data = a-&gt;Element[i].data;</span><br><span class="line">        i++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> (j &lt;= b-&gt;num)</span><br><span class="line">    &#123;<span class="comment">//道理同上,b矩阵的值直接赋给c</span></span><br><span class="line">        k++;</span><br><span class="line">        c-&gt;Element[k].row = b-&gt;Element[j].row;</span><br><span class="line">        c-&gt;Element[k].col = b-&gt;Element[j].col;</span><br><span class="line">        c-&gt;Element[k].data = b-&gt;Element[j].data;</span><br><span class="line">        j++;</span><br><span class="line">    &#125;</span><br><span class="line">    c-&gt;num = k;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">initial</span><span class="params">(pTsmatrix p)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= p-&gt;num; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d %d %d&quot;</span>, &amp;p-&gt;Element[i].row, &amp;p-&gt;Element[i].col, &amp;p-&gt;Element[i].data);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="3-行逻辑连接的顺序表"><a href="#3-行逻辑连接的顺序表" class="headerlink" title="3.行逻辑连接的顺序表"></a>3.行逻辑连接的顺序表</h2><p>由上题快速转置，我们可以想到将pos[]数组放在结构体里，得到行逻辑连接顺序表</p>
+<p>概念:为了便于随机存取任意一行的非零元，则需知道每一行的第一个非零元在三元组表中的位置。为此，可将快速转置矩阵的算法中创建的辅助数组cpot，rpos固定在稀疏矩阵的存储结构中。这种带“行链接信息”的三元组表称为行逻辑链接的顺序表。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span>&#123;</span></span><br><span class="line">        Triple  data[MaxSize];</span><br><span class="line">        <span class="keyword">int</span>  rpos[MaxRC+<span class="number">1</span>];<span class="comment">//数组起始下标为1</span></span><br><span class="line">        <span class="keyword">int</span>  mu, nu, tu;<span class="comment">//分别为行数，列数，非零元个数</span></span><br><span class="line">&#125;RLSMatrix;</span><br></pre></td></tr></table></figure>
+<h4 id="矩阵乘法"><a href="#矩阵乘法" class="headerlink" title="矩阵乘法"></a>矩阵乘法</h4><p>以上述结构进行矩阵乘法，可以体现出其优越性</p>
+<p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20210418163820144.png" alt="image-20210418163820144"></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">C=AxB</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (i=<span class="number">0</span>; i&lt;m; i++) </span><br><span class="line">    <span class="keyword">for</span> (j=<span class="number">0</span>; j&lt;l; j++)</span><br><span class="line">    &#123;</span><br><span class="line">        C[i][j]=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (k=<span class="number">0</span>; k&lt;n; k++)</span><br><span class="line">            C[i][j] += A[i][k]*B[k][j]</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>矩阵的乘法，当两个值其中一个为0，则乘积为0，因此，应免去这种无效操作。</p>
+<p>例如矩阵元素(1,2,4)与(2,3,6)则可以算出(1,3,24)</p>
+<p>但是若没有相对应的元素(即左乘数的列==右乘数的行),则乘积为0.</p>
+<p>因此,只需在右乘数中寻找符合的非零值，利用上述数据结构特点。</p>
+<p>rpos[row]为第row行第一个非零元素在三元组表中的位置</p>
+<p><strong>基本操作</strong></p>
+<p>M×N</p>
+<p>对于M中每个元素，找到N中满足条件的值，求的乘积。</p>
+<p>矩阵相应位置的值为几个乘积的和，所以设置一个累计和的变量，初值为0.</p>
+<p><strong>易忽略点</strong></p>
+<p>两个稀疏矩阵相乘的值不一定是稀疏矩阵。</p>
+<p>因为几个乘积的和不一定非零，所以算出值后需要检验。</p>
+<p>若为0则跳过</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Status <span class="title">MultiSMatrix</span><span class="params">(RLSMatrix M, RLSMatrix N, RLSMatrix *Q)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> arow, brow, ccol, p, q, t;</span><br><span class="line">    <span class="keyword">float</span> ctemp[];</span><br><span class="line">    <span class="keyword">if</span> (M.mu != N.nu)</span><br><span class="line">        <span class="keyword">return</span> ERROR;</span><br><span class="line">    Q-&gt;mu = M.mu;</span><br><span class="line">    Q-&gt;nu = N.nu;</span><br><span class="line">    Q-&gt;tu = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span> (M.tu * N.tu != <span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span> (arow = <span class="number">0</span>; arow &lt; M.mu; ++arow)</span><br><span class="line">        &#123;</span><br><span class="line">            ctemp[] = <span class="number">0</span>; <span class="comment">//memset(ctemp,0,n*sizeof(float));</span></span><br><span class="line">            Q-&gt;rpos[arow] = Q-&gt;tu;</span><br><span class="line">            <span class="keyword">for</span> (p = M.rpos[arow]; p &lt; M.rpos[arow + <span class="number">1</span>]; ++p)</span><br><span class="line">            &#123;</span><br><span class="line">                brow = M.data[p].j;</span><br><span class="line">                <span class="keyword">for</span> (q = N.rpos[brow]; q &lt; N.rpos[brow + <span class="number">1</span>]; ++q)</span><br><span class="line">                &#123;</span><br><span class="line">                    ccol = N.data[q].j;</span><br><span class="line">                    ctemp[ccol] += M.data[p].elem * N.data[q].elem;</span><br><span class="line">                &#125; <span class="comment">//for q</span></span><br><span class="line">            &#125;     <span class="comment">// for p</span></span><br><span class="line"> <span class="keyword">for</span> (ccol = <span class="number">0</span>; ccol &lt; Q.nu; ++ccol)</span><br><span class="line">            &#123;</span><br><span class="line">       <span class="keyword">if</span> (ctemp[ccol] &#123;</span><br><span class="line">          <span class="keyword">if</span> (++Q-&gt;tu &gt; MAXSIZE)</span><br><span class="line">                     <span class="keyword">return</span> ERROR;</span><br><span class="line">              <span class="keyword">else</span></span><br><span class="line">                  &#123;</span><br><span class="line">                 Q-&gt;data[Q-&gt;tu].i = arow;</span><br><span class="line">                 Q-&gt;data[Q-&gt;tu].j =ccol;</span><br><span class="line">          Q-&gt;data[Q-&gt;tu].elem=ctemp[ccol];</span><br><span class="line">                    &#125; <span class="comment">//else</span></span><br><span class="line">                   &#125; <span class="comment">//if</span></span><br><span class="line">            &#125;  <span class="comment">//for ccol</span></span><br><span class="line">      &#125; <span class="comment">//for arrow</span></span><br><span class="line">   &#125;  <span class="comment">//if</span></span><br><span class="line">    <span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>时间复杂度    O(M.mu×N.nu+M.tu×N.tu/N.mu)</p>
+<p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20210418181608401.png" alt="image-20210418181608401" style="zoom:80%;" /></p>
+<h2 id="4-十字链表"><a href="#4-十字链表" class="headerlink" title="4.十字链表"></a>4.十字链表</h2><p>当需要进行矩阵加法,减法,乘法时，矩阵中非零元素个数和位置会发生变化，若用三元组表表示会移动大量元素,相对较麻烦.</p>
+<p>十字链表能够灵活插入因运算产生的新的非零元素,删除因运算产生的新的零元素.</p>
+<p>由于矩阵有行和列，所以一个结点除了数据域(i, j, elem)之外，还应该用两个方向的指针(right, down)，分别指向行和列。这样整个矩阵构成了一个十字交叉的链表，因此称十字链表。每一行或每一列的头指针，可以用两个一维指针数组来存放。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">OLNode</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">        <span class="keyword">int</span>  i, j;</span><br><span class="line">        ElemType  elem;</span><br><span class="line">        <span class="class"><span class="keyword">struct</span> <span class="title">OLNode</span> *<span class="title">right</span>, *<span class="title">down</span>;</span></span><br><span class="line">&#125;OLNode, *OLink;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">        OLink  *rHead, *cHead;</span><br><span class="line">        <span class="keyword">int</span>  mu, nu, tu;<span class="comment">//行数，列数，非零元个数</span></span><br><span class="line">&#125;CrossList;</span><br></pre></td></tr></table></figure>
+<p>初始化十字链表</p>
+<p><strong>算法实现</strong></p>
+<ol>
+<li>读入稀疏矩阵行数列数，非零元个数</li>
+<li>动态申请行链表,列链表头指针向量</li>
+<li>逐个读入非零元，分别插入行链表,列链表</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Status <span class="title">CreateOLSMatrix</span> <span class="params">(CrossList *M)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (M) <span class="built_in">free</span>(M); <span class="built_in">scanf</span>(&amp;m, &amp;n, &amp;t);</span><br><span class="line">    M.mu=m; M.nu=n; M.tu=t;</span><br><span class="line">    <span class="keyword">if</span> (!(M.rhead=(OLink *) <span class="built_in">malloc</span> ((m+<span class="number">1</span>)*<span class="keyword">sizeof</span>(OLink)))) </span><br><span class="line">        <span class="built_in">exit</span> (OVERFLOW);</span><br><span class="line">    <span class="keyword">if</span> (!(M.chead=(OLink *) <span class="built_in">malloc</span> ((n+<span class="number">1</span>)*<span class="keyword">sizeof</span>(OLink)))) </span><br><span class="line">        <span class="built_in">exit</span> (OVERFLOW);</span><br><span class="line">    <span class="keyword">for</span> (<span class="built_in">scanf</span>(&amp;i, &amp;j, &amp;e); i!=<span class="number">0</span>; <span class="built_in">scanf</span>(&amp;i, &amp;j, &amp;e))  &#123;</span><br><span class="line">        <span class="keyword">if</span> (!(p=(OLink*) <span class="built_in">malloc</span> (<span class="keyword">sizeof</span>(OLNode))) <span class="built_in">exit</span> (OVERFLOW);</span><br><span class="line">        p-&gt;i=i; p-&gt;j=j; p-&gt;elem=e;</span><br><span class="line">        <span class="keyword">if</span> (M.rhead[i]==<span class="literal">NULL</span> || M.rhead[i]-&gt;j &gt; j)  &#123;</span><br><span class="line">            p-&gt;right=M.rhead[i]; M.rhead[i]=p; </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">for</span> (q=M.rhead[i]; (q-&gt;right) &amp;&amp; q-&gt;right-&gt;j &lt; j; q=q-&gt;right);</span><br><span class="line">            p-&gt;right=q-&gt;right; q-&gt;right=p;</span><br><span class="line">        &#125;  <span class="comment">//完成行插入</span></span><br><span class="line"><span class="keyword">if</span> (M.chead[j]==<span class="literal">NULL</span> || M.chead[j]-&gt;i &gt; i)  &#123;</span><br><span class="line">            p-&gt;down=M.chead[j]; M.chead[j]=p; </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">for</span> (q=M.chead[j]; (q-&gt;down) &amp;&amp; q-&gt;down-&gt;i &lt; i; q=q-&gt;down);</span><br><span class="line">            p-&gt;down=q-&gt;down; q-&gt;down=p;</span><br><span class="line">        &#125;  <span class="comment">//完成列插入</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="矩阵加法"><a href="#矩阵加法" class="headerlink" title="矩阵加法"></a>矩阵加法</h3><p><strong>算法原理</strong></p>
+<p>​       对每一行都用行表头出发分别找到A和B在该行中的第一个非零元，假设非空指针pa和pb分别指向矩阵A和B中行值相同的两个结点，</p>
+<p>将B加到A上去时，对A矩阵的十字链表来说,要么改变值(!=0),或者不变(b=0),或者插入一个节点(a=0),或者相加和为0，操作时删除这个节点.</p>
+<p>整个运算从从矩阵第一行逐行进行,对每一行都从行表头出发分别找到A和B在该行的第一个非零元节点后开始比较</p>
+<p>（1）若pa==NULL或pa-&gt;j&gt;pb-&gt;j，则需要在A中插入B结点；<br>（2）若pa-&gt;j==pb-&gt;j，且pa-&gt;elem+pb-&gt;elem!=0，则A结点改值；<br>（3）若pa-&gt;j==pb-&gt;j，且pa-&gt;elem+pb-&gt;elem==0，则需要删除A结点；<br>（4）若pa-&gt;j<pb->j，则只要将pa指针往右推进。<br>        为了便于插入和删除结点，需要设立一些辅助指针，比如pre指针指示pa所指结点的前驱结点，每一列也要设立一个指针hl[j]，初始值和列链表的头指针相同chead[j]。</p>
+<ol>
+<li>若pa ==NULL或pa-&gt;j&gt;pb-&gt;j,表明当前行元素已处理完,需要在A矩阵的链表中插入一个B的节点，也就是要改变pa前一个节点的right域同时改变添加节点所在列上一节点的down域</li>
+<li>若pa-&gt;j<pb->j,使pa节点后移即可，注意改变pre</li>
+<li>若pa-&gt;j == pb-&gt;j，两值相加，注意值是否为0，若为0删除该节点，不为0改变值即可</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">OLNode</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> i, j, e;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">OLNode</span> *<span class="title">down</span>, *<span class="title">right</span>;</span></span><br><span class="line">&#125; OLNode, *OLlink;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    OLlink *rhead, *chead; <span class="comment">//指向行或列第一个非零元(指向结构体的指针),可以用数组rhead[row]表示第row行的数据</span></span><br><span class="line">    <span class="keyword">int</span> m, n, len;         <span class="comment">//行列数,非零元个数</span></span><br><span class="line">&#125; CrossList;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">initial</span><span class="params">(CrossList *)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">plus</span><span class="params">(CrossList *, CrossList *)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">(CrossList *)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Insert</span><span class="params">(CrossList *, OLlink, OLlink, OLlink *, OLlink *)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(CrossList *, OLlink, OLlink, OLlink *, OLlink *)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    CrossList *M = (CrossList *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(CrossList));</span><br><span class="line">    CrossList *N = (CrossList *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(CrossList));</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d %d&quot;</span>, &amp;M-&gt;m, &amp;M-&gt;n);</span><br><span class="line">    N-&gt;m = M-&gt;m;</span><br><span class="line">    N-&gt;n = M-&gt;n;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d %d&quot;</span>, &amp;M-&gt;len, &amp;N-&gt;len);</span><br><span class="line">    initial(M);</span><br><span class="line">    initial(N);</span><br><span class="line">    plus(M, N);</span><br><span class="line">    print(M);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">(CrossList *M)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> row = <span class="number">1</span>; row &lt;= M-&gt;m; row++)</span><br><span class="line">    &#123;</span><br><span class="line">        OLlink pa = M-&gt;rhead[row];</span><br><span class="line">        <span class="keyword">while</span> (pa)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;%d %d %d\n&quot;</span>, pa-&gt;i, pa-&gt;j, pa-&gt;e);</span><br><span class="line">            pa = pa-&gt;right;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">plus</span><span class="params">(CrossList *M, CrossList *N)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    OLlink pa, pb;</span><br><span class="line">    OLlink pre; <span class="comment">//指向前面一个节点,方便插入</span></span><br><span class="line">    OLlink *hl = (OLlink *)<span class="built_in">malloc</span>((M-&gt;n + <span class="number">1</span>) * <span class="keyword">sizeof</span>(OLlink));</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= M-&gt;n; j++)</span><br><span class="line">        hl[j] = M-&gt;chead[j]; <span class="comment">//hl[]表示的是每列非零元的pre指向元素，与pre类似</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> row = <span class="number">1</span>; row &lt;= M-&gt;m; row++) <span class="comment">//行遍历</span></span><br><span class="line">    &#123;</span><br><span class="line">        pa = M-&gt;rhead[row];</span><br><span class="line">        pb = N-&gt;rhead[row];</span><br><span class="line">        pre = <span class="literal">NULL</span>;</span><br><span class="line">        <span class="keyword">while</span> (pb) <span class="comment">//当pb有非零元素时进行处理</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (pa == <span class="literal">NULL</span> || pa-&gt;j &gt; pb-&gt;j)</span><br><span class="line">            &#123;</span><br><span class="line"></span><br><span class="line">                Insert(M, pa, pb, &amp;pre, hl);</span><br><span class="line">                pb = pb-&gt;right;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (pa != <span class="literal">NULL</span> &amp;&amp; pa-&gt;j &lt; pb-&gt;j)</span><br><span class="line">            &#123;</span><br><span class="line">                pre = pa;</span><br><span class="line">                pa = pa-&gt;right;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (pa-&gt;j == pb-&gt;j)</span><br><span class="line">            &#123;</span><br><span class="line">                add(M, pa, pb, &amp;pre, hl);</span><br><span class="line">                pb = pb-&gt;right;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(CrossList *M, OLlink pa, OLlink pb, OLlink *pre, OLlink *hl)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> data = pa-&gt;e + pb-&gt;e;</span><br><span class="line">    <span class="keyword">if</span> (data)</span><br><span class="line">    &#123;</span><br><span class="line">        pa-&gt;e = data;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        OLlink temp = (OLlink)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(OLNode));</span><br><span class="line">        <span class="keyword">if</span> ((*pre) == <span class="literal">NULL</span>)</span><br><span class="line">            M-&gt;rhead[pa-&gt;i] = pa-&gt;right;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            (*pre)-&gt;right = pa-&gt;right;</span><br><span class="line">        &#125;</span><br><span class="line">        temp = pa;</span><br><span class="line">        pa = pa-&gt;right;</span><br><span class="line">        <span class="keyword">if</span> (M-&gt;chead[temp-&gt;j] == temp)</span><br><span class="line">            M-&gt;chead[temp-&gt;j] = hl[temp-&gt;j] = temp-&gt;down;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            hl[temp-&gt;j]-&gt;down = temp-&gt;down;</span><br><span class="line">        <span class="built_in">free</span>(temp);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Insert</span><span class="params">(CrossList *M, OLlink pa, OLlink pb, OLlink *pre, OLlink *hl)</span> <span class="comment">//插入有两种情况，一种是pa该行无非零元素，另一种pb所在列小于pa所在列</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    OLlink p = (OLlink)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(OLNode));</span><br><span class="line">    p-&gt;i = pb-&gt;i;</span><br><span class="line">    p-&gt;j = pb-&gt;j;</span><br><span class="line">    p-&gt;e = pb-&gt;e;</span><br><span class="line">    p-&gt;down = p-&gt;right = <span class="literal">NULL</span>;</span><br><span class="line">    <span class="keyword">if</span> ((*pre) == <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        M-&gt;rhead[p-&gt;i] = p;</span><br><span class="line">      </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        (*pre)-&gt;right = p;</span><br><span class="line">      </span><br><span class="line">    &#125;</span><br><span class="line">    p-&gt;right = pa;</span><br><span class="line">    </span><br><span class="line">    (*pre) = p;</span><br><span class="line">    pa = (*pre)-&gt;right;<span class="comment">//这一句可以不要</span></span><br><span class="line">    <span class="keyword">if</span> (!M-&gt;chead[p-&gt;j] || M-&gt;chead[p-&gt;j]-&gt;i &gt; p-&gt;i)</span><br><span class="line">    &#123;</span><br><span class="line">        p-&gt;down = M-&gt;chead[p-&gt;j];</span><br><span class="line">        M-&gt;chead[p-&gt;j] = p;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        p-&gt;down = hl[p-&gt;j]-&gt;down;</span><br><span class="line">        hl[p-&gt;j]-&gt;down = p;</span><br><span class="line">    &#125;</span><br><span class="line">    hl[p-&gt;j] = p;</span><br><span class="line">   </span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">initial</span><span class="params">(CrossList *Clist)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i, j, e;</span><br><span class="line">    Clist-&gt;rhead = (OLlink *)<span class="built_in">malloc</span>((Clist-&gt;m + <span class="number">1</span>) * <span class="keyword">sizeof</span>(OLlink));</span><br><span class="line">    Clist-&gt;chead = (OLlink *)<span class="built_in">malloc</span>((Clist-&gt;n + <span class="number">1</span>) * <span class="keyword">sizeof</span>(OLlink));</span><br><span class="line">    <span class="comment">// if(rhead||chead)</span></span><br><span class="line">    <span class="comment">// exit(1);</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= Clist-&gt;m; i++)</span><br><span class="line">        Clist-&gt;rhead[i] = <span class="literal">NULL</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= Clist-&gt;n; i++)</span><br><span class="line">        Clist-&gt;chead[i] = <span class="literal">NULL</span>;</span><br><span class="line">    OLlink s = (OLlink)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(OLNode));</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> count = <span class="number">0</span>; count &lt; Clist-&gt;len; count++)</span><br><span class="line">    &#123;</span><br><span class="line">        OLlink cur = (OLlink)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(OLNode));</span><br><span class="line">        cur-&gt;down = <span class="literal">NULL</span>;</span><br><span class="line">        cur-&gt;right = <span class="literal">NULL</span>;</span><br><span class="line">        <span class="comment">// if(cur==NULL)</span></span><br><span class="line">        <span class="comment">// exit(1);</span></span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d %d %d&quot;</span>, &amp;i, &amp;j, &amp;e);</span><br><span class="line">        cur-&gt;i = i;</span><br><span class="line">        cur-&gt;j = j;</span><br><span class="line">        cur-&gt;e = e;</span><br><span class="line">        <span class="keyword">if</span> (Clist-&gt;rhead[i] == <span class="literal">NULL</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            Clist-&gt;rhead[i] = cur;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            s = Clist-&gt;rhead[i];</span><br><span class="line">            <span class="keyword">while</span> (s-&gt;right != <span class="literal">NULL</span> &amp;&amp; s-&gt;right-&gt;j &lt; j)</span><br><span class="line">                s = s-&gt;right;</span><br><span class="line">            cur-&gt;right = s-&gt;right;</span><br><span class="line">            s-&gt;right = cur;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (Clist-&gt;chead[j] == <span class="literal">NULL</span>)</span><br><span class="line">            Clist-&gt;chead[j] = cur;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            s = Clist-&gt;chead[j];</span><br><span class="line">            <span class="keyword">while</span> (s-&gt;down != <span class="literal">NULL</span> &amp;&amp; s-&gt;down-&gt;i &lt; i)</span><br><span class="line">                s = s-&gt;down;</span><br><span class="line">            cur-&gt;down = s-&gt;down;</span><br><span class="line">            s-&gt;down = cur;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+    <div>
+	
+     <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+     
+   </div>
+        <div class="reward-container">
+  <div>感谢阅读.</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.png" alt="Sekyoro 微信支付">
+        <p>微信支付</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Sekyoro
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://sekyoro.top/2021/04/20/%E7%A8%80%E7%96%8F%E7%9F%A9%E9%98%B5/" title="稀疏矩阵">http://sekyoro.top/2021/04/20/稀疏矩阵/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/data-structure/" rel="tag"><i class="fa fa-tag"></i> data_structure</a>
+              <a href="/tags/c/" rel="tag"><i class="fa fa-tag"></i> c</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/04/15/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84noj_1/" rel="prev" title="2021-4-15-数据结构noj_1">
+      <i class="fa fa-chevron-left"></i> 2021-4-15-数据结构noj_1
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/04/23/%E5%B9%BF%E4%B9%89%E8%A1%A8%E7%AE%80%E4%BB%8B/" rel="next" title="广义表简介">
+      广义表简介 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81MzE5Ny8yOTY3Mg=="></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+	
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+	
+      	   
+          <!-- canvas粒子时钟 -->
+          <div style="">
+  <canvas id="canvas" style="width:60%;">当前浏览器不支持canvas，请更换浏览器后再试</canvas>
+</div>
+<script>
+(function(){
+
+   var digit=
+    [
+        [
+            [0,0,1,1,1,0,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,0,1,1,0],
+            [0,0,1,1,1,0,0]
+        ],//0
+        [
+            [0,0,0,1,1,0,0],
+            [0,1,1,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [1,1,1,1,1,1,1]
+        ],//1
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,1,1],
+            [1,1,1,1,1,1,1]
+        ],//2
+        [
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//3
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,0],
+            [0,0,1,1,1,1,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,1,1,0],
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,1]
+        ],//4
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,1,1,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//5
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//6
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0]
+        ],//7
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//8
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,1,1,0,0,0,0]
+        ],//9
+        [
+            [0,0,0,0,0,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,0,0,0]
+        ]//:
+    ];
+
+var canvas = document.getElementById('canvas');
+
+if(canvas.getContext){
+    var cxt = canvas.getContext('2d');
+    //声明canvas的宽高
+    var H = 100,W = 700;
+    canvas.height = H;
+    canvas.width = W;
+    cxt.fillStyle = '#f00';
+    cxt.fillRect(10,10,50,50);
+
+    //存储时间数据
+    var data = [];
+    //存储运动的小球
+    var balls = [];
+    //设置粒子半径
+    var R = canvas.height/20-1;
+    (function(){
+        var temp = /(\d)(\d):(\d)(\d):(\d)(\d)/.exec(new Date());
+        //存储时间数字，由十位小时、个位小时、冒号、十位分钟、个位分钟、冒号、十位秒钟、个位秒钟这7个数字组成
+        data.push(temp[1],temp[2],10,temp[3],temp[4],10,temp[5],temp[6]);
+    })();
+
+    /*生成点阵数字*/
+    function renderDigit(index,num){
+        for(var i = 0; i < digit[num].length; i++){
+            for(var j = 0; j < digit[num][i].length; j++){
+                if(digit[num][i][j] == 1){
+                    cxt.beginPath();
+                    cxt.arc(14*(R+2)*index + j*2*(R+1)+(R+1),i*2*(R+1)+(R+1),R,0,2*Math.PI);
+                    cxt.closePath();
+                    cxt.fill();
+                }
+            }
+        }
+    }
+
+    /*更新时钟*/
+    function updateDigitTime(){
+        var changeNumArray = [];
+        var temp = /(\d)(\d):(\d)(\d):(\d)(\d)/.exec(new Date());
+        var NewData = [];
+        NewData.push(temp[1],temp[2],10,temp[3],temp[4],10,temp[5],temp[6]);
+        for(var i = data.length-1; i >=0 ; i--){
+            //时间发生变化
+            if(NewData[i] !== data[i]){
+                //将变化的数字值和在data数组中的索引存储在changeNumArray数组中
+                changeNumArray.push(i+'_'+(Number(data[i])+1)%10);
+            }
+        }
+        //增加小球
+        for(var i = 0; i< changeNumArray.length; i++){
+            addBalls.apply(this,changeNumArray[i].split('_'));
+        }
+        data = NewData.concat();
+    }
+
+    /*更新小球状态*/
+    function updateBalls(){
+        for(var i = 0; i < balls.length; i++){
+            balls[i].stepY += balls[i].disY;
+            balls[i].x += balls[i].stepX;
+            balls[i].y += balls[i].stepY;
+            if(balls[i].x > W + R || balls[i].y > H + R){
+                balls.splice(i,1);
+                i--;
+            }
+        }
+    }
+
+    /*增加要运动的小球*/
+    function addBalls(index,num){
+        var numArray = [1,2,3];
+        var colorArray =  ["#3BE","#09C","#A6C","#93C","#9C0","#690","#FB3","#F80","#F44","#C00"];
+        for(var i = 0; i < digit[num].length; i++){
+            for(var j = 0; j < digit[num][i].length; j++){
+                if(digit[num][i][j] == 1){
+                    var ball = {
+                        x:14*(R+2)*index + j*2*(R+1)+(R+1),
+                        y:i*2*(R+1)+(R+1),
+                        stepX:Math.floor(Math.random() * 4 -2),
+                        stepY:-2*numArray[Math.floor(Math.random()*numArray.length)],
+                        color:colorArray[Math.floor(Math.random()*colorArray.length)],
+                        disY:1
+                    };
+                    balls.push(ball);
+                }
+            }
+        }
+    }
+
+    /*渲染*/
+    function render(){
+        //重置画布宽度，达到清空画布的效果
+        canvas.height = 100;
+        //渲染时钟
+        for(var i = 0; i < data.length; i++){
+            renderDigit(i,data[i]);
+        }
+        //渲染小球
+        for(var i = 0; i < balls.length; i++){
+            cxt.beginPath();
+            cxt.arc(balls[i].x,balls[i].y,R,0,2*Math.PI);
+            cxt.fillStyle = balls[i].color;
+            cxt.closePath();
+            cxt.fill();
+        }
+    }
+
+    clearInterval(oTimer);
+    var oTimer = setInterval(function(){
+        //更新时钟
+        updateDigitTime();
+        //更新小球状态
+        updateBalls();
+        //渲染
+        render();
+    },50);
+}
+
+})();
+</script>
+        
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.7.0/dist/APlayer.min.css">
+	<div class="aplayer" data-id="1294924565" data-server="netease" data-type="song"></div>
+	<script src="https://cdn.jsdelivr.net/npm/aplayer@1.7.0/dist/APlayer.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/meting@1.1.0/dist/Meting.min.js"></script>
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+	  
+		
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%A8%80%E7%96%8F%E7%9F%A9%E9%98%B5"><span class="nav-number">1.</span> <span class="nav-text">稀疏矩阵</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.1.</span> <span class="nav-text">1.介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E4%B8%89%E5%85%83%E7%BB%84%E8%A1%A8%E7%A4%BA"><span class="nav-number">1.2.</span> <span class="nav-text">2.三元组表示</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E4%B8%89%E5%85%83%E7%BB%84%E8%A1%A8%E7%A4%BA%E6%B3%95%E8%BD%AC%E7%BD%AE"><span class="nav-number">1.2.1.</span> <span class="nav-text">1.三元组表示法转置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E4%B8%89%E5%85%83%E7%BB%84%E8%A1%A8%E7%A4%BA%E6%B3%95%E5%8A%A0%E6%B3%95"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.三元组表示法加法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E8%A1%8C%E9%80%BB%E8%BE%91%E8%BF%9E%E6%8E%A5%E7%9A%84%E9%A1%BA%E5%BA%8F%E8%A1%A8"><span class="nav-number">1.3.</span> <span class="nav-text">3.行逻辑连接的顺序表</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%9F%A9%E9%98%B5%E4%B9%98%E6%B3%95"><span class="nav-number">1.3.0.1.</span> <span class="nav-text">矩阵乘法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E5%8D%81%E5%AD%97%E9%93%BE%E8%A1%A8"><span class="nav-number">1.4.</span> <span class="nav-text">4.十字链表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9F%A9%E9%98%B5%E5%8A%A0%E6%B3%95"><span class="nav-number">1.4.1.</span> <span class="nav-text">矩阵加法</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Sekyoro"
+      src="https://i.loli.net/2021/05/17/YqoavnXdGTpPO9R.jpg">
+  <p class="site-author-name" itemprop="name">Sekyoro</p>
+  <div class="site-description" itemprop="description">什么也无法舍弃的人，什么也做不了.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">15</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/drowning-in-codes" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;drowning-in-codes" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/mailtobukalala174@gmail.com" title="E-Mail → mailtobukalala174@gmail.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+  
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; Wed Apr 08 2020 08:00:00 GMT+0800 (中国标准时间) – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Sekyoro</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">123k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">1:52</span>
+</div>
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+    <span id="busuanzi_container_site_pv">总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+    <span class="post-meta-divider">|</span>
+    <span id="busuanzi_container_site_uv">总访客数<span id="busuanzi_value_site_uv"></span>人</span>
+    <span class="post-meta-divider">|</span>
+<!-- 不蒜子计数初始值纠正 -->
+<script>
+$(document).ready(function() {
+
+    var int = setInterval(fixCount, 50);  // 50ms周期检测函数
+    var countOffset = 20000;  // 初始化首次数据
+
+    function fixCount() {            
+       if (document.getElementById("busuanzi_container_site_pv").style.display != "none")
+        {
+            $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + countOffset); 
+            clearInterval(int);
+        }                  
+        if ($("#busuanzi_container_site_pv").css("display") != "none")
+        {
+            $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + countOffset); // 加上初始数据 
+            clearInterval(int); // 停止检测
+        }  
+    }
+       	
+});
+</script> 
+
+<div>
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("04/08/2021 20:00:00");
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+    }
+setInterval("createtime()",250);
+</script>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/theme-next/theme-next-pjax@0/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+<script data-pjax>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  let url = element.dataset.target;
+  let pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  let pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  let fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
+
+
+
+
+    <div id="pjax">
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+    </div>
+</body>
+</html>

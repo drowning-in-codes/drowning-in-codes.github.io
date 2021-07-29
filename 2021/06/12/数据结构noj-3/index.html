@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<script src="/live2d-widget/autoload.js"></script>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/blog_32px.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/blog_32px.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/blog_16px.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-pace-theme-barber-shop.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"sekyoro.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":240,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+<link href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css" rel="stylesheet">
+  <meta name="description" content="数据结构noj_3差不多看看就行了">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据结构noj_3">
+<meta property="og:url" content="http://sekyoro.top/2021/06/12/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84noj-3/index.html">
+<meta property="og:site_name" content="Sekyoro的博客小屋">
+<meta property="og:description" content="数据结构noj_3差不多看看就行了">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210612110800.png">
+<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210612110908.png">
+<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210612110943.png">
+<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210612111013.png">
+<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210612111120.png">
+<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210612111201.png">
+<meta property="article:published_time" content="2021-06-12T03:13:41.000Z">
+<meta property="article:modified_time" content="2021-06-12T03:14:45.026Z">
+<meta property="article:author" content="Sekyoro">
+<meta property="article:tag" content="data_structure">
+<meta property="article:tag" content="c">
+<meta property="article:tag" content="noj">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210612110800.png">
+
+<link rel="canonical" href="http://sekyoro.top/2021/06/12/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84noj-3/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+ 
+
+<script>
+  var OriginTitile = document.title;
+  var titleTime;
+  document.addEventListener("visibilitychange", function() {
+    if (document.hidden) {
+      document.title = "(つェ⊂)我藏好了哦~" + OriginTitile;
+      clearTimeout(titleTime);
+    } else {
+      document.title = "(*´∇｀*) 被你发现啦~" + OriginTitile;
+      titleTime = setTimeout(function() {
+        document.title = OriginTitile;
+      }, 2000);
+    }
+  });
+</script>
+
+
+
+  <script src="/js/src/activate-power-mode.min.js"></script>
+  <script>
+    POWERMODE.colorful = true;
+    POWERMODE.shake = false;
+    document.body.addEventListener('input', POWERMODE);
+  </script>
+
+
+  <title>数据结构noj_3 | Sekyoro的博客小屋</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+<!-- require JQuery -->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+<!-- require pjax -->
+<script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/index.min.js"></script>
+
+
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+   <script type="text/javascript" src="/js/src/fireworks.js"></script>
+
+
+  <div class="container use-motion">
+    <div class="headband"></div>
+	
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Sekyoro的博客小屋</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://sekyoro.top/2021/06/12/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84noj-3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://i.loli.net/2021/05/17/YqoavnXdGTpPO9R.jpg">
+      <meta itemprop="name" content="Sekyoro">
+      <meta itemprop="description" content="什么也无法舍弃的人，什么也做不了.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sekyoro的博客小屋">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          数据结构noj_3
+        </h1>
+
+        <div class="post-meta">
+		
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-06-12 11:13:41 / 修改时间：11:14:45" itemprop="dateCreated datePublished" datetime="2021-06-12T11:13:41+08:00">2021-06-12</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/study/" itemprop="url" rel="index"><span itemprop="name">study</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>20k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>18 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="数据结构noj-3"><a href="#数据结构noj-3" class="headerlink" title="数据结构noj_3"></a>数据结构noj_3</h1><p>差不多看看就行了</p>
+<span id="more"></span>
+<h2 id="21"><a href="#21" class="headerlink" title="21."></a>21.</h2><p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210612110800.png" alt="image-20210612110800240" style="zoom:67%;" /></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> max 2000</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">Snode</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> tag;   <span class="comment">//标签</span></span><br><span class="line">    <span class="keyword">char</span> elem;</span><br><span class="line">    <span class="keyword">int</span> prio;  <span class="comment">//优先级</span></span><br><span class="line">&#125; Snode; <span class="comment">//字符节点</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">MyString</span>&#123;</span></span><br><span class="line">    Snode data[max];</span><br><span class="line">    <span class="keyword">int</span> length;</span><br><span class="line">&#125;MyString;  <span class="comment">//存储字符串</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">TNode</span>&#123;</span></span><br><span class="line">    Snode data;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">TNode</span> *<span class="title">lchild</span>,*<span class="title">rchild</span>;</span></span><br><span class="line">&#125;TNode,BiTree,*PTNode;   <span class="comment">//二叉树</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Clear</span><span class="params">(MyString *S)</span><span class="comment">//去除外层多余的括号</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> level = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span>(S-&gt;data[<span class="number">0</span>].elem == <span class="string">&#x27;(&#x27;</span> &amp;&amp; S-&gt;data[S-&gt;length - <span class="number">1</span>].elem == <span class="string">&#x27;)&#x27;</span>)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; S-&gt;length<span class="number">-1</span>;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(S-&gt;data[i].elem == <span class="string">&#x27;(&#x27;</span>)</span><br><span class="line">            level++;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(S-&gt;data[i].elem == <span class="string">&#x27;)&#x27;</span>)</span><br><span class="line">            level--;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span>(level == <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; S-&gt;length<span class="number">-1</span>;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            S-&gt;data[i<span class="number">-1</span>] = S-&gt;data[i];</span><br><span class="line">        &#125;</span><br><span class="line">        S-&gt;length = S-&gt;length - <span class="number">2</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">InitString</span><span class="params">(MyString *S)</span></span>&#123;</span><br><span class="line">    <span class="keyword">char</span> c[max];</span><br><span class="line">    <span class="keyword">int</span> len,baselevel = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%s&quot;</span>,c);</span><br><span class="line">    len = <span class="built_in">strlen</span>(c);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; len;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        S-&gt;data[i].elem = c[i];</span><br><span class="line">		<span class="keyword">if</span> (c[i] == <span class="string">&#x27;+&#x27;</span> || c[i] == <span class="string">&#x27;-&#x27;</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			S-&gt;data[i].tag = <span class="number">1</span>;</span><br><span class="line">			S-&gt;data[i].prio = baselevel + <span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span> (c[i] == <span class="string">&#x27;*&#x27;</span> || c[i] == <span class="string">&#x27;/&#x27;</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			S-&gt;data[i].tag = <span class="number">1</span>;</span><br><span class="line">			S-&gt;data[i].prio = baselevel + <span class="number">2</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span> (c[i] == <span class="string">&#x27;(&#x27;</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			S-&gt;data[i].tag = <span class="number">0</span>;</span><br><span class="line">			baselevel = baselevel + <span class="number">2</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span> (c[i] == <span class="string">&#x27;)&#x27;</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			S-&gt;data[i].tag = <span class="number">0</span>;</span><br><span class="line">			baselevel = baselevel - <span class="number">2</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			S-&gt;data[i].tag = <span class="number">0</span>;</span><br><span class="line">		&#125;</span><br><span class="line">    &#125;</span><br><span class="line">    S-&gt;length = len;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">FindMid</span><span class="params">(MyString *S)</span></span>&#123; <span class="comment">//返回level最小符号的下标</span></span><br><span class="line">    <span class="keyword">int</span> pos = <span class="number">0</span>,min = max;<span class="comment">//min 当前最小的level，pos记录下标</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; S-&gt;length;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(S-&gt;data[i].prio &lt;= min &amp;&amp; S-&gt;data[i].tag == <span class="number">1</span>)<span class="comment">// 优先级相同时，先算前面的，所以将后面的作为中间值划分。</span></span><br><span class="line">        &#123;</span><br><span class="line">            min = S-&gt;data[i].prio;</span><br><span class="line">            pos = i;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> pos;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">PTNode <span class="title">CreatTree</span><span class="params">(MyString *S)</span></span>&#123;</span><br><span class="line">    MyString left,right;</span><br><span class="line">    PTNode T;</span><br><span class="line">    T = (PTNode)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(TNode));</span><br><span class="line">    <span class="keyword">int</span> midpos,len;</span><br><span class="line">    len = S-&gt;length;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span>(len == <span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        T-&gt;data = S-&gt;data[len<span class="number">-1</span>];</span><br><span class="line">        T-&gt;lchild = <span class="literal">NULL</span>;</span><br><span class="line">        T-&gt;rchild = <span class="literal">NULL</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(len &gt; <span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        midpos = FindMid(S);</span><br><span class="line">        left.length = midpos;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; midpos;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            left.data[i] = S-&gt;data[i];</span><br><span class="line">        &#125;</span><br><span class="line">        right.length = S-&gt;length - midpos - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; right.length;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            right.data[i] = S-&gt;data[i+midpos+<span class="number">1</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        Clear(&amp;left);</span><br><span class="line">        Clear(&amp;right);</span><br><span class="line">        T-&gt;data = S-&gt;data[midpos];</span><br><span class="line">        T-&gt;lchild = (TNode*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(TNode));</span><br><span class="line">        T-&gt;rchild = (TNode*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(TNode));</span><br><span class="line"></span><br><span class="line">        T-&gt;lchild = CreatTree(&amp;left);</span><br><span class="line">        T-&gt;rchild = CreatTree(&amp;right);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> T;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Last</span><span class="params">(BiTree* T)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(T-&gt;lchild == <span class="literal">NULL</span> &amp;&amp; T-&gt;rchild == <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%c&quot;</span>,T-&gt;data.elem);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        Last(T-&gt;lchild);</span><br><span class="line">        Last(T-&gt;rchild);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%c&quot;</span>,T-&gt;data.elem);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    MyString s;</span><br><span class="line">    s.length = <span class="number">0</span>;</span><br><span class="line">    PTNode T;</span><br><span class="line"></span><br><span class="line">    InitString(&amp;s);</span><br><span class="line">    Clear(&amp;s);</span><br><span class="line">    T = CreatTree(&amp;s);</span><br><span class="line">    Last(T);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="22"><a href="#22" class="headerlink" title="22."></a>22.</h2><p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210612110908.png" alt="image-20210612110908312" style="zoom:67%;" /></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;limits.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> YES 1</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> NO 0</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAX_VERTEX_NUM 100</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">Seqlist</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> value;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Seqlist</span> *<span class="title">next</span>;</span></span><br><span class="line">&#125; Seqlist, *pList;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">ArcNode</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> adj; <span class="comment">//权值数据</span></span><br><span class="line"></span><br><span class="line">&#125; ArcNode;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">AdjMatrix</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> vertex[MAX_VERTEX_NUM];                   <span class="comment">//顶点向量</span></span><br><span class="line">    ArcNode arcs[MAX_VERTEX_NUM][MAX_VERTEX_NUM]; <span class="comment">//邻接矩阵,权值</span></span><br><span class="line">    <span class="keyword">int</span> vexnum, arcnum;                           <span class="comment">//顶点数与弧数</span></span><br><span class="line">&#125; AdjMatrix;</span><br><span class="line"></span><br><span class="line"><span class="comment">//初始化有向图权值</span></span><br><span class="line"><span class="function">AdjMatrix <span class="title">initial</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dijkstra</span><span class="params">(AdjMatrix, <span class="keyword">int</span>, <span class="keyword">int</span>[], pList *)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//初始化路径 从v0开始到vi的最短路径序列</span></span><br><span class="line"><span class="comment">//初值为 若v0到vi有弧,则为v0,vi</span></span><br><span class="line"><span class="function">pList <span class="title">initial_path</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">member</span><span class="params">(<span class="keyword">int</span>, pList)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">addtail</span><span class="params">(pList, <span class="keyword">int</span>)</span></span>;</span><br><span class="line"><span class="comment">// pList addtail(pList,int);</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">output</span><span class="params">(<span class="keyword">int</span>[], AdjMatrix)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    AdjMatrix adj;</span><br><span class="line">    pList s;</span><br><span class="line">    <span class="comment">//dist存储目前已经找到的v0到vi当前最短路径长度</span></span><br><span class="line">    <span class="keyword">int</span> dist[MAX_VERTEX_NUM];</span><br><span class="line">    <span class="comment">//path,若v0到vi有路径则存储,否则为空</span></span><br><span class="line">    pList *path = (pList *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(pList));</span><br><span class="line">    adj = initial();</span><br><span class="line">    dijkstra(adj, <span class="number">0</span>, dist, path);</span><br><span class="line">    output(dist,adj);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">AdjMatrix <span class="title">initial</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    AdjMatrix adj;</span><br><span class="line">    <span class="keyword">int</span> vexnum, arcnum;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d %d&quot;</span>, &amp;vexnum, &amp;arcnum);</span><br><span class="line">    adj.vexnum = vexnum;</span><br><span class="line">    adj.arcnum = arcnum;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// for (int i = 0; i &lt; vexnum; i++)</span></span><br><span class="line">    <span class="comment">//     scanf(&quot;%d&quot;, &amp;adj.vertex[i]); //输入每个节点信息</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; vexnum; i++)</span><br><span class="line">        adj.vertex[i] = i + <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> i, j, weight;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> ix = <span class="number">0</span>; ix &lt; vexnum; ix++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> jx = <span class="number">0</span>; jx &lt; vexnum; jx++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (ix != jx)</span><br><span class="line">                adj.arcs[ix][jx].adj = INT_MAX;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                adj.arcs[ix][jx].adj = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (arcnum--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d %d %d&quot;</span>, &amp;i, &amp;j, &amp;weight);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> ix = <span class="number">0</span>; ix &lt; vexnum; ix++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (adj.vertex[ix] == i)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> jx = <span class="number">0</span>; jx &lt; vexnum; jx++)</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="keyword">if</span> (adj.vertex[jx] == j)</span><br><span class="line">                    &#123;</span><br><span class="line">                        adj.arcs[ix][jx].adj = weight;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> adj;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dijkstra</span><span class="params">(AdjMatrix adj, <span class="keyword">int</span> v0, <span class="keyword">int</span> dist[], pList path[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    pList s;</span><br><span class="line">    <span class="comment">//初始化 dist 为长度最短的一条的最短路径</span></span><br><span class="line">    <span class="comment">//path为存在路径的序列</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; adj.vexnum; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        path[i] = initial_path();</span><br><span class="line">        dist[i] = adj.arcs[v0][i].adj;</span><br><span class="line">        <span class="keyword">if</span> (dist[i] &lt; INT_MAX)</span><br><span class="line">        &#123;</span><br><span class="line"></span><br><span class="line">            addtail(path[i], adj.vertex[i]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    s = initial_path();</span><br><span class="line">    <span class="comment">// addtail(s, adj.vertex[v0]);</span></span><br><span class="line">    <span class="keyword">int</span> k ;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> t = <span class="number">1</span>; t &lt;= adj.vexnum - <span class="number">1</span>; t++) <span class="comment">//计算v0从第二个到最后一个结点最短路径</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> min = INT_MAX;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt; adj.vexnum; j++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (!member(adj.vertex[j], s) &amp;&amp; dist[j] &lt; min) <span class="comment">//j不在s中且存在路径</span></span><br><span class="line">            &#123;</span><br><span class="line">                k = j;</span><br><span class="line">                min = dist[j];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// if(min == INT_MAX)</span></span><br><span class="line">        <span class="comment">// continue;</span></span><br><span class="line">        addtail(s, adj.vertex[k]);</span><br><span class="line">        <span class="comment">// if(dist[])</span></span><br><span class="line">        <span class="comment">// if ()</span></span><br><span class="line">        <span class="comment">//     printf(&quot;1 %d %d\n&quot;, k + 1, (dist[k] == INT_MAX) ? -1 : dist[k]);</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; adj.vexnum; i++) <span class="comment">//修正dist[i]</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (!member(adj.vertex[i], s) &amp;&amp; adj.arcs[k][i].adj &lt; INT_MAX &amp;&amp; (dist[k] + adj.arcs[k][i].adj &lt; dist[i]))</span><br><span class="line"></span><br><span class="line">            &#123;</span><br><span class="line">                dist[i] = dist[k] + adj.arcs[k][i].adj;</span><br><span class="line">                path[i] = path[k];</span><br><span class="line">                addtail(path[i], adj.vertex[i]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">pList <span class="title">initial_path</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    pList l = (pList)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(Seqlist));</span><br><span class="line">    l-&gt;value = <span class="number">0</span>;</span><br><span class="line">    l-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line">    <span class="keyword">return</span> l;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">addtail</span><span class="params">(pList path, <span class="keyword">int</span> vertex)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// if(path-&gt;value == 0)</span></span><br><span class="line">    <span class="comment">// &#123;</span></span><br><span class="line">    <span class="comment">//     path-&gt;value = vertex;</span></span><br><span class="line">    <span class="comment">//     path-&gt;next = NULL;</span></span><br><span class="line">    <span class="comment">//     return;</span></span><br><span class="line">    <span class="comment">// &#125;</span></span><br><span class="line">    pList c = (pList)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(Seqlist));</span><br><span class="line">    c-&gt;value = vertex;</span><br><span class="line">    c-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line">    <span class="keyword">while</span> (path-&gt;next != <span class="literal">NULL</span>)</span><br><span class="line">        path = path-&gt;next;</span><br><span class="line">    path-&gt;next = c;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// pList addtail(pList path,int vertex)</span></span><br><span class="line"><span class="comment">// &#123;</span></span><br><span class="line"><span class="comment">//     pList c = (pList)malloc(sizeof(Seqlist));</span></span><br><span class="line"><span class="comment">//     pList l = path;</span></span><br><span class="line"><span class="comment">//     c-&gt;value = vertex;</span></span><br><span class="line"><span class="comment">//     c-&gt;next = NULL;</span></span><br><span class="line"><span class="comment">//     while(l)</span></span><br><span class="line"><span class="comment">//     l = l-&gt;next;</span></span><br><span class="line"><span class="comment">//     l = c;</span></span><br><span class="line"><span class="comment">//     return path;</span></span><br><span class="line"><span class="comment">// &#125;</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">member</span><span class="params">(<span class="keyword">int</span> vertex, pList path)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">while</span> (path)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (vertex == path-&gt;value)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> YES;</span><br><span class="line">        &#125;</span><br><span class="line">        path = path-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> NO;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">output</span><span class="params">(<span class="keyword">int</span> dist[], AdjMatrix adj)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// int temp;</span></span><br><span class="line">    <span class="comment">// for(int i = 1;i&lt;adj.vexnum-1;i++)</span></span><br><span class="line">    <span class="comment">// &#123;</span></span><br><span class="line">    <span class="comment">//     for(int j = 1;j&lt;adj.vexnum - i -1;j++)</span></span><br><span class="line">    <span class="comment">//     &#123;</span></span><br><span class="line">    <span class="comment">//         if(dist[j]&gt;dist[j+1])</span></span><br><span class="line">    <span class="comment">//             &#123;</span></span><br><span class="line">    <span class="comment">//                     temp = dist[j];</span></span><br><span class="line">    <span class="comment">//                     dist[j] = dist[j+1];</span></span><br><span class="line">    <span class="comment">//                     dist[j+1] = temp;</span></span><br><span class="line">    <span class="comment">//             &#125;</span></span><br><span class="line">    <span class="comment">//     &#125;</span></span><br><span class="line">    <span class="comment">// &#125;</span></span><br><span class="line">    <span class="comment">// for(int i = 1;i&lt;adj.vexnum;i++)</span></span><br><span class="line">    <span class="comment">// &#123;</span></span><br><span class="line">    <span class="comment">//     printf(&quot;1 %d %d\n&quot;,i+1,(dist[i]==INT_MAX)?(-1):dist[i]);</span></span><br><span class="line">    <span class="comment">// &#125;</span></span><br><span class="line">    <span class="comment">// int min = INT_MAX;</span></span><br><span class="line">    <span class="comment">// int max = INT_MAX;</span></span><br><span class="line">    <span class="comment">// int mark = 1;</span></span><br><span class="line">    <span class="comment">// for(int t = 1;t&lt;=adj.vexnum;t++)</span></span><br><span class="line">    <span class="comment">// &#123;</span></span><br><span class="line">    <span class="comment">// for(int i = 1;i&lt;adj.vexnum;i++)</span></span><br><span class="line">    <span class="comment">// &#123;</span></span><br><span class="line">    <span class="comment">//     min = INT_MAX;</span></span><br><span class="line">    <span class="comment">//     if(dist[i]&lt;min&amp;&amp;dist[i]!=0&amp;&amp;dist[i]&gt;=dist[mark])</span></span><br><span class="line">    <span class="comment">//     &#123;</span></span><br><span class="line">    <span class="comment">//         min = dist[i];</span></span><br><span class="line">    <span class="comment">//         mark = i;</span></span><br><span class="line">    <span class="comment">//     &#125;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// &#125;</span></span><br><span class="line">    <span class="comment">// if(min!=INT_MAX)</span></span><br><span class="line">    <span class="comment">// &#123;</span></span><br><span class="line">    <span class="comment">// printf(&quot;1 %d %d\n&quot;,adj.vertex[mark],min);</span></span><br><span class="line">    <span class="comment">// dist[mark] = 0;</span></span><br><span class="line">    <span class="comment">// &#125;</span></span><br><span class="line">    <span class="comment">// else</span></span><br><span class="line">    <span class="comment">// printf(&quot;1 %d %d\n&quot;,adj.vertex[mark],-1);</span></span><br><span class="line">    <span class="comment">// &#125;</span></span><br><span class="line">    <span class="keyword">int</span> min;</span><br><span class="line">    <span class="keyword">int</span> flag;</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> t = <span class="number">1</span>; t &lt; adj.vexnum; t++)</span><br><span class="line">    &#123;</span><br><span class="line">        min = INT_MAX;</span><br><span class="line">        <span class="keyword">for</span> ( i = <span class="number">1</span>; i &lt; adj.vexnum; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (dist[i] &lt; min &amp;&amp; dist[i] != <span class="number">0</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                flag = i;</span><br><span class="line">                min = dist[i];</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// if (dist[i] == INT_MAX)</span></span><br><span class="line">            <span class="comment">// &#123;</span></span><br><span class="line">            <span class="comment">//     flag = i;</span></span><br><span class="line">            <span class="comment">// &#125;</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (min != INT_MAX)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;1 %d %d\n&quot;</span>, adj.vertex[flag], min);</span><br><span class="line">            dist[flag] = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;1 %d %d\n&quot;</span>, adj.vertex[i<span class="number">-1</span>], <span class="number">-1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="23"><a href="#23" class="headerlink" title="23."></a>23.</h2><p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210612110943.png" alt="image-20210612110943431" style="zoom:67%;" /></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> N 11</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> </span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> key;</span><br><span class="line">    <span class="keyword">int</span> flag;</span><br><span class="line">    <span class="comment">/* data */</span></span><br><span class="line">&#125;Recordtype;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> Recordtype hashtable[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">hash</span><span class="params">(<span class="keyword">int</span>)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">create</span><span class="params">(hashtable,<span class="keyword">int</span>[],<span class="keyword">int</span>)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> data[<span class="number">8</span>] = &#123;<span class="number">22</span>,<span class="number">41</span>,<span class="number">53</span>,<span class="number">46</span>,<span class="number">30</span>,<span class="number">13</span>,<span class="number">1</span>,<span class="number">67</span>&#125;;</span><br><span class="line">    <span class="keyword">int</span> s = <span class="number">0</span>;</span><br><span class="line">    hashtable ht;</span><br><span class="line">    create(ht,data,<span class="number">8</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i&lt;N;i++)</span><br><span class="line">        s+=ht[i].flag;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,s/<span class="number">8</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">hash</span><span class="params">(<span class="keyword">int</span> k)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (<span class="number">3</span>*k)%<span class="number">11</span>;<span class="comment">//返回位置</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">create</span><span class="params">(hashtable ht,<span class="keyword">int</span> data[],<span class="keyword">int</span> len)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i&lt;N;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        ht[i].key = <span class="number">0</span>;</span><br><span class="line">        ht[i].flag = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> flag = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> h;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i&lt;len;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        h = hash(data[i]);</span><br><span class="line">        <span class="keyword">if</span>(ht[h].key==<span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            ht[h].key = data[i];</span><br><span class="line">            ht[h].flag = <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">while</span>(ht[h].key!=<span class="number">0</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                h++;</span><br><span class="line">                h = h%<span class="number">11</span>;</span><br><span class="line">                flag++;</span><br><span class="line">            &#125;</span><br><span class="line">            ht[h].key = data[i];</span><br><span class="line">            ht[h].flag = flag;</span><br><span class="line">            flag = <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="24"><a href="#24" class="headerlink" title="24."></a>24.</h2><p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210612111013.png" alt="image-20210612111013055" style="zoom:67%;" /></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//24.c</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">node</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">node</span> *<span class="title">lchild</span>;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">node</span> *<span class="title">rchild</span>;</span></span><br><span class="line">    <span class="keyword">int</span> val;</span><br><span class="line">&#125;Bstnode,*Bstree;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">is_bstree</span><span class="params">(Bstree)</span></span>;</span><br><span class="line"><span class="function">Bstree <span class="title">create</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Bstree t = (Bstree)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(Bstnode));</span><br><span class="line">    t = create();    </span><br><span class="line">    <span class="keyword">if</span>(is_bstree(t))</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;yes\n&quot;</span>);</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;no\n&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">Bstree <span class="title">create</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> elem;</span><br><span class="line">    Bstree p;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;elem);</span><br><span class="line">    <span class="keyword">if</span>(elem!=<span class="number">-1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">       p = (Bstree)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(Bstnode));</span><br><span class="line">       p-&gt;val = elem;</span><br><span class="line">        p-&gt;lchild = create();</span><br><span class="line">        p-&gt;rchild = create();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> p;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">is_bstree</span><span class="params">(Bstree t)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(t==<span class="literal">NULL</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span>(t-&gt;lchild&amp;&amp;t-&gt;rchild)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(t-&gt;val&lt;t-&gt;lchild-&gt;val||t-&gt;val&gt;t-&gt;rchild-&gt;val)</span><br><span class="line">                <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                <span class="keyword">return</span> is_bstree(t-&gt;lchild)&amp;&amp;is_bstree(t-&gt;rchild);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="keyword">if</span>(t-&gt;lchild)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>(t-&gt;val&lt;t-&gt;lchild-&gt;val)</span><br><span class="line">                    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                    <span class="keyword">return</span> is_bstree(t-&gt;lchild);</span><br><span class="line">            &#125;</span><br><span class="line">         <span class="keyword">else</span></span><br><span class="line">            <span class="keyword">if</span>(t-&gt;rchild)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>(t-&gt;val&gt;t-&gt;rchild-&gt;val)</span><br><span class="line">                    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                    <span class="keyword">return</span> is_bstree(t-&gt;rchild);</span><br><span class="line">            &#125; </span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// #include &lt;stdio.h&gt;</span></span><br><span class="line"><span class="comment">// #include &lt;stdlib.h&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// #define FALSE 0</span></span><br><span class="line"><span class="comment">// #define TRUE 1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// typedef struct BinTreeNode&#123;</span></span><br><span class="line"><span class="comment">//     int data;</span></span><br><span class="line"><span class="comment">//     struct BinTreeNode *left;</span></span><br><span class="line"><span class="comment">//     struct BinTreeNode *right;</span></span><br><span class="line"><span class="comment">// &#125;BinTreeNode;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// BinTreeNode *CreatBinTree()&#123;//先序递归输入</span></span><br><span class="line"><span class="comment">// 	int elem;</span></span><br><span class="line"><span class="comment">// 	BinTreeNode *p;</span></span><br><span class="line"><span class="comment">// 	scanf(&quot;%d&quot;,&amp;elem);</span></span><br><span class="line"><span class="comment">// 	if(elem==-1)&#123;</span></span><br><span class="line"><span class="comment">//         return NULL;</span></span><br><span class="line"><span class="comment">// 	&#125;</span></span><br><span class="line"><span class="comment">// 	else&#123;</span></span><br><span class="line"><span class="comment">// 		p = (BinTreeNode*)malloc(sizeof(BinTreeNode));</span></span><br><span class="line"><span class="comment">// 		p-&gt;data = elem;</span></span><br><span class="line"><span class="comment">// 		p-&gt;left = CreatBinTree();</span></span><br><span class="line"><span class="comment">// 		p-&gt;right = CreatBinTree();</span></span><br><span class="line"><span class="comment">// 		return p;</span></span><br><span class="line"><span class="comment">// 	&#125;</span></span><br><span class="line"><span class="comment">// &#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// int IsBinarySortTree(BinTreeNode *T)&#123;//判断是否为排序树，即(T-&gt;left-&gt;data)&lt;(T-&gt;data)&lt;(T-&gt;right-&gt;data)</span></span><br><span class="line"><span class="comment">//     if(!T)&#123;</span></span><br><span class="line"><span class="comment">//         return TRUE;</span></span><br><span class="line"><span class="comment">//     &#125;</span></span><br><span class="line"><span class="comment">//     else if(T-&gt;left&amp;&amp;T-&gt;right)&#123;</span></span><br><span class="line"><span class="comment">//         if(T-&gt;data&lt;T-&gt;left-&gt;data||T-&gt;data&gt;T-&gt;right-&gt;data)&#123;</span></span><br><span class="line"><span class="comment">//             return FALSE;</span></span><br><span class="line"><span class="comment">//         &#125;</span></span><br><span class="line"><span class="comment">//         else&#123;</span></span><br><span class="line"><span class="comment">//             return (IsBinarySortTree(T-&gt;left)&amp;&amp;IsBinarySortTree(T-&gt;right));</span></span><br><span class="line"><span class="comment">//         &#125;</span></span><br><span class="line"><span class="comment">//     &#125;</span></span><br><span class="line"><span class="comment">//     else if(T-&gt;left)&#123;</span></span><br><span class="line"><span class="comment">//         if(T-&gt;data&gt;T-&gt;left-&gt;data)&#123;</span></span><br><span class="line"><span class="comment">//             return FALSE;</span></span><br><span class="line"><span class="comment">//         &#125;</span></span><br><span class="line"><span class="comment">//         else&#123;</span></span><br><span class="line"><span class="comment">//             return (IsBinarySortTree(T-&gt;left));</span></span><br><span class="line"><span class="comment">//         &#125;</span></span><br><span class="line"><span class="comment">//     &#125;</span></span><br><span class="line"><span class="comment">//     else if(T-&gt;right)&#123;</span></span><br><span class="line"><span class="comment">//         if(T-&gt;data&lt;T-&gt;right-&gt;data)&#123;</span></span><br><span class="line"><span class="comment">//             return FALSE;</span></span><br><span class="line"><span class="comment">//         &#125;</span></span><br><span class="line"><span class="comment">//         else&#123;</span></span><br><span class="line"><span class="comment">//             return (IsBinarySortTree(T-&gt;right));</span></span><br><span class="line"><span class="comment">//         &#125;</span></span><br><span class="line"><span class="comment">//     &#125;</span></span><br><span class="line"><span class="comment">//     return TRUE;</span></span><br><span class="line"><span class="comment">// &#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// void Output(BinTreeNode *T)&#123;//中递归输出</span></span><br><span class="line"><span class="comment">//     if(T!=NULL)&#123;</span></span><br><span class="line"><span class="comment">//         Output(T-&gt;left);</span></span><br><span class="line"><span class="comment">//         printf(&quot;%d &quot;,T-&gt;data);</span></span><br><span class="line"><span class="comment">//         Output(T-&gt;right);</span></span><br><span class="line"><span class="comment">//     &#125;</span></span><br><span class="line"><span class="comment">// &#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// int main()&#123;</span></span><br><span class="line"><span class="comment">//     //其实我一般习惯是先给存储结构申请空间，用void函数对存储结构进行操作的，但是这个题在读取输入字符前无法确定是否需要申请空间，于是我选择在函数内申请空间</span></span><br><span class="line"><span class="comment">//     //因为我们无法将指针变量的本身传入函数，因此直接将指针传入函数可能会造成无效的处理</span></span><br><span class="line"><span class="comment">//     //因为在C语言中，所有非数组形式的数据实参均以传值形式调用（对实参做一备份并传递给调用的函数，函数不能修改作为实参实际变量的值，而只能修改传递给它的那份备份）</span></span><br><span class="line"><span class="comment">//     //此时我们通常有如下两种办法：</span></span><br><span class="line"><span class="comment">//     //1.通过return返回，例如 BT *T; T = creat(); ( BT *creat() )</span></span><br><span class="line"><span class="comment">//     //2.使用二级指针，例如 BT *T; creat(&amp;T); ( void creat(BT **T) )</span></span><br><span class="line"><span class="comment">//     BinTreeNode *T;</span></span><br><span class="line"><span class="comment">//     T = CreatBinTree();</span></span><br><span class="line"><span class="comment">//     if(IsBinarySortTree(T))&#123;</span></span><br><span class="line"><span class="comment">//         printf(&quot;yes&quot;);</span></span><br><span class="line"><span class="comment">//     &#125;</span></span><br><span class="line"><span class="comment">//     else&#123;</span></span><br><span class="line"><span class="comment">//         printf(&quot;no&quot;);</span></span><br><span class="line"><span class="comment">//     &#125;</span></span><br><span class="line"><span class="comment">// &#125;</span></span><br></pre></td></tr></table></figure>
+<h2 id="25"><a href="#25" class="headerlink" title="25."></a>25.</h2><p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210612111120.png" alt="image-20210612111120529" style="zoom:67%;" /></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">node</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">node</span> *<span class="title">lchild</span>;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">node</span> *<span class="title">rchild</span>;</span></span><br><span class="line">    <span class="keyword">int</span> val;</span><br><span class="line">&#125;Bstnode,*Bstree;</span><br><span class="line"></span><br><span class="line"><span class="function">Bstree <span class="title">create</span><span class="params">()</span></span>;<span class="comment">//创建  可以利用插入创建 也可以直接创建  </span></span><br><span class="line"><span class="comment">//这里说是先序输入，所以直接创建</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">search</span><span class="params">(Bstree,<span class="keyword">int</span>,<span class="keyword">int</span>)</span></span>;<span class="comment">//查找</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">insert</span><span class="params">(Bstree*,<span class="keyword">int</span>)</span></span>;<span class="comment">//插入</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">delBst</span><span class="params">(Bstree*,<span class="keyword">int</span>)</span></span>;<span class="comment">//删除</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">output</span><span class="params">(Bstree)</span></span>;<span class="comment">//输出  中序</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Bstree t = (Bstree)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(Bstnode));</span><br><span class="line">    t = create();</span><br><span class="line">    <span class="keyword">int</span> min,max;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d %d&quot;</span>,&amp;min,&amp;max);</span><br><span class="line">    search(t,min,max);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">    <span class="keyword">int</span> insert_val;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;insert_val);</span><br><span class="line">    insert(&amp;t,insert_val);</span><br><span class="line">    output(t);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">    <span class="keyword">int</span> del_val;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;del_val);</span><br><span class="line">    delBst(&amp;t,del_val);</span><br><span class="line">    output(t);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">Bstree <span class="title">create</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Bstree p;</span><br><span class="line">    <span class="keyword">int</span> n;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;n);</span><br><span class="line">    <span class="keyword">if</span>(n!=<span class="number">-1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        p = (Bstree)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(Bstnode));</span><br><span class="line">        p-&gt;val = n;</span><br><span class="line">        p-&gt;lchild = create();</span><br><span class="line">        p-&gt;rchild = create();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> p;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">search</span><span class="params">(Bstree t,<span class="keyword">int</span> min,<span class="keyword">int</span> max)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(t==<span class="literal">NULL</span>) </span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    search(t-&gt;lchild,min,max);</span><br><span class="line">    <span class="keyword">if</span>(t-&gt;val&gt;=min&amp;&amp;t-&gt;val&lt;=max)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>,t-&gt;val);</span><br><span class="line">   search(t-&gt;rchild,min,max);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">insert</span><span class="params">(Bstree *t,<span class="keyword">int</span> num)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Bstree s;</span><br><span class="line">    <span class="keyword">if</span>(!t)</span><br><span class="line">    &#123;</span><br><span class="line">        s = <span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(Bstnode));</span><br><span class="line">        s-&gt;val = num;</span><br><span class="line">        s-&gt;lchild = s-&gt;rchild = <span class="literal">NULL</span>;</span><br><span class="line">        *t = s;<span class="comment">//注意这里要改变值,所以用了指针</span></span><br><span class="line">        <span class="comment">//通过地址改变值</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    <span class="keyword">if</span>(num&lt;(*t)-&gt;val)</span><br><span class="line">    &#123;</span><br><span class="line">        insert(&amp;(*t)-&gt;lchild,num);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        insert(&amp;(*t)-&gt;rchild,num);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">delBst</span><span class="params">(Bstree *t,<span class="keyword">int</span> val)</span><span class="comment">//删除</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">                <span class="comment">//找到节点</span></span><br><span class="line">    <span class="keyword">if</span>((*t)-&gt;val==val)</span><br><span class="line">        &#123;</span><br><span class="line">                <span class="keyword">if</span>((*t)-&gt;lchild==<span class="literal">NULL</span>&amp;&amp;(*t)-&gt;rchild==<span class="literal">NULL</span>)<span class="comment">//叶子结点</span></span><br><span class="line">                &#123;</span><br><span class="line">                    (*t) = <span class="literal">NULL</span>;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">               <span class="keyword">else</span></span><br><span class="line">                <span class="keyword">if</span>((*t)-&gt;rchild==<span class="literal">NULL</span>)<span class="comment">//只有左子树,将左子树置为父节点的左子树</span></span><br><span class="line">                &#123;</span><br><span class="line">                    (*t) = (*t)-&gt;lchild;</span><br><span class="line">                &#125;</span><br><span class="line">               <span class="keyword">else</span></span><br><span class="line">                 <span class="keyword">if</span>((*t)-&gt;lchild==<span class="literal">NULL</span>)<span class="comment">//只有右子树,将右子树置为父节点的右子树</span></span><br><span class="line">                &#123;</span><br><span class="line">                    (*t) = (*t)-&gt;rchild;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span><span class="comment">//待删除节点 左右子树都有</span></span><br><span class="line">                <span class="comment">//找到中序遍历下的上一个点,右子树置为其右子树</span></span><br><span class="line">                <span class="comment">//左子树依旧为父节点左子树</span></span><br><span class="line">                &#123;</span><br><span class="line">                    Bstree s;</span><br><span class="line">                    s = (*t)-&gt;lchild;</span><br><span class="line">                    <span class="keyword">while</span>(s-&gt;rchild)</span><br><span class="line">                    &#123;</span><br><span class="line">                        s = s-&gt;rchild;<span class="comment">//找到左子树的最右分支叶子节点，将其右节点子树置为右子树</span></span><br><span class="line">                    &#125;</span><br><span class="line">                    s-&gt;rchild = (*t)-&gt;rchild;</span><br><span class="line">                    (*t) = (*t)-&gt;lchild;</span><br><span class="line">                &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    <span class="keyword">if</span>(val&lt;(*t)-&gt;val)</span><br><span class="line">    &#123;</span><br><span class="line">        delBst(&amp;(*t)-&gt;lchild,val);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        delBst(&amp;(*t)-&gt;lchild,val);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">output</span><span class="params">(Bstree t)</span><span class="comment">//输出  中序</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(t==<span class="literal">NULL</span>)</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">    <span class="comment">// if(t-&gt;lchild)</span></span><br><span class="line">        output(t-&gt;lchild);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>,t-&gt;val);</span><br><span class="line">        output(t-&gt;rchild);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// #include&lt;stdio.h&gt;</span></span><br><span class="line"><span class="comment">// #include&lt;stdlib.h&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// typedef struct BiTNode &#123;</span></span><br><span class="line"><span class="comment">// 	int data;</span></span><br><span class="line"><span class="comment">// 	struct BiTNode* left;</span></span><br><span class="line"><span class="comment">// 	struct BiTNode* right;</span></span><br><span class="line"><span class="comment">// &#125;BiTNode, * BiTree;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// BiTree CreateBiTree();   //创建二叉树</span></span><br><span class="line"><span class="comment">// void SearchAndPrint(BiTree T, int a, int b);//要求1：输出大于a、小于b的关键字</span></span><br><span class="line"><span class="comment">// void InsertBi(BiTree* T, int insert);//插入一个关键字并输出</span></span><br><span class="line"><span class="comment">// void DeleteBi(BiTree* T, int dele);  //删除结点</span></span><br><span class="line"><span class="comment">// void MidPrint(BiTree T); //中序输出</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// int main()</span></span><br><span class="line"><span class="comment">// &#123;</span></span><br><span class="line"><span class="comment">// 	BiTree T;</span></span><br><span class="line"><span class="comment">// 	T = CreateBiTree();</span></span><br><span class="line"><span class="comment">// 	int a, b, insert, dele;</span></span><br><span class="line"><span class="comment">// 	scanf(&quot;%d%d%d%d&quot;, &amp;a, &amp;b, &amp;insert, &amp;dele);</span></span><br><span class="line"><span class="comment">// 	SearchAndPrint(T, a, b);//要求1</span></span><br><span class="line"><span class="comment">// 	printf(&quot;\n&quot;);</span></span><br><span class="line"><span class="comment">// 	InsertBi(&amp;T, insert);//插入</span></span><br><span class="line"><span class="comment">// 	MidPrint(T);//中序输出</span></span><br><span class="line"><span class="comment">// 	printf(&quot;\n&quot;);</span></span><br><span class="line"><span class="comment">// 	DeleteBi(&amp;T, insert);//删除insert</span></span><br><span class="line"><span class="comment">// 	DeleteBi(&amp;T, dele);//删除dele</span></span><br><span class="line"><span class="comment">// 	MidPrint(T);//中序输出</span></span><br><span class="line"><span class="comment">// 	return 0;</span></span><br><span class="line"><span class="comment">// &#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// BiTree CreateBiTree()</span></span><br><span class="line"><span class="comment">// &#123;   //创建二叉树</span></span><br><span class="line"><span class="comment">// 	int data;</span></span><br><span class="line"><span class="comment">// 	scanf(&quot;%d&quot;, &amp;data);</span></span><br><span class="line"><span class="comment">// 	if (data == -1) &#123;</span></span><br><span class="line"><span class="comment">// 		return NULL;</span></span><br><span class="line"><span class="comment">// 	&#125;</span></span><br><span class="line"><span class="comment">// 	BiTree tmp;</span></span><br><span class="line"><span class="comment">// 	tmp = (BiTree)malloc(sizeof(BiTNode));</span></span><br><span class="line"><span class="comment">// 	if (!tmp) &#123;</span></span><br><span class="line"><span class="comment">// 		return NULL;</span></span><br><span class="line"><span class="comment">// 	&#125;</span></span><br><span class="line"><span class="comment">// 	tmp-&gt;data = data;</span></span><br><span class="line"><span class="comment">// 	tmp-&gt;left = CreateBiTree();</span></span><br><span class="line"><span class="comment">// 	tmp-&gt;right = CreateBiTree();</span></span><br><span class="line"><span class="comment">// 	return tmp;</span></span><br><span class="line"><span class="comment">// &#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// void SearchAndPrint(BiTree T, int a, int b)</span></span><br><span class="line"><span class="comment">// &#123;   //要求1：输出大于a、小于b的关键字</span></span><br><span class="line"><span class="comment">// 	//用中序输出</span></span><br><span class="line"><span class="comment">// 	if (!T) &#123;</span></span><br><span class="line"><span class="comment">// 		return;</span></span><br><span class="line"><span class="comment">// 	&#125;</span></span><br><span class="line"><span class="comment">// 	SearchAndPrint(T-&gt;left, a, b);</span></span><br><span class="line"><span class="comment">// 	if (T-&gt;data &gt; a &amp;&amp; T-&gt;data &lt; b) &#123;</span></span><br><span class="line"><span class="comment">// 		printf(&quot;%d &quot;, T-&gt;data);</span></span><br><span class="line"><span class="comment">// 	&#125;</span></span><br><span class="line"><span class="comment">// 	SearchAndPrint(T-&gt;right, a, b);</span></span><br><span class="line"><span class="comment">// &#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// void InsertBi(BiTree* T, int insert)</span></span><br><span class="line"><span class="comment">// &#123;   //插入结点</span></span><br><span class="line"><span class="comment">// 	if (!(*T)) &#123;</span></span><br><span class="line"><span class="comment">// 		BiTree tmp;</span></span><br><span class="line"><span class="comment">// 		tmp = (BiTree)malloc(sizeof(BiTNode));</span></span><br><span class="line"><span class="comment">// 		tmp-&gt;data = insert;</span></span><br><span class="line"><span class="comment">// 		tmp-&gt;left = NULL;</span></span><br><span class="line"><span class="comment">// 		tmp-&gt;right = NULL;</span></span><br><span class="line"><span class="comment">// 		*T = tmp;</span></span><br><span class="line"><span class="comment">// 		return;</span></span><br><span class="line"><span class="comment">// 	&#125;</span></span><br><span class="line"><span class="comment">// 	if (insert &lt; (*T)-&gt;data) &#123;</span></span><br><span class="line"><span class="comment">// 		InsertBi(&amp;(*T)-&gt;left, insert);</span></span><br><span class="line"><span class="comment">// 	&#125;</span></span><br><span class="line"><span class="comment">// 	if (insert &gt; (*T)-&gt;data) &#123;</span></span><br><span class="line"><span class="comment">// 		InsertBi(&amp;(*T)-&gt;right, insert);</span></span><br><span class="line"><span class="comment">// 	&#125;</span></span><br><span class="line"><span class="comment">// &#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// void DeleteBi(BiTree* T, int dele)</span></span><br><span class="line"><span class="comment">// &#123;   //删除结点</span></span><br><span class="line"><span class="comment">// 	if (!(*T)) &#123;</span></span><br><span class="line"><span class="comment">// 		return;</span></span><br><span class="line"><span class="comment">// 	&#125;</span></span><br><span class="line"><span class="comment">// 	DeleteBi(&amp;(*T)-&gt;left, dele);</span></span><br><span class="line"><span class="comment">// 	if ((*T)-&gt;data == dele) &#123;</span></span><br><span class="line"><span class="comment">// 		if (!(*T)-&gt;left) &#123;</span></span><br><span class="line"><span class="comment">// 			//左子树为空</span></span><br><span class="line"><span class="comment">// 			(*T) = (*T)-&gt;right;</span></span><br><span class="line"><span class="comment">// 		&#125;</span></span><br><span class="line"><span class="comment">// 		else &#123;//左子树非空</span></span><br><span class="line"><span class="comment">// 			BiTree tmp = (*T)-&gt;left;</span></span><br><span class="line"><span class="comment">// 			while (tmp-&gt;right) &#123;</span></span><br><span class="line"><span class="comment">// 				tmp = tmp-&gt;right;</span></span><br><span class="line"><span class="comment">// 			&#125;</span></span><br><span class="line"><span class="comment">// 			tmp-&gt;right = (*T)-&gt;right;</span></span><br><span class="line"><span class="comment">// 			(*T) = (*T)-&gt;left;</span></span><br><span class="line"><span class="comment">// 		&#125;</span></span><br><span class="line"><span class="comment">// 		return;</span></span><br><span class="line"><span class="comment">// 	&#125;</span></span><br><span class="line"><span class="comment">// 	DeleteBi(&amp;(*T)-&gt;right, dele);</span></span><br><span class="line"><span class="comment">// &#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// void MidPrint(BiTree T)</span></span><br><span class="line"><span class="comment">// &#123;   //中序输出</span></span><br><span class="line"><span class="comment">// 	if (!T) &#123;</span></span><br><span class="line"><span class="comment">// 		return;</span></span><br><span class="line"><span class="comment">// 	&#125;</span></span><br><span class="line"><span class="comment">// 	MidPrint(T-&gt;left);</span></span><br><span class="line"><span class="comment">// 	printf(&quot;%d &quot;, T-&gt;data);</span></span><br><span class="line"><span class="comment">// 	MidPrint(T-&gt;right);</span></span><br><span class="line"><span class="comment">// &#125;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="26"><a href="#26" class="headerlink" title="26."></a>26.</h2><p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210612111201.png" alt="image-20210612111201004" style="zoom:67%;" /></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//二叉树的合并</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">node</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">node</span> *<span class="title">lchild</span>;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">node</span> *<span class="title">rchild</span>;</span></span><br><span class="line">    <span class="keyword">int</span> key;</span><br><span class="line">&#125;Bstnode,*Bstree;</span><br><span class="line"></span><br><span class="line"><span class="function">Bstree <span class="title">create</span><span class="params">()</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">combine_tree</span><span class="params">(Bstree*,Bstree*)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">insert</span><span class="params">(Bstree*,<span class="keyword">int</span>)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">output</span><span class="params">(Bstree)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Bstree t1,t2;</span><br><span class="line">    t1 = create();</span><br><span class="line">    t2 = create();</span><br><span class="line">    combine_tree(&amp;t1,&amp;t2);</span><br><span class="line">    output(t1);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="function">Bstree <span class="title">create</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Bstree p;</span><br><span class="line">    <span class="keyword">int</span> n;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;n);</span><br><span class="line">    <span class="keyword">if</span>(n!=<span class="number">-1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        p = (Bstree)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(Bstnode));</span><br><span class="line">        p-&gt;key = n;</span><br><span class="line">        p-&gt;lchild = create();</span><br><span class="line">        p-&gt;rchild = create();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> p;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//中序遍历T2，将T2各个元素插入T1中</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">combine_tree</span><span class="params">(Bstree* m,Bstree* n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(*n)</span><br><span class="line">    &#123;</span><br><span class="line">        combine_tree(&amp;(*m),&amp;(*n)-&gt;lchild);</span><br><span class="line">        insert(&amp;(*m),(*n)-&gt;key);</span><br><span class="line">        combine_tree(&amp;(*m),&amp;(*n)-&gt;rchild);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">insert</span><span class="params">(Bstree *t,<span class="keyword">int</span> num)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Bstree s;</span><br><span class="line">    <span class="keyword">if</span>(!t)</span><br><span class="line">    &#123;</span><br><span class="line">        s = <span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(Bstnode));</span><br><span class="line">        s-&gt;key = num;</span><br><span class="line">        s-&gt;lchild = s-&gt;rchild = <span class="literal">NULL</span>;</span><br><span class="line">        *t = s;<span class="comment">//注意这里要改变值,所以用了指针</span></span><br><span class="line">        <span class="comment">//通过地址改变值</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    <span class="keyword">if</span>(num&lt;(*t)-&gt;key)</span><br><span class="line">    &#123;</span><br><span class="line">        insert(&amp;(*t)-&gt;lchild,num);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        insert(&amp;(*t)-&gt;rchild,num);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">output</span><span class="params">(Bstree t)</span><span class="comment">//输出  中序</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(t==<span class="literal">NULL</span>)</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">    <span class="comment">// if(t-&gt;lchild)</span></span><br><span class="line">        output(t-&gt;lchild);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>,t-&gt;key);</span><br><span class="line">        output(t-&gt;rchild);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// #include&lt;stdio.h&gt;</span></span><br><span class="line"><span class="comment">// #include&lt;stdlib.h&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// typedef struct BiTNode &#123;</span></span><br><span class="line"><span class="comment">// 	int data;</span></span><br><span class="line"><span class="comment">// 	struct BiTNode* left;</span></span><br><span class="line"><span class="comment">// 	struct BiTNode* right;</span></span><br><span class="line"><span class="comment">// &#125;BiTNode, * BiTree;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// BiTree CreateBiTree();   //创建二叉树</span></span><br><span class="line"><span class="comment">// void InsertBi(BiTree* T, int insert);//插入节点</span></span><br><span class="line"><span class="comment">// void CombineBi(BiTree T1, BiTree T2);//合并二叉树T1，T2</span></span><br><span class="line"><span class="comment">// void MidPrint(BiTree T); //中序输出</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// int main()</span></span><br><span class="line"><span class="comment">// &#123;</span></span><br><span class="line"><span class="comment">// 	BiTree T1, T2;</span></span><br><span class="line"><span class="comment">// 	T1 = CreateBiTree();</span></span><br><span class="line"><span class="comment">// 	T2 = CreateBiTree();</span></span><br><span class="line"><span class="comment">// 	CombineBi(T1, T2);</span></span><br><span class="line"><span class="comment">// 	MidPrint(T1);</span></span><br><span class="line"><span class="comment">// 	return 0;</span></span><br><span class="line"><span class="comment">// &#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// BiTree CreateBiTree()</span></span><br><span class="line"><span class="comment">// &#123;   //创建二叉树</span></span><br><span class="line"><span class="comment">// 	int data;</span></span><br><span class="line"><span class="comment">// 	scanf(&quot;%d&quot;, &amp;data);</span></span><br><span class="line"><span class="comment">// 	if (data == -1) &#123;</span></span><br><span class="line"><span class="comment">// 		return NULL;</span></span><br><span class="line"><span class="comment">// 	&#125;</span></span><br><span class="line"><span class="comment">// 	BiTree tmp;</span></span><br><span class="line"><span class="comment">// 	tmp = (BiTree)malloc(sizeof(BiTNode));</span></span><br><span class="line"><span class="comment">// 	if (!tmp) &#123;</span></span><br><span class="line"><span class="comment">// 		return NULL;</span></span><br><span class="line"><span class="comment">// 	&#125;</span></span><br><span class="line"><span class="comment">// 	tmp-&gt;data = data;</span></span><br><span class="line"><span class="comment">// 	tmp-&gt;left = CreateBiTree();</span></span><br><span class="line"><span class="comment">// 	tmp-&gt;right = CreateBiTree();</span></span><br><span class="line"><span class="comment">// 	return tmp;</span></span><br><span class="line"><span class="comment">// &#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// void InsertBi(BiTree* T, int insert)</span></span><br><span class="line"><span class="comment">// &#123;   //插入结点</span></span><br><span class="line"><span class="comment">// 	if (!(*T)) &#123;</span></span><br><span class="line"><span class="comment">// 		BiTree tmp;</span></span><br><span class="line"><span class="comment">// 		tmp = (BiTree)malloc(sizeof(BiTNode));</span></span><br><span class="line"><span class="comment">// 		tmp-&gt;data = insert;</span></span><br><span class="line"><span class="comment">// 		tmp-&gt;left = NULL;</span></span><br><span class="line"><span class="comment">// 		tmp-&gt;right = NULL;</span></span><br><span class="line"><span class="comment">// 		*T = tmp;</span></span><br><span class="line"><span class="comment">// 		return;</span></span><br><span class="line"><span class="comment">// 	&#125;</span></span><br><span class="line"><span class="comment">// 	if (insert &lt; (*T)-&gt;data) &#123;</span></span><br><span class="line"><span class="comment">// 		InsertBi(&amp;(*T)-&gt;left, insert);</span></span><br><span class="line"><span class="comment">// 	&#125;</span></span><br><span class="line"><span class="comment">// 	if (insert &gt; (*T)-&gt;data) &#123;</span></span><br><span class="line"><span class="comment">// 		InsertBi(&amp;(*T)-&gt;right, insert);</span></span><br><span class="line"><span class="comment">// 	&#125;</span></span><br><span class="line"><span class="comment">// &#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// void CombineBi(BiTree T1, BiTree T2)</span></span><br><span class="line"><span class="comment">// &#123;   //合并二叉树T1，T2</span></span><br><span class="line"><span class="comment">// 	if (!T2) &#123;</span></span><br><span class="line"><span class="comment">// 		return;</span></span><br><span class="line"><span class="comment">// 	&#125;</span></span><br><span class="line"><span class="comment">// 	CombineBi(T1, T2-&gt;left);</span></span><br><span class="line"><span class="comment">// 	InsertBi(&amp;T1, T2-&gt;data);</span></span><br><span class="line"><span class="comment">// 	CombineBi(T1, T2-&gt;right);</span></span><br><span class="line"><span class="comment">// &#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// void MidPrint(BiTree T)</span></span><br><span class="line"><span class="comment">// &#123;   //中序输出</span></span><br><span class="line"><span class="comment">// 	if (!T) &#123;</span></span><br><span class="line"><span class="comment">// 		return;</span></span><br><span class="line"><span class="comment">// 	&#125;</span></span><br><span class="line"><span class="comment">// 	MidPrint(T-&gt;left);</span></span><br><span class="line"><span class="comment">// 	printf(&quot;%d &quot;, T-&gt;data);</span></span><br><span class="line"><span class="comment">// 	MidPrint(T-&gt;right);</span></span><br><span class="line"><span class="comment">// &#125;</span></span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+    <div>
+	
+     <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+     
+   </div>
+        <div class="reward-container">
+  <div>感谢阅读.</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.png" alt="Sekyoro 微信支付">
+        <p>微信支付</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Sekyoro
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://sekyoro.top/2021/06/12/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84noj-3/" title="数据结构noj_3">http://sekyoro.top/2021/06/12/数据结构noj-3/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/data-structure/" rel="tag"><i class="fa fa-tag"></i> data_structure</a>
+              <a href="/tags/c/" rel="tag"><i class="fa fa-tag"></i> c</a>
+              <a href="/tags/noj/" rel="tag"><i class="fa fa-tag"></i> noj</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/05/30/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E8%AF%95%E9%AA%8C/" rel="prev" title="数据结构试验">
+      <i class="fa fa-chevron-left"></i> 数据结构试验
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/07/08/%E8%AF%BE%E7%A8%8B%E8%B5%84%E6%BA%90%E5%88%86%E4%BA%AB/" rel="next" title="课程资源分享">
+      课程资源分享 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81MzE5Ny8yOTY3Mg=="></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+	
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+	
+      	   
+          <!-- canvas粒子时钟 -->
+          <div style="">
+  <canvas id="canvas" style="width:60%;">当前浏览器不支持canvas，请更换浏览器后再试</canvas>
+</div>
+<script>
+(function(){
+
+   var digit=
+    [
+        [
+            [0,0,1,1,1,0,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,0,1,1,0],
+            [0,0,1,1,1,0,0]
+        ],//0
+        [
+            [0,0,0,1,1,0,0],
+            [0,1,1,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [1,1,1,1,1,1,1]
+        ],//1
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,1,1],
+            [1,1,1,1,1,1,1]
+        ],//2
+        [
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//3
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,0],
+            [0,0,1,1,1,1,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,1,1,0],
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,1]
+        ],//4
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,1,1,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//5
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//6
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0]
+        ],//7
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//8
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,1,1,0,0,0,0]
+        ],//9
+        [
+            [0,0,0,0,0,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,0,0,0]
+        ]//:
+    ];
+
+var canvas = document.getElementById('canvas');
+
+if(canvas.getContext){
+    var cxt = canvas.getContext('2d');
+    //声明canvas的宽高
+    var H = 100,W = 700;
+    canvas.height = H;
+    canvas.width = W;
+    cxt.fillStyle = '#f00';
+    cxt.fillRect(10,10,50,50);
+
+    //存储时间数据
+    var data = [];
+    //存储运动的小球
+    var balls = [];
+    //设置粒子半径
+    var R = canvas.height/20-1;
+    (function(){
+        var temp = /(\d)(\d):(\d)(\d):(\d)(\d)/.exec(new Date());
+        //存储时间数字，由十位小时、个位小时、冒号、十位分钟、个位分钟、冒号、十位秒钟、个位秒钟这7个数字组成
+        data.push(temp[1],temp[2],10,temp[3],temp[4],10,temp[5],temp[6]);
+    })();
+
+    /*生成点阵数字*/
+    function renderDigit(index,num){
+        for(var i = 0; i < digit[num].length; i++){
+            for(var j = 0; j < digit[num][i].length; j++){
+                if(digit[num][i][j] == 1){
+                    cxt.beginPath();
+                    cxt.arc(14*(R+2)*index + j*2*(R+1)+(R+1),i*2*(R+1)+(R+1),R,0,2*Math.PI);
+                    cxt.closePath();
+                    cxt.fill();
+                }
+            }
+        }
+    }
+
+    /*更新时钟*/
+    function updateDigitTime(){
+        var changeNumArray = [];
+        var temp = /(\d)(\d):(\d)(\d):(\d)(\d)/.exec(new Date());
+        var NewData = [];
+        NewData.push(temp[1],temp[2],10,temp[3],temp[4],10,temp[5],temp[6]);
+        for(var i = data.length-1; i >=0 ; i--){
+            //时间发生变化
+            if(NewData[i] !== data[i]){
+                //将变化的数字值和在data数组中的索引存储在changeNumArray数组中
+                changeNumArray.push(i+'_'+(Number(data[i])+1)%10);
+            }
+        }
+        //增加小球
+        for(var i = 0; i< changeNumArray.length; i++){
+            addBalls.apply(this,changeNumArray[i].split('_'));
+        }
+        data = NewData.concat();
+    }
+
+    /*更新小球状态*/
+    function updateBalls(){
+        for(var i = 0; i < balls.length; i++){
+            balls[i].stepY += balls[i].disY;
+            balls[i].x += balls[i].stepX;
+            balls[i].y += balls[i].stepY;
+            if(balls[i].x > W + R || balls[i].y > H + R){
+                balls.splice(i,1);
+                i--;
+            }
+        }
+    }
+
+    /*增加要运动的小球*/
+    function addBalls(index,num){
+        var numArray = [1,2,3];
+        var colorArray =  ["#3BE","#09C","#A6C","#93C","#9C0","#690","#FB3","#F80","#F44","#C00"];
+        for(var i = 0; i < digit[num].length; i++){
+            for(var j = 0; j < digit[num][i].length; j++){
+                if(digit[num][i][j] == 1){
+                    var ball = {
+                        x:14*(R+2)*index + j*2*(R+1)+(R+1),
+                        y:i*2*(R+1)+(R+1),
+                        stepX:Math.floor(Math.random() * 4 -2),
+                        stepY:-2*numArray[Math.floor(Math.random()*numArray.length)],
+                        color:colorArray[Math.floor(Math.random()*colorArray.length)],
+                        disY:1
+                    };
+                    balls.push(ball);
+                }
+            }
+        }
+    }
+
+    /*渲染*/
+    function render(){
+        //重置画布宽度，达到清空画布的效果
+        canvas.height = 100;
+        //渲染时钟
+        for(var i = 0; i < data.length; i++){
+            renderDigit(i,data[i]);
+        }
+        //渲染小球
+        for(var i = 0; i < balls.length; i++){
+            cxt.beginPath();
+            cxt.arc(balls[i].x,balls[i].y,R,0,2*Math.PI);
+            cxt.fillStyle = balls[i].color;
+            cxt.closePath();
+            cxt.fill();
+        }
+    }
+
+    clearInterval(oTimer);
+    var oTimer = setInterval(function(){
+        //更新时钟
+        updateDigitTime();
+        //更新小球状态
+        updateBalls();
+        //渲染
+        render();
+    },50);
+}
+
+})();
+</script>
+        
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.7.0/dist/APlayer.min.css">
+	<div class="aplayer" data-id="1294924565" data-server="netease" data-type="song"></div>
+	<script src="https://cdn.jsdelivr.net/npm/aplayer@1.7.0/dist/APlayer.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/meting@1.1.0/dist/Meting.min.js"></script>
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+	  
+		
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84noj-3"><span class="nav-number">1.</span> <span class="nav-text">数据结构noj_3</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#21"><span class="nav-number">1.1.</span> <span class="nav-text">21.</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#22"><span class="nav-number">1.2.</span> <span class="nav-text">22.</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#23"><span class="nav-number">1.3.</span> <span class="nav-text">23.</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#24"><span class="nav-number">1.4.</span> <span class="nav-text">24.</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#25"><span class="nav-number">1.5.</span> <span class="nav-text">25.</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#26"><span class="nav-number">1.6.</span> <span class="nav-text">26.</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Sekyoro"
+      src="https://i.loli.net/2021/05/17/YqoavnXdGTpPO9R.jpg">
+  <p class="site-author-name" itemprop="name">Sekyoro</p>
+  <div class="site-description" itemprop="description">什么也无法舍弃的人，什么也做不了.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">15</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/drowning-in-codes" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;drowning-in-codes" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/mailtobukalala174@gmail.com" title="E-Mail → mailtobukalala174@gmail.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+  
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; Wed Apr 08 2020 08:00:00 GMT+0800 (中国标准时间) – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Sekyoro</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">123k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">1:52</span>
+</div>
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+    <span id="busuanzi_container_site_pv">总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+    <span class="post-meta-divider">|</span>
+    <span id="busuanzi_container_site_uv">总访客数<span id="busuanzi_value_site_uv"></span>人</span>
+    <span class="post-meta-divider">|</span>
+<!-- 不蒜子计数初始值纠正 -->
+<script>
+$(document).ready(function() {
+
+    var int = setInterval(fixCount, 50);  // 50ms周期检测函数
+    var countOffset = 20000;  // 初始化首次数据
+
+    function fixCount() {            
+       if (document.getElementById("busuanzi_container_site_pv").style.display != "none")
+        {
+            $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + countOffset); 
+            clearInterval(int);
+        }                  
+        if ($("#busuanzi_container_site_pv").css("display") != "none")
+        {
+            $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + countOffset); // 加上初始数据 
+            clearInterval(int); // 停止检测
+        }  
+    }
+       	
+});
+</script> 
+
+<div>
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("04/08/2021 20:00:00");
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+    }
+setInterval("createtime()",250);
+</script>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/theme-next/theme-next-pjax@0/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+<script data-pjax>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  let url = element.dataset.target;
+  let pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  let pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  let fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+  
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+    </div>
+</body>
+</html>
