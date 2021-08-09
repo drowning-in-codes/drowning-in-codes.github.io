@@ -1223,7 +1223,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #f7c3ff;
+  background: #905086;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2641,7 +2641,7 @@ mjx-container + br {
 .back-to-top.back-to-top-on {
   margin-top: 16px;
 }
-.body {
+body {
   background: url("https://api.ixiaowai.cn/api/api.php");
   background-size: cover;
   background-repeat: no-repeat;
