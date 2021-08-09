@@ -270,6 +270,13 @@
   </url>
   
   <url>
+    <loc>https://sekyoro.top/tags/proxy/</loc>
+    <lastmod>2021-08-09</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://sekyoro.top/tags/python/</loc>
     <lastmod>2021-08-09</lastmod>
     <changefreq>daily</changefreq>
@@ -278,27 +285,6 @@
   
   <url>
     <loc>https://sekyoro.top/tags/sign-in/</loc>
-    <lastmod>2021-08-09</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://sekyoro.top/tags/proxy/</loc>
-    <lastmod>2021-08-09</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://sekyoro.top/tags/database/</loc>
-    <lastmod>2021-08-09</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://sekyoro.top/tags/threading/</loc>
     <lastmod>2021-08-09</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -319,6 +305,13 @@
   </url>
   
   <url>
+    <loc>https://sekyoro.top/tags/threading/</loc>
+    <lastmod>2021-08-09</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://sekyoro.top/tags/Qt/</loc>
     <lastmod>2021-08-09</lastmod>
     <changefreq>daily</changefreq>
@@ -327,6 +320,13 @@
   
   <url>
     <loc>https://sekyoro.top/tags/C/</loc>
+    <lastmod>2021-08-09</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://sekyoro.top/tags/database/</loc>
     <lastmod>2021-08-09</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
