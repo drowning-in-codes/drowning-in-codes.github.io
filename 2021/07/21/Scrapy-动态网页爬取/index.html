@@ -27,7 +27,7 @@
   <meta name="description" content="Scrapy之动态网页爬取动态网页通过JavaScript与html交互 可以通过Splash渲染引擎爬取">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Scapy_动态网页爬取">
-<meta property="og:url" content="http://sekyoro.top/2021/07/21/Scrapy-%E5%8A%A8%E6%80%81%E7%BD%91%E9%A1%B5%E7%88%AC%E5%8F%96/index.html">
+<meta property="og:url" content="https://sekyoro.top/2021/07/21/Scrapy-%E5%8A%A8%E6%80%81%E7%BD%91%E9%A1%B5%E7%88%AC%E5%8F%96/index.html">
 <meta property="og:site_name" content="Sekyoro的博客小屋">
 <meta property="og:description" content="Scrapy之动态网页爬取动态网页通过JavaScript与html交互 可以通过Splash渲染引擎爬取">
 <meta property="og:locale" content="zh_CN">
@@ -41,7 +41,7 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210729173502.png">
 
-<link rel="canonical" href="http://sekyoro.top/2021/07/21/Scrapy-%E5%8A%A8%E6%80%81%E7%BD%91%E9%A1%B5%E7%88%AC%E5%8F%96/">
+<link rel="canonical" href="https://sekyoro.top/2021/07/21/Scrapy-%E5%8A%A8%E6%80%81%E7%BD%91%E9%A1%B5%E7%88%AC%E5%8F%96/">
 
 
 <script id="page-configurations">
@@ -237,7 +237,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://sekyoro.top/2021/07/21/Scrapy-%E5%8A%A8%E6%80%81%E7%BD%91%E9%A1%B5%E7%88%AC%E5%8F%96/">
+    <link itemprop="mainEntityOfPage" href="https://sekyoro.top/2021/07/21/Scrapy-%E5%8A%A8%E6%80%81%E7%BD%91%E9%A1%B5%E7%88%AC%E5%8F%96/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://i.loli.net/2021/05/17/YqoavnXdGTpPO9R.jpg">
@@ -384,7 +384,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://sekyoro.top/2021/07/21/Scrapy-%E5%8A%A8%E6%80%81%E7%BD%91%E9%A1%B5%E7%88%AC%E5%8F%96/" title="Scapy_动态网页爬取">http://sekyoro.top/2021/07/21/Scrapy-动态网页爬取/</a>
+    <a href="https://sekyoro.top/2021/07/21/Scrapy-%E5%8A%A8%E6%80%81%E7%BD%91%E9%A1%B5%E7%88%AC%E5%8F%96/" title="Scapy_动态网页爬取">https://sekyoro.top/2021/07/21/Scrapy-动态网页爬取/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -1000,6 +1000,31 @@ window.addEventListener('pjax:success', () => {
 
 
   
+  <script data-pjax>
+    (function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+  </script>
 
 
 

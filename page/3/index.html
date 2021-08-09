@@ -27,14 +27,14 @@
   <meta name="description" content="什么也无法舍弃的人，什么也做不了.">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Sekyoro的博客小屋">
-<meta property="og:url" content="http://sekyoro.top/page/3/index.html">
+<meta property="og:url" content="https://sekyoro.top/page/3/index.html">
 <meta property="og:site_name" content="Sekyoro的博客小屋">
 <meta property="og:description" content="什么也无法舍弃的人，什么也做不了.">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:author" content="Sekyoro">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://sekyoro.top/page/3/">
+<link rel="canonical" href="https://sekyoro.top/page/3/">
 
 
 <script id="page-configurations">
@@ -229,7 +229,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://sekyoro.top/2021/05/30/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E8%AF%95%E9%AA%8C/">
+    <link itemprop="mainEntityOfPage" href="https://sekyoro.top/2021/05/30/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E8%AF%95%E9%AA%8C/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://i.loli.net/2021/05/17/YqoavnXdGTpPO9R.jpg">
@@ -324,7 +324,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://sekyoro.top/2021/05/17/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84noj_2/">
+    <link itemprop="mainEntityOfPage" href="https://sekyoro.top/2021/05/17/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84noj_2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://i.loli.net/2021/05/17/YqoavnXdGTpPO9R.jpg">
@@ -419,7 +419,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://sekyoro.top/2021/05/10/%E5%93%88%E5%A4%AB%E6%9B%BC%E7%BC%96-%E8%AF%91%E7%A0%81/">
+    <link itemprop="mainEntityOfPage" href="https://sekyoro.top/2021/05/10/%E5%93%88%E5%A4%AB%E6%9B%BC%E7%BC%96-%E8%AF%91%E7%A0%81/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://i.loli.net/2021/05/17/YqoavnXdGTpPO9R.jpg">
@@ -514,7 +514,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://sekyoro.top/2021/04/29/%E5%85%B3%E4%BA%8E%E6%8C%87%E9%92%88%E5%92%8C%E5%87%BD%E6%95%B0/">
+    <link itemprop="mainEntityOfPage" href="https://sekyoro.top/2021/04/29/%E5%85%B3%E4%BA%8E%E6%8C%87%E9%92%88%E5%92%8C%E5%87%BD%E6%95%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://i.loli.net/2021/05/17/YqoavnXdGTpPO9R.jpg">
@@ -607,7 +607,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://sekyoro.top/2021/04/23/%E5%B9%BF%E4%B9%89%E8%A1%A8%E7%AE%80%E4%BB%8B/">
+    <link itemprop="mainEntityOfPage" href="https://sekyoro.top/2021/04/23/%E5%B9%BF%E4%B9%89%E8%A1%A8%E7%AE%80%E4%BB%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://i.loli.net/2021/05/17/YqoavnXdGTpPO9R.jpg">
@@ -1282,6 +1282,31 @@ window.addEventListener('pjax:success', () => {
 
 
   
+  <script data-pjax>
+    (function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+  </script>
 
 
 
