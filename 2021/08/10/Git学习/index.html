@@ -43,7 +43,7 @@
 <meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210801142740.png">
 <meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210801150742.png">
 <meta property="article:published_time" content="2021-08-10T09:30:34.000Z">
-<meta property="article:modified_time" content="2021-08-10T09:31:53.449Z">
+<meta property="article:modified_time" content="2021-08-15T12:40:51.562Z">
 <meta property="article:author" content="Sekyoro">
 <meta property="article:tag" content="Git">
 <meta name="twitter:card" content="summary">
@@ -273,10 +273,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2021-08-10 17:30:34 / 修改时间：17:31:53" itemprop="dateCreated datePublished" datetime="2021-08-10T17:30:34+08:00">2021-08-10</time>
+              <time title="创建时间：2021-08-10 17:30:34" itemprop="dateCreated datePublished" datetime="2021-08-10T17:30:34+08:00">2021-08-10</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-08-15 20:40:51" itemprop="dateModified" datetime="2021-08-15T20:40:51+08:00">2021-08-15</time>
+              </span>
 
           
             <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
@@ -291,7 +297,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>2.2k</span>
+              <span>2.4k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -375,6 +381,11 @@
 <p>回溯至之前状态后,利用git reflog可以前推</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git commit --amend <span class="comment">#可以修改上一条提交信息</span></span><br><span class="line">git commit -am <span class="string">&quot;&quot;</span> <span class="comment">#不用add直接提交</span></span><br><span class="line">git rebase -i HEAD~2 <span class="comment">#合并历史  选定当前分支包含HEAD在内的两个最新历史记录</span></span><br></pre></td></tr></table></figure>
 <p><a target="_blank" rel="noopener" href="https://learngitbranching.js.org/?locale=zh_CN">Learn Git Branching</a></p>
+<p>1)、在本地创建一个版本库（即文件夹），通过<code>git init</code>把它变成Git仓库；</p>
+<p>2)、把项目复制到这个文件夹里面，再通过<code>git add .</code>把项目添加到仓库；</p>
+<p>3)、再通过<code>git commit -m &quot;注释内容&quot;</code>把项目提交到仓库；</p>
+<p>4)、在Github上设置好SSH密钥后，新建一个远程仓库，通过<code>git remote add origin 远程仓库地址</code>将本地仓库和远程仓库进行关联；</p>
+<p>5)、最后通过<code>git push -u origin master</code>把本地仓库的项目推送到远程仓库（也就是Github）上。</p>
 
     </div>
 
@@ -859,7 +870,7 @@ if(canvas.getContext){
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">2:14</span>
+    <span title="站点阅读时长">2:15</span>
 </div>
 
     <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
