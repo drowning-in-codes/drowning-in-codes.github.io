@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://sekyoro.top/2021/08/15/pygame%E5%AE%9E%E8%B7%B5-1/</loc>
+    
+    <lastmod>2021-08-15</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://sekyoro.top/2021/08/10/Git%E5%AD%A6%E4%B9%A0/</loc>
     
     <lastmod>2021-08-10</lastmod>
@@ -156,14 +163,14 @@
   </url>
   
   <url>
-    <loc>https://sekyoro.top/lib/jquery_lazyload/README.html</loc>
+    <loc>https://sekyoro.top/lib/jquery_lazyload/bower.json</loc>
     
     <lastmod>2021-04-09</lastmod>
     
   </url>
   
   <url>
-    <loc>https://sekyoro.top/lib/jquery_lazyload/bower.json</loc>
+    <loc>https://sekyoro.top/lib/jquery_lazyload/README.html</loc>
     
     <lastmod>2021-04-09</lastmod>
     
@@ -221,7 +228,7 @@
 
   <url>
     <loc>https://sekyoro.top/</loc>
-    <lastmod>2021-08-10</lastmod>
+    <lastmod>2021-08-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -229,133 +236,140 @@
   
   <url>
     <loc>https://sekyoro.top/tags/data-structure/</loc>
-    <lastmod>2021-08-10</lastmod>
+    <lastmod>2021-08-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://sekyoro.top/tags/c/</loc>
-    <lastmod>2021-08-10</lastmod>
+    <lastmod>2021-08-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://sekyoro.top/tags/%E6%8C%87%E9%92%88/</loc>
-    <lastmod>2021-08-10</lastmod>
+    <lastmod>2021-08-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://sekyoro.top/tags/%E5%87%BD%E6%95%B0/</loc>
-    <lastmod>2021-08-10</lastmod>
+    <lastmod>2021-08-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://sekyoro.top/tags/spider/</loc>
-    <lastmod>2021-08-10</lastmod>
+    <lastmod>2021-08-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://sekyoro.top/tags/Scrapy/</loc>
-    <lastmod>2021-08-10</lastmod>
+    <lastmod>2021-08-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://sekyoro.top/tags/splash/</loc>
-    <lastmod>2021-08-10</lastmod>
+    <lastmod>2021-08-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://sekyoro.top/tags/python/</loc>
-    <lastmod>2021-08-10</lastmod>
+    <lastmod>2021-08-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://sekyoro.top/tags/sign-in/</loc>
-    <lastmod>2021-08-10</lastmod>
+    <lastmod>2021-08-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://sekyoro.top/tags/proxy/</loc>
-    <lastmod>2021-08-10</lastmod>
+    <lastmod>2021-08-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://sekyoro.top/tags/database/</loc>
-    <lastmod>2021-08-10</lastmod>
+    <lastmod>2021-08-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://sekyoro.top/tags/threading/</loc>
-    <lastmod>2021-08-10</lastmod>
+    <lastmod>2021-08-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://sekyoro.top/tags/tkinter/</loc>
-    <lastmod>2021-08-10</lastmod>
+    <lastmod>2021-08-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://sekyoro.top/tags/GUI/</loc>
-    <lastmod>2021-08-10</lastmod>
+    <lastmod>2021-08-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://sekyoro.top/tags/Qt/</loc>
-    <lastmod>2021-08-10</lastmod>
+    <lastmod>2021-08-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://sekyoro.top/tags/C/</loc>
-    <lastmod>2021-08-10</lastmod>
+    <lastmod>2021-08-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://sekyoro.top/tags/material/</loc>
-    <lastmod>2021-08-10</lastmod>
+    <lastmod>2021-08-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://sekyoro.top/tags/Git/</loc>
-    <lastmod>2021-08-10</lastmod>
+    <lastmod>2021-08-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://sekyoro.top/tags/noj/</loc>
-    <lastmod>2021-08-10</lastmod>
+    <lastmod>2021-08-15</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://sekyoro.top/tags/pygame/</loc>
+    <lastmod>2021-08-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
@@ -364,28 +378,28 @@
   
   <url>
     <loc>https://sekyoro.top/categories/study/</loc>
-    <lastmod>2021-08-10</lastmod>
+    <lastmod>2021-08-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://sekyoro.top/categories/%E8%AF%AF%E5%8C%BA/</loc>
-    <lastmod>2021-08-10</lastmod>
+    <lastmod>2021-08-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://sekyoro.top/categories/python/</loc>
-    <lastmod>2021-08-10</lastmod>
+    <lastmod>2021-08-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://sekyoro.top/categories/fun/</loc>
-    <lastmod>2021-08-10</lastmod>
+    <lastmod>2021-08-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
