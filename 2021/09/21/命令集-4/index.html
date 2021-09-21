@@ -26,12 +26,12 @@
     var CONFIG = {"hostname":"sekyoro.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":240,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 <link href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css" rel="stylesheet">
-  <meta name="description" content="Linux进程与磁盘管理进程（process）：进程是程序在一个数据集合上的一次执行过程，在早期的 UNIX、Linux 2.4 及更早的版本中，它是系统进行资源分配和调度的独立基本单位。  动态性：进程的实质是一次程序执行的过程，有创建、撤销等状态的变化。而程序是一个静态的实体。 并发性：进程可以做到在一个时间段内，有多个程序在运行中。程序只是静态的实体，所以不存在并发性。 独立性：进程可以独立">
+  <meta name="description" content="Linux进程与磁盘管理进程（process）：进程是程序在一个数据集合上的一次执行过程，在早期的 UNIX、Linux 2.4 及更早的版本中，它是系统进行资源分配和调度的独立基本单位。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="命令集_4">
 <meta property="og:url" content="https://sekyoro.top/2021/09/21/%E5%91%BD%E4%BB%A4%E9%9B%86-4/index.html">
 <meta property="og:site_name" content="Sekyoro的博客小屋">
-<meta property="og:description" content="Linux进程与磁盘管理进程（process）：进程是程序在一个数据集合上的一次执行过程，在早期的 UNIX、Linux 2.4 及更早的版本中，它是系统进行资源分配和调度的独立基本单位。  动态性：进程的实质是一次程序执行的过程，有创建、撤销等状态的变化。而程序是一个静态的实体。 并发性：进程可以做到在一个时间段内，有多个程序在运行中。程序只是静态的实体，所以不存在并发性。 独立性：进程可以独立">
+<meta property="og:description" content="Linux进程与磁盘管理进程（process）：进程是程序在一个数据集合上的一次执行过程，在早期的 UNIX、Linux 2.4 及更早的版本中，它是系统进行资源分配和调度的独立基本单位。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210915105254.png">
 <meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210915110542.png">
@@ -61,7 +61,7 @@
 <meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210915225335.png">
 <meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210915225425.png">
 <meta property="article:published_time" content="2021-09-21T02:55:51.000Z">
-<meta property="article:modified_time" content="2021-09-21T02:57:00.655Z">
+<meta property="article:modified_time" content="2021-09-21T03:00:27.167Z">
 <meta property="article:author" content="Sekyoro">
 <meta property="article:tag" content="Linux">
 <meta name="twitter:card" content="summary">
@@ -293,7 +293,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2021-09-21 10:55:51 / 修改时间：10:57:00" itemprop="dateCreated datePublished" datetime="2021-09-21T10:55:51+08:00">2021-09-21</time>
+              <time title="创建时间：2021-09-21 10:55:51 / 修改时间：11:00:27" itemprop="dateCreated datePublished" datetime="2021-09-21T10:55:51+08:00">2021-09-21</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -338,6 +338,7 @@
 
       
         <h2 id="Linux进程与磁盘管理"><a href="#Linux进程与磁盘管理" class="headerlink" title="Linux进程与磁盘管理"></a>Linux进程与磁盘管理</h2><p><strong>进程</strong>（process）：进程是程序在一个数据集合上的一次执行过程，在早期的 UNIX、Linux 2.4 及更早的版本中，它是系统进行资源分配和调度的独立基本单位。</p>
+<span id="more"></span>
 <ul>
 <li>动态性：进程的实质是一次程序执行的过程，有创建、撤销等状态的变化。而程序是一个静态的实体。</li>
 <li>并发性：进程可以做到在一个时间段内，有多个程序在运行中。程序只是静态的实体，所以不存在并发性。</li>
