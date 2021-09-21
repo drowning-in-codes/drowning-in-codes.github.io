@@ -1223,7 +1223,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #fff94d;
+  background: #ff6bd5;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2642,7 +2642,7 @@ mjx-container + br {
   margin-top: 16px;
 }
 body {
-  background: url("https://api.ixiaowai.cn/api/api.php");
+  background: url("https://www.yingciyuan.cn/api.php");
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
