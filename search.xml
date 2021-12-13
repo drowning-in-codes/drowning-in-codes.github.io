@@ -4,6 +4,48 @@
   
     
     <entry>
+      <title>python操作百度网盘</title>
+      <link href="2021/12/08/python%E6%93%8D%E4%BD%9C%E7%99%BE%E5%BA%A6%E7%BD%91%E7%9B%98/"/>
+      <url>2021/12/08/python%E6%93%8D%E4%BD%9C%E7%99%BE%E5%BA%A6%E7%BD%91%E7%9B%98/</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>学习点</p><p>百度API</p><p>爬虫</p><span id="more"></span><p>最近想从某个发图片公众号那爬取</p><p>网盘链接,根据链接存文件.</p><p>当然这里的链接是百度网盘链接.</p><p>tips:我有两个百度云账号,但是手机利用手机账号只能登陆一个(两个账号都绑定了同一个手机),所以需要给登陆的那个号设置手机登录,如果是用户名登陆的话会跳出手机验证码,增加麻烦.</p><p>后来发现用了手机号登录还是由验证码,先输入了再说. </p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> python </tag>
+            
+            <tag> BaiduNetdisk </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>搭建wordpress</title>
+      <link href="2021/12/01/%E6%90%AD%E5%BB%BAwordpress/"/>
+      <url>2021/12/01/%E6%90%AD%E5%BB%BAwordpress/</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>本来有一个博客了,但是搭一个动态博客方便我传文件等等<br><span id="more"></span><br>需要工具:<br>宝塔面板 :图形化管理服务器<br>xshell :远程连接  或者其他shell 有ssh就行<br>xftp :传本地文件,下载服务器的文件</p><p>下载流程就不细说了,需要注意的是下载宝塔面板需要连上服务器后使用相关命令下载软件(输入一个命令即可),记住它给的信息,同时为服务器创建安全规则(我的理解就是开放端口,不然很多服务都访问不了)<br>至于具体的安全规则,在宝塔面板上有<br><a href="https://www.bt.cn/bbs/thread-2897-1-1.html">https://www.bt.cn/bbs/thread-2897-1-1.html</a> 这是阿里云的</p><p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20211201102511220.png" alt="image-20211201102511220" style="zoom:80%;" /></p><p>除了8888端口还有上面端口需要开放</p><p>如果默认8888端口会有危险,修改一下或者忽略就行了</p><p>在面板创建站点,如果有域名的话配置域名,否则用ip地址</p><p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20211201121437571.png" alt="image-20211201121437571"></p><p>然后安装wordpress,下载压缩包上传到文件,解压到网站站点目录</p><p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20211201121518824.png" alt="image-20211201121518824"></p><p>将解压得到的内容放在根目录下,这点还是很重要的.</p><p>然后登录站点,一步一步按照提示填写,最后就长这样,</p><p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20211201143454798.png" alt="image-20211201143454798"></p><p>下载wp主题,有两个主题推荐 Sakura和Kratos-pjax</p><p>github上有,不过我一开始是git clone下来发现wp需要zip,我自己压缩成zip发现不太行,后来又下载的zip.</p><p>同时注意一下php版本,4.x多半是不行了,需要装一个更新的,同时phpadmin版本也要跟着更新一下.</p><p>然后是域名备案,众所周知,在cn需要域名备案.</p><p>我用的阿里云的服务器,在腾讯买的域名,因为阿里那没有我想买的域名.</p><p>一开始在网上搜索以为这样需要域名转入,所以以为很麻烦，事实上只用备案就行了.</p><p>在购买服务器的isp那备案.</p><p><strong>注意</strong>:备案的域名需要实名购买(现在是强制的了),同时需要购买后过2天左右(会有一段时间的)才能申请备案.</p><p>填写一堆信息后需要通过初审.</p><p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20211202234623396.png" alt="image-20211202234623396"></p><p>吐槽一下,幸好这里可以吐槽… 阿里云这边需要强制安装一个阿里云app填写信息,填写的信息也是一大堆..</p><p>备案后会核实网站信息,注意的是网站信息不能有博客和免费这些信息…</p><p>后面过了管局应该就行了.</p><p>12/13更新</p><p>今天管局给我通过了,然后在ngnix上操作一下设置域名就行了</p><p>欢迎访问</p><p>proanimer.com</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> wordpress </tag>
+            
+            <tag> tutorial </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title></title>
       <link href="2021/11/21/js%E5%AD%A6%E4%B9%A0/"/>
       <url>2021/11/21/js%E5%AD%A6%E4%B9%A0/</url>
