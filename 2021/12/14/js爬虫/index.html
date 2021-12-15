@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<script src="/live2d-widget/autoload.js"></script>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/blog_32px.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/blog_32px.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/blog_16px.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="EPrJAp11bJwHULpQUaSNSZ8_3RcvTsPDAEGOME4pl1w">
+  <meta name="msvalidate.01" content="7226864CE87CE9DE8C008385273846FF">
+  <meta name="baidu-site-verification" content="code-fjFXVtiL7j" />
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-mac-osx.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"sekyoro.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":240,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+<link href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css" rel="stylesheet">
+  <meta name="description" content="之前都是用的python爬虫,现在想往web方向发展.话不多说,nodejs的superagent+cheerio">
+<meta property="og:type" content="article">
+<meta property="og:title" content="js爬虫">
+<meta property="og:url" content="https://sekyoro.top/2021/12/14/js%E7%88%AC%E8%99%AB/index.html">
+<meta property="og:site_name" content="Sekyoro的博客小屋">
+<meta property="og:description" content="之前都是用的python爬虫,现在想往web方向发展.话不多说,nodejs的superagent+cheerio">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20211214220056824.png">
+<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20211214220155928.png">
+<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20211214220250378.png">
+<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20211214220742435.png">
+<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20211214220926672.png">
+<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20211214225431353.png">
+<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20211215101931605.png">
+<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20211215101854884.png">
+<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20211215102207083.png">
+<meta property="article:published_time" content="2021-12-14T13:53:02.000Z">
+<meta property="article:modified_time" content="2021-12-15T02:22:15.304Z">
+<meta property="article:author" content="Sekyoro">
+<meta property="article:tag" content="spider">
+<meta property="article:tag" content="js">
+<meta property="article:tag" content="nodejs">
+<meta property="article:tag" content="cheerio">
+<meta property="article:tag" content="superagent">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20211214220056824.png">
+
+<link rel="canonical" href="https://sekyoro.top/2021/12/14/js%E7%88%AC%E8%99%AB/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+ 
+
+<script>
+  var OriginTitile = document.title;
+  var titleTime;
+  document.addEventListener("visibilitychange", function() {
+    if (document.hidden) {
+      document.title = "(つェ⊂)我藏好了哦~" + OriginTitile;
+      clearTimeout(titleTime);
+    } else {
+      document.title = "(*´∇｀*) 被你发现啦~" + OriginTitile;
+      titleTime = setTimeout(function() {
+        document.title = OriginTitile;
+      }, 2000);
+    }
+  });
+</script>
+
+
+
+  <script src="/js/src/activate-power-mode.min.js"></script>
+  <script>
+    POWERMODE.colorful = true;
+    POWERMODE.shake = false;
+    document.body.addEventListener('input', POWERMODE);
+  </script>
+
+
+  <title>js爬虫 | Sekyoro的博客小屋</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+<!-- require JQuery -->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+<!-- require pjax -->
+<script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/index.min.js"></script>
+
+
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+   <script type="text/javascript" src="/js/src/fireworks.js"></script>
+
+
+  <div class="container use-motion">
+    <div class="headband"></div>
+	
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Sekyoro的博客小屋</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://sekyoro.top/2021/12/14/js%E7%88%AC%E8%99%AB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://i.loli.net/2021/05/17/YqoavnXdGTpPO9R.jpg">
+      <meta itemprop="name" content="Sekyoro">
+      <meta itemprop="description" content="什么也无法舍弃的人，什么也做不了.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sekyoro的博客小屋">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          js爬虫
+        </h1>
+
+        <div class="post-meta">
+		
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-12-14 21:53:02" itemprop="dateCreated datePublished" datetime="2021-12-14T21:53:02+08:00">2021-12-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-12-15 10:22:15" itemprop="dateModified" datetime="2021-12-15T10:22:15+08:00">2021-12-15</time>
+              </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>5.1k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>5 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>之前都是用的python爬虫,现在想往web方向发展.<br>话不多说,nodejs的superagent+cheerio<br><span id="more"></span></p>
+<p>nodejs是js的环境,除此之外还有浏览器,但我们肯定不在浏览器上嘛.</p>
+<p>superagent拿来爬取,在这之前我也尝试过axios,request,事实证明superagent很好用.</p>
+<p>cheerio拿来处理爬取到的数据,主要就是html.</p>
+<p>目的是某末流二本的教务系统.</p>
+<p>我最终目的是获得课程信息以及空闲教室信息.</p>
+<h2 id="1-superagent爬取"><a href="#1-superagent爬取" class="headerlink" title="1.superagent爬取"></a>1.superagent爬取</h2><p>首先需要登录.</p>
+<p>结合多次尝试,获得了的登录url <a target="_blank" rel="noopener" href="http://us.nwpu.edu.cn/eams/login.action">http://us.nwpu.edu.cn/eams/login.action</a></p>
+<p>根据末尾很容易知道需要往这个url发送post,话不多说直接构造post</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">uid = <span class="string">&#x27;&#x27;</span>; <span class="comment">//学号</span></span><br><span class="line">pwd = <span class="string">&#x27;&#x27;</span>; <span class="comment">//密码</span></span><br><span class="line">superagent</span><br><span class="line">.post(login_url)</span><br><span class="line">.type(<span class="string">&#x27;form&#x27;</span>) <span class="comment">//这个type表示是application/x-www-form-urlencoded  </span></span><br><span class="line">.send(&#123;<span class="attr">username</span>:uid,<span class="attr">password</span>:pwd&#125;) <span class="comment">//form的数据  post肯定需要的</span></span><br><span class="line">.end(<span class="function"><span class="keyword">function</span>(<span class="params">err,res</span>)</span>&#123;</span><br><span class="line">  <span class="comment">//do somesthing</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>至于为什么类型是application/x-www-form-urlencoded,当然是抓取到的,</p>
+<p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20211214220056824.png" alt="image-20211214220056824"></p>
+<p>经典登录界面,我们猜到了点击登陆之后就会发送一个post.</p>
+<p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20211214220155928.png" alt="image-20211214220155928" style="zoom:67%;" /></p>
+<p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20211214220250378.png" alt="image-20211214220250378" style="zoom:70%;" /></p>
+<p>然后就抓取到了报文,可以看到上面的content-type就是这个.</p>
+<p>咳咳,暴露了一点个人信息.</p>
+<p>接下来难点来了,这是个302重定向,重定向到了哪里呢?事实上可以看到有了location是home.action</p>
+<p>我们就能找到了,其实无脑找找就能找到的,事实上我们使用superagent就能返回重定向的home.action的信息。</p>
+<p>这下就登录了.其实并不难(一开始我使用的其他两个工具,重定向导致失败了,我就更换了第三方包)</p>
+<p>然后就是重点,登录之后需要cookie,不然就没意义了.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>(<span class="params">err,res</span>)</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(res);</span><br><span class="line">  <span class="keyword">var</span> cookieid = res.headers[<span class="string">&#x27;set-cookie&#x27;</span>][<span class="number">0</span>].split(<span class="string">&#x27;;&#x27;</span>)[<span class="number">0</span>].split(<span class="string">&#x27;=&#x27;</span>)[<span class="number">1</span>];</span><br><span class="line">  <span class="comment">// console.log(cookieid);</span></span><br><span class="line">  <span class="keyword">var</span> cookie = <span class="string">`semester.id=158; JSESSIONID=<span class="subst">$&#123;cookieid&#125;</span>; GSESSIONID=<span class="subst">$&#123;cookieid&#125;</span>`</span>;</span><br><span class="line">  superagent.post(info_url)</span><br><span class="line">  .type(<span class="string">&#x27;form&#x27;</span>)</span><br><span class="line">  .send(&#123;</span><br><span class="line">  <span class="attr">ignoreHead</span>: <span class="number">1</span>,</span><br><span class="line">  <span class="string">&quot;setting.kind&quot;</span>: <span class="string">&quot;std&quot;</span>,</span><br><span class="line">  <span class="attr">startWeek</span>: <span class="number">1</span>,</span><br><span class="line">  <span class="string">&quot;semester.id&quot;</span>: <span class="number">158</span>,</span><br><span class="line">  <span class="attr">ids</span>: <span class="number">248032</span></span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>cookieid就是这个<img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20211214220742435.png" alt="image-20211214220742435"></p>
+<p>jsession与gsession是一样的,所以获得了一个之后,根据cookie设置就行了.注意格式就是上面这个图片的格式,我们可以直接复制下来,修改一下就行了.</p>
+<p>为了获得课程信息,可以根据网页查看是哪个返回的请求,这里我查看的是coursetable.</p>
+<p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20211214220926672.png" alt="image-20211214220926672" style="zoom:80%;" /></p>
+<p>可以猜到参数的意思,后面两个是学期的信息,我们只需要修改startWeek就能修改周数查看那一周的课程了.</p>
+<p>所以只要设置cookie,再send发送表单数据即可获取页面信息,然后还要进行处理,不然不太好看.处理我就不细说了,根据个人喜好,我就直接把课程名弄出来就行了,可以根据自己情况教室啥的都可以.</p>
+<p>具体代码</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> superagent = <span class="built_in">require</span>(<span class="string">&quot;superagent&quot;</span>);</span><br><span class="line"><span class="keyword">var</span> login_url = <span class="string">&quot;http://us.nwpu.edu.cn/eams/login.action&quot;</span>;</span><br><span class="line"><span class="keyword">var</span> info_url = <span class="string">&#x27;http://us.nwpu.edu.cn/eams/courseTableForStd!courseTable.action&#x27;</span>;</span><br><span class="line">uid = <span class="string">&quot;&quot;</span>;<span class="comment">//需要自己填写</span></span><br><span class="line">pwd = <span class="string">&quot;&quot;</span>;<span class="comment">//</span></span><br><span class="line">superagent</span><br><span class="line">.post(login_url)</span><br><span class="line">.type(<span class="string">&#x27;form&#x27;</span>)</span><br><span class="line">.send(&#123;<span class="attr">username</span>:uid,<span class="attr">password</span>:pwd&#125;)</span><br><span class="line">.end(<span class="function"><span class="keyword">function</span>(<span class="params">err,res</span>)</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(res);</span><br><span class="line">  <span class="keyword">var</span> cookieid = res.headers[<span class="string">&#x27;set-cookie&#x27;</span>][<span class="number">0</span>].split(<span class="string">&#x27;;&#x27;</span>)[<span class="number">0</span>].split(<span class="string">&#x27;=&#x27;</span>)[<span class="number">1</span>];<span class="comment">//这一句写的并不好,我对于js的基础还是掌握不够.  这一句主要是想把cookie中的那段代码提取出来.</span></span><br><span class="line">  <span class="comment">// console.log(cookieid);</span></span><br><span class="line">  <span class="keyword">var</span> cookie = <span class="string">`semester.id=158; JSESSIONID=<span class="subst">$&#123;cookieid&#125;</span>; GSESSIONID=<span class="subst">$&#123;cookieid&#125;</span>`</span>;<span class="comment">//cookie</span></span><br><span class="line">  superagent.post(info_url)<span class="comment">//semester.id我不清楚是不是跟个人有关,可以自己抓一下看看.</span></span><br><span class="line">  .type(<span class="string">&#x27;form&#x27;</span>)</span><br><span class="line">  .send(&#123;</span><br><span class="line">  <span class="attr">ignoreHead</span>: <span class="number">1</span>,</span><br><span class="line">  <span class="string">&quot;setting.kind&quot;</span>: <span class="string">&quot;std&quot;</span>,</span><br><span class="line">  <span class="attr">startWeek</span>: <span class="number">1</span>,</span><br><span class="line">  <span class="string">&quot;semester.id&quot;</span>: <span class="number">158</span>,</span><br><span class="line">  <span class="attr">ids</span>: <span class="number">248032</span></span><br><span class="line">  &#125;)</span><br><span class="line">  .set(<span class="string">&quot;Cookie&quot;</span>,cookie)</span><br><span class="line">  .end(<span class="function"><span class="keyword">function</span>(<span class="params">err,res</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(res.statusCode == <span class="number">200</span>)</span><br><span class="line">      <span class="built_in">console</span>.log(res.text);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>最后就能得到页面的html</p>
+<p>然后使用cheerio处理</p>
+<h2 id="2-cheerio处理"><a href="#2-cheerio处理" class="headerlink" title="2.cheerio处理"></a>2.cheerio处理</h2><p>关于数据处理其实有很多方法,最后影响的是性能.</p>
+<p>当你看了cheerio的文档,会感叹其的强大功能.</p>
+<p>事实上我并没有太仔细地看相关用法,我直接使用了css选择器以及cheerio的一些简单用法.</p>
+<p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20211214225431353.png" alt="image-20211214225431353"></p>
+<p>可以看到table id=”grid..”就是课程的信息,这里我直接使用css选择器基本可以解决问题(事实上很多时候我都在想选择的方法是不是太多了).</p>
+<p>直接上代码.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> courses = [];</span><br><span class="line">          <span class="keyword">var</span> teachers = [];</span><br><span class="line">          <span class="keyword">var</span> weeks = [];</span><br><span class="line">          <span class="keyword">const</span> $ = cheerio.load(res.text);</span><br><span class="line">          $(<span class="string">&quot;tbody[id] tr td:nth-child(5)&quot;</span>).each(<span class="function"><span class="keyword">function</span> (<span class="params">i,elem</span>) </span>&#123;</span><br><span class="line">            teachers[i] = $(<span class="built_in">this</span>).text();</span><br><span class="line">          &#125;);</span><br><span class="line"></span><br><span class="line">          $(<span class="string">&quot;tbody[id] tr td:nth-child(9)&quot;</span>).each(<span class="function"><span class="keyword">function</span> (<span class="params">i,elem</span>) </span>&#123;</span><br><span class="line">            weeks[i] = $(<span class="built_in">this</span>).text().trim();</span><br><span class="line">          &#125;);</span><br><span class="line">          $(<span class="string">&quot;tbody[id] tr td:nth-child(4)&quot;</span>).each(<span class="function"><span class="keyword">function</span> (<span class="params">i, elem</span>) </span>&#123;</span><br><span class="line">            courses[i] = $(<span class="built_in">this</span>).text();</span><br><span class="line">          &#125;);</span><br><span class="line"></span><br><span class="line">          courses.forEach(<span class="function">(<span class="params">value,index</span>)=&gt;</span>&#123;</span><br><span class="line">            <span class="comment">// console.log(value);</span></span><br><span class="line">            value+=<span class="string">&quot; 老师:&quot;</span>+teachers[index]+<span class="string">&quot;上课时间:&quot;</span>+weeks[index]+<span class="string">&quot;周&quot;</span>;</span><br><span class="line">            <span class="built_in">console</span>.log(value);</span><br><span class="line">          &#125;);</span><br></pre></td></tr></table></figure>
+<p>我将课程,老师以及上课的周挑选了出来,其实有很多方法,我相信我这种应该是比较傻的.</p>
+<p>然后这样登陆以及课程信息都有了.</p>
+<p>然后就是查询空闲教室,有了之前的学习,现在意外的轻松.</p>
+<p>在那个网页试一下,抓取请求</p>
+<p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20211215101931605.png" alt="image-20211215101931605"></p>
+<p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20211215101854884.png" alt="image-20211215101854884"></p>
+<p>所以是个post,数据也都能看到.构造就好了</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">superagent</span><br><span class="line">             .post(free_url)</span><br><span class="line">             .type(<span class="string">&quot;form&quot;</span>)</span><br><span class="line">             .set(<span class="string">&quot;Cookie&quot;</span>, cookie)</span><br><span class="line">             .send(&#123;</span><br><span class="line">               <span class="string">&quot;classroom.type.id&quot;</span>: <span class="string">&quot;&quot;</span>, <span class="comment">//教室类型</span></span><br><span class="line">               <span class="string">&quot;classroom.campus.id&quot;</span>: <span class="string">&quot;&quot;</span>, <span class="comment">//校区 </span></span><br><span class="line">               <span class="string">&quot;classroom.building.id&quot;</span>: <span class="string">&quot;&quot;</span>, <span class="comment">//教学楼id</span></span><br><span class="line">               <span class="attr">seats</span>: <span class="string">&quot;&quot;</span>, <span class="comment">//容量限制</span></span><br><span class="line">               <span class="string">&quot;classroom.name&quot;</span>: <span class="string">&quot;&quot;</span>, <span class="comment">//教室</span></span><br><span class="line">               <span class="string">&quot;cycleTime.cycleCount&quot;</span>: <span class="number">1</span>, <span class="comment">//时间周期</span></span><br><span class="line">               <span class="string">&quot;cycleTime.cycleType&quot;</span>: <span class="number">1</span>, <span class="comment">//天还是周</span></span><br><span class="line">               <span class="string">&quot;cycleTime.dateBegin&quot;</span>: <span class="string">&quot;2021-12-15&quot;</span>,<span class="comment">//起始时间</span></span><br><span class="line">               <span class="string">&quot;cycleTime.dateEnd&quot;</span>: <span class="string">&quot;2021-12-15&quot;</span>,<span class="comment">//结束时间</span></span><br><span class="line">               <span class="attr">roomApplyTimeType</span>: <span class="number">1</span>,</span><br><span class="line">               <span class="attr">timeBegin</span>: <span class="string">&quot;8:00&quot;</span>, <span class="comment">//开始时间</span></span><br><span class="line">               <span class="attr">timeEnd</span>: <span class="string">&quot;12:00&quot;</span>, <span class="comment">//结束时间</span></span><br><span class="line">             &#125;)</span><br></pre></td></tr></table></figure>
+<p>主要是各个字段的含义,根据我尝试大概意思就是上面注释这样.</p>
+<p>然后返回各个教室信息,数据处理就看个人了.</p>
+<p>本人能力不足,直接莽了</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">.end(<span class="function"><span class="keyword">function</span> (<span class="params">err, res</span>) </span>&#123;</span><br><span class="line">               <span class="comment">// console.log(res);</span></span><br><span class="line">               <span class="keyword">var</span> free_classrooms = [];</span><br><span class="line">               <span class="keyword">const</span> $ = cheerio.load(res.text);</span><br><span class="line">               <span class="keyword">var</span> location;</span><br><span class="line">               <span class="keyword">var</span> building;</span><br><span class="line">               <span class="keyword">var</span> campus;</span><br><span class="line">               <span class="comment">/*</span></span><br><span class="line"><span class="comment">               教西A 130</span></span><br><span class="line"><span class="comment">               </span></span><br><span class="line"><span class="comment">               */</span></span><br><span class="line">               $(<span class="string">&#x27;tbody[id] tr&#x27;</span>).each(<span class="function"><span class="keyword">function</span> (<span class="params">i,elem</span>) </span>&#123;</span><br><span class="line">                   location = $(<span class="built_in">this</span>).find(<span class="string">&#x27;td:nth-child(2)&#x27;</span>).text();</span><br><span class="line">                   building =  $(<span class="built_in">this</span>).find(<span class="string">&#x27;td:nth-child(3)&#x27;</span>).text();</span><br><span class="line">                   campus =  $(<span class="built_in">this</span>).find(<span class="string">&#x27;td:nth-child(4)&#x27;</span>).text();</span><br><span class="line">                   free_classrooms[i] = &#123;</span><br><span class="line">                       <span class="string">&#x27;教室位置&#x27;</span>:location,</span><br><span class="line">                       <span class="string">&#x27;教学楼&#x27;</span>:building,</span><br><span class="line">                       <span class="string">&#x27;校区&#x27;</span>:campus,</span><br><span class="line">                   &#125;</span><br><span class="line"></span><br><span class="line">                 &#125;);</span><br><span class="line">                 free_classrooms.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">value,index</span>) </span>&#123;</span><br><span class="line">                     <span class="built_in">console</span>.log(value);</span><br><span class="line">                 &#125;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>可以看到处理结果</p>
+<p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20211215102207083.png" alt="image-20211215102207083" style="zoom:67%;" /></p>
+<h3 id="后续"><a href="#后续" class="headerlink" title="后续"></a>后续</h3><p>webpack打包以及放在服务器上等等 后面再写</p>
+<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/52235130">JS HTTP 请求库哪家强？Axios？Request？Superagent？</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.npmjs.com/package/superagent">superagent - npm (npmjs.com)</a></p>
+<p><a target="_blank" rel="noopener" href="https://cnodejs.org/topic/5378720ed6e2d16149fa16bd">[译] SuperAgent中文使用文档</a></p>
+<p><a target="_blank" rel="noopener" href="https://cheerio.js.org/">cheerio</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/cheeriojs/cheerio/wiki/Chinese-README">Chinese README · cheeriojs/cheerio Wiki (github.com)</a></p>
+
+    </div>
+
+    
+    
+    
+    <div>
+	
+     <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+     
+   </div>
+        <div class="reward-container">
+  <div>感谢阅读.</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.png" alt="Sekyoro 微信支付">
+        <p>微信支付</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Sekyoro
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://sekyoro.top/2021/12/14/js%E7%88%AC%E8%99%AB/" title="js爬虫">https://sekyoro.top/2021/12/14/js爬虫/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/spider/" rel="tag"><i class="fa fa-tag"></i> spider</a>
+              <a href="/tags/js/" rel="tag"><i class="fa fa-tag"></i> js</a>
+              <a href="/tags/nodejs/" rel="tag"><i class="fa fa-tag"></i> nodejs</a>
+              <a href="/tags/cheerio/" rel="tag"><i class="fa fa-tag"></i> cheerio</a>
+              <a href="/tags/superagent/" rel="tag"><i class="fa fa-tag"></i> superagent</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/12/08/python%E6%93%8D%E4%BD%9C%E7%99%BE%E5%BA%A6%E7%BD%91%E7%9B%98/" rel="prev" title="python操作百度网盘">
+      <i class="fa fa-chevron-left"></i> python操作百度网盘
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81MzE5Ny8yOTY3Mg=="></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+	
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+      	   
+          <!-- canvas粒子时钟 -->
+          <div style="">
+  <canvas id="canvas" style="width:60%;">当前浏览器不支持canvas，请更换浏览器后再试</canvas>
+</div>
+<script>
+(function(){
+
+   var digit=
+    [
+        [
+            [0,0,1,1,1,0,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,0,1,1,0],
+            [0,0,1,1,1,0,0]
+        ],//0
+        [
+            [0,0,0,1,1,0,0],
+            [0,1,1,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [1,1,1,1,1,1,1]
+        ],//1
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,1,1],
+            [1,1,1,1,1,1,1]
+        ],//2
+        [
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//3
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,0],
+            [0,0,1,1,1,1,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,1,1,0],
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,1]
+        ],//4
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,1,1,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//5
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//6
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0]
+        ],//7
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//8
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,1,1,0,0,0,0]
+        ],//9
+        [
+            [0,0,0,0,0,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,0,0,0]
+        ]//:
+    ];
+
+var canvas = document.getElementById('canvas');
+
+if(canvas.getContext){
+    var cxt = canvas.getContext('2d');
+    //声明canvas的宽高
+    var H = 100,W = 700;
+    canvas.height = H;
+    canvas.width = W;
+    cxt.fillStyle = '#f00';
+    cxt.fillRect(10,10,50,50);
+
+    //存储时间数据
+    var data = [];
+    //存储运动的小球
+    var balls = [];
+    //设置粒子半径
+    var R = canvas.height/20-1;
+    (function(){
+        var temp = /(\d)(\d):(\d)(\d):(\d)(\d)/.exec(new Date());
+        //存储时间数字，由十位小时、个位小时、冒号、十位分钟、个位分钟、冒号、十位秒钟、个位秒钟这7个数字组成
+        data.push(temp[1],temp[2],10,temp[3],temp[4],10,temp[5],temp[6]);
+    })();
+
+    /*生成点阵数字*/
+    function renderDigit(index,num){
+        for(var i = 0; i < digit[num].length; i++){
+            for(var j = 0; j < digit[num][i].length; j++){
+                if(digit[num][i][j] == 1){
+                    cxt.beginPath();
+                    cxt.arc(14*(R+2)*index + j*2*(R+1)+(R+1),i*2*(R+1)+(R+1),R,0,2*Math.PI);
+                    cxt.closePath();
+                    cxt.fill();
+                }
+            }
+        }
+    }
+
+    /*更新时钟*/
+    function updateDigitTime(){
+        var changeNumArray = [];
+        var temp = /(\d)(\d):(\d)(\d):(\d)(\d)/.exec(new Date());
+        var NewData = [];
+        NewData.push(temp[1],temp[2],10,temp[3],temp[4],10,temp[5],temp[6]);
+        for(var i = data.length-1; i >=0 ; i--){
+            //时间发生变化
+            if(NewData[i] !== data[i]){
+                //将变化的数字值和在data数组中的索引存储在changeNumArray数组中
+                changeNumArray.push(i+'_'+(Number(data[i])+1)%10);
+            }
+        }
+        //增加小球
+        for(var i = 0; i< changeNumArray.length; i++){
+            addBalls.apply(this,changeNumArray[i].split('_'));
+        }
+        data = NewData.concat();
+    }
+
+    /*更新小球状态*/
+    function updateBalls(){
+        for(var i = 0; i < balls.length; i++){
+            balls[i].stepY += balls[i].disY;
+            balls[i].x += balls[i].stepX;
+            balls[i].y += balls[i].stepY;
+            if(balls[i].x > W + R || balls[i].y > H + R){
+                balls.splice(i,1);
+                i--;
+            }
+        }
+    }
+
+    /*增加要运动的小球*/
+    function addBalls(index,num){
+        var numArray = [1,2,3];
+        var colorArray =  ["#3BE","#09C","#A6C","#93C","#9C0","#690","#FB3","#F80","#F44","#C00"];
+        for(var i = 0; i < digit[num].length; i++){
+            for(var j = 0; j < digit[num][i].length; j++){
+                if(digit[num][i][j] == 1){
+                    var ball = {
+                        x:14*(R+2)*index + j*2*(R+1)+(R+1),
+                        y:i*2*(R+1)+(R+1),
+                        stepX:Math.floor(Math.random() * 4 -2),
+                        stepY:-2*numArray[Math.floor(Math.random()*numArray.length)],
+                        color:colorArray[Math.floor(Math.random()*colorArray.length)],
+                        disY:1
+                    };
+                    balls.push(ball);
+                }
+            }
+        }
+    }
+
+    /*渲染*/
+    function render(){
+        //重置画布宽度，达到清空画布的效果
+        canvas.height = 100;
+        //渲染时钟
+        for(var i = 0; i < data.length; i++){
+            renderDigit(i,data[i]);
+        }
+        //渲染小球
+        for(var i = 0; i < balls.length; i++){
+            cxt.beginPath();
+            cxt.arc(balls[i].x,balls[i].y,R,0,2*Math.PI);
+            cxt.fillStyle = balls[i].color;
+            cxt.closePath();
+            cxt.fill();
+        }
+    }
+
+    clearInterval(oTimer);
+    var oTimer = setInterval(function(){
+        //更新时钟
+        updateDigitTime();
+        //更新小球状态
+        updateBalls();
+        //渲染
+        render();
+    },50);
+}
+
+})();
+</script>
+        
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.7.0/dist/APlayer.min.css">
+	<div class="aplayer" data-id="1294924565" data-server="netease" data-type="song"></div>
+	<script src="https://cdn.jsdelivr.net/npm/aplayer@1.7.0/dist/APlayer.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/meting@1.1.0/dist/Meting.min.js"></script>
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+	  
+		
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-superagent%E7%88%AC%E5%8F%96"><span class="nav-number">1.</span> <span class="nav-text">1.superagent爬取</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-cheerio%E5%A4%84%E7%90%86"><span class="nav-number">2.</span> <span class="nav-text">2.cheerio处理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%8E%E7%BB%AD"><span class="nav-number">2.1.</span> <span class="nav-text">后续</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-number">3.</span> <span class="nav-text">References</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Sekyoro"
+      src="https://i.loli.net/2021/05/17/YqoavnXdGTpPO9R.jpg">
+  <p class="site-author-name" itemprop="name">Sekyoro</p>
+  <div class="site-description" itemprop="description">什么也无法舍弃的人，什么也做不了.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">39</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">41</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/drowning-in-codes" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;drowning-in-codes" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/mailtobukalala174@gmail.com" title="E-Mail → mailtobukalala174@gmail.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+  
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; Wed Apr 08 2020 08:00:00 GMT+0800 (中国标准时间) – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Sekyoro</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">245k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">3:43</span>
+</div>
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+    <span id="busuanzi_container_site_pv">总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+    <span class="post-meta-divider">|</span>
+    <span id="busuanzi_container_site_uv">总访客数<span id="busuanzi_value_site_uv"></span>人</span>
+    <span class="post-meta-divider">|</span>
+<!-- 不蒜子计数初始值纠正 -->
+<script>
+$(document).ready(function() {
+
+    var int = setInterval(fixCount, 50);  // 50ms周期检测函数
+    var countOffset = 20000;  // 初始化首次数据
+
+    function fixCount() {            
+       if (document.getElementById("busuanzi_container_site_pv").style.display != "none")
+        {
+            $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + countOffset); 
+            clearInterval(int);
+        }                  
+        if ($("#busuanzi_container_site_pv").css("display") != "none")
+        {
+            $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + countOffset); // 加上初始数据 
+            clearInterval(int); // 停止检测
+        }  
+    }
+       	
+});
+</script> 
+
+<div>
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("04/08/2021 20:00:00");
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+    }
+setInterval("createtime()",250);
+</script>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/theme-next/theme-next-pjax@0/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+  <script data-pjax>
+    (function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+  </script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+<script data-pjax>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  let url = element.dataset.target;
+  let pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  let pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  let fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+  
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+    </div>
+</body>
+</html>
