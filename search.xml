@@ -56,7 +56,7 @@
       <link href="2021/12/08/python%E6%93%8D%E4%BD%9C%E7%99%BE%E5%BA%A6%E7%BD%91%E7%9B%98/"/>
       <url>2021/12/08/python%E6%93%8D%E4%BD%9C%E7%99%BE%E5%BA%A6%E7%BD%91%E7%9B%98/</url>
       
-        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>学习点</p><p>百度API</p><p>爬虫</p><span id="more"></span><p>最近想从某个发图片公众号那爬取</p><p>网盘链接,根据链接存文件.</p><p>当然这里的链接是百度网盘链接.</p><p>tips:我有两个百度云账号,但是手机利用手机账号只能登陆一个(两个账号都绑定了同一个手机),所以需要给登陆的那个号设置手机登录,如果是用户名登陆的话会跳出手机验证码,增加麻烦.</p><p>后来发现用了手机号登录还是由验证码,先输入了再说. </p>]]></content>
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>学习点:百度API 爬虫</p><span id="more"></span><p>最近想从某个发图片公众号那爬取</p><p>网盘链接,根据链接存文件.</p><p>当然这里的链接是百度网盘链接.</p><p>tips:我有两个百度云账号,但是手机利用手机账号只能登陆一个(两个账号都绑定了同一个手机),所以需要给登陆的那个号设置手机登录,如果是用户名登陆的话会跳出手机验证码,增加麻烦.</p><p>后来发现用了手机号登录还是有验证码,先输入了再说. </p>]]></content>
       
       
       
@@ -244,7 +244,7 @@
             
             <tag> CSS3 </tag>
             
-            <tag> font </tag>
+            <tag> front </tag>
             
         </tags>
       
