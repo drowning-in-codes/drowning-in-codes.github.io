@@ -26,28 +26,22 @@
     var CONFIG = {"hostname":"sekyoro.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":240,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 <link href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css" rel="stylesheet">
-  <meta name="description" content="关于函数和指针这几天瞎写的时候关于指针以及malloc产生了一些问题。">
+  <meta name="description" content="理所当然的开始学框架,vue3.x">
 <meta property="og:type" content="article">
-<meta property="og:title" content="关于指针和函数">
-<meta property="og:url" content="https://sekyoro.top/2021/04/29/%E5%85%B3%E4%BA%8E%E6%8C%87%E9%92%88%E5%92%8C%E5%87%BD%E6%95%B0/index.html">
+<meta property="og:title" content="vue学习">
+<meta property="og:url" content="https://sekyoro.top/2021/12/31/vue%E5%AD%A6%E4%B9%A0/index.html">
 <meta property="og:site_name" content="Sekyoro的博客小屋">
-<meta property="og:description" content="关于函数和指针这几天瞎写的时候关于指针以及malloc产生了一些问题。">
+<meta property="og:description" content="理所当然的开始学框架,vue3.x">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/QQ%E6%88%AA%E5%9B%BE20210429195130.png">
-<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/QQ%E6%88%AA%E5%9B%BE20210429200528.png">
-<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/QQ%E6%88%AA%E5%9B%BE20210429195214.png">
-<meta property="og:image" content="https://i.loli.net/2021/04/29/EBN1HXtmY8DLRMT.png">
-<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210429205005.png">
-<meta property="article:published_time" content="2021-04-29T12:55:57.000Z">
-<meta property="article:modified_time" content="2021-04-29T12:59:18.182Z">
+<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20211231162223916.png">
+<meta property="article:published_time" content="2021-12-31T08:12:46.000Z">
+<meta property="article:modified_time" content="2022-01-01T07:22:41.280Z">
 <meta property="article:author" content="Sekyoro">
-<meta property="article:tag" content="c">
-<meta property="article:tag" content="指针">
-<meta property="article:tag" content="函数">
+<meta property="article:tag" content="vue3.x">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/QQ%E6%88%AA%E5%9B%BE20210429195130.png">
+<meta name="twitter:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20211231162223916.png">
 
-<link rel="canonical" href="https://sekyoro.top/2021/04/29/%E5%85%B3%E4%BA%8E%E6%8C%87%E9%92%88%E5%92%8C%E5%87%BD%E6%95%B0/">
+<link rel="canonical" href="https://sekyoro.top/2021/12/31/vue%E5%AD%A6%E4%B9%A0/">
 
 
 <script id="page-configurations">
@@ -87,7 +81,7 @@
   </script>
 
 
-  <title>关于指针和函数 | Sekyoro的博客小屋</title>
+  <title>vue学习 | Sekyoro的博客小屋</title>
   
 
 
@@ -248,7 +242,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://sekyoro.top/2021/04/29/%E5%85%B3%E4%BA%8E%E6%8C%87%E9%92%88%E5%92%8C%E5%87%BD%E6%95%B0/">
+    <link itemprop="mainEntityOfPage" href="https://sekyoro.top/2021/12/31/vue%E5%AD%A6%E4%B9%A0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://i.loli.net/2021/05/17/YqoavnXdGTpPO9R.jpg">
@@ -261,7 +255,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          关于指针和函数
+          vue学习
         </h1>
 
         <div class="post-meta">
@@ -271,19 +265,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2021-04-29 20:55:57 / 修改时间：20:59:18" itemprop="dateCreated datePublished" datetime="2021-04-29T20:55:57+08:00">2021-04-29</time>
+              <time title="创建时间：2021-12-31 16:12:46" itemprop="dateCreated datePublished" datetime="2021-12-31T16:12:46+08:00">2021-12-31</time>
             </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AF%AF%E5%8C%BA/" itemprop="url" rel="index"><span itemprop="name">误区</span></a>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
                 </span>
-            </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-01-01 15:22:41" itemprop="dateModified" datetime="2022-01-01T15:22:41+08:00">2022-01-01</time>
+              </span>
 
           
             <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
@@ -298,14 +289,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>2k</span>
+              <span>3.8k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
+              <span>3 分钟</span>
             </span>
 
         </div>
@@ -317,35 +308,77 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="关于函数和指针"><a href="#关于函数和指针" class="headerlink" title="关于函数和指针"></a>关于函数和指针</h1><p>这几天瞎写的时候关于指针以及malloc产生了一些问题。</p>
-<span id="more"></span>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span>* <span class="title">initial</span><span class="params">(<span class="keyword">int</span>*)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">initial</span><span class="params">(<span class="keyword">int</span>*)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   <span class="keyword">int</span> *p = (<span class="keyword">int</span>*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="keyword">int</span>));</span><br><span class="line">    p = <span class="literal">NULL</span>;</span><br><span class="line">   <span class="built_in">printf</span>(<span class="string">&quot;%p %p\n&quot;</span>,p,&amp;p);</span><br><span class="line">    p = initial(p);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%p %p\n&quot;</span>,p,&amp;p);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span>* <span class="title">initial</span><span class="params">(<span class="keyword">int</span>* p)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    p = (<span class="keyword">int</span>*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="keyword">int</span>));<span class="comment">//在函数中，指针p的地址变了</span></span><br><span class="line">    *p = <span class="number">5</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%p %p\n&quot;</span>,p,&amp;p);</span><br><span class="line">    <span class="keyword">return</span> p;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">void initial(int* p)</span></span><br><span class="line"><span class="comment">&#123;</span></span><br><span class="line"><span class="comment">      p = (int*)malloc(sizeof(int));//在函数中，指针p的地址变了</span></span><br><span class="line"><span class="comment">    //为p分配地址,但退栈后p的地址没了（找不到了）</span></span><br><span class="line"><span class="comment">    *p = 5;</span></span><br><span class="line"><span class="comment">    printf(&quot;%p %p\n&quot;,p,&amp;p);</span></span><br><span class="line"><span class="comment">&#125;*/</span></span><br></pre></td></tr></table></figure>
-<p>运行截图</p>
-<p>如果用return返回在函数中用malloc分配得到的指针</p>
-<p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/QQ%E6%88%AA%E5%9B%BE20210429195130.png" alt="QQ截图20210429195130"></p>
-<p>p是一个指向int类型的指针,其值一开始设置为NULL,指针的地址是61fe18,但在函数中利用malloc分配后得到的新值为6b1640,并且指针本身的地址也不一样。</p>
-<p>这是因为调用函数时,生成栈,参数只是一层浅拷贝,值相同,但地址不同，这就是函数的机制吧.</p>
-<p>再举个例子,比如说</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="keyword">int</span>  num = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%p&quot;</span>,&amp;n);</span><br><span class="line">func(num);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">func</span><span class="params">(<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%p&quot;</span>,&amp;n);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/QQ%E6%88%AA%E5%9B%BE20210429200528.png" alt="QQ截图20210429200528"></p>
-<p>可以发现地址并不同,这也说明了地址的变化.</p>
-<p>如果不用return返回,运行截图所示,根据刚才函数机制可知,指针的值(即所指向值的地址)并不会变化。</p>
-<p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/QQ%E6%88%AA%E5%9B%BE20210429195214.png" alt="QQ截图20210429195214"></p>
-<p>所以可以得到第一个结论了。</p>
-<p><strong>指针也是一个变量，我们如果要改变它，必须找到它在内存中的地址，也就是指针的地址。也就是说，对于函数中，如果对指针的地址进行赋值，事实上是改变不了原指针的！</strong></p>
-<p>所以解决方法主要两个,在c中利用二级指针改变指针的地址.</p>
-<p>如果在cpp中即可利用引用类型&amp;比较方便</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">Node</span> </span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> data;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Node</span>* <span class="title">lchild</span>;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Node</span>* <span class="title">rchild</span>;</span></span><br><span class="line">&#125;BiNode,*Bitree;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">initial</span><span class="params">(Bitree)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   Bitree t = (Bitree)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(BiNode));</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%p\n&quot;</span>,t);</span><br><span class="line">    initial(t);</span><br><span class="line">    <span class="keyword">if</span>(t-&gt;lchild==<span class="literal">NULL</span>)</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;子孩子结点为空k\n&quot;</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%p\n&quot;</span>,t-&gt;lchild);   </span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%c\n&quot;</span>,t-&gt;data);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,t-&gt;lchild-&gt;data);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">initial</span><span class="params">(Bitree root)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%p\n&quot;</span>,root);</span><br><span class="line">    <span class="comment">// scanf(&quot;%c&quot;,&amp;root-&gt;data);</span></span><br><span class="line">    root-&gt;lchild = (Bitree)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(BiNode));</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%p\n&quot;</span>,root-&gt;lchild);   <span class="comment">//this pointer&#x27;s value ,means pointed object addres</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p><img data-src="https://i.loli.net/2021/04/29/EBN1HXtmY8DLRMT.png" alt="20214291"></p>
-<p>可知,指针传入函数后,其值(即指向值的地址)未变,在函数中为子节点申请了空间,在函数外也能通过其访问。</p>
-<p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210429205005.png" alt="QQ截图20210429204704"></p>
-<p>内存分配的知识：</p>
-<p>1、参数、局部变量分配在栈区中。编译器自动回收<br>2、malloc申请的内存分配在堆上，由程序结束OS回收3、全局（静态区），全局变量和静态变量，由程序结束OS回收</p>
-<p>在函数中利用malloc分配空间或为指针赋值需要注意：</p>
+        <p>理所当然的开始学框架,vue3.x<br><span id="more"></span></p>
+<p>Vue.js 的核心是一个允许采用简洁的模板语法来声明式地将数据渲染进 DOM 的系统</p>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>还是三种方法</p>
+<p>下载文件本地用,CDN和npm</p>
+<p>然后需要脚手架. vue-cli</p>
+<p>使用</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i -g @vue/cli</span><br></pre></td></tr></table></figure>
+<p>官方命令行工具，可用于快速搭建大型单页应用</p>
+<h2 id="开始项目"><a href="#开始项目" class="headerlink" title="开始项目"></a>开始项目</h2><p>这样就开始</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vue init webpack projectname</span><br></pre></td></tr></table></figure>
+<p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20211231162223916.png" alt="image-20211231162223916" style="zoom:150%;" /></p>
+<p>然后会进行一系列配置,现在可以都选no,后面再改.</p>
+<p>然后进入项目 </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm run dev</span><br><span class="line">或者 </span><br><span class="line">npm run start</span><br></pre></td></tr></table></figure>
+<p>会在8080端口开启服务,注意也可以对配置文件进行修改换端口.</p>
+<p>这是开始一个vue项目.通过vue这个命令行对于构建vue项目有很多帮助.</p>
+<p>当然也可以不用,直接引入vue.js即可.同时菜鸟教程推荐了Vite工具使用npm下载</p>
+<h3 id="MVVM模式"><a href="#MVVM模式" class="headerlink" title="MVVM模式"></a>MVVM模式</h3><p>M：Model 即数据逻辑处理</p>
+<p>V：View 即视图（用户界面）</p>
+<p>VM：ViewModel 即数据视图，用于监听更新，View 与 Model 数据的双向绑定</p>
+<p>所以，Vue 一大特点就是数据双向绑定，另一大特点就是响应式.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span></span><br><span class="line"><span class="xml">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span> /&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width, initial-scale=1.0&quot;</span> /&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">&quot;X-UA-Compatible&quot;</span> <span class="attr">content</span>=<span class="string">&quot;ie=edge&quot;</span> /&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>syl-vue<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="comment">&lt;!-- 通过方式引入 vue.js --&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.staticfile.org/vue/3.0.5/vue.global.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line"><span class="xml">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span></span><br><span class="line"><span class="xml">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="comment">&lt;!-- 数据双向绑定 --&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;app&quot;</span>&gt;</span></span></span><br><span class="line"><span class="xml">      <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> /&gt;</span></span></span><br><span class="line"><span class="xml">      <span class="tag">&lt;<span class="name">p</span>&gt;</span>&#123;&#123;msg&#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></span></span><br><span class="line"><span class="javascript"><span class="xml">      <span class="keyword">var</span> app = <span class="keyword">new</span> Vue(&#123;</span></span></span><br><span class="line"><span class="javascript"><span class="xml">        <span class="attr">el</span>: <span class="string">&#x27;#app&#x27;</span>, <span class="comment">//el: 挂载点</span></span></span></span><br><span class="line"><span class="javascript"><span class="xml"></span></span></span><br><span class="line"><span class="javascript"><span class="xml">        <span class="attr">data</span>: &#123;</span></span></span><br><span class="line"><span class="javascript"><span class="xml">          <span class="comment">//data:数据选项</span></span></span></span><br><span class="line"><span class="javascript"><span class="xml"></span></span></span><br><span class="line"><span class="javascript"><span class="xml">          <span class="attr">msg</span>: <span class="string">&#x27;hello&#x27;</span>,</span></span></span><br><span class="line"><span class="javascript"><span class="xml">        &#125;,</span></span></span><br><span class="line"><span class="javascript"><span class="xml">      &#125;);</span></span></span><br><span class="line"><span class="javascript"><span class="xml">    </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line"><span class="xml">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+<h2 id="模板语法"><a href="#模板语法" class="headerlink" title="模板语法"></a>模板语法</h2><p>允许开发者声明式地将 DOM 绑定至底层 Vue 实例的数据。所有 Vue.js 的模板都是合法的 HTML ，所以能被遵循规范的浏览器和 HTML 解析器解析，通俗的讲 Vue 模板语法就是在使用 Vue.js 开发时，你可以写在 HTML 元素上的操作语法，让你开发更高效，例如：绑定样式，循环出元素列表等。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> app = &#123;</span><br><span class="line"><span class="function"><span class="title">data</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"><span class="keyword">return</span> &#123;<span class="comment">/*数据*/</span>&#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">Vue.createApp(app).mount(<span class="string">&#x27;#app&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<p>mount用于挂载</p>
+<p>data是一个函数,应该返回一个对象,$data形式存储在组件实例中</p>
 <ol>
-<li>函数的参数是浅拷贝,地址与实参不同,如果要相同,在cpp中用&amp;引用参数</li>
-<li>在函数内为指针分配地址时,栈退后会使得这个分配得到的地址无法引用,指针的地址依然是调用前,值没有改变</li>
+<li>双大括号</li>
 </ol>
+<figure class="highlight clojure"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123;&#125;&#125;</span><br></pre></td></tr></table></figure>
+<p>通过使用 <code>v-once</code> 指令你也能执行一次性地插值，当数据 <strong>改变时</strong>，插值处的内容 <strong>不会更新</strong>。但是需要注意一下，该元素节点下面其他数据的绑定，数据改变，内容也不会更新，所以，注意代码块的划分</p>
+<ol>
+<li><p>v-html</p>
+<p>渲染为html</p>
+</li>
+</ol>
+<p>3.v-bind  渲染属性</p>
+<p>4.v-on 监听事件</p>
+<p>5.v-model</p>
+<p>v-model就是<strong>vue的双向绑定的指令</strong>，能将页面上控件输入的值同步更新到相关绑定的data属性，也会在更新data绑定属性时候，更新页面上输入控件的值</p>
+<p>v-if等指令</p>
+<h3 id="methods"><a href="#methods" class="headerlink" title="methods"></a>methods</h3><p>组件中添加方法，使用 <strong>methods</strong> 选项，该选项包含了所需方法的对象</p>
+<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 完整语法 --&gt;</span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">a</span> <span class="attr">v-on:click</span>=<span class="string">&quot;doSomething&quot;</span>&gt;</span> ... <span class="tag">&lt;/<span class="name">a</span>&gt;</span></span></span><br><span class="line"></span><br><span class="line">&lt;!-- 缩写 --&gt;</span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">a</span> @<span class="attr">click</span>=<span class="string">&quot;doSomething&quot;</span>&gt;</span> ... <span class="tag">&lt;/<span class="name">a</span>&gt;</span></span></span><br><span class="line"></span><br><span class="line">&lt;!-- 动态参数的缩写 (<span class="number">2.6</span><span class="number">.0</span>+) --&gt;</span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">a</span> @[<span class="attr">event</span>]=<span class="string">&quot;doSomething&quot;</span>&gt;</span> ... <span class="tag">&lt;/<span class="name">a</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+<h3 id="修饰符"><a href="#修饰符" class="headerlink" title="修饰符"></a>修饰符</h3><ul>
+<li>事件修饰符</li>
+<li>按键修饰符</li>
+<li>系统修饰符</li>
+</ul>
+<p>修饰符是以半角句号 <strong>.</strong> 指明的特殊后缀，用于指出一个指令应该以特殊方式绑定</p>
+<p>v-bind与v-on简写</p>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;a <span class="symbol">:href=<span class="string">&quot;&quot;</span>&gt;&lt;/a&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 完整语法 --&gt;</span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">button</span> <span class="attr">v-on:click</span>=<span class="string">&quot;handleClick&quot;</span>&gt;</span>点我<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line">&lt;!-- 缩写 --&gt;</span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span>=<span class="string">&quot;handleClick&quot;</span>&gt;</span>点我<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+<p>v-if</p>
+<p>v-else</p>
+<p>v-else-if</p>
+<p>v-show</p>
+<h2 id="计算属性"><a href="#计算属性" class="headerlink" title="计算属性"></a>计算属性</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">computed:&#123;</span><br><span class="line"><span class="attr">get</span>:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="comment">//return ...</span></span><br><span class="line">	&#125;,</span><br><span class="line"><span class="attr">set</span>:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="comment">//this.</span></span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>惰性</p>
+<h2 id="侦听属性"><a href="#侦听属性" class="headerlink" title="侦听属性"></a>侦听属性</h2><p>watch关键字</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">watch:&#123;</span><br><span class="line"><span class="attr">msg</span>:<span class="function"><span class="title">funciton</span>(<span class="params"><span class="keyword">new</span>,old</span>)</span>&#123;</span><br><span class="line">	<span class="comment">//</span></span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="过滤器"><a href="#过滤器" class="headerlink" title="过滤器"></a>过滤器</h2><p>在 Vue 中我们有一个专门处理数据过滤的东西：过滤器。过滤器可以用在两个地方：<strong>双花括号插值和 v-bind 表达式</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>&#123;&#123;msg2|getString&#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">v-bind:class</span>=<span class="string">&quot;msg2|getString&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span> = <span class="string">&quot;app&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">style</span> = <span class="string">&quot;font-size:25px;&quot;</span>&gt;</span>计数器: &#123;&#123; counter &#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span> = <span class="string">&quot;counter++&quot;</span> <span class="attr">style</span> = <span class="string">&quot;font-size:25px;&quot;</span>&gt;</span>点我<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    </span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></span><br><span class="line"><span class="javascript"><span class="keyword">const</span> app = &#123;</span></span><br><span class="line"><span class="javascript">  <span class="function"><span class="title">data</span>(<span class="params"></span>)</span> &#123;</span></span><br><span class="line"><span class="javascript">    <span class="keyword">return</span> &#123;</span></span><br><span class="line"><span class="javascript">      <span class="attr">counter</span>: <span class="number">1</span></span></span><br><span class="line"><span class="javascript">    &#125;</span></span><br><span class="line"><span class="javascript">  &#125;</span></span><br><span class="line"><span class="javascript">&#125;</span></span><br><span class="line"><span class="javascript">vm = Vue.createApp(app).mount(<span class="string">&#x27;#app&#x27;</span>)</span></span><br><span class="line"><span class="javascript">vm.$watch(<span class="string">&#x27;counter&#x27;</span>, <span class="function"><span class="keyword">function</span>(<span class="params">nval, oval</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">    alert(<span class="string">&#x27;计数器值的变化 :&#x27;</span> + oval + <span class="string">&#x27; 变为 &#x27;</span> + nval + <span class="string">&#x27;!&#x27;</span>);</span></span><br><span class="line"><span class="javascript">&#125;);</span></span><br><span class="line"><span class="javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="class与style的绑定"><a href="#class与style的绑定" class="headerlink" title="class与style的绑定"></a>class与style的绑定</h2><p>1.给 <code>v-bind:class</code> 一个对象，以动态地切换 class</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">:class</span>=<span class="string">&quot;&#123; &#x27;active&#x27;: isActive &#125;&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>同时还有数组绑定法</p>
+<p>2.我们可以把一个数组传给 <strong>v-bind:class</strong> </p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;static&quot;</span> <span class="attr">:class</span>=<span class="string">&quot;[activeClass, errorClass]&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>style的绑定方法,同时也有数组与对象的方法.</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;app&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">:style</span>=<span class="string">&quot;&#123; color: activeColor, fontSize: fontSize + &#x27;px&#x27; &#125;&quot;</span>&gt;</span>菜鸟教程<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">div id=&quot;app&quot;&gt;</span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">:style</span>=<span class="string">&quot;&#123; color: activeColor, fontSize: fontSize + &#x27;px&#x27; &#125;&quot;</span>&gt;</span>菜鸟教程<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
     </div>
 
@@ -385,7 +418,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://sekyoro.top/2021/04/29/%E5%85%B3%E4%BA%8E%E6%8C%87%E9%92%88%E5%92%8C%E5%87%BD%E6%95%B0/" title="关于指针和函数">https://sekyoro.top/2021/04/29/关于指针和函数/</a>
+    <a href="https://sekyoro.top/2021/12/31/vue%E5%AD%A6%E4%B9%A0/" title="vue学习">https://sekyoro.top/2021/12/31/vue学习/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -397,9 +430,7 @@
       <footer class="post-footer">
           
           <div class="post-tags">
-              <a href="/tags/c/" rel="tag"><i class="fa fa-tag"></i> c</a>
-              <a href="/tags/%E6%8C%87%E9%92%88/" rel="tag"><i class="fa fa-tag"></i> 指针</a>
-              <a href="/tags/%E5%87%BD%E6%95%B0/" rel="tag"><i class="fa fa-tag"></i> 函数</a>
+              <a href="/tags/vue3-x/" rel="tag"><i class="fa fa-tag"></i> vue3.x</a>
           </div>
 
         
@@ -408,13 +439,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2021/04/23/%E5%B9%BF%E4%B9%89%E8%A1%A8%E7%AE%80%E4%BB%8B/" rel="prev" title="广义表简介">
-      <i class="fa fa-chevron-left"></i> 广义表简介
+    <a href="/2021/12/30/jQurey%E7%BB%A7%E7%BB%AD%E5%AD%A6%E4%B9%A0/" rel="prev" title="jQurey继续学习">
+      <i class="fa fa-chevron-left"></i> jQurey继续学习
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2021/05/10/%E5%93%88%E5%A4%AB%E6%9B%BC%E7%BC%96-%E8%AF%91%E7%A0%81/" rel="next" title="哈夫曼编/译码">
-      哈夫曼编/译码 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -750,7 +778,7 @@ if(canvas.getContext){
 		
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E5%87%BD%E6%95%B0%E5%92%8C%E6%8C%87%E9%92%88"><span class="nav-number">1.</span> <span class="nav-text">关于函数和指针</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8"><span class="nav-number">1.</span> <span class="nav-text">使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%80%E5%A7%8B%E9%A1%B9%E7%9B%AE"><span class="nav-number">2.</span> <span class="nav-text">开始项目</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#MVVM%E6%A8%A1%E5%BC%8F"><span class="nav-number">2.1.</span> <span class="nav-text">MVVM模式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E6%9D%BF%E8%AF%AD%E6%B3%95"><span class="nav-number">3.</span> <span class="nav-text">模板语法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#methods"><span class="nav-number">3.1.</span> <span class="nav-text">methods</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E6%95%B0"><span class="nav-number">3.2.</span> <span class="nav-text">参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%AE%E9%A5%B0%E7%AC%A6"><span class="nav-number">3.3.</span> <span class="nav-text">修饰符</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E5%B1%9E%E6%80%A7"><span class="nav-number">4.</span> <span class="nav-text">计算属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%A6%E5%90%AC%E5%B1%9E%E6%80%A7"><span class="nav-number">5.</span> <span class="nav-text">侦听属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%87%E6%BB%A4%E5%99%A8"><span class="nav-number">6.</span> <span class="nav-text">过滤器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#class%E4%B8%8Estyle%E7%9A%84%E7%BB%91%E5%AE%9A"><span class="nav-number">7.</span> <span class="nav-text">class与style的绑定</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

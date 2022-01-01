@@ -26,14 +26,18 @@
     var CONFIG = {"hostname":"sekyoro.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":240,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 <link href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css" rel="stylesheet">
-  <meta property="og:type" content="article">
+  <meta name="description" content="接着上次的继续">
+<meta property="og:type" content="article">
 <meta property="og:title" content="jQurey继续学习">
 <meta property="og:url" content="https://sekyoro.top/2021/12/30/jQurey%E7%BB%A7%E7%BB%AD%E5%AD%A6%E4%B9%A0/index.html">
 <meta property="og:site_name" content="Sekyoro的博客小屋">
+<meta property="og:description" content="接着上次的继续">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-12-30T14:09:23.000Z">
-<meta property="article:modified_time" content="2021-12-30T14:09:23.027Z">
+<meta property="article:modified_time" content="2021-12-30T14:12:42.614Z">
 <meta property="article:author" content="Sekyoro">
+<meta property="article:tag" content="js">
+<meta property="article:tag" content="jQuery">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="https://sekyoro.top/2021/12/30/jQurey%E7%BB%A7%E7%BB%AD%E5%AD%A6%E4%B9%A0/">
@@ -260,8 +264,9 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2021-12-30 22:09:23" itemprop="dateCreated datePublished" datetime="2021-12-30T22:09:23+08:00">2021-12-30</time>
+              <time title="创建时间：2021-12-30 22:09:23 / 修改时间：22:12:42" itemprop="dateCreated datePublished" datetime="2021-12-30T22:09:23+08:00">2021-12-30</time>
             </span>
 
           
@@ -277,7 +282,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>0</span>
+              <span>213</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -296,7 +301,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        
+        <p>接着上次的继续<br><span id="more"></span></p>
+<p>jQuery对表单表格的操作</p>
+<p>表单在网页中主要负责数据采集功能。一个表单有三个基本组成部分：</p>
+<ul>
+<li>表单标签：这里面包含了处理表单数据所用 CGI 程序的 URL 以及数据提交到服务器的方法。</li>
+<li>表单域：包含了文本框、密码框、隐藏域、多行文本框、复选框、单选框、下拉选择框和文件上传框等。</li>
+<li>表单按钮：包括提交按钮、复位按钮和一般按钮；用于将数据传送到服务器上的 CGI 脚本或者取消输入，还可以用表单按钮来控制其他定义了处理脚本的处理工作。</li>
+</ul>
+
     </div>
 
     
@@ -345,6 +358,11 @@
 
 
       <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/js/" rel="tag"><i class="fa fa-tag"></i> js</a>
+              <a href="/tags/jQuery/" rel="tag"><i class="fa fa-tag"></i> jQuery</a>
+          </div>
 
         
 
@@ -355,7 +373,10 @@
     <a href="/2021/12/30/jquery%E5%AD%A6%E4%B9%A0/" rel="prev" title="jquery学习">
       <i class="fa fa-chevron-left"></i> jquery学习
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2021/12/31/vue%E5%AD%A6%E4%B9%A0/" rel="next" title="vue学习">
+      vue学习 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -706,7 +727,7 @@ if(canvas.getContext){
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">42</span>
+          <span class="site-state-item-count">43</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -719,7 +740,7 @@ if(canvas.getContext){
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">46</span>
+        <span class="site-state-item-count">47</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -758,7 +779,7 @@ if(canvas.getContext){
 <div class="copyright">
   
   &copy; Wed Apr 08 2020 08:00:00 GMT+0800 (中国标准时间) – 
-  <span itemprop="copyrightYear">2021</span>
+  <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -767,12 +788,12 @@ if(canvas.getContext){
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">260k</span>
+    <span title="站点总字数">264k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">3:56</span>
+    <span title="站点阅读时长">4:01</span>
 </div>
 
     <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>

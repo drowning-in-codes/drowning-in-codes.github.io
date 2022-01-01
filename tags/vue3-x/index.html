@@ -26,28 +26,17 @@
     var CONFIG = {"hostname":"sekyoro.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":240,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 <link href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css" rel="stylesheet">
-  <meta name="description" content="关于函数和指针这几天瞎写的时候关于指针以及malloc产生了一些问题。">
-<meta property="og:type" content="article">
-<meta property="og:title" content="关于指针和函数">
-<meta property="og:url" content="https://sekyoro.top/2021/04/29/%E5%85%B3%E4%BA%8E%E6%8C%87%E9%92%88%E5%92%8C%E5%87%BD%E6%95%B0/index.html">
+  <meta name="description" content="什么也无法舍弃的人，什么也做不了.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Sekyoro的博客小屋">
+<meta property="og:url" content="https://sekyoro.top/tags/vue3-x/index.html">
 <meta property="og:site_name" content="Sekyoro的博客小屋">
-<meta property="og:description" content="关于函数和指针这几天瞎写的时候关于指针以及malloc产生了一些问题。">
+<meta property="og:description" content="什么也无法舍弃的人，什么也做不了.">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/QQ%E6%88%AA%E5%9B%BE20210429195130.png">
-<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/QQ%E6%88%AA%E5%9B%BE20210429200528.png">
-<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/QQ%E6%88%AA%E5%9B%BE20210429195214.png">
-<meta property="og:image" content="https://i.loli.net/2021/04/29/EBN1HXtmY8DLRMT.png">
-<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210429205005.png">
-<meta property="article:published_time" content="2021-04-29T12:55:57.000Z">
-<meta property="article:modified_time" content="2021-04-29T12:59:18.182Z">
 <meta property="article:author" content="Sekyoro">
-<meta property="article:tag" content="c">
-<meta property="article:tag" content="指针">
-<meta property="article:tag" content="函数">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/QQ%E6%88%AA%E5%9B%BE20210429195130.png">
 
-<link rel="canonical" href="https://sekyoro.top/2021/04/29/%E5%85%B3%E4%BA%8E%E6%8C%87%E9%92%88%E5%92%8C%E5%87%BD%E6%95%B0/">
+<link rel="canonical" href="https://sekyoro.top/tags/vue3-x/">
 
 
 <script id="page-configurations">
@@ -55,7 +44,7 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : true,
+    isPost : false,
     lang   : 'zh-CN'
   };
 </script>
@@ -87,7 +76,7 @@
   </script>
 
 
-  <title>关于指针和函数 | Sekyoro的博客小屋</title>
+  <title>标签: vue3.x | Sekyoro的博客小屋</title>
   
 
 
@@ -241,197 +230,57 @@
         <div class="content-wrap">
           
 
-          <div class="content post posts-expand">
+          <div class="content tag">
             
 
-    
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://sekyoro.top/2021/04/29/%E5%85%B3%E4%BA%8E%E6%8C%87%E9%92%88%E5%92%8C%E5%87%BD%E6%95%B0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://i.loli.net/2021/05/17/YqoavnXdGTpPO9R.jpg">
-      <meta itemprop="name" content="Sekyoro">
-      <meta itemprop="description" content="什么也无法舍弃的人，什么也做不了.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sekyoro的博客小屋">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          关于指针和函数
-        </h1>
-
-        <div class="post-meta">
-		
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2021-04-29 20:55:57 / 修改时间：20:59:18" itemprop="dateCreated datePublished" datetime="2021-04-29T20:55:57+08:00">2021-04-29</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AF%AF%E5%8C%BA/" itemprop="url" rel="index"><span itemprop="name">误区</span></a>
-                </span>
-            </span>
-
-          
-            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span id="busuanzi_value_page_pv"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>2k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-        <h1 id="关于函数和指针"><a href="#关于函数和指针" class="headerlink" title="关于函数和指针"></a>关于函数和指针</h1><p>这几天瞎写的时候关于指针以及malloc产生了一些问题。</p>
-<span id="more"></span>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span>* <span class="title">initial</span><span class="params">(<span class="keyword">int</span>*)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">initial</span><span class="params">(<span class="keyword">int</span>*)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   <span class="keyword">int</span> *p = (<span class="keyword">int</span>*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="keyword">int</span>));</span><br><span class="line">    p = <span class="literal">NULL</span>;</span><br><span class="line">   <span class="built_in">printf</span>(<span class="string">&quot;%p %p\n&quot;</span>,p,&amp;p);</span><br><span class="line">    p = initial(p);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%p %p\n&quot;</span>,p,&amp;p);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span>* <span class="title">initial</span><span class="params">(<span class="keyword">int</span>* p)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    p = (<span class="keyword">int</span>*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="keyword">int</span>));<span class="comment">//在函数中，指针p的地址变了</span></span><br><span class="line">    *p = <span class="number">5</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%p %p\n&quot;</span>,p,&amp;p);</span><br><span class="line">    <span class="keyword">return</span> p;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">void initial(int* p)</span></span><br><span class="line"><span class="comment">&#123;</span></span><br><span class="line"><span class="comment">      p = (int*)malloc(sizeof(int));//在函数中，指针p的地址变了</span></span><br><span class="line"><span class="comment">    //为p分配地址,但退栈后p的地址没了（找不到了）</span></span><br><span class="line"><span class="comment">    *p = 5;</span></span><br><span class="line"><span class="comment">    printf(&quot;%p %p\n&quot;,p,&amp;p);</span></span><br><span class="line"><span class="comment">&#125;*/</span></span><br></pre></td></tr></table></figure>
-<p>运行截图</p>
-<p>如果用return返回在函数中用malloc分配得到的指针</p>
-<p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/QQ%E6%88%AA%E5%9B%BE20210429195130.png" alt="QQ截图20210429195130"></p>
-<p>p是一个指向int类型的指针,其值一开始设置为NULL,指针的地址是61fe18,但在函数中利用malloc分配后得到的新值为6b1640,并且指针本身的地址也不一样。</p>
-<p>这是因为调用函数时,生成栈,参数只是一层浅拷贝,值相同,但地址不同，这就是函数的机制吧.</p>
-<p>再举个例子,比如说</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="keyword">int</span>  num = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%p&quot;</span>,&amp;n);</span><br><span class="line">func(num);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">func</span><span class="params">(<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%p&quot;</span>,&amp;n);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/QQ%E6%88%AA%E5%9B%BE20210429200528.png" alt="QQ截图20210429200528"></p>
-<p>可以发现地址并不同,这也说明了地址的变化.</p>
-<p>如果不用return返回,运行截图所示,根据刚才函数机制可知,指针的值(即所指向值的地址)并不会变化。</p>
-<p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/QQ%E6%88%AA%E5%9B%BE20210429195214.png" alt="QQ截图20210429195214"></p>
-<p>所以可以得到第一个结论了。</p>
-<p><strong>指针也是一个变量，我们如果要改变它，必须找到它在内存中的地址，也就是指针的地址。也就是说，对于函数中，如果对指针的地址进行赋值，事实上是改变不了原指针的！</strong></p>
-<p>所以解决方法主要两个,在c中利用二级指针改变指针的地址.</p>
-<p>如果在cpp中即可利用引用类型&amp;比较方便</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">Node</span> </span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> data;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Node</span>* <span class="title">lchild</span>;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Node</span>* <span class="title">rchild</span>;</span></span><br><span class="line">&#125;BiNode,*Bitree;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">initial</span><span class="params">(Bitree)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   Bitree t = (Bitree)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(BiNode));</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%p\n&quot;</span>,t);</span><br><span class="line">    initial(t);</span><br><span class="line">    <span class="keyword">if</span>(t-&gt;lchild==<span class="literal">NULL</span>)</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;子孩子结点为空k\n&quot;</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%p\n&quot;</span>,t-&gt;lchild);   </span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%c\n&quot;</span>,t-&gt;data);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,t-&gt;lchild-&gt;data);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">initial</span><span class="params">(Bitree root)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%p\n&quot;</span>,root);</span><br><span class="line">    <span class="comment">// scanf(&quot;%c&quot;,&amp;root-&gt;data);</span></span><br><span class="line">    root-&gt;lchild = (Bitree)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(BiNode));</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%p\n&quot;</span>,root-&gt;lchild);   <span class="comment">//this pointer&#x27;s value ,means pointed object addres</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p><img data-src="https://i.loli.net/2021/04/29/EBN1HXtmY8DLRMT.png" alt="20214291"></p>
-<p>可知,指针传入函数后,其值(即指向值的地址)未变,在函数中为子节点申请了空间,在函数外也能通过其访问。</p>
-<p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210429205005.png" alt="QQ截图20210429204704"></p>
-<p>内存分配的知识：</p>
-<p>1、参数、局部变量分配在栈区中。编译器自动回收<br>2、malloc申请的内存分配在堆上，由程序结束OS回收3、全局（静态区），全局变量和静态变量，由程序结束OS回收</p>
-<p>在函数中利用malloc分配空间或为指针赋值需要注意：</p>
-<ol>
-<li>函数的参数是浅拷贝,地址与实参不同,如果要相同,在cpp中用&amp;引用参数</li>
-<li>在函数内为指针分配地址时,栈退后会使得这个分配得到的地址无法引用,指针的地址依然是调用前,值没有改变</li>
-</ol>
-
-    </div>
-
-    
-    
-    
-    <div>
-	
-     <div>
-    
-        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
-    
-</div>
-     
-   </div>
-        <div class="reward-container">
-  <div>感谢阅读.</div>
-  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
-    打赏
-  </button>
-  <div id="qr" style="display: none;">
-      
-      <div style="display: inline-block;">
-        <img src="/images/wechatpay.png" alt="Sekyoro 微信支付">
-        <p>微信支付</p>
+  
+  <div class="post-block">
+    <div class="posts-collapse">
+      <div class="collection-title">
+        <h2 class="collection-header">vue3.x
+          <small>标签</small>
+        </h2>
       </div>
 
-  </div>
-</div>
-
-        
-
-<div>
-<ul class="post-copyright">
-  <li class="post-copyright-author">
-    <strong>本文作者： </strong>Sekyoro
-  </li>
-  <li class="post-copyright-link">
-    <strong>本文链接：</strong>
-    <a href="https://sekyoro.top/2021/04/29/%E5%85%B3%E4%BA%8E%E6%8C%87%E9%92%88%E5%92%8C%E5%87%BD%E6%95%B0/" title="关于指针和函数">https://sekyoro.top/2021/04/29/关于指针和函数/</a>
-  </li>
-  <li class="post-copyright-license">
-    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
-  </li>
-</ul>
-</div>
-
-
-      <footer class="post-footer">
-          
-          <div class="post-tags">
-              <a href="/tags/c/" rel="tag"><i class="fa fa-tag"></i> c</a>
-              <a href="/tags/%E6%8C%87%E9%92%88/" rel="tag"><i class="fa fa-tag"></i> 指针</a>
-              <a href="/tags/%E5%87%BD%E6%95%B0/" rel="tag"><i class="fa fa-tag"></i> 函数</a>
-          </div>
-
-        
-
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/2021/04/23/%E5%B9%BF%E4%B9%89%E8%A1%A8%E7%AE%80%E4%BB%8B/" rel="prev" title="广义表简介">
-      <i class="fa fa-chevron-left"></i> 广义表简介
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/2021/05/10/%E5%93%88%E5%A4%AB%E6%9B%BC%E7%BC%96-%E8%AF%91%E7%A0%81/" rel="next" title="哈夫曼编/译码">
-      哈夫曼编/译码 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      
+    <div class="collection-year">
+      <span class="collection-header">2021</span>
     </div>
-      </footer>
-    
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <div class="post-meta">
+        <time itemprop="dateCreated"
+              datetime="2021-12-31T16:12:46+08:00"
+              content="2021-12-31">
+          12-31
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/2021/12/31/vue%E5%AD%A6%E4%B9%A0/" itemprop="url">
+            <span itemprop="name">vue学习</span>
+          </a>
+      </div>
+
+    </header>
   </article>
+
+    </div>
+  </div>
   
   
+  
+
   
 
 
 
           </div>
           
-    
-  <div class="comments">
-    <div id="lv-container" data-id="city" data-uid="MTAyMC81MzE5Ny8yOTY3Mg=="></div>
-  </div>
-  
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -750,7 +599,6 @@ if(canvas.getContext){
 		
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E5%87%BD%E6%95%B0%E5%92%8C%E6%8C%87%E9%92%88"><span class="nav-number">1.</span> <span class="nav-text">关于函数和指针</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -1072,21 +920,6 @@ document.querySelectorAll('.pdfobject-container').forEach(element => {
 
   
 
-<script>
-NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
-  window.livereOptions = {
-    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
-  };
-  (function(d, s) {
-    var j, e = d.getElementsByTagName(s)[0];
-    if (typeof LivereTower === 'function') { return; }
-    j = d.createElement(s);
-    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-    j.async = true;
-    e.parentNode.insertBefore(j, e);
-  })(document, 'script');
-});
-</script>
 
     </div>
 </body>
