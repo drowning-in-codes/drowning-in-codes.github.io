@@ -4,11 +4,32 @@
   
     
     <entry>
+      <title>typora解绑后出现问题</title>
+      <link href="2022/01/30/typora%E8%A7%A3%E7%BB%91%E5%90%8E%E5%87%BA%E7%8E%B0%E9%97%AE%E9%A2%98/"/>
+      <url>2022/01/30/typora%E8%A7%A3%E7%BB%91%E5%90%8E%E5%87%BA%E7%8E%B0%E9%97%AE%E9%A2%98/</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>众所周知,typora作为一款良好的markdown编辑器,写写博客啥的很方便.图床,转pdf的功能也很实用.<br><span id="more"></span><br>本人使用这款软件也有一两年了,综合感受就是写一些几千字或者几百字的图文技术博客是很适合的,很多平台也都支持markdown.缺点就是对于一些数学符号, 科学计算等符号使用还是有一点麻烦,不过作为一款还算比较轻便的软件,这也不算什么.同时对于doc转换效果还是有一点差.因为有些人喜欢看doc文档,所以这个功能还有待提升.</p><p>现在软件收费了,我也直接14.99$入手了.不过存在一些问题,版本的更新提示不知道是不是墙的问题,直接更新不了,导致版本都1.0.3了,我一直都还在用1.0.0.</p><p>新版本作者贴心地加了国区特供,我都不好说这到底是件好事还是坏事了.另外,由于某些原因,我购买后又取消了,再次想要激活时发现一直提示服务器连接不上.网上已经有了解决方案.</p><blockquote><p>在typora1.0.3版本中有了国内服务器连接的功能,打开后就能解决. </p></blockquote><p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20220130130946612.png" alt="激活撒花" style="zoom:50%;" /></p><p>不过点击检查更新以及提示连不上</p><p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20220130131132678.png" alt="检查更新失败" style="zoom:67%;" /></p><p>当然这个软件还在一些问题,不过这个本质就是写markdown的,没必要花里胡哨.</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> typora </tag>
+            
+            <tag> issue </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>cousera_ML学习</title>
       <link href="2022/01/20/cousera-ML%E5%AD%A6%E4%B9%A0/"/>
       <url>2022/01/20/cousera-ML%E5%AD%A6%E4%B9%A0/</url>
       
-        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>Cousera的Andrew机器学习课程.</p><p>Maching Learning的两个定义</p><p>监督学习与非监督学习</p><p>监督学习:classificaton与regression</p><p>liner regression</p><p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20220121210252634.png" alt="liner regression" style="zoom:80%;" /></p><p>损失函数</p><p>非监督学习:clustering和non-clustering 密度估计</p><p>cost function</p><p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20220121205930781.png" alt="cost function"></p><p>等高线图</p><p>梯度下降算法将代价函数最小化</p><p> <img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20220126111554154.png" alt="image-20220126111554154"></p>]]></content>
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>Cousera的Andrew机器学习课程.</p><p>Maching Learning的两个定义</p><p>监督学习与非监督学习</p><p>监督学习:classificaton与regression</p><p>liner regression</p><p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20220121210252634.png" alt="liner regression" style="zoom:80%;" /></p><p>损失函数</p><p>非监督学习:clustering和non-clustering 密度估计</p><p>cost function</p><p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20220121205930781.png" alt="cost function"></p><p>等高线图</p><p>梯度下降算法将代价函数最小化</p><p> <img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20220126111554154.png" alt="image-20220126111554154"></p><p>Gradient Descent and norm Equation</p>]]></content>
       
       
       <categories>
