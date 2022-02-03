@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://sekyoro.top/2022/01/11/python-opencv%E5%AD%A6%E4%B9%A0/</loc>
+    <lastmod>2022-02-03</lastmod>
+  </url>
+  <url>
     <loc>https://sekyoro.top/2022/02/03/NLP%E5%AD%A6%E4%B9%A0/</loc>
     <lastmod>2022-02-03</lastmod>
   </url>
@@ -19,10 +23,6 @@
   <url>
     <loc>https://sekyoro.top/2022/01/19/%E5%8F%AF%E8%A7%86%E5%8C%96%E5%9B%BE%E7%9A%84%E5%B7%A5%E5%85%B7/</loc>
     <lastmod>2022-01-19</lastmod>
-  </url>
-  <url>
-    <loc>https://sekyoro.top/2022/01/11/python-opencv%E5%AD%A6%E4%B9%A0/</loc>
-    <lastmod>2022-01-17</lastmod>
   </url>
   <url>
     <loc>https://sekyoro.top/2022/01/17/pandas%E5%AD%A6%E4%B9%A0/</loc>
