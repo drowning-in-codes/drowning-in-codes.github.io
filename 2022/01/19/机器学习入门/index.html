@@ -34,11 +34,13 @@
 <meta property="og:site_name" content="Sekyoro的博客小屋">
 <meta property="og:description" content="现在入门可能都晚了">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/uid214893-20190505-1557025095926">
 <meta property="article:published_time" content="2022-01-19T07:36:35.000Z">
-<meta property="article:modified_time" content="2022-01-21T11:45:34.873Z">
+<meta property="article:modified_time" content="2022-02-02T15:38:10.327Z">
 <meta property="article:author" content="Sekyoro">
 <meta property="article:tag" content="ML">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/uid214893-20190505-1557025095926">
 
 <link rel="canonical" href="https://sekyoro.top/2022/01/19/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%85%A5%E9%97%A8/">
 
@@ -272,7 +274,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-01-21 19:45:34" itemprop="dateModified" datetime="2022-01-21T19:45:34+08:00">2022-01-21</time>
+                <time title="修改时间：2022-02-02 23:38:10" itemprop="dateModified" datetime="2022-02-02T23:38:10+08:00">2022-02-02</time>
               </span>
 
           
@@ -288,14 +290,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>5.9k</span>
+              <span>7.6k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>5 分钟</span>
+              <span>7 分钟</span>
             </span>
 
         </div>
@@ -313,6 +315,21 @@
 <p>机器学习研究和构建的是一种特殊算法（<strong>而非某一个特定的算法</strong>），能够让计算机自己在数据中学习从而进行预测。</p>
 </blockquote>
 <p>所以，<strong>机器学习不是某种具体的算法，而是很多算法的统称。</strong></p>
+<p>此外还有一个经典概念.</p>
+<blockquote>
+<p>假设用 P 来评估计算机程序在某任务类 T 上的性能，若一个程序利用经验 E 在任务 T 上获得了性能改善，则我们就说关于 T 和 P, 该程序对 E 进行了学习。</p>
+</blockquote>
+<p>机器学习中一些流行的任务 T 包括：</p>
+<ul>
+<li>分类：基于特征将实例分为某一类。</li>
+<li>回归：基于实例的其他特征预测该实例的数值型目标特征。</li>
+<li>聚类：基于实例的特征实现实例的分组，从而让组内成员比组间成员更为相似。</li>
+<li>异常检测：寻找与其他样本或组内实例有很大区别的实例。</li>
+<li>其他更多任务</li>
+</ul>
+<blockquote>
+<p>经验 E 指的是数据（没有数据我们什么也干不了）。根据训练方式，机器学习算法可以分为监督（supervised）和无监督（unsupervised）两类。无监督学习需要训练含有很多特征的数据集，然后学习出这个数据集上有用的结构性质。而监督学习的数据集除了含有很多特征外，它的每个样本都要有一个标签（label）或目标（target）</p>
+</blockquote>
 <p>机器学习包含了很多种不同的算法，深度学习就是其中之一，其他方法包括决策树，聚类，贝叶斯等。</p>
 <p>需要的知识:学会Numpy,matplotlib,seaborn,pandas和scipy.基本的一些方法要知道同时要知道如何查阅文档,这个可能更重要.</p>
 <p>同时需要一些基础的数学知识.</p>
@@ -373,7 +390,28 @@
 <p>因为特征值都是0或1,在一个量级不需要归一化.</p>
 <p>通过上面的KNN学习,可以了解到KNN的时间和空间效率并不高,需要改进.</p>
 <p>特点:简单有效,使用算法时必须有接近实际数据的训练样本数据.必须保存全部数据集,必须对每个数据计算距离值,实际使用时可能非常耗时.</p>
-<h3 id="决策树"><a href="#决策树" class="headerlink" title="决策树"></a>决策树</h3><h2 id="附件"><a href="#附件" class="headerlink" title="附件"></a>附件</h2><p>1936图灵 自动机理论</p>
+<h3 id="决策树"><a href="#决策树" class="headerlink" title="决策树"></a>决策树</h3><p><del>不好意思鸽了这么久</del></p>
+<p>决策树常常是专家经验的概括，是一种分享特定过程知识的方式。例如，在引入可扩展机器学习算法之前，银行业的信用评分任务是由专家解决的，能否放贷是基于一些直观（或经验）的规则，这些规则就可以表示为决策树的形式.它合并一连串逻辑规则，使之成为一个树形的数据结构，这些规则的形式为「特征 a 的值小于 x，特征 b 的值小于 y … =&gt; 类别 1」</p>
+<p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/uid214893-20190505-1557025095926" alt="决策树" style="zoom:67%;" /></p>
+<p>可以简单地发现,决策树可以认为是一种状态图.</p>
+<p>根据不同的决策剔除选项.那么如何判断哪些决策能剔除更多的选项呢?</p>
+<h4 id="重要概念"><a href="#重要概念" class="headerlink" title="重要概念"></a>重要概念</h4><p><strong>熵</strong></p>
+<p>熵是一个在物理、信息论和其他领域中广泛应用的重要概念，可以衡量获得的信息量。</p>
+<p>对于具有 N 种可能状态的系统而言,熵定义为</p>
+<script type="math/tex; mode=display">S = -\sum_{i=1}^{N}p_i \log_2{p_i},</script><p>其中，$p_i$ 是系统位于第 i 个状态的概率。熵可以描述为系统的混沌程度，熵越高，系统的有序性越差，反之亦然。</p>
+<p><strong>信息增益</strong></p>
+<p>熵的下降被称为信息增益</p>
+<script type="math/tex; mode=display">IG(Q) = S_O - \sum_{i=1}^{q}\frac{N_i}{N}S_i,</script><p>对数据进行分组后,对每一组进行熵的计算,再将每组的熵乘以该组所占的比例.得到的就是分组后的熵</p>
+<p>所以决策树的构建就很重要.需要避免过拟合的问题.为了避免过拟合，直到熵为某个较小的值。不同的算法使用不同的推断，通过「提前停止」或「截断」以避免构建出过拟合的树.</p>
+<p>不同的决策树构建算法依据的指标不一样.</p>
+<p>C4.5是信息增益率,ID3是信息增益.同时还有基尼不确定性,$G = 1 - \sum\limits_k (p_k)^2$</p>
+<p>错分率 $E = 1 - \max\limits_k p_k$</p>
+<p>基尼不确定性和信息增益的效果差不多</p>
+<p>二元分类熵的计算 <script type="math/tex">S = -p_+ \log_2{p_+} -p_- \log_2{p_-} = -p_+ \log_2{p_+} -(1 - p_{+}) \log_2{(1 - p_{+})}</script></p>
+<p>基尼不确定性 <script type="math/tex">G = 1 - p_+^2 - p_-^2 = 1 - p_+^2 - (1 - p_+)^2 = 2p_+(1-p_+)</script></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">plt.figure(figsize=(<span class="number">6</span>, <span class="number">4</span>))</span><br><span class="line">xx = np.linspace(<span class="number">0</span>, <span class="number">1</span>, <span class="number">50</span>)</span><br><span class="line">plt.plot(xx, [<span class="number">2</span> * x * (<span class="number">1</span>-x) <span class="keyword">for</span> x <span class="keyword">in</span> xx], label=<span class="string">&#x27;gini&#x27;</span>)</span><br><span class="line">plt.plot(xx, [<span class="number">4</span> * x * (<span class="number">1</span>-x) <span class="keyword">for</span> x <span class="keyword">in</span> xx], label=<span class="string">&#x27;2*gini&#x27;</span>)</span><br><span class="line">plt.plot(xx, [-x * np.log2(x) - (<span class="number">1</span>-x) * np.log2(<span class="number">1</span> - x)</span><br><span class="line">              <span class="keyword">for</span> x <span class="keyword">in</span> xx], label=<span class="string">&#x27;entropy&#x27;</span>)</span><br><span class="line">plt.plot(xx, [<span class="number">1</span> - <span class="built_in">max</span>(x, <span class="number">1</span>-x) <span class="keyword">for</span> x <span class="keyword">in</span> xx], label=<span class="string">&#x27;missclass&#x27;</span>)</span><br><span class="line">plt.plot(xx, [<span class="number">2</span> - <span class="number">2</span> * <span class="built_in">max</span>(x, <span class="number">1</span>-x) <span class="keyword">for</span> x <span class="keyword">in</span> xx], label=<span class="string">&#x27;2*missclass&#x27;</span>)</span><br><span class="line">plt.xlabel(<span class="string">&#x27;p+&#x27;</span>)</span><br><span class="line">plt.ylabel(<span class="string">&#x27;criterion&#x27;</span>)</span><br><span class="line">plt.title(<span class="string">&#x27;Criteria of quality as a function of p+ (binary classification)&#x27;</span>)</span><br><span class="line">plt.legend()</span><br></pre></td></tr></table></figure>
+<p>区分不同的标准 </p>
+<h2 id="附件"><a href="#附件" class="headerlink" title="附件"></a>附件</h2><p>1936图灵 自动机理论</p>
 <p>自动机有如下基本概念：</p>
 <p>符号 ：有某种意义或在这个机器上有效的任意数据(datum)。符号有时就叫做“字母”。</p>
 <p>字：通过一些符号串接而形成的有限字符串。</p>
@@ -382,6 +420,7 @@
 <h2 id="学习资料"><a href="#学习资料" class="headerlink" title="学习资料"></a>学习资料</h2><p>Cousera吴恩达的机器学习课程</p>
 <p><a target="_blank" rel="noopener" href="https://easyai.tech/">很好的ai学习网站</a></p>
 <p>《机器学习实战》python2.x</p>
+<p>蓝桥云课程.</p>
 
     </div>
 
@@ -783,7 +822,7 @@ if(canvas.getContext){
 		
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Classification"><span class="nav-number">1.</span> <span class="nav-text">Classification</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#KNN"><span class="nav-number">1.1.</span> <span class="nav-text">KNN</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%A3%E6%9E%90%E6%95%B0%E6%8D%AE"><span class="nav-number">1.1.1.</span> <span class="nav-text">解析数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%86%E6%9E%90%E6%95%B0%E6%8D%AE"><span class="nav-number">1.1.2.</span> <span class="nav-text">分析数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%87%86%E5%A4%87%E6%95%B0%E6%8D%AE"><span class="nav-number">1.1.3.</span> <span class="nav-text">准备数据</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%BD%92%E4%B8%80%E5%8C%96"><span class="nav-number">1.1.3.1.</span> <span class="nav-text">归一化</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95%E7%AE%97%E6%B3%95"><span class="nav-number">1.1.4.</span> <span class="nav-text">测试算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E7%AE%97%E6%B3%95"><span class="nav-number">1.1.5.</span> <span class="nav-text">使用算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%89%8B%E5%86%99%E8%AF%86%E5%88%AB%E7%B3%BB%E7%BB%9F"><span class="nav-number">1.1.6.</span> <span class="nav-text">手写识别系统</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%B3%E7%AD%96%E6%A0%91"><span class="nav-number">1.2.</span> <span class="nav-text">决策树</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%99%84%E4%BB%B6"><span class="nav-number">2.</span> <span class="nav-text">附件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%96%99"><span class="nav-number">3.</span> <span class="nav-text">学习资料</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Classification"><span class="nav-number">1.</span> <span class="nav-text">Classification</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#KNN"><span class="nav-number">1.1.</span> <span class="nav-text">KNN</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%A3%E6%9E%90%E6%95%B0%E6%8D%AE"><span class="nav-number">1.1.1.</span> <span class="nav-text">解析数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%86%E6%9E%90%E6%95%B0%E6%8D%AE"><span class="nav-number">1.1.2.</span> <span class="nav-text">分析数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%87%86%E5%A4%87%E6%95%B0%E6%8D%AE"><span class="nav-number">1.1.3.</span> <span class="nav-text">准备数据</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%BD%92%E4%B8%80%E5%8C%96"><span class="nav-number">1.1.3.1.</span> <span class="nav-text">归一化</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95%E7%AE%97%E6%B3%95"><span class="nav-number">1.1.4.</span> <span class="nav-text">测试算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E7%AE%97%E6%B3%95"><span class="nav-number">1.1.5.</span> <span class="nav-text">使用算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%89%8B%E5%86%99%E8%AF%86%E5%88%AB%E7%B3%BB%E7%BB%9F"><span class="nav-number">1.1.6.</span> <span class="nav-text">手写识别系统</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%B3%E7%AD%96%E6%A0%91"><span class="nav-number">1.2.</span> <span class="nav-text">决策树</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%87%8D%E8%A6%81%E6%A6%82%E5%BF%B5"><span class="nav-number">1.2.1.</span> <span class="nav-text">重要概念</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%99%84%E4%BB%B6"><span class="nav-number">2.</span> <span class="nav-text">附件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%96%99"><span class="nav-number">3.</span> <span class="nav-text">学习资料</span></a></li></ol></div>
       </div>
       <!--/noindex-->
       <div class="site-overview-wrap sidebar-panel">
@@ -798,7 +837,7 @@ if(canvas.getContext){
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">56</span>
+          <span class="site-state-item-count">57</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -811,7 +850,7 @@ if(canvas.getContext){
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">64</span>
+        <span class="site-state-item-count">65</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -870,12 +909,12 @@ if(canvas.getContext){
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">305k</span>
+    <span title="站点总字数">315k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">4:38</span>
+    <span title="站点阅读时长">4:46</span>
 </div>
 
     <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
