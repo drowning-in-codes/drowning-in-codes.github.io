@@ -34,23 +34,23 @@
 <meta property="og:site_name" content="Sekyoro的博客小屋">
 <meta property="og:description" content="之前碰过,现在想系统学一下.设计opencv-python,Numpy,Matploylib这几个库">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20220111150541787.png">
-<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/20190604011343261.png">
-<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20220111172001806.png">
-<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20220111184013171.png">
-<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20220111192553471.png">
-<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20220111200028762.png">
-<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20220111220749007.png">
-<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20220111220808007.png">
-<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20220111201024190.png">
-<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/d7e538c0c85f61f6a5609008bff4beeb-0">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/093951.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/065829.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/065830.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/093954.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/093955.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/093958.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/065833.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/065836.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/094000.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/094001.png">
 <meta property="article:published_time" content="2022-01-11T06:59:03.000Z">
-<meta property="article:modified_time" content="2022-02-03T09:17:44.748Z">
+<meta property="article:modified_time" content="2022-04-01T09:53:02.427Z">
 <meta property="article:author" content="Sekyoro">
 <meta property="article:tag" content="python">
 <meta property="article:tag" content="opencv">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20220111150541787.png">
+<meta name="twitter:image" content="http://cdn.sekyoro.top/imgs/093951.png">
 
 <link rel="canonical" href="https://sekyoro.top/2022/01/11/python-opencv%E5%AD%A6%E4%B9%A0/">
 
@@ -284,7 +284,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-02-03 17:17:44" itemprop="dateModified" datetime="2022-02-03T17:17:44+08:00">2022-02-03</time>
+                <time title="修改时间：2022-04-01 17:53:02" itemprop="dateModified" datetime="2022-04-01T17:53:02+08:00">2022-04-01</time>
               </span>
 
           
@@ -327,10 +327,10 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">imread()  <span class="comment">#传入图像路径</span></span><br><span class="line">imsave()  <span class="comment">#保存图像名字以及image</span></span><br></pre></td></tr></table></figure>
 <p>我们读入一个图像并尝试打印</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">image = imread(<span class="string">&quot;image.jpg&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(image)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(image))</span><br></pre></td></tr></table></figure>
-<p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20220111150541787.png" alt="打印image" style="zoom:50%;" /></p>
+<p><img data-src="http://cdn.sekyoro.top/imgs/093951.png" alt="打印image"></p>
 <p>可以看到结果是多维数组,类型其实是Numpy的数组类型,所以搭配Numpy很好操作.</p>
 <p>这里涉及到图像的知识,图像在计算机中的存储.</p>
-<p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/20190604011343261.png" alt="三信道矩阵"></p>
+<p><img data-src="http://cdn.sekyoro.top/imgs/065829.png" alt="三信道矩阵"></p>
 <p><strong>值得注意的:opencv得到的三通道像素点是BGR格式.</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#得到image对象后</span></span><br><span class="line">image[<span class="number">0</span>,<span class="number">0</span>]  <span class="comment">#0,0位置上像素  直接修改即可</span></span><br><span class="line">image[<span class="number">0</span>:<span class="number">100</span>,<span class="number">0</span>:<span class="number">200</span>] = (<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>) <span class="comment">#将一个矩形区域改为黑色</span></span><br></pre></td></tr></table></figure>
 <h3 id="拆分和合并图像信道"><a href="#拆分和合并图像信道" class="headerlink" title="拆分和合并图像信道"></a>拆分和合并图像信道</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">split() <span class="comment">#拆分信道</span></span><br><span class="line">merge() <span class="comment">#合并信道</span></span><br><span class="line"><span class="comment">#拆分信道  结果为bgr</span></span><br><span class="line"><span class="comment">#image打印得到一个numpy矩阵</span></span><br><span class="line">b,g,r = cv2.split(image)</span><br><span class="line"><span class="comment">#合并信道</span></span><br><span class="line"><span class="built_in">sum</span> = cv2.merge([r,g,b])</span><br><span class="line">cv2.imwrite(<span class="string">&#x27;reverse.jpg&#x27;</span>,<span class="built_in">sum</span>)</span><br></pre></td></tr></table></figure>
@@ -338,7 +338,7 @@
 <h3 id="访问图像属性"><a href="#访问图像属性" class="headerlink" title="访问图像属性"></a>访问图像属性</h3><p>一张图像具有多个属性：行数、列数、通道数、图像数据类型、像素数等.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">image = imread(<span class="string">&quot;&quot;</span>)  <span class="comment">#参数是一个图像地址</span></span><br><span class="line">image.shape <span class="comment">#图像属性</span></span><br><span class="line">image.dtype <span class="comment">#图像的数值类型</span></span><br><span class="line">image.size  <span class="comment">#图像大小,其实就是高x宽</span></span><br></pre></td></tr></table></figure>
 <p>当意识到imread返回的其实是一个矩阵,我们就能利用numpy的一些方法.</p>
-<p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20220111172001806.png" alt="image-20220111172001806"></p>
+<p><img data-src="http://cdn.sekyoro.top/imgs/065830.png" alt="image-20220111172001806"></p>
 <p>可以看到 <code>image.shape</code> 返回的是一组包含图片属性的元组。第一个元素是图片的高，表示图片有多少行像素。第二个元素是图片的宽，表示图片有多少列像素。最后一个元素 <code>3</code> 是图片的通道数，我们使用的是 RGB 彩色图片，所以一共有三个通道.是彩色图像</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(image))</span><br><span class="line"><span class="comment"># ndarray</span></span><br></pre></td></tr></table></figure>
 <p><code>image.dtype</code> 获取像素值的数据类型，可以看到像素值的数据类型是 <code>uint8</code> 表示 8 位无符号整数。因为像素值的范围是 0 到 255，而 <code>uint8</code> 也是在这一范围.</p>
@@ -403,7 +403,7 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">numpy.empty()  <span class="comment">#np.empty([3,2], dtype = int) </span></span><br><span class="line">numpy.ones() <span class="comment">#np.ones([2,2], dtype = int)</span></span><br><span class="line">numpy.randn() <span class="comment">#numpy.random.randn(2,3)</span></span><br><span class="line">numpy.arange() <span class="comment">#从范围内创建数组</span></span><br><span class="line">numpy.eye()  <span class="comment">#对角矩阵 参数是行列数</span></span><br><span class="line">numpy.full() <span class="comment">#任意值的初始化</span></span><br></pre></td></tr></table></figure>
 <h3 id="画矩形"><a href="#画矩形" class="headerlink" title="画矩形"></a>画矩形</h3><p>与画直线类似,需要定义左上角和右上角.厚度为负数则为填充图形.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">region = np.zeros((<span class="number">500</span>,<span class="number">500</span>,<span class="number">3</span>))</span><br><span class="line">rectangle = cv.rectangle(region,(<span class="number">50</span>,<span class="number">50</span>),(<span class="number">150</span>,<span class="number">150</span>),(<span class="number">0</span>,<span class="number">255</span>,<span class="number">0</span>),-<span class="number">1</span>)</span><br><span class="line">cv.imwrite(<span class="string">&quot;rectangle.jpg&quot;</span>,rectangle)</span><br></pre></td></tr></table></figure>
-<p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20220111184013171.png" alt="矩形图像" style="zoom:50%;" /></p>
+<p><img data-src="http://cdn.sekyoro.top/imgs/093954.png" alt="矩形图像"></p>
 <p>画圆和椭圆类似,就是用的方法不一样而已</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cv2.circle() <span class="comment">#画圆</span></span><br><span class="line">cv2.ellipse() <span class="comment">#椭圆</span></span><br></pre></td></tr></table></figure>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">#画圆</span></span><br><span class="line">region = np.zeros((<span class="number">500</span>,<span class="number">500</span>,<span class="number">3</span>))</span><br><span class="line">circle = cv.circle(region,(<span class="number">250</span>,<span class="number">250</span>),<span class="number">200</span>,(<span class="number">0</span>,<span class="number">255</span>,<span class="number">0</span>),-<span class="number">1</span>)</span><br><span class="line">cv.imwrite(<span class="string">&quot;circle.jpg&quot;</span>,circle)</span><br></pre></td></tr></table></figure>
@@ -416,7 +416,7 @@
 <p>添加文字</p>
 <figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cv2.putText()  <span class="meta">#参数分别为添加文字的图像,添加的字符串,添加的位置</span></span><br></pre></td></tr></table></figure>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">words = cv2.putText(region, <span class="string">&quot;Vision&quot;</span>, (<span class="number">100</span>, <span class="number">250</span>), cv2.FONT_HERSHEY_SIMPLEX, <span class="number">3</span>, (<span class="number">0</span>, <span class="number">255</span>, <span class="number">0</span>), <span class="number">10</span>, cv2.LINE_AA)</span><br><span class="line">cv2.imwrite(<span class="string">&quot;words.jpg&quot;</span>, words)</span><br></pre></td></tr></table></figure>
-<p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20220111192553471.png" alt="插入文本" style="zoom:80%;" /></p>
+<p><img data-src="http://cdn.sekyoro.top/imgs/093955.png" alt="插入文本"></p>
 <p>第四个参数 <code>cv2.FONT_HERSHEY_SIMPLEX</code> 是字体类型，第五个参数 <code>3</code> 是字体的大小，第六个参数 <code>(0, 255, 0)</code> 是字体的颜色，第七个参数 <code>10</code> 是文字线条的粗细，第八个参数 <code>cv2.LINE_AA</code> 是线条的类型。</p>
 <h2 id="图像的处理"><a href="#图像的处理" class="headerlink" title="图像的处理"></a>图像的处理</h2><h3 id="图像的缩放"><a href="#图像的缩放" class="headerlink" title="图像的缩放"></a>图像的缩放</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cv2.resize()</span><br><span class="line">resized = cv2.resize(image, (<span class="number">0</span>, <span class="number">0</span>), fx=<span class="number">0.5</span>, fy=<span class="number">0.5</span>, interpolation = cv2.INTER_AREA)</span><br><span class="line">cv2.imwrite(<span class="string">&quot;resized.jpg&quot;</span>,resized)</span><br></pre></td></tr></table></figure>
 <p>使用 <code>cv2.resize</code> 函数来对图片的尺寸进行缩放，该函数的第一个参数 <code>image</code> 是要被缩放的图片。第二个参数 <code>(0, 0)</code> 是一个元组，表示输出图片的尺寸，元组内的第一个元素表示图片的宽，第二个表示图片的高。第三参数 <code>fx = 0.5</code> 表示沿图片的宽的缩放系数，第四参数 <code>fy = 0.5</code> 表示沿图片的高的缩放系数。第五个参数 <code>interpolation = cv2.INTER_AREA)</code> 是插值方法，表明图片是用哪种方法被缩放的，<code>cv2.resize</code> 默认的插值方法是 <code>cv2.INTER_LINEAR</code>，大家也可以尝试使用其他方法： <code>cv2.INTER_NEAREST</code>、<code>cv2.INTER_CUBIC</code>、<code>cv2.INTER_LANCZ0S4</code>。我们也可以尝试定义输出图片尺寸来对图片进行缩放。</p>
@@ -424,7 +424,7 @@
 <p>当将此参数设置为 <code>(0, 0)</code> 时，图片的输出尺寸由后面两个缩放系数 <code>fx</code> 和 <code>fy</code> 分别与函数的输入图片的宽和高相乘得出，当此参数不等于 <code>(0, 0)</code> 时，输出图片的尺寸等于我们自己设定的值</p>
 <h3 id="图像平移"><a href="#图像平移" class="headerlink" title="图像平移"></a>图像平移</h3><p>图片的平移是让图片中所有的像素点沿着坐标轴移动相同的距离，视觉上看起来就是图片在进行上、下、左、右移动.</p>
 <p>对图片进行平移时，我们要先确定图片向哪个方向移动、移动多少</p>
-<p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20220111200028762.png" alt="图像平移" style="zoom:50%;" /></p>
+<p><img data-src="http://cdn.sekyoro.top/imgs/093958.png" alt="图像平移"></p>
 <p>使用 <code>cv2.warpAffine</code> 函数对图片进行平移，第一个参数 <code>image</code> 是要被平移的图片。第二个参数 <code>M</code> 是我们刚才创建的矩阵 <code>M</code>。第三个参数 <code>(width, height)</code> 是输出的图片尺寸，这里我们输出的尺寸和输入的原始图片尺寸一样，<code>width</code> 表示图片的宽，<code>height</code> 表示图片的高</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">height,width = image.shape[:<span class="number">2</span>]</span><br><span class="line">M = np.float32([[<span class="number">1</span>,<span class="number">0</span>,<span class="number">100</span>],[<span class="number">0</span>,<span class="number">1</span>,<span class="number">50</span>]])</span><br><span class="line">translation = cv2.warpAffine(image,M,(width,height))</span><br><span class="line">cv2.imwrite(<span class="string">&#x27;translation.jpg&#x27;</span>,translation)</span><br></pre></td></tr></table></figure>
 <h2 id="图像的运算"><a href="#图像的运算" class="headerlink" title="图像的运算"></a>图像的运算</h2><p><strong>算术运算和按位运算</strong></p>
@@ -442,8 +442,8 @@
 <h3 id="按位运算"><a href="#按位运算" class="headerlink" title="按位运算"></a>按位运算</h3><p><code>and</code> 运算是当两个像素值都大于 0 时为真，<code>or</code> 运算是当两个像素值有一个大于 0 时为真，<code>xor</code> 运算是当两个像素值有一个大于 0 但不同时都大于 0 则为真。<code>not</code> 则是一个取反的运算.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cv2.bitwise_and(a, b)</span><br><span class="line">cv2.bitwise_or(a, b)</span><br><span class="line">cv2.bitwise_xor(a, b)</span><br><span class="line">cv2.bitwise_not(a)</span><br></pre></td></tr></table></figure>
 <p>图片的按位运算。两张图片的按位运算就是将两张尺寸通道数相同的图片中的每个像素值分别进行 <code>and</code>、<code>or</code>、<code>xor</code>、<code>not</code> 运算</p>
-<p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20220111220749007.png" alt="图片相与"></p>
-<p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20220111220808007.png" alt="图片相或"></p>
+<p><img data-src="http://cdn.sekyoro.top/imgs/065833.png" alt="图片相与"></p>
+<p><img data-src="http://cdn.sekyoro.top/imgs/065836.png" alt="图片相或"></p>
 <p>相与可以只取白色部分,或可以去掉白色部分</p>
 <p>所以这就涉及到掩码(mask)</p>
 <p>利用np.zeros创造黑图,创建一张黑色图片，因为这张图片的尺寸要和进行掩膜操作的原图片的尺寸一样.</p>
@@ -452,7 +452,7 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">imagemask = cv2.bitwise_and(image1, image1, mask = mask)</span><br><span class="line">cv2.imwrite(<span class="string">&quot;imagemask.jpg&quot;</span>, imagemask)</span><br></pre></td></tr></table></figure>
 <h3 id="颜色空间"><a href="#颜色空间" class="headerlink" title="颜色空间"></a>颜色空间</h3><p>除了RGB还有HSV和LAB,描述色彩模型.</p>
 <p>颜色空间是一种描述色彩的模型，其作用是在不同的标准下对不同颜色的说明。OpenCV 中有上百种颜色空间转换方法</p>
-<h3 id="图像的旋转"><a href="#图像的旋转" class="headerlink" title="图像的旋转"></a>图像的旋转</h3><p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20220111201024190.png" alt="图像旋转" style="zoom:50%;" /></p>
+<h3 id="图像的旋转"><a href="#图像的旋转" class="headerlink" title="图像的旋转"></a>图像的旋转</h3><p><img data-src="http://cdn.sekyoro.top/imgs/094000.png" alt="图像旋转"></p>
 <figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cv.getRotatio<span class="symbol">nMatrix2</span>D<span class="comment">()</span> <span class="attr">#参数分别为旋转中心,角度,缩放</span></span><br></pre></td></tr></table></figure>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">img = cv.imread(<span class="string">&#x27;messi5.jpg&#x27;</span>,<span class="number">0</span>)</span><br><span class="line">rows,cols = img.shape</span><br><span class="line"><span class="comment"># cols-1 和 rows-1 是坐标限制</span></span><br><span class="line">M = cv.getRotationMatrix2D(((cols-<span class="number">1</span>)/<span class="number">2.0</span>,(rows-<span class="number">1</span>)/<span class="number">2.0</span>),<span class="number">90</span>,<span class="number">1</span>)</span><br><span class="line">dst = cv.warpAffine(img,M,(cols,rows))</span><br></pre></td></tr></table></figure>
 <figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">height</span>,width = image.shape[:<span class="number">2</span>]</span><br><span class="line"><span class="attribute">M</span> = cv<span class="number">2</span>.getRotationMatrix<span class="number">2</span>D((<span class="number">50</span>,<span class="number">50</span>),<span class="number">30</span>,<span class="number">1</span>)</span><br><span class="line"><span class="attribute">rotation</span> = cv<span class="number">2</span>.warpAffine(image,M,(width,height)) </span><br><span class="line"><span class="attribute">cv2</span>.imwrite(<span class="string">&quot;rotation1.jpg&quot;</span>, rotation)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
@@ -471,7 +471,7 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#Otsu阈值</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">Otsu</span>():</span></span><br><span class="line">    image = cv2.imread(<span class="string">&quot;1.jpg&quot;</span>)</span><br><span class="line">    grayimage = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)</span><br><span class="line">    T,thresh = cv2.threshold(grayimage,<span class="number">0</span>,<span class="number">255</span>,cv2.THRESH_OTSU)</span><br><span class="line">    cv2.imwrite(<span class="string">&#x27;thresh.jpg&#x27;</span>, thresh)</span><br><span class="line">    <span class="built_in">print</span>(T)</span><br><span class="line">    T, thresh = cv2.threshold(grayimage, <span class="number">0</span>, <span class="number">255</span>, cv2.THRESH_OTSU+cv2.THRESH_BINARY_INV)</span><br><span class="line">    cv2.imwrite(<span class="string">&#x27;rthresh.jpg&#x27;</span>, thresh)</span><br></pre></td></tr></table></figure>
 <p>还可以在 <code>cv2.threshold</code> 函数的第四个参数 <code>cv2.THRESH_OTSU</code> 后面添加设置阈值的方法来呈现不同的处理结果。</p>
 <h2 id="图像平滑"><a href="#图像平滑" class="headerlink" title="图像平滑"></a>图像平滑</h2><p>图像平滑也可称为滤波，是一种用于减少图像噪声且会让图像变得模糊的方法。图像平滑常常在图像预处理时使用，其主要目的是减少图像中的噪声，使得后续的处理操作能够获得更好的效果和可靠性。</p>
-<p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/d7e538c0c85f61f6a5609008bff4beeb-0" alt="像素值" style="zoom:67%;" /></p>
+<p><img data-src="http://cdn.sekyoro.top/imgs/094001.png" alt="像素值"></p>
 <p>每个数字表示像素值，红色方框是一个 <code>3*3</code> 矩阵或者称之为卷积核。图像平滑实际上是使用一个 <code>m*k</code> 的矩阵在图片上移动并与像素值进行相应计算来实现的</p>
 <h3 id="均值滤波"><a href="#均值滤波" class="headerlink" title="均值滤波"></a>均值滤波</h3><p>均值滤波就是线性滤波，是指用一个 <code>m*m</code> 的模板（卷积核）在图像上滑动，其中 <code>m</code> 是正整数且是奇数，当模板在滑动时，处于模板中心的像素值将会被其周围的像素值的平均值所替代。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 均值滤波</span></span><br><span class="line">image = cv2.imread(<span class="string">&quot;1.jpg&quot;</span>)</span><br><span class="line">blur = cv2.blur(image, (<span class="number">5</span>, <span class="number">5</span>))</span><br><span class="line">blur = cv2.resize(blur, (<span class="number">0</span>, <span class="number">0</span>), fx=<span class="number">0.5</span>, fy=<span class="number">0.3</span>)</span><br><span class="line">cv2.imshow(<span class="string">&#x27;blur&#x27;</span>, blur)</span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
@@ -957,7 +957,7 @@ if(canvas.getContext){
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">65</span>
+          <span class="site-state-item-count">67</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -970,7 +970,7 @@ if(canvas.getContext){
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">73</span>
+        <span class="site-state-item-count">76</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -1029,12 +1029,12 @@ if(canvas.getContext){
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">361k</span>
+    <span title="站点总字数">354k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">5:28</span>
+    <span title="站点阅读时长">5:22</span>
 </div>
 
     <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>

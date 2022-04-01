@@ -34,20 +34,20 @@
 <meta property="og:site_name" content="Sekyoro的博客小屋">
 <meta property="og:description" content="机器学习有必要好好学会numpy,pandas和matplotlib">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20220117101621720.png">
-<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20220117102443905.png">
-<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20220117103213650.png">
-<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20220117104228327.png">
-<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20220117105116768.png">
-<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20220117105355553.png">
-<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20220117105637505.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/094014.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/094015.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/094017.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/094018.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/094019.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/094021.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/094021-1.png">
 <meta property="article:published_time" content="2022-01-17T01:23:08.000Z">
-<meta property="article:modified_time" content="2022-01-17T03:19:44.133Z">
+<meta property="article:modified_time" content="2022-04-01T09:53:03.976Z">
 <meta property="article:author" content="Sekyoro">
 <meta property="article:tag" content="python">
 <meta property="article:tag" content="pandas">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20220117101621720.png">
+<meta name="twitter:image" content="http://cdn.sekyoro.top/imgs/094014.png">
 
 <link rel="canonical" href="https://sekyoro.top/2022/01/17/pandas%E5%AD%A6%E4%B9%A0/">
 
@@ -273,10 +273,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2022-01-17 09:23:08 / 修改时间：11:19:44" itemprop="dateCreated datePublished" datetime="2022-01-17T09:23:08+08:00">2022-01-17</time>
+              <time title="创建时间：2022-01-17 09:23:08" itemprop="dateCreated datePublished" datetime="2022-01-17T09:23:08+08:00">2022-01-17</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-04-01 17:53:03" itemprop="dateModified" datetime="2022-04-01T17:53:03+08:00">2022-04-01</time>
+              </span>
 
           
             <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
@@ -320,10 +326,10 @@
 <p>前者是一列,类似一维数组,后者是表格。</p>
 <figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">pandas.Series( data, index, dtype, name, copy)</span><br><span class="line">参数说明：</span><br><span class="line"></span><br><span class="line">data：一组数据(ndarray 类型)。</span><br><span class="line"></span><br><span class="line">index：数据索引标签，如果不指定，默认从 0 开始。</span><br><span class="line"></span><br><span class="line">dtype：数据类型，默认会自己判断。</span><br><span class="line"></span><br><span class="line">name：设置名称。</span><br><span class="line"></span><br><span class="line">copy：拷贝数据，默认为 False。</span><br></pre></td></tr></table></figure>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"></span><br><span class="line">a = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line"></span><br><span class="line">myvar = pd.Series(a)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(myvar)</span><br></pre></td></tr></table></figure>
-<p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20220117101621720.png" alt="Series" style="zoom:67%;" /></p>
+<p><img data-src="http://cdn.sekyoro.top/imgs/094014.png" alt="Series"></p>
 <p>索引默认从0开始,可以修改索引名字.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"></span><br><span class="line">a = [<span class="string">&quot;Google&quot;</span>, <span class="string">&quot;Runoob&quot;</span>, <span class="string">&quot;Wiki&quot;</span>]</span><br><span class="line"></span><br><span class="line">myvar = pd.Series(a, index = [<span class="string">&quot;x&quot;</span>, <span class="string">&quot;y&quot;</span>, <span class="string">&quot;z&quot;</span>])</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(myvar)</span><br></pre></td></tr></table></figure>
-<p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20220117102443905.png" alt="对象作为数据" style="zoom:80%;" /></p>
+<p><img data-src="http://cdn.sekyoro.top/imgs/094015.png" alt="对象作为数据"></p>
 <p>也可以使用字典创建对象,</p>
 <p>DataFrame 构造方法如下：</p>
 <figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pandas.<span class="constructor">DataFrame( <span class="params">data</span>, <span class="params">index</span>, <span class="params">columns</span>, <span class="params">dtype</span>, <span class="params">copy</span>)</span></span><br></pre></td></tr></table></figure>
@@ -338,16 +344,16 @@
 <p>使用二维数组创建</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"></span><br><span class="line">data = [[<span class="string">&#x27;Google&#x27;</span>,<span class="number">10</span>],[<span class="string">&#x27;Runoob&#x27;</span>,<span class="number">12</span>],[<span class="string">&#x27;Wiki&#x27;</span>,<span class="number">13</span>]]</span><br><span class="line"></span><br><span class="line">df = pd.DataFrame(data,columns=[<span class="string">&#x27;Site&#x27;</span>,<span class="string">&#x27;Age&#x27;</span>],dtype=<span class="built_in">float</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(df)</span><br></pre></td></tr></table></figure>
 <p>使用numpy类型创建</p>
-<p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20220117103213650.png" alt="创建dataframe" style="zoom:80%;" /></p>
+<p><img data-src="http://cdn.sekyoro.top/imgs/094017.png" alt="创建dataframe"></p>
 <p>loc属性返回指定行或列</p>
-<p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20220117104228327.png" alt="loc" style="zoom:67%;" /></p>
+<p><img data-src="http://cdn.sekyoro.top/imgs/094018.png" alt="loc"></p>
 <h3 id="读取csv文件"><a href="#读取csv文件" class="headerlink" title="读取csv文件"></a>读取csv文件</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">df = pd.read_csv()</span><br><span class="line">df.tostring() <span class="comment">#to_string() 用于返回 DataFrame 类型的数据，如果不使用该函数，则输出结果为数据的前面 5 行和末尾 5 行</span></span><br><span class="line">df</span><br></pre></td></tr></table></figure>
-<p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20220117105116768.png" alt="读取csv" style="zoom:67%;" /></p>
+<p><img data-src="http://cdn.sekyoro.top/imgs/094019.png" alt="读取csv"></p>
 <p>存为csv文件</p>
 <p>to_csv()将DataFrame数据存为csv</p>
-<p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20220117105355553.png" alt="存为csv文件" style="zoom:67%;" /></p>
+<p><img data-src="http://cdn.sekyoro.top/imgs/094021.png" alt="存为csv文件"></p>
 <h3 id="数据处理"><a href="#数据处理" class="headerlink" title="数据处理"></a>数据处理</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">head() <span class="comment">#前面几行</span></span><br><span class="line">tail() <span class="comment">#后面几行</span></span><br><span class="line">info() <span class="comment">#返回表格基本信息</span></span><br></pre></td></tr></table></figure>
-<p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20220117105637505.png" alt="查看csv文件" style="zoom:80%;" /></p>
+<p><img data-src="http://cdn.sekyoro.top/imgs/094021-1.png" alt="查看csv文件"></p>
 <h3 id="读取json文件"><a href="#读取json文件" class="headerlink" title="读取json文件"></a>读取json文件</h3><p>存储和交换文本信息的语法，类似 XML</p>
 <p>JSON 比 XML 更小、更快，更易解析</p>
 <p>主要是内嵌的json.</p>
@@ -779,7 +785,7 @@ if(canvas.getContext){
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">65</span>
+          <span class="site-state-item-count">67</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -792,7 +798,7 @@ if(canvas.getContext){
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">73</span>
+        <span class="site-state-item-count">76</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -851,12 +857,12 @@ if(canvas.getContext){
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">361k</span>
+    <span title="站点总字数">354k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">5:28</span>
+    <span title="站点阅读时长">5:22</span>
 </div>
 
     <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>

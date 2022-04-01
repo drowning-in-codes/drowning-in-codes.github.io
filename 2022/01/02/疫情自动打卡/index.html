@@ -34,25 +34,25 @@
 <meta property="og:site_name" content="Sekyoro的博客小屋">
 <meta property="og:description" content="主要涉及到一个查询参数的逆向.疫情填报打卡,之前用selenium写过,不过比较笨重. 现在直接使用requests.">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20220102171907498.png">
-<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20220102171754941.png">
-<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20220102172509367.png">
-<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20220102172603819.png">
-<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20220102172706501.png">
-<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20220102173029972.png">
-<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20220102173401933.png">
-<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20220102173804950.png">
-<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20220102174221779.png">
-<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20220102174413097.png">
-<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20220102174720756.png">
-<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20220102175014649.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/093918.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/093920.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/093921.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/093924.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/093925.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/093927.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/093930.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/093931.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/093934.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/093936.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/093937.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/093939.png">
 <meta property="article:published_time" content="2022-01-02T09:11:25.000Z">
-<meta property="article:modified_time" content="2022-01-02T09:59:55.117Z">
+<meta property="article:modified_time" content="2022-04-01T09:53:08.223Z">
 <meta property="article:author" content="Sekyoro">
 <meta property="article:tag" content="python">
 <meta property="article:tag" content="requests">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20220102171907498.png">
+<meta name="twitter:image" content="http://cdn.sekyoro.top/imgs/093918.png">
 
 <link rel="canonical" href="https://sekyoro.top/2022/01/02/%E7%96%AB%E6%83%85%E8%87%AA%E5%8A%A8%E6%89%93%E5%8D%A1/">
 
@@ -278,10 +278,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2022-01-02 17:11:25 / 修改时间：17:59:55" itemprop="dateCreated datePublished" datetime="2022-01-02T17:11:25+08:00">2022-01-02</time>
+              <time title="创建时间：2022-01-02 17:11:25" itemprop="dateCreated datePublished" datetime="2022-01-02T17:11:25+08:00">2022-01-02</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-04-01 17:53:08" itemprop="dateModified" datetime="2022-04-01T17:53:08+08:00">2022-04-01</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -329,48 +335,48 @@
 <h2 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h2><p>首先进入官网</p>
 <p><a target="_blank" rel="noopener" href="https://uis.nwpu.edu.cn/cas/login">西北工业大学</a></p>
 <p>打开检查,一般流程是发送一个GET请求,有了cookie.如果你发现响应没有set-cookie,而请求直接就有了cookie,这一般是浏览器缓存了,可以清除一下cookie.</p>
-<p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20220102171907498.png" alt="image-20220102171907498" style="zoom:50%;" /></p>
+<p><img data-src="http://cdn.sekyoro.top/imgs/093918.png" alt="image-20220102171907498"></p>
 <p>这就是响应,可以看到有了set-cookie,这很重要,直接提交表单的话没有cookie,很可能失败(要说为什么不是一定,这与你调的第三方包有关).</p>
-<p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20220102171754941.png" alt="image-20220102171754941" style="zoom:50%;" /></p>
+<p><img data-src="http://cdn.sekyoro.top/imgs/093920.png" alt="image-20220102171754941"></p>
 <p>然后输入账号密码,查看又发了什么请求,通常会发一个POST.</p>
 <p>打开筛选器 method:POST查看</p>
-<p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20220102172509367.png" alt="image-20220102172509367" style="zoom:80%;" /></p>
+<p><img data-src="http://cdn.sekyoro.top/imgs/093921.png" alt="image-20220102172509367"></p>
 <p>当看到POST请求时有必要查看PAYLOAD,也就是携带的数据.</p>
-<p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20220102172603819.png" alt="image-20220102172603819" style="zoom:80%;" /></p>
+<p><img data-src="http://cdn.sekyoro.top/imgs/093924.png" alt="image-20220102172603819"></p>
 <p>构造请求时直接把这个表单发过去就行了.</p>
 <p>再看看响应头又有set-cookie说明这个很有用,因为给了你cookie.</p>
-<p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20220102172706501.png" alt="image-20220102172706501" style="zoom:80%;" /></p>
+<p><img data-src="http://cdn.sekyoro.top/imgs/093925.png" alt="image-20220102172706501"></p>
 <p>这样登录之后就有了基本的cookie</p>
 <h2 id="进入疫情填报"><a href="#进入疫情填报" class="headerlink" title="进入疫情填报"></a>进入疫情填报</h2><p>然后进入疫情填报界面<a target="_blank" rel="noopener" href="http://yqtb.nwpu.edu.cn/wx/xg/yz-mobile/index.jsp">疫情每日填报</a></p>
 <p>正常一波操作:打开审查,刷新,查看重要的请求(一般是jsp或者js啥的)</p>
 <p>看到了熟悉的set-cookie</p>
-<p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20220102173029972.png" alt="image-20220102173029972" style="zoom:80%;" /></p>
+<p><img data-src="http://cdn.sekyoro.top/imgs/093927.png" alt="image-20220102173029972"></p>
 <p>说明这个url是需要get的,同时查看响应发现有很多个人信息,包括姓名.</p>
 <p>注意一下:因为我们登陆时只输入了学号和密码,如果后面需要姓名,可以通过这种方法获取响应提取出姓名.</p>
 <p>这里就可以利用正则提取出姓名.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">name_info = s.get(get_name_url, headers=headers).text</span><br><span class="line">name = re.search(<span class="string">r&#x27;姓名：(.*)&lt;&#x27;</span>, name_info).group(<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
 <p>同时我们又可以发现还有POST请求</p>
-<p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20220102173401933.png" alt="image-20220102173401933" style="zoom:67%;" /></p>
+<p><img data-src="http://cdn.sekyoro.top/imgs/093930.png" alt="image-20220102173401933"></p>
 <p>查看payload,有一个</p>
 <figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">actionType: getRoles</span><br></pre></td></tr></table></figure>
 <p>看不出有什么特别的作用,可以不用post.</p>
 <h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>然后点击每日填报,又进入新的页面,查看有没有什么请求</p>
 <p>筛选jsp,我们到这里就可以知道这个网站的架构了,利用jsp(不过这是常见的方法)</p>
 <p>可以发现一个请求jrsb.jsp,貌似没什么特别作用.</p>
-<p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20220102173804950.png" alt="image-20220102173804950" style="zoom:50%;" /></p>
+<p><img data-src="http://cdn.sekyoro.top/imgs/093931.png" alt="image-20220102173804950"></p>
 <p>不过可以看看响应的预览,后面可能会用于提取一些数据啥的.</p>
 <p>勾选已检测,提交表单.</p>
 <p>可以查看新的请求</p>
-<p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20220102174221779.png" alt="image-20220102174221779" style="zoom:50%;" /></p>
+<p><img data-src="http://cdn.sekyoro.top/imgs/093934.png" alt="image-20220102174221779"></p>
 <p>这就是提交表单的POST. </p>
 <p>查看Payload,重点是sign和timeStamp.表单数据正常贴过去就行.</p>
 <p>主要是sign和timeStamp数据如何获取.</p>
-<p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20220102174413097.png" alt="image-20220102174413097" style="zoom:50%;" /></p>
+<p><img data-src="http://cdn.sekyoro.top/imgs/093936.png" alt="image-20220102174413097"></p>
 <p>接下来说说这个重点</p>
 <h3 id="重点"><a href="#重点" class="headerlink" title="重点"></a>重点</h3><p>直接全局搜索sign或者其他关键词,这里的要点是不能把之前的清空了,也就是查询字符串参数与之前的响应有关.</p>
-<p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20220102174720756.png" alt="image-20220102174720756" style="zoom:67%;" /></p>
+<p><img data-src="http://cdn.sekyoro.top/imgs/093937.png" alt="image-20220102174720756"></p>
 <p>结果惊奇的发现这个字段在jrsb.jsp的响应里,url就是这个字段,推测是后台java生成后发过来的.</p>
-<p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20220102175014649.png" alt="image-20220102175014649" style="zoom:67%;" /></p>
+<p><img data-src="http://cdn.sekyoro.top/imgs/093939.png" alt="image-20220102175014649"></p>
 <p>提取出来就行了.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">query_info = s.get(get_query_url, headers=headers).text</span><br><span class="line">info = re.search(<span class="string">r&#x27;sign=(.*?)&amp;timeStamp=(\d*)&#x27;</span>, query_info)</span><br></pre></td></tr></table></figure>
 <p>后面post需要params的参数,也就是post需要data表单数据,也需要params的字符串查询参数.</p>
@@ -799,7 +805,7 @@ if(canvas.getContext){
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">65</span>
+          <span class="site-state-item-count">67</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -812,7 +818,7 @@ if(canvas.getContext){
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">73</span>
+        <span class="site-state-item-count">76</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -871,12 +877,12 @@ if(canvas.getContext){
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">361k</span>
+    <span title="站点总字数">354k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">5:28</span>
+    <span title="站点阅读时长">5:22</span>
 </div>
 
     <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>

@@ -34,17 +34,17 @@
 <meta property="og:site_name" content="Sekyoro的博客小屋">
 <meta property="og:description" content="之前都是用的python爬虫,现在想往web方向发展.话不多说,nodejs的superagent+cheerio">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20211214220056824.png">
-<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20211214220155928.png">
-<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20211214220250378.png">
-<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20211214220742435.png">
-<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20211214220926672.png">
-<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20211214225431353.png">
-<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20211215101931605.png">
-<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20211215101854884.png">
-<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20211215102207083.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/065254.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/093024.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/093026.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/065259.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/093027.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/065300.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/065303.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/065305.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/093029.png">
 <meta property="article:published_time" content="2021-12-14T13:53:02.000Z">
-<meta property="article:modified_time" content="2021-12-26T07:56:28.680Z">
+<meta property="article:modified_time" content="2022-04-01T09:53:08.425Z">
 <meta property="article:author" content="Sekyoro">
 <meta property="article:tag" content="js">
 <meta property="article:tag" content="spider">
@@ -52,7 +52,7 @@
 <meta property="article:tag" content="cheerio">
 <meta property="article:tag" content="superagent">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20211214220056824.png">
+<meta name="twitter:image" content="http://cdn.sekyoro.top/imgs/065254.png">
 
 <link rel="canonical" href="https://sekyoro.top/2021/12/14/js%E7%88%AC%E8%99%AB/">
 
@@ -286,7 +286,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-12-26 15:56:28" itemprop="dateModified" datetime="2021-12-26T15:56:28+08:00">2021-12-26</time>
+                <time title="修改时间：2022-04-01 17:53:08" itemprop="dateModified" datetime="2022-04-01T17:53:08+08:00">2022-04-01</time>
               </span>
 
           
@@ -332,10 +332,10 @@
 <p>根据末尾很容易知道需要往这个url发送post,话不多说直接构造post</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">uid = <span class="string">&#x27;&#x27;</span>; <span class="comment">//学号</span></span><br><span class="line">pwd = <span class="string">&#x27;&#x27;</span>; <span class="comment">//密码</span></span><br><span class="line">superagent</span><br><span class="line">.post(login_url)</span><br><span class="line">.type(<span class="string">&#x27;form&#x27;</span>) <span class="comment">//这个type表示是application/x-www-form-urlencoded  </span></span><br><span class="line">.send(&#123;<span class="attr">username</span>:uid,<span class="attr">password</span>:pwd&#125;) <span class="comment">//form的数据  post肯定需要的</span></span><br><span class="line">.end(<span class="function"><span class="keyword">function</span>(<span class="params">err,res</span>)</span>&#123;</span><br><span class="line">  <span class="comment">//do somesthing</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <p>至于为什么类型是application/x-www-form-urlencoded,当然是抓取到的,</p>
-<p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20211214220056824.png" alt="image-20211214220056824"></p>
+<p><img data-src="http://cdn.sekyoro.top/imgs/065254.png" alt="image-20211214220056824"></p>
 <p>经典登录界面,我们猜到了点击登陆之后就会发送一个post.</p>
-<p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20211214220155928.png" alt="image-20211214220155928" style="zoom:67%;" /></p>
-<p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20211214220250378.png" alt="image-20211214220250378" style="zoom:70%;" /></p>
+<p><img data-src="http://cdn.sekyoro.top/imgs/093024.png" alt="image-20211214220155928"></p>
+<p><img data-src="http://cdn.sekyoro.top/imgs/093026.png" alt="image-20211214220250378"></p>
 <p>然后就抓取到了报文,可以看到上面的content-type就是这个.</p>
 <p>咳咳,暴露了一点个人信息.</p>
 <p>接下来难点来了,这是个302重定向,重定向到了哪里呢?事实上可以看到有了location是home.action</p>
@@ -343,10 +343,10 @@
 <p>这下就登录了.其实并不难(一开始我使用的其他两个工具,重定向导致失败了,我就更换了第三方包)</p>
 <p>然后就是重点,登录之后需要cookie,不然就没意义了.</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>(<span class="params">err,res</span>)</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(res);</span><br><span class="line">  <span class="keyword">var</span> cookieid = res.headers[<span class="string">&#x27;set-cookie&#x27;</span>][<span class="number">0</span>].split(<span class="string">&#x27;;&#x27;</span>)[<span class="number">0</span>].split(<span class="string">&#x27;=&#x27;</span>)[<span class="number">1</span>];</span><br><span class="line">  <span class="comment">// console.log(cookieid);</span></span><br><span class="line">  <span class="keyword">var</span> cookie = <span class="string">`semester.id=158; JSESSIONID=<span class="subst">$&#123;cookieid&#125;</span>; GSESSIONID=<span class="subst">$&#123;cookieid&#125;</span>`</span>;</span><br><span class="line">  superagent.post(info_url)</span><br><span class="line">  .type(<span class="string">&#x27;form&#x27;</span>)</span><br><span class="line">  .send(&#123;</span><br><span class="line">  <span class="attr">ignoreHead</span>: <span class="number">1</span>,</span><br><span class="line">  <span class="string">&quot;setting.kind&quot;</span>: <span class="string">&quot;std&quot;</span>,</span><br><span class="line">  <span class="attr">startWeek</span>: <span class="number">1</span>,</span><br><span class="line">  <span class="string">&quot;semester.id&quot;</span>: <span class="number">158</span>,</span><br><span class="line">  <span class="attr">ids</span>: <span class="number">248032</span></span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-<p>cookieid就是这个<img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20211214220742435.png" alt="image-20211214220742435"></p>
+<p>cookieid就是这个<img data-src="http://cdn.sekyoro.top/imgs/065259.png" alt="image-20211214220742435"></p>
 <p>jsession与gsession是一样的,所以获得了一个之后,根据cookie设置就行了.注意格式就是上面这个图片的格式,我们可以直接复制下来,修改一下就行了.</p>
 <p>为了获得课程信息,可以根据网页查看是哪个返回的请求,这里我查看的是coursetable.</p>
-<p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20211214220926672.png" alt="image-20211214220926672" style="zoom:80%;" /></p>
+<p><img data-src="http://cdn.sekyoro.top/imgs/093027.png" alt="image-20211214220926672"></p>
 <p>可以猜到参数的意思,后面两个是学期的信息,我们只需要修改startWeek就能修改周数查看那一周的课程了.</p>
 <p>所以只要设置cookie,再send发送表单数据即可获取页面信息,然后还要进行处理,不然不太好看.处理我就不细说了,根据个人喜好,我就直接把课程名弄出来就行了,可以根据自己情况教室啥的都可以.</p>
 <p>具体代码</p>
@@ -356,7 +356,7 @@
 <h2 id="2-cheerio处理"><a href="#2-cheerio处理" class="headerlink" title="2.cheerio处理"></a>2.cheerio处理</h2><p>关于数据处理其实有很多方法,最后影响的是性能.</p>
 <p>当你看了cheerio的文档,会感叹其的强大功能.</p>
 <p>事实上我并没有太仔细地看相关用法,我直接使用了css选择器以及cheerio的一些简单用法.</p>
-<p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20211214225431353.png" alt="image-20211214225431353"></p>
+<p><img data-src="http://cdn.sekyoro.top/imgs/065300.png" alt="image-20211214225431353"></p>
 <p>可以看到table id=”grid..”就是课程的信息,这里我直接使用css选择器基本可以解决问题(事实上很多时候我都在想选择的方法是不是太多了).</p>
 <p>直接上代码.</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> courses = [];</span><br><span class="line">          <span class="keyword">var</span> teachers = [];</span><br><span class="line">          <span class="keyword">var</span> weeks = [];</span><br><span class="line">          <span class="keyword">const</span> $ = cheerio.load(res.text);</span><br><span class="line">          $(<span class="string">&quot;tbody[id] tr td:nth-child(5)&quot;</span>).each(<span class="function"><span class="keyword">function</span> (<span class="params">i,elem</span>) </span>&#123;</span><br><span class="line">            teachers[i] = $(<span class="built_in">this</span>).text();</span><br><span class="line">          &#125;);</span><br><span class="line"></span><br><span class="line">          $(<span class="string">&quot;tbody[id] tr td:nth-child(9)&quot;</span>).each(<span class="function"><span class="keyword">function</span> (<span class="params">i,elem</span>) </span>&#123;</span><br><span class="line">            weeks[i] = $(<span class="built_in">this</span>).text().trim();</span><br><span class="line">          &#125;);</span><br><span class="line">          $(<span class="string">&quot;tbody[id] tr td:nth-child(4)&quot;</span>).each(<span class="function"><span class="keyword">function</span> (<span class="params">i, elem</span>) </span>&#123;</span><br><span class="line">            courses[i] = $(<span class="built_in">this</span>).text();</span><br><span class="line">          &#125;);</span><br><span class="line"></span><br><span class="line">          courses.forEach(<span class="function">(<span class="params">value,index</span>)=&gt;</span>&#123;</span><br><span class="line">            <span class="comment">// console.log(value);</span></span><br><span class="line">            value+=<span class="string">&quot; 老师:&quot;</span>+teachers[index]+<span class="string">&quot;上课时间:&quot;</span>+weeks[index]+<span class="string">&quot;周&quot;</span>;</span><br><span class="line">            <span class="built_in">console</span>.log(value);</span><br><span class="line">          &#125;);</span><br></pre></td></tr></table></figure>
@@ -364,8 +364,8 @@
 <p>然后这样登陆以及课程信息都有了.</p>
 <p>然后就是查询空闲教室,有了之前的学习,现在意外的轻松.</p>
 <p>在那个网页试一下,抓取请求</p>
-<p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20211215101931605.png" alt="image-20211215101931605"></p>
-<p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20211215101854884.png" alt="image-20211215101854884"></p>
+<p><img data-src="http://cdn.sekyoro.top/imgs/065303.png" alt="image-20211215101931605"></p>
+<p><img data-src="http://cdn.sekyoro.top/imgs/065305.png" alt="image-20211215101854884"></p>
 <p>所以是个post,数据也都能看到.构造就好了</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">superagent</span><br><span class="line">             .post(free_url)</span><br><span class="line">             .type(<span class="string">&quot;form&quot;</span>)</span><br><span class="line">             .set(<span class="string">&quot;Cookie&quot;</span>, cookie)</span><br><span class="line">             .send(&#123;</span><br><span class="line">               <span class="string">&quot;classroom.type.id&quot;</span>: <span class="string">&quot;&quot;</span>, <span class="comment">//教室类型</span></span><br><span class="line">               <span class="string">&quot;classroom.campus.id&quot;</span>: <span class="string">&quot;&quot;</span>, <span class="comment">//校区 </span></span><br><span class="line">               <span class="string">&quot;classroom.building.id&quot;</span>: <span class="string">&quot;&quot;</span>, <span class="comment">//教学楼id</span></span><br><span class="line">               <span class="attr">seats</span>: <span class="string">&quot;&quot;</span>, <span class="comment">//容量限制</span></span><br><span class="line">               <span class="string">&quot;classroom.name&quot;</span>: <span class="string">&quot;&quot;</span>, <span class="comment">//教室</span></span><br><span class="line">               <span class="string">&quot;cycleTime.cycleCount&quot;</span>: <span class="number">1</span>, <span class="comment">//时间周期</span></span><br><span class="line">               <span class="string">&quot;cycleTime.cycleType&quot;</span>: <span class="number">1</span>, <span class="comment">//天还是周</span></span><br><span class="line">               <span class="string">&quot;cycleTime.dateBegin&quot;</span>: <span class="string">&quot;2021-12-15&quot;</span>,<span class="comment">//起始时间</span></span><br><span class="line">               <span class="string">&quot;cycleTime.dateEnd&quot;</span>: <span class="string">&quot;2021-12-15&quot;</span>,<span class="comment">//结束时间</span></span><br><span class="line">               <span class="attr">roomApplyTimeType</span>: <span class="number">1</span>,</span><br><span class="line">               <span class="attr">timeBegin</span>: <span class="string">&quot;8:00&quot;</span>, <span class="comment">//开始时间</span></span><br><span class="line">               <span class="attr">timeEnd</span>: <span class="string">&quot;12:00&quot;</span>, <span class="comment">//结束时间</span></span><br><span class="line">             &#125;)</span><br></pre></td></tr></table></figure>
 <p>主要是各个字段的含义,根据我尝试大概意思就是上面注释这样.</p>
@@ -373,7 +373,7 @@
 <p>本人能力不足,直接莽了</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">.end(<span class="function"><span class="keyword">function</span> (<span class="params">err, res</span>) </span>&#123;</span><br><span class="line">               <span class="comment">// console.log(res);</span></span><br><span class="line">               <span class="keyword">var</span> free_classrooms = [];</span><br><span class="line">               <span class="keyword">const</span> $ = cheerio.load(res.text);</span><br><span class="line">               <span class="keyword">var</span> location;</span><br><span class="line">               <span class="keyword">var</span> building;</span><br><span class="line">               <span class="keyword">var</span> campus;</span><br><span class="line">               <span class="comment">/*</span></span><br><span class="line"><span class="comment">               教西A 130</span></span><br><span class="line"><span class="comment">               </span></span><br><span class="line"><span class="comment">               */</span></span><br><span class="line">               $(<span class="string">&#x27;tbody[id] tr&#x27;</span>).each(<span class="function"><span class="keyword">function</span> (<span class="params">i,elem</span>) </span>&#123;</span><br><span class="line">                   location = $(<span class="built_in">this</span>).find(<span class="string">&#x27;td:nth-child(2)&#x27;</span>).text();</span><br><span class="line">                   building =  $(<span class="built_in">this</span>).find(<span class="string">&#x27;td:nth-child(3)&#x27;</span>).text();</span><br><span class="line">                   campus =  $(<span class="built_in">this</span>).find(<span class="string">&#x27;td:nth-child(4)&#x27;</span>).text();</span><br><span class="line">                   free_classrooms[i] = &#123;</span><br><span class="line">                       <span class="string">&#x27;教室位置&#x27;</span>:location,</span><br><span class="line">                       <span class="string">&#x27;教学楼&#x27;</span>:building,</span><br><span class="line">                       <span class="string">&#x27;校区&#x27;</span>:campus,</span><br><span class="line">                   &#125;</span><br><span class="line"></span><br><span class="line">                 &#125;);</span><br><span class="line">                 free_classrooms.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">value,index</span>) </span>&#123;</span><br><span class="line">                     <span class="built_in">console</span>.log(value);</span><br><span class="line">                 &#125;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <p>可以看到处理结果</p>
-<p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/image-20211215102207083.png" alt="image-20211215102207083" style="zoom:67%;" /></p>
+<p><img data-src="http://cdn.sekyoro.top/imgs/093029.png" alt="image-20211215102207083"></p>
 <p>继续开坑,之前遇到了一系列问题,把程序放在服务器上结果报错等等.</p>
 <p>之前是登陆后获得cookie再去请求空教室,这样导致请求空教室就必须去登陆,所以需要进行分离.</p>
 <p>首先登录获得cookie,这是一个函数.然后再拿cookie去获得空闲教室.这是另一个函数,名字分别为getnewcookie()与getfreeclassroom().</p>
@@ -806,7 +806,7 @@ if(canvas.getContext){
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">65</span>
+          <span class="site-state-item-count">67</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -819,7 +819,7 @@ if(canvas.getContext){
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">73</span>
+        <span class="site-state-item-count">76</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -878,12 +878,12 @@ if(canvas.getContext){
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">361k</span>
+    <span title="站点总字数">354k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">5:28</span>
+    <span title="站点阅读时长">5:22</span>
 </div>
 
     <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>

@@ -34,68 +34,68 @@
 <meta property="og:site_name" content="Sekyoro的博客小屋">
 <meta property="og:description" content="Linux 文件管理及目录与权限控制前言 事实上提到对文件及目录管理时,我认为无法避免会说到用户及用户组.所以在这个主题下先提及一下. Linux可以实现多用户登陆,这些用户可以共享一些文件,但他们也都有自己的空间.实际上他们的文件都是放在同一个物理磁盘甚至同一个目录的.这就是因为用户管理与权限机制。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210913235127.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/065407.png">
 <meta property="og:image" content="https://doc.shiyanlou.com/linux_base/4-1.png">
-<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210913235143.png">
-<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210914000226.png">
-<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210914000213.png">
-<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210914000215.png">
-<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210914000204.png">
-<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210914000202.png">
-<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210914000200.png">
-<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210914000157.png">
-<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210913235351.png">
-<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210914000146.png">
-<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210914000149.png">
-<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210914000140.png">
-<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210914000130.png">
-<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210914000126.png">
-<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210914000121.png">
-<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210914000111.png">
-<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210914000101.png">
-<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210914000108.png">
-<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210914000057.png">
-<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210914000055.png">
-<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210914000053.png">
-<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210914000050.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/065409.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/093329.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/093331.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/093333.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/093335.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/093336.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/093338.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/093339.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/065411.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/093341.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/093342.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/093344.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/093345.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/093347.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/093351.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/093354.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/093356.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/093401.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/093403.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/093405.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/093407.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/065412.png">
 <meta property="og:image" content="https://doc.shiyanlou.com/linux_base/3-10.png">
-<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210914000046.png">
-<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210914000043.png">
-<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210914000041.png">
-<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210914000039.png">
-<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210914000037.png">
-<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210914000035.png">
-<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210914000033.png">
-<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210914000030.png">
-<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210914000026.png">
-<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210914000024.png">
-<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210914000022.png">
-<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210914000020.png">
-<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210914000018.png">
-<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210914000015.png">
-<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210914000012.png">
-<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210914000010.png">
-<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210914000008.png">
-<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210914000002.png">
-<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210914000001.png">
-<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210913235959.png">
-<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210914000450.png">
-<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210914000445.png">
-<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210913235953.png">
-<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210913235943.png">
-<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210913235941.png">
-<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210913235939.png">
-<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210913235934.png">
-<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210913235928.png">
-<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210913235918.png">
-<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210913235913.png">
-<meta property="og:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210913235858.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/093409.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/093412.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/093414.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/065414.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/065417.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/093417.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/065421.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/065426.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/093418.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/093420.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/093422.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/065429.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/065431.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/093424.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/093427.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/065433.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/065434.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/065436.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/065439.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/065444.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/065446.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/065448.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/065452.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/065458.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/093429.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/065459.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/065501.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/065503.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/065506.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/065511.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/065514.png">
 <meta property="article:published_time" content="2021-09-21T02:52:51.000Z">
-<meta property="article:modified_time" content="2021-12-01T02:06:44.751Z">
+<meta property="article:modified_time" content="2022-04-01T09:53:18.987Z">
 <meta property="article:author" content="Sekyoro">
 <meta property="article:tag" content="Linux">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210913235127.png">
+<meta name="twitter:image" content="http://cdn.sekyoro.top/imgs/065407.png">
 
 <link rel="canonical" href="https://sekyoro.top/2021/09/21/%E5%91%BD%E4%BB%A4%E9%9B%86-2/">
 
@@ -329,7 +329,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-12-01 10:06:44" itemprop="dateModified" datetime="2021-12-01T10:06:44+08:00">2021-12-01</time>
+                <time title="修改时间：2022-04-01 17:53:18" itemprop="dateModified" datetime="2022-04-01T17:53:18+08:00">2022-04-01</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -379,7 +379,7 @@
 <p>输入</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">who am i </span><br></pre></td></tr></table></figure>
 <p>可以查看当前用户</p>
-<p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210913235127.png" alt="image-20210913235127244"></p>
+<p><img data-src="http://cdn.sekyoro.top/imgs/065407.png" alt="image-20210913235127244"></p>
 <p>root账户权限最高,可以对其他用户文件进行删改</p>
 <p>sudo 命令提升权限,否则一些命令可能无法执行</p>
 <p>这个命令会常用</p>
@@ -388,8 +388,8 @@
 <h3 id="文件及目录的管理"><a href="#文件及目录的管理" class="headerlink" title="文件及目录的管理"></a>文件及目录的管理</h3><p>有了些基本知识就可以对文件进行操作了</p>
 <p>Linux目录结构与Windows不同,以目录为主.可以理解为树形目录是一个用户可操作系统的骨架。虽然本质上无论是目录结构还是操作系统内核都是存储在磁盘上的，但从逻辑上来说 Linux 的磁盘是挂载在目录上的，每一个目录不仅能使用本地磁盘分区的文件系统，也可以使用网络上的文件系统。</p>
 <p>Linux目录配置依据 FHS。根据这个标准,Linux的目录该放那些文件是有规定的</p>
-<p><img data-src="https://doc.shiyanlou.com/linux_base/4-1.png" alt="img" style="zoom:50%;" /></p>
-<p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210913235143.png" alt="img"></p>
+<p><img data-src="https://doc.shiyanlou.com/linux_base/4-1.png" alt="img"></p>
+<p><img data-src="http://cdn.sekyoro.top/imgs/065409.png" alt="img"></p>
 <p><strong>关于目录树</strong></p>
 <p>绝对路径: 由根目录/开始写起的文件名或目录名称</p>
 <p>相对路径:相对于目前路径的文件名写法</p>
@@ -402,17 +402,17 @@
 <li>切换到上一个工作目录： cd -</li>
 <li>切换到home目录： cd or cd ~</li>
 </ul>
-<p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210914000226.png" alt="image-20210913192130268" style="zoom:50%;"/></p>
+<p><img data-src="http://cdn.sekyoro.top/imgs/093329.png" alt="image-20210913192130268"></p>
 <ul>
 <li>显示当前路径: pwd</li>
 </ul>
-<p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210914000213.png" alt="image-20210913192046022" style="zoom:50%;" /></p>
+<p><img data-src="http://cdn.sekyoro.top/imgs/093331.png" alt="image-20210913192046022"></p>
 <ul>
 <li><p>更改当前工作路径为</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">path: <span class="variable">$cd</span> path</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210914000215.png" alt="image-20210913192304748" style="zoom:50%;" /></p>
+<p><img data-src="http://cdn.sekyoro.top/imgs/093333.png" alt="image-20210913192304748"></p>
 <p>.. 表示上一级目录</p>
 <p>.  表示当前目录</p>
 <p>现在可以开始对文件的查看了</p>
@@ -426,15 +426,15 @@
 <li>复制：cp (复制目录：cp -r )</li>
 <li>创建文件:touch</li>
 </ul>
-<h4 id="新建"><a href="#新建" class="headerlink" title="新建"></a>新建</h4><h5 id="touch-创建空白文件"><a href="#touch-创建空白文件" class="headerlink" title="touch 创建空白文件"></a>touch 创建空白文件</h5><p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210914000204.png" alt="image-20210913192915649" style="zoom:50%;" /></p>
-<h5 id="mkdir-新建目录"><a href="#mkdir-新建目录" class="headerlink" title="mkdir 新建目录"></a>mkdir 新建目录</h5><p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210914000202.png" alt="image-20210913193233984" style="zoom:50%;" /></p>
+<h4 id="新建"><a href="#新建" class="headerlink" title="新建"></a>新建</h4><h5 id="touch-创建空白文件"><a href="#touch-创建空白文件" class="headerlink" title="touch 创建空白文件"></a>touch 创建空白文件</h5><p><img data-src="http://cdn.sekyoro.top/imgs/093335.png" alt="image-20210913192915649"></p>
+<h5 id="mkdir-新建目录"><a href="#mkdir-新建目录" class="headerlink" title="mkdir 新建目录"></a>mkdir 新建目录</h5><p><img data-src="http://cdn.sekyoro.top/imgs/093336.png" alt="image-20210913193233984"></p>
 <p>我们发现如果想创建多层的目录直接使用mkdir不行,需要 mkdir -p</p>
-<p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210914000200.png" alt="image-20210913193350560" style="zoom:50%;" /></p>
+<p><img data-src="http://cdn.sekyoro.top/imgs/093338.png" alt="image-20210913193350560"></p>
 <p>同时一个目录下文件不能与文件夹同名</p>
 <h4 id="复制"><a href="#复制" class="headerlink" title="复制"></a>复制</h4><p>使用 cp命令（copy）复制一个文件到指定目录</p>
-<p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210914000157.png" alt="image-20210913193711075" style="zoom:50%;"/></p>
+<p><img data-src="http://cdn.sekyoro.top/imgs/093339.png" alt="image-20210913193711075"></p>
 <p>文件的复制。默认复制文件的数据</p>
-<p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210913235351.png" alt="image-20210913200119663"></p>
+<p><img data-src="http://cdn.sekyoro.top/imgs/065411.png" alt="image-20210913200119663"></p>
 <h5 id="复制目录"><a href="#复制目录" class="headerlink" title="复制目录"></a>复制目录</h5><p>直接使用cp复制目录会出错</p>
 <p>加上参数 -r 递归复制</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$cp</span> -r source_dir  dest_dir</span><br></pre></td></tr></table></figure>
@@ -447,42 +447,42 @@
 <p>源文件是否是符号链接</p>
 <p>源文件是否是mulu</p>
 <h4 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h4><p>使用 <code>rm</code>（remove files or directories）命令删除一个文件</p>
-<p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210914000146.png" alt="image-20210913195612391" style="zoom:50%;" /></p>
+<p><img data-src="http://cdn.sekyoro.top/imgs/093341.png" alt="image-20210913195612391"></p>
 <p>当然 不能删除本身不存在的文件</p>
 <p>有时候你会遇到想要删除一些为只读权限的文件，直接使用 <code>rm</code> 删除会显示一个提示,加上 -f参数直接强制删除</p>
 <p>-i  在删除前会询问</p>
-<p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210914000149.png" alt="image-20210913195758530" style="zoom:50%;" /></p>
+<p><img data-src="http://cdn.sekyoro.top/imgs/093342.png" alt="image-20210913195758530"></p>
 <h5 id="删除目录"><a href="#删除目录" class="headerlink" title="删除目录"></a>删除目录</h5><p>同样的,需要加上-r参数才能删除目录</p>
-<p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210914000140.png" alt="image-20210913200839956" style="zoom:50%;" /></p>
+<p><img data-src="http://cdn.sekyoro.top/imgs/093344.png" alt="image-20210913200839956"></p>
 <p>其实也可以使用rmdir,但只能删除空目录</p>
-<p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210914000130.png" alt="image-20210913201913643" style="zoom:50%;" /></p>
-<p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210914000126.png" alt="image-20210913201926192" style="zoom:50%;" /></p>
+<p><img data-src="http://cdn.sekyoro.top/imgs/093345.png" alt="image-20210913201913643"></p>
+<p><img data-src="http://cdn.sekyoro.top/imgs/093347.png" alt="image-20210913201926192"></p>
 <h4 id="移动"><a href="#移动" class="headerlink" title="移动"></a>移动</h4><p>使用mv命令移动文件</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mv <span class="built_in">source</span> destination </span><br></pre></td></tr></table></figure>
-<p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210914000121.png" alt="image-20210913201207839" style="zoom:50%;" /></p>
+<p><img data-src="http://cdn.sekyoro.top/imgs/093351.png" alt="image-20210913201207839"></p>
 <h5 id="重命名文件"><a href="#重命名文件" class="headerlink" title="重命名文件"></a>重命名文件</h5><p><code>mv</code> 命令除了能移动文件外，还能给文件重命名。命令格式为 <code>mv 旧的文件名 新的文件名</code>。</p>
-<p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210914000111.png" alt="image-20210913201430489" style="zoom:50%;" /></p>
+<p><img data-src="http://cdn.sekyoro.top/imgs/093354.png" alt="image-20210913201430489"></p>
 <h3 id="文件权限"><a href="#文件权限" class="headerlink" title="文件权限"></a>文件权限</h3><p>Unix/Linux 系统是一个典型的多用户系统，不同的用户处于不同的地位，对文件和目录有不同的访问权限。为了保护系统的安全性，Unix/Linux 系统除了对用户权限作了严格的界定外，还在用户身份认证、访问控制、传输安全、文件读写权限等方面作了周密的控制。</p>
 <p>在 Unix/Linux 中的每一个文件或目录都包含有访问权限，这些访问权限决定了谁能访问和如何访问这些文件和目录。</p>
 <h4 id="查看文件与目录"><a href="#查看文件与目录" class="headerlink" title="查看文件与目录"></a>查看文件与目录</h4><p>之前也用到很多次  ls命令</p>
-<p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210914000101.png" alt="image-20210913202256597" style="zoom:50%;" /></p>
+<p><img data-src="http://cdn.sekyoro.top/imgs/093356.png" alt="image-20210913202256597"></p>
 <p>ls列出目录下的文件</p>
-<p>-a  显示所有文件及目录（包含以“.”开头的隐藏文件）<br><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210914000108.png" alt="image-20210913202947310" style="zoom:50%;" />-l  显示详细文件内容,长格式</p>
+<p>-a  显示所有文件及目录（包含以“.”开头的隐藏文件）<br><img data-src="http://cdn.sekyoro.top/imgs/093401.png" alt="image-20210913202947310">-l  显示详细文件内容,长格式</p>
 <p>-h  与-l一起使用，输出易于阅读的文件大小。 Human-readable</p>
-<p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210914000057.png" alt="image-20210913202919245" style="zoom:50%;" /></p>
+<p><img data-src="http://cdn.sekyoro.top/imgs/093403.png" alt="image-20210913202919245"></p>
 <p>-r  将文件以相反次序显示(原定以英文字母次序)</p>
 <p>-d 若不加参数指定目录,ls会列出目录中的内容,若与-l结合则可以查看目录信息</p>
-<p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210914000055.png" alt="image-20210913202837994" style="zoom:50%;" /></p>
+<p><img data-src="http://cdn.sekyoro.top/imgs/093405.png" alt="image-20210913202837994"></p>
 <p>-t 安修改日期排序输出</p>
 <p>-S 按文件大小排序输出</p>
 <p>我们会发现 在长格式下,文件前面会有一些东西</p>
-<p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210914000053.png" alt="image-20210913203233587" style="zoom:50%;" /></p>
+<p><img data-src="http://cdn.sekyoro.top/imgs/093407.png" alt="image-20210913203233587"></p>
 <p>分别是 文件类型权限  链接数  文件所属用户组 文件大小Byte  文件最后修改时间  文件名 (当然后面可能会有软链接) </p>
-<p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210914000050.png" alt="pic"></p>
-<h4 id="关于权限"><a href="#关于权限" class="headerlink" title="关于权限"></a>关于权限</h4><p><img data-src="https://doc.shiyanlou.com/linux_base/3-10.png" alt="pic" style="zoom: 67%;" /></p>
+<p><img data-src="http://cdn.sekyoro.top/imgs/065412.png" alt="pic"></p>
+<h4 id="关于权限"><a href="#关于权限" class="headerlink" title="关于权限"></a>关于权限</h4><p><img data-src="https://doc.shiyanlou.com/linux_base/3-10.png" alt="pic"></p>
 <p>读权限，表示你可以使用 <code>cat &lt;file name&gt;</code> 命令来读取某个文件的内容；写权限，表示你可以编辑和修改某个文件的内容；</p>
 <p>执行权限，通常指可以运行的二进制程序文件或者脚本文件，如同 Windows 上的 <code>exe</code> 后缀的文件，不过 Linux 上不是通过文件后缀名来区分文件的类型。你需要注意的一点是，<strong>一个目录同时具有读权限和执行权限才可以打开并查看内部文件，而一个目录要有写权限才允许在其中创建其它文件</strong>，这是因为目录文件实际保存着该目录里面的文件的列表等信息。</p>
-<p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210914000046.png" alt="image-20210913203914866" style="zoom:50%;" /></p>
+<p><img data-src="http://cdn.sekyoro.top/imgs/093409.png" alt="image-20210913203914866"></p>
 <p>可以分析一下,这是个目录(d) 拥有者与用户组权限都是rwx,即可读可写可执行. 但其他用户不能写,说明其他用户不能改写该目录.所有者与所属用户组为shiyanlou</p>
 <h4 id="更改权限"><a href="#更改权限" class="headerlink" title="更改权限"></a>更改权限</h4><p>chgrp:修改文件所属用户组</p>
 <p>chown:修改文件拥有者</p>
@@ -495,25 +495,25 @@
 <li>增加脚本可执行权限： chmod a+x myscript</li>
 </ul>
 <p>注意 用户组在 etc/group里。用户在etc/passwd里</p>
-<h5 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h5><p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210914000043.png" alt="image-20210913205052643" style="zoom:50%;" /></p>
+<h5 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h5><p><img data-src="http://cdn.sekyoro.top/imgs/093412.png" alt="image-20210913205052643"></p>
 <p>创建用户,在该用户目录下创建ipone文件。发现该文件所有者是lilei</p>
 <p>现在切回root</p>
-<p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210914000041.png" alt="image-20210913205812323" style="zoom:50%;" /></p>
+<p><img data-src="http://cdn.sekyoro.top/imgs/093414.png" alt="image-20210913205812323"></p>
 <p>发现该文件所有者变为shiyanlou</p>
-<p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210914000039.png" alt="image-20210913205912499"></p>
+<p><img data-src="http://cdn.sekyoro.top/imgs/065414.png" alt="image-20210913205912499"></p>
 <p>现在是更改了文件的所有者,下面继续更改所属用户组</p>
-<p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210914000037.png" alt="image-20210913212151973"></p>
+<p><img data-src="http://cdn.sekyoro.top/imgs/065417.png" alt="image-20210913212151973"></p>
 <p>这样的话lilei就只有rx的权限了,也就是说无法更改文件.我们试一试</p>
-<p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210914000035.png" alt="image-20210913212322183" style="zoom:33%;" /></p>
+<p><img data-src="http://cdn.sekyoro.top/imgs/093417.png" alt="image-20210913212322183"></p>
 <p>会发现无法修改…</p>
 <p>接下来进行修改权限</p>
 <ol>
 <li><p>二进制数字表示</p>
-<p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210914000033.png" alt="pic"></p>
+<p><img data-src="http://cdn.sekyoro.top/imgs/065421.png" alt="pic"></p>
 </li>
 </ol>
 <p>第一位指定属主的权限，第二位指定组权限，第三位指定其他用户的权限，每位通过4(读)、2(写)、1(执行)三种数值的和来确定权限。如6(4+2)代表有读写权，7(4+2+1)有读、写和执行的权限。</p>
-<p>例如<img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210914000030.png" alt="image-20210913211810594"></p>
+<p>例如<img data-src="http://cdn.sekyoro.top/imgs/065426.png" alt="image-20210913211810594"></p>
 <p>可以发现改为了拥有者可读可写</p>
 <ol>
 <li><p>符号操作</p>
@@ -533,28 +533,28 @@
 </ul>
 </li>
 </ol>
-<p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210914000026.png" alt="image-20210913212537141" style="zoom:50%;" /></p>
+<p><img data-src="http://cdn.sekyoro.top/imgs/093418.png" alt="image-20210913212537141"></p>
 <p><code>+</code> 和 <code>-</code> 分别表示增加和去掉相应的权限。</p>
 <p>在shell中，要修改文件当前的用户必须具有管理员root的权限。可以通过su命令切换到root用户，也可以通过sudo获得root的权限</p>
 <p><strong>注意</strong>:对于文件和文件夹来说。 rwx权限不太一样</p>
 <p>文件:r 读取文件内容  w修改文件内容  x执行文件内容</p>
 <p>目录:r 读到文件名  w修改文件名  x进入目录权限</p>
 <p>也就是说若没有x权限,无法进入目录(不代表不能知道目录下的东西)</p>
-<h5 id="实例-1"><a href="#实例-1" class="headerlink" title="实例"></a>实例</h5><p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210914000024.png" alt="image-20210913213443471" style="zoom:50%;" /></p>
+<h5 id="实例-1"><a href="#实例-1" class="headerlink" title="实例"></a>实例</h5><p><img data-src="http://cdn.sekyoro.top/imgs/093420.png" alt="image-20210913213443471"></p>
 <p>创建一个目录 然后更改权限 使得用户组与其他用户只有r权限</p>
-<p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210914000022.png" alt="image-20210913213634417" style="zoom:50%;" /></p>
+<p><img data-src="http://cdn.sekyoro.top/imgs/093422.png" alt="image-20210913213634417"></p>
 <p>使用groups查看当前用户的用户组。发现他加入了多个用户组</p>
-<p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210914000020.png" alt="image-20210913213536038"></p>
+<p><img data-src="http://cdn.sekyoro.top/imgs/065429.png" alt="image-20210913213536038"></p>
 <p>然后想要进入该目录权限不够,因为只有r</p>
 <p>sudo大法  更改权限进入文件</p>
-<p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210914000018.png" alt="image-20210913214229305"></p>
+<p><img data-src="http://cdn.sekyoro.top/imgs/065431.png" alt="image-20210913214229305"></p>
 <p>添加一个文件</p>
-<p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210914000015.png" alt="image-20210913214622660" style="zoom:50%;" /></p>
+<p><img data-src="http://cdn.sekyoro.top/imgs/093424.png" alt="image-20210913214622660"></p>
 <p>发现可以查询目录下的文件名列表但无法切换到目录内。甚至无法读取文件内容</p>
 <h4 id="file确定文件类型"><a href="#file确定文件类型" class="headerlink" title="file确定文件类型"></a>file确定文件类型</h4><p>Linux下不要求文件名反应文件类型,使用file命令可以查看类型</p>
-<p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210914000012.png" alt="image-20210913215723013" style="zoom:50%;" /></p>
-<p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210914000010.png" alt="image-20210913225537180"></p>
-<h4 id="less查看文本文件"><a href="#less查看文本文件" class="headerlink" title="less查看文本文件"></a>less查看文本文件</h4><p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210914000008.png" alt="image-20210913215804478"></p>
+<p><img data-src="http://cdn.sekyoro.top/imgs/093427.png" alt="image-20210913215723013"></p>
+<p><img data-src="http://cdn.sekyoro.top/imgs/065433.png" alt="image-20210913225537180"></p>
+<h4 id="less查看文本文件"><a href="#less查看文本文件" class="headerlink" title="less查看文本文件"></a>less查看文本文件</h4><p><img data-src="http://cdn.sekyoro.top/imgs/065434.png" alt="image-20210913215804478"></p>
 <p>我们可以上下翻页。q退出</p>
 <h4 id="cat"><a href="#cat" class="headerlink" title="cat"></a>cat</h4><p>cat命令用于连接文件并打印到标准输出设备上。</p>
 <p>我写在这里是因为这些命令用的挺多的</p>
@@ -582,18 +582,18 @@
 <p>与Windows的快捷方式类似</p>
 <p>在符号连接中，文件实际上是一个文本文件，其中包含的有另一文件的位置信息。</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ln -s cc ccTo :符号链接(软链接)；删除源，另一个无法使用；（后面一个ccTo 为新建的文件）</span><br></pre></td></tr></table></figure>
-<p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210914000002.png" alt="image-20210913220642505"></p>
+<p><img data-src="http://cdn.sekyoro.top/imgs/065436.png" alt="image-20210913220642505"></p>
 <p>ls -li   -i可以显示inode节点。通过这个判断链接。当然,符号链接inode不同且有箭头指向被链接的文件.</p>
 <p>若源文件被删,则符号链接的文件也失效</p>
-<p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210914000001.png" alt="image-20210913221115358"></p>
-<p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210913235959.png" alt="image-20210913221136588"></p>
+<p><img data-src="http://cdn.sekyoro.top/imgs/065439.png" alt="image-20210913221115358"></p>
+<p><img data-src="http://cdn.sekyoro.top/imgs/065444.png" alt="image-20210913221136588"></p>
 <h4 id="硬链接"><a href="#硬链接" class="headerlink" title="硬链接"></a>硬链接</h4><p>它与软链接实现方式不同</p>
 <p>硬链接指通过索引节点来进行连接。硬连接的作用是允许一个文件拥有多个有效路径名，这样用户就可以建立硬连接到重要文件，以防止“误删”的功能。其原因如上所述，因为对应该目录的索引节点有一个以上的链接。只删除一个连接并不影响索引节点本身和其它的连接，只有当最后一个连接被删除后，文件的数据块及目录的连接才会被释放。也就是说，文件真正删除的条件是与之相关的所有硬连接文件均被删除。</p>
-<p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210914000450.png" alt="image-20210913221552058"></p>
+<p><img data-src="http://cdn.sekyoro.top/imgs/065446.png" alt="image-20210913221552058"></p>
 <p>硬链接f2到f1，将f1删掉.因为节点相同,发现原本软链接到f1的f3硬链接到了f2</p>
-<p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210914000445.png" alt="image-20210913221853123"></p>
+<p><img data-src="http://cdn.sekyoro.top/imgs/065448.png" alt="image-20210913221853123"></p>
 <p>删除被软链接的文件,在创建同名文件,发现软链接的文件更新了</p>
-<p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210913235953.png" alt="image-20210913222100169"></p>
+<p><img data-src="http://cdn.sekyoro.top/imgs/065452.png" alt="image-20210913222100169"></p>
 <h3 id="文件压缩与解压"><a href="#文件压缩与解压" class="headerlink" title="文件压缩与解压"></a>文件压缩与解压</h3><p>在 Windows 上最常见的不外乎这两种 <code>*.zip</code>，<code>*.7z</code> 后缀的压缩文件。而在 Linux 上面常见的格式除了以上两种外，还有 <code>.rar</code>，<code>*.gz</code>，<code>*.xz</code>，<code>*.bz2</code>，<code>*.tar</code>，<code>*.tar.gz</code>，<code>*.tar.xz</code>，<code>*.tar.bz2</code>，</p>
 <p>Linux 常用的压缩与解压缩命令有：tar、gzip、gunzip、bzip2、bunzip2、compress 、uncompress、 zip、 unzip、rar、unrar 等</p>
 <div class="table-container">
@@ -659,10 +659,10 @@
 <p>-c 创建一个tar包   -f指定文件名</p>
 <p>-r 增加文件</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo tar -cf mytar.tar file</span><br></pre></td></tr></table></figure>
-<p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210913235943.png" alt="image-20210913223434051"></p>
+<p><img data-src="http://cdn.sekyoro.top/imgs/065458.png" alt="image-20210913223434051"></p>
 <p>创建了一个tar包</p>
 <p>还可以加上 <code>-v</code> 参数以可视的的方式输出打包的文件。</p>
-<p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210913235941.png" alt="image-20210913223923573" style="zoom:50%;" /></p>
+<p><img data-src="http://cdn.sekyoro.top/imgs/093429.png" alt="image-20210913223923573"></p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -uf all.tar logo.gif</span><br></pre></td></tr></table></figure>
 <p>更新原来 tar 包 all.tar 中 logo.gif 文件，-u 是表示更新文件的意思</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -tf all.tar</span><br></pre></td></tr></table></figure>
@@ -672,15 +672,15 @@
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -cphf etc.tar /etc</span><br></pre></td></tr></table></figure>
 <h5 id="解包"><a href="#解包" class="headerlink" title="解包"></a>解包</h5><p>解包一个文件（<code>-x</code> 参数）到指定路径的<strong>已存在</strong>目录（<code>-C</code> 参数）</p>
-<p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210913235939.png" alt="image-20210913225018181"></p>
-<p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210913235934.png" alt="image-20210913224507056"></p>
+<p><img data-src="http://cdn.sekyoro.top/imgs/065459.png" alt="image-20210913225018181"></p>
+<p><img data-src="http://cdn.sekyoro.top/imgs/065501.png" alt="image-20210913224507056"></p>
 <p>只查看不解包文件 <code>-t</code> 参数</p>
 <h5 id="压缩与解压"><a href="#压缩与解压" class="headerlink" title="压缩与解压"></a>压缩与解压</h5><p>对于创建不同的压缩格式的文件，对于 tar 来说是相当简单的，需要的只是换一个参数</p>
 <p>在创建 tar 文件的基础上添加 <code>-z</code> 参数</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo tar -czf mytar.tar.gz file</span><br></pre></td></tr></table></figure>
-<p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210913235928.png" alt="image-20210913225228029"></p>
+<p><img data-src="http://cdn.sekyoro.top/imgs/065503.png" alt="image-20210913225228029"></p>
 <p>解压文件使用 -xzf (对于gzip)</p>
-<p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210913235918.png" alt="image-20210913225338711"></p>
+<p><img data-src="http://cdn.sekyoro.top/imgs/065506.png" alt="image-20210913225338711"></p>
 <div class="table-container">
 <table>
 <thead>
@@ -711,10 +711,10 @@
 <p><code>-o</code>，表示输出文件</p>
 <p>还可以设置压缩等级</p>
 <p>zip -r -o myzip.zip file</p>
-<p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210913235913.png" alt="image-20210913225914594"></p>
+<p><img data-src="http://cdn.sekyoro.top/imgs/065511.png" alt="image-20210913225914594"></p>
 <p>du用于查看文件大小</p>
 <p>-e设置密码</p>
-<p><img data-src="https://gitee.com/the-helpless-beggar/mypics/raw/master/20210913235858.png" alt="image-20210913230218420"></p>
+<p><img data-src="http://cdn.sekyoro.top/imgs/065514.png" alt="image-20210913230218420"></p>
 <p>-l 用于使LF转化为CR+LF. 也就是linux换行符为LF在windows上无法显示</p>
 <p><strong>unzip用于解压</strong></p>
 <p>-q 安静模式</p>
@@ -1161,7 +1161,7 @@ if(canvas.getContext){
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">65</span>
+          <span class="site-state-item-count">67</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1174,7 +1174,7 @@ if(canvas.getContext){
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">73</span>
+        <span class="site-state-item-count">76</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -1233,12 +1233,12 @@ if(canvas.getContext){
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">361k</span>
+    <span title="站点总字数">354k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">5:28</span>
+    <span title="站点阅读时长">5:22</span>
 </div>
 
     <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
