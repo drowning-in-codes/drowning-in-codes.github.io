@@ -1,0 +1,1143 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<script src="/live2d-widget/autoload.js"></script>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/blog_32px.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/blog_32px.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/blog_16px.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="EPrJAp11bJwHULpQUaSNSZ8_3RcvTsPDAEGOME4pl1w">
+  <meta name="msvalidate.01" content="7226864CE87CE9DE8C008385273846FF">
+  <meta name="baidu-site-verification" content="code-fjFXVtiL7j" />
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-mac-osx.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"sekyoro.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":240,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+<link href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css" rel="stylesheet">
+  <meta name="description" content="这是一个tough part">
+<meta property="og:type" content="article">
+<meta property="og:title" content="write_a_compiler_by_yourself">
+<meta property="og:url" content="https://sekyoro.top/2022/05/06/write-a-compiler-by-yourself/index.html">
+<meta property="og:site_name" content="Sekyoro的博客小屋">
+<meta property="og:description" content="这是一个tough part">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.loli.net/2022/05/08/EcgFvkbuN63iV75.png">
+<meta property="article:published_time" content="2022-05-06T08:05:45.000Z">
+<meta property="article:modified_time" content="2022-05-09T12:17:53.147Z">
+<meta property="article:author" content="Sekyoro">
+<meta property="article:tag" content="c">
+<meta property="article:tag" content="compiler">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2022/05/08/EcgFvkbuN63iV75.png">
+
+<link rel="canonical" href="https://sekyoro.top/2022/05/06/write-a-compiler-by-yourself/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+ 
+
+<script>
+  var OriginTitile = document.title;
+  var titleTime;
+  document.addEventListener("visibilitychange", function() {
+    if (document.hidden) {
+      document.title = "(つェ⊂)我藏好了哦~" + OriginTitile;
+      clearTimeout(titleTime);
+    } else {
+      document.title = "(*´∇｀*) 被你发现啦~" + OriginTitile;
+      titleTime = setTimeout(function() {
+        document.title = OriginTitile;
+      }, 2000);
+    }
+  });
+</script>
+
+
+
+  <script src="/js/src/activate-power-mode.min.js"></script>
+  <script>
+    POWERMODE.colorful = true;
+    POWERMODE.shake = false;
+    document.body.addEventListener('input', POWERMODE);
+  </script>
+
+
+  <title>write_a_compiler_by_yourself | Sekyoro的博客小屋</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+<!-- require JQuery -->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+<!-- require pjax -->
+<script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/index.min.js"></script>
+
+
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+   <script type="text/javascript" src="/js/src/fireworks.js"></script>
+
+
+  <div class="container use-motion">
+    <div class="headband"></div>
+	
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Sekyoro的博客小屋</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://sekyoro.top/2022/05/06/write-a-compiler-by-yourself/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://i.loli.net/2021/05/17/YqoavnXdGTpPO9R.jpg">
+      <meta itemprop="name" content="Sekyoro">
+      <meta itemprop="description" content="什么也无法舍弃的人，什么也做不了.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sekyoro的博客小屋">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          write_a_compiler_by_yourself
+        </h1>
+
+        <div class="post-meta">
+		
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-05-06 16:05:45" itemprop="dateCreated datePublished" datetime="2022-05-06T16:05:45+08:00">2022-05-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-09 20:17:53" itemprop="dateModified" datetime="2022-05-09T20:17:53+08:00">2022-05-09</time>
+              </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>8.1k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>7 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>这是一个tough part<br><span id="more"></span><br>本人学艺不精,这里先列举一下用到的资料.<br><a target="_blank" rel="noopener" href="https://compilers.iecc.com/">自己写一个编译器</a></p>
+<p><a target="_blank" rel="noopener" href="https://lotabout.me/2015/write-a-C-interpreter-1/">手把手教你构建 C 语言编译器</a></p>
+<p>一个英文一个中文,可以说是比较详细了.</p>
+<p>还有国内清华的<a target="_blank" rel="noopener" href="https://decaf-lang.github.io/minidecaf-tutorial">minidecaf</a>,最后我还是用了北大的.</p>
+<p>需要装docker.输入docker version报错.应该是Hyper-V或是WSL2未开启,开了之后</p>
+<p><img data-src="https://s2.loli.net/2022/05/08/EcgFvkbuN63iV75.png" alt="image-20220508192521986"></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd &quot;C:\Program Files\Docker\Docker&quot;</span><br><span class="line"></span><br><span class="line">DockerCli.exe -SwitchDaemon</span><br></pre></td></tr></table></figure>
+<p>一顿操作,基本就行了.如果遇到这种错误<a target="_blank" rel="noopener" href="https://blog.csdn.net/sunshineGGB/article/details/122838156">Containers feature is disabled. Enable it using the PowerShell script in an administrative</a></p>
+<h2 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h2><h3 id="编译器结构"><a href="#编译器结构" class="headerlink" title="编译器结构"></a>编译器结构</h3><p>一般而言，编译器的编写分为 3 个步骤：</p>
+<ol>
+<li>词法分析器，用于将字符串转化成内部的表示结构。</li>
+<li>语法分析器，将词法分析得到的标记流（token）生成一棵语法树。</li>
+<li>目标代码的生成，将语法树转化成目标代码。</li>
+</ol>
+<p>在这里我们只需要设计一个程序, 将输入的 SysY 源代码, 编译到 RISC-V 汇编即可. 在这种意义之下, 编译器通常由以下几个部分组成:</p>
+<ul>
+<li><strong>前端:</strong> 通过词法分析和语法分析, 将源代码解析成抽象语法树 (abstract syntax tree, AST). 通过语义分析, 扫描抽象语法树, 检查其是否存在语义错误.</li>
+<li><strong>中端:</strong> 将抽象语法树转换为中间表示 (intermediate representation, IR), 并在此基础上完成一些机器无关优化.</li>
+<li><strong>后端:</strong> 将中间表示转换为目标平台的汇编代码, 并在此基础上完成一些机器相关优化.</li>
+</ul>
+<p>在前端中, 我们的目的是把文本形式的源代码, 转换为内存中的一种树形的数据结构. 因为相比于处理字符串, 在树形结构上进行处理显然要更方便, 且效率更高. 把文本形式的源代码变成数据结构形式的 AST 有很多种方法, 但相对科学的方法是对源代码进行词法分析和语法分析.</p>
+<p>而语法分析的目的, 按照程序的语法规则, 将输入的 token 流变成程序的 AST. 例如, 对于 SysY 程序, 关键字 <code>int</code> 后跟的一定是一个标识符, 而不可能是一个整数字面量, 这便是语法规则. Parser 会通过某些语法分析算法, 例如 LL 分析法或 LR 分析法, 对 token 流做一系列的分析, 并最终得到 AST.</p>
+<p>语义分析阶段, 编译器通常会:</p>
+<ul>
+<li><strong>建立符号表</strong>, 跟踪程序里变量的声明和使用, 确定程序在某处用到了哪一个变量, 同时也可发现变量重复定义/引用未定义变量之类的错误.</li>
+<li><strong>进行类型检查</strong>, 确定程序中是否存在诸如 “对整数变量进行数组访问” 这种类型问题. 同时标注程序中表达式的类型, 以便进行后续的生成工作. 对于某些编程语言 (例如 C++11 之后的 C++, Rust 等等), 编译器还会进行类型推断.</li>
+<li><strong>进行必要的编译期计算</strong>. SysY 中支持使用常量表达式作为数组定义时的长度, 而我们在生成 IR 之前, 必须知道数组的长度 (SysY 不支持 <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Variable-length_array">VLA</a>), 这就要求编译器必须能在编译的时候算出常量表达式的值, 同时对那些无法计算的常量表达式报错. 对于某些支持元编程的语言, 这一步可能会非常复杂.</li>
+</ul>
+<p>至此, 我们就能得到一个语法正确, 语义清晰的 AST 表示了.</p>
+<p>编译器通常不会直接通过扫描 AST 来生成目标代码 (汇编)——当然这么做也不是不可以, 因为从定义上讲, AST 也是一种 “中间表示”. 只不过, AST 在形式上更接近源语言, 而且其中可能会包含一些更为高级的语义, 例如分支/循环, 甚至结构体/类等等, 这些内容要一步到位变成汇编还是比较复杂的.</p>
+<p>所以, 编译器通常会将 AST 转换为另一种形式的数据结构, 我们把它称作 IR. IR 的抽象层次比 AST 更低, 但又不至于低到汇编代码的程度. 在此基础上, 无论是直接把 IR 进一步转换为汇编代码, 还是在 IR 之上做出一些优化, 都相对更容易.</p>
+<p>有了 IR 的存在, 我们也可以大幅降低编译器的开发成本: 假设我们想开发 MM 种语言的编译器, 要求它们能把输入编译成 NN 种指令系统的目标代码, 在没有统一的 IR 的情况下, 我们需要开发 M \times NM×N 个相关模块. 如果我们先把所有源语言都转换到同一种 IR, 然后再将这种 IR 翻译为不同的目标代码, 我们就只需要开发 M + NM+N 个相关模块.</p>
+<p>现实世界的确存在这样的操作, 例如 <a target="_blank" rel="noopener" href="https://llvm.org/docs/">LLVM IR</a> 就是一种被广泛使用的 IR. 有很多语言的编译器实现, 例如 Rust, Swift, Julia, 都会将源语言翻译到 LLVM IR. 同时, LLVM IR 可被生成为 x86, ARM, RISC-V 等一系列指令系统的目标代码. 此时, 编译器的前后端是完全解耦的, 两部分可以各自维护, 十分方便.</p>
+<p>此外, IR 也可以极大地方便开发者调试自己的编译器. 在编译实践中, 你的编译器对于同一个 SysY 文件的输入, 既可以输出 Koopa IR, 也可以输出 RISC-V. 你可以借助相关测试工具来测试这两部分的正确性, 进而定位你的编译器到底是在前端/中端部分出了问题, 还是在后端的部分出了问题.</p>
+<p>编译器进行的最后一步操作, 就是将 IR 转换为目标代码, 也就是目标指令系统的汇编代码. 通常情况下, 这一步通常要做以下几件事:</p>
+<ol>
+<li><strong>指令选择:</strong> 决定 IR 中的指令应该被翻译为哪些目标指令系统的指令. 例如前文的 Koopa IR 程序中出现的 <code>lt</code> 指令可以被翻译为 RISC-V 中的 <code>slt</code>/<code>slti</code> 指令.</li>
+<li><strong>寄存器分配:</strong> 决定 IR 中的值和指令系统中寄存器的对应关系. 例如前文的 Koopa IR 程序中的 <code>@x</code>, <code>%cond</code>, <code>%0</code> 等等, 它们最终可能会被放在 RISC-V 的某些寄存器中. 由于指令系统中寄存器的数量通常是有限的 (RISC-V 中只有 32 个整数通用寄存器, 且它们并不都能用来存放数据), 某些值还可能会被分配在内存中.</li>
+<li><strong>指令调度:</strong> 决定 IR 生成的指令序列最终的顺序如何. 我们通常希望编译器能生成一个最优化的指令序列, 它可以最大程度地利用目标平台的微结构特性, 这样生成的程序的性能就会很高. 例如编译器可能会穿插调度访存指令和其他指令, 以求减少访存导致的停顿.</li>
+</ol>
+<p>EBNF, 即 <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Extended_Backus–Naur_form">Extended Backus–Naur Form</a>, 扩展巴科斯范式, 可以用来描述编程语言的语法. 基于 SysY 的 EBNF, 我们可以从开始符号出发, 推导出任何一个符合 SysY 语法定义的 SysY 程序. </p>
+<p>makefile</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># C++ 模式</span></span><br><span class="line">flex -o 文件名.lex.cpp 文件名.l</span><br><span class="line">bison -d -o 文件名.tab.cpp 文件名.y   <span class="comment"># 此时 bison 还会生成 `文件名.tab.hpp`</span></span><br><span class="line"><span class="comment"># C 模式</span></span><br><span class="line">flex -o 文件名.lex.c 文件名.l</span><br><span class="line">bison -d -o 文件名.tab.c 文件名.y     <span class="comment"># 此时 bison 还会生成 `文件名.tab.h`</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">%option noyywrap</span></span><br><span class="line"><span class="comment">%option nounput</span></span><br><span class="line"><span class="comment">%option noinput</span></span><br><span class="line"></span><br><span class="line"><span class="comment">%&#123;</span></span><br><span class="line"></span><br><span class="line"><span class="params">#</span>include &lt;cstdlib&gt;</span><br><span class="line"><span class="params">#</span>include &lt;string&gt;</span><br><span class="line"></span><br><span class="line">// 因为 Flex 会用到 Bison 中关于 token 的定义</span><br><span class="line">// 所以需要 include Bison 生成的头文件</span><br><span class="line"><span class="params">#</span>include &quot;sysy.tab.hpp&quot;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line"><span class="comment">%&#125;</span></span><br><span class="line"></span><br><span class="line">/* 空白符和注释 */</span><br><span class="line">WhiteSpace    [ <span class="keyword">\t</span><span class="keyword">\n</span><span class="keyword">\r</span>]*</span><br><span class="line">LineComment   &quot;//&quot;.*<span class="built_in">$</span></span><br><span class="line"></span><br><span class="line">/* 标识符 */</span><br><span class="line">Identifier    [a-zA-Z<span class="built_in">_</span>][a-zA-Z0-9<span class="built_in">_</span>]*</span><br><span class="line"></span><br><span class="line">/* 整数字面量 */</span><br><span class="line">Decimal       [1-9][0-9]*</span><br><span class="line">Octal         0[0-7]*</span><br><span class="line">Hexadecimal   0[xX][0-9a-fA-F]+</span><br><span class="line"></span><br><span class="line"><span class="comment">%%</span></span><br><span class="line"></span><br><span class="line">&#123;WhiteSpace&#125;    &#123; /* 忽略, 不做任何操作 */ &#125;</span><br><span class="line">&#123;LineComment&#125;   &#123; /* 忽略, 不做任何操作 */ &#125;</span><br><span class="line"></span><br><span class="line">&quot;int&quot;           &#123; return INT; &#125;</span><br><span class="line">&quot;return&quot;        &#123; return RETURN; &#125;</span><br><span class="line"></span><br><span class="line">&#123;Identifier&#125;    &#123; yylval.str<span class="built_in">_</span>val = new string(yytext); return IDENT; &#125;</span><br><span class="line"></span><br><span class="line">&#123;Decimal&#125;       &#123; yylval.int<span class="built_in">_</span>val = strtol(yytext, nullptr, 0); return INT<span class="built_in">_</span>CONST; &#125;</span><br><span class="line">&#123;Octal&#125;         &#123; yylval.int<span class="built_in">_</span>val = strtol(yytext, nullptr, 0); return INT<span class="built_in">_</span>CONST; &#125;</span><br><span class="line">&#123;Hexadecimal&#125;   &#123; yylval.int<span class="built_in">_</span>val = strtol(yytext, nullptr, 0); return INT<span class="built_in">_</span>CONST; &#125;</span><br><span class="line"></span><br><span class="line">.               &#123; return yytext[0]; &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">%%</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ul>
+<li>文件最开头我们设置了一些选项, 你可以 RTFM 这些选项的含义. 如果不设置这些选项, Flex 就会要求我们在代码里定义一些额外的东西, 但我们实际上用不到这些东西.</li>
+<li>第二部分声明了必要的头文件, 然后是经典的 <code>using namespace std</code>.</li>
+<li>第三部分定义了一些正则表达式的规则, 比如空白符, 行注释等等. 这些规则其实直接写在第四部分也可以, 但那样太乱了, 还是给它们起个名字比较好理解一些.</li>
+<li>第四部分定义了 lexer 的行为:<ul>
+<li>遇到空白符和注释就跳过.</li>
+<li>遇到 <code>int</code>, <code>return</code> 这种关键字就返回对应的 token.</li>
+<li>遇到标识符就把标识符存起来, 然后返回对应的 token. <code>yytext</code> 代表 lexer 当前匹配到的字符串的内容, 它的类型是 <code>char *</code>, 在此处对应读取到的一个标识符. <code>yylval</code> 用来向 parser 传递 lexer 读取到的内容, <code>str_val</code> 和之后的 <code>int_val</code> 是我们在 Bison 文件中定义的字段, 之后再解释.</li>
+<li>遇到整数字面量, 先把读取到的字符串转换成整数, 然后存起来, 并返回对应的 token.</li>
+<li>遇到单个字符, 就直接返回单个字符作为 token. <code>.</code> 这个正则表达式会匹配任意单个字符, 而 <code>yytext[0]</code> 实际上读取了目前匹配到的这个字符. 在 Flex/Bison 中, token 实际就是整数, 之前出现的 <code>INT</code>, <code>RETURN</code>, <code>IDENT</code> 等, 其实是 Bison 根据我们的定义生成的枚举 (<code>enum</code>). 所以此处相当于, 我们取了当前匹配到的字符, 然后把它转成了整数, 交给 Bison 生成的 parser 处理. 在 Bison 里, 我们可以直接通过写字符 (比如 <code>&#39;(&#39;</code>), 来表示我们希望匹配 lexer 返回的一个字符转换得到的 token.</li>
+</ul>
+</li>
+</ul>
+<p>由于在<strong>union</strong>里也不允许存放带有构造函数、析构函数和复制构造函数等的类的对象，但是可以存放对应的类对象指针。</p>
+<h1 id="pragma-once一般由编译器提供保证：同一个文件不会被包含多次。这里所说的”同一个文件”是指物理上的一个文件，而不是指内容相同的两个文件。无法对一个头文件中的一段代码作-pragma-once声明，而只能针对文件。此方式不会出现宏名碰撞引发的奇怪问题，大型项目的编译速度也因此提供了一些。缺点是如果某个头文件有多份拷贝，此方法不能保证它们不被重复包含。在C-C-中，-pragma-once是一个非标准但是被广泛支持的方式。"><a href="#pragma-once一般由编译器提供保证：同一个文件不会被包含多次。这里所说的”同一个文件”是指物理上的一个文件，而不是指内容相同的两个文件。无法对一个头文件中的一段代码作-pragma-once声明，而只能针对文件。此方式不会出现宏名碰撞引发的奇怪问题，大型项目的编译速度也因此提供了一些。缺点是如果某个头文件有多份拷贝，此方法不能保证它们不被重复包含。在C-C-中，-pragma-once是一个非标准但是被广泛支持的方式。" class="headerlink" title="pragma once一般由编译器提供保证：同一个文件不会被包含多次。这里所说的”同一个文件”是指物理上的一个文件，而不是指内容相同的两个文件。无法对一个头文件中的一段代码作#pragma once声明，而只能针对文件。此方式不会出现宏名碰撞引发的奇怪问题，大型项目的编译速度也因此提供了一些。缺点是如果某个头文件有多份拷贝，此方法不能保证它们不被重复包含。在C/C++中，#pragma once是一个非标准但是被广泛支持的方式。"></a>pragma once一般由编译器提供保证：同一个文件不会被包含多次。这里所说的”同一个文件”是指物理上的一个文件，而不是指内容相同的两个文件。无法对一个头文件中的一段代码作#pragma once声明，而只能针对文件。此方式不会出现宏名碰撞引发的奇怪问题，大型项目的编译速度也因此提供了一些。缺点是如果某个头文件有多份拷贝，此方法不能保证它们不被重复包含。在C/C++中，#pragma once是一个非标准但是被广泛支持的方式。</h1><pre><code>    #pragma once方式产生于#ifndef之后。#ifndef方式受C/C++语言标准的支持，不受编译器的任何限制；而#pragma once方式有些编译器不支持(较老编译器不支持，如GCC 3.4版本之前不支持#pragmaonce)，兼容性不够好。#ifndef可以针对一个文件中的部分代码，而#pragma once只能针对整个文件。相对而言，#ifndef更加灵活，兼容性好，#pragma once操作简单，效率高。
+</code></pre><figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">%code requires &#123;</span></span><br><span class="line">  <span class="params">#</span>include &lt;memory&gt;</span><br><span class="line">  <span class="params">#</span>include &lt;string&gt;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">%&#123;</span></span><br><span class="line"></span><br><span class="line"><span class="params">#</span>include &lt;iostream&gt;</span><br><span class="line"><span class="params">#</span>include &lt;memory&gt;</span><br><span class="line"><span class="params">#</span>include &lt;string&gt;</span><br><span class="line"></span><br><span class="line">// 声明 lexer 函数和错误处理函数</span><br><span class="line">int yylex();</span><br><span class="line">void yyerror(std::unique<span class="built_in">_</span>ptr&lt;std::string&gt; <span class="built_in">&amp;</span>ast, const char *s);</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line"><span class="comment">%&#125;</span></span><br><span class="line"></span><br><span class="line">// 定义 parser 函数和错误处理函数的附加参数</span><br><span class="line">// 我们需要返回一个字符串作为 AST, 所以我们把附加参数定义成字符串的智能指针</span><br><span class="line">// 解析完成后, 我们要手动修改这个参数, 把它设置成解析得到的字符串</span><br><span class="line"><span class="comment">%parse-param &#123; std::unique_ptr&lt;std::string&gt; &amp;ast &#125;</span></span><br><span class="line"></span><br><span class="line">// yylval 的定义, 我们把它定义成了一个联合体 (union)</span><br><span class="line">// 因为 token 的值有的是字符串指针, 有的是整数</span><br><span class="line">// 之前我们在 lexer 中用到的 str<span class="built_in">_</span>val 和 int<span class="built_in">_</span>val 就是在这里被定义的</span><br><span class="line">// 至于为什么要用字符串指针而不直接用 string 或者 unique<span class="built_in">_</span>ptr&lt;string&gt;?</span><br><span class="line">// 请自行 STFW 在 union 里写一个带析构函数的类会出现什么情况</span><br><span class="line"><span class="comment">%union &#123;</span></span><br><span class="line">  std::string *str<span class="built_in">_</span>val;</span><br><span class="line">  int int<span class="built_in">_</span>val;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// lexer 返回的所有 token 种类的声明</span><br><span class="line">// 注意 IDENT 和 INT<span class="built_in">_</span>CONST 会返回 token 的值, 分别对应 str<span class="built_in">_</span>val 和 int<span class="built_in">_</span>val</span><br><span class="line"><span class="comment">%token INT RETURN</span></span><br><span class="line"><span class="comment">%token &lt;str_val&gt; IDENT</span></span><br><span class="line"><span class="comment">%token &lt;int_val&gt; INT_CONST</span></span><br><span class="line"></span><br><span class="line">// 非终结符的类型定义</span><br><span class="line"><span class="comment">%type &lt;str_val&gt; FuncDef FuncType Block Stmt Number</span></span><br><span class="line"></span><br><span class="line"><span class="comment">%%</span></span><br><span class="line"></span><br><span class="line">// 开始符, CompUnit ::= FuncDef, 大括号后声明了解析完成后 parser 要做的事情</span><br><span class="line">// 之前我们定义了 FuncDef 会返回一个 str<span class="built_in">_</span>val, 也就是字符串指针</span><br><span class="line">// 而 parser 一旦解析完 CompUnit, 就说明所有的 token 都被解析了, 即解析结束了</span><br><span class="line">// 此时我们应该把 FuncDef 返回的结果收集起来, 作为 AST 传给调用 parser 的函数</span><br><span class="line">// <span class="built_in">$</span>1 指代规则里第一个符号的返回值, 也就是 FuncDef 的返回值</span><br><span class="line">CompUnit</span><br><span class="line">  : FuncDef &#123;</span><br><span class="line">    ast = unique<span class="built_in">_</span>ptr&lt;string&gt;(<span class="built_in">$</span>1);</span><br><span class="line">  &#125;</span><br><span class="line">  ;</span><br><span class="line"></span><br><span class="line">// FuncDef ::= FuncType IDENT &#x27;(&#x27; &#x27;)&#x27; Block;</span><br><span class="line">// 我们这里可以直接写 &#x27;(&#x27; 和 &#x27;)&#x27;, 因为之前在 lexer 里已经处理了单个字符的情况</span><br><span class="line">// 解析完成后, 把这些符号的结果收集起来, 然后拼成一个新的字符串, 作为结果返回</span><br><span class="line">// <span class="built_in">$</span><span class="built_in">$</span> 表示非终结符的返回值, 我们可以通过给这个符号赋值的方法来返回结果</span><br><span class="line">// 你可能会问, FuncType, IDENT 之类的结果已经是字符串指针了</span><br><span class="line">// 为什么还要用 unique<span class="built_in">_</span>ptr 接住它们, 然后再解引用, 把它们拼成另一个字符串指针呢</span><br><span class="line">// 因为所有的字符串指针都是我们 new 出来的, new 出来的内存一定要 delete</span><br><span class="line">// 否则会发生内存泄漏, 而 unique<span class="built_in">_</span>ptr 这种智能指针可以自动帮我们 delete</span><br><span class="line">// 虽然此处你看不出用 unique<span class="built_in">_</span>ptr 和手动 delete 的区别, 但当我们定义了 AST 之后</span><br><span class="line">// 这种写法会省下很多内存管理的负担</span><br><span class="line">FuncDef</span><br><span class="line">  : FuncType IDENT &#x27;(&#x27; &#x27;)&#x27; Block &#123;</span><br><span class="line">    auto type = unique<span class="built_in">_</span>ptr&lt;string&gt;(<span class="built_in">$</span>1);</span><br><span class="line">    auto ident = unique<span class="built_in">_</span>ptr&lt;string&gt;(<span class="built_in">$</span>2);</span><br><span class="line">    auto block = unique<span class="built_in">_</span>ptr&lt;string&gt;(<span class="built_in">$</span>5);</span><br><span class="line">    <span class="built_in">$</span><span class="built_in">$</span> = new string(*type + &quot; &quot; + *ident + &quot;() &quot; + *block);</span><br><span class="line">  &#125;</span><br><span class="line">  ;</span><br><span class="line"></span><br><span class="line">// 同上, 不再解释</span><br><span class="line">FuncType</span><br><span class="line">  : INT &#123;</span><br><span class="line">    <span class="built_in">$</span><span class="built_in">$</span> = new string(&quot;int&quot;);</span><br><span class="line">  &#125;</span><br><span class="line">  ;</span><br><span class="line"></span><br><span class="line">Block</span><br><span class="line">  : &#x27;&#123;&#x27; Stmt &#x27;&#125;&#x27; &#123;</span><br><span class="line">    auto stmt = unique<span class="built_in">_</span>ptr&lt;string&gt;(<span class="built_in">$</span>2);</span><br><span class="line">    <span class="built_in">$</span><span class="built_in">$</span> = new string(&quot;&#123; &quot; + *stmt + &quot; &#125;&quot;);</span><br><span class="line">  &#125;</span><br><span class="line">  ;</span><br><span class="line"></span><br><span class="line">Stmt</span><br><span class="line">  : RETURN Number &#x27;;&#x27; &#123;</span><br><span class="line">    auto number = unique<span class="built_in">_</span>ptr&lt;string&gt;(<span class="built_in">$</span>2);</span><br><span class="line">    <span class="built_in">$</span><span class="built_in">$</span> = new string(&quot;return &quot; + *number + &quot;;&quot;);</span><br><span class="line">  &#125;</span><br><span class="line">  ;</span><br><span class="line"></span><br><span class="line">Number</span><br><span class="line">  : INT<span class="built_in">_</span>CONST &#123;</span><br><span class="line">    <span class="built_in">$</span><span class="built_in">$</span> = new string(to<span class="built_in">_</span>string(<span class="built_in">$</span>1));</span><br><span class="line">  &#125;</span><br><span class="line">  ;</span><br><span class="line"></span><br><span class="line"><span class="comment">%%</span></span><br><span class="line"></span><br><span class="line">// 定义错误处理函数, 其中第二个参数是错误信息</span><br><span class="line">// parser 如果发生错误 (例如输入的程序出现了语法错误), 就会调用这个函数</span><br><span class="line">void yyerror(unique<span class="built_in">_</span>ptr&lt;string&gt; <span class="built_in">&amp;</span>ast, const char *s) &#123;</span><br><span class="line">  cerr &lt;&lt; &quot;error: &quot; &lt;&lt; s &lt;&lt; endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>设置一些必要的选项, 比如 <code>%code requires</code>.</li>
+<li>引用头文件, 声明 lexer 函数和错误处理函数. 如果不声明这些函数的话, parser 会找不到 Flex 中定义的 lexer, 也没办法正常报错.</li>
+<li>定义 parser 函数的参数. Bison 生成的 parser 函数返回类型一定是 <code>int</code>, 所以我们没办法通过返回值返回 AST, 所以只能通过参数来返回 AST 了. 当然你也可以通过全局变量来返回 AST, 但, 那样做很 dirty (如果你接触过函数式编程或了解软件工程技术的话).</li>
+<li>定义了 <code>yylval</code>, token 和非终结符的类型.</li>
+<li>定义了语法规则, 同时定义了 parser 解析完语法规则之后执行的操作.</li>
+<li>定义了错误处理函数.</li>
+</ul>
+<p>这里主要涉及到flex和bison的知识,这个可能要看一会.</p>
+<h3 id="设计AST"><a href="#设计AST" class="headerlink" title="设计AST"></a>设计AST</h3><p>设计 AST 这件事其实很简单, 你首先要知道:</p>
+<ol>
+<li>AST 保留了程序语法的结构.</li>
+<li>AST 是为了方便程序的处理而存在的, 不存在什么设计规范</li>
+</ol>
+<p>注意%token是终结符,而其他的是非终结符</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">%type &lt;str_val&gt; FuncDef FuncType Block Stmt Number</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">%<span class="class"><span class="keyword">union</span> &#123;</span></span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">string</span> *str_val;</span><br><span class="line">  <span class="keyword">int</span> int_val;</span><br><span class="line">  BaseAST *ast_val;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>修改yylval类型</p>
+<h2 id="misc"><a href="#misc" class="headerlink" title="misc"></a>misc</h2><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/EQ1024/p/15660909.html">Docker -v | volume 挂载宿主机目录导致容器内文件被覆盖问题 - 二柒席地而坐 - 博客园 (cnblogs.com)</a></p>
+
+    </div>
+
+    
+    
+    
+    <div>
+	
+     <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+     
+   </div>
+        <div class="reward-container">
+  <div>感谢阅读.</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.png" alt="Sekyoro 微信支付">
+        <p>微信支付</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Sekyoro
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://sekyoro.top/2022/05/06/write-a-compiler-by-yourself/" title="write_a_compiler_by_yourself">https://sekyoro.top/2022/05/06/write-a-compiler-by-yourself/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/c/" rel="tag"><i class="fa fa-tag"></i> c</a>
+              <a href="/tags/compiler/" rel="tag"><i class="fa fa-tag"></i> compiler</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/05/02/html%E7%B2%BE%E5%AD%A6/" rel="prev" title="html精学">
+      <i class="fa fa-chevron-left"></i> html精学
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81MzE5Ny8yOTY3Mg=="></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+	
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+      	   
+          <!-- canvas粒子时钟 -->
+          <div style="">
+  <canvas id="canvas" style="width:60%;">当前浏览器不支持canvas，请更换浏览器后再试</canvas>
+</div>
+<script>
+(function(){
+
+   var digit=
+    [
+        [
+            [0,0,1,1,1,0,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,0,1,1,0],
+            [0,0,1,1,1,0,0]
+        ],//0
+        [
+            [0,0,0,1,1,0,0],
+            [0,1,1,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [1,1,1,1,1,1,1]
+        ],//1
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,1,1],
+            [1,1,1,1,1,1,1]
+        ],//2
+        [
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//3
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,0],
+            [0,0,1,1,1,1,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,1,1,0],
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,1]
+        ],//4
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,1,1,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//5
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//6
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0]
+        ],//7
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//8
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,1,1,0,0,0,0]
+        ],//9
+        [
+            [0,0,0,0,0,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,0,0,0]
+        ]//:
+    ];
+
+var canvas = document.getElementById('canvas');
+
+if(canvas.getContext){
+    var cxt = canvas.getContext('2d');
+    //声明canvas的宽高
+    var H = 100,W = 700;
+    canvas.height = H;
+    canvas.width = W;
+    cxt.fillStyle = '#f00';
+    cxt.fillRect(10,10,50,50);
+
+    //存储时间数据
+    var data = [];
+    //存储运动的小球
+    var balls = [];
+    //设置粒子半径
+    var R = canvas.height/20-1;
+    (function(){
+        var temp = /(\d)(\d):(\d)(\d):(\d)(\d)/.exec(new Date());
+        //存储时间数字，由十位小时、个位小时、冒号、十位分钟、个位分钟、冒号、十位秒钟、个位秒钟这7个数字组成
+        data.push(temp[1],temp[2],10,temp[3],temp[4],10,temp[5],temp[6]);
+    })();
+
+    /*生成点阵数字*/
+    function renderDigit(index,num){
+        for(var i = 0; i < digit[num].length; i++){
+            for(var j = 0; j < digit[num][i].length; j++){
+                if(digit[num][i][j] == 1){
+                    cxt.beginPath();
+                    cxt.arc(14*(R+2)*index + j*2*(R+1)+(R+1),i*2*(R+1)+(R+1),R,0,2*Math.PI);
+                    cxt.closePath();
+                    cxt.fill();
+                }
+            }
+        }
+    }
+
+    /*更新时钟*/
+    function updateDigitTime(){
+        var changeNumArray = [];
+        var temp = /(\d)(\d):(\d)(\d):(\d)(\d)/.exec(new Date());
+        var NewData = [];
+        NewData.push(temp[1],temp[2],10,temp[3],temp[4],10,temp[5],temp[6]);
+        for(var i = data.length-1; i >=0 ; i--){
+            //时间发生变化
+            if(NewData[i] !== data[i]){
+                //将变化的数字值和在data数组中的索引存储在changeNumArray数组中
+                changeNumArray.push(i+'_'+(Number(data[i])+1)%10);
+            }
+        }
+        //增加小球
+        for(var i = 0; i< changeNumArray.length; i++){
+            addBalls.apply(this,changeNumArray[i].split('_'));
+        }
+        data = NewData.concat();
+    }
+
+    /*更新小球状态*/
+    function updateBalls(){
+        for(var i = 0; i < balls.length; i++){
+            balls[i].stepY += balls[i].disY;
+            balls[i].x += balls[i].stepX;
+            balls[i].y += balls[i].stepY;
+            if(balls[i].x > W + R || balls[i].y > H + R){
+                balls.splice(i,1);
+                i--;
+            }
+        }
+    }
+
+    /*增加要运动的小球*/
+    function addBalls(index,num){
+        var numArray = [1,2,3];
+        var colorArray =  ["#3BE","#09C","#A6C","#93C","#9C0","#690","#FB3","#F80","#F44","#C00"];
+        for(var i = 0; i < digit[num].length; i++){
+            for(var j = 0; j < digit[num][i].length; j++){
+                if(digit[num][i][j] == 1){
+                    var ball = {
+                        x:14*(R+2)*index + j*2*(R+1)+(R+1),
+                        y:i*2*(R+1)+(R+1),
+                        stepX:Math.floor(Math.random() * 4 -2),
+                        stepY:-2*numArray[Math.floor(Math.random()*numArray.length)],
+                        color:colorArray[Math.floor(Math.random()*colorArray.length)],
+                        disY:1
+                    };
+                    balls.push(ball);
+                }
+            }
+        }
+    }
+
+    /*渲染*/
+    function render(){
+        //重置画布宽度，达到清空画布的效果
+        canvas.height = 100;
+        //渲染时钟
+        for(var i = 0; i < data.length; i++){
+            renderDigit(i,data[i]);
+        }
+        //渲染小球
+        for(var i = 0; i < balls.length; i++){
+            cxt.beginPath();
+            cxt.arc(balls[i].x,balls[i].y,R,0,2*Math.PI);
+            cxt.fillStyle = balls[i].color;
+            cxt.closePath();
+            cxt.fill();
+        }
+    }
+
+    clearInterval(oTimer);
+    var oTimer = setInterval(function(){
+        //更新时钟
+        updateDigitTime();
+        //更新小球状态
+        updateBalls();
+        //渲染
+        render();
+    },50);
+}
+
+})();
+</script>
+        
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.0/dist/APlayer.min.css">
+		<script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.0/dist/APlayer.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/meting@1.2/dist/Meting.min.js"></script>
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+	  
+		
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%80%E5%A7%8B"><span class="nav-number">1.</span> <span class="nav-text">开始</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%96%E8%AF%91%E5%99%A8%E7%BB%93%E6%9E%84"><span class="nav-number">1.1.</span> <span class="nav-text">编译器结构</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#pragma-once%E4%B8%80%E8%88%AC%E7%94%B1%E7%BC%96%E8%AF%91%E5%99%A8%E6%8F%90%E4%BE%9B%E4%BF%9D%E8%AF%81%EF%BC%9A%E5%90%8C%E4%B8%80%E4%B8%AA%E6%96%87%E4%BB%B6%E4%B8%8D%E4%BC%9A%E8%A2%AB%E5%8C%85%E5%90%AB%E5%A4%9A%E6%AC%A1%E3%80%82%E8%BF%99%E9%87%8C%E6%89%80%E8%AF%B4%E7%9A%84%E2%80%9D%E5%90%8C%E4%B8%80%E4%B8%AA%E6%96%87%E4%BB%B6%E2%80%9D%E6%98%AF%E6%8C%87%E7%89%A9%E7%90%86%E4%B8%8A%E7%9A%84%E4%B8%80%E4%B8%AA%E6%96%87%E4%BB%B6%EF%BC%8C%E8%80%8C%E4%B8%8D%E6%98%AF%E6%8C%87%E5%86%85%E5%AE%B9%E7%9B%B8%E5%90%8C%E7%9A%84%E4%B8%A4%E4%B8%AA%E6%96%87%E4%BB%B6%E3%80%82%E6%97%A0%E6%B3%95%E5%AF%B9%E4%B8%80%E4%B8%AA%E5%A4%B4%E6%96%87%E4%BB%B6%E4%B8%AD%E7%9A%84%E4%B8%80%E6%AE%B5%E4%BB%A3%E7%A0%81%E4%BD%9C-pragma-once%E5%A3%B0%E6%98%8E%EF%BC%8C%E8%80%8C%E5%8F%AA%E8%83%BD%E9%92%88%E5%AF%B9%E6%96%87%E4%BB%B6%E3%80%82%E6%AD%A4%E6%96%B9%E5%BC%8F%E4%B8%8D%E4%BC%9A%E5%87%BA%E7%8E%B0%E5%AE%8F%E5%90%8D%E7%A2%B0%E6%92%9E%E5%BC%95%E5%8F%91%E7%9A%84%E5%A5%87%E6%80%AA%E9%97%AE%E9%A2%98%EF%BC%8C%E5%A4%A7%E5%9E%8B%E9%A1%B9%E7%9B%AE%E7%9A%84%E7%BC%96%E8%AF%91%E9%80%9F%E5%BA%A6%E4%B9%9F%E5%9B%A0%E6%AD%A4%E6%8F%90%E4%BE%9B%E4%BA%86%E4%B8%80%E4%BA%9B%E3%80%82%E7%BC%BA%E7%82%B9%E6%98%AF%E5%A6%82%E6%9E%9C%E6%9F%90%E4%B8%AA%E5%A4%B4%E6%96%87%E4%BB%B6%E6%9C%89%E5%A4%9A%E4%BB%BD%E6%8B%B7%E8%B4%9D%EF%BC%8C%E6%AD%A4%E6%96%B9%E6%B3%95%E4%B8%8D%E8%83%BD%E4%BF%9D%E8%AF%81%E5%AE%83%E4%BB%AC%E4%B8%8D%E8%A2%AB%E9%87%8D%E5%A4%8D%E5%8C%85%E5%90%AB%E3%80%82%E5%9C%A8C-C-%E4%B8%AD%EF%BC%8C-pragma-once%E6%98%AF%E4%B8%80%E4%B8%AA%E9%9D%9E%E6%A0%87%E5%87%86%E4%BD%86%E6%98%AF%E8%A2%AB%E5%B9%BF%E6%B3%9B%E6%94%AF%E6%8C%81%E7%9A%84%E6%96%B9%E5%BC%8F%E3%80%82"><span class="nav-number"></span> <span class="nav-text">pragma once一般由编译器提供保证：同一个文件不会被包含多次。这里所说的”同一个文件”是指物理上的一个文件，而不是指内容相同的两个文件。无法对一个头文件中的一段代码作#pragma once声明，而只能针对文件。此方式不会出现宏名碰撞引发的奇怪问题，大型项目的编译速度也因此提供了一些。缺点是如果某个头文件有多份拷贝，此方法不能保证它们不被重复包含。在C&#x2F;C++中，#pragma once是一个非标准但是被广泛支持的方式。</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BE%E8%AE%A1AST"><span class="nav-number">0.1.</span> <span class="nav-text">设计AST</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#misc"><span class="nav-number">1.</span> <span class="nav-text">misc</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Sekyoro"
+      src="https://i.loli.net/2021/05/17/YqoavnXdGTpPO9R.jpg">
+  <p class="site-author-name" itemprop="name">Sekyoro</p>
+  <div class="site-description" itemprop="description">什么也无法舍弃的人，什么也做不了.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">77</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">93</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/drowning-in-codes" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;drowning-in-codes" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:bukalala174@gmail.com" title="E-Mail → mailto:bukalala174@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      友情链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="http://myqhs.top/" title="http:&#x2F;&#x2F;myqhs.top&#x2F;" rel="noopener" target="_blank">myqhs</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+		<div id="aplayer" class="aplayer" data-id="6856787487" data-server="netease" data-type="playlist" data-listfolded="true" data-order="random"></div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+  
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; Wed Apr 08 2020 08:00:00 GMT+0800 (中国标准时间) – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Sekyoro</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">428k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">6:29</span>
+</div>
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+    <span id="busuanzi_container_site_pv">总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+    <span class="post-meta-divider">|</span>
+    <span id="busuanzi_container_site_uv">总访客数<span id="busuanzi_value_site_uv"></span>人</span>
+    <span class="post-meta-divider">|</span>
+<!-- 不蒜子计数初始值纠正 -->
+<script>
+$(document).ready(function() {
+
+    var int = setInterval(fixCount, 50);  // 50ms周期检测函数
+    var countOffset = 20000;  // 初始化首次数据
+
+    function fixCount() {            
+       if (document.getElementById("busuanzi_container_site_pv").style.display != "none")
+        {
+            $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + countOffset); 
+            clearInterval(int);
+        }                  
+        if ($("#busuanzi_container_site_pv").css("display") != "none")
+        {
+            $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + countOffset); // 加上初始数据 
+            clearInterval(int); // 停止检测
+        }  
+    }
+       	
+});
+</script> 
+
+<div>
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("04/08/2021 20:00:00");
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+    }
+setInterval("createtime()",250);
+</script>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/theme-next/theme-next-pjax@0/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+  <script data-pjax>
+    (function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+  </script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+<script data-pjax>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  let url = element.dataset.target;
+  let pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  let pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  let fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+  
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+    </div>
+</body>
+</html>
