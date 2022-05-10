@@ -36,7 +36,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://s2.loli.net/2022/05/08/EcgFvkbuN63iV75.png">
 <meta property="article:published_time" content="2022-05-06T08:05:45.000Z">
-<meta property="article:modified_time" content="2022-05-09T12:17:53.147Z">
+<meta property="article:modified_time" content="2022-05-09T14:39:35.224Z">
 <meta property="article:author" content="Sekyoro">
 <meta property="article:tag" content="c">
 <meta property="article:tag" content="compiler">
@@ -275,7 +275,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-05-09 20:17:53" itemprop="dateModified" datetime="2022-05-09T20:17:53+08:00">2022-05-09</time>
+                <time title="修改时间：2022-05-09 22:39:35" itemprop="dateModified" datetime="2022-05-09T22:39:35+08:00">2022-05-09</time>
               </span>
 
           
@@ -291,14 +291,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>8.1k</span>
+              <span>11k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>7 分钟</span>
+              <span>10 分钟</span>
             </span>
 
         </div>
@@ -387,7 +387,40 @@
 <p>注意%token是终结符,而其他的是非终结符</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">%type &lt;str_val&gt; FuncDef FuncType Block Stmt Number</span><br></pre></td></tr></table></figure>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">%<span class="class"><span class="keyword">union</span> &#123;</span></span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">string</span> *str_val;</span><br><span class="line">  <span class="keyword">int</span> int_val;</span><br><span class="line">  BaseAST *ast_val;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>修改yylval类型</p>
+<p>修改yylval类型.</p>
+<p>生成了AST后,继续生成IR.</p>
+<p>一旦完成了 IR 的生成, 你的编译器就已经初步成型了. 因为有一些基础设施的存在, 比如 LLVM IR, 现代的很多编译器都只会进行到 IR 生成这一步, 然后把后续的工作交给这些基础设施完成.</p>
+<ul>
+<li>编译器首先会对源代码做词法/语法分析, 生成 AST.</li>
+<li>然后在 AST 上进行语义分析, 建立符号表, 做类型检查, 报告语义错误, 等等.</li>
+<li>接着, 遍历语义分析后的 AST, 生成 IR.</li>
+</ul>
+<p>我们会在每章的<a target="_blank" rel="noopener" href="https://pku-minic.github.io/online-doc/#/lv1-main/">开头</a>给出本章涉及内容的语法规范和语义规范. 一个功能完备的编译器应该能够检查输入程序是否符合语义规范, 并在发生语义错误时报错.</p>
+<p>不过, 在课程实践中, 所有的测试用例均为符合语法/语义规范的 SysY 程序. <strong>我们不要求你编写的编译器具备处理语法/语义错误的能力, 也不会考察这些内容.</strong> 但我们希望学有余力的同学, 能够在自己的编译器中检查这些问题, 并对其作出合适的处理, 比如像 <code>clang</code> 或 <code>rustc</code> 一样, 给出精确到行列的错误信息, 甚至具备忽略错误继续扫描, 以及对错误给出修改建议的高级功能.</p>
+<p>Koopa IR 中, 最大的单位是 <code>Program</code>, 它代表一个 Koopa IR 程序. <code>Program</code> 由若干全局变量 (<code>Value</code>) 和函数 (<code>Function</code>) 构成. <code>Function</code> 又由若干基本块 (<code>BasicBlock</code>) 构成, 基本块中是一系列指令, 指令也是 <code>Value</code>. 所以 Koopa IR 程序的结构如下所示:</p>
+<ul>
+<li>```<br>Program<figure class="highlight haml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">-<span class="ruby"> 全局变量列表:</span></span><br><span class="line"><span class="ruby"></span></span><br><span class="line">  -<span class="ruby"> <span class="string">`Value`</span> <span class="number">1</span>.</span></span><br><span class="line"><span class="ruby"></span>  -<span class="ruby"> <span class="string">`Value`</span> <span class="number">2</span>.</span></span><br><span class="line"><span class="ruby"></span>  -<span class="ruby"> …</span></span><br><span class="line"><span class="ruby"></span></span><br><span class="line">-<span class="ruby"> 函数列表:</span></span><br><span class="line"><span class="ruby"></span></span><br><span class="line">  -<span class="ruby"> <span class="string">``</span><span class="string">`</span></span></span><br><span class="line"><span class="string"><span class="ruby"></span></span>    Function</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<pre><code>  1.
+
+  - 基本块列表:
+
+    - ```
+      BasicBlock
+      <figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="code">           </span></span><br><span class="line"><span class="code"></span></span><br><span class="line"><span class="bullet">          1.</span></span><br><span class="line"></span><br><span class="line">          - 指令列表:</span><br><span class="line"><span class="bullet">            -</span> <span class="code">`Value`</span> 1.</span><br><span class="line"><span class="bullet">            -</span> <span class="code">`Value`</span> 2.</span><br><span class="line"><span class="bullet">            -</span> …</span><br><span class="line"></span><br><span class="line"><span class="bullet">        -</span> <span class="code">`BasicBlock`</span> 2.</span><br><span class="line"></span><br><span class="line"><span class="bullet">        -</span> …</span><br><span class="line"></span><br><span class="line"><span class="bullet">    -</span> <span class="code">`Function`</span> 2.</span><br><span class="line"></span><br><span class="line"><span class="bullet">    -</span> …</span><br><span class="line"></span><br><span class="line"><span class="bullet">-</span> <span class="strong">**各类常量:**</span> 整数常量 (<span class="code">`Integer`</span>), 零初始化器 (<span class="code">`ZeroInit`</span>), 等等.</span><br><span class="line"><span class="bullet">-</span> <span class="strong">**参数引用:**</span> 函数参数引用 (<span class="code">`FuncArgRef`</span>) 等, 用来指代传入的参数.</span><br><span class="line"><span class="bullet">-</span> <span class="strong">**内存分配:**</span> 全局内存分配 (<span class="code">`GlobalAlloc`</span>, 所有的全局变量都是这个玩意) 和局部内存分配 (<span class="code">`Alloc`</span>).</span><br><span class="line"><span class="bullet">-</span> <span class="strong">**访存指令:**</span> 加载 (<span class="code">`Load`</span>) 和存储 (<span class="code">`Store`</span>).</span><br><span class="line"><span class="bullet">-</span> <span class="strong">**指针运算:**</span> <span class="code">`GetPtr`</span> 和 <span class="code">`GetElemPtr`</span>.</span><br><span class="line"><span class="bullet">-</span> <span class="strong">**二元运算:**</span> <span class="code">`Binary`</span>, 比如加减乘除模/比较之类的运算都属于此类.</span><br><span class="line"><span class="bullet">-</span> <span class="strong">**控制转移:**</span> 条件分支 (<span class="code">`Branch`</span>) 和无条件跳转 (<span class="code">`Jump`</span>).</span><br><span class="line"><span class="bullet">-</span> <span class="strong">**函数相关:**</span> 函数调用 (<span class="code">`Call`</span>) 和函数返回 (<span class="code">`Return`</span>).</span><br><span class="line"></span><br><span class="line">目标很明确了:</span><br><span class="line"></span><br><span class="line"><span class="bullet">1.</span> 我们应该生成一个 Koopa IR 程序.</span><br><span class="line"><span class="bullet">2.</span> 程序中有一个名字叫 <span class="code">`main`</span> 的函数.</span><br><span class="line"><span class="bullet">3.</span> 函数里有一个入口基本块.</span><br><span class="line"><span class="bullet">4.</span> 基本块里有一条返回指令.</span><br><span class="line"><span class="bullet">5.</span> 返回指令的返回值就是 SysY 里 <span class="code">`return`</span> 语句后跟的值, 也就是一个整数常量.</span><br><span class="line"></span><br><span class="line"> Koopa IR 目前有两种形式:</span><br><span class="line"></span><br><span class="line"><span class="bullet">1.</span> <span class="strong">**文本形式:**</span> 就是你在前文见到的字符串形式, 方便人类阅读.</span><br><span class="line"><span class="bullet">2.</span> <span class="strong">**内存形式:**</span> 即数据结构的形式, 你可以把它理解为另一种 “AST”, 方便程序处理.</span><br><span class="line"></span><br><span class="line">你的编译器输出的文本形式 IR, 最终会被 Koopa IR 的相关工具 (比如 <span class="code">`koopac`</span>) 读取, 变成内存形式的 IR, 然后作进一步处理. Koopa IR 的框架也提供了在两种形式的 IR 之间互相转换的接口.</span><br><span class="line"></span><br><span class="line">所以, 考虑到上述情况, 你有以下几种生成 IR 的思路:</span><br><span class="line"></span><br><span class="line"><span class="bullet">-</span> 遍历 AST, 输出文本形式的 IR. 这样最简单, 适用于任何语言实现的编译器.</span><br><span class="line"><span class="bullet">-</span> 调用 Koopa IR 框架提供的接口. 使用 Rust 的同学可以尝试, 详见 Koopa IR 框架的 [<span class="string">crates.io</span>](<span class="link">https://crates.io/crates/koopa</span>) 以及[<span class="string">文档</span>](<span class="link">https://docs.rs/koopa</span>).</span><br><span class="line"><span class="bullet">-</span> 像定义 AST 一样定义表示 Koopa IR 的数据结构 (比如指令/基本块/函数等等), 然后遍历 AST 输出这种结构, 再遍历这种结构输出字符串.</span><br><span class="line"><span class="bullet">-</span> 对于使用 C/C++ 的同学, 在上一条的基础上, 你可以考虑把这种结构转换成 raw program, 然后使用 <span class="code">`libkoopa`</span> 中的相关接口, 将 raw program 转换成其他形式的 Koopa IR 程序</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">第一种思路可能是大部分同学会采用的思路, 因为它相当简单且直观, 实现难度很低. 但其缺点是, 你在生成目标代码之前, 不得不再次将文本形式的 Koopa IR 转换成某种数据结构——这相当于再写一个编译器. 否则, 你的程序几乎无法直接基于文本形式 IR 生成汇编.</span><br><span class="line"></span><br><span class="line">不过好在, 我们为大家提供了能够处理 Koopa IR 的库, 你可以使用其中的实现, 来将文本形式的 IR 转换为内存形式.</span><br><span class="line"></span><br><span class="line"><span class="code">```c</span></span><br><span class="line"><span class="code">// 解析字符串 str, 得到 Koopa IR 程序</span></span><br><span class="line"><span class="code">koopa_program_t program;</span></span><br><span class="line"><span class="code">koopa_error_code_t ret = koopa_parse_from_string(str, &amp;program);</span></span><br><span class="line"><span class="code">assert(ret == KOOPA_EC_SUCCESS);  // 确保解析时没有出错</span></span><br><span class="line"><span class="code">// 创建一个 raw program builder, 用来构建 raw program</span></span><br><span class="line"><span class="code">koopa_raw_program_builder_t builder = koopa_new_raw_program_builder();</span></span><br><span class="line"><span class="code">// 将 Koopa IR 程序转换为 raw program</span></span><br><span class="line"><span class="code">koopa_raw_program_t raw = koopa_build_raw_program(builder, program);</span></span><br><span class="line"><span class="code">// 释放 Koopa IR 程序占用的内存</span></span><br><span class="line"><span class="code">koopa_delete_program(program);</span></span><br><span class="line"><span class="code"></span></span><br><span class="line"><span class="code">// 处理 raw program</span></span><br><span class="line"><span class="code">// ...</span></span><br><span class="line"><span class="code"></span></span><br><span class="line"><span class="code">// 处理完成, 释放 raw program builder 占用的内存</span></span><br><span class="line"><span class="code">// 注意, raw program 中所有的指针指向的内存均为 raw program builder 的内存</span></span><br><span class="line"><span class="code">// 所以不要在 raw program 处理完毕之前释放 builder</span></span><br><span class="line"><span class="code">koopa_delete_raw_program_builder(builder);</span></span><br></pre></td></tr></table></figure>
+</code></pre><ul>
+<li>最上层是 <code>koopa_raw_program_t</code>, 也就是 <code>Program</code>.</li>
+<li>之下是全局变量定义列表和函数定义列表.<ul>
+<li>在 raw program 中, 列表的类型是 <code>koopa_raw_slice_t</code>.</li>
+<li>本质上这是一个指针数组, 其中的 <code>buffer</code> 字段记录了指针数组的地址 (类型是 <code>const void **</code>), <code>len</code> 字段记录了指针数组的长度, <code>kind</code> 字段记录了数组元素是何种类型的指针</li>
+<li>在访问时, 你可以通过 <code>slice.buffer[i]</code> 拿到列表元素的指针, 然后通过判断 <code>kind</code> 来决定把这个指针转换成什么类型.</li>
+</ul>
+</li>
+<li><code>koopa_raw_function_t</code> 代表函数, 其中是基本块列表.</li>
+<li><code>koopa_raw_basic_block_t</code> 代表基本块, 其中是指令列表.</li>
+<li><code>koopa_raw_value_t</code> 代表全局变量, 或者基本块中的指令.</li>
+</ul>
 <h2 id="misc"><a href="#misc" class="headerlink" title="misc"></a>misc</h2><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/EQ1024/p/15660909.html">Docker -v | volume 挂载宿主机目录导致容器内文件被覆盖问题 - 二柒席地而坐 - 博客园 (cnblogs.com)</a></p>
 
     </div>
@@ -875,12 +908,12 @@ if(canvas.getContext){
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">428k</span>
+    <span title="站点总字数">431k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">6:29</span>
+    <span title="站点阅读时长">6:31</span>
 </div>
 
     <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
