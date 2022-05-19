@@ -41,11 +41,13 @@
 <meta property="og:image" content="https://s2.loli.net/2022/04/30/IPy2vi5EGBlMhpS.png">
 <meta property="og:image" content="https://s2.loli.net/2022/04/30/dke7PwDhFtS8JvY.png">
 <meta property="og:image" content="https://s2.loli.net/2022/04/30/taFMk9RO6iH3Yjo.png">
+<meta property="og:image" content="https://dn-simplecloud.shiyanlou.com/questions/uid788648-20190513-1557739698486">
+<meta property="og:image" content="https://dn-simplecloud.shiyanlou.com/questions/uid788648-20190521-1558405128517">
 <meta property="article:published_time" content="2022-04-30T08:41:24.000Z">
-<meta property="article:modified_time" content="2022-05-02T05:35:38.371Z">
+<meta property="article:modified_time" content="2022-05-13T14:55:18.415Z">
 <meta property="article:author" content="Sekyoro">
-<meta property="article:tag" content="deep learning">
 <meta property="article:tag" content="GAN">
+<meta property="article:tag" content="deep learning">
 <meta property="article:tag" content="keras">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://dn-simplecloud.shiyanlou.com/questions/uid788648-20190514-1557814594170">
@@ -282,7 +284,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-05-02 13:35:38" itemprop="dateModified" datetime="2022-05-02T13:35:38+08:00">2022-05-02</time>
+                <time title="修改时间：2022-05-13 22:55:18" itemprop="dateModified" datetime="2022-05-13T22:55:18+08:00">2022-05-13</time>
               </span>
 
           
@@ -298,14 +300,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>4.5k</span>
+              <span>7.2k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>4 分钟</span>
+              <span>7 分钟</span>
             </span>
 
         </div>
@@ -373,7 +375,30 @@
 <p>当compile一个模型时，该模型的训练状态就被固定成当前状态了（比如discriminator.trainable=True）;</p>
 <p>当尝试修改compile之后的discriminator的训练状态时，实质上是对另外一个discriminator的训练状态进行修改（也许接下来会compile）;</p>
 <p>由于框架自身的机制，上面compile之后的两个discriminator拥有相同的网络权重（即使它们被看作是两个独立的模型）</p>
-<h2 id="DCGAN"><a href="#DCGAN" class="headerlink" title="DCGAN"></a>DCGAN</h2><h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p>李宏毅 机器学习</p>
+<h2 id="DCGAN"><a href="#DCGAN" class="headerlink" title="DCGAN"></a>DCGAN</h2><p>普通的GAN训练效果挺差的.</p>
+<p>DCGAN（深度卷积生成对抗网络，Deep Convolution Generative Adversarial Network）基于 GAN 做了网络结构的改进，将 <a target="_blank" rel="noopener" href="https://baike.baidu.com/item/卷积神经网络/17541100?fr=aladdin">卷积神经网络</a> 应用在生成器网络和判别器网络中，使得整个模型具有更好的训练稳定性和性能表现。其工作原理和 GAN 相同，这里不再赘述</p>
+<h3 id="生成器网络结构"><a href="#生成器网络结构" class="headerlink" title="生成器网络结构"></a>生成器网络结构</h3><p><img data-src="https://dn-simplecloud.shiyanlou.com/questions/uid788648-20190513-1557739698486" alt="img" style="zoom:50%;" /></p>
+<h3 id="鉴别器网络结构"><a href="#鉴别器网络结构" class="headerlink" title="鉴别器网络结构"></a>鉴别器网络结构</h3><p><img data-src="https://dn-simplecloud.shiyanlou.com/questions/uid788648-20190521-1558405128517" alt="img" style="zoom:50%;" /></p>
+<p>DCGAN 是一类模型的总称，其结构特点如下所示：</p>
+<ul>
+<li>所有的池化层使用步幅卷积和 <a target="_blank" rel="noopener" href="https://buptldy.github.io/2016/10/29/2016-10-29-deconv/">微步幅卷积 Fractionally Strided Convolution</a> 或 <a target="_blank" rel="noopener" href="https://www.cnblogs.com/jokerjason/p/9429452.html">上采样</a> 进行替换，步幅卷积指的是卷积层的步长 <code>strides&gt;1</code>。</li>
+<li>判别器网络中使用步幅卷积，目的是进行图像压缩；生成器网路中使用微步幅卷积或上采样，目的是进行图像放大。</li>
+<li>在生成器网络和判别器网络中使用批标准化。</li>
+<li>对于更深的构架去掉 Dense 全连接层。</li>
+<li>生成器网络中输出层使用 <a target="_blank" rel="noopener" href="https://baike.baidu.com/item/激活函数/2520792?fr=aladdin">Tanh</a> 激活函数，其他所有的层都使用 <a target="_blank" rel="noopener" href="https://baike.baidu.com/item/ReLU 函数/22689567?fr=aladdin">ReLu</a> 激活函数。</li>
+<li>判别器网络中所有的层使用 LeakyReLu 激活函数</li>
+</ul>
+<p>这里写一下明显差别</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> tensorflow.keras.layers <span class="keyword">import</span> Input</span><br><span class="line"><span class="keyword">from</span> tensorflow.keras.layers <span class="keyword">import</span> Dense, Reshape</span><br><span class="line"><span class="keyword">from</span> tensorflow.keras.layers <span class="keyword">import</span> UpSampling2D</span><br><span class="line"><span class="keyword">from</span> tensorflow.keras.layers <span class="keyword">import</span> Conv2D</span><br><span class="line"><span class="keyword">from</span> tensorflow.keras.layers <span class="keyword">import</span> BatchNormalization, Activation</span><br><span class="line"><span class="keyword">from</span> tensorflow.keras.models <span class="keyword">import</span> Model</span><br><span class="line"><span class="comment"># 生成器</span></span><br><span class="line">img_rows = <span class="number">28</span></span><br><span class="line">img_cols = <span class="number">28</span></span><br><span class="line">channels = <span class="number">1</span></span><br><span class="line">img_shape = (img_rows, img_cols, channels)</span><br><span class="line">latent_dim = <span class="number">100</span></span><br><span class="line">generator_input = Input(shape=(latent_dim,))</span><br><span class="line">x = Dense(<span class="number">128</span> * <span class="number">7</span> * <span class="number">7</span>, activation=<span class="string">&quot;relu&quot;</span>,)(generator_input)</span><br><span class="line">x = Reshape((<span class="number">7</span>, <span class="number">7</span>, <span class="number">128</span>))(x)</span><br><span class="line">x = UpSampling2D()(x)</span><br><span class="line">x = Conv2D(<span class="number">128</span>, kernel_size=<span class="number">3</span>, padding=<span class="string">&#x27;same&#x27;</span>)(x)</span><br><span class="line">x = BatchNormalization(momentum=<span class="number">0.8</span>)(x)</span><br><span class="line">x = Activation(<span class="string">&quot;relu&quot;</span>)(x)</span><br><span class="line">x = UpSampling2D()(x)</span><br><span class="line">x = Conv2D(<span class="number">64</span>, <span class="number">3</span>, padding=<span class="string">&#x27;same&#x27;</span>)(x)</span><br><span class="line">x = BatchNormalization(momentum=<span class="number">0.8</span>)(x)</span><br><span class="line">x = Activation(<span class="string">&quot;relu&quot;</span>)(x)</span><br><span class="line">x = Conv2D(channels, kernel_size=<span class="number">3</span>, activation=<span class="string">&#x27;tanh&#x27;</span>, padding=<span class="string">&#x27;same&#x27;</span>)(x)</span><br><span class="line">generator = Model(generator_input, x)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 构建判别器</span></span><br><span class="line"><span class="keyword">from</span> tensorflow.keras.layers <span class="keyword">import</span> LeakyReLU</span><br><span class="line"><span class="keyword">from</span> tensorflow.keras.layers <span class="keyword">import</span> Dropout</span><br><span class="line"><span class="keyword">from</span> tensorflow.keras.layers <span class="keyword">import</span> Flatten, ZeroPadding2D</span><br><span class="line"><span class="keyword">from</span> tensorflow.keras.optimizers <span class="keyword">import</span> Adam</span><br><span class="line">discriminator_input = Input(shape=img_shape)</span><br><span class="line">x = Conv2D(<span class="number">32</span>, kernel_size=<span class="number">3</span>, strides=<span class="number">2</span>, padding=<span class="string">&quot;same&quot;</span>)(discriminator_input)</span><br><span class="line">x = LeakyReLU(alpha=<span class="number">0.2</span>)(x)</span><br><span class="line">x = Dropout(<span class="number">0.25</span>)(x)</span><br><span class="line">x = Conv2D(<span class="number">64</span>, kernel_size=<span class="number">3</span>, strides=<span class="number">2</span>, padding=<span class="string">&quot;same&quot;</span>)(x)</span><br><span class="line">x = ZeroPadding2D(padding=((<span class="number">0</span>, <span class="number">1</span>), (<span class="number">0</span>, <span class="number">1</span>)))(x)</span><br><span class="line">x = BatchNormalization(momentum=<span class="number">0.8</span>)(x)</span><br><span class="line">x = LeakyReLU(alpha=<span class="number">0.2</span>)(x)</span><br><span class="line">x = Dropout(<span class="number">0.25</span>)(x)</span><br><span class="line">x = Conv2D(<span class="number">128</span>, kernel_size=<span class="number">3</span>, strides=<span class="number">2</span>, padding=<span class="string">&quot;same&quot;</span>)(x)</span><br><span class="line">x = BatchNormalization(momentum=<span class="number">0.8</span>)(x)</span><br><span class="line">x = LeakyReLU(alpha=<span class="number">0.2</span>)(x)</span><br><span class="line">x = Dropout(<span class="number">0.25</span>)(x)</span><br><span class="line">x = Conv2D(<span class="number">256</span>, kernel_size=<span class="number">3</span>, strides=<span class="number">1</span>, padding=<span class="string">&quot;same&quot;</span>)(x)</span><br><span class="line">x = BatchNormalization(momentum=<span class="number">0.8</span>)(x)</span><br><span class="line">x = LeakyReLU(alpha=<span class="number">0.2</span>)(x)</span><br><span class="line">x = Dropout(<span class="number">0.25</span>)(x)</span><br><span class="line">x = Flatten()(x)</span><br><span class="line">x = Dense(<span class="number">1</span>, activation=<span class="string">&#x27;sigmoid&#x27;</span>)(x)</span><br><span class="line">discriminator = Model(discriminator_input, x)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 实例化 Adam 优化器</span></span><br><span class="line">optimizer = Adam(<span class="number">0.0002</span>, <span class="number">0.5</span>)</span><br><span class="line"><span class="comment"># 编译模型</span></span><br><span class="line">discriminator.<span class="built_in">compile</span>(loss=<span class="string">&#x27;binary_crossentropy&#x27;</span>,</span><br><span class="line">                      optimizer=optimizer,</span><br><span class="line">                      metrics=[<span class="string">&#x27;accuracy&#x27;</span>])</span><br></pre></td></tr></table></figure>
+<p>其他的都类似.</p>
+<p>训练DCGAN的技巧</p>
+<ul>
+<li>使用正态分布（高斯分布）对潜在空间中的点进行采样，而不用均匀分布。</li>
+<li>随机性能够提高稳健性。训练 GAN 得到的是一个动态平衡，所以 GAN 可能以各种方式“卡住”。在训练过程中引入随机性有助于防止出现这种情况。可通过两种方式引入随机性：一种是在判别器中使用 Dropout，另一种是向判别器的标签添加随机噪声。</li>
+<li>稀疏的梯度会妨碍 GAN 的训练。最大池化运算和 ReLU 激活函数都可能导致梯度稀疏。故本次实验在判别器网络中使用步幅卷积代替 <a target="_blank" rel="noopener" href="https://baike.baidu.com/item/最大池化/22692585?fr=aladdin">最大池化</a>，使用 LeakyReLU 层来代替 ReLU。</li>
+</ul>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p>李宏毅 机器学习</p>
 <p>deep learning 吴恩达</p>
 <p><a target="_blank" rel="noopener" href="https://easyai.tech/ai-definition/gan/">生成对抗网络 - GAN</a></p>
 
@@ -427,8 +452,8 @@
       <footer class="post-footer">
           
           <div class="post-tags">
-              <a href="/tags/deep-learning/" rel="tag"><i class="fa fa-tag"></i> deep learning</a>
               <a href="/tags/GAN/" rel="tag"><i class="fa fa-tag"></i> GAN</a>
+              <a href="/tags/deep-learning/" rel="tag"><i class="fa fa-tag"></i> deep learning</a>
               <a href="/tags/keras/" rel="tag"><i class="fa fa-tag"></i> keras</a>
           </div>
 
@@ -779,7 +804,7 @@ if(canvas.getContext){
 		
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#GAN%E7%90%86%E8%AE%BA"><span class="nav-number">1.</span> <span class="nav-text">GAN理论</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%80%E5%A7%8B"><span class="nav-number">1.1.</span> <span class="nav-text">开始</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E5%99%A8"><span class="nav-number">1.1.1.</span> <span class="nav-text">生成器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%A4%E5%88%AB%E5%99%A8"><span class="nav-number">1.1.2.</span> <span class="nav-text">判别器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9E%84%E5%BB%BAGAN"><span class="nav-number">1.1.3.</span> <span class="nav-text">构建GAN</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%93%E6%9E%9C"><span class="nav-number">1.2.</span> <span class="nav-text">结果</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#details"><span class="nav-number">1.3.</span> <span class="nav-text">details</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DCGAN"><span class="nav-number">2.</span> <span class="nav-text">DCGAN</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">3.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#GAN%E7%90%86%E8%AE%BA"><span class="nav-number">1.</span> <span class="nav-text">GAN理论</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%80%E5%A7%8B"><span class="nav-number">1.1.</span> <span class="nav-text">开始</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E5%99%A8"><span class="nav-number">1.1.1.</span> <span class="nav-text">生成器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%A4%E5%88%AB%E5%99%A8"><span class="nav-number">1.1.2.</span> <span class="nav-text">判别器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9E%84%E5%BB%BAGAN"><span class="nav-number">1.1.3.</span> <span class="nav-text">构建GAN</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%93%E6%9E%9C"><span class="nav-number">1.2.</span> <span class="nav-text">结果</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#details"><span class="nav-number">1.3.</span> <span class="nav-text">details</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DCGAN"><span class="nav-number">2.</span> <span class="nav-text">DCGAN</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E5%99%A8%E7%BD%91%E7%BB%9C%E7%BB%93%E6%9E%84"><span class="nav-number">2.1.</span> <span class="nav-text">生成器网络结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%89%B4%E5%88%AB%E5%99%A8%E7%BD%91%E7%BB%9C%E7%BB%93%E6%9E%84"><span class="nav-number">2.2.</span> <span class="nav-text">鉴别器网络结构</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">3.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
       </div>
       <!--/noindex-->
       <div class="site-overview-wrap sidebar-panel">
@@ -866,12 +891,12 @@ if(canvas.getContext){
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">431k</span>
+    <span title="站点总字数">457k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">6:31</span>
+    <span title="站点阅读时长">6:55</span>
 </div>
 
     <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
@@ -1130,5 +1155,4 @@ NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
 </script>
 
     </div>
-</body>
-</html>
+<script async>window.onload=function(){var a=document.createElement('script'),b=document.getElementsByTagName('script')[0];a.type='text/javascript',a.async=!0,a.src='/sw-register.js?v='+Date.now(),b.parentNode.insertBefore(a,b)};</script></body></html>
