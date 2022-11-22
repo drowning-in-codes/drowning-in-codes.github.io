@@ -4,6 +4,29 @@
   
     
     <entry>
+      <title>磁力链接与RSS订阅</title>
+      <link href="2022/11/22/%E7%A3%81%E5%8A%9B%E9%93%BE%E6%8E%A5%E4%B8%8ERSS%E8%AE%A2%E9%98%85/"/>
+      <url>2022/11/22/%E7%A3%81%E5%8A%9B%E9%93%BE%E6%8E%A5%E4%B8%8ERSS%E8%AE%A2%E9%98%85/</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>最近接触到了BT下载和RSS订阅,稍微学习学习,了解下概念.内容主要来自维基百科<br><span id="more"></span></p><h2 id="BT介绍"><a href="#BT介绍" class="headerlink" title="BT介绍"></a>BT介绍</h2><p>BT全称BitTorrent,是用在<a href="https://zh.wikipedia.org/wiki/对等网络">对等网络</a>中<a href="https://zh.wikipedia.org/wiki/文件分享">文件分享</a>的<a href="https://zh.wikipedia.org/wiki/网络协议">网络协议</a><a href="https://zh.wikipedia.org/wiki/计算机程序">程序</a>。和<a href="https://zh.wikipedia.org/wiki/点对点协议">点对点</a>（point-to-point）的协议<a href="https://zh.wikipedia.org/wiki/计算机程序">程序</a>不同，它是用户群对用户群（peer-to-peer），而且用户越多，下载同一文件的人越多，下载该文件的速度越快。且下载后，继续维持上传的状态，就可以“分享”，成为其用户端节点下载的<a href="https://zh.wikipedia.org/wiki/种子文件">种子文件</a>（.torrent），同时上传及下载.</p><p>普通的<a href="https://zh.wikipedia.org/wiki/HTTP">HTTP</a>／<a href="https://zh.wikipedia.org/wiki/FTP">FTP</a>下载使用<a href="https://zh.wikipedia.org/wiki/TCP/IP协议">TCP/IP协议</a>，BitTorrent协议是架构于TCP/IP协议之上的一个<a href="https://zh.wikipedia.org/wiki/对等网络">P2P</a>文件传输<a href="https://zh.wikipedia.org/wiki/通訊協定">通信协议</a>，处于TCP/IP结构的<a href="https://zh.wikipedia.org/wiki/应用层">应用层</a>。BitTorrent协议本身也包含了很多具体的内容协议和扩展协议，并在不断扩展中</p><p>在BT下载的流程中,文件发布者会根据要发布的文件生成提供一个.torrent文件,这就是种子文件.发布这个文件就是做种(发布者提供下载任务的全部内容的行为；下载者下载完成后继续提供给他人下载的行为).</p><p>这个种子文件本质上是<a href="https://zh.wikipedia.org/wiki/文本文件">文本文件</a>，包含Tracker信息和文件信息两部分。<strong>Tracker信息主要是BT下载中需要用到的Tracker服务器的地址和针对Tracker服务器的设置</strong>，<strong>文件信息是根据对目标文件的计算生成的，计算结果根据BitTorrent协议内的<a href="https://zh.wikipedia.org/wiki/Bencode">Bencode</a>规则进行编码</strong>。它的主要原理是需要把提供下载的文件虚拟分成大小相等的块，块大小必须为2k的整数次方（由于是虚拟分块，硬盘上并不产生各个块文件），并把每个块的索引信息和<a href="https://zh.wikipedia.org/wiki/Hash">Hash</a>验证码写入种子文件中；所以，种子文件就是被下载文件的“索引”。</p><p>下载者要下载文件内容，需要先得到相应的种子文件，然后使用BT客户端软件进行下载。</p><p>因为种子文件中有tracker地址,这个tracker就是个服务器地址(下载者的信息也会记录.收集下载者信息的服务器，并将此信息提供给其他下载者，使下载者们相互连接起来，传输数据。).下图是在Motrix中的种子的tracker信息<img data-src="http://cdn.sekyoro.top/imgs/image-20221122140032781.png" alt="image-20221122140032781" style="zoom:50%;" /></p><p>下载时，BT客户端首先解析种子文件得到Tracker地址，然后连接Tracker服务器。Tracker服务器回应下载者的请求，提供下载者其他下载者（包括发布者）的IP。下载者再连接其他下载者，根据种子文件，两者分别告知对方自己已经有的块，然后交换对方所没有的数据。此时不需要其他服务器参与，分散了单个线路上的数据流量，因此减轻了服务器负担。</p><p>下载者每得到一个块，需要算出下载块的Hash验证码与种子文件中的对比，如果一样则说明块正确，不一样则需要重新下载这个块。这种规定是为了解决下载内容准确性的问题。</p><h2 id="磁力链接"><a href="#磁力链接" class="headerlink" title="磁力链接"></a>磁力链接</h2><p><strong>磁力链接</strong>（Magnet URI scheme），是<a href="https://zh.wikipedia.org/wiki/对等网络">对等网络</a>中进行信息检索和下载文档的<a href="https://zh.wikipedia.org/wiki/电脑程序">电脑程序</a>。和基于“位置”连接的<a href="https://zh.wikipedia.org/wiki/统一资源定位符">统一资源定位符</a>不同，磁力链接是基于<a href="https://zh.wikipedia.org/wiki/元数据">元数据</a>（metadata）文件内容，属于<a href="https://zh.wikipedia.org/wiki/统一资源名称">统一资源名称</a>。也就是说，磁力链接不基于文档的<a href="https://zh.wikipedia.org/wiki/IP地址">IP地址</a>或定位符，而是在<a href="https://zh.wikipedia.org/wiki/分布式数据库">分布式数据库</a>中，通过<a href="https://zh.wikipedia.org/wiki/散列函数">散列函数</a>值来识别、<a href="https://zh.wikipedia.org/wiki/搜索">搜索</a>来下载文档。因为不依赖一个处于启动状态的主机来下载文档，所以特别适用没有中心服务器的<a href="https://zh.wikipedia.org/wiki/对等网络">对等网络</a>。它符合<a href="https://zh.wikipedia.org/wiki/开源标准">开源标准</a>。</p><p>磁力链接由一组参数组成，参数间的顺序没有讲究，其格式与在HTTP链接末尾的查询字符串相同。最常见的参数是”xt”，是”exact topic”的缩写，通常是一个特定文件的内容散列函数值形成的<a href="https://zh.wikipedia.org/wiki/统一资源名称">URN</a></p><p><img data-src="http://cdn.sekyoro.top/imgs/image-20221122140625013.png" alt="image-20221122140625013"></p><h2 id="RSS订阅"><a href="#RSS订阅" class="headerlink" title="RSS订阅"></a>RSS订阅</h2><p><strong>RSS</strong>（英文全称：<a href="https://zh.wikipedia.org/wiki/Resource_Description_Framework">RDF</a> Site Summary 或 Really Simple Syndication<a href="https://zh.wikipedia.org/wiki/RSS#cite_note-powers-2003-1-2">[2]</a>），中文译作<strong>简易信息聚合</strong><a href="https://zh.wikipedia.org/wiki/RSS#cite_note-3">[3]</a>，也称<strong>聚合内容</strong><a href="https://zh.wikipedia.org/wiki/RSS#cite_note-张锐2015-4">[4]</a>，是一种<a href="https://zh.wikipedia.org/wiki/消息來源">消息来源</a>格式规范，用以聚合多个网站更新的内容并自动通知网站订阅者。使用 RSS 后，网站订阅者便无需再手动查看网站是否有新的内容，同时 RSS 可将多个网站更新的内容进行整合，以摘要的形式呈现，有助于订阅者快速获取重要信息，并选择性地点阅查看。</p><p>RSS 摘要可以借由 RSS 阅读器、feed reader 或 aggregator 等网页或以桌面为架构的软件来阅读。标准的 <a href="https://zh.wikipedia.org/wiki/XML">XML</a> 档式可允许信息在一次发布后通过不同的程序阅览。用户借由将网摘输入 RSS 阅读器，或是用鼠标点取浏览器上指向订阅程序的 RSS 小图标 <a href="https://zh.wikipedia.org/wiki/URI">URI</a>（非通常所称的 <a href="https://zh.wikipedia.org/wiki/URL">URL</a>）来订阅网摘。RSS 阅读器会定期检阅网站是否有更新，然后下载至监看用户界面。</p><h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a href="https://zh.wikipedia.org/wiki/RSS">RSS - 维基百科，自由的百科全书 (wikipedia.org)</a></p><p><a href="https://zh.wikipedia.org/wiki/BitTorrent_(协议">BitTorrent (协议) - 维基百科，自由的百科全书 (wikipedia.org)</a>)</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> RSS </tag>
+            
+            <tag> torrent </tag>
+            
+            <tag> BT </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>使用overleaf优雅地写文章</title>
       <link href="2022/11/11/%E4%BD%BF%E7%94%A8overleaf%E4%BC%98%E9%9B%85%E5%9C%B0%E5%86%99%E6%96%87%E7%AB%A0/"/>
       <url>2022/11/11/%E4%BD%BF%E7%94%A8overleaf%E4%BC%98%E9%9B%85%E5%9C%B0%E5%86%99%E6%96%87%E7%AB%A0/</url>
