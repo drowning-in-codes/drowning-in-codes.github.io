@@ -24,7 +24,7 @@ NexT.utils = {
         $imageWrapLink.attr('data-fancybox', 'default').attr('rel', 'default');
       }
 
-      var imageTitle = $image.attr('title') || $image.attr('alt');
+      var imageTitle = $image.attr('title'); //|| $image.attr('alt'); 使得一般没有title属性的图片下不显示名称
       if (imageTitle) {
         $imageWrapLink.append(`<p class="image-caption">${imageTitle}</p>`);
         // Make sure img title tag will show correctly in fancybox
