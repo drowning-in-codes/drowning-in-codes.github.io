@@ -494,11 +494,11 @@
       
         <tags>
             
+            <tag> flex </tag>
+            
             <tag> lex </tag>
             
             <tag> yacc </tag>
-            
-            <tag> flex </tag>
             
             <tag> bison </tag>
             
