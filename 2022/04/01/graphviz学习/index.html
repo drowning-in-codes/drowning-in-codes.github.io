@@ -1,0 +1,1340 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<script src="/live2d-widget/autoload.js"></script>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/blog_32px.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/blog_32px.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/blog_16px.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="EPrJAp11bJwHULpQUaSNSZ8_3RcvTsPDAEGOME4pl1w">
+
+<!-- google adsense in head.swig -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4034523802263123"
+     crossorigin="anonymous"></script>
+  <meta name="msvalidate.01" content="7226864CE87CE9DE8C008385273846FF">
+  <meta name="baidu-site-verification" content="code-fjFXVtiL7j" />
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-mac-osx.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"sekyoro.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":240,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+<link href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css" rel="stylesheet">
+  <meta name="description" content="这是一个好用的工具,跟UML一样能起到很好的作用.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="graphviz学习">
+<meta property="og:url" content="https://sekyoro.top/2022/04/01/graphviz%E5%AD%A6%E4%B9%A0/index.html">
+<meta property="og:site_name" content="Sekyoro的博客小屋">
+<meta property="og:description" content="这是一个好用的工具,跟UML一样能起到很好的作用.">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/image-20220402093358726.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/%E5%A5%87%E5%A6%99%E7%9A%84%E5%85%B3%E7%B3%BB.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/image-20220402231223552.png">
+<meta property="article:published_time" content="2022-03-31T16:13:58.000Z">
+<meta property="article:modified_time" content="2022-04-02T15:15:42.678Z">
+<meta property="article:author" content="Sekyoro">
+<meta property="article:tag" content="编译原理">
+<meta property="article:tag" content="graphviz">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://cdn.sekyoro.top/imgs/image-20220402093358726.png">
+
+<link rel="canonical" href="https://sekyoro.top/2022/04/01/graphviz%E5%AD%A6%E4%B9%A0/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+ 
+
+<script>
+  var OriginTitile = document.title;
+  var titleTime;
+  document.addEventListener("visibilitychange", function() {
+    if (document.hidden) {
+      document.title = "(つェ⊂)我藏好了哦~" + OriginTitile;
+      clearTimeout(titleTime);
+    } else {
+      document.title = "(*´∇｀*) 被你发现啦~" + OriginTitile;
+      titleTime = setTimeout(function() {
+        document.title = OriginTitile;
+      }, 2000);
+    }
+  });
+</script>
+
+
+
+  <script src="/js/src/activate-power-mode.min.js"></script>
+  <script>
+    POWERMODE.colorful = true;
+    POWERMODE.shake = false;
+    document.body.addEventListener('input', POWERMODE);
+  </script>
+
+
+  <title>graphviz学习 | Sekyoro的博客小屋</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+<!-- require JQuery -->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+<!-- require pjax -->
+<script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/index.min.js"></script>
+
+
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+   <script type="text/javascript" src="/js/src/fireworks.js"></script>
+
+
+  <div class="container use-motion">
+    <div class="headband"></div>
+	
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Sekyoro的博客小屋</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-resume">
+
+    <a href="/resume/" rel="section"><i class="fa fa-file-pdf fa-fw"></i>简历</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://sekyoro.top/2022/04/01/graphviz%E5%AD%A6%E4%B9%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://i.loli.net/2021/05/17/YqoavnXdGTpPO9R.jpg">
+      <meta itemprop="name" content="Sekyoro">
+      <meta itemprop="description" content="什么也无法舍弃的人，什么也做不了.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sekyoro的博客小屋">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          graphviz学习
+        </h1>
+
+        <div class="post-meta">
+		
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-04-01 00:13:58" itemprop="dateCreated datePublished" datetime="2022-04-01T00:13:58+08:00">2022-04-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-04-02 23:15:42" itemprop="dateModified" datetime="2022-04-02T23:15:42+08:00">2022-04-02</time>
+              </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>5.4k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>5 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>这是一个好用的工具,跟UML一样能起到很好的作用.<br><span id="more"></span></p>
+<p>官方网站<a target="_blank" rel="noopener" href="https://graphviz.org/">Graphviz</a></p>
+<p>其官网在介绍Dot language时也用了文法推导.</p>
+<h2 id="Layout-Engines"><a href="#Layout-Engines" class="headerlink" title="Layout Engines"></a>Layout Engines</h2><p>使用这些引擎可以得到不同的图</p>
+<h3 id="dot"><a href="#dot" class="headerlink" title="dot"></a>dot</h3><blockquote>
+<p>Makes “hierarchical” or layered drawings of directed graphs.</p>
+<p><code>dot</code> is the default tool to use if edges have directionality.</p>
+</blockquote>
+<p>dot是使用有向图的默认工具.</p>
+<blockquote>
+<p>The layout algorithm aims edges in the same direction (top to bottom, or left to right) and then attempts to avoid edge crossings and reduce edge length.</p>
+</blockquote>
+<p>使箭头尽量从上到下,从左到右.其输出格式包括PostScript，PDF，SVG，PNG，含注解的文本等等。</p>
+<h3 id="neato"><a href="#neato" class="headerlink" title="neato"></a>neato</h3><blockquote>
+<p><code>neato</code> is the default tool to use if the graph is not too large (about 100 nodes) and you don’t know anything else about it.</p>
+<p><code>neato</code> attempts to minimize a global energy function, which is equivalent to statistical multi-dimensional scaling.</p>
+</blockquote>
+<p>放射状,节点不能过多.</p>
+<h3 id="twopi"><a href="#twopi" class="headerlink" title="twopi"></a>twopi</h3><blockquote>
+<p>Nodes are placed on concentric circles depending their distance from a given root node.</p>
+</blockquote>
+<p>同心圆</p>
+<h3 id="circo"><a href="#circo" class="headerlink" title="circo"></a>circo</h3><blockquote>
+<p>This is suitable for certain diagrams of multiple cyclic structures, such as certain telecommunications networks</p>
+</blockquote>
+<p>圆形图形</p>
+<h3 id="fdp"><a href="#fdp" class="headerlink" title="fdp"></a>fdp</h3><blockquote>
+<p>“spring model” layouts similar to those of <a target="_blank" rel="noopener" href="https://graphviz.org/docs/layouts/neato/">neato</a>, but does this by reducing forces rather than working with energy.</p>
+<p><code>fdp</code> implements the Fruchterman-Reingold heuristic including a multigrid solver that handles larger graphs and clustered undirected graphs.</p>
+</blockquote>
+<p>用于生成无向图的工具</p>
+<p>此外还有osage,patchwork和sfdp</p>
+<blockquote>
+<p><code>osage</code> draws clustered graphs</p>
+<p><code>patchwork</code> draws clustered graphs using a squarified treemap layout</p>
+<p>Multiscale version of <code>fdp</code> for the layout of large graphs.</p>
+</blockquote>
+<p>可以输出的类型也非常多,除了常见的图片类型png,jpg,ico,webp还有svg,ps(postscript)/pdf</p>
+<h2 id="Dot语言"><a href="#Dot语言" class="headerlink" title="Dot语言"></a>Dot语言</h2><p>描述图的生成.</p>
+<p>另外还有节点颜色形状,边的颜色箭头样式, 图的颜色等设置,这些直接翻阅官方文档即可.</p>
+<p>可以直接写一个dot文件然后命令行输出得到图,也可以配合一些编辑器,例如vscode,下载插件plantUML或者直接Graphviz就有扩展.</p>
+<p><img data-src="http://cdn.sekyoro.top/imgs/image-20220402093358726.png" alt="示例" style="zoom:50%;" /></p>
+<p>我基本上就在vscode上练了.</p>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">digraph demo &#123;</span><br><span class="line">   label = &quot;示例&quot;</span><br><span class="line">   bgcolor = &quot;beige&quot;</span><br><span class="line">   node[color = &quot;grey&quot;]</span><br><span class="line">    father[label = &quot;爸爸&quot;,shape = &quot;box&quot;]</span><br><span class="line">    node[color=&quot;<span class="params">#</span>FF6347&quot;]</span><br><span class="line">    strangers[label=&quot;路人&quot;]</span><br><span class="line">    edge[color=&quot;yellow&quot;]</span><br><span class="line">    father-&gt;mother[dir=both,label=&quot;爱人&quot;]</span><br><span class="line">    strangers-&gt;mother[label=&quot;??&quot;]</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里说一下问题,vscode插件导出图片后中文变乱码了,预览的时候好好的.</p>
+<p><img data-src="http://cdn.sekyoro.top/imgs/%E5%A5%87%E5%A6%99%E7%9A%84%E5%85%B3%E7%B3%BB.png" alt="奇妙的关系" style="zoom:67%;" /></p>
+<p>然后我发现这不只是插件的问题,事实上在windows上使用graphviz中文就是会乱码,所以需要额外的设置(不用中文也不是不行),在mac上我记得是不会乱码的.</p>
+<p>可行的解决方法是手动添加字体属性,要给node,edge和graph都添加上</p>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"> digraph demo &#123;</span><br><span class="line">   graph[label=&quot;图&quot;,fontname=&quot;FangSong&quot;]</span><br><span class="line">   bgcolor = &quot;beige&quot;</span><br><span class="line">   node[color = &quot;grey&quot;,fontname=&quot;FangSong&quot;]</span><br><span class="line">    edge[color=&quot;yellow&quot;,fontname=&quot;FangSong&quot;]</span><br><span class="line">    father[label = &quot; 爸爸 &quot;,shape = &quot;box&quot;]</span><br><span class="line">    strangers[label=&quot; 路人 &quot;]</span><br><span class="line">    </span><br><span class="line">    father-&gt;mother[dir=both,label=&quot; 爱人 &quot;]</span><br><span class="line">    strangers-&gt;mother[label=&quot;??&quot;]</span><br><span class="line">    me[shape=&quot;record&quot;,label=&quot; |你好| &quot;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后就正常了.后面如果有解决方法我再更新.</p>
+<h3 id="题外话"><a href="#题外话" class="headerlink" title="题外话"></a>题外话</h3><p>这里再介绍一下其他的一堆东西.原因是我发现我装的graphviz是msys2中的.</p>
+<p>clang和llvm,cygwin,msys2,minGW,msvc.</p>
+<blockquote>
+<p>在<strong>windows下clang指令只是负责编译的前端工作，即识别编译指令，与提供报错提示</strong>。并<strong>不负责具体的代码编译工作</strong>，所以在windows下光安装llvm是不够的，还需<strong>要</strong>有实际的编译链接库，例如<strong>安装MinGW或者MSVC来获取需要的运行库</strong></p>
+</blockquote>
+<p>其实clang的含义有一定的歧义,一般可以认为其包含llvm作为后端,下载时直接下载llvm包含clang,苹果一般是自带clang的.狭义理解clang就是前端负责词法语法和语义生成中间代码.</p>
+<p><strong>Cygwin是一个可原生运行于Windows系统上的POSIX兼容环境</strong>。这意味着我们我可以在windows上使用经典的一些linux东西,比如GNU套装.</p>
+<p>MinGW，<em>Minimalist GNU for Windows</em>，用于开发原生（32位） Windows 应用的开发环境。它主要提供了针对 win32 应用的 GCC、GNU binutils 等工具，以及对等于 Windows SDK（的子集）的头文件和用于 MinGW 版本 linker 的库文件（so、a等，而不是 VC 的 lib）。</p>
+<p>MinGW 能够替代 cl 用于编译不包含 MFC 的、以 WinSDK 为主的 Windows 应用，并且编译出来的应用不依赖于第三方的模拟层支持，其运行时为大部分 Windows 标配的 msvcrt（故称原生 Windows 应用）。除此之外，MinGW 也支持 GCC 支持的其他语言。</p>
+<p>而msys2是msys的升级版,msys是MinGW的分支,作用类似.</p>
+<p>区别（小结）：Cygwin是模拟 POSIX 系统，源码移植 Linux 应用到 Windows 下；MinGW 是用于开发 Windows 应用的开发环境.</p>
+<p>MSVC，就是微软（MS）的VC运行库。VC运行库，是Visual C++的运行库。很多程序在编制的时候，使用了微软的运行库，大大减少了软件的编码量，却提高了兼容性。但运行的时候，需要这些运行库。这些运行库简称就是MSVC。</p>
+<h2 id="一些重点"><a href="#一些重点" class="headerlink" title="一些重点"></a>一些重点</h2><p>事实上这些东西较难也没有必要完全记住,把官方文档保存,掌握基本要点就行了.<br>掌握四个重点,图,子图,节点与边.</p>
+<h3 id="Graph"><a href="#Graph" class="headerlink" title="Graph"></a>Graph</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>属性名</th>
+<th>默认值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>label</td>
+<td></td>
+<td>图片标签，如上面<code>示例</code></td>
+</tr>
+<tr>
+<td>bgcolor</td>
+<td></td>
+<td>背景颜色，颜色文档<a target="_blank" rel="noopener" href="http://www.graphviz.org/content/color-names">点此</a></td>
+</tr>
+<tr>
+<td>fontcolor</td>
+<td>black</td>
+<td>字体颜色，定义上面<code>示例</code>的颜色</td>
+</tr>
+<tr>
+<td>fontname</td>
+<td>Times-Roman</td>
+<td>字体</td>
+</tr>
+<tr>
+<td>fontsize</td>
+<td>14</td>
+<td>字体大小</td>
+</tr>
+<tr>
+<td>rank</td>
+<td></td>
+<td>子图等级限制， same,min,max,source,sink</td>
+</tr>
+<tr>
+<td>rankdir</td>
+<td>TB</td>
+<td>排序方向，LR(left to right) or TB(top to bottom)</td>
+</tr>
+<tr>
+<td>compound</td>
+<td>false</td>
+<td>If true, allow edges between clusters. 配合 lhead 和 ltail 使用</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>label设置图的标题.</p>
+<p>graph[设置全局图属性] 注意这种设置会被局部的覆盖,对于图来说倒不是很要紧</p>
+<p>如果中文字图出现乱码可以设置fontname.一般rankdir和compound用的较多,可以设置排序方向和边的连接.</p>
+<p>注意,有向边只能在有向图中使用,无向边只能在无向图中使用</p>
+<h3 id="Node"><a href="#Node" class="headerlink" title="Node"></a>Node</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>属性名</th>
+<th>默认值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>label</td>
+<td>node name</td>
+<td>节点显示内容</td>
+</tr>
+<tr>
+<td>color</td>
+<td>black</td>
+<td>node边框颜色</td>
+</tr>
+<tr>
+<td>fontcolor</td>
+<td>black</td>
+<td>字体颜色</td>
+</tr>
+<tr>
+<td>fillcolor</td>
+<td></td>
+<td>背景色</td>
+</tr>
+<tr>
+<td>fontname</td>
+<td>Times-Roman</td>
+<td>字体</td>
+</tr>
+<tr>
+<td>fontsize</td>
+<td>14</td>
+<td>字体大小</td>
+</tr>
+<tr>
+<td>shape</td>
+<td>ellipse</td>
+<td>形状,box、ellipse、circle、diamond、plaintext、point、triangle、invtriangle</td>
+</tr>
+<tr>
+<td>style</td>
+<td></td>
+<td>图形样式，eg. bold、dashed、dotted、filled</td>
+</tr>
+<tr>
+<td>image</td>
+<td></td>
+<td>背景图片地址</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>style设置节点样式(主要针对节点的边框的样式),shape设置节点形状.color设置边框颜色.</p>
+<p>将节点shape设置为record,用 | 隔开的串会在绘制出来的节点中展现为一条分隔符，用 &lt;&gt; 括起来的串称为锚点</p>
+<p>记录形式的节点也可以是竖形排列的。与横向排列的记录的不同只是label的形式不同，label中内容使用 {} 包围则是竖形排列的</p>
+<h3 id="Edge"><a href="#Edge" class="headerlink" title="Edge"></a>Edge</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>属性名</th>
+<th>默认值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>label</td>
+<td></td>
+<td>描述关系</td>
+</tr>
+<tr>
+<td>color</td>
+<td>black</td>
+<td>箭头颜色</td>
+</tr>
+<tr>
+<td>fontcolor</td>
+<td>black</td>
+<td>关系文字颜色</td>
+</tr>
+<tr>
+<td>dir</td>
+<td>forward</td>
+<td>设置方向：forward,back,both,none</td>
+</tr>
+<tr>
+<td>arrowhead</td>
+<td>normal</td>
+<td>箭头头部形状。box、crow、diamond、dot、none、normal、vee。箭头文档<a target="_blank" rel="noopener" href="http://www.graphviz.org/content/arrow-shapes">点此</a></td>
+</tr>
+<tr>
+<td>arrowtail</td>
+<td></td>
+<td>箭头尾部形状</td>
+</tr>
+<tr>
+<td>arrowsize</td>
+<td>1.0</td>
+<td>箭头大小</td>
+</tr>
+<tr>
+<td>style</td>
+<td></td>
+<td>图形样式，eg. bold、dashed、dotted、filled</td>
+</tr>
+<tr>
+<td>lhead</td>
+<td></td>
+<td>当 compound 为true时，lhead用于指定边指向的cluster</td>
+</tr>
+<tr>
+<td>ltail</td>
+<td></td>
+<td>与ltail类似</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>设置边的属性,dir可以设置双向</p>
+<h3 id="子图"><a href="#子图" class="headerlink" title="子图"></a>子图</h3><p>很多属性与图类似</p>
+<p>子图名字要以cluster开头</p>
+<p>边直接指向cluster，需要设置 compound 为true，并配合 lhead 或 ltail 来实现.</p>
+<h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><p>全局生命的属性(例如node[…])只对声明语句后才创建的结构起作用.</p>
+<p>看一个例子.</p>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">digraph G &#123;    </span><br><span class="line">  start -&gt; a0;</span><br><span class="line">  start -&gt; b0;</span><br><span class="line">  a1 -&gt; b3;</span><br><span class="line">  node[color=&quot;yellow&quot;];</span><br><span class="line">  b2 -&gt; a3;</span><br><span class="line">  a3 -&gt; a0;</span><br><span class="line">  a3 -&gt; end;</span><br><span class="line">  b3 -&gt; end; </span><br><span class="line">  start [shape=diamond];</span><br><span class="line">  end [shape=Msquare];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img data-src="http://cdn.sekyoro.top/imgs/image-20220402231223552.png" alt="image-20220402231223552"></p>
+<p>可以看到b2,a3,end节点是黄色,而这三个节点是在声明语句后才创建的.</p>
+<h2 id="实战"><a href="#实战" class="headerlink" title="实战"></a>实战</h2><figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">digraph G &#123;</span><br><span class="line"></span><br><span class="line">  subgraph cluster<span class="built_in">_</span>0 &#123;</span><br><span class="line">    style=filled;</span><br><span class="line">    color=lightgrey;</span><br><span class="line">    node [style=filled,color=white];</span><br><span class="line">    a0 -&gt; a1 -&gt; a2 -&gt; a3;</span><br><span class="line">    label = &quot;process <span class="params">#1</span>&quot;;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  subgraph cluster<span class="built_in">_</span>1 &#123;</span><br><span class="line">    node [style=filled];</span><br><span class="line">    b0 -&gt; b1 -&gt; b2 -&gt; b3;</span><br><span class="line">    label = &quot;process <span class="params">#2</span>&quot;;</span><br><span class="line">    color=blue</span><br><span class="line">  &#125;</span><br><span class="line">  start -&gt; a0;</span><br><span class="line">  start -&gt; b0;</span><br><span class="line">  a1 -&gt; b3;</span><br><span class="line">  b2 -&gt; a3;</span><br><span class="line">  a3 -&gt; a0;</span><br><span class="line">  a3 -&gt; end;</span><br><span class="line">  b3 -&gt; end;</span><br><span class="line"></span><br><span class="line">  start [shape=diamond];</span><br><span class="line">  end [shape=Msquare];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>首先digraph表示有向图,随后声明两个子图,然后node生命全局属性,然后节点连接.</p>
+<p>然后在子图中声明节点属性和图的color属性.</p>
+<h2 id="资料"><a href="#资料" class="headerlink" title="资料"></a>资料</h2><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/shuqin/p/11897207.html">Graphviz 画图的一些总结 - 小胖西瓜 - 博客园 (cnblogs.com)</a></p>
+<p><a target="_blank" rel="noopener" href="https://itopic.org/graphviz.html">简介而全面的介绍</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/myRealization/article/details/119459490">【VS Code】Windows10下VS Code配置Graphviz和DOT语言环境_memcpy0的博客-CSDN博客</a>介绍了vscode上的几款插件,我建议下载可以直接导出pdf的.</p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/tshua/p/5932501.html">Cygwin、Msys、MinGW、Msys2的区别与联系(转) - 紫色年华 - 博客园 (cnblogs.com)</a></p>
+
+    </div>
+
+    
+    
+    
+    <div>
+	
+     <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+     
+   </div>
+        <div class="reward-container">
+  <div>感谢阅读.</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.png" alt="Sekyoro 微信支付">
+        <p>微信支付</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Sekyoro
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://sekyoro.top/2022/04/01/graphviz%E5%AD%A6%E4%B9%A0/" title="graphviz学习">https://sekyoro.top/2022/04/01/graphviz学习/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/" rel="tag"><i class="fa fa-tag"></i> 编译原理</a>
+              <a href="/tags/graphviz/" rel="tag"><i class="fa fa-tag"></i> graphviz</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/03/11/Keras%E5%AD%A6%E4%B9%A0/" rel="prev" title="Keras学习">
+      <i class="fa fa-chevron-left"></i> Keras学习
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/04/07/django%E5%AD%A6%E4%B9%A0/" rel="next" title="django学习">
+      django学习 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81MzE5Ny8yOTY3Mg=="></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+	
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+      	   
+          <!-- canvas粒子时钟 -->
+          <div style="">
+  <canvas id="canvas" style="width:60%;">当前浏览器不支持canvas，请更换浏览器后再试</canvas>
+</div>
+<script>
+(function(){
+
+   var digit=
+    [
+        [
+            [0,0,1,1,1,0,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,0,1,1,0],
+            [0,0,1,1,1,0,0]
+        ],//0
+        [
+            [0,0,0,1,1,0,0],
+            [0,1,1,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [1,1,1,1,1,1,1]
+        ],//1
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,1,1],
+            [1,1,1,1,1,1,1]
+        ],//2
+        [
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//3
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,0],
+            [0,0,1,1,1,1,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,1,1,0],
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,1]
+        ],//4
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,1,1,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//5
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//6
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0]
+        ],//7
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//8
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,1,1,0,0,0,0]
+        ],//9
+        [
+            [0,0,0,0,0,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,0,0,0]
+        ]//:
+    ];
+
+var canvas = document.getElementById('canvas');
+
+if(canvas.getContext){
+    var cxt = canvas.getContext('2d');
+    //声明canvas的宽高
+    var H = 100,W = 700;
+    canvas.height = H;
+    canvas.width = W;
+    cxt.fillStyle = '#f00';
+    cxt.fillRect(10,10,50,50);
+
+    //存储时间数据
+    var data = [];
+    //存储运动的小球
+    var balls = [];
+    //设置粒子半径
+    var R = canvas.height/20-1;
+    (function(){
+        var temp = /(\d)(\d):(\d)(\d):(\d)(\d)/.exec(new Date());
+        //存储时间数字，由十位小时、个位小时、冒号、十位分钟、个位分钟、冒号、十位秒钟、个位秒钟这7个数字组成
+        data.push(temp[1],temp[2],10,temp[3],temp[4],10,temp[5],temp[6]);
+    })();
+
+    /*生成点阵数字*/
+    function renderDigit(index,num){
+        for(var i = 0; i < digit[num].length; i++){
+            for(var j = 0; j < digit[num][i].length; j++){
+                if(digit[num][i][j] == 1){
+                    cxt.beginPath();
+                    cxt.arc(14*(R+2)*index + j*2*(R+1)+(R+1),i*2*(R+1)+(R+1),R,0,2*Math.PI);
+                    cxt.closePath();
+                    cxt.fill();
+                }
+            }
+        }
+    }
+
+    /*更新时钟*/
+    function updateDigitTime(){
+        var changeNumArray = [];
+        var temp = /(\d)(\d):(\d)(\d):(\d)(\d)/.exec(new Date());
+        var NewData = [];
+        NewData.push(temp[1],temp[2],10,temp[3],temp[4],10,temp[5],temp[6]);
+        for(var i = data.length-1; i >=0 ; i--){
+            //时间发生变化
+            if(NewData[i] !== data[i]){
+                //将变化的数字值和在data数组中的索引存储在changeNumArray数组中
+                changeNumArray.push(i+'_'+(Number(data[i])+1)%10);
+            }
+        }
+        //增加小球
+        for(var i = 0; i< changeNumArray.length; i++){
+            addBalls.apply(this,changeNumArray[i].split('_'));
+        }
+        data = NewData.concat();
+    }
+
+    /*更新小球状态*/
+    function updateBalls(){
+        for(var i = 0; i < balls.length; i++){
+            balls[i].stepY += balls[i].disY;
+            balls[i].x += balls[i].stepX;
+            balls[i].y += balls[i].stepY;
+            if(balls[i].x > W + R || balls[i].y > H + R){
+                balls.splice(i,1);
+                i--;
+            }
+        }
+    }
+
+    /*增加要运动的小球*/
+    function addBalls(index,num){
+        var numArray = [1,2,3];
+        var colorArray =  ["#3BE","#09C","#A6C","#93C","#9C0","#690","#FB3","#F80","#F44","#C00"];
+        for(var i = 0; i < digit[num].length; i++){
+            for(var j = 0; j < digit[num][i].length; j++){
+                if(digit[num][i][j] == 1){
+                    var ball = {
+                        x:14*(R+2)*index + j*2*(R+1)+(R+1),
+                        y:i*2*(R+1)+(R+1),
+                        stepX:Math.floor(Math.random() * 4 -2),
+                        stepY:-2*numArray[Math.floor(Math.random()*numArray.length)],
+                        color:colorArray[Math.floor(Math.random()*colorArray.length)],
+                        disY:1
+                    };
+                    balls.push(ball);
+                }
+            }
+        }
+    }
+
+    /*渲染*/
+    function render(){
+        //重置画布宽度，达到清空画布的效果
+        canvas.height = 100;
+        //渲染时钟
+        for(var i = 0; i < data.length; i++){
+            renderDigit(i,data[i]);
+        }
+        //渲染小球
+        for(var i = 0; i < balls.length; i++){
+            cxt.beginPath();
+            cxt.arc(balls[i].x,balls[i].y,R,0,2*Math.PI);
+            cxt.fillStyle = balls[i].color;
+            cxt.closePath();
+            cxt.fill();
+        }
+    }
+
+    clearInterval(oTimer);
+    var oTimer = setInterval(function(){
+        //更新时钟
+        updateDigitTime();
+        //更新小球状态
+        updateBalls();
+        //渲染
+        render();
+    },50);
+}
+
+})();
+</script>
+        
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.0/dist/APlayer.min.css">
+		<script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.0/dist/APlayer.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/meting@1.2/dist/Meting.min.js"></script>
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+	  
+		
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Layout-Engines"><span class="nav-number">1.</span> <span class="nav-text">Layout Engines</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#dot"><span class="nav-number">1.1.</span> <span class="nav-text">dot</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#neato"><span class="nav-number">1.2.</span> <span class="nav-text">neato</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#twopi"><span class="nav-number">1.3.</span> <span class="nav-text">twopi</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#circo"><span class="nav-number">1.4.</span> <span class="nav-text">circo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#fdp"><span class="nav-number">1.5.</span> <span class="nav-text">fdp</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Dot%E8%AF%AD%E8%A8%80"><span class="nav-number">2.</span> <span class="nav-text">Dot语言</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%98%E5%A4%96%E8%AF%9D"><span class="nav-number">2.1.</span> <span class="nav-text">题外话</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E4%BA%9B%E9%87%8D%E7%82%B9"><span class="nav-number">3.</span> <span class="nav-text">一些重点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Graph"><span class="nav-number">3.1.</span> <span class="nav-text">Graph</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Node"><span class="nav-number">3.2.</span> <span class="nav-text">Node</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Edge"><span class="nav-number">3.3.</span> <span class="nav-text">Edge</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%90%E5%9B%BE"><span class="nav-number">3.4.</span> <span class="nav-text">子图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B3%A8%E6%84%8F"><span class="nav-number">3.5.</span> <span class="nav-text">注意</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E6%88%98"><span class="nav-number">4.</span> <span class="nav-text">实战</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B5%84%E6%96%99"><span class="nav-number">5.</span> <span class="nav-text">资料</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Sekyoro"
+      src="https://i.loli.net/2021/05/17/YqoavnXdGTpPO9R.jpg">
+  <p class="site-author-name" itemprop="name">Sekyoro</p>
+  <div class="site-description" itemprop="description">什么也无法舍弃的人，什么也做不了.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">96</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">123</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/drowning-in-codes" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;drowning-in-codes" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:bukalala174@gmail.com" title="E-Mail → mailto:bukalala174@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      友情链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="http://myqhs.top/" title="http:&#x2F;&#x2F;myqhs.top&#x2F;" rel="noopener" target="_blank">myqhs</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+		<div id="aplayer" class="aplayer" data-id="6856787487" data-server="netease" data-type="playlist" data-listfolded="true" data-order="random"></div>
+		<br/>
+		<script type="text/javascript" id="clustrmaps" src="//clustrmaps.com/map_v2.js?d=xQdGTxqARTBiNIwX2aUban-ixkj2s6VaZQWo-aVCgY8&cl=ffffff&w=a"></script>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+  
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; Wed Apr 08 2020 08:00:00 GMT+0800 (中国标准时间) – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Sekyoro</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">528k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">8:01</span>
+</div>
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+    <span id="busuanzi_container_site_pv">总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+    <span class="post-meta-divider">|</span>
+    <span id="busuanzi_container_site_uv">总访客数<span id="busuanzi_value_site_uv"></span>人</span>
+    <span class="post-meta-divider">|</span>
+<!-- 不蒜子计数初始值纠正 -->
+<script>
+$(document).ready(function() {
+
+    var int = setInterval(fixCount, 50);  // 50ms周期检测函数
+    var countOffset = 20000;  // 初始化首次数据
+
+    function fixCount() {            
+       if (document.getElementById("busuanzi_container_site_pv").style.display != "none")
+        {
+            $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + countOffset); 
+            clearInterval(int);
+        }                  
+        if ($("#busuanzi_container_site_pv").css("display") != "none")
+        {
+            $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + countOffset); // 加上初始数据 
+            clearInterval(int); // 停止检测
+        }  
+    }
+       	
+});
+</script> 
+
+<div>
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("04/08/2021 20:00:00");
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+    }
+setInterval("createtime()",250);
+</script>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/theme-next/theme-next-pjax@0/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+  <script data-pjax>
+    (function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+  </script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+<script data-pjax>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  let url = element.dataset.target;
+  let pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  let pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  let fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+  
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+    </div>
+<!-- hexo injector body_end start --><script src='/js/outdate.js'></script><!-- hexo injector body_end end --></body>
+</html>

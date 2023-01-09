@@ -1,0 +1,1859 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<script src="/live2d-widget/autoload.js"></script>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/blog_32px.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/blog_32px.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/blog_16px.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="EPrJAp11bJwHULpQUaSNSZ8_3RcvTsPDAEGOME4pl1w">
+
+<!-- google adsense in head.swig -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4034523802263123"
+     crossorigin="anonymous"></script>
+  <meta name="msvalidate.01" content="7226864CE87CE9DE8C008385273846FF">
+  <meta name="baidu-site-verification" content="code-fjFXVtiL7j" />
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-mac-osx.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"sekyoro.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":240,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+<link href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css" rel="stylesheet">
+  <meta name="description" content="之前学过一点基础的,现在调一下api">
+<meta property="og:type" content="article">
+<meta property="og:title" content="微信小程序学习">
+<meta property="og:url" content="https://sekyoro.top/2021/11/03/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%AD%A6%E4%B9%A0/index.html">
+<meta property="og:site_name" content="Sekyoro的博客小屋">
+<meta property="og:description" content="之前学过一点基础的,现在调一下api">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/094011.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/094012.png">
+<meta property="article:published_time" content="2021-11-03T11:27:54.000Z">
+<meta property="article:modified_time" content="2022-04-01T09:53:15.477Z">
+<meta property="article:author" content="Sekyoro">
+<meta property="article:tag" content="wechat">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://cdn.sekyoro.top/imgs/094011.png">
+
+<link rel="canonical" href="https://sekyoro.top/2021/11/03/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%AD%A6%E4%B9%A0/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+ 
+
+<script>
+  var OriginTitile = document.title;
+  var titleTime;
+  document.addEventListener("visibilitychange", function() {
+    if (document.hidden) {
+      document.title = "(つェ⊂)我藏好了哦~" + OriginTitile;
+      clearTimeout(titleTime);
+    } else {
+      document.title = "(*´∇｀*) 被你发现啦~" + OriginTitile;
+      titleTime = setTimeout(function() {
+        document.title = OriginTitile;
+      }, 2000);
+    }
+  });
+</script>
+
+
+
+  <script src="/js/src/activate-power-mode.min.js"></script>
+  <script>
+    POWERMODE.colorful = true;
+    POWERMODE.shake = false;
+    document.body.addEventListener('input', POWERMODE);
+  </script>
+
+
+  <title>微信小程序学习 | Sekyoro的博客小屋</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+<!-- require JQuery -->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+<!-- require pjax -->
+<script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/index.min.js"></script>
+
+
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+   <script type="text/javascript" src="/js/src/fireworks.js"></script>
+
+
+  <div class="container use-motion">
+    <div class="headband"></div>
+	
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Sekyoro的博客小屋</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-resume">
+
+    <a href="/resume/" rel="section"><i class="fa fa-file-pdf fa-fw"></i>简历</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://sekyoro.top/2021/11/03/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%AD%A6%E4%B9%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://i.loli.net/2021/05/17/YqoavnXdGTpPO9R.jpg">
+      <meta itemprop="name" content="Sekyoro">
+      <meta itemprop="description" content="什么也无法舍弃的人，什么也做不了.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sekyoro的博客小屋">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          微信小程序学习
+        </h1>
+
+        <div class="post-meta">
+		
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-11-03 19:27:54" itemprop="dateCreated datePublished" datetime="2021-11-03T19:27:54+08:00">2021-11-03</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-04-01 17:53:15" itemprop="dateModified" datetime="2022-04-01T17:53:15+08:00">2022-04-01</time>
+              </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>7.2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>7 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>之前学过一点基础的,现在调一下api<br><span id="more"></span></p>
+<h2 id="网络部分"><a href="#网络部分" class="headerlink" title="网络部分"></a>网络部分</h2><h3 id="相关信息"><a href="#相关信息" class="headerlink" title="相关信息"></a>相关信息</h3><p>小程序/服务器架构是CS架构</p>
+<p>小程序网络API在发起网络请求时使用JSON格式的文本进行数据交换</p>
+<h3 id="服务器域名配置"><a href="#服务器域名配置" class="headerlink" title="服务器域名配置"></a>服务器域名配置</h3><p>这里的服务器可以是你自己的,也可以是wechat或者其他第三方的.</p>
+<p>选择【设置】—【开发设置】—【服务器域名】进行添加或修改</p>
+<p><img data-src="http://cdn.sekyoro.top/imgs/094011.png" alt="image-20211103193519336"></p>
+<ul>
+<li><p>域名只支持 https (request、uploadFile、downloadFile) 和 wss (connectSocket) 协议；</p>
+</li>
+<li><p>域名不能使用 IP 地址或 localhost；域名必须经过 ICP 备案；</p>
+</li>
+<li><p>出于安全考虑，api.weixin.qq.com 不能被配置为服务器域名，相关API也不能在小程序内调</p>
+<p>用。开发者应将 appsecret 保存到后台服务器中，通过服务器使用 appsecret 获取 accesstoken，并调用相关 API；每类接口分别可以配置最多 20 个域名。</p>
+</li>
+</ul>
+<p>且配置次数每个月有限制</p>
+<p>自己的服务器还要有HTTP证书等,总之用这个最好还是用微信自己的或者第三方的</p>
+<p>小程序对服务器端没有软件和语言的限制条件，用户可以根据自己实际情况选择Apache、Ngnix、Tomcat等任意一款服务器软件进行安装部署，以及选用PHP、Node.js、J2EE等任意一种语言进行后端开发。</p>
+<h3 id="练习"><a href="#练习" class="headerlink" title="练习"></a>练习</h3><p>这里说一下临时部署,就是在本地电脑上部署,在服务器其实类似</p>
+<p>可以用Apache,ngnix服务器软件搭配php,nodejs等进行开发</p>
+<p>可以安装phpstudy学习,挺好的软件 </p>
+<p>有php,Apache,ngnix,mysql数据库集成</p>
+<p><img data-src="http://cdn.sekyoro.top/imgs/094012.png" alt="image-20211103194554124"></p>
+<p>这样就可以本地测试了.</p>
+<h3 id="发起请求"><a href="#发起请求" class="headerlink" title="发起请求"></a>发起请求</h3><p>小程序使用wx.request(OBJECT) 发起网络请求</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th><strong>参数名</strong></th>
+<th><strong>类型</strong></th>
+<th><strong>必填</strong></th>
+<th><strong>说明</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>url</strong></td>
+<td>String</td>
+<td>是</td>
+<td>开发者或第三方服务器接口地址</td>
+</tr>
+<tr>
+<td><strong>data</strong></td>
+<td>Object/String/ArrayBuffer</td>
+<td>否</td>
+<td>请求的参数</td>
+</tr>
+<tr>
+<td><strong>header</strong></td>
+<td>Object</td>
+<td>否</td>
+<td>设置请求的 header，header 中不能设置 Referer（其中content-type 默认为 ‘application/json’）</td>
+</tr>
+<tr>
+<td><strong>method</strong></td>
+<td>String</td>
+<td>否</td>
+<td>有效值：OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT（默认值是GET）</td>
+</tr>
+<tr>
+<td><strong>dataType</strong></td>
+<td>String</td>
+<td>否</td>
+<td>默认值为json。如果设为json，会尝试对返回的数据做一次 JSON.parse</td>
+</tr>
+<tr>
+<td><strong>responseType</strong></td>
+<td>String</td>
+<td>否</td>
+<td>设置响应的数据类型。合法值：text、arraybuffer。默认值为text。最低版本1.7.0</td>
+</tr>
+<tr>
+<td><strong>success</strong></td>
+<td>Function</td>
+<td>否</td>
+<td>收到服务器成功返回的回调函数</td>
+</tr>
+<tr>
+<td><strong>fail</strong></td>
+<td>Function</td>
+<td>否</td>
+<td>接口调用失败的回调函数</td>
+</tr>
+<tr>
+<td><strong>complete</strong></td>
+<td>Function</td>
+<td>否</td>
+<td>接口调用结束的回调函数（调用成功与否都会执行）</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>success返回参数</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th><strong>参数</strong></th>
+<th><strong>类型</strong></th>
+<th><strong>说明</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>data</strong></td>
+<td>Object/String/ArrayBuffer</td>
+<td>开发者服务器返回的数据</td>
+</tr>
+<tr>
+<td><strong>statusCode</strong></td>
+<td>Number</td>
+<td>开发者服务器返回的HTTP 状态码</td>
+</tr>
+<tr>
+<td><strong>header</strong></td>
+<td>Object</td>
+<td>开发者服务器返回的HTTP Response Header，最低版本1.2.0</td>
+</tr>
+</tbody>
+</table>
+</div>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">wx.request(&#123;</span><br><span class="line">  <span class="attr">url</span>: <span class="string">&#x27;https://test.com/&#x27;</span>, <span class="comment">//仅为示例，并非真实的接口地址</span></span><br><span class="line">  <span class="attr">data</span>: &#123;</span><br><span class="line">     <span class="attr">x</span>: <span class="string">&#x27;123&#x27;</span> ,  <span class="comment">//数据的key和value由开发者自定义</span></span><br><span class="line">     <span class="attr">y</span>: <span class="string">&#x27;456&#x27;</span>   <span class="comment">//这里的数据仅为示例</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">success</span>: <span class="function"><span class="keyword">function</span>(<span class="params">res</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(res.data) <span class="comment">//返回的数据</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>最终发送给服务器的data数据是String类型，如果传入的data是其他类型也会被转换成String</p>
+<ul>
+<li>对于 GET 方法的数据，会将数据转换成 query string（key1=value1&amp;key2=value2…）；</li>
+<li>对于 POST 方法且 header[‘content-type’] 为 application/json 的数据，会对数据进行 JSON 序列化；</li>
+<li>对于 POST 方法且 header[‘content-type’] 为 application/x-www-form-urlencoded 的数据，会将数据转换成 query string （key1=value1&amp;key2=value2…）</li>
+</ul>
+<h3 id="中断请求"><a href="#中断请求" class="headerlink" title="中断请求"></a>中断请求</h3><p>wx.request(OBJECT)接口返回一个requestTask对象，通过该对象的abort方法可以中断请求任务。requestTask对象的方法如表所示。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> requestTask = wx.request(&#123;</span><br><span class="line">  <span class="attr">url</span>: <span class="string">&#x27;https://test.com/&#x27;</span>, <span class="comment">//仅为示例，并非真实的接口地址</span></span><br><span class="line">  <span class="attr">data</span>: &#123;</span><br><span class="line">     <span class="attr">x</span>: <span class="string">&#x27;123&#x27;</span> ,  <span class="comment">//数据的key和value由开发者自定义</span></span><br><span class="line">     <span class="attr">y</span>: <span class="string">&#x27;456&#x27;</span>   <span class="comment">//这里的数据仅为示例</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">success</span>: <span class="function"><span class="keyword">function</span>(<span class="params">res</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(res.data)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line">requestTask.abort() <span class="comment">// 取消请求任务</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="文件上传"><a href="#文件上传" class="headerlink" title="文件上传"></a>文件上传</h3><h4 id="上传请求"><a href="#上传请求" class="headerlink" title="上传请求"></a>上传请求</h4><p>小程序使用wx.uploadFile(OBJECT)可以将本地资源上传到开发者服务器，上传时将从客户端发起一个 HTTPS POST请求到服务器，其中content-type为multipart/form-data。<br>该接口的OBJECT参数说明如表所示。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th><strong>参数</strong></th>
+<th><strong>类型</strong></th>
+<th><strong>必填</strong></th>
+<th><strong>说明</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>url</strong></td>
+<td>String</td>
+<td>是</td>
+<td>开发者服务器 url</td>
+</tr>
+<tr>
+<td><strong>filePath</strong></td>
+<td>String</td>
+<td>是</td>
+<td>要上传文件资源的路径</td>
+</tr>
+<tr>
+<td><strong>name</strong></td>
+<td>String</td>
+<td>是</td>
+<td>文件对应的 key , 开发者在服务器端通过这个 key 可以获取到文件二进制内容</td>
+</tr>
+<tr>
+<td><strong>header</strong></td>
+<td>Object</td>
+<td>否</td>
+<td>HTTP 请求 Header, header 中不能设置 Referer</td>
+</tr>
+<tr>
+<td><strong>formData</strong></td>
+<td>Object</td>
+<td>否</td>
+<td>HTTP 请求中其他额外的 form data</td>
+</tr>
+<tr>
+<td><strong>success</strong></td>
+<td>Function</td>
+<td>否</td>
+<td>接口调用成功的回调函数</td>
+</tr>
+<tr>
+<td><strong>fail</strong></td>
+<td>Function</td>
+<td>否</td>
+<td>接口调用失败的回调函数</td>
+</tr>
+<tr>
+<td><strong>complete</strong></td>
+<td>Function</td>
+<td>否</td>
+<td>接口调用结束的回调函数（调用成功与否都会执行）</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>成功时返回的数据</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th><strong>data</strong></th>
+<th>String</th>
+<th>开发者服务器返回的数据</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>statusCode</strong></td>
+<td>Number</td>
+<td>开发者服务器返回的 HTTP 状态码</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>该接口与其他接口一起使用</p>
+<p>页面通过wx.chooseImage接口获取到一个本地资源的临时文件路径后，可通过此接口将本地资源上传到指定服务器.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">wx.chooseImage(&#123;</span><br><span class="line">  <span class="attr">success</span>: <span class="function"><span class="keyword">function</span>(<span class="params">res</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> tempFilePaths = res.tempFilePaths</span><br><span class="line">    wx.uploadFile(&#123;</span><br><span class="line">      <span class="attr">url</span>: <span class="string">&#x27;https://example.weixin.qq.com/upload&#x27;</span>, <span class="comment">//仅为示例，非真实的接口地址</span></span><br><span class="line">      <span class="attr">filePath</span>: tempFilePaths[<span class="number">0</span>],</span><br><span class="line">      <span class="attr">name</span>: <span class="string">&#x27;file&#x27;</span>,</span><br><span class="line">      <span class="attr">formData</span>:&#123;</span><br><span class="line">        <span class="string">&#x27;user&#x27;</span>: <span class="string">&#x27;test&#x27;</span></span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="attr">success</span>: <span class="function"><span class="keyword">function</span>(<span class="params">res</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">var</span> data = res.data</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h4 id="上传任务对象"><a href="#上传任务对象" class="headerlink" title="上传任务对象"></a>上传任务对象</h4><p>wx.uploadFile(OBJECT)接口返回一个uploadTask对象，通过该对象可监听文件上传进度变化事件.</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th><strong>方法</strong></th>
+<th><strong>参数</strong></th>
+<th><strong>说明</strong></th>
+<th><strong>最低版本</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>onProgressUpdate</strong></td>
+<td>callback</td>
+<td>监听上传进度变化</td>
+<td>1.4.0</td>
+</tr>
+<tr>
+<td><strong>abort</strong></td>
+<td></td>
+<td>中断上传任务</td>
+<td>1.4.0</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>onProgressUpdate返回参数</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th><strong>参数</strong></th>
+<th><strong>类型</strong></th>
+<th><strong>说明</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>progress</strong></td>
+<td>Number</td>
+<td>上传进度百分比</td>
+</tr>
+<tr>
+<td><strong>totalBytesSent</strong></td>
+<td>Number</td>
+<td>已经上传的数据长度，单位 Bytes</td>
+</tr>
+<tr>
+<td><strong>totalBytesExpectedToSend</strong></td>
+<td>Number</td>
+<td>预期需要上传的数据总长度，单位 Bytes</td>
+</tr>
+</tbody>
+</table>
+</div>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> uploadTask = wx.uploadFile(&#123;</span><br><span class="line">    …</span><br><span class="line">&#125;)</span><br><span class="line">uploadTask.onProgressUpdate(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;上传进度&#x27;</span>, res.progress)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;已经上传的数据长度&#x27;</span>, res.totalBytesSent)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;预期需要上传的数据总长度&#x27;</span>, res.totalBytesExpectedToSend)</span><br><span class="line">&#125;)</span><br><span class="line">uploadTask.abort() <span class="comment">// 取消上传任务</span></span><br></pre></td></tr></table></figure>
+<h4 id="文件下载"><a href="#文件下载" class="headerlink" title="文件下载"></a>文件下载</h4><p>使用wx.downloadFile(OBJECT)可以从服务器下载文件资源到本地，OBJECT参数说明如表所示。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th><strong>参数</strong></th>
+<th><strong>类型</strong></th>
+<th><strong>必填</strong></th>
+<th><strong>说明</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>url</strong></td>
+<td>String</td>
+<td>是</td>
+<td>下载资源的 url</td>
+</tr>
+<tr>
+<td><strong>header</strong></td>
+<td>Object</td>
+<td>否</td>
+<td>HTTP 请求 Header，header 中不能设置 Referer</td>
+</tr>
+<tr>
+<td><strong>success</strong></td>
+<td>Function</td>
+<td>否</td>
+<td>下载成功后以 tempFilePath 的形式传给页面，res = {tempFilePath: ‘文件的临时路径’}</td>
+</tr>
+<tr>
+<td><strong>fail</strong></td>
+<td>Function</td>
+<td>否</td>
+<td>接口调用失败的回调函数</td>
+</tr>
+<tr>
+<td><strong>complete</strong></td>
+<td>Function</td>
+<td>否</td>
+<td>接口调用结束的回调函数（调用成功与否都执行）</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>success返回参数</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th><strong>参数</strong></th>
+<th><strong>类型</strong></th>
+<th><strong>说明</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>tempFilePath</strong></td>
+<td>String</td>
+<td>临时文件路径，下载后的文件会存储到一个临时文件</td>
+</tr>
+<tr>
+<td><strong>statusCode</strong></td>
+<td>Number</td>
+<td>开发者服务器返回的 HTTP 状态码</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>下载文件的原理是客户端直接发起一个HTTP GET请求，返回文件的本地临时路径。需要注意的是，本地临时路径文件在小程序本次启动期间可以正常使用，如需持久保存，需在主动调用 wx.saveFile才能在小程序下次启动时访问得到。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">wx.downloadFile(&#123;</span><br><span class="line">  <span class="attr">url</span>: <span class="string">&#x27;https://example.com/audio/123&#x27;</span>, <span class="comment">//仅为示例，并非真实的资源</span></span><br><span class="line">  <span class="attr">success</span>: <span class="function"><span class="keyword">function</span>(<span class="params">res</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 只要服务器有响应数据，就会把响应内容写入文件并进入 success 回调</span></span><br><span class="line">    <span class="keyword">if</span> (res.statusCode === <span class="number">200</span>) &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(res.tempFilePath) <span class="comment">//文件临时路径地址</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h4 id="下载任务对象"><a href="#下载任务对象" class="headerlink" title="下载任务对象"></a>下载任务对象</h4><p>wx.downloadFile(OBJECT)返回一个downloadTask对象，通过downloadTask，可监听下载进度变化事件，以及取消下载任务。该接口从基础库 1.4.0 开始支持，低版本需做兼容处理。downloadTask对象的方法列表如表所示</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th><strong>方法</strong></th>
+<th><strong>参数</strong></th>
+<th><strong>说明</strong></th>
+<th><strong>最低版本</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>onProgressUpdate</strong></td>
+<td>callback</td>
+<td>监听下载进度变化</td>
+<td>1.4.0</td>
+</tr>
+<tr>
+<td><strong>abort</strong></td>
+<td>无</td>
+<td>中断下载任务</td>
+<td>1.4.0</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>onProgressUpdate返回参数说明</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th><strong>progress</strong></th>
+<th>Number</th>
+<th>下载进度百分比</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>totalBytesWritten</strong></td>
+<td>Number</td>
+<td>已经下载的数据长度，单位 Bytes</td>
+</tr>
+<tr>
+<td><strong>totalBytesExpectedToWrite</strong></td>
+<td>Number</td>
+<td>预期需要下载的数据总长度，单位 Bytes</td>
+</tr>
+</tbody>
+</table>
+</div>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> downloadTask = wx.downloadFile(&#123;</span><br><span class="line">    …</span><br><span class="line">&#125;)</span><br><span class="line">downloadTask.onProgressUpdate(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;下载进度&#x27;</span>, res.progress)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;已经下载的数据长度&#x27;</span>, res.totalBytesWritten)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;预期需要下载的数据总长度&#x27;</span>, res.totalBytesExpectedToWrite)</span><br><span class="line">&#125;)</span><br><span class="line">downloadTask.abort() <span class="comment">// 取消下载任务</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="图片管理"><a href="#图片管理" class="headerlink" title="图片管理"></a>图片管理</h2><p>小程序使用wx.chooseImage(OBJECT)从本地相册选择图片或使用相机拍照获得图片，图片将被存放在设备的临时路径，在小程序本次启动期间可以正常使用。</p>
+<h3 id="选择图片"><a href="#选择图片" class="headerlink" title="选择图片"></a>选择图片</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th><strong>参数</strong></th>
+<th><strong>类型</strong></th>
+<th><strong>必填</strong></th>
+<th><strong>说明</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>count</strong></td>
+<td>Number</td>
+<td>否</td>
+<td>最多可以选择的图片张数，默认9</td>
+</tr>
+<tr>
+<td><strong>sizeType</strong></td>
+<td>StringArray</td>
+<td>否</td>
+<td>original 原图，compressed 压缩图，默认二者都有</td>
+</tr>
+<tr>
+<td><strong>sourceType</strong></td>
+<td>StringArray</td>
+<td>否</td>
+<td>album 从相册选图，camera 使用相机，默认二者都有</td>
+</tr>
+<tr>
+<td><strong>success</strong></td>
+<td>Function</td>
+<td>是</td>
+<td>成功则返回图片的本地文件路径列表 tempFilePaths</td>
+</tr>
+<tr>
+<td><strong>fail</strong></td>
+<td>Function</td>
+<td>否</td>
+<td>接口调用失败的回调函数</td>
+</tr>
+<tr>
+<td><strong>complete</strong></td>
+<td>Function</td>
+<td>否</td>
+<td>接口调用结束的回调函数（调用成功与否都执行）</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>success返回参数</p>
+<p>tempFilePaths：StringArray类型，表示图片的本地文件路径列表；<br>tempFiles：ObjectArray类型，表示图片的本地文件列表，每项是一个File对象，最低版本1.2.0开始支持</p>
+<p>File 对象结构说明如下：<br>path：String类型，表示本地文件路径；<br>size：Number类型，表示本地文件大小，单位：B。<br>需要注意是，wx.chooseImage获得的图片仅能在小程序启动期间临时使用。如需持久保存，需在主动调用 wx.saveFile进行保存，在小程序下次启动时才能访问得到。</p>
+<h3 id="预览图片"><a href="#预览图片" class="headerlink" title="预览图片"></a>预览图片</h3><p>小程序使用wx.previewImage(OBJECT) 预览图片，OBJECT参数说明如表所示</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th><strong>参数</strong></th>
+<th><strong>类型</strong></th>
+<th><strong>必填</strong></th>
+<th><strong>说明</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>current</strong></td>
+<td>String</td>
+<td>否</td>
+<td>当前显示图片的链接，不填则默认为 urls 的第一张</td>
+</tr>
+<tr>
+<td><strong>urls</strong></td>
+<td>StringArray</td>
+<td>是</td>
+<td>需要预览的图片链接列表</td>
+</tr>
+<tr>
+<td><strong>success</strong></td>
+<td>Function</td>
+<td>否</td>
+<td>接口调用成功的回调函数</td>
+</tr>
+<tr>
+<td><strong>fail</strong></td>
+<td>Function</td>
+<td>否</td>
+<td>接口调用失败的回调函数</td>
+</tr>
+<tr>
+<td><strong>complete</strong></td>
+<td>Function</td>
+<td>否</td>
+<td>接口调用结束的回调函数（调用成功与否都执行）</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="获取图片信息"><a href="#获取图片信息" class="headerlink" title="获取图片信息"></a>获取图片信息</h3><p>wx.getImageInfo(OBJECT) 获取图片信息</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th><strong>参数</strong></th>
+<th><strong>类型</strong></th>
+<th><strong>必填</strong></th>
+<th><strong>说明</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>src</strong></td>
+<td>String</td>
+<td>是</td>
+<td>图片的路径，可以是相对路径，临时文件路径，存储文件路径，网络图片路径</td>
+</tr>
+<tr>
+<td><strong>success</strong></td>
+<td>Function</td>
+<td>否</td>
+<td>接口调用成功的回调函数</td>
+</tr>
+<tr>
+<td><strong>fail</strong></td>
+<td>Function</td>
+<td>否</td>
+<td>接口调用失败的回调函数</td>
+</tr>
+<tr>
+<td><strong>complete</strong></td>
+<td>Function</td>
+<td>否</td>
+<td>接口调用结束的回调函数（调用成功与否都执行）</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>success返回参数</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th><strong>参数</strong></th>
+<th><strong>类型</strong></th>
+<th><strong>说明</strong></th>
+<th><strong>最低版本</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>width</strong></td>
+<td>Number</td>
+<td>图片宽度，单位px</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>height</strong></td>
+<td>Number</td>
+<td>图片高度，单位px</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>path</strong></td>
+<td>String</td>
+<td>返回图片的本地路径</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>orientation</strong></td>
+<td>String</td>
+<td>返回图片的方向</td>
+<td>1.9.90</td>
+</tr>
+<tr>
+<td><strong>type</strong></td>
+<td>String</td>
+<td>返回图片的格式</td>
+<td>1.9.90</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>orientation参数</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th><strong>枚举值</strong></th>
+<th><strong>说明</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>up</strong></td>
+<td>默认</td>
+</tr>
+<tr>
+<td><strong>down</strong></td>
+<td>180度旋转</td>
+</tr>
+<tr>
+<td><strong>left</strong></td>
+<td>逆时针旋转90度</td>
+</tr>
+<tr>
+<td><strong>right</strong></td>
+<td>顺时针旋转90度</td>
+</tr>
+<tr>
+<td><strong>up-mirrored</strong></td>
+<td>同up，但水平翻转</td>
+</tr>
+<tr>
+<td><strong>down-mirrored</strong></td>
+<td>同down，但水平翻转</td>
+</tr>
+<tr>
+<td><strong>left-mirrored</strong></td>
+<td>同left，但垂直翻转</td>
+</tr>
+<tr>
+<td><strong>right-mirrored</strong></td>
+<td>同right，但垂直翻转</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>保存图像</p>
+<p>小程序使用wx.saveImageToPhotosAlbum(OBJECT) 保存图片到系统相册</p>
+<p>需要用户授权 scope.writePhotosAlbum</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th><strong>参数名</strong></th>
+<th><strong>类型</strong></th>
+<th><strong>必填</strong></th>
+<th><strong>说明</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>filePath</strong></td>
+<td>String</td>
+<td>是</td>
+<td>图片文件路径，可以是临时文件路径也可以是永久文件路径，不支持网络图片路径</td>
+</tr>
+<tr>
+<td><strong>success</strong></td>
+<td>Function</td>
+<td>否</td>
+<td>接口调用成功的回调函数，返回String类型参数errMsg，表示调用结果</td>
+</tr>
+<tr>
+<td><strong>fail</strong></td>
+<td>Function</td>
+<td>否</td>
+<td>接口调用失败的回调函数</td>
+</tr>
+<tr>
+<td><strong>complete</strong></td>
+<td>Function</td>
+<td>否</td>
+<td>接口调用结束的回调函数（调用成功与否都执行）</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="录音管理"><a href="#录音管理" class="headerlink" title="录音管理"></a>录音管理</h3><p>小程序使用wx.getRecorderManager()获取全局唯一的录音管理器 recorderManager</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th><strong>方法</strong></th>
+<th><strong>参数</strong></th>
+<th><strong>说明</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>start</strong></td>
+<td>options</td>
+<td>开始录音</td>
+</tr>
+<tr>
+<td><strong>pause</strong></td>
+<td></td>
+<td>暂停录音</td>
+</tr>
+<tr>
+<td><strong>resume</strong></td>
+<td></td>
+<td>继续录音</td>
+</tr>
+<tr>
+<td><strong>stop</strong></td>
+<td></td>
+<td>停止录音</td>
+</tr>
+<tr>
+<td><strong>onStart</strong></td>
+<td>callback</td>
+<td>录音开始事件</td>
+</tr>
+<tr>
+<td><strong>onPause</strong></td>
+<td>callback</td>
+<td>录音暂停事件</td>
+</tr>
+<tr>
+<td><strong>onStop</strong></td>
+<td>callback</td>
+<td>录音停止事件，返回String类型参数tempFilePath表示录音文件的临时路径</td>
+</tr>
+<tr>
+<td><strong>onFrameRecorded</strong></td>
+<td>callback</td>
+<td>已录制完指定帧大小的文件，会回调录音分片结果数据。如果设置了frameSize，则会回调此事件。</td>
+</tr>
+<tr>
+<td><strong>onError</strong></td>
+<td>callback</td>
+<td>录音错误事件，返回String类型参数errMsg表示错误信息</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>start(options)方法参数</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th><strong>duration</strong></th>
+<th>Number</th>
+<th>否</th>
+<th>指定录音的时长，单位 ms ，如果传入了合法的 duration ，在到达指定的 duration 后会自动停止录音，最大值 600000（10 分钟）,默认值 60000（1 分钟）</th>
+<th>1.6.0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>sampleRate</strong></td>
+<td>Number</td>
+<td>否</td>
+<td>采样率，有效值 8000/16000/44100</td>
+<td>1.6.0</td>
+</tr>
+<tr>
+<td><strong>numberOfChannels</strong></td>
+<td>Number</td>
+<td>否</td>
+<td>录音通道数，有效值 1/2</td>
+<td>1.6.0</td>
+</tr>
+<tr>
+<td><strong>encodeBitRate</strong></td>
+<td>Number</td>
+<td>否</td>
+<td>编码码率，有效值见下表格</td>
+<td>1.6.0</td>
+</tr>
+<tr>
+<td><strong>format</strong></td>
+<td>String</td>
+<td>否</td>
+<td>音频格式，有效值 aac/mp3</td>
+<td>1.6.0</td>
+</tr>
+<tr>
+<td><strong>frameSize</strong></td>
+<td>Number</td>
+<td>否</td>
+<td>指定帧大小，单位 KB。传入 frameSize 后，每录制指定帧大小的内容后，会回调录制的文件内容，不指定则不会回调。暂仅支持 mp3 格式</td>
+<td>1.6.0</td>
+</tr>
+<tr>
+<td><strong>audioSource</strong></td>
+<td>String</td>
+<td>否</td>
+<td>指定音频输入源，默认值为 ‘auto’</td>
+<td>2.1.0</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+    </div>
+
+    
+    
+    
+    <div>
+	
+     <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+     
+   </div>
+        <div class="reward-container">
+  <div>感谢阅读.</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.png" alt="Sekyoro 微信支付">
+        <p>微信支付</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Sekyoro
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://sekyoro.top/2021/11/03/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%AD%A6%E4%B9%A0/" title="微信小程序学习">https://sekyoro.top/2021/11/03/微信小程序学习/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/wechat/" rel="tag"><i class="fa fa-tag"></i> wechat</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/10/20/css%E5%AD%A6%E4%B9%A0/" rel="prev" title="css学习">
+      <i class="fa fa-chevron-left"></i> css学习
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/11/04/css%E6%8F%AD%E7%A7%98/" rel="next" title="css揭秘">
+      css揭秘 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81MzE5Ny8yOTY3Mg=="></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+	
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+      	   
+          <!-- canvas粒子时钟 -->
+          <div style="">
+  <canvas id="canvas" style="width:60%;">当前浏览器不支持canvas，请更换浏览器后再试</canvas>
+</div>
+<script>
+(function(){
+
+   var digit=
+    [
+        [
+            [0,0,1,1,1,0,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,0,1,1,0],
+            [0,0,1,1,1,0,0]
+        ],//0
+        [
+            [0,0,0,1,1,0,0],
+            [0,1,1,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [1,1,1,1,1,1,1]
+        ],//1
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,1,1],
+            [1,1,1,1,1,1,1]
+        ],//2
+        [
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//3
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,0],
+            [0,0,1,1,1,1,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,1,1,0],
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,1]
+        ],//4
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,1,1,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//5
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//6
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0]
+        ],//7
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//8
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,1,1,0,0,0,0]
+        ],//9
+        [
+            [0,0,0,0,0,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,0,0,0]
+        ]//:
+    ];
+
+var canvas = document.getElementById('canvas');
+
+if(canvas.getContext){
+    var cxt = canvas.getContext('2d');
+    //声明canvas的宽高
+    var H = 100,W = 700;
+    canvas.height = H;
+    canvas.width = W;
+    cxt.fillStyle = '#f00';
+    cxt.fillRect(10,10,50,50);
+
+    //存储时间数据
+    var data = [];
+    //存储运动的小球
+    var balls = [];
+    //设置粒子半径
+    var R = canvas.height/20-1;
+    (function(){
+        var temp = /(\d)(\d):(\d)(\d):(\d)(\d)/.exec(new Date());
+        //存储时间数字，由十位小时、个位小时、冒号、十位分钟、个位分钟、冒号、十位秒钟、个位秒钟这7个数字组成
+        data.push(temp[1],temp[2],10,temp[3],temp[4],10,temp[5],temp[6]);
+    })();
+
+    /*生成点阵数字*/
+    function renderDigit(index,num){
+        for(var i = 0; i < digit[num].length; i++){
+            for(var j = 0; j < digit[num][i].length; j++){
+                if(digit[num][i][j] == 1){
+                    cxt.beginPath();
+                    cxt.arc(14*(R+2)*index + j*2*(R+1)+(R+1),i*2*(R+1)+(R+1),R,0,2*Math.PI);
+                    cxt.closePath();
+                    cxt.fill();
+                }
+            }
+        }
+    }
+
+    /*更新时钟*/
+    function updateDigitTime(){
+        var changeNumArray = [];
+        var temp = /(\d)(\d):(\d)(\d):(\d)(\d)/.exec(new Date());
+        var NewData = [];
+        NewData.push(temp[1],temp[2],10,temp[3],temp[4],10,temp[5],temp[6]);
+        for(var i = data.length-1; i >=0 ; i--){
+            //时间发生变化
+            if(NewData[i] !== data[i]){
+                //将变化的数字值和在data数组中的索引存储在changeNumArray数组中
+                changeNumArray.push(i+'_'+(Number(data[i])+1)%10);
+            }
+        }
+        //增加小球
+        for(var i = 0; i< changeNumArray.length; i++){
+            addBalls.apply(this,changeNumArray[i].split('_'));
+        }
+        data = NewData.concat();
+    }
+
+    /*更新小球状态*/
+    function updateBalls(){
+        for(var i = 0; i < balls.length; i++){
+            balls[i].stepY += balls[i].disY;
+            balls[i].x += balls[i].stepX;
+            balls[i].y += balls[i].stepY;
+            if(balls[i].x > W + R || balls[i].y > H + R){
+                balls.splice(i,1);
+                i--;
+            }
+        }
+    }
+
+    /*增加要运动的小球*/
+    function addBalls(index,num){
+        var numArray = [1,2,3];
+        var colorArray =  ["#3BE","#09C","#A6C","#93C","#9C0","#690","#FB3","#F80","#F44","#C00"];
+        for(var i = 0; i < digit[num].length; i++){
+            for(var j = 0; j < digit[num][i].length; j++){
+                if(digit[num][i][j] == 1){
+                    var ball = {
+                        x:14*(R+2)*index + j*2*(R+1)+(R+1),
+                        y:i*2*(R+1)+(R+1),
+                        stepX:Math.floor(Math.random() * 4 -2),
+                        stepY:-2*numArray[Math.floor(Math.random()*numArray.length)],
+                        color:colorArray[Math.floor(Math.random()*colorArray.length)],
+                        disY:1
+                    };
+                    balls.push(ball);
+                }
+            }
+        }
+    }
+
+    /*渲染*/
+    function render(){
+        //重置画布宽度，达到清空画布的效果
+        canvas.height = 100;
+        //渲染时钟
+        for(var i = 0; i < data.length; i++){
+            renderDigit(i,data[i]);
+        }
+        //渲染小球
+        for(var i = 0; i < balls.length; i++){
+            cxt.beginPath();
+            cxt.arc(balls[i].x,balls[i].y,R,0,2*Math.PI);
+            cxt.fillStyle = balls[i].color;
+            cxt.closePath();
+            cxt.fill();
+        }
+    }
+
+    clearInterval(oTimer);
+    var oTimer = setInterval(function(){
+        //更新时钟
+        updateDigitTime();
+        //更新小球状态
+        updateBalls();
+        //渲染
+        render();
+    },50);
+}
+
+})();
+</script>
+        
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.0/dist/APlayer.min.css">
+		<script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.0/dist/APlayer.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/meting@1.2/dist/Meting.min.js"></script>
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+	  
+		
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E9%83%A8%E5%88%86"><span class="nav-number">1.</span> <span class="nav-text">网络部分</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3%E4%BF%A1%E6%81%AF"><span class="nav-number">1.1.</span> <span class="nav-text">相关信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%9F%9F%E5%90%8D%E9%85%8D%E7%BD%AE"><span class="nav-number">1.2.</span> <span class="nav-text">服务器域名配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%83%E4%B9%A0"><span class="nav-number">1.3.</span> <span class="nav-text">练习</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%91%E8%B5%B7%E8%AF%B7%E6%B1%82"><span class="nav-number">1.4.</span> <span class="nav-text">发起请求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%AD%E6%96%AD%E8%AF%B7%E6%B1%82"><span class="nav-number">1.5.</span> <span class="nav-text">中断请求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0"><span class="nav-number">1.6.</span> <span class="nav-text">文件上传</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8A%E4%BC%A0%E8%AF%B7%E6%B1%82"><span class="nav-number">1.6.1.</span> <span class="nav-text">上传请求</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8A%E4%BC%A0%E4%BB%BB%E5%8A%A1%E5%AF%B9%E8%B1%A1"><span class="nav-number">1.6.2.</span> <span class="nav-text">上传任务对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD"><span class="nav-number">1.6.3.</span> <span class="nav-text">文件下载</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD%E4%BB%BB%E5%8A%A1%E5%AF%B9%E8%B1%A1"><span class="nav-number">1.6.4.</span> <span class="nav-text">下载任务对象</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%BE%E7%89%87%E7%AE%A1%E7%90%86"><span class="nav-number">2.</span> <span class="nav-text">图片管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%89%E6%8B%A9%E5%9B%BE%E7%89%87"><span class="nav-number">2.1.</span> <span class="nav-text">选择图片</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%84%E8%A7%88%E5%9B%BE%E7%89%87"><span class="nav-number">2.2.</span> <span class="nav-text">预览图片</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%9B%BE%E7%89%87%E4%BF%A1%E6%81%AF"><span class="nav-number">2.3.</span> <span class="nav-text">获取图片信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BD%95%E9%9F%B3%E7%AE%A1%E7%90%86"><span class="nav-number">2.4.</span> <span class="nav-text">录音管理</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Sekyoro"
+      src="https://i.loli.net/2021/05/17/YqoavnXdGTpPO9R.jpg">
+  <p class="site-author-name" itemprop="name">Sekyoro</p>
+  <div class="site-description" itemprop="description">什么也无法舍弃的人，什么也做不了.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">96</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">123</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/drowning-in-codes" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;drowning-in-codes" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:bukalala174@gmail.com" title="E-Mail → mailto:bukalala174@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      友情链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="http://myqhs.top/" title="http:&#x2F;&#x2F;myqhs.top&#x2F;" rel="noopener" target="_blank">myqhs</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+		<div id="aplayer" class="aplayer" data-id="6856787487" data-server="netease" data-type="playlist" data-listfolded="true" data-order="random"></div>
+		<br/>
+		<script type="text/javascript" id="clustrmaps" src="//clustrmaps.com/map_v2.js?d=xQdGTxqARTBiNIwX2aUban-ixkj2s6VaZQWo-aVCgY8&cl=ffffff&w=a"></script>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+  
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; Wed Apr 08 2020 08:00:00 GMT+0800 (中国标准时间) – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Sekyoro</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">528k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">8:01</span>
+</div>
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+    <span id="busuanzi_container_site_pv">总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+    <span class="post-meta-divider">|</span>
+    <span id="busuanzi_container_site_uv">总访客数<span id="busuanzi_value_site_uv"></span>人</span>
+    <span class="post-meta-divider">|</span>
+<!-- 不蒜子计数初始值纠正 -->
+<script>
+$(document).ready(function() {
+
+    var int = setInterval(fixCount, 50);  // 50ms周期检测函数
+    var countOffset = 20000;  // 初始化首次数据
+
+    function fixCount() {            
+       if (document.getElementById("busuanzi_container_site_pv").style.display != "none")
+        {
+            $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + countOffset); 
+            clearInterval(int);
+        }                  
+        if ($("#busuanzi_container_site_pv").css("display") != "none")
+        {
+            $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + countOffset); // 加上初始数据 
+            clearInterval(int); // 停止检测
+        }  
+    }
+       	
+});
+</script> 
+
+<div>
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("04/08/2021 20:00:00");
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+    }
+setInterval("createtime()",250);
+</script>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/theme-next/theme-next-pjax@0/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+  <script data-pjax>
+    (function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+  </script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+<script data-pjax>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  let url = element.dataset.target;
+  let pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  let pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  let fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+  
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+    </div>
+<!-- hexo injector body_end start --><script src='/js/outdate.js'></script><!-- hexo injector body_end end --></body>
+</html>

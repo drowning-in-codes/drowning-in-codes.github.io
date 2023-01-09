@@ -1,0 +1,1173 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<script src="/live2d-widget/autoload.js"></script>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/blog_32px.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/blog_32px.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/blog_16px.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="EPrJAp11bJwHULpQUaSNSZ8_3RcvTsPDAEGOME4pl1w">
+
+<!-- google adsense in head.swig -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4034523802263123"
+     crossorigin="anonymous"></script>
+  <meta name="msvalidate.01" content="7226864CE87CE9DE8C008385273846FF">
+  <meta name="baidu-site-verification" content="code-fjFXVtiL7j" />
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-mac-osx.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"sekyoro.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":240,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+<link href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css" rel="stylesheet">
+  <meta name="description" content="利用flex,bison实现词法和语法分析,利用llvm实现代码优化和代码生成. 这里介绍一下lex和yacc(unix环境下). linux环境下是flex和bison.(当然lex和flex,yacc和bison还是有差别的)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="flex_bison学习">
+<meta property="og:url" content="https://sekyoro.top/2022/04/12/flex-bison%E5%AD%A6%E4%B9%A0/index.html">
+<meta property="og:site_name" content="Sekyoro的博客小屋">
+<meta property="og:description" content="利用flex,bison实现词法和语法分析,利用llvm实现代码优化和代码生成. 这里介绍一下lex和yacc(unix环境下). linux环境下是flex和bison.(当然lex和flex,yacc和bison还是有差别的)">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-04-12T14:52:35.000Z">
+<meta property="article:modified_time" content="2022-05-09T13:14:30.730Z">
+<meta property="article:author" content="Sekyoro">
+<meta property="article:tag" content="flex">
+<meta property="article:tag" content="lex">
+<meta property="article:tag" content="yacc">
+<meta property="article:tag" content="bison">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://sekyoro.top/2022/04/12/flex-bison%E5%AD%A6%E4%B9%A0/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+ 
+
+<script>
+  var OriginTitile = document.title;
+  var titleTime;
+  document.addEventListener("visibilitychange", function() {
+    if (document.hidden) {
+      document.title = "(つェ⊂)我藏好了哦~" + OriginTitile;
+      clearTimeout(titleTime);
+    } else {
+      document.title = "(*´∇｀*) 被你发现啦~" + OriginTitile;
+      titleTime = setTimeout(function() {
+        document.title = OriginTitile;
+      }, 2000);
+    }
+  });
+</script>
+
+
+
+  <script src="/js/src/activate-power-mode.min.js"></script>
+  <script>
+    POWERMODE.colorful = true;
+    POWERMODE.shake = false;
+    document.body.addEventListener('input', POWERMODE);
+  </script>
+
+
+  <title>flex_bison学习 | Sekyoro的博客小屋</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+<!-- require JQuery -->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+<!-- require pjax -->
+<script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/index.min.js"></script>
+
+
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+   <script type="text/javascript" src="/js/src/fireworks.js"></script>
+
+
+  <div class="container use-motion">
+    <div class="headband"></div>
+	
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Sekyoro的博客小屋</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-resume">
+
+    <a href="/resume/" rel="section"><i class="fa fa-file-pdf fa-fw"></i>简历</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://sekyoro.top/2022/04/12/flex-bison%E5%AD%A6%E4%B9%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://i.loli.net/2021/05/17/YqoavnXdGTpPO9R.jpg">
+      <meta itemprop="name" content="Sekyoro">
+      <meta itemprop="description" content="什么也无法舍弃的人，什么也做不了.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sekyoro的博客小屋">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          flex_bison学习
+        </h1>
+
+        <div class="post-meta">
+		
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-04-12 22:52:35" itemprop="dateCreated datePublished" datetime="2022-04-12T22:52:35+08:00">2022-04-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-09 21:14:30" itemprop="dateModified" datetime="2022-05-09T21:14:30+08:00">2022-05-09</time>
+              </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>8.8k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>8 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>利用flex,bison实现词法和语法分析,利用llvm实现代码优化和代码生成.</p>
+<p>这里介绍一下lex和yacc(unix环境下).</p>
+<p>linux环境下是flex和bison.(当然lex和flex,yacc和bison还是有差别的)</p>
+<span id="more"></span>
+<h2 id="lex"><a href="#lex" class="headerlink" title="lex"></a>lex</h2><p>用lex源语言编写的程序,扩展名为.l的文件.经lex系统处理后输出c程序文件.该文件包含依据正规式构建的状态转移表,用来驱动该状态表的总控程序yylex().</p>
+<p>文件格式</p>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">定义部分</span><br><span class="line"><span class="comment">%%</span></span><br><span class="line">识别规则部分</span><br><span class="line"><span class="comment">%%</span></span><br><span class="line">辅助函数部分</span><br></pre></td></tr></table></figure>
+<p>第二个%%可以省略(即辅助函数部分没有的情况下)</p>
+<p>一个例子</p>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">%&#123;</span></span><br><span class="line"><span class="params">#</span>include &lt;stdio.h&gt;</span><br><span class="line">int num<span class="built_in">_</span>lines = 0,num<span class="built_in">_</span>chars = 0;</span><br><span class="line"><span class="comment">%&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">%%</span></span><br><span class="line"><span class="keyword">\n</span> &#123;num<span class="built_in">_</span>lines++;num<span class="built_in">_</span>chars++;&#125;</span><br><span class="line">. &#123;++num<span class="built_in">_</span>chars;&#125; //除空白字符</span><br><span class="line"><span class="comment">%%</span></span><br><span class="line">int main(void)</span><br><span class="line">&#123;</span><br><span class="line">    yylex();</span><br><span class="line">    printf(&quot;num of lines =<span class="comment">%d,num of chars=%d\n&quot;,num_lines,num_chars);</span></span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>定义部分对规则部分要引用的文件和变量进行说明.可包含头文件,常数定义,全局变量定义,外部变量定义以及正规式定义.</p>
+<p>识别规则部分 </p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">P &#123;/\*<span class="keyword">do</span> something*/&#125;</span><br></pre></td></tr></table></figure>
+<p>辅助函数部分</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>变量和函数</th>
+<th>介绍</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>yyin</td>
+<td>FILE*类型 指向输入文件</td>
+</tr>
+<tr>
+<td>yyout</td>
+<td>指向输出文件</td>
+</tr>
+<tr>
+<td>yytext</td>
+<td>char* 指向识别规则中的一个正规式匹配的单词的首字符</td>
+</tr>
+<tr>
+<td>yylex()</td>
+<td>从该函数分析</td>
+</tr>
+<tr>
+<td>yyleng</td>
+<td>int类型 记录与识别规则中正规式匹配的单词的首字符长度</td>
+</tr>
+<tr>
+<td>yywrap()</td>
+<td>文件结束处理函数 若返回值1就停止解析  可用来解析多个文件</td>
+</tr>
+<tr>
+<td>echo</td>
+<td>将yytext打印到yyout</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>正规式就不多介绍了</p>
+<h2 id="yacc"><a href="#yacc" class="headerlink" title="yacc"></a>yacc</h2><p>基于LALR(1)语法分析,可以输出两个文件,一个是包含语法分析函数yyparse()的c程序,另一个是包含原文件中所有终结符编码的宏定义文件,扩展名.h.</p>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">%&#123;</span></span><br><span class="line"><span class="params">#</span>include &lt;stdio.h&gt;</span><br><span class="line">void yyerror(const char* msg) &#123;&#125;</span><br><span class="line"><span class="comment">%&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">%token T_NUM</span></span><br><span class="line"></span><br><span class="line"><span class="comment">%left &#x27;+&#x27; &#x27;-&#x27;</span></span><br><span class="line"><span class="comment">%left &#x27;*&#x27; &#x27;/&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">%%</span></span><br><span class="line"></span><br><span class="line">S   :   S E &#x27;<span class="keyword">\n</span>&#x27;        &#123; printf(&quot;ans = <span class="comment">%d\n&quot;, $2); &#125;</span></span><br><span class="line">    |   /* empty */     &#123; /* empty */ &#125;</span><br><span class="line">    ;</span><br><span class="line"></span><br><span class="line">E   :   E &#x27;+&#x27; E         &#123; <span class="built_in">$</span><span class="built_in">$</span> = <span class="built_in">$</span>1 + <span class="built_in">$</span>3; &#125;</span><br><span class="line">    |   E &#x27;-&#x27; E         &#123; <span class="built_in">$</span><span class="built_in">$</span> = <span class="built_in">$</span>1 - <span class="built_in">$</span>3; &#125;</span><br><span class="line">    |   E &#x27;*&#x27; E         &#123; <span class="built_in">$</span><span class="built_in">$</span> = <span class="built_in">$</span>1 * <span class="built_in">$</span>3; &#125;</span><br><span class="line">    |   E &#x27;/&#x27; E         &#123; <span class="built_in">$</span><span class="built_in">$</span> = <span class="built_in">$</span>1 / <span class="built_in">$</span>3; &#125;</span><br><span class="line">    |   T<span class="built_in">_</span>NUM           &#123; <span class="built_in">$</span><span class="built_in">$</span> = <span class="built_in">$</span>1; &#125;</span><br><span class="line">    |   &#x27;(&#x27; E &#x27;)&#x27;       &#123; <span class="built_in">$</span><span class="built_in">$</span> = <span class="built_in">$</span>2; &#125;</span><br><span class="line">    ;</span><br><span class="line"></span><br><span class="line"><span class="comment">%%</span></span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">    return yyparse();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>生成的头文件</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> YY_YY_CAL2_TAB_H_INCLUDED</span></span><br><span class="line"><span class="meta"># <span class="meta-keyword">define</span> YY_YY_CAL2_TAB_H_INCLUDED</span></span><br><span class="line"><span class="comment">/* Debug traces.  */</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> YYDEBUG</span></span><br><span class="line"><span class="meta"># <span class="meta-keyword">define</span> YYDEBUG 0</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">if</span> YYDEBUG</span></span><br><span class="line"><span class="keyword">extern</span> <span class="keyword">int</span> yydebug;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* Token type.  */</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> YYTOKENTYPE</span></span><br><span class="line"><span class="meta"># <span class="meta-keyword">define</span> YYTOKENTYPE</span></span><br><span class="line">  <span class="class"><span class="keyword">enum</span> <span class="title">yytokentype</span></span></span><br><span class="line"><span class="class">  &#123;</span></span><br><span class="line">    NUMBER = <span class="number">258</span>,</span><br><span class="line">    ADD = <span class="number">259</span>,</span><br><span class="line">    SUB = <span class="number">260</span>,</span><br><span class="line">    MUL = <span class="number">261</span>,</span><br><span class="line">    DIV = <span class="number">262</span>,</span><br><span class="line">    ABS = <span class="number">263</span>,</span><br><span class="line">    EOL = <span class="number">264</span></span><br><span class="line">  &#125;;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* Value type.  */</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">if</span> ! defined YYSTYPE &amp;&amp; ! defined YYSTYPE_IS_DECLARED</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> YYSTYPE;</span><br><span class="line"><span class="meta"># <span class="meta-keyword">define</span> YYSTYPE_IS_TRIVIAL 1</span></span><br><span class="line"><span class="meta"># <span class="meta-keyword">define</span> YYSTYPE_IS_DECLARED 1</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">extern</span> YYSTYPE yylval;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">yyparse</span> <span class="params">(<span class="keyword">void</span>)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">/* !YY_YY_CAL2_TAB_H_INCLUDED  */</span></span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>可以直接引入到.l文件中</p>
+<p>文件格式</p>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[说明部分]</span><br><span class="line"><span class="comment">%%</span></span><br><span class="line">翻译规则</span><br><span class="line">[<span class="comment">%%</span></span><br><span class="line">辅助过程]</span><br></pre></td></tr></table></figure>
+<p>说明部分包括两部分,一部分是处于<code>%&#123;%&#125;</code>之间的c语言代码,定义全局变量和相关文件.</p>
+<p>第二部分是文法记号声明,该部分每一项均以%开头.</p>
+<p>语义值类型定义</p>
+<p>语法分析器除了包含用来保存文法符号和状态的分析栈之外,还有一个用来保存与分析栈中文法符号相对应的语义值的语义栈.即YYSTYPE,抽象数据类型,缺省为int</p>
+<p>用户定义YYSTYPE</p>
+<p>若为简单类型</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">%&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> YYSTYPE float</span></span><br><span class="line">%&#125;</span><br></pre></td></tr></table></figure>
+<p>若为复杂类型,使用共用体.</p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">%union</span><br><span class="line">&#123;</span><br><span class="line">SYMBOL *sym;</span><br><span class="line">ENODE *<span class="keyword">NODE</span></span><br><span class="line"><span class="title">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>引用时</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">%token &lt;sym&gt; id</span><br><span class="line">%type &lt;node&gt; expr</span><br></pre></td></tr></table></figure>
+<p>%token表示终结符</p>
+<p>%type表示非终结符</p>
+<p>文法开始符定义</p>
+<p>一般以%start S表明S是文法的开始符号.默认为规则部分中出现的第一个产生式的左部非终极符号.</p>
+<p>优先性与结合性</p>
+<p>%left 左结合</p>
+<p>%nonassoc 无结合性</p>
+<p>结合性说明排列的次序决定运算符的优先级,在后写的优先级越高</p>
+<p>翻译规则</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">A: a1 &#123;语义动作&#125;</span><br><span class="line">|a2 &#123;&#125;</span><br><span class="line">;</span><br></pre></td></tr></table></figure>
+<p>$$表示与产生式做不非终结符号相关的属性值.</p>
+<p>$i 表示与产生式右部第i个文法符号相关的属性值. 在每个$i算出来之后再进行归约.</p>
+<p>辅助过程</p>
+<p>包含主程序,词法分析程序yylex,yyerror.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br></pre></td><td class="code"><pre><span class="line">YY_DECL</span><br><span class="line">&#123;</span><br><span class="line">	yy_state_type yy_current_state;</span><br><span class="line">	<span class="keyword">char</span> *yy_cp, *yy_bp;</span><br><span class="line">	<span class="keyword">int</span> yy_act;</span><br><span class="line">    </span><br><span class="line">	<span class="keyword">if</span> ( !(yy_init) )</span><br><span class="line">		&#123;</span><br><span class="line">		(yy_init) = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> YY_USER_INIT</span></span><br><span class="line">		YY_USER_INIT;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> ( ! (yy_start) )</span><br><span class="line">			(yy_start) = <span class="number">1</span>;	<span class="comment">/* first start state */</span></span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> ( ! yyin )</span><br><span class="line">			yyin = <span class="built_in">stdin</span>;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> ( ! yyout )</span><br><span class="line">			yyout = <span class="built_in">stdout</span>;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> ( ! YY_CURRENT_BUFFER ) &#123;</span><br><span class="line">			yyensure_buffer_stack ();</span><br><span class="line">			YY_CURRENT_BUFFER_LVALUE =</span><br><span class="line">				yy_create_buffer( yyin, YY_BUF_SIZE );</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		yy_load_buffer_state(  );</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">	&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">line</span> 15 <span class="meta-string">&quot;cal2.l&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">line</span> 681 <span class="meta-string">&quot;lex.yy.c&quot;</span></span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">while</span> ( <span class="comment">/*CONSTCOND*/</span><span class="number">1</span> )		<span class="comment">/* loops until end-of-file is reached */</span></span><br><span class="line">		&#123;</span><br><span class="line">		yy_cp = (yy_c_buf_p);</span><br><span class="line"></span><br><span class="line">		<span class="comment">/* Support of yytext. */</span></span><br><span class="line">		*yy_cp = (yy_hold_char);</span><br><span class="line"></span><br><span class="line">		<span class="comment">/* yy_bp points to the position in yy_ch_buf of the start of</span></span><br><span class="line"><span class="comment">		 * the current run.</span></span><br><span class="line"><span class="comment">		 */</span></span><br><span class="line">		yy_bp = yy_cp;</span><br><span class="line"></span><br><span class="line">		yy_current_state = (yy_start);</span><br><span class="line">yy_match:</span><br><span class="line">		<span class="keyword">do</span></span><br><span class="line">			&#123;</span><br><span class="line">			YY_CHAR yy_c = yy_ec[YY_SC_TO_UI(*yy_cp)] ;</span><br><span class="line">			<span class="keyword">if</span> ( yy_accept[yy_current_state] )</span><br><span class="line">				&#123;</span><br><span class="line">				(yy_last_accepting_state) = yy_current_state;</span><br><span class="line">				(yy_last_accepting_cpos) = yy_cp;</span><br><span class="line">				&#125;</span><br><span class="line">			<span class="keyword">while</span> ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )</span><br><span class="line">				&#123;</span><br><span class="line">				yy_current_state = (<span class="keyword">int</span>) yy_def[yy_current_state];</span><br><span class="line">				<span class="keyword">if</span> ( yy_current_state &gt;= <span class="number">15</span> )</span><br><span class="line">					yy_c = yy_meta[yy_c];</span><br><span class="line">				&#125;</span><br><span class="line">			yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];</span><br><span class="line">			++yy_cp;</span><br><span class="line">			&#125;</span><br><span class="line">		<span class="keyword">while</span> ( yy_base[yy_current_state] != <span class="number">13</span> );</span><br><span class="line"></span><br><span class="line">yy_find_action:</span><br><span class="line">		yy_act = yy_accept[yy_current_state];</span><br><span class="line">		<span class="keyword">if</span> ( yy_act == <span class="number">0</span> )</span><br><span class="line">			&#123; <span class="comment">/* have to back up */</span></span><br><span class="line">			yy_cp = (yy_last_accepting_cpos);</span><br><span class="line">			yy_current_state = (yy_last_accepting_state);</span><br><span class="line">			yy_act = yy_accept[yy_current_state];</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">		YY_DO_BEFORE_ACTION;</span><br><span class="line"></span><br><span class="line">do_action:	<span class="comment">/* This label is used only to access EOF actions. */</span></span><br><span class="line"></span><br><span class="line">		<span class="keyword">switch</span> ( yy_act )</span><br><span class="line">	&#123; <span class="comment">/* beginning of action switch */</span></span><br><span class="line">			<span class="keyword">case</span> <span class="number">0</span>: <span class="comment">/* must back up */</span></span><br><span class="line">			<span class="comment">/* undo the effects of YY_DO_BEFORE_ACTION */</span></span><br><span class="line">			*yy_cp = (yy_hold_char);</span><br><span class="line">			yy_cp = (yy_last_accepting_cpos);</span><br><span class="line">			yy_current_state = (yy_last_accepting_state);</span><br><span class="line">			<span class="keyword">goto</span> yy_find_action;</span><br><span class="line"></span><br><span class="line"><span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">YY_RULE_SETUP</span><br><span class="line"><span class="meta">#<span class="meta-keyword">line</span> 16 <span class="meta-string">&quot;cal2.l&quot;</span></span></span><br><span class="line">&#123;<span class="keyword">return</span> ADD; &#125;</span><br><span class="line">	YY_BREAK</span><br><span class="line"><span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">YY_RULE_SETUP</span><br><span class="line"><span class="meta">#<span class="meta-keyword">line</span> 17 <span class="meta-string">&quot;cal2.l&quot;</span></span></span><br><span class="line">&#123;<span class="keyword">return</span> SUB; &#125;</span><br><span class="line">	YY_BREAK</span><br><span class="line"><span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">YY_RULE_SETUP</span><br><span class="line"><span class="meta">#<span class="meta-keyword">line</span> 18 <span class="meta-string">&quot;cal2.l&quot;</span></span></span><br><span class="line">&#123;<span class="keyword">return</span> MUL; &#125;</span><br><span class="line">	YY_BREAK</span><br><span class="line"><span class="keyword">case</span> <span class="number">4</span>:</span><br><span class="line">YY_RULE_SETUP</span><br><span class="line"><span class="meta">#<span class="meta-keyword">line</span> 19 <span class="meta-string">&quot;cal2.l&quot;</span></span></span><br><span class="line">&#123;<span class="keyword">return</span> DIV; &#125;</span><br><span class="line">	YY_BREAK</span><br><span class="line"><span class="keyword">case</span> <span class="number">5</span>:</span><br><span class="line">YY_RULE_SETUP</span><br><span class="line"><span class="meta">#<span class="meta-keyword">line</span> 20 <span class="meta-string">&quot;cal2.l&quot;</span></span></span><br><span class="line">&#123;<span class="keyword">return</span> ABS; &#125;</span><br><span class="line">	YY_BREAK</span><br><span class="line"><span class="keyword">case</span> <span class="number">6</span>:</span><br><span class="line">YY_RULE_SETUP</span><br><span class="line"><span class="meta">#<span class="meta-keyword">line</span> 21 <span class="meta-string">&quot;cal2.l&quot;</span></span></span><br><span class="line">&#123; yylval = atoi(yytext); <span class="keyword">return</span> NUMBER; &#125; <span class="comment">//yytext匹配 yylval返回值</span></span><br><span class="line">	YY_BREAK</span><br><span class="line"><span class="keyword">case</span> <span class="number">7</span>:</span><br><span class="line"><span class="comment">/* rule 7 can match eol */</span></span><br><span class="line">YY_RULE_SETUP</span><br><span class="line"><span class="meta">#<span class="meta-keyword">line</span> 22 <span class="meta-string">&quot;cal2.l&quot;</span></span></span><br><span class="line">&#123;<span class="keyword">return</span> EOL;&#125;</span><br><span class="line">	YY_BREAK</span><br><span class="line"><span class="keyword">case</span> <span class="number">8</span>:</span><br><span class="line">YY_RULE_SETUP</span><br><span class="line"><span class="meta">#<span class="meta-keyword">line</span> 23 <span class="meta-string">&quot;cal2.l&quot;</span></span></span><br><span class="line">&#123;&#125;</span><br><span class="line">	YY_BREAK</span><br><span class="line"><span class="keyword">case</span> <span class="number">9</span>:</span><br><span class="line">YY_RULE_SETUP</span><br><span class="line"><span class="meta">#<span class="meta-keyword">line</span> 24 <span class="meta-string">&quot;cal2.l&quot;</span></span></span><br><span class="line">&#123; ECHO ;&#125;</span><br><span class="line">	YY_BREAK</span><br><span class="line"><span class="keyword">case</span> <span class="number">10</span>:</span><br><span class="line">YY_RULE_SETUP</span><br><span class="line"><span class="meta">#<span class="meta-keyword">line</span> 25 <span class="meta-string">&quot;cal2.l&quot;</span></span></span><br><span class="line">ECHO;</span><br><span class="line">	YY_BREAK</span><br><span class="line"><span class="meta">#<span class="meta-keyword">line</span> 789 <span class="meta-string">&quot;lex.yy.c&quot;</span></span></span><br><span class="line"><span class="function"><span class="keyword">case</span> <span class="title">YY_STATE_EOF</span><span class="params">(INITIAL)</span>:</span></span><br><span class="line"><span class="function">	<span class="title">yyterminate</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">case</span> YY_END_OF_BUFFER:</span><br><span class="line">		&#123;</span><br><span class="line">		<span class="comment">/* Amount of text matched not including the EOB char. */</span></span><br><span class="line">		<span class="keyword">int</span> yy_amount_of_matched_text = (<span class="keyword">int</span>) (yy_cp - (yytext_ptr)) - <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">		<span class="comment">/* Undo the effects of YY_DO_BEFORE_ACTION. */</span></span><br><span class="line">		*yy_cp = (yy_hold_char);</span><br><span class="line">		<span class="function">YY_RESTORE_YY_MORE_OFFSET</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">		<span class="title">if</span> <span class="params">( YY_CURRENT_BUFFER_LVALUE-&gt;yy_buffer_status == YY_BUFFER_NEW )</span></span></span><br><span class="line"><span class="function">			</span>&#123;</span><br><span class="line">			<span class="comment">/* We&#x27;re scanning a new file or input source.  It&#x27;s</span></span><br><span class="line"><span class="comment">			 * possible that this happened because the user</span></span><br><span class="line"><span class="comment">			 * just pointed yyin at a new source and called</span></span><br><span class="line"><span class="comment">			 * yylex().  If so, then we have to assure</span></span><br><span class="line"><span class="comment">			 * consistency between YY_CURRENT_BUFFER and our</span></span><br><span class="line"><span class="comment">			 * globals.  Here is the right place to do so, because</span></span><br><span class="line"><span class="comment">			 * this is the first action (other than possibly a</span></span><br><span class="line"><span class="comment">			 * back-up) that will match for the new input source.</span></span><br><span class="line"><span class="comment">			 */</span></span><br><span class="line">			(yy_n_chars) = YY_CURRENT_BUFFER_LVALUE-&gt;yy_n_chars;</span><br><span class="line">			YY_CURRENT_BUFFER_LVALUE-&gt;yy_input_file = yyin;</span><br><span class="line">			YY_CURRENT_BUFFER_LVALUE-&gt;yy_buffer_status = YY_BUFFER_NORMAL;</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">		<span class="comment">/* Note that here we test for yy_c_buf_p &quot;&lt;=&quot; to the position</span></span><br><span class="line"><span class="comment">		 * of the first EOB in the buffer, since yy_c_buf_p will</span></span><br><span class="line"><span class="comment">		 * already have been incremented past the NUL character</span></span><br><span class="line"><span class="comment">		 * (since all states make transitions on EOB to the</span></span><br><span class="line"><span class="comment">		 * end-of-buffer state).  Contrast this with the test</span></span><br><span class="line"><span class="comment">		 * in input().</span></span><br><span class="line"><span class="comment">		 */</span></span><br><span class="line">		<span class="keyword">if</span> ( (yy_c_buf_p) &lt;= &amp;YY_CURRENT_BUFFER_LVALUE-&gt;yy_ch_buf[(yy_n_chars)] )</span><br><span class="line">			&#123; <span class="comment">/* This was really a NUL. */</span></span><br><span class="line">			yy_state_type yy_next_state;</span><br><span class="line"></span><br><span class="line">			(yy_c_buf_p) = (yytext_ptr) + yy_amount_of_matched_text;</span><br><span class="line"></span><br><span class="line">			yy_current_state = yy_get_previous_state(  );</span><br><span class="line"></span><br><span class="line">			<span class="comment">/* Okay, we&#x27;re now positioned to make the NUL</span></span><br><span class="line"><span class="comment">			 * transition.  We couldn&#x27;t have</span></span><br><span class="line"><span class="comment">			 * yy_get_previous_state() go ahead and do it</span></span><br><span class="line"><span class="comment">			 * for us because it doesn&#x27;t know how to deal</span></span><br><span class="line"><span class="comment">			 * with the possibility of jamming (and we don&#x27;t</span></span><br><span class="line"><span class="comment">			 * want to build jamming into it because then it</span></span><br><span class="line"><span class="comment">			 * will run more slowly).</span></span><br><span class="line"><span class="comment">			 */</span></span><br><span class="line"></span><br><span class="line">			yy_next_state = yy_try_NUL_trans( yy_current_state );</span><br><span class="line"></span><br><span class="line">			yy_bp = (yytext_ptr) + YY_MORE_ADJ;</span><br><span class="line"></span><br><span class="line">			<span class="keyword">if</span> ( yy_next_state )</span><br><span class="line">				&#123;</span><br><span class="line">				<span class="comment">/* Consume the NUL. */</span></span><br><span class="line">				yy_cp = ++(yy_c_buf_p);</span><br><span class="line">				yy_current_state = yy_next_state;</span><br><span class="line">				<span class="keyword">goto</span> yy_match;</span><br><span class="line">				&#125;</span><br><span class="line"></span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">				&#123;</span><br><span class="line">				yy_cp = (yy_c_buf_p);</span><br><span class="line">				<span class="keyword">goto</span> yy_find_action;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">switch</span> ( yy_get_next_buffer(  ) )</span><br><span class="line">			&#123;</span><br><span class="line">			<span class="keyword">case</span> EOB_ACT_END_OF_FILE:</span><br><span class="line">				&#123;</span><br><span class="line">				(yy_did_buffer_switch_on_eof) = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">				<span class="keyword">if</span> ( yywrap(  ) )</span><br><span class="line">					&#123;</span><br><span class="line">					<span class="comment">/* Note: because we&#x27;ve taken care in</span></span><br><span class="line"><span class="comment">					 * yy_get_next_buffer() to have set up</span></span><br><span class="line"><span class="comment">					 * yytext, we can now set up</span></span><br><span class="line"><span class="comment">					 * yy_c_buf_p so that if some total</span></span><br><span class="line"><span class="comment">					 * hoser (like flex itself) wants to</span></span><br><span class="line"><span class="comment">					 * call the scanner after we return the</span></span><br><span class="line"><span class="comment">					 * YY_NULL, it&#x27;ll still work - another</span></span><br><span class="line"><span class="comment">					 * YY_NULL will get returned.</span></span><br><span class="line"><span class="comment">					 */</span></span><br><span class="line">					(yy_c_buf_p) = (yytext_ptr) + YY_MORE_ADJ;</span><br><span class="line"></span><br><span class="line">					yy_act = YY_STATE_EOF(YY_START);</span><br><span class="line">					<span class="keyword">goto</span> do_action;</span><br><span class="line">					&#125;</span><br><span class="line"></span><br><span class="line">				<span class="keyword">else</span></span><br><span class="line">					&#123;</span><br><span class="line">					<span class="keyword">if</span> ( ! (yy_did_buffer_switch_on_eof) )</span><br><span class="line">						YY_NEW_FILE;</span><br><span class="line">					&#125;</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">				&#125;</span><br><span class="line"></span><br><span class="line">			<span class="keyword">case</span> EOB_ACT_CONTINUE_SCAN:</span><br><span class="line">				(yy_c_buf_p) =</span><br><span class="line">					(yytext_ptr) + yy_amount_of_matched_text;</span><br><span class="line"></span><br><span class="line">				yy_current_state = yy_get_previous_state(  );</span><br><span class="line"></span><br><span class="line">				yy_cp = (yy_c_buf_p);</span><br><span class="line">				yy_bp = (yytext_ptr) + YY_MORE_ADJ;</span><br><span class="line">				<span class="keyword">goto</span> yy_match;</span><br><span class="line"></span><br><span class="line">			<span class="keyword">case</span> EOB_ACT_LAST_MATCH:</span><br><span class="line">				(yy_c_buf_p) =</span><br><span class="line">				&amp;YY_CURRENT_BUFFER_LVALUE-&gt;yy_ch_buf[(yy_n_chars)];</span><br><span class="line"></span><br><span class="line">				yy_current_state = yy_get_previous_state(  );</span><br><span class="line"></span><br><span class="line">				yy_cp = (yy_c_buf_p);</span><br><span class="line">				yy_bp = (yytext_ptr) + YY_MORE_ADJ;</span><br><span class="line">				<span class="keyword">goto</span> yy_find_action;</span><br><span class="line">			&#125;</span><br><span class="line">		<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">default</span>:</span><br><span class="line">		YY_FATAL_ERROR(</span><br><span class="line">			<span class="string">&quot;fatal flex scanner internal error--no action found&quot;</span> );</span><br><span class="line">	&#125; <span class="comment">/* end of action switch */</span></span><br><span class="line">		&#125; <span class="comment">/* end of scanning one token */</span></span><br><span class="line">	&#125; <span class="comment">/* end of user&#x27;s declarations */</span></span><br><span class="line">&#125; <span class="comment">/* end of yylex */</span></span><br></pre></td></tr></table></figure>
+<p>以上是yylex函数.</p>
+<h3 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h3><p>yyparse调用yylex,调用yylex时得到一个二元式,&lt;记号 属性值&gt;</p>
+<p>记号通过return会送给yyparse(),记号必须在yacc中%token声明.属性值通过全局变量yylval会送给yyparse</p>
+<h2 id="参考书籍6"><a href="#参考书籍6" class="headerlink" title="参考书籍6"></a>参考书籍6</h2><p>flex和bison</p>
+<p>编译与反编译实战</p>
+
+    </div>
+
+    
+    
+    
+    <div>
+	
+     <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+     
+   </div>
+        <div class="reward-container">
+  <div>感谢阅读.</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.png" alt="Sekyoro 微信支付">
+        <p>微信支付</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Sekyoro
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://sekyoro.top/2022/04/12/flex-bison%E5%AD%A6%E4%B9%A0/" title="flex_bison学习">https://sekyoro.top/2022/04/12/flex-bison学习/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/flex/" rel="tag"><i class="fa fa-tag"></i> flex</a>
+              <a href="/tags/lex/" rel="tag"><i class="fa fa-tag"></i> lex</a>
+              <a href="/tags/yacc/" rel="tag"><i class="fa fa-tag"></i> yacc</a>
+              <a href="/tags/bison/" rel="tag"><i class="fa fa-tag"></i> bison</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/04/11/%E5%AF%86%E7%A0%81%E7%A0%B4%E8%A7%A3%E5%AD%A6%E4%B9%A0/" rel="prev" title="密码破解学习">
+      <i class="fa fa-chevron-left"></i> 密码破解学习
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/04/15/pytorch%E5%AD%A6%E4%B9%A0/" rel="next" title="pytorch学习">
+      pytorch学习 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81MzE5Ny8yOTY3Mg=="></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+	
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+      	   
+          <!-- canvas粒子时钟 -->
+          <div style="">
+  <canvas id="canvas" style="width:60%;">当前浏览器不支持canvas，请更换浏览器后再试</canvas>
+</div>
+<script>
+(function(){
+
+   var digit=
+    [
+        [
+            [0,0,1,1,1,0,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,0,1,1,0],
+            [0,0,1,1,1,0,0]
+        ],//0
+        [
+            [0,0,0,1,1,0,0],
+            [0,1,1,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [1,1,1,1,1,1,1]
+        ],//1
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,1,1],
+            [1,1,1,1,1,1,1]
+        ],//2
+        [
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//3
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,0],
+            [0,0,1,1,1,1,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,1,1,0],
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,1]
+        ],//4
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,1,1,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//5
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//6
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0]
+        ],//7
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//8
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,1,1,0,0,0,0]
+        ],//9
+        [
+            [0,0,0,0,0,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,0,0,0]
+        ]//:
+    ];
+
+var canvas = document.getElementById('canvas');
+
+if(canvas.getContext){
+    var cxt = canvas.getContext('2d');
+    //声明canvas的宽高
+    var H = 100,W = 700;
+    canvas.height = H;
+    canvas.width = W;
+    cxt.fillStyle = '#f00';
+    cxt.fillRect(10,10,50,50);
+
+    //存储时间数据
+    var data = [];
+    //存储运动的小球
+    var balls = [];
+    //设置粒子半径
+    var R = canvas.height/20-1;
+    (function(){
+        var temp = /(\d)(\d):(\d)(\d):(\d)(\d)/.exec(new Date());
+        //存储时间数字，由十位小时、个位小时、冒号、十位分钟、个位分钟、冒号、十位秒钟、个位秒钟这7个数字组成
+        data.push(temp[1],temp[2],10,temp[3],temp[4],10,temp[5],temp[6]);
+    })();
+
+    /*生成点阵数字*/
+    function renderDigit(index,num){
+        for(var i = 0; i < digit[num].length; i++){
+            for(var j = 0; j < digit[num][i].length; j++){
+                if(digit[num][i][j] == 1){
+                    cxt.beginPath();
+                    cxt.arc(14*(R+2)*index + j*2*(R+1)+(R+1),i*2*(R+1)+(R+1),R,0,2*Math.PI);
+                    cxt.closePath();
+                    cxt.fill();
+                }
+            }
+        }
+    }
+
+    /*更新时钟*/
+    function updateDigitTime(){
+        var changeNumArray = [];
+        var temp = /(\d)(\d):(\d)(\d):(\d)(\d)/.exec(new Date());
+        var NewData = [];
+        NewData.push(temp[1],temp[2],10,temp[3],temp[4],10,temp[5],temp[6]);
+        for(var i = data.length-1; i >=0 ; i--){
+            //时间发生变化
+            if(NewData[i] !== data[i]){
+                //将变化的数字值和在data数组中的索引存储在changeNumArray数组中
+                changeNumArray.push(i+'_'+(Number(data[i])+1)%10);
+            }
+        }
+        //增加小球
+        for(var i = 0; i< changeNumArray.length; i++){
+            addBalls.apply(this,changeNumArray[i].split('_'));
+        }
+        data = NewData.concat();
+    }
+
+    /*更新小球状态*/
+    function updateBalls(){
+        for(var i = 0; i < balls.length; i++){
+            balls[i].stepY += balls[i].disY;
+            balls[i].x += balls[i].stepX;
+            balls[i].y += balls[i].stepY;
+            if(balls[i].x > W + R || balls[i].y > H + R){
+                balls.splice(i,1);
+                i--;
+            }
+        }
+    }
+
+    /*增加要运动的小球*/
+    function addBalls(index,num){
+        var numArray = [1,2,3];
+        var colorArray =  ["#3BE","#09C","#A6C","#93C","#9C0","#690","#FB3","#F80","#F44","#C00"];
+        for(var i = 0; i < digit[num].length; i++){
+            for(var j = 0; j < digit[num][i].length; j++){
+                if(digit[num][i][j] == 1){
+                    var ball = {
+                        x:14*(R+2)*index + j*2*(R+1)+(R+1),
+                        y:i*2*(R+1)+(R+1),
+                        stepX:Math.floor(Math.random() * 4 -2),
+                        stepY:-2*numArray[Math.floor(Math.random()*numArray.length)],
+                        color:colorArray[Math.floor(Math.random()*colorArray.length)],
+                        disY:1
+                    };
+                    balls.push(ball);
+                }
+            }
+        }
+    }
+
+    /*渲染*/
+    function render(){
+        //重置画布宽度，达到清空画布的效果
+        canvas.height = 100;
+        //渲染时钟
+        for(var i = 0; i < data.length; i++){
+            renderDigit(i,data[i]);
+        }
+        //渲染小球
+        for(var i = 0; i < balls.length; i++){
+            cxt.beginPath();
+            cxt.arc(balls[i].x,balls[i].y,R,0,2*Math.PI);
+            cxt.fillStyle = balls[i].color;
+            cxt.closePath();
+            cxt.fill();
+        }
+    }
+
+    clearInterval(oTimer);
+    var oTimer = setInterval(function(){
+        //更新时钟
+        updateDigitTime();
+        //更新小球状态
+        updateBalls();
+        //渲染
+        render();
+    },50);
+}
+
+})();
+</script>
+        
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.0/dist/APlayer.min.css">
+		<script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.0/dist/APlayer.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/meting@1.2/dist/Meting.min.js"></script>
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+	  
+		
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#lex"><span class="nav-number">1.</span> <span class="nav-text">lex</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#yacc"><span class="nav-number">2.</span> <span class="nav-text">yacc</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%81%E7%A8%8B"><span class="nav-number">2.1.</span> <span class="nav-text">流程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E4%B9%A6%E7%B1%8D6"><span class="nav-number">3.</span> <span class="nav-text">参考书籍6</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Sekyoro"
+      src="https://i.loli.net/2021/05/17/YqoavnXdGTpPO9R.jpg">
+  <p class="site-author-name" itemprop="name">Sekyoro</p>
+  <div class="site-description" itemprop="description">什么也无法舍弃的人，什么也做不了.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">96</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">123</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/drowning-in-codes" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;drowning-in-codes" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:bukalala174@gmail.com" title="E-Mail → mailto:bukalala174@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      友情链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="http://myqhs.top/" title="http:&#x2F;&#x2F;myqhs.top&#x2F;" rel="noopener" target="_blank">myqhs</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+		<div id="aplayer" class="aplayer" data-id="6856787487" data-server="netease" data-type="playlist" data-listfolded="true" data-order="random"></div>
+		<br/>
+		<script type="text/javascript" id="clustrmaps" src="//clustrmaps.com/map_v2.js?d=xQdGTxqARTBiNIwX2aUban-ixkj2s6VaZQWo-aVCgY8&cl=ffffff&w=a"></script>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+  
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; Wed Apr 08 2020 08:00:00 GMT+0800 (中国标准时间) – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Sekyoro</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">528k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">8:01</span>
+</div>
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+    <span id="busuanzi_container_site_pv">总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+    <span class="post-meta-divider">|</span>
+    <span id="busuanzi_container_site_uv">总访客数<span id="busuanzi_value_site_uv"></span>人</span>
+    <span class="post-meta-divider">|</span>
+<!-- 不蒜子计数初始值纠正 -->
+<script>
+$(document).ready(function() {
+
+    var int = setInterval(fixCount, 50);  // 50ms周期检测函数
+    var countOffset = 20000;  // 初始化首次数据
+
+    function fixCount() {            
+       if (document.getElementById("busuanzi_container_site_pv").style.display != "none")
+        {
+            $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + countOffset); 
+            clearInterval(int);
+        }                  
+        if ($("#busuanzi_container_site_pv").css("display") != "none")
+        {
+            $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + countOffset); // 加上初始数据 
+            clearInterval(int); // 停止检测
+        }  
+    }
+       	
+});
+</script> 
+
+<div>
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("04/08/2021 20:00:00");
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+    }
+setInterval("createtime()",250);
+</script>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/theme-next/theme-next-pjax@0/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+  <script data-pjax>
+    (function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+  </script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+<script data-pjax>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  let url = element.dataset.target;
+  let pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  let pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  let fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+  
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+    </div>
+<!-- hexo injector body_end start --><script src='/js/outdate.js'></script><!-- hexo injector body_end end --></body>
+</html>
