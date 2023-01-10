@@ -716,12 +716,14 @@ if(canvas.getContext){
 	 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4034523802263123"
      crossorigin="anonymous"></script>
 <!-- 边栏 -->
+<div class="sidebar-ads"> 
 <ins class="adsbygoogle"
      style="display:block"
      data-ad-client="ca-pub-4034523802263123"
      data-ad-slot="6549565089"
      data-ad-format="auto"
      data-full-width-responsive="true"></ins>
+	 </div>
 <script>
      (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
@@ -1018,5 +1020,14 @@ NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
 </script>
 
     </div>
+  <script>
+    $(function(){
+   setTimeout(function(){
+		if ($('.sibar-ads').height() == 0)
+			  $(".sibar-ads").html("检测到您可能开启了广告屏蔽<br>小站贫瘠,希望能点点广告获取收益");
+  },6000);
+});
+  
+  </script>
 </body>
 </html>
