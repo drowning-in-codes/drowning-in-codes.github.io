@@ -1215,27 +1215,6 @@
   </url>
   
   <url>
-    <loc>https://sekyoro.top/tags/RSS/</loc>
-    <lastmod>2023-01-10</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://sekyoro.top/tags/torrent/</loc>
-    <lastmod>2023-01-10</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://sekyoro.top/tags/BT/</loc>
-    <lastmod>2023-01-10</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://sekyoro.top/tags/latex/</loc>
     <lastmod>2023-01-10</lastmod>
     <changefreq>daily</changefreq>
@@ -1251,6 +1230,27 @@
   
   <url>
     <loc>https://sekyoro.top/tags/overleaf/</loc>
+    <lastmod>2023-01-10</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://sekyoro.top/tags/RSS/</loc>
+    <lastmod>2023-01-10</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://sekyoro.top/tags/torrent/</loc>
+    <lastmod>2023-01-10</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://sekyoro.top/tags/BT/</loc>
     <lastmod>2023-01-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
