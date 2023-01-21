@@ -1089,14 +1089,14 @@
   </url>
   
   <url>
-    <loc>https://www.sekyoro.top/tags/requests/</loc>
+    <loc>https://www.sekyoro.top/tags/ML/</loc>
     <lastmod>2023-01-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://www.sekyoro.top/tags/ML/</loc>
+    <loc>https://www.sekyoro.top/tags/requests/</loc>
     <lastmod>2023-01-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1404,20 +1404,6 @@
   </url>
   
   <url>
-    <loc>https://www.sekyoro.top/tags/pytorch/</loc>
-    <lastmod>2023-01-21</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.sekyoro.top/tags/deep-learning/</loc>
-    <lastmod>2023-01-21</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://www.sekyoro.top/tags/lex/</loc>
     <lastmod>2023-01-21</lastmod>
     <changefreq>daily</changefreq>
@@ -1439,7 +1425,28 @@
   </url>
   
   <url>
+    <loc>https://www.sekyoro.top/tags/pytorch/</loc>
+    <lastmod>2023-01-21</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.sekyoro.top/tags/deep-learning/</loc>
+    <lastmod>2023-01-21</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://www.sekyoro.top/tags/JavaScript/</loc>
+    <lastmod>2023-01-21</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.sekyoro.top/tags/django/</loc>
     <lastmod>2023-01-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1454,13 +1461,6 @@
   
   <url>
     <loc>https://www.sekyoro.top/tags/keras/</loc>
-    <lastmod>2023-01-21</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.sekyoro.top/tags/django/</loc>
     <lastmod>2023-01-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
