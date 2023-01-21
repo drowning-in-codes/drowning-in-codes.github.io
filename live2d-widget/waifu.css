@@ -24,9 +24,10 @@
 
 #waifu {
 	bottom: -1000px;
-	left: 0;
+	right: 0;
 	line-height: 0;
 	margin-bottom: -10px;
+	margin-right: 45px;
 	position: fixed;
 	transform: translateY(3px);
 	transition: transform .3s ease-in-out, bottom 3s ease-in-out;
