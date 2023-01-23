@@ -1,0 +1,1227 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<script src="/live2d-widget/autoload.js"></script>
+
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/blog_32px.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/blog_32px.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/blog_16px.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="EPrJAp11bJwHULpQUaSNSZ8_3RcvTsPDAEGOME4pl1w">
+
+<!-- google adsense in head.swig -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4034523802263123"
+     crossorigin="anonymous"></script>
+  <meta name="msvalidate.01" content="7226864CE87CE9DE8C008385273846FF">
+  <meta name="baidu-site-verification" content="code-fjFXVtiL7j" />
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-corner-indicator.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.sekyoro.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":240,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+<link href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css" rel="stylesheet">
+  <meta name="description" content="利用闲置服务器通过BT SSR下载动漫,并通过filebrowser浏览下载. FileBrowser filebrowser 是一个使用go语言编写的软件，功能是可以通过浏览器对服务器上的文件进行管理。可以是修改文件，或者是添加删除文件，甚至可以分享文件，是一个很棒的文件管理器，你甚至可以当成一个网盘来使用。  在网站上下载压缩包后并解压. filebrowser&#x2F;filebrowser: 📂">
+<meta property="og:type" content="article">
+<meta property="og:title" content="闲置服务器BT下载影视">
+<meta property="og:url" content="https://www.sekyoro.top/2023/01/23/%E9%97%B2%E7%BD%AE%E6%9C%8D%E5%8A%A1%E5%99%A8BT%E4%B8%8B%E8%BD%BD%E5%BD%B1%E8%A7%86/index.html">
+<meta property="og:site_name" content="Sekyoro的博客小屋">
+<meta property="og:description" content="利用闲置服务器通过BT SSR下载动漫,并通过filebrowser浏览下载. FileBrowser filebrowser 是一个使用go语言编写的软件，功能是可以通过浏览器对服务器上的文件进行管理。可以是修改文件，或者是添加删除文件，甚至可以分享文件，是一个很棒的文件管理器，你甚至可以当成一个网盘来使用。  在网站上下载压缩包后并解压. filebrowser&#x2F;filebrowser: 📂">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/23/0120230123235939.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/23/0120230123235942.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/23/0120230123235958.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/23/0120230123235947.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/24/0120230124000007.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/24/0120230124000010.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/24/0120230124000014.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/24/01image-20230123224224945.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/24/0120230124000018.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/24/0120230124000026.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/24/0120230124000030.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/24/0120230124000033.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/24/0120230124000037.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/24/01image-20230123234248037.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/24/0120230124000045.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/24/0120230124000048.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/24/0120230124000051.png">
+<meta property="og:image" content="http://cdn.sekyoro.top/imgs/24/0120230124000102.png">
+<meta property="article:published_time" content="2023-01-23T13:38:55.000Z">
+<meta property="article:modified_time" content="2023-01-23T16:01:04.049Z">
+<meta property="article:author" content="Sekyoro">
+<meta property="article:tag" content="torrent">
+<meta property="article:tag" content="Centos">
+<meta property="article:tag" content="filebrowser">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://cdn.sekyoro.top/imgs/23/0120230123235939.png">
+
+<link rel="canonical" href="https://www.sekyoro.top/2023/01/23/%E9%97%B2%E7%BD%AE%E6%9C%8D%E5%8A%A1%E5%99%A8BT%E4%B8%8B%E8%BD%BD%E5%BD%B1%E8%A7%86/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+ 
+
+<script>
+  var OriginTitile = document.title;
+  var titleTime;
+  document.addEventListener("visibilitychange", function() {
+    if (document.hidden) {
+      document.title = "(つェ⊂)我藏好了哦~" + OriginTitile;
+      clearTimeout(titleTime);
+    } else {
+      document.title = "(*´∇｀*) 被你发现啦~" + OriginTitile;
+      titleTime = setTimeout(function() {
+        document.title = OriginTitile;
+      }, 2000);
+    }
+  });
+</script>
+
+
+
+  <script src="/js/src/activate-power-mode.min.js"></script>
+  <script>
+    POWERMODE.colorful = true;
+    POWERMODE.shake = false;
+    document.body.addEventListener('input', POWERMODE);
+  </script>
+
+
+  <title>闲置服务器BT下载影视 | Sekyoro的博客小屋</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+<!-- require JQuery -->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+<!-- require pjax -->
+<script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/index.min.js"></script>
+
+
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+   <script type="text/javascript" src="/js/src/fireworks.js"></script>
+
+
+  <div class="container use-motion">
+    <div class="headband"></div>
+	
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Sekyoro的博客小屋</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-resume">
+
+    <a href="/resume/" rel="section"><i class="fa fa-file-pdf fa-fw"></i>简历</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.sekyoro.top/2023/01/23/%E9%97%B2%E7%BD%AE%E6%9C%8D%E5%8A%A1%E5%99%A8BT%E4%B8%8B%E8%BD%BD%E5%BD%B1%E8%A7%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://i.loli.net/2021/05/17/YqoavnXdGTpPO9R.jpg">
+      <meta itemprop="name" content="Sekyoro">
+      <meta itemprop="description" content="什么也无法舍弃的人，什么也做不了.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sekyoro的博客小屋">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          闲置服务器BT下载影视
+        </h1>
+
+        <div class="post-meta">
+		
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-01-23 21:38:55" itemprop="dateCreated datePublished" datetime="2023-01-23T21:38:55+08:00">2023-01-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-01-24 00:01:04" itemprop="dateModified" datetime="2023-01-24T00:01:04+08:00">2023-01-24</time>
+              </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.4k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>利用闲置服务器通过BT SSR下载动漫,并通过filebrowser浏览下载.</p>
+<h2 id="FileBrowser"><a href="#FileBrowser" class="headerlink" title="FileBrowser"></a>FileBrowser</h2><blockquote>
+<p>filebrowser 是一个使用go语言编写的软件，功能是可以通过浏览器对服务器上的文件进行管理。可以是修改文件，或者是添加删除文件，甚至可以分享文件，是一个很棒的文件管理器，你甚至可以当成一个网盘来使用。</p>
+</blockquote>
+<p>在网站上下载压缩包后并解压.</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/filebrowser/filebrowser">filebrowser/filebrowser: 📂 Web File Browser (github.com)</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">tar -xzvf linux-amd64-filebrowser.tar.gz</span><br><span class="line">CHANGELOG.md</span><br><span class="line">LICENSE</span><br><span class="line">README.md</span><br><span class="line">filebrowser</span><br></pre></td></tr></table></figure>
+<p>直接运行程序,默认端口在8080</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"> ./filebrowser</span><br><span class="line">15:22:42 No config file used</span><br><span class="line">15:22:42 Listening on 127.0.0.1:8080</span><br></pre></td></tr></table></figure>
+<p>一般都需要更改这个默认端口,可以先找到其db配置文件.</p>
+<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><p>你可以直接通过命令参数filebrowser 后接参数设置,这里我推荐设置db文件.</p>
+<p><img data-src="http://cdn.sekyoro.top/imgs/23/0120230123235939.png" alt="image-20230123221036526"></p>
+<p>默认配置文件在上面三个目录下你可以依次找看有没有.db文件,如果没有可以通过</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">filebrowser config init</span><br></pre></td></tr></table></figure>
+<p>新建文件,然后通过</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">filebrowser config cat</span><br></pre></td></tr></table></figure>
+<p>查看设置</p>
+<p><img data-src="http://cdn.sekyoro.top/imgs/23/0120230123235942.png" alt="image-20230123221243713" style="zoom:67%;" /></p>
+<p>我们可以通过filebrowser config set -p 9200设置运行端口为9200.</p>
+<h3 id="设置安全组"><a href="#设置安全组" class="headerlink" title="设置安全组"></a>设置安全组</h3><p>开启后注意在服务器商那,比如腾讯云,阿里云拿<strong>设置安全组</strong>开通这个端口,允许外网访问,<strong>同时</strong>还要在服务器这开启端口</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --zone=public --add-port=9201/tcp --permanent</span><br></pre></td></tr></table></figure>
+<p>同时最好重启一下防火墙服务</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --reload</span><br></pre></td></tr></table></figure>
+<h3 id="后台运行"><a href="#后台运行" class="headerlink" title="后台运行"></a>后台运行</h3><p>进入目录/lib/systemd/system,可以新建filebrowser.service或者下载一个类似的文件.</p>
+<p><img data-src="http://cdn.sekyoro.top/imgs/23/0120230123235958.png" alt="image-20230123222348866"></p>
+<p>写入以上内容,主要设置-d 配置刚才的db文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl start filebrowser.service</span><br></pre></td></tr></table></figure>
+<p>开启服务</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl <span class="built_in">enable</span> filebrowser.service</span><br></pre></td></tr></table></figure>
+<p>设置开机自启动</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl status filebrowser.service</span><br></pre></td></tr></table></figure>
+<p>查看运行状态</p>
+<p><img data-src="http://cdn.sekyoro.top/imgs/23/0120230123235947.png" alt="image-20230123223854973"></p>
+<p>然后打开你的网站,即公网ip+port,打开后类似如下图</p>
+<p><img data-src="http://cdn.sekyoro.top/imgs/24/0120230124000007.png" alt="image-20230123222855110" style="zoom:80%;" /></p>
+<p>可以在设置页面设置一些选项.</p>
+<p><img data-src="http://cdn.sekyoro.top/imgs/24/0120230124000010.png" alt="image-20230123222951056" style="zoom:67%;" />这样设置后就能访问某个文件夹下的内容了.</p>
+<h2 id="qbtorrent"><a href="#qbtorrent" class="headerlink" title="qbtorrent"></a>qbtorrent</h2><p>qbtorrent下载之前讲过,现在就是需要查看webui,以及放开相应端口,设置后台运行.</p>
+<p>操作跟刚才类似.</p>
+<p>在Centos下下载qb</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y qbittorrent-nox</span><br></pre></td></tr></table></figure>
+<p>其他平台类似,当然也可以自己下载包编译安装.</p>
+<p>下载安装后直接运行,默认端口8080</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">qbittorrent-nox</span><br></pre></td></tr></table></figure>
+<h3 id="开启后台运行服务"><a href="#开启后台运行服务" class="headerlink" title="开启后台运行服务"></a>开启后台运行服务</h3><blockquote>
+<p>/usr/lib/systemd/system/目录下，您将找到一个qbittorrent-nox@.service文件。通过运行以下命令，使qbittorrent-nox在启动时自动启动。替换username为您的实际用户名。</p>
+</blockquote>
+<p>可以用whoami命令查看当前用户.</p>
+<p>注意这里的username是您的用户名</p>
+<p>然后开启服务</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl start qbittorrent-nox@username.service</span><br></pre></td></tr></table></figure>
+<p>开机启动</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl <span class="built_in">enable</span> qbittorrent-nox@username.service</span><br></pre></td></tr></table></figure>
+<p>在那个目录下可以查看并配置这个服务</p>
+<p><img data-src="http://cdn.sekyoro.top/imgs/24/0120230124000014.png" alt="image-20230123224137176"></p>
+<p>然后更改端口</p>
+<p><img data-src="http://cdn.sekyoro.top/imgs/24/01image-20230123224224945.png" alt="image-20230123224224945"></p>
+<p>后面设置安全组什么的跟上面类似.</p>
+<p>打开这个端口即可. 默认username:admin  password:adminadmin</p>
+<p><img data-src="http://cdn.sekyoro.top/imgs/24/0120230124000018.png" alt="image-20230123224318627"></p>
+<p>用户界面</p>
+<p><img data-src="http://cdn.sekyoro.top/imgs/24/0120230124000026.png" alt="image-20230123224417888" style="zoom:50%;" /></p>
+<h3 id="更改web-ui密码"><a href="#更改web-ui密码" class="headerlink" title="更改web ui密码"></a>更改web ui密码</h3><p><img data-src="http://cdn.sekyoro.top/imgs/24/0120230124000030.png" alt="image-20230123224715884"></p>
+<p>在tools-&gt;options-&gt;web ui中更改语言,验证信息.</p>
+<p><img data-src="http://cdn.sekyoro.top/imgs/24/0120230124000033.png" alt="image-20230123224801908" style="zoom:67%;" /></p>
+<h3 id="设置下载路径"><a href="#设置下载路径" class="headerlink" title="设置下载路径"></a>设置下载路径</h3><p><img data-src="http://cdn.sekyoro.top/imgs/24/0120230124000037.png" alt="image-20230123225109400" style="zoom:67%;" /></p>
+<p>将下载的文件放在filebrowser暴露的文件中,然后最好设置完成后删除torrent节省空间.</p>
+<h3 id="设置RSS"><a href="#设置RSS" class="headerlink" title="设置RSS"></a>设置RSS</h3><p>注意,截至现在时间qbittorrent版本是4.2.5,其Web UI界面没有RSS订阅功能.</p>
+<p><img data-src="http://cdn.sekyoro.top/imgs/24/01image-20230123234248037.png" alt="image-20230123234248037"></p>
+<p>这里我们设置第三方UI增加RSS订阅功能,这样就不用手动加磁力链接了.</p>
+<p>有两种方法,其中一种需要开启HTTPS,懒得去申请了.</p>
+<p>第二种需要下载文件到服务器,下载Release文件并解压.</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/CzBiX/qb-web">CzBiX/qb-web: A qBittorrent Web UI, write in TypeScript+Vue. (github.com)</a></p>
+<p>将解压后的文件放在服务器某个位置.</p>
+<p>在设置界面 web UI下文件路径放那个文件的路径,比如 /config/dist. dist就是解压后的文件夹.</p>
+<p><img data-src="http://cdn.sekyoro.top/imgs/24/0120230124000045.png" alt="image-20230123234702168"></p>
+<p>然后打开网页即可.</p>
+<p><img data-src="http://cdn.sekyoro.top/imgs/24/0120230124000048.png" alt="image-20230123234752928" style="zoom:67%;" /></p>
+<p>左侧点击RSS增加RSS功能即可.</p>
+<p><img data-src="http://cdn.sekyoro.top/imgs/24/0120230124000051.png" alt="image-20230123234823176" style="zoom:67%;" /></p>
+<p>可以结合之前我的文章查看一些RSS订阅源.比如利用蜜柑计划等等…</p>
+<h3 id="部分优化"><a href="#部分优化" class="headerlink" title="部分优化"></a>部分优化</h3><h4 id="增加tracker"><a href="#增加tracker" class="headerlink" title="增加tracker"></a>增加tracker</h4><p>需要切换到原来的UI</p>
+<p><img data-src="http://cdn.sekyoro.top/imgs/24/0120230124000102.png" alt="image-20230123235226961" style="zoom: 67%;" /></p>
+<h3 id="资料"><a href="#资料" class="headerlink" title="资料"></a>资料</h3><ol>
+<li><a target="_blank" rel="noopener" href="https://www.filebrowser.cn/">filebrowser 是一款非常优秀的文件管理工具，并且是跨平台。安装也非常简单，安装后就可以使用，同样使用也非常的简单。在linux环境中使用的比较多</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/filebrowser/filebrowser">filebrowser/filebrowser: 📂 Web File Browser (github.com)</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/webenh/p/13334303.html">File Browser 安装及使用 - WebEnh - 博客园 (cnblogs.com)</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/a5idc/p/13784155.html">如何在CentOS 8 / RHEL 8服务器上安装qBittorrent - A5互联 - 博客园 (cnblogs.com)</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.misterma.com/archives/902/">Linux 服务器安装 qBittorrent - Mr. Ma’s Blog (misterma.com)</a></li>
+<li><a target="_blank" rel="noopener" href="https://eatash.com/index.php/2021/09/02/qbittorrent这两个-第三方-webui-还不错-geekman/">qbittorrent这两个 第三方 webui 还不错-Geekman | 吃灰网 (eatash.com)</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/54a6bf9e5ebe">Docker版qBittorrent或qBittorrent WebUI使用RSS功能 - 简书 (jianshu.com)</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/CzBiX/qb-web">CzBiX/qb-web: A qBittorrent Web UI, write in TypeScript+Vue. (github.com)</a></li>
+</ol>
+
+    </div>
+
+    
+    
+    
+    <div>
+	
+     <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+     
+   </div>
+        <div class="reward-container">
+  <div>感谢阅读.</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.png" alt="Sekyoro 微信支付">
+        <p>微信支付</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Sekyoro
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://www.sekyoro.top/2023/01/23/%E9%97%B2%E7%BD%AE%E6%9C%8D%E5%8A%A1%E5%99%A8BT%E4%B8%8B%E8%BD%BD%E5%BD%B1%E8%A7%86/" title="闲置服务器BT下载影视">https://www.sekyoro.top/2023/01/23/闲置服务器BT下载影视/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/torrent/" rel="tag"><i class="fa fa-tag"></i> torrent</a>
+              <a href="/tags/Centos/" rel="tag"><i class="fa fa-tag"></i> Centos</a>
+              <a href="/tags/filebrowser/" rel="tag"><i class="fa fa-tag"></i> filebrowser</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/01/14/dart%E5%AD%A6%E4%B9%A0/" rel="prev" title="dart学习">
+      <i class="fa fa-chevron-left"></i> dart学习
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+		  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4034523802263123"
+     crossorigin="anonymous"></script>
+<!-- 评论区 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-4034523802263123"
+     data-ad-slot="6333657257"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+          
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81MzE5Ny8yOTY3Mg=="></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+	
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+      	   
+          <!-- canvas粒子时钟 -->
+          <div style="">
+  <canvas id="canvas" style="width:60%;">当前浏览器不支持canvas，请更换浏览器后再试</canvas>
+</div>
+<script>
+(function(){
+
+   var digit=
+    [
+        [
+            [0,0,1,1,1,0,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,0,1,1,0],
+            [0,0,1,1,1,0,0]
+        ],//0
+        [
+            [0,0,0,1,1,0,0],
+            [0,1,1,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [1,1,1,1,1,1,1]
+        ],//1
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,1,1],
+            [1,1,1,1,1,1,1]
+        ],//2
+        [
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//3
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,0],
+            [0,0,1,1,1,1,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,1,1,0],
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,1]
+        ],//4
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,1,1,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//5
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//6
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0]
+        ],//7
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//8
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,1,1,0,0,0,0]
+        ],//9
+        [
+            [0,0,0,0,0,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,0,0,0]
+        ]//:
+    ];
+
+var canvas = document.getElementById('canvas');
+
+if(canvas.getContext){
+    var cxt = canvas.getContext('2d');
+    //声明canvas的宽高
+    var H = 100,W = 700;
+    canvas.height = H;
+    canvas.width = W;
+    cxt.fillStyle = '#f00';
+    cxt.fillRect(10,10,50,50);
+
+    //存储时间数据
+    var data = [];
+    //存储运动的小球
+    var balls = [];
+    //设置粒子半径
+    var R = canvas.height/20-1;
+    (function(){
+        var temp = /(\d)(\d):(\d)(\d):(\d)(\d)/.exec(new Date());
+        //存储时间数字，由十位小时、个位小时、冒号、十位分钟、个位分钟、冒号、十位秒钟、个位秒钟这7个数字组成
+        data.push(temp[1],temp[2],10,temp[3],temp[4],10,temp[5],temp[6]);
+    })();
+
+    /*生成点阵数字*/
+    function renderDigit(index,num){
+        for(var i = 0; i < digit[num].length; i++){
+            for(var j = 0; j < digit[num][i].length; j++){
+                if(digit[num][i][j] == 1){
+                    cxt.beginPath();
+                    cxt.arc(14*(R+2)*index + j*2*(R+1)+(R+1),i*2*(R+1)+(R+1),R,0,2*Math.PI);
+                    cxt.closePath();
+                    cxt.fill();
+                }
+            }
+        }
+    }
+
+    /*更新时钟*/
+    function updateDigitTime(){
+        var changeNumArray = [];
+        var temp = /(\d)(\d):(\d)(\d):(\d)(\d)/.exec(new Date());
+        var NewData = [];
+        NewData.push(temp[1],temp[2],10,temp[3],temp[4],10,temp[5],temp[6]);
+        for(var i = data.length-1; i >=0 ; i--){
+            //时间发生变化
+            if(NewData[i] !== data[i]){
+                //将变化的数字值和在data数组中的索引存储在changeNumArray数组中
+                changeNumArray.push(i+'_'+(Number(data[i])+1)%10);
+            }
+        }
+        //增加小球
+        for(var i = 0; i< changeNumArray.length; i++){
+            addBalls.apply(this,changeNumArray[i].split('_'));
+        }
+        data = NewData.concat();
+    }
+
+    /*更新小球状态*/
+    function updateBalls(){
+        for(var i = 0; i < balls.length; i++){
+            balls[i].stepY += balls[i].disY;
+            balls[i].x += balls[i].stepX;
+            balls[i].y += balls[i].stepY;
+            if(balls[i].x > W + R || balls[i].y > H + R){
+                balls.splice(i,1);
+                i--;
+            }
+        }
+    }
+
+    /*增加要运动的小球*/
+    function addBalls(index,num){
+        var numArray = [1,2,3];
+        var colorArray =  ["#3BE","#09C","#A6C","#93C","#9C0","#690","#FB3","#F80","#F44","#C00"];
+        for(var i = 0; i < digit[num].length; i++){
+            for(var j = 0; j < digit[num][i].length; j++){
+                if(digit[num][i][j] == 1){
+                    var ball = {
+                        x:14*(R+2)*index + j*2*(R+1)+(R+1),
+                        y:i*2*(R+1)+(R+1),
+                        stepX:Math.floor(Math.random() * 4 -2),
+                        stepY:-2*numArray[Math.floor(Math.random()*numArray.length)],
+                        color:colorArray[Math.floor(Math.random()*colorArray.length)],
+                        disY:1
+                    };
+                    balls.push(ball);
+                }
+            }
+        }
+    }
+
+    /*渲染*/
+    function render(){
+        //重置画布宽度，达到清空画布的效果
+        canvas.height = 100;
+        //渲染时钟
+        for(var i = 0; i < data.length; i++){
+            renderDigit(i,data[i]);
+        }
+        //渲染小球
+        for(var i = 0; i < balls.length; i++){
+            cxt.beginPath();
+            cxt.arc(balls[i].x,balls[i].y,R,0,2*Math.PI);
+            cxt.fillStyle = balls[i].color;
+            cxt.closePath();
+            cxt.fill();
+        }
+    }
+
+    clearInterval(oTimer);
+    var oTimer = setInterval(function(){
+        //更新时钟
+        updateDigitTime();
+        //更新小球状态
+        updateBalls();
+        //渲染
+        render();
+    },50);
+}
+
+})();
+</script>
+        
+
+<!-- require APlayer -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+<script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+<!-- require MetingJS -->
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+	  
+		
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#FileBrowser"><span class="nav-number">1.</span> <span class="nav-text">FileBrowser</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE"><span class="nav-number">1.1.</span> <span class="nav-text">配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E5%AE%89%E5%85%A8%E7%BB%84"><span class="nav-number">1.2.</span> <span class="nav-text">设置安全组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C"><span class="nav-number">1.3.</span> <span class="nav-text">后台运行</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#qbtorrent"><span class="nav-number">2.</span> <span class="nav-text">qbtorrent</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%80%E5%90%AF%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C%E6%9C%8D%E5%8A%A1"><span class="nav-number">2.1.</span> <span class="nav-text">开启后台运行服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9B%B4%E6%94%B9web-ui%E5%AF%86%E7%A0%81"><span class="nav-number">2.2.</span> <span class="nav-text">更改web ui密码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E4%B8%8B%E8%BD%BD%E8%B7%AF%E5%BE%84"><span class="nav-number">2.3.</span> <span class="nav-text">设置下载路径</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AERSS"><span class="nav-number">2.4.</span> <span class="nav-text">设置RSS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%83%A8%E5%88%86%E4%BC%98%E5%8C%96"><span class="nav-number">2.5.</span> <span class="nav-text">部分优化</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A2%9E%E5%8A%A0tracker"><span class="nav-number">2.5.1.</span> <span class="nav-text">增加tracker</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B5%84%E6%96%99"><span class="nav-number">2.6.</span> <span class="nav-text">资料</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Sekyoro"
+      src="https://i.loli.net/2021/05/17/YqoavnXdGTpPO9R.jpg">
+  <p class="site-author-name" itemprop="name">Sekyoro</p>
+  <div class="site-description" itemprop="description">什么也无法舍弃的人，什么也做不了.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">98</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">126</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/drowning-in-codes" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;drowning-in-codes" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:bukalala174@gmail.com" title="E-Mail → mailto:bukalala174@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      友情链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="http://myqhs.top/" title="http:&#x2F;&#x2F;myqhs.top&#x2F;" rel="noopener" target="_blank">myqhs</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+<meting-js
+	id="6856787487"
+	server="netease"
+	type="playlist"
+	order="random"
+	>
+</meting-js>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=110 src="//music.163.com/outchain/player?type=0&id=6856787487&auto=0&height=90"></iframe>
+		<br/>
+		<script type="text/javascript" id="clustrmaps" src="//clustrmaps.com/map_v2.js?d=xQdGTxqARTBiNIwX2aUban-ixkj2s6VaZQWo-aVCgY8&cl=ffffff&w=a"></script>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+	 
+	 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4034523802263123"
+     crossorigin="anonymous"></script>
+<!-- 边栏 -->
+
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-4034523802263123"
+     data-ad-slot="6549565089"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+	 
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+	 
+	
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+  
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; Wed Apr 08 2020 08:00:00 GMT+0800 (中国标准时间) – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Sekyoro</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">532k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">8:03</span>
+</div>
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+    <span id="busuanzi_container_site_pv">总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+    <span class="post-meta-divider">|</span>
+    <span id="busuanzi_container_site_uv">总访客数<span id="busuanzi_value_site_uv"></span>人</span>
+    <span class="post-meta-divider">|</span>
+<!-- 不蒜子计数初始值纠正 -->
+<script>
+$(document).ready(function() {
+
+    var int = setInterval(fixCount, 50);  // 50ms周期检测函数
+    var countOffset = 20000;  // 初始化首次数据
+
+    function fixCount() {            
+       if (document.getElementById("busuanzi_container_site_pv").style.display != "none")
+        {
+            $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + countOffset); 
+            clearInterval(int);
+        }                  
+        if ($("#busuanzi_container_site_pv").css("display") != "none")
+        {
+            $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + countOffset); // 加上初始数据 
+            clearInterval(int); // 停止检测
+        }  
+    }
+       	
+});
+</script> 
+
+<div>
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("04/08/2021 20:00:00");
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+    }
+setInterval("createtime()",250);
+</script>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/theme-next/theme-next-pjax@0/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+  <script data-pjax>
+    (function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+  </script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+<script data-pjax>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  let url = element.dataset.target;
+  let pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  let pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  let fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+  
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+    </div>  
+<!-- hexo injector body_end start --><script src='/js/outdate.js'></script><!-- hexo injector body_end end --><script async>window.onload=function(){var a=document.createElement('script'),b=document.getElementsByTagName('script')[0];a.type='text/javascript',a.async=!0,a.src='/sw-register.js?v='+Date.now(),b.parentNode.insertBefore(a,b)};</script></body></html>
