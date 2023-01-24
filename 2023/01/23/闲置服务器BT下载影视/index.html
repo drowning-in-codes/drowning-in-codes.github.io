@@ -32,12 +32,12 @@
     var CONFIG = {"hostname":"www.sekyoro.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":240,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 <link href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css" rel="stylesheet">
-  <meta name="description" content="利用闲置服务器通过BT SSR下载动漫,并通过filebrowser浏览下载. FileBrowser filebrowser 是一个使用go语言编写的软件，功能是可以通过浏览器对服务器上的文件进行管理。可以是修改文件，或者是添加删除文件，甚至可以分享文件，是一个很棒的文件管理器，你甚至可以当成一个网盘来使用。  在网站上下载压缩包后并解压. filebrowser&#x2F;filebrowser: 📂">
+  <meta name="description" content="利用闲置服务器通过BT SSR下载动漫,并通过filebrowser浏览下载.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="闲置服务器BT下载影视">
 <meta property="og:url" content="https://www.sekyoro.top/2023/01/23/%E9%97%B2%E7%BD%AE%E6%9C%8D%E5%8A%A1%E5%99%A8BT%E4%B8%8B%E8%BD%BD%E5%BD%B1%E8%A7%86/index.html">
 <meta property="og:site_name" content="Sekyoro的博客小屋">
-<meta property="og:description" content="利用闲置服务器通过BT SSR下载动漫,并通过filebrowser浏览下载. FileBrowser filebrowser 是一个使用go语言编写的软件，功能是可以通过浏览器对服务器上的文件进行管理。可以是修改文件，或者是添加删除文件，甚至可以分享文件，是一个很棒的文件管理器，你甚至可以当成一个网盘来使用。  在网站上下载压缩包后并解压. filebrowser&#x2F;filebrowser: 📂">
+<meta property="og:description" content="利用闲置服务器通过BT SSR下载动漫,并通过filebrowser浏览下载.">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://cdn.sekyoro.top/imgs/23/0120230123235939.png">
 <meta property="og:image" content="http://cdn.sekyoro.top/imgs/23/0120230123235942.png">
@@ -58,7 +58,7 @@
 <meta property="og:image" content="http://cdn.sekyoro.top/imgs/24/0120230124000051.png">
 <meta property="og:image" content="http://cdn.sekyoro.top/imgs/24/0120230124000102.png">
 <meta property="article:published_time" content="2023-01-23T13:38:55.000Z">
-<meta property="article:modified_time" content="2023-01-23T16:01:04.049Z">
+<meta property="article:modified_time" content="2023-01-24T05:26:11.614Z">
 <meta property="article:author" content="Sekyoro">
 <meta property="article:tag" content="torrent">
 <meta property="article:tag" content="Centos">
@@ -303,7 +303,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-01-24 00:01:04" itemprop="dateModified" datetime="2023-01-24T00:01:04+08:00">2023-01-24</time>
+                <time title="修改时间：2023-01-24 13:26:11" itemprop="dateModified" datetime="2023-01-24T13:26:11+08:00">2023-01-24</time>
               </span>
 
           
@@ -338,7 +338,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>利用闲置服务器通过BT SSR下载动漫,并通过filebrowser浏览下载.</p>
+        <p>利用闲置服务器通过BT SSR下载动漫,并通过filebrowser浏览下载.<br><span id="more"></span></p>
 <h2 id="FileBrowser"><a href="#FileBrowser" class="headerlink" title="FileBrowser"></a>FileBrowser</h2><blockquote>
 <p>filebrowser 是一个使用go语言编写的软件，功能是可以通过浏览器对服务器上的文件进行管理。可以是修改文件，或者是添加删除文件，甚至可以分享文件，是一个很棒的文件管理器，你甚至可以当成一个网盘来使用。</p>
 </blockquote>
@@ -349,7 +349,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"> ./filebrowser</span><br><span class="line">15:22:42 No config file used</span><br><span class="line">15:22:42 Listening on 127.0.0.1:8080</span><br></pre></td></tr></table></figure>
 <p>一般都需要更改这个默认端口,可以先找到其db配置文件.</p>
 <h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><p>你可以直接通过命令参数filebrowser 后接参数设置,这里我推荐设置db文件.</p>
-<p><img data-src="http://cdn.sekyoro.top/imgs/23/0120230123235939.png" alt="image-20230123221036526"></p>
+<p><img data-src="http://cdn.sekyoro.top/imgs/23/0120230123235939.png" alt="image-20230123221036526" style="zoom:80%;" /></p>
 <p>默认配置文件在上面三个目录下你可以依次找看有没有.db文件,如果没有可以通过</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">filebrowser config init</span><br></pre></td></tr></table></figure>
 <p>新建文件,然后通过</p>
