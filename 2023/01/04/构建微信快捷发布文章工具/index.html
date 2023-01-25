@@ -39,7 +39,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"www.sekyoro.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":240,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"www.sekyoro.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":240,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"appID":"3G9PZZIKCH","apiKey":"8eb71f5ca3167e9ef3487882f10cfaad","indexName":"SekyoroSearch","hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 <link href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css" rel="stylesheet">
   <meta name="description" content="最近在使用微信公众号写文章但是每天打开网页太麻烦,而且上传图片文章也麻烦.于是打算自己写个桌面程序.主要使用vue和electron,使用vite构建工具. 长期更新">
@@ -55,10 +55,10 @@
 <meta property="article:modified_time" content="2023-01-05T05:26:04.945Z">
 <meta property="article:author" content="Sekyoro">
 <meta property="article:tag" content="vue">
+<meta property="article:tag" content="wechat">
 <meta property="article:tag" content="vite">
 <meta property="article:tag" content="electron">
 <meta property="article:tag" content="Bootstrap5">
-<meta property="article:tag" content="wechat">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://cdn.sekyoro.top/imgs/04/0120230104172727.png">
 
@@ -232,21 +232,18 @@
   <span class="search-icon">
     <i class="fa fa-search"></i>
   </span>
-  <div class="search-input-container">
-    <input autocomplete="off" autocapitalize="off"
-           placeholder="搜索..." spellcheck="false"
-           type="search" class="search-input">
-  </div>
+  <div class="search-input-container"></div>
   <span class="popup-btn-close">
     <i class="fa fa-times-circle"></i>
   </span>
 </div>
-<div id="search-result">
-  <div id="no-result">
-    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
-  </div>
+<div class="algolia-results">
+  <div id="algolia-stats"></div>
+  <div id="algolia-hits"></div>
+  <div id="algolia-pagination" class="algolia-pagination"></div>
 </div>
 
+      
     </div>
   </div>
 
@@ -473,10 +470,10 @@
           
           <div class="post-tags">
               <a href="/tags/vue/" rel="tag"><i class="fa fa-tag"></i> vue</a>
+              <a href="/tags/wechat/" rel="tag"><i class="fa fa-tag"></i> wechat</a>
               <a href="/tags/vite/" rel="tag"><i class="fa fa-tag"></i> vite</a>
               <a href="/tags/electron/" rel="tag"><i class="fa fa-tag"></i> electron</a>
               <a href="/tags/Bootstrap5/" rel="tag"><i class="fa fa-tag"></i> Bootstrap5</a>
-              <a href="/tags/wechat/" rel="tag"><i class="fa fa-tag"></i> wechat</a>
           </div>
 
         
@@ -1173,7 +1170,10 @@ window.addEventListener('pjax:success', () => {
 
 
   
-<script src="/js/local-search.js"></script>
+<script src="//cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
+<script src="//cdn.jsdelivr.net/npm/instantsearch.js@4/dist/instantsearch.production.min.js"></script>
+<script src="/js/algolia-search.js"></script>
+
 
 
 
@@ -1231,4 +1231,5 @@ NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
 </script>
 
     </div>  
-<!-- hexo injector body_end start --><script src='/js/outdate.js'></script><!-- hexo injector body_end end --><script async>window.onload=function(){var a=document.createElement('script'),b=document.getElementsByTagName('script')[0];a.type='text/javascript',a.async=!0,a.src='/sw-register.js?v='+Date.now(),b.parentNode.insertBefore(a,b)};</script></body></html>
+<!-- hexo injector body_end start --><script src='/js/outdate.js'></script><!-- hexo injector body_end end --></body>
+</html>
