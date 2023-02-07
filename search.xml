@@ -4,6 +4,29 @@
   
     
     <entry>
+      <title>TotalCommander使用和学习</title>
+      <link href="2023/02/07/TotalCommander%E4%BD%BF%E7%94%A8%E5%92%8C%E5%AD%A6%E4%B9%A0/"/>
+      <url>2023/02/07/TotalCommander%E4%BD%BF%E7%94%A8%E5%92%8C%E5%AD%A6%E4%B9%A0/</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>使用TotalCommander提升平时工作学习效率.<br><span id="more"></span></p><h2 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h2><p>由于之前使用Premiere Pro时发现必须使用管理员身份打开,否则会出现莫名奇妙的问题包含但不限于<code>显示表面初始化失败</code>以及后面打开时无法使用一些<code>动态运动图形素材</code>.</p><p>当使用管理员身份打开后,就难以从文件管理器中拖入文件到素材库中. 因为权限问题无法拖入.</p><iframe src="//player.bilibili.com/player.html?aid=393029005&bvid=BV12d4y1V7Ns&cid=972854406&page=1" scrolling="yes" border="2" frameborder="yes" framespacing="5" allowfullscreen="true"> </iframe><p>简单的方法可以打开注册表设置LUA为0,但这个方法并不推荐.或者用管理员身份打开Everything软件,从Everything中拖入素材.</p><p>但是Everything这个软件还是适合直接用来找文件,后面查询了一些资料发现了Total Commander这个工具以管理员身份打开用来拖文件到素材库.发现这个工具还挺不错的.</p><h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><blockquote><p>Total Commander，简称TC，原名Windows Commander，功能强大的全能文件管理器。Total Commander 是<a href="https://baike.baidu.com/item/共享软件/680839">共享软件</a>，<a href="https://baike.baidu.com/item/官网/7805125">官网</a>下载版本为一个月<a href="https://baike.baidu.com/item/试用版/1656171">试用版</a></p></blockquote><p><img data-src="http://cdn.sekyoro.top/imgs/07/0220230207172756.png" alt="image-20230207172746360" style="zoom:67%;" /></p><p>所以这里就需要动用自己找资源的能力了,我在本文最后附有我找到的破解版下载网址,可以跳过其中的打开注册表文件夹操作,原价现在貌似需要200多.</p><p>可以看到这里就是一个没有怎么配置的TC界面.</p><p>这里直接使用别人的图片</p><p><img data-src="https://pic3.zhimg.com/80/v2-75f6664b0bd8160569a8254fb03c0572_720w.webp" alt="img" style="zoom:80%;" /></p><p>以管理员身份打开,测试成功.可以拖入素材</p><p><img data-src="http://cdn.sekyoro.top/imgs/07/0220230207175417.png" alt="image-20230207175417295"></p><p>到这里其实我的目的就达到了,不过这个工具其实思想跟Linux系统常用的桌面管理器类似(我之前的文章也介绍过),所以稍微学习一下也不错.</p><h3 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h3><p>这个软件有两侧文件夹栏目</p><p><strong>标签栏常用快捷键</strong>:<br>Ctrl+T 创建标签页<br>Ctrl+W 关闭标签页<br>Ctrl+Shift+W 关闭所有非锁定标签页<br>Ctrl+Tab键 切换下一个标签<br>Ctrl+Shift+Tab键 切换上一个标签页</p><p>Ctrl+D 唤出书签栏菜单</p><p>ctrl+q 快速预览效果</p><p>ctrl+\ 跳转到跟目录</p><p> Ctrl + →或←，将光标下的文件夹或压缩包在另一个窗口打开</p><p>Alt +↓显示 历史文件夹，Alt + ←到 前一个访问过的目录，Alt + →到 后一个访问过的目录。</p><h3 id="更多"><a href="#更多" class="headerlink" title="更多"></a>更多</h3><p><img data-src="http://cdn.sekyoro.top/imgs/07/0220230207172756.png" style="zoom:50%;" /></p><p>其实更多的就需要自己配快捷键了.另外还有插件等,这里就不更多探索了.</p><p>这里由于我需要输入文件路径到目录下拖素材,所以增加了快捷键.</p><p><img data-src="http://cdn.sekyoro.top/imgs/07/0220230207175417.png" style="zoom:80%;" /></p><h2 id="相关资料"><a href="#相关资料" class="headerlink" title="相关资料"></a>相关资料</h2><ol><li><a href="https://zhuanlan.zhihu.com/p/163301413">Total Commander用法介绍 - 知乎 (zhihu.com)</a></li><li><a href="https://www.jb51.net/softs/824660.html">Total Commander破解补丁下载</a></li></ol>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> TotalCommander </tag>
+            
+            <tag> 工具使用 </tag>
+            
+            <tag> 效率提升 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>闲置服务器BT下载影视</title>
       <link href="2023/01/23/%E9%97%B2%E7%BD%AE%E6%9C%8D%E5%8A%A1%E5%99%A8BT%E4%B8%8B%E8%BD%BD%E5%BD%B1%E8%A7%86/"/>
       <url>2023/01/23/%E9%97%B2%E7%BD%AE%E6%9C%8D%E5%8A%A1%E5%99%A8BT%E4%B8%8B%E8%BD%BD%E5%BD%B1%E8%A7%86/</url>
