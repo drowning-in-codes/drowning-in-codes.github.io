@@ -1,7 +1,7 @@
 (function() {
-  //不同的日期显示不同的样式，50 天为黄色提示，200天为红色提示，可以自己定义。
-  let warningDay = 50;
-  let errorDay = 200;
+  //不同的日期显示不同的样式，25 天为黄色提示，90天为红色提示，可以自己定义。
+  let warningDay = 20;
+  let errorDay = 90;
   // 确保能够获取到文章时间以及在文章详情页
   let times = document.getElementsByTagName('time');
   if (times.length === 0) { return; }
