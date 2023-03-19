@@ -28,10 +28,11 @@ document.addEventListener('DOMContentLoaded', () => {
     instantsearch.widgets.searchBox({
       container           : '.search-input-container',
       placeholder         : algoliaSettings.labels.input_placeholder,
-      // Hide default icons of algolia search
+      searchAsYouType: false,
+	  // Hide default icons of algolia search
       showReset           : false,
-      showSubmit          : false,
-      showLoadingIndicator: false,
+      showSubmit          : true,
+      showLoadingIndicator: true,
       cssClasses          : {
         input: 'search-input'
       }
