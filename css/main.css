@@ -1224,7 +1224,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #febacd;
+  background: #ffa2aa;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2395,37 +2395,6 @@ ul.breadcrumb li + li:last-child {
 }
 .algolia-pagination .disabled-item {
   visibility: hidden;
-}
-.search-popup .search-input-container {
-  flex-grow: 1;
-  padding: 2px;
-}
-.search-popup ul.search-result-list {
-  margin: 0 5px;
-  padding: 0;
-  width: 100%;
-}
-.search-popup p.search-result {
-  border-bottom: 1px dashed #ccc;
-  padding: 5px 0;
-}
-.search-popup a.search-result-title {
-  font-weight: bold;
-}
-.search-popup .search-keyword {
-  border-bottom: 1px dashed #ff2a2a;
-  color: #ff2a2a;
-  font-weight: bold;
-}
-.search-popup #search-result {
-  display: flex;
-  height: calc(100% - 55px);
-  overflow: auto;
-  padding: 5px 25px;
-}
-.search-popup #no-result {
-  color: #ccc;
-  margin: auto;
 }
 .popular-posts-header {
   border-bottom: 1px solid #eee;
