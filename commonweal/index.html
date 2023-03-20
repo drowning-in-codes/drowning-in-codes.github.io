@@ -66,33 +66,6 @@
     lang   : 'zh-CN'
   };
 </script>
- 
-
-<script>
-  var OriginTitile = document.title;
-  var titleTime;
-  document.addEventListener("visibilitychange", function() {
-    if (document.hidden) {
-      document.title = "(つェ⊂)我藏好了哦~" + OriginTitile;
-      clearTimeout(titleTime);
-    } else {
-      document.title = "(*´∇｀*) 被你发现啦~" + OriginTitile;
-      titleTime = setTimeout(function() {
-        document.title = OriginTitile;
-      }, 2000);
-    }
-  });
-</script>
-
-
-
-  <script src="/js/src/activate-power-mode.min.js"></script>
-  <script>
-    POWERMODE.colorful = true;
-    POWERMODE.shake = false;
-    document.body.addEventListener('input', POWERMODE);
-  </script>
-
 
   <title>commonweal | Sekyoro的博客小屋
 </title>
@@ -1039,6 +1012,33 @@ NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
   })(document, 'script');
 });
 </script>
+ 
+
+<script>
+  var OriginTitile = document.title;
+  var titleTime;
+  document.addEventListener("visibilitychange", function() {
+    if (document.hidden) {
+      document.title = "(つェ⊂)我藏好了哦~" + OriginTitile;
+      clearTimeout(titleTime);
+    } else {
+      document.title = "(*´∇｀*) 被你发现啦~" + OriginTitile;
+      titleTime = setTimeout(function() {
+        document.title = OriginTitile;
+      }, 2000);
+    }
+  });
+</script>
+
+
+
+  <script src="/js/src/activate-power-mode.min.js"></script>
+  <script>
+    POWERMODE.colorful = true;
+    POWERMODE.shake = false;
+    document.body.addEventListener('input', POWERMODE);
+  </script>
+
 
     </div>  
 <script async>window.onload=function(){var a=document.createElement('script'),b=document.getElementsByTagName('script')[0];a.type='text/javascript',a.async=!0,a.src='/sw-register.js?v='+Date.now(),b.parentNode.insertBefore(a,b)};</script></body></html>
