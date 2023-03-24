@@ -6,7 +6,7 @@
   <link href="https://www.sekyoro.top/atom.xml" rel="self"/>
   
   <link href="https://www.sekyoro.top/"/>
-  <updated>2023-03-22T09:13:30.886Z</updated>
+  <updated>2023-03-23T13:45:09.066Z</updated>
   <id>https://www.sekyoro.top/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>实战写油猴脚本</title>
+    <link href="https://www.sekyoro.top/2023/03/23/%E5%AE%9E%E6%88%98%E5%86%99%E6%B2%B9%E7%8C%B4%E8%84%9A%E6%9C%AC/"/>
+    <id>https://www.sekyoro.top/2023/03/23/%E5%AE%9E%E6%88%98%E5%86%99%E6%B2%B9%E7%8C%B4%E8%84%9A%E6%9C%AC/</id>
+    <published>2023-03-23T13:40:04.000Z</published>
+    <updated>2023-03-23T13:45:09.066Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>写一些浏览器脚本或者插件方便平时的自动化操作.<br>油猴脚本</p><link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot; cla</summary>
+      
+    
+    
+    
+    
+    <category term="JavaScript" scheme="https://www.sekyoro.top/tags/JavaScript/"/>
+    
+    <category term="油猴脚本" scheme="https://www.sekyoro.top/tags/%E6%B2%B9%E7%8C%B4%E8%84%9A%E6%9C%AC/"/>
+    
+  </entry>
   
   <entry>
     <title>vscode+latex本地搭建tex写论文</title>
@@ -438,23 +462,6 @@
     <category term="leetcode" scheme="https://www.sekyoro.top/tags/leetcode/"/>
     
     <category term="algorithm" scheme="https://www.sekyoro.top/tags/algorithm/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>vue网上商城项目</title>
-    <link href="https://www.sekyoro.top/2022/10/25/vue%E7%BD%91%E4%B8%8A%E5%95%86%E5%9F%8E%E9%A1%B9%E7%9B%AE/"/>
-    <id>https://www.sekyoro.top/2022/10/25/vue%E7%BD%91%E4%B8%8A%E5%95%86%E5%9F%8E%E9%A1%B9%E7%9B%AE/</id>
-    <published>2022-10-25T09:37:34.000Z</published>
-    <updated>2022-10-25T12:33:16.331Z</updated>
-    
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>学了就要写<br><span id="more"></span></p><p>使用vue cli,自己选一些feature.vuex和vue-router必要的.还要安装axios,vue-axios(axios使用的时候不能像vue的插件（如：Vue-Router、VueX等）通过Vue.use()安装插件，需要在原型上进行绑定：Vue.prototype.$axios = axios).</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install axios vue-axios -S</span><br></pre></td></tr></table></figure><p>在main.js文件中</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; createApp &#125; <span class="keyword">from</span> <span class="string">&#x27;vue&#x27;</span></span><br><span class="line"><span class="keyword">import</span> App <span class="keyword">from</span> <span class="string">&#x27;./App.vue&#x27;</span></span><br><span class="line"><span class="keyword">import</span> router <span class="keyword">from</span> <span class="string">&#x27;./router&#x27;</span></span><br><span class="line"><span class="keyword">import</span> store <span class="keyword">from</span> <span class="string">&#x27;./store&#x27;</span></span><br><span class="line"><span class="keyword">import</span> axios <span class="keyword">from</span> <span class="string">&#x27;axios&#x27;</span></span><br><span class="line"><span class="keyword">import</span> VueAxios <span class="keyword">from</span> <span class="string">&#x27;vue-axios&#x27;</span></span><br><span class="line">createApp(App).use(store).use(router).use(VueAxios,axios).mount(<span class="string">&#x27;#app&#x27;</span>)</span><br></pre></td></tr></table></figure><p>views目录下存放页面级组件,一般的小组件存放在components的文件夹下,这些组件会被复用.</p><p>请求后端数据就需要配置一个反向代理,在vue.config.js中配置</p><h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="https://blog.csdn.net/qq_43654065/article/details/121288529">axios和vue-axios_在线小白www的博客-CSDN博客_axios vue-axios</a></p><link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
-    
-    
-    <summary type="html">&lt;p&gt;学了就要写&lt;br&gt;</summary>
-    
-    
-    
     
   </entry>
   

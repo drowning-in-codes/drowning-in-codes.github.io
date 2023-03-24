@@ -4,6 +4,27 @@
   
     
     <entry>
+      <title>实战写油猴脚本</title>
+      <link href="2023/03/23/%E5%AE%9E%E6%88%98%E5%86%99%E6%B2%B9%E7%8C%B4%E8%84%9A%E6%9C%AC/"/>
+      <url>2023/03/23/%E5%AE%9E%E6%88%98%E5%86%99%E6%B2%B9%E7%8C%B4%E8%84%9A%E6%9C%AC/</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>写一些浏览器脚本或者插件方便平时的自动化操作.<br>油猴脚本</p><link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> JavaScript </tag>
+            
+            <tag> 油猴脚本 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>vscode+latex本地搭建tex写论文</title>
       <link href="2023/03/22/vscode-latex%E6%9C%AC%E5%9C%B0%E6%90%AD%E5%BB%BAtex%E5%86%99%E8%AE%BA%E6%96%87/"/>
       <url>2023/03/22/vscode-latex%E6%9C%AC%E5%9C%B0%E6%90%AD%E5%BB%BAtex%E5%86%99%E8%AE%BA%E6%96%87/</url>
