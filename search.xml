@@ -4,6 +4,27 @@
   
     
     <entry>
+      <title>EndNote基本使用</title>
+      <link href="2023/04/02/EndNote%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/"/>
+      <url>2023/04/02/EndNote%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>之前讲过使用Zotero管理并阅读文献,现在写论文的使用为了方便管理插入文献,这里使用EndNote管理.<br><span id="more"></span></p><h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><blockquote><p>Endnote是一款被广泛使用的文献管理软件，其是<a href="https://link.zhihu.com/?target=https%3A//baike.baidu.com/item/SCI/18829">SCI</a>（Thomson Scientific 公司）的官方软件，支持国际期刊的参考文献格式有3776 种【也可以自定义期刊引用格式】。</p><p>软件非常方便科研狗进行文献整理，写笔记，做备注，分类，导出期刊格式，进行数据迁移【这个特别方便，可以随时将其他电脑上的文献导入到自己的电脑中】</p></blockquote><p>EndNote版本特别多,我目前用的是EndNote20,不过其他版本也类似.</p><p><a href="https://link.zhihu.com/?target=https%3A//its.tsinghua.edu.cn/column/bgrj/2">下载地址</a></p><p>注意下载的时候有一个添加的word选项勾上即可.</p><p>下面简单地介绍其使用</p><h2 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h2><h3 id="创建Library"><a href="#创建Library" class="headerlink" title="创建Library"></a>创建Library</h3><p><img data-src="http://cdn.sekyoro.top/imgs/02/0420230402200455.png" alt="image-20230402200448244" style="zoom:50%;" /></p><p>一个Library用于存放文献以及笔记.可以对文献进行分组.</p><p><img data-src="https://pic2.zhimg.com/80/v2-959f0acb60032ef5c334118a1f5b9a2d_720w.webp" alt="img" style="zoom:67%;" /></p><p>这里我以Pub Med的一篇文章导入为例</p><p><img data-src="http://cdn.sekyoro.top/imgs/02/0420230402200702.png" alt="image-20230402200702560" style="zoom: 50%;" /></p><p>下载好文件即可选择导入</p><p><img data-src="http://cdn.sekyoro.top/imgs/02/0420230402200741.png" alt="image-20230402200740915" style="zoom:50%;" /></p><p>由于这里是Pub Med格式,导入时还需要选择Filter</p><p><img data-src="http://cdn.sekyoro.top/imgs/02/0420230402201909.png" alt="image-20230402201908947" style="zoom:50%;" /></p><p>这里推荐尝试使用EndNote打开这个文件,也会导入到Library中,更加简单.</p><p>当然还可以直接通过自己填写信息添加文献,不过我推荐就使用上面的方式即可.</p><p><img data-src="http://cdn.sekyoro.top/imgs/02/0420230402202743.png" alt="image-20230402202743736" style="zoom:50%;" /></p><h3 id="文献目录"><a href="#文献目录" class="headerlink" title="文献目录"></a>文献目录</h3><p>导入文献后常常需要对文献进行分类.</p><p>创建好一个Library后默认会有一个Group Set,这个是删除不掉的.我一般在这个set里创建group</p><p>然后将文献添加到group中.</p><p><img data-src="http://cdn.sekyoro.top/imgs/02/0420230402203123.png" alt="image-20230402203122928" style="zoom:50%;" /></p><h3 id="添加笔记"><a href="#添加笔记" class="headerlink" title="添加笔记"></a>添加笔记</h3><p>右键点击文献,选择Edit Reference,点击Summary,选择Attach file链接笔记文件即可.</p><p><img data-src="http://cdn.sekyoro.top/imgs/02/0420230402204815.png" alt="image-20230402204815649" style="zoom:50%;" /></p><p>同时添加pdf也是类似.</p><h3 id="设置参考文献格式"><a href="#设置参考文献格式" class="headerlink" title="设置参考文献格式"></a>设置参考文献格式</h3><p><img data-src="http://cdn.sekyoro.top/imgs/02/0420230402204250.png" alt="image-20230402204250594" style="zoom:50%;" /></p><p>插入论文的文献格式设置,可以去<a href="https://www.endnote.com/">https://www.EndNote.com/</a> 下载想要的格式</p><h3 id="本地迁移"><a href="#本地迁移" class="headerlink" title="本地迁移"></a>本地迁移</h3><p>使用压缩功能把当前文献库报错,如果需要迁移到另一个电脑,选择上方菜单栏中的【File】-【Compress Library.enlx】</p><p><img data-src="http://cdn.sekyoro.top/imgs/02/0420230402205005.png" alt="image-20230402205005519" style="zoom:50%;" /></p><p>如果双击打开这个压缩文件，会自动生成一个文件「测试.enl」和一个文件夹「测试.Data」，这样又会自动还原为正常的数据库文件。</p><h3 id="与Word一起使用"><a href="#与Word一起使用" class="headerlink" title="与Word一起使用"></a>与Word一起使用</h3><p>在下载时记得勾选与Word联动,如果忘了可以查看下载目录</p><p><img data-src="http://cdn.sekyoro.top/imgs/02/0420230402205432.png" alt="image-20230402205432273"></p><p>点击这个config endnote.exe进行设置.</p><p>配置后Word中就有相关选项</p><p><img data-src="http://cdn.sekyoro.top/imgs/02/0420230402210145.png" alt="image-20230402210145730"></p><h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ol><li><a href="https://zhuanlan.zhihu.com/p/110516363">还不会EndNote？超详细教程来了！ - 知乎 (zhihu.com)</a></li><li><a href="https://zhuanlan.zhihu.com/p/65652207">[EndNote]导入PubMed数据库文献方法 - 知乎 (zhihu.com)</a></li><li><a href="https://www.cnblogs.com/vmware-com/p/12244995.html#:~:text=1，首先在电脑上打开word2019，点击左上角的“文件”菜单。 2，然后在打开的文件菜单中点击“选项”的快捷链接。,3，接下来在打开的Word选项窗口中点击左侧边栏的“加载项”的菜单项。 4，在右侧的窗口中点击com加载项后面的“转到”按钮。 5，接下来就会弹出COM加载项的窗口，在窗口中找到并勾选Endnote的选项。">如何将EndNote 和 Word (office)连接起来 - VMWARE_COM - 博客园 (cnblogs.com)</a></li><li><a href="https://www.jianshu.com/p/ffb7ee272457">Endnote20文献管理软件使用教程 - 简书 (jianshu.com)</a></li></ol><link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> paper </tag>
+            
+            <tag> thesis </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>服务器结合OSS存储用于自动录播</title>
       <link href="2023/04/01/%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BB%93%E5%90%88OSS%E5%AD%98%E5%82%A8%E7%94%A8%E4%BA%8E%E8%87%AA%E5%8A%A8%E5%BD%95%E6%92%AD/"/>
       <url>2023/04/01/%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BB%93%E5%90%88OSS%E5%AD%98%E5%82%A8%E7%94%A8%E4%BA%8E%E8%87%AA%E5%8A%A8%E5%BD%95%E6%92%AD/</url>
