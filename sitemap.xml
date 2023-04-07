@@ -807,14 +807,14 @@
   </url>
   
   <url>
-    <loc>https://www.sekyoro.top/lib/jquery_lazyload/README.html</loc>
+    <loc>https://www.sekyoro.top/lib/jquery_lazyload/bower.json</loc>
     
     <lastmod>2021-04-09</lastmod>
     
   </url>
   
   <url>
-    <loc>https://www.sekyoro.top/lib/jquery_lazyload/bower.json</loc>
+    <loc>https://www.sekyoro.top/lib/jquery_lazyload/README.html</loc>
     
     <lastmod>2021-04-09</lastmod>
     
@@ -928,14 +928,14 @@
   </url>
   
   <url>
-    <loc>https://www.sekyoro.top/tags/reading/</loc>
+    <loc>https://www.sekyoro.top/tags/exercise/</loc>
     <lastmod>2023-04-07</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://www.sekyoro.top/tags/exercise/</loc>
+    <loc>https://www.sekyoro.top/tags/reading/</loc>
     <lastmod>2023-04-07</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1306,27 +1306,6 @@
   </url>
   
   <url>
-    <loc>https://www.sekyoro.top/tags/latex/</loc>
-    <lastmod>2023-04-07</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.sekyoro.top/tags/tex/</loc>
-    <lastmod>2023-04-07</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.sekyoro.top/tags/overleaf/</loc>
-    <lastmod>2023-04-07</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://www.sekyoro.top/tags/RSS/</loc>
     <lastmod>2023-04-07</lastmod>
     <changefreq>daily</changefreq>
@@ -1342,6 +1321,27 @@
   
   <url>
     <loc>https://www.sekyoro.top/tags/BT/</loc>
+    <lastmod>2023-04-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.sekyoro.top/tags/latex/</loc>
+    <lastmod>2023-04-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.sekyoro.top/tags/tex/</loc>
+    <lastmod>2023-04-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.sekyoro.top/tags/overleaf/</loc>
     <lastmod>2023-04-07</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
