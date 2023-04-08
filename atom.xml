@@ -334,11 +334,11 @@
     
     <category term="python" scheme="https://www.sekyoro.top/tags/python/"/>
     
+    <category term="wechat" scheme="https://www.sekyoro.top/tags/wechat/"/>
+    
     <category term="xpath" scheme="https://www.sekyoro.top/tags/xpath/"/>
     
     <category term="request" scheme="https://www.sekyoro.top/tags/request/"/>
-    
-    <category term="wechat" scheme="https://www.sekyoro.top/tags/wechat/"/>
     
   </entry>
   
@@ -359,13 +359,13 @@
     
     <category term="vue" scheme="https://www.sekyoro.top/tags/vue/"/>
     
-    <category term="wechat" scheme="https://www.sekyoro.top/tags/wechat/"/>
-    
     <category term="vite" scheme="https://www.sekyoro.top/tags/vite/"/>
     
     <category term="electron" scheme="https://www.sekyoro.top/tags/electron/"/>
     
     <category term="Bootstrap5" scheme="https://www.sekyoro.top/tags/Bootstrap5/"/>
+    
+    <category term="wechat" scheme="https://www.sekyoro.top/tags/wechat/"/>
     
   </entry>
   
