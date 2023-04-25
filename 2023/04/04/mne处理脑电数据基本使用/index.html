@@ -51,7 +51,7 @@
 <meta property="og:description" content="最近的东西,不定期更新">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-04-04T06:40:57.000Z">
-<meta property="article:modified_time" content="2023-04-04T07:12:11.383Z">
+<meta property="article:modified_time" content="2023-04-24T07:07:38.176Z">
 <meta property="article:author" content="Sekyoro">
 <meta property="article:tag" content="python">
 <meta property="article:tag" content="MNE">
@@ -263,10 +263,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2023-04-04 14:40:57 / 修改时间：15:12:11" itemprop="dateCreated datePublished" datetime="2023-04-04T14:40:57+08:00">2023-04-04</time>
+              <time title="创建时间：2023-04-04 14:40:57" itemprop="dateCreated datePublished" datetime="2023-04-04T14:40:57+08:00">2023-04-04</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-04-24 15:07:38" itemprop="dateModified" datetime="2023-04-24T15:07:38+08:00">2023-04-24</time>
+              </span>
 
           
             <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
@@ -281,7 +287,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>338</span>
+              <span>953</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -305,7 +311,20 @@
 <p>EEGLAB的使用这里不详细说了,比较方便的是其有方便的GUI,当然后面我也发现python也有相关的带GUI的EEG数据处理包.</p>
 <p>这里主要介绍MNE同时也会搭配一些机器学习算法等.<a href="[Documentation overview — MNE 1.3.1 documentation](https://mne.tools/stable/overview/index.html">MNE官网</a>)</p>
 <p><a href="[Glossary — MNE 1.3.1 documentation](https://mne.tools/stable/glossary.html">一些概念介绍</a>)</p>
-<h2 id="实战"><a href="#实战" class="headerlink" title="实战"></a>实战</h2><h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ol>
+<h2 id="实战"><a href="#实战" class="headerlink" title="实战"></a>实战</h2><h3 id="数据预处理"><a href="#数据预处理" class="headerlink" title="数据预处理"></a>数据预处理</h3><p>主要包括设置电极位置,重参考,降采样,滤波,使用ICA方法去除伪迹等.</p>
+<h3 id="划分数据集"><a href="#划分数据集" class="headerlink" title="划分数据集"></a>划分数据集</h3><p>将数据集划分话训练集和测试集,主要使用sklearn工具包</p>
+<p>可以直接使用<code>train_test_split</code>分割训练集,就是简单的按比例分割,可以先打乱</p>
+<blockquote>
+<p>import numpy as np<br>from sklearn.model_selection import train_test_split</p>
+<h1 id="创建一个数据集X和相应的标签y-X中样本数目为100"><a href="#创建一个数据集X和相应的标签y-X中样本数目为100" class="headerlink" title="创建一个数据集X和相应的标签y,X中样本数目为100"></a>创建一个数据集X和相应的标签y,X中样本数目为100</h1><p>X, y = np.arange(200).reshape((100, 2)), range(100)</p>
+<h1 id="用train-test-split函数划分出训练集和测试集，测试集占比0-33"><a href="#用train-test-split函数划分出训练集和测试集，测试集占比0-33" class="headerlink" title="用train_test_split函数划分出训练集和测试集，测试集占比0.33"></a>用train_test_split函数划分出训练集和测试集，测试集占比0.33</h1><p>X_train, X_test, y_train, y_test = train_test_split( X, y, test_size=0.33, random_state=42)</p>
+<h1 id="打印出原始样本集、训练集和测试集的数目"><a href="#打印出原始样本集、训练集和测试集的数目" class="headerlink" title="打印出原始样本集、训练集和测试集的数目"></a>打印出原始样本集、训练集和测试集的数目</h1><p>print(“The length of original data X is:”, X.shape[0])<br>print(“The length of train Data is:”, X_train.shape[0])<br>print(“The length of test Data is:”, X_test.shape[0])</p>
+</blockquote>
+<p>但是一般用交叉验证划分比较多,比如<code>KFold</code>和<code>ShuffleSplit</code>.</p>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><ol>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/hellcat/p/7045585.html">『Sklearn』数据划分方法 - 叠加态的猫 - 博客园 (cnblogs.com)</a></li>
+</ol>
+<h2 id="参考资料-1"><a href="#参考资料-1" class="headerlink" title="参考资料"></a>参考资料</h2><ol>
 <li><a target="_blank" rel="noopener" href="https://mne.tools/stable/overview/index.html">Documentation overview — MNE 1.3.1 documentation</a></li>
 <li><a target="_blank" rel="noopener" href="https://github.com/ZitongLu1996/Python-EEG-Handbook">ZitongLu1996/Python-EEG-Handbook: Python脑电数据处理中文手册 - A Chinese handbook for EEG data analysis based on Python (github.com)</a></li>
 </ol>
@@ -785,7 +804,7 @@ if(canvas.getContext){
 	  
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E6%88%98"><span class="nav-number">2.</span> <span class="nav-text">实战</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">3.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E6%88%98"><span class="nav-number">2.</span> <span class="nav-text">实战</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E9%A2%84%E5%A4%84%E7%90%86"><span class="nav-number">2.1.</span> <span class="nav-text">数据预处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%92%E5%88%86%E6%95%B0%E6%8D%AE%E9%9B%86"><span class="nav-number">2.2.</span> <span class="nav-text">划分数据集</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E6%95%B0%E6%8D%AE%E9%9B%86X%E5%92%8C%E7%9B%B8%E5%BA%94%E7%9A%84%E6%A0%87%E7%AD%BEy-X%E4%B8%AD%E6%A0%B7%E6%9C%AC%E6%95%B0%E7%9B%AE%E4%B8%BA100"><span class="nav-number"></span> <span class="nav-text">创建一个数据集X和相应的标签y,X中样本数目为100</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%94%A8train-test-split%E5%87%BD%E6%95%B0%E5%88%92%E5%88%86%E5%87%BA%E8%AE%AD%E7%BB%83%E9%9B%86%E5%92%8C%E6%B5%8B%E8%AF%95%E9%9B%86%EF%BC%8C%E6%B5%8B%E8%AF%95%E9%9B%86%E5%8D%A0%E6%AF%940-33"><span class="nav-number"></span> <span class="nav-text">用train_test_split函数划分出训练集和测试集，测试集占比0.33</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%89%93%E5%8D%B0%E5%87%BA%E5%8E%9F%E5%A7%8B%E6%A0%B7%E6%9C%AC%E9%9B%86%E3%80%81%E8%AE%AD%E7%BB%83%E9%9B%86%E5%92%8C%E6%B5%8B%E8%AF%95%E9%9B%86%E7%9A%84%E6%95%B0%E7%9B%AE"><span class="nav-number"></span> <span class="nav-text">打印出原始样本集、训练集和测试集的数目</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">0.1.</span> <span class="nav-text">参考资料</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99-1"><span class="nav-number">1.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
       </div>
       <!--/noindex-->
       <div class="site-overview-wrap sidebar-panel">
@@ -922,7 +941,7 @@ if(canvas.getContext){
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">9:01</span>
+    <span title="站点阅读时长">9:02</span>
 </div>
 
     <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
@@ -1039,8 +1058,7 @@ var pjax = new Pjax({
     '.post-toc-wrap',
     '.languages',
     '#pjax',
-	'.widget-wrap',
-
+	'.widget-wrap'
   ],
   switches: {
     '.post-toc-wrap': Pjax.switches.innerHTML
