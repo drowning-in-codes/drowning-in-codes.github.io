@@ -51,7 +51,7 @@
 <meta property="og:description" content="最近的东西,不定期更新">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-04-04T06:40:57.000Z">
-<meta property="article:modified_time" content="2023-04-24T07:07:38.176Z">
+<meta property="article:modified_time" content="2023-05-03T04:05:43.495Z">
 <meta property="article:author" content="Sekyoro">
 <meta property="article:tag" content="python">
 <meta property="article:tag" content="MNE">
@@ -271,7 +271,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-04-24 15:07:38" itemprop="dateModified" datetime="2023-04-24T15:07:38+08:00">2023-04-24</time>
+                <time title="修改时间：2023-05-03 12:05:43" itemprop="dateModified" datetime="2023-05-03T12:05:43+08:00">2023-05-03</time>
               </span>
 
           
@@ -287,7 +287,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>953</span>
+              <span>1.1k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -321,7 +321,9 @@
 <h1 id="打印出原始样本集、训练集和测试集的数目"><a href="#打印出原始样本集、训练集和测试集的数目" class="headerlink" title="打印出原始样本集、训练集和测试集的数目"></a>打印出原始样本集、训练集和测试集的数目</h1><p>print(“The length of original data X is:”, X.shape[0])<br>print(“The length of train Data is:”, X_train.shape[0])<br>print(“The length of test Data is:”, X_test.shape[0])</p>
 </blockquote>
 <p>但是一般用交叉验证划分比较多,比如<code>KFold</code>和<code>ShuffleSplit</code>.</p>
-<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><ol>
+<p>这类包一般在<code>sklearn.model_selection</code>中,使用KFold等处理一个对象的运动想象任务的数据集划分,使用GroupKFold等处理对象间数据集划分. 也就是说可以使用GoupKFold,LeaveOneGoupOut处理跨对象的数据.</p>
+<p>同时搭配<code>GridSearchCV</code>用于调整超参数,获得较好的模型.</p>
+<h3 id="模型评估"><a href="#模型评估" class="headerlink" title="模型评估"></a>模型评估</h3><h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><ol>
 <li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/hellcat/p/7045585.html">『Sklearn』数据划分方法 - 叠加态的猫 - 博客园 (cnblogs.com)</a></li>
 </ol>
 <h2 id="参考资料-1"><a href="#参考资料-1" class="headerlink" title="参考资料"></a>参考资料</h2><ol>
@@ -347,6 +349,9 @@
   <div class="popular-posts-header">相关文章</div>
   <ul class="popular-posts">
     <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2023\05\02\python中的logging模块\" rel="bookmark">python中的logging模块</a></div>
+    </li>
+    <li class="popular-posts-item">
       <div class="popular-posts-title"><a href="\2023\01\04\python构建微信公众号文章发表控制台应用\" rel="bookmark">python构建微信公众号文章发表控制台应用</a></div>
     </li>
     <li class="popular-posts-item">
@@ -357,9 +362,6 @@
     </li>
     <li class="popular-posts-item">
       <div class="popular-posts-title"><a href="\2022\01\02\疫情自动打卡\" rel="bookmark">疫情自动打卡</a></div>
-    </li>
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\2021\07\21\疫情打卡\" rel="bookmark">疫情打卡</a></div>
     </li>
   </ul>
 
@@ -804,7 +806,7 @@ if(canvas.getContext){
 	  
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E6%88%98"><span class="nav-number">2.</span> <span class="nav-text">实战</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E9%A2%84%E5%A4%84%E7%90%86"><span class="nav-number">2.1.</span> <span class="nav-text">数据预处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%92%E5%88%86%E6%95%B0%E6%8D%AE%E9%9B%86"><span class="nav-number">2.2.</span> <span class="nav-text">划分数据集</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E6%95%B0%E6%8D%AE%E9%9B%86X%E5%92%8C%E7%9B%B8%E5%BA%94%E7%9A%84%E6%A0%87%E7%AD%BEy-X%E4%B8%AD%E6%A0%B7%E6%9C%AC%E6%95%B0%E7%9B%AE%E4%B8%BA100"><span class="nav-number"></span> <span class="nav-text">创建一个数据集X和相应的标签y,X中样本数目为100</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%94%A8train-test-split%E5%87%BD%E6%95%B0%E5%88%92%E5%88%86%E5%87%BA%E8%AE%AD%E7%BB%83%E9%9B%86%E5%92%8C%E6%B5%8B%E8%AF%95%E9%9B%86%EF%BC%8C%E6%B5%8B%E8%AF%95%E9%9B%86%E5%8D%A0%E6%AF%940-33"><span class="nav-number"></span> <span class="nav-text">用train_test_split函数划分出训练集和测试集，测试集占比0.33</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%89%93%E5%8D%B0%E5%87%BA%E5%8E%9F%E5%A7%8B%E6%A0%B7%E6%9C%AC%E9%9B%86%E3%80%81%E8%AE%AD%E7%BB%83%E9%9B%86%E5%92%8C%E6%B5%8B%E8%AF%95%E9%9B%86%E7%9A%84%E6%95%B0%E7%9B%AE"><span class="nav-number"></span> <span class="nav-text">打印出原始样本集、训练集和测试集的数目</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">0.1.</span> <span class="nav-text">参考资料</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99-1"><span class="nav-number">1.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E6%88%98"><span class="nav-number">2.</span> <span class="nav-text">实战</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E9%A2%84%E5%A4%84%E7%90%86"><span class="nav-number">2.1.</span> <span class="nav-text">数据预处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%92%E5%88%86%E6%95%B0%E6%8D%AE%E9%9B%86"><span class="nav-number">2.2.</span> <span class="nav-text">划分数据集</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E6%95%B0%E6%8D%AE%E9%9B%86X%E5%92%8C%E7%9B%B8%E5%BA%94%E7%9A%84%E6%A0%87%E7%AD%BEy-X%E4%B8%AD%E6%A0%B7%E6%9C%AC%E6%95%B0%E7%9B%AE%E4%B8%BA100"><span class="nav-number"></span> <span class="nav-text">创建一个数据集X和相应的标签y,X中样本数目为100</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%94%A8train-test-split%E5%87%BD%E6%95%B0%E5%88%92%E5%88%86%E5%87%BA%E8%AE%AD%E7%BB%83%E9%9B%86%E5%92%8C%E6%B5%8B%E8%AF%95%E9%9B%86%EF%BC%8C%E6%B5%8B%E8%AF%95%E9%9B%86%E5%8D%A0%E6%AF%940-33"><span class="nav-number"></span> <span class="nav-text">用train_test_split函数划分出训练集和测试集，测试集占比0.33</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%89%93%E5%8D%B0%E5%87%BA%E5%8E%9F%E5%A7%8B%E6%A0%B7%E6%9C%AC%E9%9B%86%E3%80%81%E8%AE%AD%E7%BB%83%E9%9B%86%E5%92%8C%E6%B5%8B%E8%AF%95%E9%9B%86%E7%9A%84%E6%95%B0%E7%9B%AE"><span class="nav-number"></span> <span class="nav-text">打印出原始样本集、训练集和测试集的数目</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0"><span class="nav-number">0.1.</span> <span class="nav-text">模型评估</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">0.2.</span> <span class="nav-text">参考资料</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99-1"><span class="nav-number">1.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
       </div>
       <!--/noindex-->
       <div class="site-overview-wrap sidebar-panel">
@@ -832,7 +834,7 @@ if(canvas.getContext){
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">146</span>
+        <span class="site-state-item-count">148</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -883,7 +885,7 @@ if(canvas.getContext){
     <h3 class="widget-title" style="margin:0">文章词云</h3>
     <div id="myCanvasContainer" class="widget tagcloud">
         <canvas width="250" height="250" id="resCanvas" style="width:100%">
-		  <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/EEG/" rel="tag">EEG</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MNE/" rel="tag">MNE</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a><span class="tag-list-count">11</span></li></ul>	
+		  <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/EEG/" rel="tag">EEG</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MNE/" rel="tag">MNE</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a><span class="tag-list-count">12</span></li></ul>	
         </canvas>
     </div>
 </div>
@@ -936,12 +938,12 @@ if(canvas.getContext){
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">596k</span>
+    <span title="站点总字数">603k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">9:02</span>
+    <span title="站点阅读时长">9:08</span>
 </div>
 
     <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
