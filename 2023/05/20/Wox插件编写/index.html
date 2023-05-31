@@ -52,13 +52,15 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://s2.loli.net/2023/05/20/79rv3TcFb4fYPqn.png">
 <meta property="og:image" content="https://s2.loli.net/2023/05/21/rqlJXwZEeTzhdIK.png">
+<meta property="og:image" content="https://s2.loli.net/2023/05/22/Tu4YXj6OHxD9ngG.png">
+<meta property="og:image" content="https://s2.loli.net/2023/05/22/vLZGqJ58NnWkBoi.png">
 <meta property="og:image" content="https://s2.loli.net/2023/05/21/K5TBRAWYpmGbeaf.png">
 <meta property="og:image" content="https://s2.loli.net/2023/05/21/kwTv5QKbJtL716S.png">
 <meta property="og:image" content="https://s2.loli.net/2023/05/21/7FJRkB6H21wNcsL.png">
 <meta property="og:image" content="https://s2.loli.net/2023/05/21/zH9peMTlJg13GYU.png">
 <meta property="og:image" content="https://s2.loli.net/2023/05/21/7CioWXbFr4nSx3d.png">
 <meta property="article:published_time" content="2023-05-20T02:21:31.000Z">
-<meta property="article:modified_time" content="2023-05-21T09:52:19.631Z">
+<meta property="article:modified_time" content="2023-05-22T03:35:12.967Z">
 <meta property="article:author" content="Sekyoro">
 <meta property="article:tag" content="个人博客 技术学习 计算机 互联网 人工智能">
 <meta name="twitter:card" content="summary">
@@ -277,7 +279,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-05-21 17:52:19" itemprop="dateModified" datetime="2023-05-21T17:52:19+08:00">2023-05-21</time>
+                <time title="修改时间：2023-05-22 11:35:12" itemprop="dateModified" datetime="2023-05-22T11:35:12+08:00">2023-05-22</time>
               </span>
 
           
@@ -293,7 +295,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>6.1k</span>
+              <span>6.2k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -341,7 +343,10 @@
 <p>其中,拿一个翻译插件来说，Title就是要点,SubTitle就是翻译结果,icoPath是左边图标的路径，我测试了必须使用本地文件，而JsonRPCAction就是按Enter键或鼠标左击后的响应，method就是触发的方法，可以自己写，也可以用wox.py<a target="_blank" rel="noopener" href="https://github.com/Wox-launcher/Wox/blob/master/JsonRPC/wox.py">Wox/wox.py at master · Wox-launcher/Wox · GitHub</a>中的WoxAPI方法,parameters就是参数，要求传入一个列表.<code>dontHideAfterAction</code>表示点击之后Wox会不会隐藏.</p>
 <p>此外还有个有意思的方法就是<code>context_menu</code></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">context_menu</span>(<span class="params">self, data</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    optional context menu entries for a result</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">return</span> []</span><br></pre></td></tr></table></figure>
-<p>就是鼠标右击或者Shift+Enter后的响应。</p>
+<p>就是鼠标右击或者Shift+Enter后的响应，<strong>需要注意的是</strong>,重载的必须是<code>context_menu(self, data)</code>,不能确少data参数，这个data可以在query方法中返回的结果里设置<code>ContextData</code>如下</p>
+<p><img data-src="https://s2.loli.net/2023/05/22/Tu4YXj6OHxD9ngG.png" alt="image-20230522112012105" style="zoom:67%;" /></p>
+<p>比如我在Context menu里添加一项<code>去我的博客看看</code>,下面两项是默认的.</p>
+<p><img data-src="https://s2.loli.net/2023/05/22/vLZGqJ58NnWkBoi.png" alt="image-20230522113028138" style="zoom: 67%;" /></p>
 <p>所以<code>query</code>和<code>context_menu</code>返回的结果就是展示的结果项目。</p>
 <h3 id="错误处理"><a href="#错误处理" class="headerlink" title="错误处理"></a>错误处理</h3><h4 id="日志"><a href="#日志" class="headerlink" title="日志"></a>日志</h4><p>像对于这种插件的开发个人认为是比较累的，debug比较麻烦,不能在终端直接显示，不像一般的客户端或者Web开发，所以日志还是很重要的，主要使用Python自带的logging模块.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 日志记录</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Logger</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">        filename = os.path.join(os.path.dirname(__file__), <span class="string">&#x27;log.txt&#x27;</span>)</span><br><span class="line">        logging.basicConfig(level=logging.DEBUG, filename=filename, filemode=<span class="string">&#x27;a&#x27;</span>,</span><br><span class="line">                            <span class="built_in">format</span>=<span class="string">&#x27;%(asctime)s - %(filename)s[line:%(lineno)d] - %(levelname)s: %(message)s&#x27;</span>)</span><br><span class="line">        self.logger = logging.getLogger()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">debug</span>(<span class="params">self, msg</span>):</span></span><br><span class="line">        self.logger.debug(msg)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">info</span>(<span class="params">self, msg</span>):</span></span><br><span class="line">        self.logger.info(msg)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">error</span>(<span class="params">self, msg</span>):</span></span><br><span class="line">        self.logger.error(msg)</span><br></pre></td></tr></table></figure>
