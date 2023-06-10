@@ -4,6 +4,29 @@
   
     
     <entry>
+      <title>node的包管理工具介绍</title>
+      <link href="2023/06/10/node%E7%9A%84%E5%8C%85%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7%E4%BB%8B%E7%BB%8D/"/>
+      <url>2023/06/10/node%E7%9A%84%E5%8C%85%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7%E4%BB%8B%E7%BB%8D/</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>不同的语言都有相应的不同包或者环境管理工具,本文介绍一下node的<br><span id="more"></span></p><link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> node </tag>
+            
+            <tag> npm </tag>
+            
+            <tag> yarn </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>深入Clash配置文件</title>
       <link href="2023/06/03/%E6%B7%B1%E5%85%A5Clash%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/"/>
       <url>2023/06/03/%E6%B7%B1%E5%85%A5Clash%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/</url>
