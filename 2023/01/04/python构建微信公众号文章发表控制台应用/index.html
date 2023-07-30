@@ -54,9 +54,9 @@
 <meta property="article:modified_time" content="2023-01-08T08:57:32.788Z">
 <meta property="article:author" content="Sekyoro">
 <meta property="article:tag" content="python">
-<meta property="article:tag" content="wechat">
 <meta property="article:tag" content="xpath">
 <meta property="article:tag" content="request">
+<meta property="article:tag" content="wechat">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="https://www.sekyoro.top/2023/01/04/python%E6%9E%84%E5%BB%BA%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7%E6%96%87%E7%AB%A0%E5%8F%91%E8%A1%A8%E6%8E%A7%E5%88%B6%E5%8F%B0%E5%BA%94%E7%94%A8/">
@@ -545,9 +545,9 @@
           
           <div class="post-tags">
               <a href="/tags/python/" rel="tag"><i class="fa fa-tag"></i> python</a>
-              <a href="/tags/wechat/" rel="tag"><i class="fa fa-tag"></i> wechat</a>
               <a href="/tags/xpath/" rel="tag"><i class="fa fa-tag"></i> xpath</a>
               <a href="/tags/request/" rel="tag"><i class="fa fa-tag"></i> request</a>
+              <a href="/tags/wechat/" rel="tag"><i class="fa fa-tag"></i> wechat</a>
           </div>
 
         
@@ -1179,35 +1179,6 @@ var pjax = new Pjax({
 });
 
 window.addEventListener('pjax:success', () => {
-	try {
-         TagCanvas.textFont = 'Helvetica';
-         TagCanvas.textColour = '#333';
-         TagCanvas.textHeight = 15;
-         TagCanvas.outlineColour = '#E2E1C1';
-         TagCanvas.maxSpeed = 0.03;
-         TagCanvas.freezeActive = true;
-         TagCanvas.outlineMethod = 'block';
-         TagCanvas.minBrightness = 0.2;
-         TagCanvas.depth = 0.92;
-         TagCanvas.pulsateTo = 0.6;
-         TagCanvas.initial = [0.1,-0.1];
-         TagCanvas.decel = 0.98;
-         TagCanvas.reverse = true;
-         TagCanvas.hideTags = false;
-         TagCanvas.shadow = '#ccf';
-         TagCanvas.shadowBlur = 3;
-         TagCanvas.weight = false;
-         TagCanvas.imageScale = null;
-         TagCanvas.fadeIn = 1000;
-         TagCanvas.clickToFront = 600;
-         TagCanvas.lock = false;
-         TagCanvas.Start('resCanvas');
-         TagCanvas.tc['resCanvas'].Wheel(true)
-     } catch(e) {
-         console.log(e);
-		 console.log('tag cloud load failed')
-         document.getElementById('myCanvasContainer').style.display = 'none';
-     };
   document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
     var code = element.text || element.textContent || element.innerHTML || '';
     var parent = element.parentNode;
@@ -1235,6 +1206,7 @@ window.addEventListener('pjax:success', () => {
     }
     parent.appendChild(script);
   });
+ 
   NexT.boot.refresh();
   // Define Motion Sequence & Bootstrap Motion.
   if (CONFIG.motion.enable) {
