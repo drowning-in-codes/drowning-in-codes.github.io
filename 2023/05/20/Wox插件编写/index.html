@@ -57,10 +57,14 @@
 <meta property="og:image" content="https://s2.loli.net/2023/05/21/K5TBRAWYpmGbeaf.png">
 <meta property="og:image" content="https://s2.loli.net/2023/05/21/kwTv5QKbJtL716S.png">
 <meta property="og:image" content="https://s2.loli.net/2023/05/21/7FJRkB6H21wNcsL.png">
+<meta property="og:image" content="https://s2.loli.net/2023/07/29/5WwyJq6p7l9oRiK.png">
+<meta property="og:image" content="https://s2.loli.net/2023/07/29/Y8n1iPpI4Qmr9Db.png">
+<meta property="og:image" content="https://s2.loli.net/2023/07/29/vftBx4l81mpG3jS.png">
 <meta property="og:image" content="https://s2.loli.net/2023/05/21/zH9peMTlJg13GYU.png">
 <meta property="og:image" content="https://s2.loli.net/2023/05/21/7CioWXbFr4nSx3d.png">
+<meta property="og:image" content="https://s2.loli.net/2023/07/30/u5ebcfDnj8FRp3V.png">
 <meta property="article:published_time" content="2023-05-20T02:21:31.000Z">
-<meta property="article:modified_time" content="2023-06-03T06:52:19.078Z">
+<meta property="article:modified_time" content="2023-07-30T04:08:59.635Z">
 <meta property="article:author" content="Sekyoro">
 <meta property="article:tag" content="python">
 <meta property="article:tag" content="插件">
@@ -280,7 +284,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-06-03 14:52:19" itemprop="dateModified" datetime="2023-06-03T14:52:19+08:00">2023-06-03</time>
+                <time title="修改时间：2023-07-30 12:08:59" itemprop="dateModified" datetime="2023-07-30T12:08:59+08:00">2023-07-30</time>
               </span>
 
           
@@ -296,14 +300,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>6.2k</span>
+              <span>7.5k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>6 分钟</span>
+              <span>7 分钟</span>
             </span>
 
         </div>
@@ -362,11 +366,28 @@
 <p><img data-src="https://s2.loli.net/2023/05/21/kwTv5QKbJtL716S.png" alt="image-20230521173212739" style="zoom:50%;" /></p>
 <p><code>JsonRPCAction</code>的parameters传入的列表就对应method中的参数，比如传[1,2],而method中就可以使用method(a,b)来接收,当然也可以使用method(*para)用一个元组接收.</p>
 <p><img data-src="https://s2.loli.net/2023/05/21/7FJRkB6H21wNcsL.png" alt="image-20230521174809680"></p>
+<h3 id="更新到Wox扩展"><a href="#更新到Wox扩展" class="headerlink" title="更新到Wox扩展"></a>更新到Wox扩展</h3><p>目前代码已经传到Github上,Wox本身有一个扩展库.</p>
+<p>欢迎下载<a target="_blank" rel="noopener" href="http://www.wox.one/plugin/416">Plugin Detail (wox.one)</a></p>
+<p><img data-src="https://s2.loli.net/2023/07/29/5WwyJq6p7l9oRiK.png" alt="image-20230729211142583"></p>
+<h3 id="B站直播信息查看"><a href="#B站直播信息查看" class="headerlink" title="B站直播信息查看"></a>B站直播信息查看</h3><p>由于平时会看看直播,找到了一个关于B站接口的项目<a target="_blank" rel="noopener" href="https://github.com/SocialSisterYi/bilibili-API-collect">GitHub - SocialSisterYi/bilibili-API-collect: 哔哩哔哩-API收集整理【不断更新中….】</a></p>
+<p>利用其中的一些接口使用Wox快速看看某个直播是不是在直播.</p>
+<p>目前打算的方法是让用户填写配置信息,让用户填好Cookie后,直接调用请求查看关注的正在直播的用户.</p>
+<p><img data-src="https://s2.loli.net/2023/07/29/Y8n1iPpI4Qmr9Db.png" alt="框架" style="zoom:67%;" /></p>
+<p>用户在web上登陆后,在配置文件中<code>config.json</code>中写<code>SESSDATA</code></p>
+<p><img data-src="https://s2.loli.net/2023/07/29/vftBx4l81mpG3jS.png" alt="image-20230729221851699"></p>
+<p>然后调用接口即可.</p>
+<p>主要注意两点,一个是在JSONRPC里不要轻易调用原本类里东西.比如我写了个<code>Logger</code>类,并在<code>Main</code>类里实例化了这个类,并增加了<code>searchall</code>方法,通过<code>JsonRPCAction</code>调用.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add_item</span>(<span class="params">self, title, subtitle, icopath, method, *parameters</span>):</span></span><br><span class="line">    item = &#123;</span><br><span class="line">        <span class="string">&quot;Title&quot;</span>: title,</span><br><span class="line">        <span class="string">&quot;SubTitle&quot;</span>: subtitle,</span><br><span class="line">        <span class="string">&quot;IcoPath&quot;</span>: icopath,</span><br><span class="line">        <span class="string">&quot;JsonRPCAction&quot;</span>: &#123;</span><br><span class="line">            <span class="string">&quot;method&quot;</span>: method,</span><br><span class="line">            <span class="string">&quot;parameters&quot;</span>: parameters,</span><br><span class="line">            <span class="string">&quot;dontHideAfterAction&quot;</span>: <span class="literal">True</span>,</span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> item</span><br></pre></td></tr></table></figure>
+<p>在这里的<code>searchall</code>方法里是不能使用<code>logger</code>输出日志的.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">self.results.append(</span><br><span class="line">            self.add_item(<span class="string">&quot;BiliLive&quot;</span>, <span class="string">&quot;查看自己关注的正在直播的主播&quot;</span>, <span class="string">&#x27;Images/pic.png&#x27;</span>,<span class="string">&quot;searchall&quot;</span>,<span class="string">&quot;all&quot;</span>)</span><br><span class="line">        self.results.append(</span><br><span class="line">            self.add_item(<span class="string">&quot;Config Cookie&quot;</span>, <span class="string">&quot;配置你的Cookie&quot;</span>, <span class="string">&#x27;Images/cookie.png&#x27;</span>, <span class="string">&quot;openviewer&quot;</span>))</span><br><span class="line">        self.results.append(</span><br><span class="line">            self.add_item(<span class="string">&quot;reload&quot;</span>, <span class="string">&quot;刷新重载插件&quot;</span>, <span class="string">&#x27;Images/pic.png&#x27;</span>, <span class="string">&quot;reload&quot;</span>))</span><br><span class="line"><span class="keyword">return</span> self.results</span><br></pre></td></tr></table></figure>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ol>
 <li>Python编写插件相关资料比较少,C#要多一点</li>
 <li>可以参考这个文件的代码,还是不错的<a target="_blank" rel="noopener" href="https://github.com/Wox-launcher/Wox/tree/master/Plugins/HelloWorldPython">Wox/Plugins/HelloWorldPython at master · Wox-launcher/Wox · GitHub</a></li>
 <li>可以看看我的翻译插件,支持免费中英互译,也支持百度的有一定免费额度的API翻译，支持多种语言<br><img data-src="https://s2.loli.net/2023/05/21/zH9peMTlJg13GYU.png" alt="image-20230521173938835"><br><img data-src="https://s2.loli.net/2023/05/21/7CioWXbFr4nSx3d.png" alt="image-20230521174103179"></li>
+<li>如果向上传给别人用,需要压缩整个文件夹然后改后缀名为wox<a target="_blank" rel="noopener" href="https://github.com/Wox-launcher/Wox/issues/2199">How to create <code>.wox</code> · Issue #2199 · Wox-launcher/Wox (github.com)</a></li>
+<li>最后我在Wox的plugin上上传了这两个插件,欢迎star以及下载使用!</li>
 </ol>
+<p><img data-src="https://s2.loli.net/2023/07/30/u5ebcfDnj8FRp3V.png" alt="image-20230730120855907"></p>
 <h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ol>
 <li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/81568689#:~:text=virtualenv ：Python 虚拟环境管理工具。 venv ：Python 标准库内置的虚拟环境管理工具，Python 3.3 加入，Python,开始作为管理虚拟环境的推荐工具，用法类似 virtualenv。 如果你使用 Python 3，推荐使用 venv 来替代 virtualenv。">要不我们还是用回 virtualenv/venv 和 pip 吧 </a></li>
 <li><a target="_blank" rel="noopener" href="https://github.com/Wox-launcher/Wox/blob/master/JsonRPC/wox.py">Wox/wox.py at master · Wox-launcher/Wox · GitHub</a></li>
@@ -390,16 +411,16 @@
   <div class="popular-posts-header">相关文章</div>
   <ul class="popular-posts">
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\2023\04\04\mne处理脑电数据基本使用\" rel="bookmark">mne处理脑电数据基本使用</a></div>
+      <div class="popular-posts-title"><a href="\2021\12\08\python操作百度网盘\" rel="bookmark">python操作百度网盘</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\2023\05\07\python的特别方法与装饰器\" rel="bookmark">python的特别方法与装饰器</a></div>
+      <div class="popular-posts-title"><a href="\2021\07\21\疫情打卡\" rel="bookmark">疫情打卡</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\2023\05\02\python中的logging模块\" rel="bookmark">python中的logging模块</a></div>
+      <div class="popular-posts-title"><a href="\2022\01\17\pandas学习\" rel="bookmark">pandas学习</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\2023\01\04\python构建微信公众号文章发表控制台应用\" rel="bookmark">python构建微信公众号文章发表控制台应用</a></div>
+      <div class="popular-posts-title"><a href="\2022\01\02\疫情自动打卡\" rel="bookmark">疫情自动打卡</a></div>
     </li>
     <li class="popular-posts-item">
       <div class="popular-posts-title"><a href="\2022\02\04\pyqt学习\" rel="bookmark">pyqt学习</a></div>
@@ -857,7 +878,7 @@ if(canvas.getContext){
 	  
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84"><span class="nav-number">1.</span> <span class="nav-text">项目结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Python%E5%BC%80%E5%8F%91"><span class="nav-number">2.</span> <span class="nav-text">Python开发</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80"><span class="nav-number">2.1.</span> <span class="nav-text">基础</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86"><span class="nav-number">2.2.</span> <span class="nav-text">错误处理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%97%A5%E5%BF%97"><span class="nav-number">2.2.1.</span> <span class="nav-text">日志</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%98%BE%E7%A4%BA%E9%A1%B9%E7%9B%AE"><span class="nav-number">2.2.2.</span> <span class="nav-text">显示项目</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%93%8D%E5%BA%94%E6%96%B9%E6%B3%95"><span class="nav-number">2.3.</span> <span class="nav-text">响应方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="nav-number">4.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84"><span class="nav-number">1.</span> <span class="nav-text">项目结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Python%E5%BC%80%E5%8F%91"><span class="nav-number">2.</span> <span class="nav-text">Python开发</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80"><span class="nav-number">2.1.</span> <span class="nav-text">基础</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86"><span class="nav-number">2.2.</span> <span class="nav-text">错误处理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%97%A5%E5%BF%97"><span class="nav-number">2.2.1.</span> <span class="nav-text">日志</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%98%BE%E7%A4%BA%E9%A1%B9%E7%9B%AE"><span class="nav-number">2.2.2.</span> <span class="nav-text">显示项目</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%93%8D%E5%BA%94%E6%96%B9%E6%B3%95"><span class="nav-number">2.3.</span> <span class="nav-text">响应方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9B%B4%E6%96%B0%E5%88%B0Wox%E6%89%A9%E5%B1%95"><span class="nav-number">2.4.</span> <span class="nav-text">更新到Wox扩展</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B%E7%AB%99%E7%9B%B4%E6%92%AD%E4%BF%A1%E6%81%AF%E6%9F%A5%E7%9C%8B"><span class="nav-number">2.5.</span> <span class="nav-text">B站直播信息查看</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="nav-number">4.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
       </div>
       <!--/noindex-->
       <div class="site-overview-wrap sidebar-panel">
@@ -991,12 +1012,12 @@ if(canvas.getContext){
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">646k</span>
+    <span title="站点总字数">651k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">9:47</span>
+    <span title="站点阅读时长">9:52</span>
 </div>
 
     <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
