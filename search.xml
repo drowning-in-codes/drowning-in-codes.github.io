@@ -8,7 +8,7 @@
       <link href="2023/07/30/%E6%B5%8F%E8%A7%88%E5%99%A8JS/"/>
       <url>2023/07/30/%E6%B5%8F%E8%A7%88%E5%99%A8JS/</url>
       
-        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>浏览器的一些常用js方法.<br><span id="more"></span></p><link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>浏览器的一些常用js方法.主要是浏览的宽高什么的,我经常弄混.<br><span id="more"></span></p><h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><ol><li><a href="https://github.com/XIANFESchool/FE-problem-collection/issues/31">js获取浏览器中各种宽、高、偏移值 · Issue #31 · XIANFESchool/FE-problem-collection (github.com)</a></li><li><a href="https://github.com/sophianbj/JavaScript-accumulation/blob/master/前端开发中的各种宽高整理.md">JavaScript-accumulation/前端开发中的各种宽高整理.md at master · sophianbj/JavaScript-accumulation (github.com)</a></li><li></li></ol><link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
       
       
       
