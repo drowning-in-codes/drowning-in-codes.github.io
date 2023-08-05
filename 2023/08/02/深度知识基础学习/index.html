@@ -43,16 +43,21 @@
     var CONFIG = {"hostname":"www.sekyoro.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":240,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"appID":"3G9PZZIKCH","apiKey":"8eb71f5ca3167e9ef3487882f10cfaad","indexName":"SekyoroSearch","hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 <link href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css" rel="stylesheet">
-  <meta property="og:type" content="article">
+  <meta name="description" content="这方面的知识实在是很多">
+<meta property="og:type" content="article">
 <meta property="og:title" content="深度知识基础学习">
 <meta property="og:url" content="https://www.sekyoro.top/2023/08/02/%E6%B7%B1%E5%BA%A6%E7%9F%A5%E8%AF%86%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/index.html">
 <meta property="og:site_name" content="Sekyoro的博客小屋">
+<meta property="og:description" content="这方面的知识实在是很多">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.loli.net/2023/08/03/wQkVZHUIGzYyvMs.png">
+<meta property="og:image" content="https://s2.loli.net/2023/08/03/olDupY69gcaJGH3.png">
 <meta property="article:published_time" content="2023-08-02T03:59:56.000Z">
-<meta property="article:modified_time" content="2023-08-02T03:59:56.440Z">
+<meta property="article:modified_time" content="2023-08-04T13:51:16.867Z">
 <meta property="article:author" content="Sekyoro">
-<meta property="article:tag" content="个人博客 技术学习 计算机 互联网 人工智能">
+<meta property="article:tag" content="deepLearning">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2023/08/03/wQkVZHUIGzYyvMs.png">
 
 <link rel="canonical" href="https://www.sekyoro.top/2023/08/02/%E6%B7%B1%E5%BA%A6%E7%9F%A5%E8%AF%86%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/">
 
@@ -262,6 +267,13 @@
 
               <time title="创建时间：2023-08-02 11:59:56" itemprop="dateCreated datePublished" datetime="2023-08-02T11:59:56+08:00">2023-08-02</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-08-04 21:51:16" itemprop="dateModified" datetime="2023-08-04T21:51:16+08:00">2023-08-04</time>
+              </span>
 
           
             <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
@@ -276,14 +288,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>0</span>
+              <span>2.5k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>2 分钟</span>
             </span>
 
         </div>
@@ -295,7 +307,26 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
+        <p>这方面的知识实在是很多<br><span id="more"></span></p>
+<p>首先写一下计算机视觉方向的,介绍一下各种Net的发展史.</p>
+<h3 id="LeNet"><a href="#LeNet" class="headerlink" title="LeNet"></a>LeNet</h3><blockquote>
+<p>LeNet，它是最早发布的卷积神经网络之一，因其在计算机视觉任务中的高效性能而受到广泛关注。 这个模型是由AT&amp;T贝尔实验室的研究员Yann LeCun在1989年提出的（并以其命名），目的是识别图像 (<a target="_blank" rel="noopener" href="https://zh.d2l.ai/chapter_references/zreferences.html#id90">LeCun <em>et al.</em>, 1998</a>)中的手写数字。 当时，Yann LeCun发表了第一篇通过反向传播成功训练卷积神经网络的研究，这项工作代表了十多年来神经网络研究开发的成果</p>
+</blockquote>
+<p><img data-src="https://s2.loli.net/2023/08/03/wQkVZHUIGzYyvMs.png" alt="image-20230803191703397"></p>
+<p>​    每个卷积块中的基本单元是一个卷积层、一个sigmoid激活函数和平均汇聚层。请注意，虽然ReLU和最大汇聚层更有效，但它们在20世纪90年代还没有出现。每个卷积层使用5×5卷积核和一个sigmoid激活函数。这些层将输入映射到多个二维特征输出，通常同时增加通道的数量。第一卷积层有6个输出通道，而第二个卷积层有16个输出通道。每个2×2池操作（步幅2）通过空间下采样将维数减少4倍。卷积的输出形状由批量大小、通道数、高度、宽度决定。</p>
+<p>​    为了将卷积块的输出传递给稠密块，我们必须在小批量中展平每个样本。换言之，我们将这个四维输入转换成全连接层所期望的二维输入。这里的二维表示的第一个维度索引小批量中的样本，第二个维度给出每个样本的平面向量表示。LeNet的稠密块有三个全连接层，分别有120、84和10个输出。因为我们在执行分类任务，所以输出层的10维对应于最后输出结果的数量。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LeNet</span>(<span class="params">nn.Module</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="built_in">super</span>(LeNet, self).__init__()</span><br><span class="line">        self.conv1 = nn.Conv2d(<span class="number">3</span>, <span class="number">6</span>, <span class="number">5</span>)</span><br><span class="line">        self.conv2 = nn.Conv2d(<span class="number">6</span>, <span class="number">16</span>, <span class="number">5</span>)</span><br><span class="line">        self.fc1 = nn.Linear(in_features=<span class="number">16</span>*<span class="number">5</span>*<span class="number">5</span>, out_features=<span class="number">120</span>)</span><br><span class="line">        self.fc2 = nn.Linear(in_features=<span class="number">120</span>, out_features=<span class="number">84</span>)</span><br><span class="line">        self.fc3 = nn.Linear(in_features=<span class="number">84</span>, out_features=<span class="number">10</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span>(<span class="params">self,x</span>):</span></span><br><span class="line">        out = F.relu(self.conv1(x)) <span class="comment"># 3*32*32 -&gt; 6*28*28</span></span><br><span class="line">        out = F.max_pool2d(out,<span class="number">2</span>) <span class="comment"># 6*28*28 -&gt; 6*14*14</span></span><br><span class="line">        out = F.relu(self.conv2(out)) <span class="comment"># 6*14*14 -&gt; 16*10*10</span></span><br><span class="line">        out = F.max_pool2d(out, <span class="number">2</span>) <span class="comment"># 16*10*10 -&gt; 16*5*5</span></span><br><span class="line">        out = out.view(out.size(<span class="number">0</span>), -<span class="number">1</span>) <span class="comment"># 16*5*5 -&gt; 400</span></span><br><span class="line"></span><br><span class="line">        out = F.relu(self.fc1(out))</span><br><span class="line">        out = F.relu(self.fc2(out))</span><br><span class="line">        out = self.fc3(out)</span><br><span class="line">        <span class="keyword">return</span> out</span><br></pre></td></tr></table></figure>
+<h3 id="AlexNet"><a href="#AlexNet" class="headerlink" title="AlexNet"></a>AlexNet</h3><p>2012年，AlexNet横空出世。它首次证明了学习到的特征可以超越手工设计的特征。它一举打破了计算机视觉研究的现状。 AlexNet使用了8层卷积神经网络，并以很大的优势赢得了2012年ImageNet图像识别挑战赛。</p>
+<p>AlexNet和LeNet的架构非常相似</p>
+<p><img data-src="https://s2.loli.net/2023/08/03/olDupY69gcaJGH3.png" alt="image-20230803213645408" style="zoom:67%;" /></p>
+<p>AlexNet和LeNet的设计理念非常相似，但也存在显著差异。</p>
+<ol>
+<li>AlexNet比相对较小的LeNet5要深得多。AlexNet由八层组成：五个卷积层、两个全连接隐藏层和一个全连接输出层。</li>
+<li>AlexNet使用ReLU而不是sigmoid作为其激活函数。</li>
+</ol>
+<p>AlexNet通过<code>DropOut</code>控制全连接层的模型复杂度，而LeNet只使用了权重衰减。 为了进一步扩充数据，AlexNet在训练时增加了大量的图像增强数据，如翻转、裁切和变色。 这使得模型更健壮，更大的样本量有效地减少了过拟合。 在 <a target="_blank" rel="noopener" href="https://zh-v2.d2l.ai/chapter_computer-vision/image-augmentation.html#sec-image-augmentation">13.1节</a>中更详细地讨论数据扩增。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AlexNet</span>(<span class="params">nn.Module</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="built_in">super</span>().__init__()</span><br><span class="line">        self.features = nn.Sequential(</span><br><span class="line">            nn.Conv2d(<span class="number">3</span>, <span class="number">64</span>, kernel_size=<span class="number">11</span>, stride=<span class="number">4</span>, padding=<span class="number">2</span>), <span class="comment"># 3*224*224 -&gt; 64*55*55</span></span><br><span class="line">            nn.ReLU(inplace=<span class="literal">True</span>),</span><br><span class="line">            nn.MaxPool2d(kernel_size=<span class="number">2</span>, stride=<span class="number">2</span>), <span class="comment"># 64*55*55 -&gt; 64*27*27</span></span><br><span class="line">            nn.Conv2d(<span class="number">64</span>, <span class="number">192</span>, kernel_size=<span class="number">5</span>, padding=<span class="number">2</span>), <span class="comment"># 64*27*27 -&gt; 192*27*27</span></span><br><span class="line">            nn.ReLU(inplace=<span class="literal">True</span>),</span><br><span class="line">            nn.MaxPool2d(kernel_size=<span class="number">2</span>, stride=<span class="number">2</span>), <span class="comment"># 192*27*27 -&gt; 192*13*13</span></span><br><span class="line">            nn.Conv2d(<span class="number">192</span>, <span class="number">384</span>, kernel_size=<span class="number">3</span>, padding=<span class="number">1</span>), <span class="comment"># 192*13*13 -&gt; 384*13*13</span></span><br><span class="line">            nn.ReLU(inplace=<span class="literal">True</span>),</span><br><span class="line">            nn.Conv2d(<span class="number">384</span>, <span class="number">256</span>, kernel_size=<span class="number">3</span>, padding=<span class="number">1</span>), <span class="comment"># 384*13*13 -&gt; 256*13*13</span></span><br><span class="line">            nn.ReLU(inplace=<span class="literal">True</span>),</span><br><span class="line">            nn.Conv2d(<span class="number">256</span>, <span class="number">256</span>, kernel_size=<span class="number">3</span>, padding=<span class="number">1</span>), <span class="comment"># 256*13*13 -&gt; 256*13*13</span></span><br><span class="line">            nn.ReLU(inplace=<span class="literal">True</span>),</span><br><span class="line">            nn.MaxPool2d(kernel_size=<span class="number">2</span>, stride=<span class="number">2</span>), <span class="comment"># 256*13*13 -&gt; 256*6*6</span></span><br><span class="line">        )</span><br><span class="line">        self.fc = nn.Linear(<span class="number">256</span>,<span class="number">10</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span>(<span class="params">self,x</span>):</span></span><br><span class="line">        out = self.features(x)</span><br><span class="line">        out = out.view(out.size(<span class="number">0</span>), -<span class="number">1</span>)</span><br><span class="line">        out = self.fc(out)</span><br><span class="line">        <span class="keyword">return</span> out</span><br></pre></td></tr></table></figure>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
     </div>
 
     
@@ -395,6 +426,10 @@
 
 
       <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/deepLearning/" rel="tag"><i class="fa fa-tag"></i> deepLearning</a>
+          </div>
 
         
 
@@ -405,7 +440,10 @@
     <a href="/2023/08/01/%E5%A2%9E%E5%8A%A0live2d%E7%9C%8B%E6%9D%BF%E5%A8%98/" rel="prev" title="增加live2d看板娘">
       <i class="fa fa-chevron-left"></i> 增加live2d看板娘
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2023/08/04/tailwind%E9%80%9F%E6%88%90/" rel="next" title="tailwind速成">
+      tailwind速成 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -755,6 +793,7 @@ if(canvas.getContext){
 	  
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#LeNet"><span class="nav-number">1.</span> <span class="nav-text">LeNet</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AlexNet"><span class="nav-number">2.</span> <span class="nav-text">AlexNet</span></a></li></ol></div>
       </div>
       <!--/noindex-->
       <div class="site-overview-wrap sidebar-panel">
@@ -769,7 +808,7 @@ if(canvas.getContext){
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">123</span>
+          <span class="site-state-item-count">124</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -782,7 +821,7 @@ if(canvas.getContext){
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">158</span>
+        <span class="site-state-item-count">160</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -831,8 +870,13 @@ if(canvas.getContext){
 	order="random"
 	>
 </meting-js>
-<div class="widget-wrap">
-    <h3 class="widget-title" style="margin:0">此文章目前无词云</h3>
+			<div class="widget-wrap">
+    <h3 class="widget-title" style="margin:0">文章词云</h3>
+    <div id="myCanvasContainer" class="widget tagcloud">
+        <canvas width="250" height="250" id="resCanvas" style="width:100%">
+		  <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/deepLearning/" rel="tag">deepLearning</a><span class="tag-list-count">1</span></li></ul>	
+        </canvas>
+    </div>
 </div>
 		<script type="text/javascript" id="clustrmaps" src="//clustrmaps.com/map_v2.js?d=xQdGTxqARTBiNIwX2aUban-ixkj2s6VaZQWo-aVCgY8&cl=ffffff&w=a"></script>
         <div class="back-to-top motion-element">
@@ -883,12 +927,12 @@ if(canvas.getContext){
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">655k</span>
+    <span title="站点总字数">657k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">9:55</span>
+    <span title="站点阅读时长">9:57</span>
 </div>
 
     <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
