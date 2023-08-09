@@ -1,24 +1,15 @@
- function addLoadEvent(func) {
-     var oldonload = window.onload;
-     if (typeof window.onload != 'function') {
-         window.onload = func;
-     } else {
-         window.onload = function() {
-             oldonload();
-             func();
-         }
-     }
- }
-
- addLoadEvent(function() {
+document.addEventListener('DOMContentLoaded', loadTagCloud)
+document.addEventListener('pjax:complete',loadTagCloud)
+function loadTagCloud() {
      console.log('tag cloud plugin rock and roll!');
-
      try {
-         TagCanvas.textFont = 'Trebuchet MS, Helvetica';
+		 let resCanvas = document.querySelector("#resCanvas")
+		 if(!resCanvas) return;
+         TagCanvas.textFont = 'Helvetica';
          TagCanvas.textColour = '#333';
-         TagCanvas.textHeight = 20;
-         TagCanvas.outlineColour = '#E2E1D1';
-         TagCanvas.maxSpeed = 0.3;
+         TagCanvas.textHeight = 16;
+         TagCanvas.outlineColour = '#E2E1C1';
+         TagCanvas.maxSpeed = 0.03;
          TagCanvas.freezeActive = true;
          TagCanvas.outlineMethod = 'block';
          TagCanvas.minBrightness = 0.2;
@@ -35,10 +26,11 @@
          TagCanvas.fadeIn = 1000;
          TagCanvas.clickToFront = 600;
          TagCanvas.lock = false;
-         TagCanvas.Start('resCanvas');
-         TagCanvas.tc['resCanvas'].Wheel(true)
+		TagCanvas.Start('resCanvas');
+        TagCanvas.tc['resCanvas'].Wheel(true)
      } catch(e) {
          console.log(e);
+		 console.log('tag cloud load failed')
          document.getElementById('myCanvasContainer').style.display = 'none';
      }
- });
+ };
