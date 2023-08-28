@@ -51,7 +51,7 @@
 <meta property="og:description" content="深入GAN学习">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-08-11T10:08:06.000Z">
-<meta property="article:modified_time" content="2023-08-15T11:13:41.109Z">
+<meta property="article:modified_time" content="2023-08-15T12:40:30.000Z">
 <meta property="article:author" content="Sekyoro">
 <meta property="article:tag" content="GAN">
 <meta name="twitter:card" content="summary">
@@ -269,7 +269,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-08-15 19:13:41" itemprop="dateModified" datetime="2023-08-15T19:13:41+08:00">2023-08-15</time>
+                <time title="修改时间：2023-08-15 20:40:30" itemprop="dateModified" datetime="2023-08-15T20:40:30+08:00">2023-08-15</time>
               </span>
 
           
@@ -285,7 +285,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>930</span>
+              <span>966</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -309,7 +309,7 @@
 <p>摘要</p>
 <p>We propose a new framework for estimating generative models via an adversarial process, in which we simultaneously train two models: a generative model G that captures the data distribution, and a discriminative model D that estimates the probability that a sample came from the training data rather than G. The training procedure for G is to maximize the probability of D making a mistake. This framework corresponds to a minimax two-player game. In the space of arbitrary functions G and D, a unique solution exists, with G recovering the training data distribution and D equal to 1 2 everywhere. In the case where G and D are defined by multilayer perceptrons, the entire system can be trained with backpropagation. There is no need for any Markov chains or unrolled approximate inference networks during either training or generation of samples. Experiments demonstrate the potential of the framework through qualitative and quantitative evaluation of the generated samples</p>
 <h3 id="DCGAN"><a href="#DCGAN" class="headerlink" title="DCGAN"></a>DCGAN</h3><p>标题<strong>WITH DEEP CONVOLUTIONAL GENERATIVE ADVERSARIAL NETWORKS</strong></p>
-<h3 id="BIGGAN"><a href="#BIGGAN" class="headerlink" title="BIGGAN"></a>BIGGAN</h3><link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
+<h3 id="BIGGAN"><a href="#BIGGAN" class="headerlink" title="BIGGAN"></a>BIGGAN</h3><h3 id="Conditional-GAN"><a href="#Conditional-GAN" class="headerlink" title="Conditional GAN"></a>Conditional GAN</h3><h3 id="proGAn"><a href="#proGAn" class="headerlink" title="proGAn"></a>proGAn</h3><h3 id="StyleGAN"><a href="#StyleGAN" class="headerlink" title="StyleGAN"></a>StyleGAN</h3><h3 id="TelDiGAN"><a href="#TelDiGAN" class="headerlink" title="TelDiGAN"></a>TelDiGAN</h3><link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
     </div>
 
     
@@ -782,7 +782,7 @@ if(canvas.getContext){
 	  
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#GAN"><span class="nav-number">1.</span> <span class="nav-text">GAN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DCGAN"><span class="nav-number">2.</span> <span class="nav-text">DCGAN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BIGGAN"><span class="nav-number">3.</span> <span class="nav-text">BIGGAN</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#GAN"><span class="nav-number">1.</span> <span class="nav-text">GAN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DCGAN"><span class="nav-number">2.</span> <span class="nav-text">DCGAN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BIGGAN"><span class="nav-number">3.</span> <span class="nav-text">BIGGAN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Conditional-GAN"><span class="nav-number">4.</span> <span class="nav-text">Conditional GAN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#proGAn"><span class="nav-number">5.</span> <span class="nav-text">proGAn</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#StyleGAN"><span class="nav-number">6.</span> <span class="nav-text">StyleGAN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TelDiGAN"><span class="nav-number">7.</span> <span class="nav-text">TelDiGAN</span></a></li></ol></div>
       </div>
       <!--/noindex-->
       <div class="site-overview-wrap sidebar-panel">
@@ -916,12 +916,12 @@ if(canvas.getContext){
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">678k</span>
+    <span title="站点总字数">690k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">10:17</span>
+    <span title="站点阅读时长">10:27</span>
 </div>
 
     <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
@@ -1216,12 +1216,4 @@ NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
   <script  type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
 <script  type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
 
-<!-- hexo injector body_end start --><script src='/js/outdate.js'></script><!-- hexo injector body_end end --><script async>addLoadEvent(function () {
-    var a = document.createElement('script'),
-    b = document.getElementsByTagName('script')[0];
-    a.type = 'text/javascript',
-    a.async = !0,
-    a.src = '/sw-register.js?v=' + Date.now(),
-    b.parentNode.insertBefore(a, b)
-});
-</script></body></html>
+<!-- hexo injector body_end start --><script src='/js/outdate.js'></script><!-- hexo injector body_end end --><script async>window.onload=function(){var a=document.createElement('script'),b=document.getElementsByTagName('script')[0];a.type='text/javascript',a.async=!0,a.src='/sw-register.js?v='+Date.now(),b.parentNode.insertBefore(a,b)};</script></body></html>

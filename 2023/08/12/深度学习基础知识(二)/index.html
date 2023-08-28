@@ -56,8 +56,25 @@
 <meta property="og:image" content="https://zh-v2.d2l.ai/_images/sequence-model.svg">
 <meta property="og:image" content="https://s2.loli.net/2023/08/12/5CnHizhOuTlW1wc.png">
 <meta property="og:image" content="https://zh.d2l.ai/_images/rnn.svg">
+<meta property="og:image" content="https://s2.loli.net/2023/08/16/zpKICRmb4FvML2g.png">
+<meta property="og:image" content="https://s2.loli.net/2023/08/16/kWAnvRDGEHc2Bxi.png">
+<meta property="og:image" content="https://s2.loli.net/2023/08/16/EPUuOp3Gf1Szlxq.png">
+<meta property="og:image" content="https://zh-v2.d2l.ai/_images/gru-1.svg">
+<meta property="og:image" content="https://zh-v2.d2l.ai/_images/gru-2.svg">
+<meta property="og:image" content="https://zh-v2.d2l.ai/_images/gru-3.svg">
+<meta property="og:image" content="https://zh-v2.d2l.ai/_images/lstm-1.svg">
+<meta property="og:image" content="https://zh-v2.d2l.ai/_images/lstm-3.svg">
+<meta property="og:image" content="https://zh-v2.d2l.ai/_images/deep-rnn.svg">
+<meta property="og:image" content="https://zh-v2.d2l.ai/_images/birnn.svg">
+<meta property="og:image" content="https://zh-v2.d2l.ai/_images/encoder-decoder.svg">
+<meta property="og:image" content="https://zh-v2.d2l.ai/_images/seq2seq.svg">
+<meta property="og:image" content="https://zh-v2.d2l.ai/_images/seq2seq-predict.svg">
+<meta property="og:image" content="https://zh-v2.d2l.ai/_images/qkv.svg">
+<meta property="og:image" content="https://zh-v2.d2l.ai/_images/attention-output.svg">
+<meta property="og:image" content="https://zh-v2.d2l.ai/_images/seq2seq-attention-details.svg">
+<meta property="og:image" content="https://zh-v2.d2l.ai/_images/multi-head-attention.svg">
 <meta property="article:published_time" content="2023-08-12T10:16:29.000Z">
-<meta property="article:modified_time" content="2023-08-13T14:23:43.047Z">
+<meta property="article:modified_time" content="2023-08-18T02:49:56.000Z">
 <meta property="article:author" content="Sekyoro">
 <meta property="article:tag" content="deepLearning">
 <meta name="twitter:card" content="summary">
@@ -276,7 +293,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-08-13 22:23:43" itemprop="dateModified" datetime="2023-08-13T22:23:43+08:00">2023-08-13</time>
+                <time title="修改时间：2023-08-18 10:49:56" itemprop="dateModified" datetime="2023-08-18T10:49:56+08:00">2023-08-18</time>
               </span>
 
           
@@ -292,14 +309,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>1k</span>
+              <span>12k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>11 分钟</span>
             </span>
 
         </div>
@@ -338,7 +355,156 @@
 <li>很多n元组很少出现，这使得拉普拉斯平滑非常不适合语言建模。 作为代替，我们将使用基于深度学习的模型。</li>
 </ol>
 <h3 id="循环神经网络-1"><a href="#循环神经网络-1" class="headerlink" title="循环神经网络"></a>循环神经网络</h3><p><img data-src="https://zh.d2l.ai/_images/rnn.svg" alt="../_images/rnn.svg" style="zoom: 67%;" /></p>
-<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
+<h4 id="隐状态"><a href="#隐状态" class="headerlink" title="隐状态"></a>隐状态</h4><p><img data-src="https://s2.loli.net/2023/08/16/zpKICRmb4FvML2g.png" alt="image-20230815235353077"></p>
+<p>隐状态H,有上一个隐状态与本次输入控制.</p>
+<p><img data-src="https://s2.loli.net/2023/08/16/kWAnvRDGEHc2Bxi.png" alt="image-20230816000019295"></p>
+<p>输出O</p>
+<h4 id="梯度裁剪"><a href="#梯度裁剪" class="headerlink" title="梯度裁剪"></a>梯度裁剪</h4><p><img data-src="https://s2.loli.net/2023/08/16/EPUuOp3Gf1Szlxq.png" alt="image-20230816130933516"></p>
+<h4 id="简单的RNN缺点"><a href="#简单的RNN缺点" class="headerlink" title="简单的RNN缺点"></a>简单的RNN缺点</h4><ul>
+<li>我们可能会遇到这样的情况：早期观测值对预测所有未来观测值具有非常重要的意义。 考虑一个极端情况，其中第一个观测值包含一个校验和， 目标是在序列的末尾辨别校验和是否正确。 在这种情况下，第一个词元的影响至关重要。 我们希望有某些机制能够在一个记忆元里存储重要的早期信息。 如果没有这样的机制，我们将不得不给这个观测值指定一个非常大的梯度， 因为它会影响所有后续的观测值。</li>
+<li>我们可能会遇到这样的情况：一些词元没有相关的观测值。 例如，在对网页内容进行情感分析时， 可能有一些辅助HTML代码与网页传达的情绪无关。 我们希望有一些机制来<em>跳过</em>隐状态表示中的此类词元。</li>
+<li>我们可能会遇到这样的情况：序列的各个部分之间存在逻辑中断。 例如，书的章节之间可能会有过渡存在， 或者证券的熊市和牛市之间可能会有过渡存在。 在这种情况下，最好有一种方法来<em>重置</em>我们的内部状态表示</li>
+</ul>
+<h3 id="GRU"><a href="#GRU" class="headerlink" title="GRU"></a>GRU</h3><blockquote>
+<p>门控循环单元与普通的循环神经网络之间的关键区别在于： 前者支持隐状态的门控。 这意味着模型有专门的机制来确定应该何时更新隐状态， 以及应该何时重置隐状态。 这些机制是可学习的，并且能够解决了上面列出的问题。 例如，如果第一个词元非常重要， 模型将学会在第一次观测之后不更新隐状态。 同样，模型也可以学会跳过不相关的临时观测。 最后，模型还将学会在需要的时候重置隐状态。 下面我们将详细讨论各类门控</p>
+</blockquote>
+<p>引入重置门和更新门. 输入是由当前时间步的输入和前一时间步的隐状态给出。 两个门的输出是由使用sigmoid激活函数的两个全连接层给</p>
+<p><img data-src="https://zh-v2.d2l.ai/_images/gru-1.svg" alt="../_images/gru-1.svg" style="zoom: 67%;" /></p>
+<p>利用重置门的输出与常规隐状态集成,得到一个候选隐状态.如如果重置门输出为1,则是普通的隐状态,由本次输入与上次隐状态作为输入,如果重置门输出为0,则候选隐状态只受输入影响,也就是进行了重置.</p>
+<script type="math/tex; mode=display">
+\tilde{\mathbf{H}}_t=\tanh \left(\mathbf{X}_t \mathbf{W}_{x h}+\left(\mathbf{R}_t \odot \mathbf{H}_{t-1}\right) \mathbf{W}_{h h}+\mathbf{b}_h\right),</script><p><img data-src="https://zh-v2.d2l.ai/_images/gru-2.svg" alt="../_images/gru-2.svg"></p>
+<p>结合更新门确定最终隐状态,如果输出为1,不进行更新,保持之前的隐状态,如果是0则将候选隐状态作为新的隐状态.</p>
+<script type="math/tex; mode=display">
+\mathbf{H}_t=\mathbf{Z}_t \odot \mathbf{H}_{t-1}+\left(1-\mathbf{Z}_t\right) \odot \tilde{\mathbf{H}}_t .</script><p><img data-src="https://zh-v2.d2l.ai/_images/gru-3.svg" alt="../_images/gru-3.svg"></p>
+<blockquote>
+<ul>
+<li>门控循环神经网络可以更好地捕获时间步距离很长的序列上的依赖关系。</li>
+<li>重置门有助于捕获序列中的短期依赖关系。</li>
+<li>更新门有助于捕获序列中的长期依赖关系。</li>
+<li>重置门打开时，门控循环单元包含基本循环神经网络；更新门打开时，门控循环单元可以跳过子序列。</li>
+</ul>
+</blockquote>
+<h3 id="LSTM"><a href="#LSTM" class="headerlink" title="LSTM"></a>LSTM</h3><p>从时间上来说,LSTM比GRU结构要早,结构也更复杂.</p>
+<blockquote>
+<ul>
+<li>可以说，长短期记忆网络的设计灵感来自于计算机的逻辑门。 长短期记忆网络引入了<em>记忆元</em>（memory cell），或简称为<em>单元</em>（cell）。 有些文献认为记忆元是隐状态的一种特殊类型， 它们与隐状态具有相同的形状，其设计目的是用于记录附加的信息。 为了控制记忆元，我们需要许多门。 其中一个门用来从单元中输出条目，我们将其称为<em>输出门</em>（output gate）。 另外一个门用来决定何时将数据读入单元，我们将其称为<em>输入门</em>（input gate）。 我们还需要一种机制来重置单元的内容，由<em>遗忘门</em>（forget gate）来管理， 这种设计的动机与门控循环单元相同， 能够通过专用机制决定什么时候记忆或忽略隐状态中的输入。</li>
+</ul>
+</blockquote>
+<p>引入输入门,忘记门,输出门用于控制隐状态.</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\mathbf{I}_t & =\sigma\left(\mathbf{X}_t \mathbf{W}_{x i}+\mathbf{H}_{t-1} \mathbf{W}_{h i}+\mathbf{b}_i\right), \\
+\mathbf{F}_t & =\sigma\left(\mathbf{X}_t \mathbf{W}_{x f}+\mathbf{H}_{t-1} \mathbf{W}_{h f}+\mathbf{b}_f\right), \\
+\mathbf{O}_t & =\sigma\left(\mathbf{X}_t \mathbf{W}_{x o}+\mathbf{H}_{t-1} \mathbf{W}_{h o}+\mathbf{b}_o\right),
+\end{aligned}</script><p>同时还有候选记忆元,</p>
+<script type="math/tex; mode=display">
+\tilde{\mathbf{C}}_t=\tanh \left(\mathbf{X}_t \mathbf{W}_{x c}+\mathbf{H}_{t-1} \mathbf{W}_{h c}+\mathbf{b}_c\right)</script><p><img data-src="https://zh-v2.d2l.ai/_images/lstm-1.svg" alt="../_images/lstm-1.svg"></p>
+<p>利用忘记门和输入门控制上一次的记忆元和候选记忆元,隐状态的计算就是根据输出门和记忆元.</p>
+<script type="math/tex; mode=display">
+\mathbf{H}_t=\mathbf{O}_t \odot \tanh \left(\mathbf{C}_t\right)</script><p>只要输出门接近1，就能够有效地将所有记忆信息传递给预测部分，而对于输出门接近0，我们只保留记忆元内的所有信息，而不需要更新隐状态。</p>
+<p><img data-src="https://zh-v2.d2l.ai/_images/lstm-3.svg" alt="../_images/lstm-3.svg"></p>
+<h3 id="深度循环神经网络"><a href="#深度循环神经网络" class="headerlink" title="深度循环神经网络"></a>深度循环神经网络</h3><p><img data-src="https://zh-v2.d2l.ai/_images/deep-rnn.svg" alt="../_images/deep-rnn.svg" style="zoom: 80%;" /></p>
+<script type="math/tex; mode=display">
+\mathbf{H}_t^{(l)}=\phi_l\left(\mathbf{H}_t^{(l-1)} \mathbf{W}_{x h}^{(l)}+\mathbf{H}_{t-1}^{(l)} \mathbf{W}_{h h}^{(l)}+\mathbf{b}_h^{(l)}\right)</script><script type="math/tex; mode=display">
+\mathbf{H}_t^{(l)}=\phi_l\left(\mathbf{H}_t^{(l-1)} \mathbf{W}_{x h}^{(l)}+\mathbf{H}_{t-1}^{(l)} \mathbf{W}_{h h}^{(l)}+\mathbf{b}_h^{(l)}\right)</script><script type="math/tex; mode=display">
+\mathbf{O}_t=\mathbf{H}_t^{(L)} \mathbf{W}_{h q}+\mathbf{b}_q</script><p>与多层感知机一样，隐藏层数目L和隐藏单元数目ℎ都是超参数。 也就是说，它们可以由我们调整的。 另外，用门控循环单元或长短期记忆网络的隐状态 来代替隐状态进行计算， 可以很容易地得到深度门控循环神经网络或深度长短期记忆神经网络。</p>
+<ul>
+<li>在深度循环神经网络中，隐状态的信息被传递到当前层的下一时间步和下一层的当前时间步。</li>
+<li>有许多不同风格的深度循环神经网络， 如长短期记忆网络、门控循环单元、或经典循环神经网络。 这些模型在深度学习框架的高级API中都有涵盖。</li>
+<li>总体而言，深度循环神经网络需要大量的调参（如学习率和修剪） 来确保合适的收敛，模型的初始化也需要谨慎。</li>
+</ul>
+<h3 id="双向循环神经网络"><a href="#双向循环神经网络" class="headerlink" title="双向循环神经网络"></a>双向循环神经网络</h3><p>处在序列中间的文字明显可以收到两边的影响.</p>
+<p><img data-src="https://zh-v2.d2l.ai/_images/birnn.svg" alt="../_images/birnn.svg"></p>
+<p>其中ℎ是隐藏单元的数目。 前向和反向隐状态的更新如下</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+& \overrightarrow{\mathbf{H}}_t=\phi\left(\mathbf{X}_t \mathbf{W}_{x h}^{(f)}+\overrightarrow{\mathbf{H}}_{t-1} \mathbf{W}_{h h}^{(f)}+\mathbf{b}_h^{(f)}\right) \\
+& \overleftarrow{\mathbf{H}}_t=\phi\left(\mathbf{X}_t \mathbf{W}_{x h}^{(b)}+\overleftarrow{\mathbf{H}}_{t+1} \mathbf{W}_{h h}^{(b)}+\mathbf{b}_h^{(b)}\right)
+\end{aligned}</script><script type="math/tex; mode=display">
+\mathbf{O}_t=\mathbf{H}_t \mathbf{W}_{h q}+\mathbf{b}_q .</script><blockquote>
+<p>双向循环神经网络的一个关键特性是：使用来自序列两端的信息来估计输出。 也就是说，我们使用来自过去和未来的观测信息来预测当前的观测。 但是在对下一个词元进行预测的情况中，这样的模型并不是我们所需的。 因为在预测下一个词元时，我们终究无法知道下一个词元的下文是什么， 所以将不会得到很好的精度。 具体地说，在训练期间，我们能够利用过去和未来的数据来估计现在空缺的词； 而在测试期间，我们只有过去的数据，因此精度将会很差。</p>
+<p>另一个严重问题是，双向循环神经网络的计算速度非常慢。 其主要原因是网络的前向传播需要在双向层中进行前向和后向递归， 并且网络的反向传播还依赖于前向传播的结果。 因此，梯度求解将有一个非常长的链</p>
+</blockquote>
+<p>双向层的使用在实践中非常少，并且仅仅应用于部分场合。 例如，<strong>填充缺失的单词</strong>、<strong>词元注释</strong>（例如，用于命名实体识别） 以及作为序列处理流水线中的一个步骤<strong>对序列进行编码</strong></p>
+<h4 id="数据集一般处理流程"><a href="#数据集一般处理流程" class="headerlink" title="数据集一般处理流程"></a>数据集一般处理流程</h4><p>将数据进行预处理(比如替换不间断空格,小写,单词和标点之间插入空格)、词元化后得到词元之后,建立词表.</p>
+<p>由于机器翻译数据集由语言对组成， 因此我们可以分别为源语言和目标语言构建两个词表。 使用单词级词元化时，词表大小将明显大于使用字符级词元化时的词表大小。 为了缓解这一问题，这里我们将<strong>出现次数少于2次的低频率词元 视为相同的未知（“<unk>”）词元</strong>。 除此之外，我们还指定了额外的特定词元， 例如在<strong>小批量时用于将序列填充到相同长度的填充词元（“<pad>”）</strong>， 以及<strong>序列的开始词元（“<bos>”）和结束词元（“<eos>”）</strong>。 这些特殊词元在自然语言处理任务中比较常见.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">truncate_pad</span>(<span class="params">line, num_steps, padding_token</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;截断或填充文本序列&quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(line) &gt; num_steps:</span><br><span class="line">        <span class="keyword">return</span> line[:num_steps]  <span class="comment"># 截断</span></span><br><span class="line">    <span class="keyword">return</span> line + [padding_token] * (num_steps - <span class="built_in">len</span>(line))  <span class="comment"># 填充</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">build_array_nmt</span>(<span class="params">lines, vocab, num_steps</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;将机器翻译的文本序列转换成小批量&quot;&quot;&quot;</span></span><br><span class="line">    lines = [vocab[l] <span class="keyword">for</span> l <span class="keyword">in</span> lines]</span><br><span class="line">    lines = [l + [vocab[<span class="string">&#x27;&lt;eos&gt;&#x27;</span>]] <span class="keyword">for</span> l <span class="keyword">in</span> lines]</span><br><span class="line">    array = np.array([truncate_pad(</span><br><span class="line">        l, num_steps, vocab[<span class="string">&#x27;&lt;pad&gt;&#x27;</span>]) <span class="keyword">for</span> l <span class="keyword">in</span> lines])</span><br><span class="line">    valid_len = (array != vocab[<span class="string">&#x27;&lt;pad&gt;&#x27;</span>]).astype(np.int32).<span class="built_in">sum</span>(<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">return</span> array, valid_len</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ul>
+<li>机器翻译指的是将文本序列从一种语言自动翻译成另一种语言。</li>
+<li>使用单词级词元化时的词表大小，将明显大于使用字符级词元化时的词表大小。为了缓解这一问题，我们可以将低频词元视为相同的未知词元。</li>
+<li>通过截断和填充文本序列，可以保证所有的文本序列都具有相同的长度，以便以小批量的方式加载。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">load_data_nmt</span>(<span class="params">batch_size, num_steps, num_examples=<span class="number">600</span></span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;返回翻译数据集的迭代器和词表&quot;&quot;&quot;</span></span><br><span class="line">    text = preprocess_nmt(read_data_nmt())</span><br><span class="line">    source, target = tokenize_nmt(text, num_examples)</span><br><span class="line">    src_vocab = d2l.Vocab(source, min_freq=<span class="number">2</span>,</span><br><span class="line">                          reserved_tokens=[<span class="string">&#x27;&lt;pad&gt;&#x27;</span>, <span class="string">&#x27;&lt;bos&gt;&#x27;</span>, <span class="string">&#x27;&lt;eos&gt;&#x27;</span>])</span><br><span class="line">    tgt_vocab = d2l.Vocab(target, min_freq=<span class="number">2</span>,</span><br><span class="line">                          reserved_tokens=[<span class="string">&#x27;&lt;pad&gt;&#x27;</span>, <span class="string">&#x27;&lt;bos&gt;&#x27;</span>, <span class="string">&#x27;&lt;eos&gt;&#x27;</span>])</span><br><span class="line">    src_array, src_valid_len = build_array_nmt(source, src_vocab, num_steps)</span><br><span class="line">    tgt_array, tgt_valid_len = build_array_nmt(target, tgt_vocab, num_steps)</span><br><span class="line">    data_arrays = (src_array, src_valid_len, tgt_array, tgt_valid_len)</span><br><span class="line">    data_iter = d2l.load_array(data_arrays, batch_size)</span><br><span class="line">    <span class="keyword">return</span> data_iter, src_vocab, tgt_vocab</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">load_data_nmt</span>(<span class="params">batch_size, num_steps, num_examples=<span class="number">600</span></span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;返回翻译数据集的迭代器和词表&quot;&quot;&quot;</span></span><br><span class="line">    text = preprocess_nmt(read_data_nmt())</span><br><span class="line">    source, target = tokenize_nmt(text, num_examples)</span><br><span class="line">    src_vocab = d2l.Vocab(source, min_freq=<span class="number">2</span>,</span><br><span class="line">                          reserved_tokens=[<span class="string">&#x27;&lt;pad&gt;&#x27;</span>, <span class="string">&#x27;&lt;bos&gt;&#x27;</span>, <span class="string">&#x27;&lt;eos&gt;&#x27;</span>])</span><br><span class="line">    tgt_vocab = d2l.Vocab(target, min_freq=<span class="number">2</span>,</span><br><span class="line">                          reserved_tokens=[<span class="string">&#x27;&lt;pad&gt;&#x27;</span>, <span class="string">&#x27;&lt;bos&gt;&#x27;</span>, <span class="string">&#x27;&lt;eos&gt;&#x27;</span>])</span><br><span class="line">    src_array, src_valid_len = build_array_nmt(source, src_vocab, num_steps)</span><br><span class="line">    tgt_array, tgt_valid_len = build_array_nmt(target, tgt_vocab, num_steps)</span><br><span class="line">    data_arrays = (src_array, src_valid_len, tgt_array, tgt_valid_len)</span><br><span class="line">    data_iter = d2l.load_array(data_arrays, batch_size)</span><br><span class="line">    <span class="keyword">return</span> data_iter, src_vocab, tgt_vocab</span><br></pre></td></tr></table></figure>
+<h3 id="编码器-解码器架构"><a href="#编码器-解码器架构" class="headerlink" title="编码器-解码器架构"></a>编码器-解码器架构</h3><p><img data-src="https://zh-v2.d2l.ai/_images/encoder-decoder.svg" alt="../_images/encoder-decoder.svg"></p>
+<p>前面处理机器翻译时输入和输出长度都是固定的.</p>
+<p>机器翻译是序列转换模型的一个核心问题， 其输入和输出都是长度可变的序列。 为了处理这种类型的输入和输出， 我们可以设计一个包含两个主要组件的架构： 第一个组件是一个<em>编码器</em>（encoder）： 它接受一个长度可变的序列作为输入， 并将其转换为具有固定形状的编码状态。 第二个组件是<em>解码器</em>（decoder）： 它将固定形状的编码状态映射到长度可变的序列。 这被称为<em>编码器-解码器</em>（encoder-decoder）架构.</p>
+<ul>
+<li>“编码器－解码器”架构可以将长度可变的序列作为输入和输出，因此适用于机器翻译等序列转换问题。</li>
+<li>编码器将长度可变的序列作为输入，并将其转换为具有固定形状的编码状态。</li>
+<li>解码器将具有固定形状的编码状态映射为长度可变的序列。</li>
+</ul>
+<h3 id="seq2seq"><a href="#seq2seq" class="headerlink" title="seq2seq"></a>seq2seq</h3><blockquote>
+<p>遵循编码器－解码器架构的设计原则， 循环神经网络编码器使用长度可变的序列作为输入， 将其转换为固定形状的隐状态。 换言之，输入序列的信息被<em>编码</em>到循环神经网络编码器的隐状态中。 为了连续生成输出序列的词元， 独立的循环神经网络解码器是基于输入序列的编码信息 和输出序列已经看见的或者生成的词元来预测下一个词元</p>
+</blockquote>
+<p><img data-src="https://zh-v2.d2l.ai/_images/seq2seq.svg" alt="../_images/seq2seq.svg"></p>
+<h4 id="编码器"><a href="#编码器" class="headerlink" title="编码器"></a>编码器</h4><script type="math/tex; mode=display">
+\mathbf{h}_{t}=f(\mathbf{x}_{t},\mathbf{h}_{t-1}).</script><p>隐状态根据本次输入和上次的隐状态输出.</p>
+<script type="math/tex; mode=display">
+\mathbf{c}=q(\mathbf{h}_1,\ldots,\mathbf{h}_T).</script><p>常常会使用一个嵌入层,获得输入序列中每个词元的特征向量。 嵌入层的权重是一个矩阵， 其行数等于输入词表的大小（<code>vocab_size</code>）， 其列数等于特征向量的维度（<code>embed_size</code>）。 对于任意输入词元的索引i， 嵌入层获取权重矩阵的第i行（从0开始）以返回其特征向量</p>
+<h4 id="解码器"><a href="#解码器" class="headerlink" title="解码器"></a>解码器</h4><script type="math/tex; mode=display">
+\mathbf{s}_{t^{\prime}}=g(y_{t^{\prime}-1},\mathbf{c},\mathbf{s}_{t^{\prime}-1}).</script><p>在获得解码器的隐状态之后， 我们可以使用输出层和softmax操作 来计算在时间步t′时输出y~t~′的条件概率分布</p>
+<p>损失函数使用交叉熵,在每个时间步，解码器预测了输出词元的概率分布。 类似于语言模型，可以使用softmax来获得分布， 并通过计算交叉熵损失函数来进行优化,此外应该将填充词元的预测排除在损失函数的计算之外屏蔽不相关项.</p>
+<h4 id="训练与预测"><a href="#训练与预测" class="headerlink" title="训练与预测"></a>训练与预测</h4><p>训练时,特定的序列开始词元（“<bos>”）和 原始的输出序列（不包括序列结束词元“<eos>”） 拼接在一起作为解码器的输入。 这被称为<em>强制教学</em>（teacher forcing）， 因为原始的输出序列（词元的标签）被送入解码器。 或者，将来自上一个时间步的<em>预测</em>得到的词元作为解码器的当前输入.</p>
+<p>预测时,为了采用一个接着一个词元的方式预测输出序列， 每个解码器当前时间步的输入都将来自于前一时间步的预测词元。 与训练类似，序列开始词元（“<bos>”） 在初始时间步被输入到解码器中.</p>
+<p><img data-src="https://zh-v2.d2l.ai/_images/seq2seq-predict.svg" alt="../_images/seq2seq-predict.svg"></p>
+<h3 id="注意力机制"><a href="#注意力机制" class="headerlink" title="注意力机制"></a>注意力机制</h3><p><img data-src="https://zh-v2.d2l.ai/_images/qkv.svg" alt="../_images/qkv.svg"></p>
+<p>将注意力简单地分为自主性和非自主性,利用这两种注意力提示,用神经网络来设计注意力机制的框架.</p>
+<p>“是否包含自主性提示”将注意力机制与全连接层或汇聚层区别开来。 在注意力机制的背景下，自主性提示被称为<em>查询</em>（query）。 给定任何查询，注意力机制通过<em>注意力汇聚</em>（attention pooling） 将选择引导至<em>感官输入</em>（sensory inputs，例如中间特征表示）。 在注意力机制中，这些感官输入被称为<em>值</em>（value）。 更通俗的解释，每个值都与一个<em>键</em>（key）配对， 这可以想象为感官输入的非自主提示。 </p>
+<ul>
+<li>人类的注意力是有限的、有价值和稀缺的资源。</li>
+<li>受试者使用非自主性和自主性提示有选择性地引导注意力。前者基于突出性，后者则依赖于意识。</li>
+<li>注意力机制与全连接层或者汇聚层的区别源于增加的自主提示。</li>
+<li>由于包含了自主性提示，注意力机制与全连接的层或汇聚层不同。</li>
+<li>注意力机制通过注意力汇聚使选择偏向于值（感官输入），其中包含查询（自主性提示）和键（非自主性提示）。键和值是成对的。</li>
+<li>可视化查询和键之间的注意力权重是可行的。</li>
+</ul>
+<p><img data-src="https://zh-v2.d2l.ai/_images/attention-output.svg" alt="../_images/attention-output.svg"></p>
+<p>高斯核指数部分可以视为<em>注意力评分函数</em>（attention scoring function）， 简称<em>评分函数</em>（scoring function）， 然后把这个函数的输出结果输入到softmax函数中进行运算。 通过上述步骤，将得到与键对应的值的概率分布（即注意力权重）。 最后，注意力汇聚的输出就是基于这些注意力权重的值的加权和</p>
+<script type="math/tex; mode=display">
+f(\mathbf{q},(\mathbf{k}_1,\mathbf{v}_1),\ldots,(\mathbf{k}_m,\mathbf{v}_m))=\sum_{i=1}^m\alpha(\mathbf{q},\mathbf{k}_i)\mathbf{v}_i\in\mathbb{R}^v,</script><script type="math/tex; mode=display">
+\alpha(\mathbf{q},\mathbf{k}_i)=\mathrm{softmax}(a(\mathbf{q},\mathbf{k}_i))=\frac{\exp(a(\mathbf{q},\mathbf{k}_i))}{\sum_{j=1}^m\exp(a(\mathbf{q},\mathbf{k}_j))}\in\mathbb{R}.</script><p>注意力机制涉及到q,k,v分别代表查询,键,值. 计算注意力评分有多种方法,常用的有加性注意力和缩放点积注意力.</p>
+<script type="math/tex; mode=display">
+a(\mathbf{q}, \mathbf{k})=\mathbf{w}_v^{\top} \tanh \left(\mathbf{W}_q \mathbf{q}+\mathbf{W}_k \mathbf{k}\right) \in \mathbb{R}</script><script type="math/tex; mode=display">
+\operatorname{softmax}\left(\frac{\mathbf{Q}\mathbf{K}^\top}{\sqrt d}\right)\mathbf{V}\in\mathbb{R}^{n\times v}.</script><p>有了评分函数后,继续考虑注意力模型问题.循环神经网络编码器将长度可变的序列转换为固定形状的上下文变量， 然后循环神经网络解码器<strong>根据生成的词元和上下文变量</strong> 按词元生成输出（目标）序列词元。</p>
+<blockquote>
+<p>即使并非所有输入（源）词元都对解码某个词元都有用， 在每个解码步骤中仍使用编码<em>相同</em>的上下文变量。 有什么方法能改变上下文变量呢</p>
+</blockquote>
+<h4 id="Bahdanau注意力"><a href="#Bahdanau注意力" class="headerlink" title="Bahdanau注意力"></a>Bahdanau注意力</h4><p>在预测词元时，如果不是所有输入词元都相关，模型将仅对齐（或参与）输入序列中与当前预测相关的部分。这是通过<strong>将上下文变量视为注意力集中的输出</strong>来实现的.</p>
+<p>其中解码时间步t~’~都会被c~t’~替换,是作为查询(query)的上一步解码器隐状态和与编码器隐状态</p>
+<script type="math/tex; mode=display">
+\mathbf{c}_{t^{\prime}}=\sum_{t=1}^T\alpha(\mathbf{s}_{t^{\prime}-1},\mathbf{h}_t)\mathbf{h}_t,</script><p>时间步t′−1时的解码器隐状态s~t~′−1是查询， 编码器隐状态ℎ~t~既是键，也是值. 注意力权重可以使用加性注意力打分.</p>
+<p><img data-src="https://zh-v2.d2l.ai/_images/seq2seq-attention-details.svg" alt="../_images/seq2seq-attention-details.svg"></p>
+<p>定义Bahdanau注意力,只需要改变解码器就行了.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Seq2SeqAttentionDecoder</span>(<span class="params">AttentionDecoder</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, vocab_size, embed_size, num_hiddens, num_layers,</span></span></span><br><span class="line"><span class="params"><span class="function">                 dropout=<span class="number">0</span>, **kwargs</span>):</span></span><br><span class="line">        <span class="built_in">super</span>(Seq2SeqAttentionDecoder, self).__init__(**kwargs)</span><br><span class="line">        self.attention = d2l.AdditiveAttention(</span><br><span class="line">            num_hiddens, num_hiddens, num_hiddens, dropout)</span><br><span class="line">        self.embedding = nn.Embedding(vocab_size, embed_size)</span><br><span class="line">        self.rnn = nn.GRU(</span><br><span class="line">            embed_size + num_hiddens, num_hiddens, num_layers,</span><br><span class="line">            dropout=dropout)</span><br><span class="line">        self.dense = nn.Linear(num_hiddens, vocab_size)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">init_state</span>(<span class="params">self, enc_outputs, enc_valid_lens, *args</span>):</span></span><br><span class="line">        <span class="comment"># outputs的形状为(batch_size，num_steps，num_hiddens).</span></span><br><span class="line">        <span class="comment"># hidden_state的形状为(num_layers，batch_size，num_hiddens)</span></span><br><span class="line">        outputs, hidden_state = enc_outputs</span><br><span class="line">        <span class="keyword">return</span> (outputs.permute(<span class="number">1</span>, <span class="number">0</span>, <span class="number">2</span>), hidden_state, enc_valid_lens)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span>(<span class="params">self, X, state</span>):</span></span><br><span class="line">        <span class="comment"># enc_outputs的形状为(batch_size,num_steps,num_hiddens).</span></span><br><span class="line">        <span class="comment"># hidden_state的形状为(num_layers,batch_size,</span></span><br><span class="line">        <span class="comment"># num_hiddens)</span></span><br><span class="line">        enc_outputs, hidden_state, enc_valid_lens = state</span><br><span class="line">        <span class="comment"># 输出X的形状为(num_steps,batch_size,embed_size)</span></span><br><span class="line">        X = self.embedding(X).permute(<span class="number">1</span>, <span class="number">0</span>, <span class="number">2</span>)</span><br><span class="line">        outputs, self._attention_weights = [], []</span><br><span class="line">        <span class="keyword">for</span> x <span class="keyword">in</span> X:</span><br><span class="line">            <span class="comment"># query的形状为(batch_size,1,num_hiddens)</span></span><br><span class="line">            query = torch.unsqueeze(hidden_state[-<span class="number">1</span>], dim=<span class="number">1</span>)</span><br><span class="line">            <span class="comment"># context的形状为(batch_size,1,num_hiddens)</span></span><br><span class="line">            context = self.attention(</span><br><span class="line">                query, enc_outputs, enc_outputs, enc_valid_lens)</span><br><span class="line">            <span class="comment"># 在特征维度上连结</span></span><br><span class="line">            x = torch.cat((context, torch.unsqueeze(x, dim=<span class="number">1</span>)), dim=-<span class="number">1</span>)</span><br><span class="line">            <span class="comment"># 将x变形为(1,batch_size,embed_size+num_hiddens)</span></span><br><span class="line">            out, hidden_state = self.rnn(x.permute(<span class="number">1</span>, <span class="number">0</span>, <span class="number">2</span>), hidden_state)</span><br><span class="line">            outputs.append(out)</span><br><span class="line">            self._attention_weights.append(self.attention.attention_weights)</span><br><span class="line">        <span class="comment"># 全连接层变换后，outputs的形状为</span></span><br><span class="line">        <span class="comment"># (num_steps,batch_size,vocab_size)</span></span><br><span class="line">        outputs = self.dense(torch.cat(outputs, dim=<span class="number">0</span>))</span><br><span class="line">        <span class="keyword">return</span> outputs.permute(<span class="number">1</span>, <span class="number">0</span>, <span class="number">2</span>), [enc_outputs, hidden_state,</span><br><span class="line">                                          enc_valid_lens]</span><br><span class="line"></span><br><span class="line"><span class="meta">    @property</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">attention_weights</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">return</span> self._attention_weights</span><br></pre></td></tr></table></figure>
+<p>首先，初始化解码器的状态，需要下面的输入：</p>
+<p><strong>编码器</strong>在所有时间步的<strong>最终层隐状态，将作为注意力的键和值</strong>；</p>
+<p><strong>上一时间步的编码器全层隐状态，将作为初始化解码器的隐状态</strong>；</p>
+<p><strong>编码器有效长度</strong>（排除在注意力池中填充词元）。</p>
+<p>结合了注意力机制与编码器-解码器,使得解码器中每个解码时间步是注意力模型的输出,查询q是上一步的隐状态,键和值都是编码器的最终隐状态.</p>
+<h3 id="多头注意力机制"><a href="#多头注意力机制" class="headerlink" title="多头注意力机制"></a>多头注意力机制</h3><blockquote>
+<p>在实践中，当给定相同的查询、键和值的集合时， 我们希望模型可以基于相同的注意力机制学习到不同的行为， 然后将不同的行为作为知识组合起来， 捕获序列内各种范围的依赖关系 （例如，短距离依赖和长距离依赖关系）。 因此，允许注意力机制组合使用查询、键和值的不同 <em>子空间表示</em>（representation subspaces）可能是有益的</p>
+</blockquote>
+<p><img data-src="https://zh-v2.d2l.ai/_images/multi-head-attention.svg" alt="../_images/multi-head-attention.svg"></p>
+<p>可以用独立学习得到的ℎ组不同的<em>线性投影</em>（linear projections）来变换查询、键和值。 然后，这ℎ组变换后的查询、键和值将并行地送到注意力汇聚中。 最后，将这ℎ个注意力汇聚的输出拼接在一起， 并且通过另一个可以学习的线性投影进行变换， 以产生最终输出。</p>
+<p>多头注意力机制,对于h个注意力汇聚输出,每一个注意力汇聚都被称作一个”头”.</p>
+<script type="math/tex; mode=display">
+\mathbf{h}_i=f(\mathbf{W}_i^{(q)}\mathbf{q},\mathbf{W}_i^{(k)}\mathbf{k},\mathbf{W}_i^{(v)}\mathbf{v})\in\mathbb{R}^{p_v},</script><script type="math/tex; mode=display">
+\mathbf{W}_o\begin{bmatrix}\mathbf{h}_1\\\vdots\\\mathbf{h}_h\end{bmatrix}\in\mathbb{R}^{p_o}.</script><p>其中的W均是可学习的参数,f是注意力汇聚的函数.</p>
+<ul>
+<li>多头注意力融合了来自于多个注意力汇聚的不同知识，这些知识的不同来源于相同的查询、键和值的不同的子空间表示。</li>
+<li>基于适当的张量操作，可以实现多头注意力的并行计算。</li>
+</ul>
+<h3 id="自注意力和位置编码"><a href="#自注意力和位置编码" class="headerlink" title="自注意力和位置编码"></a>自注意力和位置编码</h3><link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
     </div>
 
     
@@ -808,7 +974,7 @@ if(canvas.getContext){
 	  
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BE%AA%E7%8E%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C"><span class="nav-number">1.</span> <span class="nav-text">循环神经网络</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%87%E6%9C%AC%E9%A2%84%E5%A4%84%E7%90%86%E6%96%B9%E5%BC%8F"><span class="nav-number">1.1.</span> <span class="nav-text">文本预处理方式</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BE%AA%E7%8E%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C-1"><span class="nav-number">2.</span> <span class="nav-text">循环神经网络</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BE%AA%E7%8E%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C"><span class="nav-number">1.</span> <span class="nav-text">循环神经网络</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%87%E6%9C%AC%E9%A2%84%E5%A4%84%E7%90%86%E6%96%B9%E5%BC%8F"><span class="nav-number">1.1.</span> <span class="nav-text">文本预处理方式</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BE%AA%E7%8E%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C-1"><span class="nav-number">2.</span> <span class="nav-text">循环神经网络</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9A%90%E7%8A%B6%E6%80%81"><span class="nav-number">2.1.</span> <span class="nav-text">隐状态</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A2%AF%E5%BA%A6%E8%A3%81%E5%89%AA"><span class="nav-number">2.2.</span> <span class="nav-text">梯度裁剪</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AE%80%E5%8D%95%E7%9A%84RNN%E7%BC%BA%E7%82%B9"><span class="nav-number">2.3.</span> <span class="nav-text">简单的RNN缺点</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GRU"><span class="nav-number">3.</span> <span class="nav-text">GRU</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LSTM"><span class="nav-number">4.</span> <span class="nav-text">LSTM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%B1%E5%BA%A6%E5%BE%AA%E7%8E%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C"><span class="nav-number">5.</span> <span class="nav-text">深度循环神经网络</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%8C%E5%90%91%E5%BE%AA%E7%8E%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C"><span class="nav-number">6.</span> <span class="nav-text">双向循环神经网络</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E9%9B%86%E4%B8%80%E8%88%AC%E5%A4%84%E7%90%86%E6%B5%81%E7%A8%8B"><span class="nav-number">6.1.</span> <span class="nav-text">数据集一般处理流程</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%96%E7%A0%81%E5%99%A8-%E8%A7%A3%E7%A0%81%E5%99%A8%E6%9E%B6%E6%9E%84"><span class="nav-number">7.</span> <span class="nav-text">编码器-解码器架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#seq2seq"><span class="nav-number">8.</span> <span class="nav-text">seq2seq</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BC%96%E7%A0%81%E5%99%A8"><span class="nav-number">8.1.</span> <span class="nav-text">编码器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%A3%E7%A0%81%E5%99%A8"><span class="nav-number">8.2.</span> <span class="nav-text">解码器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%AD%E7%BB%83%E4%B8%8E%E9%A2%84%E6%B5%8B"><span class="nav-number">8.3.</span> <span class="nav-text">训练与预测</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6"><span class="nav-number">9.</span> <span class="nav-text">注意力机制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Bahdanau%E6%B3%A8%E6%84%8F%E5%8A%9B"><span class="nav-number">9.1.</span> <span class="nav-text">Bahdanau注意力</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E5%A4%B4%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6"><span class="nav-number">10.</span> <span class="nav-text">多头注意力机制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E6%B3%A8%E6%84%8F%E5%8A%9B%E5%92%8C%E4%BD%8D%E7%BD%AE%E7%BC%96%E7%A0%81"><span class="nav-number">11.</span> <span class="nav-text">自注意力和位置编码</span></a></li></ol></div>
       </div>
       <!--/noindex-->
       <div class="site-overview-wrap sidebar-panel">
@@ -942,12 +1108,12 @@ if(canvas.getContext){
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">678k</span>
+    <span title="站点总字数">690k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">10:17</span>
+    <span title="站点阅读时长">10:27</span>
 </div>
 
     <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
@@ -1242,12 +1408,4 @@ NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
   <script  type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
 <script  type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
 
-<!-- hexo injector body_end start --><script src='/js/outdate.js'></script><!-- hexo injector body_end end --><script async>addLoadEvent(function () {
-    var a = document.createElement('script'),
-    b = document.getElementsByTagName('script')[0];
-    a.type = 'text/javascript',
-    a.async = !0,
-    a.src = '/sw-register.js?v=' + Date.now(),
-    b.parentNode.insertBefore(a, b)
-});
-</script></body></html>
+<!-- hexo injector body_end start --><script src='/js/outdate.js'></script><!-- hexo injector body_end end --><script async>window.onload=function(){var a=document.createElement('script'),b=document.getElementsByTagName('script')[0];a.type='text/javascript',a.async=!0,a.src='/sw-register.js?v='+Date.now(),b.parentNode.insertBefore(a,b)};</script></body></html>

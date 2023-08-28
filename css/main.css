@@ -1227,7 +1227,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #c2af88;
+  background: #39ec26;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2731,7 +2731,7 @@ mjx-container + br {
   margin-top: 16px;
 }
 body {
-  background: url("https://moe.jitsu.top/img/");
+  background: url("https://img.xjh.me/random_img.php");
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
