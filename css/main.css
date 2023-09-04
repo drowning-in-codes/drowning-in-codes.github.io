@@ -1227,7 +1227,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #60ffd9;
+  background: #4d086f;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2731,7 +2731,7 @@ mjx-container + br {
   margin-top: 16px;
 }
 body {
-  background: url("https://img.xjh.me/random_img.php");
+  background: url("https://api.yimian.xyz/img?type=moe");
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
