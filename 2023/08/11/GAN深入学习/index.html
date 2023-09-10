@@ -50,17 +50,21 @@
 <meta property="og:site_name" content="Sekyoro的博客小屋">
 <meta property="og:description" content="深入GAN学习">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://github.com/microsoft/AI-For-Beginners/raw/main/lessons/4-ComputerVision/10-GANs/images/gan_architecture.png">
 <meta property="og:image" content="https://pic4.zhimg.com/80/v2-044f8d58f378b088c9a85a8f19dae363_720w.webp">
 <meta property="og:image" content="https://s2.loli.net/2023/08/29/L1aVuqWoiDHfS2z.png">
 <meta property="og:image" content="https://s2.loli.net/2023/08/29/cktnUB7Lj5g6mlI.png">
 <meta property="og:image" content="https://s2.loli.net/2023/08/30/eIhKBaf3t85gVqx.png">
 <meta property="og:image" content="https://s2.loli.net/2023/08/31/6QlMEzeH8vsLy7S.png">
+<meta property="og:image" content="https://pic1.zhimg.com/80/v2-b783ce95d8bdf1499fc88994e170a02c_720w.webp">
+<meta property="og:image" content="https://pic2.zhimg.com/80/v2-fe9ef30af6166a5eea47c9006bfc27cd_720w.webp">
+<meta property="og:image" content="https://s2.loli.net/2023/09/05/u4hjRmwN5i3E9oG.png">
 <meta property="article:published_time" content="2023-08-11T10:08:06.000Z">
-<meta property="article:modified_time" content="2023-08-31T10:05:36.368Z">
+<meta property="article:modified_time" content="2023-09-05T14:44:19.771Z">
 <meta property="article:author" content="Sekyoro">
 <meta property="article:tag" content="GAN">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://pic4.zhimg.com/80/v2-044f8d58f378b088c9a85a8f19dae363_720w.webp">
+<meta name="twitter:image" content="https://github.com/microsoft/AI-For-Beginners/raw/main/lessons/4-ComputerVision/10-GANs/images/gan_architecture.png">
 
 <link rel="canonical" href="https://www.sekyoro.top/2023/08/11/GAN%E6%B7%B1%E5%85%A5%E5%AD%A6%E4%B9%A0/">
 
@@ -275,7 +279,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-08-31 18:05:36" itemprop="dateModified" datetime="2023-08-31T18:05:36+08:00">2023-08-31</time>
+                <time title="修改时间：2023-09-05 22:44:19" itemprop="dateModified" datetime="2023-09-05T22:44:19+08:00">2023-09-05</time>
               </span>
 
           
@@ -291,7 +295,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>5.8k</span>
+              <span>6k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -311,6 +315,7 @@
 
       
         <p>深入GAN学习<br><span id="more"></span></p>
+<p><img data-src="https://github.com/microsoft/AI-For-Beginners/raw/main/lessons/4-ComputerVision/10-GANs/images/gan_architecture.png" alt="img"></p>
 <p>注意,实验复现时最好设置随机种子固定</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># seed setting</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">same_seeds</span>(<span class="params">seed</span>):</span></span><br><span class="line">    <span class="comment"># Python built-in random module</span></span><br><span class="line">    random.seed(seed)</span><br><span class="line">    <span class="comment"># Numpy</span></span><br><span class="line">    np.random.seed(seed)</span><br><span class="line">    <span class="comment"># Torch</span></span><br><span class="line">    torch.manual_seed(seed)</span><br><span class="line">    <span class="keyword">if</span> torch.cuda.is_available():</span><br><span class="line">        torch.cuda.manual_seed(seed)</span><br><span class="line">        torch.cuda.manual_seed_all(seed)</span><br><span class="line">    torch.backends.cudnn.benchmark = <span class="literal">False</span></span><br><span class="line">    torch.backends.cudnn.deterministic = <span class="literal">True</span></span><br><span class="line">same_seeds(<span class="number">2023</span>)</span><br></pre></td></tr></table></figure>
 <h3 id="GAN"><a href="#GAN" class="headerlink" title="GAN"></a>GAN</h3><p>标题<strong>Generative Adversarial Nets</strong> 2014年</p>
@@ -318,7 +323,7 @@
 <p>We propose a new framework for estimating generative models via an adversarial process, in which we simultaneously train two models: a generative model G that captures the data distribution, and a discriminative model D that estimates the probability that a sample came from the training data rather than G. The training procedure for G is to maximize the probability of D making a mistake. This framework corresponds to a minimax two-player game. In the space of arbitrary functions G and D, a unique solution exists, with G recovering the training data distribution and D equal to 1 2 everywhere. In the case where G and D are defined by multilayer perceptrons, the entire system can be trained with backpropagation. There is no need for any Markov chains or unrolled approximate inference networks during either training or generation of samples. Experiments demonstrate the potential of the framework through qualitative and quantitative evaluation of the generated samples</p>
 <p><img data-src="https://pic4.zhimg.com/80/v2-044f8d58f378b088c9a85a8f19dae363_720w.webp" alt="img" style="zoom:67%;" /></p>
 <p>主要贡献:提出GAN  定义G和D以及损失函数.由于GAN中使用的极小极大（minmax）优化，训练可能非常不稳定。</p>
-<h3 id="DCGAN"><a href="#DCGAN" class="headerlink" title="DCGAN"></a>DCGAN</h3><p>标题<strong>WITH DEEP CONVOLUTIONAL GENERATIVE ADVERSARIAL NETWORKS</strong></p>
+<h3 id="DCGAN"><a href="#DCGAN" class="headerlink" title="*DCGAN"></a>*DCGAN</h3><p>标题<strong>WITH DEEP CONVOLUTIONAL GENERATIVE ADVERSARIAL NETWORKS</strong></p>
 <p><strong>intro</strong></p>
 <p>Learning reusable feature representations from large unlabeled datasets has been an area of active research. In the context of computer vision, one can leverage the practically unlimited amount of unlabeled images and videos to learn good intermediate representations, which can then be used on a variety of supervised learning tasks such as image classification. We propose that one way to build good image representations is by training Generative Adversarial Networks (GANs) (Goodfellow et al., 2014), and later reusing parts of the generator and discriminator networks as feature extractors for supervised tasks. GANs provide an attractive alternative to maximum likelihood techniques. One can additionally argue that their learning process and the lack of a heuristic cost function (such as pixel-wise independent mean-square error) are attractive to representation learning. GANs have been known to be unstable to train, often resulting in generators that produce nonsensical outputs. There has been very limited published research in trying to understand and visualize what GANs learn, and the intermediate representations of multi-layer GANs. In this paper, we make the following contributions </p>
 <p>• We propose and evaluate a set of constraints on the architectural topology of Convolutional GANs that make them stable to train in most settings. We name this class of architectures Deep Convolutional GANs (DCGAN) </p>
@@ -351,7 +356,18 @@
 <p>我在测试github上一个DCGAN的代码时,发现其在生成器上除了最后一层使用tanh激活函数,其他层都使用leak激活函数,但是这样生成器会逐渐变大.</p>
 <p><img data-src="https://s2.loli.net/2023/08/31/6QlMEzeH8vsLy7S.png" alt="image-20230831165159320" style="zoom:67%;" /></p>
 <p>因为LeakyReLU照顾到了负数,使得每一线性层输出为负值时也有梯度,这样也许能使得生成器跳出</p>
-<h3 id="WGAN"><a href="#WGAN" class="headerlink" title="WGAN"></a>WGAN</h3><h3 id="Conditional-GAN"><a href="#Conditional-GAN" class="headerlink" title="Conditional GAN"></a>Conditional GAN</h3><h3 id="BIGGAN"><a href="#BIGGAN" class="headerlink" title="BIGGAN"></a>BIGGAN</h3><h3 id="proGAN"><a href="#proGAN" class="headerlink" title="proGAN"></a>proGAN</h3><h3 id="StyleGAN"><a href="#StyleGAN" class="headerlink" title="StyleGAN"></a>StyleGAN</h3><h3 id="TelDiGAN"><a href="#TelDiGAN" class="headerlink" title="TelDiGAN"></a>TelDiGAN</h3><h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ol>
+<h3 id="WGAN"><a href="#WGAN" class="headerlink" title="*WGAN"></a>*WGAN</h3><p>使用EM距离</p>
+<ul>
+<li>判别器最后一层去掉sigmoid</li>
+<li>生成器和判别器的loss不取log</li>
+<li>每次更新判别器的参数之后把它们的绝对值截断到不超过一个固定常数c</li>
+<li>不要用基于动量的优化算法（包括momentum和Adam），推荐RMSProp，SGD也行</li>
+</ul>
+<p><img data-src="https://pic1.zhimg.com/80/v2-b783ce95d8bdf1499fc88994e170a02c_720w.webp" alt="img"></p>
+<p><img data-src="https://pic2.zhimg.com/80/v2-fe9ef30af6166a5eea47c9006bfc27cd_720w.webp" alt="img"></p>
+<p>下面是WGAN论文的intro</p>
+<p><img data-src="https://s2.loli.net/2023/09/05/u4hjRmwN5i3E9oG.png" alt="image-20230905224350055" style="zoom: 80%;" /></p>
+<h3 id="Conditional-GAN"><a href="#Conditional-GAN" class="headerlink" title="*Conditional GAN"></a>*Conditional GAN</h3><h3 id="BIGGAN"><a href="#BIGGAN" class="headerlink" title="BIGGAN"></a>BIGGAN</h3><h3 id="proGAN"><a href="#proGAN" class="headerlink" title="proGAN"></a>proGAN</h3><h3 id="StyleGAN"><a href="#StyleGAN" class="headerlink" title="StyleGAN"></a>StyleGAN</h3><h3 id="CycleGAN"><a href="#CycleGAN" class="headerlink" title="CycleGAN"></a>CycleGAN</h3><h3 id="SAGAN"><a href="#SAGAN" class="headerlink" title="SAGAN"></a>SAGAN</h3><h3 id="TelDiGAN"><a href="#TelDiGAN" class="headerlink" title="TelDiGAN"></a>TelDiGAN</h3><h3 id="SRGAN"><a href="#SRGAN" class="headerlink" title="SRGAN"></a>SRGAN</h3><h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ol>
 <li><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/44926155">盘点各种GAN及资源整理（1） - 知乎 (zhihu.com)</a></p>
 </li>
 <li><p><a target="_blank" rel="noopener" href="https://github.com/soumith/ganhacks">soumith/ganhacks: starter from “How to Train a GAN?” at NIPS2016 (github.com)</a></p>
@@ -844,7 +860,7 @@ if(canvas.getContext){
 	  
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#GAN"><span class="nav-number">1.</span> <span class="nav-text">GAN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DCGAN"><span class="nav-number">2.</span> <span class="nav-text">DCGAN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WGAN"><span class="nav-number">3.</span> <span class="nav-text">WGAN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Conditional-GAN"><span class="nav-number">4.</span> <span class="nav-text">Conditional GAN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BIGGAN"><span class="nav-number">5.</span> <span class="nav-text">BIGGAN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#proGAN"><span class="nav-number">6.</span> <span class="nav-text">proGAN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#StyleGAN"><span class="nav-number">7.</span> <span class="nav-text">StyleGAN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TelDiGAN"><span class="nav-number">8.</span> <span class="nav-text">TelDiGAN</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number"></span> <span class="nav-text">参考资料</span></a></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#GAN"><span class="nav-number">1.</span> <span class="nav-text">GAN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DCGAN"><span class="nav-number">2.</span> <span class="nav-text">*DCGAN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WGAN"><span class="nav-number">3.</span> <span class="nav-text">*WGAN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Conditional-GAN"><span class="nav-number">4.</span> <span class="nav-text">*Conditional GAN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BIGGAN"><span class="nav-number">5.</span> <span class="nav-text">BIGGAN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#proGAN"><span class="nav-number">6.</span> <span class="nav-text">proGAN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#StyleGAN"><span class="nav-number">7.</span> <span class="nav-text">StyleGAN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CycleGAN"><span class="nav-number">8.</span> <span class="nav-text">CycleGAN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SAGAN"><span class="nav-number">9.</span> <span class="nav-text">SAGAN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TelDiGAN"><span class="nav-number">10.</span> <span class="nav-text">TelDiGAN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SRGAN"><span class="nav-number">11.</span> <span class="nav-text">SRGAN</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number"></span> <span class="nav-text">参考资料</span></a></div>
       </div>
       <!--/noindex-->
       <div class="site-overview-wrap sidebar-panel">
