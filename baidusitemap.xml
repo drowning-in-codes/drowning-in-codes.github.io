@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://www.sekyoro.top/2022/06/14/animeGAN/</loc>
+    <lastmod>2023-09-18</lastmod>
+  </url>
+  <url>
     <loc>https://www.sekyoro.top/2023/08/11/GAN%E6%B7%B1%E5%85%A5%E5%AD%A6%E4%B9%A0/</loc>
-    <lastmod>2023-09-17</lastmod>
+    <lastmod>2023-09-18</lastmod>
   </url>
   <url>
     <loc>https://www.sekyoro.top/2023/09/16/ZTM-pytorchForDL/</loc>
@@ -239,10 +243,6 @@
   <url>
     <loc>https://www.sekyoro.top/2022/05/30/acwj-01/</loc>
     <lastmod>2022-06-28</lastmod>
-  </url>
-  <url>
-    <loc>https://www.sekyoro.top/2022/06/14/animeGAN/</loc>
-    <lastmod>2022-06-14</lastmod>
   </url>
   <url>
     <loc>https://www.sekyoro.top/2022/05/06/write-a-compiler-by-yourself/</loc>

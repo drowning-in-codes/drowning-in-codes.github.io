@@ -69,8 +69,9 @@
 <meta property="og:image" content="https://miro.medium.com/v2/resize:fit:700/1*gi2isFNxtXE-pNiQ_CrZ8w.jpeg">
 <meta property="og:image" content="https://pic4.zhimg.com/80/v2-ede0624e4acb54575483852435d0ec2b_720w.webp">
 <meta property="og:image" content="https://miro.medium.com/v2/resize:fit:543/1*c0wSI0WJR9-yagc0ruFGGg.png">
+<meta property="og:image" content="https://img1.imgtp.com/2023/09/18/TvDtnXUu.png">
 <meta property="article:published_time" content="2023-08-11T10:08:06.000Z">
-<meta property="article:modified_time" content="2023-09-17T10:48:13.092Z">
+<meta property="article:modified_time" content="2023-09-18T08:49:54.073Z">
 <meta property="article:author" content="Sekyoro">
 <meta property="article:tag" content="GAN">
 <meta name="twitter:card" content="summary">
@@ -289,7 +290,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-09-17 18:48:13" itemprop="dateModified" datetime="2023-09-17T18:48:13+08:00">2023-09-17</time>
+                <time title="修改时间：2023-09-18 16:49:54" itemprop="dateModified" datetime="2023-09-18T16:49:54+08:00">2023-09-18</time>
               </span>
 
           
@@ -305,14 +306,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>13k</span>
+              <span>15k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>12 分钟</span>
+              <span>14 分钟</span>
             </span>
 
         </div>
@@ -445,7 +446,7 @@ JS(P_1||P_2)=\frac12KL(P_1||\frac{P_1+P_2}2)+\frac12KL(P_2||\frac{P_1+P_2}2)</sc
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">from</span> torch <span class="keyword">import</span> autograd</span><br><span class="line"><span class="comment"># demo</span></span><br><span class="line">x = torch.rand(<span class="number">3</span>, <span class="number">4</span>)</span><br><span class="line">x.requires_grad_()</span><br><span class="line">y = torch.<span class="built_in">sum</span>(x**<span class="number">2</span>)</span><br><span class="line">grads = autograd.grad(outputs=y, inputs=x,create_graph=<span class="literal">True</span>)</span><br><span class="line"><span class="built_in">print</span>(grads)</span><br></pre></td></tr></table></figure>
 <p><img data-src="https://miro.medium.com/v2/resize:fit:700/1*r8472Sg5fDJ1XKQPUbRC4Q.png" alt=""></p>
 <p><img data-src="https://miro.medium.com/v2/resize:fit:700/1*gi2isFNxtXE-pNiQ_CrZ8w.jpeg" alt="img"></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Gradient Penalty (e.g. gradients w.r.t x_penalty)</span></span><br><span class="line">eps = torch.rand(batch_size, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>).to(DEVICE) <span class="comment"># x shape: (64, 1, 28, 28)</span></span><br><span class="line">x_penalty = eps*x + (<span class="number">1</span>-eps)*x_fake</span><br><span class="line">x_penalty = x_penalty.view(x_penalty.size(<span class="number">0</span>), -<span class="number">1</span>)  <span class="comment"># n 1 28*28</span></span><br><span class="line">p_outputs = D(x_penalty, y)  <span class="comment"># N,1</span></span><br><span class="line">xp_grad = autograd.grad(outputs=p_outputs, inputs=x_penalty, grad_outputs=D_labels, <span class="comment"># N 1</span></span><br><span class="line">                        create_graph=<span class="literal">True</span>, retain_graph=<span class="literal">True</span>, only_inputs=<span class="literal">True</span>)</span><br><span class="line"><span class="built_in">print</span>(xp_grad)</span><br><span class="line">grad_penalty = p_coeff * torch.mean(torch.<span class="built_in">pow</span>(torch.norm(xp_grad[<span class="number">0</span>], <span class="number">2</span>, <span class="number">1</span>) - <span class="number">1</span>, <span class="number">2</span>))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Gradient Penalty (e.g. gradients w.r.t x_penalty)</span></span><br><span class="line">eps = torch.rand(batch_size, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>).to(DEVICE) <span class="comment"># x shape: (64, 1, 28, 28)</span></span><br><span class="line">x_penalty = eps*x + (<span class="number">1</span>-eps)*x_fake</span><br><span class="line">x_penalty = x_penalty.view(x_penalty.size(<span class="number">0</span>), -<span class="number">1</span>)  <span class="comment"># n 1 28*28</span></span><br><span class="line">p_outputs = D(x_penalty, y)  <span class="comment"># N,1</span></span><br><span class="line">xp_grad = autograd.grad(outputs=p_outputs, inputs=x_penalty, grad_outputs=D_labels, <span class="comment"># N 1</span></span><br><span class="line">                        create_graph=<span class="literal">True</span>, retain_graph=<span class="literal">True</span>, only_inputs=<span class="literal">True</span>)</span><br><span class="line"><span class="built_in">print</span>(xp_grad)</span><br><span class="line">grad_penalty = p_coeff * torch.mean(torch.<span class="built_in">pow</span>(torch.norm(xp_grad[<span class="number">0</span>], <span class="number">2</span>, <span class="number">1</span>) - <span class="number">1</span>, <span class="number">2</span>))</span><br></pre></td></tr></table></figure>
 <p>对于辨别器,WGAN一般叫做critic,损失函数,而生成器依旧是</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Wasserstein loss</span></span><br><span class="line">x_outputs = D(x, y)</span><br><span class="line">z_outputs = D(x_fake, y)</span><br><span class="line">D_x_loss = torch.mean(x_outputs)</span><br><span class="line">D_z_loss = torch.mean(z_outputs)</span><br><span class="line">D_loss = D_z_loss - D_x_loss + grad_penalty</span><br></pre></td></tr></table></figure>
 <p>此外不使用BN,批次标准化会在同一批次中的样本之间创建相关性。它<strong>影响了梯度惩罚的有效性</strong>，实验证实了这一点。</p>
@@ -476,7 +477,15 @@ L_{I}(G,Q)& =E_{c\sim P(c),x\sim G(z,c)}[\log Q(c|x)]+H(c)  \\
 &\leq I(c;G(z,c))
 \end{aligned}</script><p>最后目标函数为</p>
 <p><img data-src="https://pic4.zhimg.com/80/v2-ede0624e4acb54575483852435d0ec2b_720w.webp" alt="img"></p>
-<p><img data-src="https://miro.medium.com/v2/resize:fit:543/1*c0wSI0WJR9-yagc0ruFGGg.png" alt="img"></p>
+<p><img data-src="https://miro.medium.com/v2/resize:fit:543/1*c0wSI0WJR9-yagc0ruFGGg.png" alt="img" style="zoom: 67%;" /></p>
+<p>z,c均为采样得到,z依旧是正态分布采样,c由两部分组成,一部分是离散分布另一部分是连续分布.论文中使用Categorical与Unif分布,是离散均匀分布与连续均匀分布.</p>
+<p><img data-src="https://img1.imgtp.com/2023/09/18/TvDtnXUu.png" alt="image-20230918102341583" style="zoom:67%;" /></p>
+<p>在MNIST数据集上,比如使用c~1~作为离散变量控制生成的数字的类型,其他的c~2~和c~3~作为连续变量控制其他.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sample_noise</span>(<span class="params">batch_size, n_noise, n_c_discrete, n_c_continuous, label=<span class="literal">None</span>, supervised=<span class="literal">False</span></span>):</span></span><br><span class="line">    z = torch.randn(batch_size, n_noise).to(DEVICE) <span class="comment">#正态分布 潜变量 与VAE的中间变量类似. bottleneck</span></span><br><span class="line">    <span class="comment"># 离散分布 控制数字类型也就是类别 如果supervised 会根据label的值</span></span><br><span class="line">    <span class="keyword">if</span> supervised:</span><br><span class="line">        c_discrete = to_onehot(label).to(DEVICE) <span class="comment"># (B,10)</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="comment"># 否则随机离散均匀生成</span></span><br><span class="line">        c_discrete = to_onehot(torch.LongTensor(batch_size, <span class="number">1</span>).random_(<span class="number">0</span>, n_c_discrete)).to(DEVICE) <span class="comment"># (B,10)</span></span><br><span class="line">    <span class="comment"># 连续分布 控制其他属性 </span></span><br><span class="line">    c_continuous = torch.zeros(batch_size, n_c_continuous).uniform_(-<span class="number">1</span>, <span class="number">1</span>).to(DEVICE) <span class="comment"># (B,2)</span></span><br><span class="line">    c = torch.cat((c_discrete.<span class="built_in">float</span>(), c_continuous), <span class="number">1</span>) <span class="comment">#c (B,12)</span></span><br><span class="line">    <span class="keyword">return</span> z, c</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment"># Training Discriminator</span></span><br><span class="line">x = images.to(DEVICE)</span><br><span class="line">x_outputs, _, = D(x)</span><br><span class="line">D_x_loss = bce_loss(x_outputs, D_labels)</span><br><span class="line"></span><br><span class="line">z, c = sample_noise(batch_size, n_noise, n_c_discrete, n_c_continuous, label=labels, supervised=<span class="literal">True</span>)</span><br><span class="line">z_outputs, _, = D(G(z, c))</span><br><span class="line">D_z_loss = bce_loss(z_outputs, D_fakes)</span><br><span class="line">D_loss = D_x_loss + D_z_loss</span><br><span class="line"></span><br><span class="line">D_opt.zero_grad()</span><br><span class="line">D_loss.backward()</span><br><span class="line">D_opt.step()</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">log_gaussian</span>(<span class="params">c, mu, var</span>):</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    criterion for Q(condition classifier)</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="keyword">return</span> -((c - mu)**<span class="number">2</span>)/(<span class="number">2</span>*var+<span class="number">1e-8</span>) - <span class="number">0.5</span>*torch.log(<span class="number">2</span>*np.pi*var+<span class="number">1e-8</span>)</span><br><span class="line">    </span><br><span class="line"> <span class="comment"># Training Generator</span></span><br><span class="line">z, c = sample_noise(batch_size, n_noise, n_c_discrete, n_c_continuous, label=labels, supervised=<span class="literal">True</span>)</span><br><span class="line">c_discrete_label = torch.<span class="built_in">max</span>(c[:, :-<span class="number">2</span>], <span class="number">1</span>)[<span class="number">1</span>].view(-<span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">z_outputs, features = D(G(z, c)) <span class="comment"># (B,1), (B,10), (B,4)</span></span><br><span class="line">c_discrete_out, cc_mu, cc_var = Q(features)</span><br><span class="line"></span><br><span class="line">G_loss = bce_loss(z_outputs, D_labels)</span><br><span class="line">Q_loss_discrete = ce_loss(c_discrete_out, c_discrete_label.view(-<span class="number">1</span>))</span><br><span class="line">Q_loss_continuous = -torch.mean(torch.<span class="built_in">sum</span>(log_gaussian(c[:, -<span class="number">2</span>:], cc_mu, cc_var), <span class="number">1</span>)) <span class="comment"># N(x | mu,var) -&gt; (B, 2) -&gt; (,1)</span></span><br><span class="line">mutual_info_loss = Q_loss_discrete + Q_loss_continuous*<span class="number">0.1</span></span><br><span class="line"></span><br><span class="line">GnQ_loss = G_loss + mutual_info_loss</span><br><span class="line"></span><br><span class="line">G_opt.zero_grad()</span><br><span class="line">GnQ_loss.backward()</span><br><span class="line">G_opt.step()</span><br></pre></td></tr></table></figure>
+<p>离散分布的c求损失使用交叉熵,利用一个Q网络,输入是D的倒数第二层输出,得到离散输出与连续输出的均值和logV. 相当于利用Q的输出与D的倒数第二层输出计算损失,判断在生成过程中是否有损失.</p>
+<p>其中log_gaussian是在计算log(q(x)),看来还是要学好数理统计和矩阵论才行.</p>
 <h3 id="BIGGAN"><a href="#BIGGAN" class="headerlink" title="BIGGAN"></a>BIGGAN</h3><h3 id="proGAN"><a href="#proGAN" class="headerlink" title="proGAN"></a>proGAN</h3><h3 id="StyleGAN"><a href="#StyleGAN" class="headerlink" title="StyleGAN"></a>StyleGAN</h3><h3 id="CycleGAN"><a href="#CycleGAN" class="headerlink" title="CycleGAN"></a>CycleGAN</h3><h3 id="SAGAN"><a href="#SAGAN" class="headerlink" title="SAGAN"></a>SAGAN</h3><h3 id="TelDiGAN"><a href="#TelDiGAN" class="headerlink" title="TelDiGAN"></a>TelDiGAN</h3><h3 id="SRGAN"><a href="#SRGAN" class="headerlink" title="SRGAN"></a>SRGAN</h3><h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ol>
 <li><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/44926155">盘点各种GAN及资源整理（1） - 知乎 (zhihu.com)</a></p>
 </li>
@@ -515,6 +524,9 @@ L_{I}(G,Q)& =E_{c\sim P(c),x\sim G(z,c)}[\log Q(c|x)]+H(c)  \\
       
   <div class="popular-posts-header">相关文章</div>
   <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2022\06\14\animeGAN\" rel="bookmark">animeGAN</a></div>
+    </li>
     <li class="popular-posts-item">
       <div class="popular-posts-title"><a href="\2022\04\30\GAN学习\" rel="bookmark">GAN学习</a></div>
     </li>
@@ -1051,7 +1063,7 @@ if(canvas.getContext){
     <h3 class="widget-title" style="margin:0">文章词云</h3>
     <div id="myCanvasContainer" class="widget tagcloud">
         <canvas width="250" height="250" id="resCanvas" style="width:100%">
-		  <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/GAN/" rel="tag">GAN</a><span class="tag-list-count">2</span></li></ul>	
+		  <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/GAN/" rel="tag">GAN</a><span class="tag-list-count">3</span></li></ul>	
         </canvas>
     </div>
 </div>
@@ -1104,12 +1116,12 @@ if(canvas.getContext){
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">715k</span>
+    <span title="站点总字数">726k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">10:50</span>
+    <span title="站点阅读时长">11:01</span>
 </div>
 
     <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
