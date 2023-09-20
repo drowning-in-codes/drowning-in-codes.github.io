@@ -6,7 +6,7 @@
   <link href="https://www.sekyoro.top/atom.xml" rel="self"/>
   
   <link href="https://www.sekyoro.top/"/>
-  <updated>2023-09-19T13:55:36.076Z</updated>
+  <updated>2023-09-20T05:40:13.644Z</updated>
   <id>https://www.sekyoro.top/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://www.sekyoro.top/2023/09/16/ZTM-pytorchForDL/"/>
     <id>https://www.sekyoro.top/2023/09/16/ZTM-pytorchForDL/</id>
     <published>2023-09-16T08:35:22.000Z</published>
-    <updated>2023-09-19T13:55:36.076Z</updated>
+    <updated>2023-09-20T05:40:13.644Z</updated>
     
     <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>ZeroToMastery<a href="https://www.learnpytorch.io/">Zero to Mastery Learn PyTorch for Deep Learning</a>上的课程学习<br><span id="more"></span></p><h2 id="chapter-1"><a href="#chapter-1" class="headerlink" title="chapter 1"></a>chapter 1</h2><p>设置seed,计算tensor的点乘以及tensor数据类型等基础操作,搭配官方文档即可.</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Set seed</span></span><br><span class="line">torch.manual_seed(<span class="number">7</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Create random tensor</span></span><br><span class="line">x = torch.rand(<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">10</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Remove single dimensions</span></span><br><span class="line">y = torch.squeeze(x)</span><br><span class="line"><span class="comment"># Print out tensors and their shapes</span></span><br><span class="line"><span class="built_in">print</span>(x,x.shape)</span><br><span class="line"><span class="built_in">print</span>(y,y.shape)</span><br></pre></td></tr></table></figure><p>此外还有一些常用方法,比如<code>torch.squeeze</code>,<code>torch.cat</code>,<code>torch.stack</code>,<code>torch.unsqueeze</code>,<code>torch.Tensor.view</code>,<code>torch.Tensor.reshape</code>,<code>torch.Tensor.transpose</code>,<code>torch.Tensor.permute</code>等等</p><h2 id="chapter-2"><a href="#chapter-2" class="headerlink" title="chapter 2"></a>chapter 2</h2><link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
     
@@ -33,7 +33,7 @@
     
     <category term="pytorch" scheme="https://www.sekyoro.top/tags/pytorch/"/>
     
-    <category term="Deep Learning" scheme="https://www.sekyoro.top/tags/Deep-Learning/"/>
+    <category term="DeepLearning" scheme="https://www.sekyoro.top/tags/DeepLearning/"/>
     
   </entry>
   
