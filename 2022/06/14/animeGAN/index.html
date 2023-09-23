@@ -56,8 +56,11 @@
 <meta property="og:image" content="https://img1.imgtp.com/2023/09/18/YOHo01lJ.png">
 <meta property="og:image" content="https://img1.imgtp.com/2023/09/18/oHr6K1SN.png">
 <meta property="og:image" content="https://img1.imgtp.com/2023/09/18/6noOUFOS.png">
+<meta property="og:image" content="https://img1.imgtp.com/2023/09/20/CDfmjJ9v.png">
+<meta property="og:image" content="https://img1.imgtp.com/2023/09/20/uyarENqk.png">
+<meta property="og:image" content="https://img1.imgtp.com/2023/09/21/3GLXNGL4.png">
 <meta property="article:published_time" content="2022-06-14T13:52:58.000Z">
-<meta property="article:modified_time" content="2023-09-20T04:49:01.628Z">
+<meta property="article:modified_time" content="2023-09-21T13:06:21.627Z">
 <meta property="article:author" content="Sekyoro">
 <meta property="article:tag" content="GAN">
 <meta name="twitter:card" content="summary">
@@ -281,7 +284,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-09-20 12:49:01" itemprop="dateModified" datetime="2023-09-20T12:49:01+08:00">2023-09-20</time>
+                <time title="修改时间：2023-09-21 21:06:21" itemprop="dateModified" datetime="2023-09-21T21:06:21+08:00">2023-09-21</time>
               </span>
 
           
@@ -297,7 +300,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>9.7k</span>
+              <span>9.8k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -365,6 +368,12 @@
 <p><img data-src="https://img1.imgtp.com/2023/09/18/6noOUFOS.png" alt="image-20230918195800561"></p>
 <p>可视化loss可以使用tensorboard或者visdom.</p>
 <p>常用的GAN数据集还有MNIST,fashion-MNIST,Celeb,SVHN等等还有用于超分的数据集monet2photo,edges2shoes,可以换换数据集.</p>
+<p><strong>update</strong>:将图片增加后训练出来的模型出现了类似model collapse的情况,生成的图像十分单一.</p>
+<p><img data-src="https://img1.imgtp.com/2023/09/20/CDfmjJ9v.png" alt="epoch_500" style="zoom: 80%;" /></p>
+<p>将epoch减小之后,model collapse不再那么明显了.</p>
+<p><img data-src="https://img1.imgtp.com/2023/09/20/uyarENqk.png" alt="epoch-200" style="zoom:67%;" /></p>
+<p>增大到一定值时又会出现这种现象.考虑使用PGGAN中估计标准偏差减少这种情况.</p>
+<p><img data-src="https://img1.imgtp.com/2023/09/21/3GLXNGL4.png" alt="epch_300"></p>
 <h2 id="参考repo"><a href="#参考repo" class="headerlink" title="参考repo"></a>参考repo</h2><ol>
 <li><a target="_blank" rel="noopener" href="https://github.com/nagadomi/lbpcascade_animeface">nagadomi/lbpcascade_animeface: A Face detector for anime/manga using OpenCV (github.com)</a></li>
 <li><a target="_blank" rel="noopener" href="https://github.com/jayleicn/animeGAN">jayleicn/animeGAN: A simple PyTorch Implementation of Generative Adversarial Networks, focusing on anime face drawing. (github.com)</a></li>
@@ -861,7 +870,7 @@ if(canvas.getContext){
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">129</span>
+          <span class="site-state-item-count">131</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -874,7 +883,7 @@ if(canvas.getContext){
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">163</span>
+        <span class="site-state-item-count">164</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -980,12 +989,12 @@ if(canvas.getContext){
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">727k</span>
+    <span title="站点总字数">731k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">11:01</span>
+    <span title="站点阅读时长">11:04</span>
 </div>
 
     <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
