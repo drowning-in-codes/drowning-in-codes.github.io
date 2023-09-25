@@ -51,7 +51,7 @@
 <meta property="og:description" content="了解浏览器的一些安全策略同时了解跨域问题.">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-03-04T07:08:59.000Z">
-<meta property="article:modified_time" content="2023-03-04T08:53:06.000Z">
+<meta property="article:modified_time" content="2023-09-24T05:52:08.868Z">
 <meta property="article:author" content="Sekyoro">
 <meta property="article:tag" content="cors">
 <meta property="article:tag" content="csp">
@@ -268,10 +268,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2023-03-04 15:08:59 / 修改时间：16:53:06" itemprop="dateCreated datePublished" datetime="2023-03-04T15:08:59+08:00">2023-03-04</time>
+              <time title="创建时间：2023-03-04 15:08:59" itemprop="dateCreated datePublished" datetime="2023-03-04T15:08:59+08:00">2023-03-04</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-09-24 13:52:08" itemprop="dateModified" datetime="2023-09-24T13:52:08+08:00">2023-09-24</time>
+              </span>
 
           
             <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
@@ -442,19 +448,16 @@
 </li>
 <li><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Range"><code>Range</code></a>（只允许<a target="_blank" rel="noopener" href="https://fetch.spec.whatwg.org/#simple-range-header-value">简单的范围标头值</a> 如 <code>bytes=256-</code> 或 <code>bytes=127-255</code>）</p>
 </li>
-<li><p><code>Content-Type</code></p>
+<li><p><code>Content-Type</code>标头所指定的媒体类型的值仅限于下列三者之一：</p>
 </li>
-</ul>
-<p>  标头所指定的</p>
-<p>  媒体类型</p>
-<p>  的值仅限于下列三者之一：</p>
-<ul>
-<li><code>text/plain</code></li>
+<li><code>text/plain</code><ul>
 <li><code>multipart/form-data</code></li>
+</ul>
+</li>
 <li><code>application/x-www-form-urlencoded</code></li>
 </ul>
 <p>具体请查阅MDN<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/CORS#什么情况下需要_cors？">跨源资源共享（CORS） - HTTP | MDN (mozilla.org)</a></p>
-<p>使用 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Origin"><code>Origin</code></a> 和 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Access-Control-Allow-Origin"><code>Access-Control-Allow-Origin</code></a> 就能完成最简单的访问控制。如果 <code>https://bar.other</code> 的资源持有者想限制他的资源<em>只能</em>通过 <code>https://foo.example</code> 来访问</p>
+<p>如果 <code>https://bar.other</code> 的资源持有者想限制他的资源<em>只能</em>通过 <code>https://foo.example</code> 来访问,使用 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Origin"><code>Origin</code></a> 和 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Access-Control-Allow-Origin"><code>Access-Control-Allow-Origin</code></a> 就能完成最简单的访问控制</p>
 <ol>
 <li>预检请求</li>
 </ol>
@@ -468,7 +471,7 @@
 </ol>
 <h2 id="内容安全策略-CSP"><a href="#内容安全策略-CSP" class="headerlink" title="内容安全策略(CSP)"></a>内容安全策略(CSP)</h2><p><strong>内容安全策略</strong>（<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Glossary/CSP">CSP</a>）是一个额外的安全层，用于检测并削弱某些特定类型的攻击，包括<strong>跨站脚本</strong>（<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Glossary/Cross-site_scripting">XSS</a>）和<strong>数据注入攻击</strong>等。无论是数据盗取、网站内容污染还是恶意软件分发，这些攻击都是主要的手段。  </p>
 <p>为使 CSP 可用，你需要配置你的网络服务器返回 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Content-Security-Policy"><code>Content-Security-Policy</code></a> HTTP 标头（有时你会看到 <code>X-Content-Security-Policy</code> 标头，但那是旧版本，并且你无须再如此指定它）。</p>
-<p>除此之外，<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/meta">``</a> 元素也可以被用来配置该策略，例如</p>
+<p>除此之外，<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/meta"><code>meta</code></a> 元素也可以被用来配置该策略，例如</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span></span></span><br><span class="line"><span class="tag">  <span class="attr">http-equiv</span>=<span class="string">&quot;Content-Security-Policy&quot;</span></span></span><br><span class="line"><span class="tag">  <span class="attr">content</span>=<span class="string">&quot;default-src &#x27;self&#x27;; img-src https://*; child-src &#x27;none&#x27;;&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure>
 <h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例 1"></a><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/CSP#示例_1">示例 1</a></h3><p>一个网站管理者想要所有内容均来自站点的同一个源（不包括其子域名）。</p>
 <figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Content-<span class="keyword">Security</span>-<span class="keyword">Policy</span>: <span class="keyword">default</span>-src <span class="string">&#x27;self&#x27;</span></span><br></pre></td></tr></table></figure>
@@ -1095,12 +1098,12 @@ if(canvas.getContext){
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">731k</span>
+    <span title="站点总字数">732k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">11:04</span>
+    <span title="站点阅读时长">11:06</span>
 </div>
 
     <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
