@@ -1,0 +1,1275 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<script src="/live2d-widget/autoload.js"></script>
+
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/blog_32px.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/blog_32px.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/blog_16px.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="EPrJAp11bJwHULpQUaSNSZ8_3RcvTsPDAEGOME4pl1w">
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-VB21D8MKKW"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-VB21D8MKKW');
+</script>
+
+<!-- google adsense in head.swig -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4034523802263123"
+     crossorigin="anonymous"></script>
+  <meta name="msvalidate.01" content="7226864CE87CE9DE8C008385273846FF">
+  <meta name="baidu-site-verification" content="code-fjFXVtiL7j" />
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.lug.ustc.edu.cn/css?family=Roboto Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<link href="https://fonts.googleapis.com/css?family=Noto+Serif+SC|Roboto&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-corner-indicator.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.sekyoro.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":240,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"appID":"3G9PZZIKCH","apiKey":"8eb71f5ca3167e9ef3487882f10cfaad","indexName":"SekyoroSearch","hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+<link href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css" rel="stylesheet">
+  <meta name="description" content="将一个图像中的风格应用在另一图像之上，即风格迁移（style transfer）这里我们需要两张输入图像：一张是内容图像，另一张是风格图像。 我们将使用神经网络修改内容图像，使其在风格上接近风格图像。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="风格迁移">
+<meta property="og:url" content="https://www.sekyoro.top/2023/09/26/%E9%A3%8E%E6%A0%BC%E8%BF%81%E7%A7%BB/index.html">
+<meta property="og:site_name" content="Sekyoro的博客小屋">
+<meta property="og:description" content="将一个图像中的风格应用在另一图像之上，即风格迁移（style transfer）这里我们需要两张输入图像：一张是内容图像，另一张是风格图像。 我们将使用神经网络修改内容图像，使其在风格上接近风格图像。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://zh.d2l.ai/_images/neural-style.svg">
+<meta property="og:image" content="https://img1.imgtp.com/2023/09/26/fqReGmQh.png">
+<meta property="og:image" content="https://img1.imgtp.com/2023/09/26/spmizDnH.png">
+<meta property="og:image" content="https://img1.imgtp.com/2023/09/26/RlUlfrPS.png">
+<meta property="og:image" content="https://img1.imgtp.com/2023/09/26/zHqMS03J.png">
+<meta property="article:published_time" content="2023-09-26T03:00:48.000Z">
+<meta property="article:modified_time" content="2023-09-26T15:26:07.104Z">
+<meta property="article:author" content="Sekyoro">
+<meta property="article:tag" content="-style transfer">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://zh.d2l.ai/_images/neural-style.svg">
+
+<link rel="canonical" href="https://www.sekyoro.top/2023/09/26/%E9%A3%8E%E6%A0%BC%E8%BF%81%E7%A7%BB/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>风格迁移 | Sekyoro的博客小屋</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Sekyoro的博客小屋" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+<!-- require JQuery -->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+<!-- require pjax -->
+<script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/index.min.js"></script>
+
+
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+   <script type="text/javascript" src="/js/src/fireworks.js"></script>
+
+
+  <div class="container use-motion">
+    <div class="headband"></div>
+	
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Sekyoro的博客小屋</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-bangumis">
+
+    <a href="/bangumis/" rel="section"><i class="fa fa-film fa-fw"></i>追番</a>
+
+  </li>
+        <li class="menu-item menu-item-resume">
+
+    <a href="/resume/" rel="section"><i class="fa fa-file-pdf fa-fw"></i>简历</a>
+
+  </li>
+        <li class="menu-item menu-item-materials">
+
+    <a href="/materials/" rel="section"><i class="fa fa-book fa-fw"></i>学习资料</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container"></div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="algolia-results">
+  <div id="algolia-stats"></div>
+  <div id="algolia-hits"></div>
+  <div id="algolia-pagination" class="algolia-pagination"></div>
+</div>
+
+      
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.sekyoro.top/2023/09/26/%E9%A3%8E%E6%A0%BC%E8%BF%81%E7%A7%BB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://i.loli.net/2021/05/17/YqoavnXdGTpPO9R.jpg">
+      <meta itemprop="name" content="Sekyoro">
+      <meta itemprop="description" content="什么也无法舍弃的人，什么也做不了.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sekyoro的博客小屋">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          风格迁移
+        </h1>
+
+        <div class="post-meta">
+		
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-09-26 11:00:48 / 修改时间：23:26:07" itemprop="dateCreated datePublished" datetime="2023-09-26T11:00:48+08:00">2023-09-26</time>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>6.1k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>6 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>将一个图像中的风格应用在另一图像之上，即<em>风格迁移</em>（style transfer）这里我们需要两张输入图像：一张是<em>内容图像</em>，另一张是<em>风格图像</em>。 我们将使用神经网络修改内容图像，使其在风格上接近风格图像。 </p>
+<span id="more"></span>
+<h2 id="使用预训练模型进行迁移"><a href="#使用预训练模型进行迁移" class="headerlink" title="使用预训练模型进行迁移"></a>使用预训练模型进行迁移</h2><p><img data-src="https://zh.d2l.ai/_images/neural-style.svg" alt="风格迁移"></p>
+<p>首先，我们初始化合成图像，例如将其初始化为内容图像。 </p>
+<p>该合成图像是风格迁移过程中唯一需要更新的变量，即风格迁移所需迭代的模型参数。 然后，我们选择一个预训练的卷积神经网络来抽取图像的特征，其中的模型参数在训练中无须更新。 这个深度卷积神经网络凭借多个层逐级抽取图像的特征，我们可以选择其中某些层的输出作为内容特征或风格特征。 </p>
+<p>接下来，我们通过前向传播（实线箭头方向）计算风格迁移的损失函数，并通过反向传播（虚线箭头方向）迭代模型参数，即不断更新合成图像。 风格迁移常用的损失函数由3部分组成：</p>
+<ol>
+<li><em>内容损失</em>使合成图像与内容图像在内容特征上接近；</li>
+<li><em>风格损失</em>使合成图像与风格图像在风格特征上接近；</li>
+<li><em>全变分损失</em>则有助于减少合成图像中的噪点。</li>
+</ol>
+<p>最后，当模型训练结束时，我们输出风格迁移的模型参数，即得到最终的合成图像。</p>
+<p>使用一个预训练模型,比如VGG提取内容与特征.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pretrained_net = torchvision.models.vgg19(pretrained=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+<p>为了抽取图像的内容特征和风格特征，我们可以选择VGG网络中某些层的输出。</p>
+<p> 一般来说，<strong>越靠近输入层，越容易抽取图像的细节信息；反之，则越容易抽取图像的全局信息。</strong> <strong>为了避免合成图像过多保留内容图像的细节，我们选择VGG较靠近输出的层，即<em>内容层</em>，来输出图像的内容特征</strong>。</p>
+<p> 我们从VGG中选择不同层的输出来匹配局部和全局的风格，这些图层也称为<em>风格层</em>。 VGG网络使用了5个卷积块。可以选择第四卷积块的最后一个卷积层作为内容层，选择每个卷积块的第一个卷积层作为风格层。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">style_layers, content_layers = [<span class="number">0</span>, <span class="number">5</span>, <span class="number">10</span>, <span class="number">19</span>, <span class="number">28</span>], [<span class="number">25</span>]</span><br><span class="line">net = nn.Sequential(*[pretrained_net.features[i] <span class="keyword">for</span> i <span class="keyword">in</span></span><br><span class="line">                      <span class="built_in">range</span>(<span class="built_in">max</span>(content_layers + style_layers) + <span class="number">1</span>)])</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">extract_features</span>(<span class="params">X, content_layers, style_layers</span>):</span></span><br><span class="line">    contents = []</span><br><span class="line">    styles = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(net)):</span><br><span class="line">        X = net[i](X)</span><br><span class="line">        <span class="comment"># forward pass 如果是选定的风格层或者是内容层 添加到列表中	</span></span><br><span class="line">        <span class="keyword">if</span> i <span class="keyword">in</span> style_layers:</span><br><span class="line">            styles.append(X)</span><br><span class="line">        <span class="keyword">if</span> i <span class="keyword">in</span> content_layers:</span><br><span class="line">            contents.append(X)</span><br><span class="line">    <span class="keyword">return</span> contents, styles</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_contents</span>(<span class="params">image_shape, device</span>):</span></span><br><span class="line">    content_X = preprocess(content_img, image_shape).to(device)</span><br><span class="line">    contents_Y, _ = extract_features(content_X, content_layers, style_layers)</span><br><span class="line">    <span class="keyword">return</span> content_X, contents_Y</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_styles</span>(<span class="params">image_shape, device</span>):</span></span><br><span class="line">    style_X = preprocess(style_img, image_shape).to(device) <span class="comment"># 得到tensor数据 放入网络中 将输出这张图像的内容和风格</span></span><br><span class="line">    _, styles_Y = extract_features(style_X, content_layers, style_layers)</span><br><span class="line">    <span class="keyword">return</span> style_X, styles_Y</span><br></pre></td></tr></table></figure>
+<p><code>get_contents</code>函数对内容图像抽取内容特征； <code>get_styles</code>函数对风格图像抽取风格特征。 因为在训练时无须改变预训练的VGG的模型参数，所以我们可以在训练开始之前就提取出内容特征和风格特征。 </p>
+<p>由于合成图像是风格迁移所需迭代的模型参数，我们只能在训练过程中通过调用<code>extract_features</code>函数来抽取合成图像的内容特征和风格特征.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">rgb_mean = torch.tensor([<span class="number">0.485</span>, <span class="number">0.456</span>, <span class="number">0.406</span>])</span><br><span class="line">rgb_std = torch.tensor([<span class="number">0.229</span>, <span class="number">0.224</span>, <span class="number">0.225</span>])</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">preprocess</span>(<span class="params">img, image_shape</span>):</span></span><br><span class="line">    transforms = torchvision.transforms.Compose([</span><br><span class="line">        torchvision.transforms.Resize(image_shape),</span><br><span class="line">        torchvision.transforms.ToTensor(),</span><br><span class="line">        torchvision.transforms.Normalize(mean=rgb_mean, std=rgb_std)])</span><br><span class="line">    <span class="keyword">return</span> transforms(img).unsqueeze(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">postprocess</span>(<span class="params">img</span>):</span></span><br><span class="line">    img = img[<span class="number">0</span>].to(rgb_std.device)</span><br><span class="line">    img = torch.clamp(img.permute(<span class="number">1</span>, <span class="number">2</span>, <span class="number">0</span>) * rgb_std + rgb_mean, <span class="number">0</span>, <span class="number">1</span>)</span><br><span class="line">    <span class="keyword">return</span> torchvision.transforms.ToPILImage()(img.permute(<span class="number">2</span>, <span class="number">0</span>, <span class="number">1</span>))</span><br></pre></td></tr></table></figure>
+<p>preprocess与postprocess分别将PIL数据转为tensor,tensor转为PIL数据.</p>
+<h3 id="损失函数"><a href="#损失函数" class="headerlink" title="损失函数"></a>损失函数</h3><p><strong>内容损失</strong></p>
+<p>容损失通过平方误差函数衡量合成图像与内容图像在内容特征上的差异。 平方误差函数的两个输入均为<code>extract_features</code>函数计算所得到的内容层的输出</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">content_loss</span>(<span class="params">Y_hat, Y</span>):</span></span><br><span class="line">    <span class="comment"># 我们从动态计算梯度的树中分离目标：</span></span><br><span class="line">    <span class="comment"># 这是一个规定的值，而不是一个变量。</span></span><br><span class="line">    <span class="keyword">return</span> torch.square(Y_hat - Y.detach()).mean()</span><br></pre></td></tr></table></figure>
+<p><strong>风格损失</strong></p>
+<p>风格损失与内容损失类似，也通过平方误差函数衡量合成图像与风格图像在风格上的差异。 为了表达风格层输出的风格，我们先通过<code>extract_features</code>函数计算风格层的输出。 假设该输出的样本数为1，通道数为c，高和宽分别为h和w，我们可以将此输出转换为矩阵X，其有c行和hw列。 这个矩阵可以被看作由c个长度为hw的向量x1,…,xc组合而成的。其中向量xi代表了通道i上的风格特征。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">gram</span>(<span class="params">X</span>):</span></span><br><span class="line">    num_channels, n = X.shape[<span class="number">1</span>], X.numel() // X.shape[<span class="number">1</span>]</span><br><span class="line">    X = X.reshape((num_channels, n))</span><br><span class="line">    <span class="keyword">return</span> torch.matmul(X, X.T) / (num_channels * n)</span><br></pre></td></tr></table></figure>
+<p>风格损失的平方误差函数的两个格拉姆矩阵输入分别基于合成图像与风格图像的风格层输出。这里假设基于风格图像的格拉姆矩阵<code>gram_Y</code>已经预先计算好了</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">style_loss</span>(<span class="params">Y_hat, gram_Y</span>):</span></span><br><span class="line">    <span class="keyword">return</span> torch.square(gram(Y_hat) - gram_Y.detach()).mean()</span><br></pre></td></tr></table></figure>
+<p><strong>全变分损失</strong></p>
+<p>有时候，我们学到的合成图像里面有大量高频噪点，即有特别亮或者特别暗的颗粒像素。 一种常见的去噪方法是<em>全变分去噪</em>（total variation denoising）： 假设xi,j表示坐标(i,j)处的像素值，降低全变分损失<code>∑i,j|xi,j−xi+1,j|+|xi,j−xi,j+1|</code></p>
+<p>能够尽可能使邻近的像素值相似。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">tv_loss</span>(<span class="params">Y_hat</span>):</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0.5</span> * (torch.<span class="built_in">abs</span>(Y_hat[:, :, <span class="number">1</span>:, :] - Y_hat[:, :, :-<span class="number">1</span>, :]).mean() +torch.<span class="built_in">abs</span>(Y_hat[:, :, :, <span class="number">1</span>:] - Y_hat[:, :, :, :-<span class="number">1</span>]).mean())</span><br></pre></td></tr></table></figure>
+<p><strong>损失函数</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">content_weight, style_weight, tv_weight = <span class="number">1</span>, <span class="number">1e3</span>, <span class="number">10</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">compute_loss</span>(<span class="params">X, contents_Y_hat, styles_Y_hat, contents_Y, styles_Y_gram</span>):</span></span><br><span class="line">    <span class="comment"># 分别计算内容损失、风格损失和全变分损失</span></span><br><span class="line">    contents_l = [content_loss(Y_hat, Y) * content_weight <span class="keyword">for</span> Y_hat, Y <span class="keyword">in</span> <span class="built_in">zip</span>(contents_Y_hat, contents_Y)]</span><br><span class="line">    styles_l = [style_loss(Y_hat, Y) * style_weight <span class="keyword">for</span> Y_hat, Y <span class="keyword">in</span> <span class="built_in">zip</span>(styles_Y_hat, styles_Y_gram)]</span><br><span class="line">    tv_l = tv_loss(X) * tv_weight</span><br><span class="line">    <span class="comment"># 对所有损失求和</span></span><br><span class="line">    l = <span class="built_in">sum</span>(<span class="number">10</span> * styles_l + contents_l + [tv_l])</span><br><span class="line">    <span class="keyword">return</span> contents_l, styles_l, tv_l, l</span><br></pre></td></tr></table></figure>
+<p>contents_l表示内容损失,</p>
+<h3 id="初始化合成图像"><a href="#初始化合成图像" class="headerlink" title="初始化合成图像"></a>初始化合成图像</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_inits</span>(<span class="params">X, device, lr, styles_Y</span>):</span></span><br><span class="line">    gen_img = SynthesizedImage(X.shape).to(device)</span><br><span class="line">    gen_img.weight.data.copy_(X.data)</span><br><span class="line">    trainer = torch.optim.Adam(gen_img.parameters(), lr=lr)</span><br><span class="line">    styles_Y_gram = [gram(Y) <span class="keyword">for</span> Y <span class="keyword">in</span> styles_Y]</span><br><span class="line">    <span class="keyword">return</span> gen_img(), styles_Y_gram, trainer <span class="comment"># 返回与内容图像一样的数据与计算的风格gram特征</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SynthesizedImage</span>(<span class="params">nn.Module</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, img_shape, **kwargs</span>):</span></span><br><span class="line">        <span class="built_in">super</span>(SynthesizedImage, self).__init__(**kwargs)</span><br><span class="line">        self.weight = nn.Parameter(torch.rand(*img_shape))</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">return</span> self.weight</span><br></pre></td></tr></table></figure>
+<h3 id="训练模型"><a href="#训练模型" class="headerlink" title="训练模型"></a>训练模型</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">train</span>(<span class="params">X, contents_Y, styles_Y, device, lr, num_epochs, lr_decay_epoch</span>):</span></span><br><span class="line">    X, styles_Y_gram, trainer = get_inits(X, device, lr, styles_Y) <span class="comment">#生成原本图片 作为变量 并计算风格特征</span></span><br><span class="line">    scheduler = torch.optim.lr_scheduler.StepLR(trainer, lr_decay_epoch, <span class="number">0.8</span>)</span><br><span class="line">    animator = d2l.Animator(xlabel=<span class="string">&#x27;epoch&#x27;</span>, ylabel=<span class="string">&#x27;loss&#x27;</span>,</span><br><span class="line">                            xlim=[<span class="number">10</span>, num_epochs],</span><br><span class="line">                            legend=[<span class="string">&#x27;content&#x27;</span>, <span class="string">&#x27;style&#x27;</span>, <span class="string">&#x27;TV&#x27;</span>],</span><br><span class="line">                            ncols=<span class="number">2</span>, figsize=(<span class="number">7</span>, <span class="number">2.5</span>))</span><br><span class="line">    <span class="keyword">for</span> epoch <span class="keyword">in</span> <span class="built_in">range</span>(num_epochs):</span><br><span class="line">        trainer.zero_grad()</span><br><span class="line">        contents_Y_hat, styles_Y_hat = extract_features(</span><br><span class="line">            X, content_layers, style_layers) <span class="comment"># 获取内容和风格</span></span><br><span class="line">        contents_l, styles_l, tv_l, l = compute_loss(</span><br><span class="line">            X, contents_Y_hat, styles_Y_hat, contents_Y, styles_Y_gram)</span><br><span class="line">        l.backward()</span><br><span class="line">        trainer.step()</span><br><span class="line">        scheduler.step()</span><br><span class="line">        <span class="keyword">if</span> (epoch + <span class="number">1</span>) % <span class="number">10</span> == <span class="number">0</span>:</span><br><span class="line">            animator.axes[<span class="number">1</span>].imshow(postprocess(X))</span><br><span class="line">            animator.add(epoch + <span class="number">1</span>, [<span class="built_in">float</span>(<span class="built_in">sum</span>(contents_l)),</span><br><span class="line">                                     <span class="built_in">float</span>(<span class="built_in">sum</span>(styles_l)), <span class="built_in">float</span>(tv_l)])</span><br><span class="line">    <span class="keyword">return</span> X</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">device, image_shape = d2l.try_gpu(), (<span class="number">300</span>, <span class="number">450</span>)</span><br><span class="line">net = net.to(device)</span><br><span class="line">content_X, contents_Y = get_contents(image_shape, device)</span><br><span class="line">_, styles_Y = get_styles(image_shape, device) <span class="comment"># 获取content_image和内容特征 内容特征就是传到预训练模型得到的相应层输出  以及style_image的样式特征</span></span><br><span class="line">output = train(content_X, contents_Y, styles_Y, device, <span class="number">0.3</span>, <span class="number">500</span>, <span class="number">50</span>) <span class="comment"># 训练传入X和其内容与样式特征</span></span><br></pre></td></tr></table></figure>
+<p>合成图像保留了内容图像的风景和物体，并同时迁移了风格图像的色彩。例如，合成图像具有与风格图像中一样的色彩块，其中一些甚至具有画笔笔触的细微纹理</p>
+<h3 id="结果展示"><a href="#结果展示" class="headerlink" title="结果展示"></a>结果展示</h3><p><img data-src="https://img1.imgtp.com/2023/09/26/fqReGmQh.png" alt="image-20230926225405384"></p>
+<p><img data-src="https://img1.imgtp.com/2023/09/26/spmizDnH.png" alt="image-20230926225430234"></p>
+<p><img data-src="https://img1.imgtp.com/2023/09/26/RlUlfrPS.png" alt="image-20230926225439855"></p>
+<p>可以尝试改动style_weight,看看风格变换.比如style_weight增大,发现style loss太小了,而且会影响content loss</p>
+<p><img data-src="https://img1.imgtp.com/2023/09/26/zHqMS03J.png" alt="image-20230926231717608"></p>
+<ul>
+<li>风格迁移常用的损失函数由3部分组成：（1）<strong>内容损失使合成图像与内容图像在内容特征上接近</strong>；（2）<strong>风格损失令合成图像与风格图像在风格特征上接近</strong>；（3）<strong>全变分损失则有助于减少合成图像中的噪点</strong>。</li>
+<li>我们<strong>可以通过预训练的卷积神经网络来抽取图像的特征</strong>，并通过最小化损失函数来不断更新合成图像来作为模型参数。</li>
+<li>我们使用<strong>gram矩阵表达风格层输出的风格</strong></li>
+</ul>
+<h2 id="使用GAN进行风格迁移"><a href="#使用GAN进行风格迁移" class="headerlink" title="使用GAN进行风格迁移"></a>使用GAN进行风格迁移</h2><p>GANs是生成艺术图像的好方法。另一种有趣的技术是所谓的风格转换，它获取一个内容图像，然后用不同的风格重新绘制，从风格图像中应用过滤器。</p>
+<p>工作方式如下:</p>
+<p>我们从随机噪声图像开始（或从内容图像开始，但为了理解起见，从随机噪声开始更容易）</p>
+<p>我们的目标是创建这样一个图像，<strong>它将接近内容图像和风格图像</strong>。这将由两个损失函数确定：基于CNN在<strong>当前图像和内容图像的某些层提取的特征来计算内容损失</strong>,<strong>使用Gram矩阵巧妙地计算当前图像和风格图像之间的风格损失</strong></p>
+<p>为了使图像更平滑并去除噪声，我们还引入了全变分损失，它计算相邻像素之间的平均距离</p>
+<p>优化方式使用梯度下降（或一些其他优化算法）调整当前图像，以最小化总损失，总损失是所有三个损失的加权和。</p>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><ol>
+<li><a target="_blank" rel="noopener" href="https://zh.d2l.ai/chapter_computer-vision/neural-style.html">13.12. 风格迁移 — 动手学深度学习 2.0.0 documentation (d2l.ai)</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/microsoft/AI-For-Beginners/tree/main/lessons/4-ComputerVision/10-GANs">AI-For-Beginners/lessons/4-ComputerVision/10-GANs at main · microsoft/AI-For-Beginners (github.com)</a></li>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/abs/1508.06576">[1508.06576] A Neural Algorithm of Artistic Style (arxiv.org)</a></li>
+</ol>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
+    </div>
+
+    
+    
+    
+    <div>
+	
+     <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+     
+   </div>
+      
+
+        <div class="reward-container">
+  <div>感谢阅读.</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.png" alt="Sekyoro 微信支付">
+        <p>微信支付</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Sekyoro
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://www.sekyoro.top/2023/09/26/%E9%A3%8E%E6%A0%BC%E8%BF%81%E7%A7%BB/" title="风格迁移">https://www.sekyoro.top/2023/09/26/风格迁移/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/images/wxqrcode.png">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/images/website.png">
+            <span class="icon">
+              <i class="fa fa-user"></i>
+            </span>
+
+            <span class="label">PersonalWebsite</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="https://my-astro-git-main-drowning-in-codes.vercel.app">
+            <span class="icon">
+              <i class="fas fa-share"></i>
+            </span>
+
+            <span class="label">杂鱼分享</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/style-transfer/" rel="tag"><i class="fa fa-tag"></i> -style transfer</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/09/23/%E7%8E%A9%E8%BD%AChuggingface/" rel="prev" title="玩转huggingface">
+      <i class="fa fa-chevron-left"></i> 玩转huggingface
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+		  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4034523802263123"
+     crossorigin="anonymous"></script>
+<!-- 评论区 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-4034523802263123"
+     data-ad-slot="6333657257"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+          
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81MzE5Ny8yOTY3Mg=="></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+	
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+      	   
+          <!-- canvas粒子时钟 -->
+          <div style="">
+  <canvas id="canvas" style="width:60%;">当前浏览器不支持canvas，请更换浏览器后再试</canvas>
+</div>
+<script>
+(function(){
+
+   var digit=
+    [
+        [
+            [0,0,1,1,1,0,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,0,1,1,0],
+            [0,0,1,1,1,0,0]
+        ],//0
+        [
+            [0,0,0,1,1,0,0],
+            [0,1,1,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [1,1,1,1,1,1,1]
+        ],//1
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,1,1],
+            [1,1,1,1,1,1,1]
+        ],//2
+        [
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//3
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,0],
+            [0,0,1,1,1,1,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,1,1,0],
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,1]
+        ],//4
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,1,1,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//5
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//6
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0]
+        ],//7
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//8
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,1,1,0,0,0,0]
+        ],//9
+        [
+            [0,0,0,0,0,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,0,0,0]
+        ]//:
+    ];
+
+var canvas = document.getElementById('canvas');
+
+if(canvas.getContext){
+    var cxt = canvas.getContext('2d');
+    //声明canvas的宽高
+    var H = 100,W = 700;
+    canvas.height = H;
+    canvas.width = W;
+    cxt.fillStyle = '#f00';
+    cxt.fillRect(10,10,50,50);
+
+    //存储时间数据
+    var data = [];
+    //存储运动的小球
+    var balls = [];
+    //设置粒子半径
+    var R = canvas.height/20-1;
+    (function(){
+        var temp = /(\d)(\d):(\d)(\d):(\d)(\d)/.exec(new Date());
+        //存储时间数字，由十位小时、个位小时、冒号、十位分钟、个位分钟、冒号、十位秒钟、个位秒钟这7个数字组成
+        data.push(temp[1],temp[2],10,temp[3],temp[4],10,temp[5],temp[6]);
+    })();
+
+    /*生成点阵数字*/
+    function renderDigit(index,num){
+        for(var i = 0; i < digit[num].length; i++){
+            for(var j = 0; j < digit[num][i].length; j++){
+                if(digit[num][i][j] == 1){
+                    cxt.beginPath();
+                    cxt.arc(14*(R+2)*index + j*2*(R+1)+(R+1),i*2*(R+1)+(R+1),R,0,2*Math.PI);
+                    cxt.closePath();
+                    cxt.fill();
+                }
+            }
+        }
+    }
+
+    /*更新时钟*/
+    function updateDigitTime(){
+        var changeNumArray = [];
+        var temp = /(\d)(\d):(\d)(\d):(\d)(\d)/.exec(new Date());
+        var NewData = [];
+        NewData.push(temp[1],temp[2],10,temp[3],temp[4],10,temp[5],temp[6]);
+        for(var i = data.length-1; i >=0 ; i--){
+            //时间发生变化
+            if(NewData[i] !== data[i]){
+                //将变化的数字值和在data数组中的索引存储在changeNumArray数组中
+                changeNumArray.push(i+'_'+(Number(data[i])+1)%10);
+            }
+        }
+        //增加小球
+        for(var i = 0; i< changeNumArray.length; i++){
+            addBalls.apply(this,changeNumArray[i].split('_'));
+        }
+        data = NewData.concat();
+    }
+
+    /*更新小球状态*/
+    function updateBalls(){
+        for(var i = 0; i < balls.length; i++){
+            balls[i].stepY += balls[i].disY;
+            balls[i].x += balls[i].stepX;
+            balls[i].y += balls[i].stepY;
+            if(balls[i].x > W + R || balls[i].y > H + R){
+                balls.splice(i,1);
+                i--;
+            }
+        }
+    }
+
+    /*增加要运动的小球*/
+    function addBalls(index,num){
+        var numArray = [1,2,3];
+        var colorArray =  ["#3BE","#09C","#A6C","#93C","#9C0","#690","#FB3","#F80","#F44","#C00"];
+        for(var i = 0; i < digit[num].length; i++){
+            for(var j = 0; j < digit[num][i].length; j++){
+                if(digit[num][i][j] == 1){
+                    var ball = {
+                        x:14*(R+2)*index + j*2*(R+1)+(R+1),
+                        y:i*2*(R+1)+(R+1),
+                        stepX:Math.floor(Math.random() * 4 -2),
+                        stepY:-2*numArray[Math.floor(Math.random()*numArray.length)],
+                        color:colorArray[Math.floor(Math.random()*colorArray.length)],
+                        disY:1
+                    };
+                    balls.push(ball);
+                }
+            }
+        }
+    }
+
+    /*渲染*/
+    function render(){
+        //重置画布宽度，达到清空画布的效果
+        canvas.height = 100;
+        //渲染时钟
+        for(var i = 0; i < data.length; i++){
+            renderDigit(i,data[i]);
+        }
+        //渲染小球
+        for(var i = 0; i < balls.length; i++){
+            cxt.beginPath();
+            cxt.arc(balls[i].x,balls[i].y,R,0,2*Math.PI);
+            cxt.fillStyle = balls[i].color;
+            cxt.closePath();
+            cxt.fill();
+        }
+    }
+
+    clearInterval(oTimer);
+    var oTimer = setInterval(function(){
+        //更新时钟
+        updateDigitTime();
+        //更新小球状态
+        updateBalls();
+        //渲染
+        render();
+    },50);
+}
+
+})();
+</script>
+        
+
+<!-- require APlayer -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+<script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+<!-- require MetingJS -->
+
+<script src="/js/meting-js.js"></script>
+	  
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+	  
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B%E8%BF%9B%E8%A1%8C%E8%BF%81%E7%A7%BB"><span class="nav-number">1.</span> <span class="nav-text">使用预训练模型进行迁移</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0"><span class="nav-number">1.1.</span> <span class="nav-text">损失函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96%E5%90%88%E6%88%90%E5%9B%BE%E5%83%8F"><span class="nav-number">1.2.</span> <span class="nav-text">初始化合成图像</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.3.</span> <span class="nav-text">训练模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%93%E6%9E%9C%E5%B1%95%E7%A4%BA"><span class="nav-number">1.4.</span> <span class="nav-text">结果展示</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8GAN%E8%BF%9B%E8%A1%8C%E9%A3%8E%E6%A0%BC%E8%BF%81%E7%A7%BB"><span class="nav-number">2.</span> <span class="nav-text">使用GAN进行风格迁移</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">2.1.</span> <span class="nav-text">参考资料</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Sekyoro"
+      src="https://i.loli.net/2021/05/17/YqoavnXdGTpPO9R.jpg">
+  <p class="site-author-name" itemprop="name">Sekyoro</p>
+  <div class="site-description" itemprop="description">什么也无法舍弃的人，什么也做不了.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">132</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">165</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="http://proanimer.com/" title="Personal Website → http:&#x2F;&#x2F;proanimer.com" rel="noopener" target="_blank"><i class="fab fa-internet-explorer fa-fw"></i>Personal Website</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://github.com/drowning-in-codes" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;drowning-in-codes" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:bukalala174@gmail.com" title="E-Mail → mailto:bukalala174@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://mp.weixin.qq.com/s?__biz=Mzg3ODY1MDkzMg==&mid=2247483770&idx=1&sn=fdf88faab01d5c219ac609570a21c9d6&chksm=cf113221f866bb373938cfca03cf095ff4fe1e4dc37d68ef5de4cd4876ee1260fca0c015a4d6&token=1096259873&lang=zh_CN#rd" title="wxPublicAccount → https:&#x2F;&#x2F;mp.weixin.qq.com&#x2F;s?__biz&#x3D;Mzg3ODY1MDkzMg&#x3D;&#x3D;&amp;mid&#x3D;2247483770&amp;idx&#x3D;1&amp;sn&#x3D;fdf88faab01d5c219ac609570a21c9d6&amp;chksm&#x3D;cf113221f866bb373938cfca03cf095ff4fe1e4dc37d68ef5de4cd4876ee1260fca0c015a4d6&amp;token&#x3D;1096259873&amp;lang&#x3D;zh_CN#rd" rel="noopener" target="_blank"><i class="fab fa-weixin fa-fw"></i>wxPublicAccount</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-rss fa-fw"></i>RSS</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/aqwca" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;aqwca" rel="noopener" target="_blank"><i class="fa fa-handshake fa-fw"></i>CSDN</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://my-astro-git-main-drowning-in-codes.vercel.app/" title="杂鱼分享 → https:&#x2F;&#x2F;my-astro-git-main-drowning-in-codes.vercel.app" rel="noopener" target="_blank"><i class="fas fa-share fa-fw"></i>杂鱼分享</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      友情链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="http://myqhs.top/" title="http:&#x2F;&#x2F;myqhs.top&#x2F;" rel="noopener" target="_blank">myqhs</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+<meting-js
+	id="6856787487"
+	server="netease"
+	type="playlist"
+	order="random"
+	>
+</meting-js>
+			<div class="widget-wrap">
+    <h3 class="widget-title" style="margin:0">文章词云</h3>
+    <div id="myCanvasContainer" class="widget tagcloud">
+        <canvas width="250" height="250" id="resCanvas" style="width:100%">
+		  <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/style-transfer/" rel="tag">-style transfer</a><span class="tag-list-count">1</span></li></ul>	
+        </canvas>
+    </div>
+</div>
+		<script type="text/javascript" id="clustrmaps" src="//clustrmaps.com/map_v2.js?d=xQdGTxqARTBiNIwX2aUban-ixkj2s6VaZQWo-aVCgY8&cl=ffffff&w=a"></script>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+	 
+	 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4034523802263123"
+     crossorigin="anonymous"></script>
+<!-- 边栏 -->
+
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-4034523802263123"
+     data-ad-slot="6549565089"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+	 
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+	 
+	
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+  
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; Wed Apr 08 2020 08:00:00 GMT+0800 (中国标准时间) – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Sekyoro</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">739k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">11:11</span>
+</div>
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+    <span id="busuanzi_container_site_pv">总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+    <span class="post-meta-divider">|</span>
+    <span id="busuanzi_container_site_uv">总访客数<span id="busuanzi_value_site_uv"></span>人</span>
+    <span class="post-meta-divider">|</span>
+<!-- 不蒜子计数初始值纠正 -->
+<script>
+$(document).ready(function() {
+
+    var int = setInterval(fixCount, 50);  // 50ms周期检测函数
+    var countOffset = 20000;  // 初始化首次数据
+
+    function fixCount() {            
+       if (document.getElementById("busuanzi_container_site_pv").style.display != "none")
+        {
+            $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + countOffset); 
+            clearInterval(int);
+        }                  
+        if ($("#busuanzi_container_site_pv").css("display") != "none")
+        {
+            $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + countOffset); // 加上初始数据 
+            clearInterval(int); // 停止检测
+        }  
+    }
+       	
+});
+</script> 
+
+<div>
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("04/08/2021 20:00:00");
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+    }
+setInterval("createtime()",250);
+</script>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/theme-next/theme-next-pjax@0/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax',
+	'.widget-wrap'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+ 
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+  <script data-pjax>
+    (function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+  </script>
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
+<script src="//cdn.jsdelivr.net/npm/instantsearch.js@4/dist/instantsearch.production.min.js"></script>
+<script src="/js/algolia-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+<script data-pjax>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  let url = element.dataset.target;
+  let pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  let pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  let fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+  
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+ 
+
+<script>
+  var OriginTitile = document.title;
+  var titleTime;
+  document.addEventListener("visibilitychange", function() {
+    if (document.hidden) {
+      document.title = "(つェ⊂)我藏好了哦~" + OriginTitile;
+      clearTimeout(titleTime);
+    } else {
+      document.title = "(*´∇｀*) 被你发现啦~" + OriginTitile;
+      titleTime = setTimeout(function() {
+        document.title = OriginTitile;
+      }, 2000);
+    }
+  });
+</script>
+
+
+
+  <script src="/js/src/activate-power-mode.min.js"></script>
+  <script>
+    POWERMODE.colorful = true;
+    POWERMODE.shake = false;
+    document.body.addEventListener('input', POWERMODE);
+  </script>
+
+
+    </div>  
+  
+  <script  type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+<script  type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+
+<!-- hexo injector body_end start --><script src='/js/outdate.js'></script><!-- hexo injector body_end end --><script async>window.onload=function(){var a=document.createElement('script'),b=document.getElementsByTagName('script')[0];a.type='text/javascript',a.async=!0,a.src='/sw-register.js?v='+Date.now(),b.parentNode.insertBefore(a,b)};</script></body></html>
