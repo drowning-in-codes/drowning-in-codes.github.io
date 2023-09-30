@@ -56,7 +56,7 @@
 <meta property="og:image" content="https://img1.imgtp.com/2023/09/26/RlUlfrPS.png">
 <meta property="og:image" content="https://img1.imgtp.com/2023/09/26/zHqMS03J.png">
 <meta property="article:published_time" content="2023-09-26T03:00:48.000Z">
-<meta property="article:modified_time" content="2023-09-26T15:26:07.104Z">
+<meta property="article:modified_time" content="2023-09-29T11:43:28.740Z">
 <meta property="article:author" content="Sekyoro">
 <meta property="article:tag" content="-style transfer">
 <meta name="twitter:card" content="summary">
@@ -272,10 +272,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2023-09-26 11:00:48 / 修改时间：23:26:07" itemprop="dateCreated datePublished" datetime="2023-09-26T11:00:48+08:00">2023-09-26</time>
+              <time title="创建时间：2023-09-26 11:00:48" itemprop="dateCreated datePublished" datetime="2023-09-26T11:00:48+08:00">2023-09-26</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-09-29 19:43:28" itemprop="dateModified" datetime="2023-09-29T19:43:28+08:00">2023-09-29</time>
+              </span>
 
           
             <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
@@ -290,14 +296,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>6.1k</span>
+              <span>8k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>6 分钟</span>
+              <span>7 分钟</span>
             </span>
 
         </div>
@@ -369,7 +375,10 @@
 <p>我们的目标是创建这样一个图像，<strong>它将接近内容图像和风格图像</strong>。这将由两个损失函数确定：基于CNN在<strong>当前图像和内容图像的某些层提取的特征来计算内容损失</strong>,<strong>使用Gram矩阵巧妙地计算当前图像和风格图像之间的风格损失</strong></p>
 <p>为了使图像更平滑并去除噪声，我们还引入了全变分损失，它计算相邻像素之间的平均距离</p>
 <p>优化方式使用梯度下降（或一些其他优化算法）调整当前图像，以最小化总损失，总损失是所有三个损失的加权和。</p>
-<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><ol>
+<p>在代码上与之前的差别是使用高斯分布采样得到的噪音作为需要优化的参数,</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">img_style = load_image(<span class="string">&#x27;images/style.jpg&#x27;</span>)</span><br><span class="line">img_content = load_image(<span class="string">&#x27;images/image.jpg&#x27;</span>)</span><br><span class="line"></span><br><span class="line">img_result = np.random.uniform(size=(img_size,img_size,<span class="number">3</span>))</span><br><span class="line">vgg = tf.keras.applications.VGG16(include_top=<span class="literal">False</span>, weights=<span class="string">&#x27;imagenet&#x27;</span>)</span><br><span class="line">vgg.trainable = <span class="literal">False</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">layer_extractor</span>(<span class="params">layers</span>):</span></span><br><span class="line">    outputs = [vgg.get_layer(x).output <span class="keyword">for</span> x <span class="keyword">in</span> layers]</span><br><span class="line">    model = tf.keras.Model([vgg.<span class="built_in">input</span>],outputs)</span><br><span class="line">    <span class="keyword">return</span> model </span><br><span class="line">content_layers = [<span class="string">&#x27;block4_conv2&#x27;</span>] </span><br><span class="line">content_extractor = layer_extractor(content_layers)</span><br><span class="line"></span><br><span class="line">content_target = content_extractor(preprocess_input(tf.expand_dims(img_content,axis=<span class="number">0</span>)))</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">content_loss</span>(<span class="params">img</span>):</span></span><br><span class="line">    z = content_extractor(preprocess_input(tf.expand_dims(<span class="number">255</span>*img,axis=<span class="number">0</span>))) </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0.5</span>*tf.reduce_sum((z-content_target)**<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">gram_matrix</span>(<span class="params">x</span>):</span></span><br><span class="line">  result = tf.linalg.einsum(<span class="string">&#x27;bijc,bijd-&gt;bcd&#x27;</span>, x, x)</span><br><span class="line">  input_shape = tf.shape(x)</span><br><span class="line">  num_locations = tf.cast(input_shape[<span class="number">1</span>]*input_shape[<span class="number">2</span>], tf.float32)</span><br><span class="line">  <span class="keyword">return</span> result/(num_locations)</span><br><span class="line"></span><br><span class="line">style_layers = [<span class="string">&#x27;block1_conv1&#x27;</span>,<span class="string">&#x27;block2_conv1&#x27;</span>,<span class="string">&#x27;block3_conv1&#x27;</span>,<span class="string">&#x27;block4_conv1&#x27;</span>]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">style_extractor</span>(<span class="params">img</span>):</span></span><br><span class="line">    <span class="keyword">return</span> [gram_matrix(x) <span class="keyword">for</span> x <span class="keyword">in</span> layer_extractor(style_layers)(img)]</span><br><span class="line"></span><br><span class="line">style_target = style_extractor(preprocess_input(tf.expand_dims(img_style,axis=<span class="number">0</span>)))</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">style_loss</span>(<span class="params">img</span>):</span></span><br><span class="line">    z = style_extractor(preprocess_input(tf.expand_dims(<span class="number">255</span>*img,axis=<span class="number">0</span>)))</span><br><span class="line">    loss = tf.add_n([tf.reduce_mean((x-target)**<span class="number">2</span>) </span><br><span class="line">                           <span class="keyword">for</span> x,target <span class="keyword">in</span> <span class="built_in">zip</span>(z,style_target)])</span><br><span class="line">    <span class="keyword">return</span> loss / <span class="built_in">len</span>(style_layers)</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">variation_loss</span>(<span class="params">img</span>):</span></span><br><span class="line">  img = tf.cast(img,tf.float32)</span><br><span class="line">  x_var = img[ :, <span class="number">1</span>:, :] - img[ :, :-<span class="number">1</span>, :]</span><br><span class="line">  y_var = img[ <span class="number">1</span>:, :, :] - img[ :-<span class="number">1</span>, :, :]</span><br><span class="line">  <span class="keyword">return</span> tf.reduce_sum(tf.<span class="built_in">abs</span>(x_var)) + tf.reduce_sum(tf.<span class="built_in">abs</span>(y_var))</span><br><span class="line">  </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">total_loss_var</span>(<span class="params">img</span>):</span></span><br><span class="line">    <span class="keyword">return</span> content_loss(img)+<span class="number">150</span>*style_loss(img)+<span class="number">30</span>*variation_loss(img)</span><br><span class="line"></span><br><span class="line">img.assign(clip(np.random.normal(-<span class="number">0.3</span>,<span class="number">0.3</span>,size=img_content.shape)+img_content/<span class="number">255.0</span>))</span><br><span class="line"></span><br><span class="line">train(img,loss_fn=total_loss_var)</span><br></pre></td></tr></table></figure>
+<p>注意,提取风格的层数一般选择每个特征块的前面几层,而提取内容的层数一般选择特征块的后面几块.</p>
+<h2 id=""><a href="#" class="headerlink" title=" "></a> </h2><h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><ol>
 <li><a target="_blank" rel="noopener" href="https://zh.d2l.ai/chapter_computer-vision/neural-style.html">13.12. 风格迁移 — 动手学深度学习 2.0.0 documentation (d2l.ai)</a></li>
 <li><a target="_blank" rel="noopener" href="https://github.com/microsoft/AI-For-Beginners/tree/main/lessons/4-ComputerVision/10-GANs">AI-For-Beginners/lessons/4-ComputerVision/10-GANs at main · microsoft/AI-For-Beginners (github.com)</a></li>
 <li><a target="_blank" rel="noopener" href="https://arxiv.org/abs/1508.06576">[1508.06576] A Neural Algorithm of Artistic Style (arxiv.org)</a></li>
@@ -488,7 +497,10 @@
     <a href="/2023/09/23/%E7%8E%A9%E8%BD%AChuggingface/" rel="prev" title="玩转huggingface">
       <i class="fa fa-chevron-left"></i> 玩转huggingface
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2023/09/28/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BE%AE%E8%B0%83/" rel="next" title="大模型微调">
+      大模型微调 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -838,7 +850,7 @@ if(canvas.getContext){
 	  
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B%E8%BF%9B%E8%A1%8C%E8%BF%81%E7%A7%BB"><span class="nav-number">1.</span> <span class="nav-text">使用预训练模型进行迁移</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0"><span class="nav-number">1.1.</span> <span class="nav-text">损失函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96%E5%90%88%E6%88%90%E5%9B%BE%E5%83%8F"><span class="nav-number">1.2.</span> <span class="nav-text">初始化合成图像</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.3.</span> <span class="nav-text">训练模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%93%E6%9E%9C%E5%B1%95%E7%A4%BA"><span class="nav-number">1.4.</span> <span class="nav-text">结果展示</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8GAN%E8%BF%9B%E8%A1%8C%E9%A3%8E%E6%A0%BC%E8%BF%81%E7%A7%BB"><span class="nav-number">2.</span> <span class="nav-text">使用GAN进行风格迁移</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">2.1.</span> <span class="nav-text">参考资料</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B%E8%BF%9B%E8%A1%8C%E8%BF%81%E7%A7%BB"><span class="nav-number">1.</span> <span class="nav-text">使用预训练模型进行迁移</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0"><span class="nav-number">1.1.</span> <span class="nav-text">损失函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96%E5%90%88%E6%88%90%E5%9B%BE%E5%83%8F"><span class="nav-number">1.2.</span> <span class="nav-text">初始化合成图像</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.3.</span> <span class="nav-text">训练模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%93%E6%9E%9C%E5%B1%95%E7%A4%BA"><span class="nav-number">1.4.</span> <span class="nav-text">结果展示</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8GAN%E8%BF%9B%E8%A1%8C%E9%A3%8E%E6%A0%BC%E8%BF%81%E7%A7%BB"><span class="nav-number">2.</span> <span class="nav-text">使用GAN进行风格迁移</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text"> </span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">3.1.</span> <span class="nav-text">参考资料</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
       <div class="site-overview-wrap sidebar-panel">
@@ -853,7 +865,7 @@ if(canvas.getContext){
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">132</span>
+          <span class="site-state-item-count">134</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -866,7 +878,7 @@ if(canvas.getContext){
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">165</span>
+        <span class="site-state-item-count">168</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -972,12 +984,12 @@ if(canvas.getContext){
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">739k</span>
+    <span title="站点总字数">761k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">11:11</span>
+    <span title="站点阅读时长">11:32</span>
 </div>
 
     <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
