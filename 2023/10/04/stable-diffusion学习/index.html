@@ -54,9 +54,20 @@
 <meta property="og:image" content="https://img1.imgtp.com/2023/10/04/0K8yjheX.png">
 <meta property="og:image" content="https://jalammar.github.io/images/stable-diffusion/stable-diffusion-autoencoder.png">
 <meta property="og:image" content="https://jalammar.github.io/images/stable-diffusion/stable-diffusion-latent-forward-process-v2.png">
+<meta property="og:image" content="https://jalammar.github.io/images/stable-diffusion/stable-diffusion-forward-and-reverse-process-v2.png">
+<meta property="og:image" content="https://jalammar.github.io/images/stable-diffusion/stable-diffusion-forward-diffusion-training-example-2.png">
+<meta property="og:image" content="https://jalammar.github.io/images/stable-diffusion/stable-diffusion-u-net-noise-training-step.png">
+<meta property="og:image" content="https://jalammar.github.io/images/stable-diffusion/stable-diffusion-denoising-step-2v2.png">
+<meta property="og:image" content="https://jalammar.github.io/images/stable-diffusion/clip-training-step-1.png">
+<meta property="og:image" content="https://jalammar.github.io/images/stable-diffusion/clip-training-step-3.png">
+<meta property="og:image" content="https://jalammar.github.io/images/stable-diffusion/stable-diffusion-unet-inputs-v2.png">
+<meta property="og:image" content="https://jalammar.github.io/images/stable-diffusion/stable-diffusion-text-dataset-v2.png">
+<meta property="og:image" content="https://jalammar.github.io/images/stable-diffusion/unet-inputs-outputs-v2.png">
+<meta property="og:image" content="https://jalammar.github.io/images/stable-diffusion/unit-resnet-steps-v2.png">
+<meta property="og:image" content="https://jalammar.github.io/images/stable-diffusion/unet-with-text-steps-v2.png">
 <meta property="og:image" content="https://img1.imgtp.com/2023/10/04/kHc7pOee.png">
 <meta property="article:published_time" content="2023-10-04T06:30:57.000Z">
-<meta property="article:modified_time" content="2023-10-04T07:34:48.896Z">
+<meta property="article:modified_time" content="2023-10-04T08:31:01.778Z">
 <meta property="article:author" content="Sekyoro">
 <meta property="article:tag" content="stable diffusion">
 <meta name="twitter:card" content="summary">
@@ -274,7 +285,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2023-10-04 14:30:57 / 修改时间：15:34:48" itemprop="dateCreated datePublished" datetime="2023-10-04T14:30:57+08:00">2023-10-04</time>
+              <time title="创建时间：2023-10-04 14:30:57 / 修改时间：16:31:01" itemprop="dateCreated datePublished" datetime="2023-10-04T14:30:57+08:00">2023-10-04</time>
             </span>
 
           
@@ -290,14 +301,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>5.6k</span>
+              <span>7k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>5 分钟</span>
+              <span>6 分钟</span>
             </span>
 
         </div>
@@ -344,7 +355,47 @@
 <p>首先将图像通过encoder得到潜在变量用于后续处理,这也是为了内存和计算资源.这种压缩（以及后来的解压缩）是通过自动编码器完成的。自动编码器使用其编码器将图像压缩到潜在空间中，然后使用解码器仅使用压缩信息来重建图像。</p>
 <p>现在，正向扩散过程是在压缩的compressed latents上完成的。噪声应用于那些latents的噪声，而不是应用于本身的像素图像的噪声。因此，<strong>噪声预测器实际上被训练来预测压缩表示（潜在空间）中的噪声</strong>。</p>
 <p><img data-src="https://jalammar.github.io/images/stable-diffusion/stable-diffusion-latent-forward-process-v2.png" alt="img"></p>
-<h2 id="Stable-Diffusion-during-inference"><a href="#Stable-Diffusion-during-inference" class="headerlink" title="Stable Diffusion during inference"></a>Stable Diffusion during inference</h2><p><img data-src="https://img1.imgtp.com/2023/10/04/kHc7pOee.png" alt="image-20231004150708585"></p>
+<p>正向过程（使用自动编码器的编码器）是我们生成数据以训练噪声预测器的方式。一旦经过训练，我们就可以通过运行反向过程（使用自动编码器的解码器）来生成图像。</p>
+<p><img data-src="https://jalammar.github.io/images/stable-diffusion/stable-diffusion-forward-and-reverse-process-v2.png" alt="img"></p>
+<p>通过一张图片(潜在变量)以及添加与一个值(noise amount)相关的噪声,得到新的数据.</p>
+<p><img data-src="https://jalammar.github.io/images/stable-diffusion/stable-diffusion-forward-diffusion-training-example-2.png" alt="img"></p>
+<p>有了这个数据集，我们可以训练噪声预测器，并最终获得一个出色的噪声预测器。当在特定配置下运行时，它实际上可以创建图像</p>
+<p><img data-src="https://jalammar.github.io/images/stable-diffusion/stable-diffusion-u-net-noise-training-step.png" alt="img"></p>
+<p>我们目的是得到一个噪声预测器,通过之前得到的带有噪声的图像数据集以及相应的加噪声的值,这个预测器将这些作为输入,输出就是噪声,将带噪声图像数据集减去噪声看是否与原图一样,这样就得到一个noise predictor.</p>
+<p><img data-src="https://jalammar.github.io/images/stable-diffusion/stable-diffusion-denoising-step-2v2.png" alt="img" style="zoom:50%;" /></p>
+<p>Dall-E2和谷歌的Imagen也是类似原理.</p>
+<p>注意上面的输入并没有加入text embedding,Transformer语言模型被用作语言理解组件，该组件接受文本提示并生成 token embeddings。发布的stable diffusion使用ClipText（一种基于GPT的模型），而论文中使用的BERT。</p>
+<h3 id="CLIP训练"><a href="#CLIP训练" class="headerlink" title="CLIP训练"></a>CLIP训练</h3><p>CLIP是在图像及其字幕的数据集上进行训练的。想象一下这样的数据集，只有4亿张图像和它们的标题(captions)</p>
+<blockquote>
+<p>事实上，CLIP是根据从网络上抓取的图像及其“alt”标签进行训练的。</p>
+</blockquote>
+<p>CLIP是图像编码器和文本编码器的组合。它的训练过程可以简化为拍摄图像及其说明(caption)。我们分别用图像和文本编码器对它们进行编码。</p>
+<p><img data-src="https://jalammar.github.io/images/stable-diffusion/clip-training-step-1.png" alt="img" style="zoom: 50%;" /></p>
+<p>然后，我们使用<strong>余弦相似性</strong>来比较结果嵌入。当我们开始训练过程时，即使文本正确地描述了图像，相似度也会很低。我们更新这两个模型，以便下次嵌入它们时，得到的嵌入是相似的。</p>
+<p><img data-src="https://jalammar.github.io/images/stable-diffusion/clip-training-step-3.png" alt="img" style="zoom:50%;" /></p>
+<p>通过在数据集中重复，并使用大批量，我们最终发现编码器能够生成狗的图像和句子“狗的照片”相似的嵌入。就像在word2vec中一样，训练过程也需要包括不匹配的图像和描述(captions )的负面示例，并且模型需要为它们分配低相似度分数。</p>
+<blockquote>
+<p>captions本身是字幕的意思,这里表示图像的类似标签,标题,名字的含义.</p>
+</blockquote>
+<h3 id="加入text信息"><a href="#加入text信息" class="headerlink" title="加入text信息"></a>加入text信息</h3><p><img data-src="https://jalammar.github.io/images/stable-diffusion/stable-diffusion-unet-inputs-v2.png" alt="img" style="zoom:67%;" /></p>
+<p>为了使文本成为图像生成过程的一部分，我们必须调整我们的噪声预测器，以使用文本作为输入。</p>
+<p>现在的数据集包括编码文本。由于我们在潜在空间中操作，输入图像和预测噪声都在潜在空间内。</p>
+<p><img data-src="https://jalammar.github.io/images/stable-diffusion/stable-diffusion-text-dataset-v2.png" alt="img"></p>
+<h4 id="如果不包含text信息"><a href="#如果不包含text信息" class="headerlink" title="如果不包含text信息"></a>如果不包含text信息</h4><p>在Unet中,如果没有text信息,那么结构如下</p>
+<p><img data-src="https://jalammar.github.io/images/stable-diffusion/unet-inputs-outputs-v2.png" alt="img"></p>
+<ol>
+<li>Unet是一系列用于转换latents数组的层</li>
+<li>每个层对上一层的输出进行操作</li>
+<li>一些输出（通过residual connections）被馈送到网络中稍后的处理中</li>
+<li>时间步长(timestep)被转换为时间步长嵌入向量( time step embedding vector)，</li>
+</ol>
+<p><img data-src="https://jalammar.github.io/images/stable-diffusion/unit-resnet-steps-v2.png" alt="img"></p>
+<h4 id="如果包含text信息"><a href="#如果包含text信息" class="headerlink" title="如果包含text信息"></a>如果包含text信息</h4><p>需要对结构进行的主要更改是在ResNet块之间添加一个注意力层，以添加对文本输入的支持。</p>
+<p><img data-src="https://jalammar.github.io/images/stable-diffusion/unet-with-text-steps-v2.png" alt="img"></p>
+<p>请注意，ResNet块不会直接查看文本。但注意力层将这些文本表示合并到了latents中。现在，下一个ResNet可以在处理过程中利用合并的文本信息。</p>
+<h2 id="Stable-Diffusion-during-inference"><a href="#Stable-Diffusion-during-inference" class="headerlink" title="Stable Diffusion during inference"></a>Stable Diffusion during inference</h2><p>训练时通过一个prompt,也就是text文本,然后通过一个laten seed随机生成一个潜变量图像(正态分布噪声),这些作为unet的输入</p>
+<p><img data-src="https://img1.imgtp.com/2023/10/04/kHc7pOee.png" alt="image-20231004150708585"></p>
+<p>代码如下,使用hugging face的diffusers库.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line">torch_device = <span class="string">&quot;cuda&quot;</span> <span class="keyword">if</span> torch.cuda.is_available() <span class="keyword">else</span> <span class="string">&quot;cpu&quot;</span></span><br><span class="line"><span class="keyword">from</span> transformers <span class="keyword">import</span> CLIPTextModel, CLIPTokenizer</span><br><span class="line"><span class="keyword">from</span> diffusers <span class="keyword">import</span> AutoencoderKL, UNet2DConditionModel, PNDMScheduler</span><br><span class="line"></span><br><span class="line"><span class="comment"># 1. Load the autoencoder model which will be used to decode the latents into image space.</span></span><br><span class="line">vae = AutoencoderKL.from_pretrained(<span class="string">&quot;CompVis/stable-diffusion-v1-4&quot;</span>, subfolder=<span class="string">&quot;vae&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. Load the tokenizer and text encoder to tokenize and encode the text.</span></span><br><span class="line">tokenizer = CLIPTokenizer.from_pretrained(<span class="string">&quot;openai/clip-vit-large-patch14&quot;</span>)</span><br><span class="line">text_encoder = CLIPTextModel.from_pretrained(<span class="string">&quot;openai/clip-vit-large-patch14&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3. The UNet model for generating the latents.</span></span><br><span class="line">unet = UNet2DConditionModel.from_pretrained(<span class="string">&quot;CompVis/stable-diffusion-v1-4&quot;</span>, subfolder=<span class="string">&quot;unet&quot;</span>)</span><br><span class="line"><span class="keyword">from</span> diffusers <span class="keyword">import</span> LMSDiscreteScheduler</span><br><span class="line"></span><br><span class="line">scheduler = LMSDiscreteScheduler.from_pretrained(<span class="string">&quot;CompVis/stable-diffusion-v1-4&quot;</span>, subfolder=<span class="string">&quot;scheduler&quot;</span>)</span><br><span class="line">vae = vae.to(torch_device)</span><br><span class="line">text_encoder = text_encoder.to(torch_device)</span><br><span class="line">unet = unet.to(torch_device)</span><br><span class="line">prompt = [<span class="string">&quot;a photograph of an astronaut riding a horse&quot;</span>]</span><br><span class="line"></span><br><span class="line">height = <span class="number">512</span>                        <span class="comment"># default height of Stable Diffusion</span></span><br><span class="line">width = <span class="number">512</span>                         <span class="comment"># default width of Stable Diffusion</span></span><br><span class="line"></span><br><span class="line">num_inference_steps = <span class="number">100</span>            <span class="comment"># Number of denoising steps</span></span><br><span class="line"></span><br><span class="line">guidance_scale = <span class="number">7.5</span>                <span class="comment"># Scale for classifier-free guidance</span></span><br><span class="line"></span><br><span class="line">generator = torch.manual_seed(<span class="number">32</span>)   <span class="comment"># Seed generator to create the inital latent noise</span></span><br><span class="line"></span><br><span class="line">batch_size = <span class="number">1</span></span><br><span class="line">text_input = tokenizer(prompt, padding=<span class="string">&quot;max_length&quot;</span>, max_length=tokenizer.model_max_length, truncation=<span class="literal">True</span>, return_tensors=<span class="string">&quot;pt&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> torch.no_grad():</span><br><span class="line">  text_embeddings = text_encoder(text_input.input_ids.to(torch_device))[<span class="number">0</span>]</span><br><span class="line">  max_length = text_input.input_ids.shape[-<span class="number">1</span>]</span><br><span class="line">uncond_input = tokenizer(</span><br><span class="line">    [<span class="string">&quot;&quot;</span>] * batch_size, padding=<span class="string">&quot;max_length&quot;</span>, max_length=max_length, return_tensors=<span class="string">&quot;pt&quot;</span></span><br><span class="line">)</span><br><span class="line"><span class="keyword">with</span> torch.no_grad():</span><br><span class="line">  uncond_embeddings = text_encoder(uncond_input.input_ids.to(torch_device))[<span class="number">0</span>]</span><br><span class="line">  text_embeddings = torch.cat([uncond_embeddings, text_embeddings])</span><br><span class="line">  latents = torch.randn(</span><br><span class="line">  (batch_size, unet.in_channels, height // <span class="number">8</span>, width // <span class="number">8</span>),</span><br><span class="line">  generator=generator,</span><br><span class="line">)</span><br><span class="line">latents = latents.to(torch_device)</span><br><span class="line">scheduler.set_timesteps(num_inference_steps)</span><br><span class="line">latents = latents * scheduler.init_noise_sigma</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> tqdm.auto <span class="keyword">import</span> tqdm</span><br><span class="line"><span class="keyword">from</span> torch <span class="keyword">import</span> autocast</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> t <span class="keyword">in</span> tqdm(scheduler.timesteps):</span><br><span class="line">  <span class="comment"># expand the latents if we are doing classifier-free guidance to avoid doing two forward passes.</span></span><br><span class="line">  latent_model_input = torch.cat([latents] * <span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">  latent_model_input = scheduler.scale_model_input(latent_model_input, t)</span><br><span class="line"></span><br><span class="line">  <span class="comment"># predict the noise residual</span></span><br><span class="line">  <span class="keyword">with</span> torch.no_grad():</span><br><span class="line">    noise_pred = unet(latent_model_input, t, encoder_hidden_states=text_embeddings).sample</span><br><span class="line"></span><br><span class="line">  <span class="comment"># perform guidance</span></span><br><span class="line">  noise_pred_uncond, noise_pred_text = noise_pred.chunk(<span class="number">2</span>)</span><br><span class="line">  noise_pred = noise_pred_uncond + guidance_scale * (noise_pred_text - noise_pred_uncond)</span><br><span class="line"></span><br><span class="line">  <span class="comment"># compute the previous noisy sample x_t -&gt; x_t-1</span></span><br><span class="line">  latents = scheduler.step(noise_pred, t, latents).prev_sample</span><br><span class="line">  <span class="comment"># scale and decode the image latents with vae</span></span><br><span class="line">latents = <span class="number">1</span> / <span class="number">0.18215</span> * latents</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> torch.no_grad():</span><br><span class="line">  image = vae.decode(latents).sample</span><br><span class="line">  image = (image / <span class="number">2</span> + <span class="number">0.5</span>).clamp(<span class="number">0</span>, <span class="number">1</span>)</span><br><span class="line">image = image.detach().cpu().permute(<span class="number">0</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">1</span>).numpy()</span><br><span class="line">images = (image * <span class="number">255</span>).<span class="built_in">round</span>().astype(<span class="string">&quot;uint8&quot;</span>)</span><br><span class="line">pil_images = [Image.fromarray(image) <span class="keyword">for</span> image <span class="keyword">in</span> images]</span><br></pre></td></tr></table></figure>
 <p>本人水平有限,如果上文中关于diffusion过程有错误,还请斧正.</p>
 <h2 id="相关资料"><a href="#相关资料" class="headerlink" title="相关资料"></a>相关资料</h2><ol>
@@ -818,7 +869,7 @@ if(canvas.getContext){
 	  
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Overview"><span class="nav-number">1.</span> <span class="nav-text">Overview</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#VAE"><span class="nav-number">1.1.</span> <span class="nav-text">VAE</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#U-Net"><span class="nav-number">1.2.</span> <span class="nav-text">U-Net</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Text-encoder"><span class="nav-number">1.3.</span> <span class="nav-text">Text-encoder</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#diffusion-process"><span class="nav-number">2.</span> <span class="nav-text">diffusion process</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Stable-Diffusion-during-inference"><span class="nav-number">3.</span> <span class="nav-text">Stable Diffusion during inference</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3%E8%B5%84%E6%96%99"><span class="nav-number">4.</span> <span class="nav-text">相关资料</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Overview"><span class="nav-number">1.</span> <span class="nav-text">Overview</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#VAE"><span class="nav-number">1.1.</span> <span class="nav-text">VAE</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#U-Net"><span class="nav-number">1.2.</span> <span class="nav-text">U-Net</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Text-encoder"><span class="nav-number">1.3.</span> <span class="nav-text">Text-encoder</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#diffusion-process"><span class="nav-number">2.</span> <span class="nav-text">diffusion process</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CLIP%E8%AE%AD%E7%BB%83"><span class="nav-number">2.1.</span> <span class="nav-text">CLIP训练</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A0%E5%85%A5text%E4%BF%A1%E6%81%AF"><span class="nav-number">2.2.</span> <span class="nav-text">加入text信息</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A6%82%E6%9E%9C%E4%B8%8D%E5%8C%85%E5%90%ABtext%E4%BF%A1%E6%81%AF"><span class="nav-number">2.2.1.</span> <span class="nav-text">如果不包含text信息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A6%82%E6%9E%9C%E5%8C%85%E5%90%ABtext%E4%BF%A1%E6%81%AF"><span class="nav-number">2.2.2.</span> <span class="nav-text">如果包含text信息</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Stable-Diffusion-during-inference"><span class="nav-number">3.</span> <span class="nav-text">Stable Diffusion during inference</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3%E8%B5%84%E6%96%99"><span class="nav-number">4.</span> <span class="nav-text">相关资料</span></a></li></ol></div>
       </div>
       <!--/noindex-->
       <div class="site-overview-wrap sidebar-panel">
@@ -952,12 +1003,12 @@ if(canvas.getContext){
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">786k</span>
+    <span title="站点总字数">787k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">11:55</span>
+    <span title="站点阅读时长">11:56</span>
 </div>
 
     <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
