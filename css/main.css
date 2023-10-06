@@ -1190,6 +1190,30 @@ pre .javascript .function {
 .cc-license img {
   display: inline-block;
 }
+.announcement {
+  background-color: #f7f7f7;
+  max-width: 600px;
+  border-radius: 0.5em;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+}
+.announcement .title {
+  color: #333;
+  font-size: 1.4rem;
+  letter-spacing: 1em;
+  text-indent: 1em;
+}
+.announcement .date {
+  color: #666;
+  font-size: 14px;
+  margin-bottom: 1em;
+}
+.announcement .content {
+  padding: 0 0.8em 0;
+  color: #333;
+  font-size: 16px;
+  line-height: 1.5;
+  margin-bottom: 0;
+}
 .site-author-image {
   border: 1px solid #eee;
   display: block;
@@ -1227,7 +1251,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #aff;
+  background: #45ffb6;
   border-radius: 50%;
   content: ' ';
   display: inline-block;

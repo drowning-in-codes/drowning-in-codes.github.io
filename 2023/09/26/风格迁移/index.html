@@ -51,16 +51,16 @@
 <meta property="og:description" content="将一个图像中的风格应用在另一图像之上，即风格迁移（style transfer）这里我们需要两张输入图像：一张是内容图像，另一张是风格图像。 我们将使用神经网络修改内容图像，使其在风格上接近风格图像。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://zh.d2l.ai/_images/neural-style.svg">
-<meta property="og:image" content="https://img1.imgtp.com/2023/09/26/fqReGmQh.png">
-<meta property="og:image" content="https://img1.imgtp.com/2023/09/26/spmizDnH.png">
-<meta property="og:image" content="https://img1.imgtp.com/2023/09/26/RlUlfrPS.png">
-<meta property="og:image" content="https://img1.imgtp.com/2023/09/26/zHqMS03J.png">
-<meta property="og:image" content="https://img1.imgtp.com/2023/10/01/MiSavdBT.png">
-<meta property="og:image" content="https://img1.imgtp.com/2023/10/01/Mu9sCSMV.png">
-<meta property="og:image" content="https://img1.imgtp.com/2023/10/01/v3ypktNG.png">
-<meta property="og:image" content="https://img1.imgtp.com/2023/10/01/xcacfJg1.png">
+<meta property="og:image" content="https://s2.loli.net/2023/10/06/W4Ey98RPmMslXwJ.png">
+<meta property="og:image" content="https://s2.loli.net/2023/10/06/S5DUiCZE8K9cwnA.png">
+<meta property="og:image" content="https://s2.loli.net/2023/10/06/9UaWgiykmJt5Lfz.png">
+<meta property="og:image" content="https://s2.loli.net/2023/10/06/H2QAYtzVKRXMNmw.png">
+<meta property="og:image" content="https://s2.loli.net/2023/10/06/Pg1q59j4WnuSCIo.png">
+<meta property="og:image" content="https://s2.loli.net/2023/10/06/X1qoLVJPAZbYIHr.png">
+<meta property="og:image" content="https://s2.loli.net/2023/10/06/ivem7EW1CjXrZN8.png">
+<meta property="og:image" content="https://s2.loli.net/2023/10/06/HvpYWiA2uUdz9xe.png">
 <meta property="article:published_time" content="2023-09-26T03:00:48.000Z">
-<meta property="article:modified_time" content="2023-10-01T10:31:13.253Z">
+<meta property="article:modified_time" content="2023-10-06T09:33:42.610Z">
 <meta property="article:author" content="Sekyoro">
 <meta property="article:tag" content="-style transfer">
 <meta name="twitter:card" content="summary">
@@ -284,7 +284,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-10-01 18:31:13" itemprop="dateModified" datetime="2023-10-01T18:31:13+08:00">2023-10-01</time>
+                <time title="修改时间：2023-10-06 17:33:42" itemprop="dateModified" datetime="2023-10-06T17:33:42+08:00">2023-10-06</time>
               </span>
 
           
@@ -363,11 +363,11 @@
 <h3 id="训练模型"><a href="#训练模型" class="headerlink" title="训练模型"></a>训练模型</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">train</span>(<span class="params">X, contents_Y, styles_Y, device, lr, num_epochs, lr_decay_epoch</span>):</span></span><br><span class="line">    X, styles_Y_gram, trainer = get_inits(X, device, lr, styles_Y) <span class="comment">#生成原本图片 作为变量 并计算风格特征</span></span><br><span class="line">    scheduler = torch.optim.lr_scheduler.StepLR(trainer, lr_decay_epoch, <span class="number">0.8</span>)</span><br><span class="line">    animator = d2l.Animator(xlabel=<span class="string">&#x27;epoch&#x27;</span>, ylabel=<span class="string">&#x27;loss&#x27;</span>,</span><br><span class="line">                            xlim=[<span class="number">10</span>, num_epochs],</span><br><span class="line">                            legend=[<span class="string">&#x27;content&#x27;</span>, <span class="string">&#x27;style&#x27;</span>, <span class="string">&#x27;TV&#x27;</span>],</span><br><span class="line">                            ncols=<span class="number">2</span>, figsize=(<span class="number">7</span>, <span class="number">2.5</span>))</span><br><span class="line">    <span class="keyword">for</span> epoch <span class="keyword">in</span> <span class="built_in">range</span>(num_epochs):</span><br><span class="line">        trainer.zero_grad()</span><br><span class="line">        contents_Y_hat, styles_Y_hat = extract_features(</span><br><span class="line">            X, content_layers, style_layers) <span class="comment"># 获取内容和风格</span></span><br><span class="line">        contents_l, styles_l, tv_l, l = compute_loss(</span><br><span class="line">            X, contents_Y_hat, styles_Y_hat, contents_Y, styles_Y_gram)</span><br><span class="line">        l.backward()</span><br><span class="line">        trainer.step()</span><br><span class="line">        scheduler.step()</span><br><span class="line">        <span class="keyword">if</span> (epoch + <span class="number">1</span>) % <span class="number">10</span> == <span class="number">0</span>:</span><br><span class="line">            animator.axes[<span class="number">1</span>].imshow(postprocess(X))</span><br><span class="line">            animator.add(epoch + <span class="number">1</span>, [<span class="built_in">float</span>(<span class="built_in">sum</span>(contents_l)),</span><br><span class="line">                                     <span class="built_in">float</span>(<span class="built_in">sum</span>(styles_l)), <span class="built_in">float</span>(tv_l)])</span><br><span class="line">    <span class="keyword">return</span> X</span><br></pre></td></tr></table></figure>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">device, image_shape = d2l.try_gpu(), (<span class="number">300</span>, <span class="number">450</span>)</span><br><span class="line">net = net.to(device)</span><br><span class="line">content_X, contents_Y = get_contents(image_shape, device)</span><br><span class="line">_, styles_Y = get_styles(image_shape, device) <span class="comment"># 获取content_image和内容特征 内容特征就是传到预训练模型得到的相应层输出  以及style_image的样式特征</span></span><br><span class="line">output = train(content_X, contents_Y, styles_Y, device, <span class="number">0.3</span>, <span class="number">500</span>, <span class="number">50</span>) <span class="comment"># 训练传入X和其内容与样式特征</span></span><br></pre></td></tr></table></figure>
 <p>合成图像保留了内容图像的风景和物体，并同时迁移了风格图像的色彩。例如，合成图像具有与风格图像中一样的色彩块，其中一些甚至具有画笔笔触的细微纹理</p>
-<h3 id="结果展示"><a href="#结果展示" class="headerlink" title="结果展示"></a>结果展示</h3><p><img data-src="https://img1.imgtp.com/2023/09/26/fqReGmQh.png" alt="image-20230926225405384"></p>
-<p><img data-src="https://img1.imgtp.com/2023/09/26/spmizDnH.png" alt="image-20230926225430234"></p>
-<p><img data-src="https://img1.imgtp.com/2023/09/26/RlUlfrPS.png" alt="image-20230926225439855"></p>
+<h3 id="结果展示"><a href="#结果展示" class="headerlink" title="结果展示"></a>结果展示</h3><p><img data-src="https://s2.loli.net/2023/10/06/W4Ey98RPmMslXwJ.png" alt="image-20231006173228071"></p>
+<p><img data-src="https://s2.loli.net/2023/10/06/S5DUiCZE8K9cwnA.png" alt="image-20231006173234821"></p>
+<p><img data-src="https://s2.loli.net/2023/10/06/9UaWgiykmJt5Lfz.png" alt="image-20231006173243962"></p>
 <p>可以尝试改动style_weight,看看风格变换.比如style_weight增大,发现style loss太小了,而且会影响content loss</p>
-<p><img data-src="https://img1.imgtp.com/2023/09/26/zHqMS03J.png" alt="image-20230926231717608"></p>
+<p><img data-src="https://s2.loli.net/2023/10/06/H2QAYtzVKRXMNmw.png" alt="image-20231006173251615"></p>
 <ul>
 <li>风格迁移常用的损失函数由3部分组成：（1）<strong>内容损失使合成图像与内容图像在内容特征上接近</strong>；（2）<strong>风格损失令合成图像与风格图像在风格特征上接近</strong>；（3）<strong>全变分损失则有助于减少合成图像中的噪点</strong>。</li>
 <li>我们<strong>可以通过预训练的卷积神经网络来抽取图像的特征</strong>，并通过最小化损失函数来不断更新合成图像来作为模型参数。</li>
@@ -396,7 +396,7 @@
 <p><strong>查看每一层后的结果</strong></p>
 <p>利用<code>torchinfo</code>库查看</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">summary(vgg,input_size=(<span class="number">1</span>,<span class="number">3</span>,<span class="number">224</span>,<span class="number">224</span>))</span><br></pre></td></tr></table></figure>
-<p><img data-src="https://img1.imgtp.com/2023/10/01/MiSavdBT.png" alt="image-20231001161905086" style="zoom:67%;" /></p>
+<p><img data-src="https://s2.loli.net/2023/10/06/Pg1q59j4WnuSCIo.png" alt="image-20231006173311040"></p>
 <p>可以看到输入一张3通道224的图像特征层输出是512通道的宽高为7的特征</p>
 <p><strong>提取图像特征</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">res = vgg.features(sample_image).cpu()</span><br><span class="line">plt.figure(figsize=(<span class="number">15</span>,<span class="number">3</span>))</span><br><span class="line">plt.imshow(res.detach().view(<span class="number">512</span>,-<span class="number">1</span>).T)</span><br><span class="line"><span class="built_in">print</span>(res.size())</span><br></pre></td></tr></table></figure>
@@ -415,17 +415,17 @@
 <p>如果您的对象在视觉上与普通的ImageNet图像不同，则这种功能组合可能无法发挥最佳效果。因此，开始训练卷积层也是有意义的。 为此，我们可以解冻之前冻结的卷积滤波器参数。不过一般都会采用一些微调方法,比如LoRA等.</p>
 <h3 id="其他方向"><a href="#其他方向" class="headerlink" title="其他方向"></a>其他方向</h3><p>domain knowledge,domain adaption或者是transfer learning,本质上都是像提取一些特征,这种特征能在多个domain上使用.我们可以考虑利用这种特征进行可视化或者对抗攻击等.</p>
 <p>比如利用预训练模型作为分类器,尝试从下从正态分布采样得到噪声图,然后作为输入,优化这个输入使其被分类为想要的分类.这样的图像虽然被正确分类了但人眼还是能明显看出差别.</p>
-<p><img data-src="https://img1.imgtp.com/2023/10/01/Mu9sCSMV.png" alt="image-20231001174507317"></p>
+<p><img data-src="https://s2.loli.net/2023/10/06/X1qoLVJPAZbYIHr.png" alt="image-20231006173320659"></p>
 <blockquote>
 <p>这种噪音对我们来说没有多大意义，但很可能它包含了很多需要的类别(比如猫)特有的低级别过滤器。然而，由于有很多方法可以优化输入以获得理想的结果，因此优化算法没有动机找到视觉上可理解的模式.</p>
 <p>为了让它看起来不那么像噪音，我们可以在损失函数中引入一个附加项——变化损失。它测量图像的相邻像素的相似程度。如果我们将这个项添加到损失函数中，它将迫使优化器找到噪声较小的解决方案，从而具有更多可识别的细节</p>
 </blockquote>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">total_loss</span>(<span class="params">target,res</span>):</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">10</span>*tf.reduce_mean(keras.metrics.sparse_categorical_crossentropy(target,res)) + \</span><br><span class="line">           <span class="number">0.005</span>*tf.image.total_variation(x,res)</span><br><span class="line"></span><br><span class="line">optimize(x,target,loss_fn=total_loss)</span><br></pre></td></tr></table></figure>
 <p>也就是分类的损失加上全变分损失.全变分损失目的是减小噪声,得到图像图下</p>
-<p><img data-src="https://img1.imgtp.com/2023/10/01/v3ypktNG.png" alt="image-20231001174926326"></p>
+<p><img data-src="https://s2.loli.net/2023/10/06/ivem7EW1CjXrZN8.png" alt="image-20231006173331956"></p>
 <p>对抗攻击就利用一张本身是狗分类也确实是狗的图片,对这张图片进行优化</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">x = tf.Variable(np.expand_dims(img,axis=<span class="number">0</span>).astype(np.float32)/<span class="number">255.0</span>)</span><br><span class="line">optimize(x,target,epochs=<span class="number">100</span>)</span><br></pre></td></tr></table></figure>
-<p><img data-src="https://img1.imgtp.com/2023/10/01/xcacfJg1.png" alt="image-20231001175428790"></p>
+<p><img data-src="https://s2.loli.net/2023/10/06/HvpYWiA2uUdz9xe.png" alt="image-20231006173338372"></p>
 <p>在pytorch中使用<code>autograd</code>计算梯度.<a target="_blank" rel="noopener" href="https://www.w3cschool.cn/article/4182917.html">pytorch 中autograd.grad()函数的用法说明 | w3cschool笔记</a></p>
 <p>最后推荐一下微软的Ai for beginners的课程,质量比较高,此外还有李沐的d2l,台湾李宏毅老师的深度学习课程以及fast.ai课程,都是比较好的.</p>
 <blockquote>
@@ -973,6 +973,12 @@ if(canvas.getContext){
     </ul>
   </div>
 
+
+  <div class="motion-element announcement">
+   <div class="title">注意</div>
+   <p class="content">由于最近图床更新,可能有些图片显示不了.如果发现了有些图片无法显示影响阅读的,还烦请联系我,我有空补上. </p>
+   <p class="date"> 2023-10-6 </p>
+  </div>
       </div>
 <meting-js
 	id="6856787487"
