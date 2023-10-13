@@ -56,11 +56,12 @@
 <meta property="og:image" content="https://s2.loli.net/2023/10/06/9hi24Ic8HjwdtWO.png">
 <meta property="og:image" content="https://s2.loli.net/2023/10/06/FfyiX9CdYEekwoG.png">
 <meta property="og:image" content="https://s2.loli.net/2023/10/06/ipwL97YE2kQHPR3.png">
+<meta property="og:image" content="https://proanimer.com/alimg">
 <meta property="og:image" content="https://s2.loli.net/2023/10/06/B3WSiX6vjFgoZLz.png">
 <meta property="og:image" content="https://s2.loli.net/2023/10/06/ERe2l7duOKzAtI1.png">
 <meta property="og:image" content="https://s2.loli.net/2023/10/06/J4AkdG1SruwH92Y.png">
 <meta property="article:published_time" content="2023-09-25T07:39:52.000Z">
-<meta property="article:modified_time" content="2023-10-06T09:24:27.259Z">
+<meta property="article:modified_time" content="2023-10-09T11:05:37.786Z">
 <meta property="article:author" content="Sekyoro">
 <meta property="article:tag" content="个人博客 技术学习 计算机 互联网 人工智能">
 <meta name="twitter:card" content="summary">
@@ -284,7 +285,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-10-06 17:24:27" itemprop="dateModified" datetime="2023-10-06T17:24:27+08:00">2023-10-06</time>
+                <time title="修改时间：2023-10-09 19:05:37" itemprop="dateModified" datetime="2023-10-09T19:05:37+08:00">2023-10-09</time>
               </span>
 
           
@@ -300,14 +301,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>4.6k</span>
+              <span>6.4k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>4 分钟</span>
+              <span>6 分钟</span>
             </span>
 
         </div>
@@ -321,7 +322,12 @@
       
         <p>cvpr 2023 best paper <strong>Planning-oriented Autonomous Driving</strong><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2212.10156">[2212.10156] Planning-oriented Autonomous Driving (arxiv.org)</a></p>
 <span id="more"></span>
-<h2 id="Planning-oriented-Autonomous-Driving"><a href="#Planning-oriented-Autonomous-Driving" class="headerlink" title="Planning-oriented Autonomous Driving"></a>Planning-oriented Autonomous Driving</h2><h3 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h3><p><strong>背景介绍</strong></p>
+<h2 id="Planning-oriented-Autonomous-Driving"><a href="#Planning-oriented-Autonomous-Driving" class="headerlink" title="Planning-oriented Autonomous Driving"></a>Planning-oriented Autonomous Driving</h2><h3 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h3><p>为了执行广泛多样的任务，现代性方法要么为单个任务部署独立模型，要么设计具有独立头部的多任务范式。然而，他们可能会出现累积错误或任务协调不足</p>
+<h4 id="Contribution"><a href="#Contribution" class="headerlink" title="Contribution"></a>Contribution</h4><p>将全栈驾驶任务集成在一个网络中。它经过精心设计，可以利用每个模块的优势，并从全局角度为代理交互提供互补的功能抽象。任务通过统一的查询接口进行通信，以便于彼此进行规划。我们在具有挑战性的nuScenes基准上实例化UniAD。通过广泛的消融，使用这种哲学的有效性被证明在所有方面都大大优于以前的技术状态。代码和模型是公开的。</p>
+<p>（a） 我们遵循以规划为导向的哲学，对自动驾驶框架进行了新的展望，并证明了有效的任务协调的必要性，而不是独立设计或简单的多任务学习。</p>
+<p>（b）介绍了UniAD，一个全面的端到端系统，可利用广泛的任务。启动的关键组件是将查询设计为连接所有节点的接口。因此，UniAD享有灵活的中间表示和交换多任务知识规划。</p>
+<p>（c） 我们在现实场景的具有挑战性的基准上实例化UniAD。通过大面积消融，我们验证了我们的方法在各个方面都优于以前的技术</p>
+<h3 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h3><p><strong>背景介绍</strong></p>
 <p>现代自动驾驶系统的特点是<strong>按顺序执行模块化任务，即感知、预测和规划</strong>.</p>
 <p>为了执行多种多样的任务并实现高级智能，<strong>当代的方法要么是为单个任务部署独立的模型</strong>，要么<strong>是设计一个具有独立头部的多任务范例</strong>。</p>
 <p>但是，他们可能会出现<strong>累积性错误</strong>或<strong>任务协调能力不足</strong>的问题。</p>
@@ -352,17 +358,21 @@
 <p>端到端的做法中,一种“白板(tabula-rasa)”做法是直接预测计划的轨迹，没有任何明确的感知和预测监督。虽然这样的方向值得进一步探索，但在安全保障和可解释性方面是不够的，特别是对于高度动态的城市场景。在本文中，我们倾向于另一个角度，并提出以下问题：<strong>对于可靠且以规划为导向的自动驾驶系统，如何设计有利于规划的管道？前面哪些任务是必需的？</strong></p>
 <p>一个直观的解决方案是感知周围的物体，预测未来的行为并明确计划一个安全的操作。当代方法提供了良好的见解并实现了令人印象深刻的性能。<strong>但是</strong>,以前的工作或多或少没有考虑某些组成部分让人想起以规划为导向的精神</p>
 <p>为此，我们推出了UniAD，这是一个统一的自动驾驶算法框架，利用五个基本任务来实现安全可靠的系统。UniAD的设计理念是面向规划的。我们认为，这不是一堆简单的任务，需要简单的工程工作。一个关键组件是基于查询的设计来连接所有节点。与传统的边界框表示形式相比，查询受益于更大的感受域，以减轻上游预测的复合误差。此外，查询可以灵活地对各种交互进行建模和编码</p>
-<h3 id="Methodology"><a href="#Methodology" class="headerlink" title="Methodology"></a>Methodology</h3><p>UniAD由四个基于transformer decoder-based的感知和预测模块组成，最后由一个规划器组成。查询 Q 扮演连接pipeline的角色，以对驱动方案中实体的不同交互进行建模。</p>
+<h3 id="Methodology"><a href="#Methodology" class="headerlink" title="Methodology"></a>Methodology</h3><p>UniAD由<strong>四个基于transformer decoder-based的感知和预测模块</strong>组成，<strong>最后由一个规划器组成</strong>。查询 Q 扮演连接pipeline的角色，以对驱动方案中实体的不同交互进行建模。</p>
 <p><img data-src="https://s2.loli.net/2023/10/06/FfyiX9CdYEekwoG.png" alt="image-20231006172400282"></p>
-<p>具体来说，将一系列多相机图像输入特征提取器，并通过BEVFormer中的现成BEV编码器将生成的透视视图特征转换为统一的鸟瞰图（BEV）特征B.</p>
+<p>具体来说，将一系列多相机图像输入特征提取器，并通过BEVFormer中的现成BEV编码器将生成的透视图特征转换为统一的鸟瞰图（BEV）特征B.</p>
+<blockquote>
+<p>也就是说,多机位图片通过特征提取器得到透视图特征,再利用BEVFormer中现成的BEV编码器编码得到统一的鸟瞰图特征.</p>
+</blockquote>
 <p>在 TrackFormer 中，我们称为跟踪查询(track queries)的可学习嵌入从 B 查询agents的信息，以检测和跟踪agents。learnable embeddings从B查询信息</p>
 <p>MapFormer 将地图查询作为道路元素（例如车道和分隔线）的语义抽象，并对地图进行全景分割.</p>
 <p>通过上述表示代理和映射的查询，MotionFormer 捕获agents之间的交互，并映射和预测每个agents的未来轨迹。</p>
 <p>由于每个代理的操作可以显著影响场景中的其他代理，因此此模块对所有考虑的代理进行联合预测。同时，我们设计了一个自我车辆查询来显式地建模自我车辆，并使其能够在这种以场景为中心的范式中与其他代理进行交互</p>
-<p>OccFormer 使用 BEV 功能 B 作为查询，配备agent-wise知识作为键和值，并在保留agents实体的情况下预测多步骤的未来占用(occupancy)。</p>
-<p>Planner利用来自MotionFormer 的富有表现力的自我车辆查询来预测规划结果,使自己远离OccForer预测的占领区域以避免碰撞</p>
+<p><strong>OccFormer</strong> 使用 BEV 特征 B 作为查询，配备agent-wise知识作为键和值，并在保留agents实体的情况下预测多步骤的未来占用(occupancy)。</p>
+<p><strong>Planner</strong>利用来自MotionFormer 的自我车辆查询来预测规划结果,使自己远离OccForer预测的占领区域以避免碰撞</p>
 <p><img data-src="https://s2.loli.net/2023/10/06/ipwL97YE2kQHPR3.png" alt="image-20231006172407503"></p>
 <h4 id="Perception-Tracking-and-Mapping"><a href="#Perception-Tracking-and-Mapping" class="headerlink" title="Perception: Tracking and Mapping"></a>Perception: Tracking and Mapping</h4><p>感知：跟踪和映射</p>
+<p><img data-src="https://proanimer.com/alimg" alt=""></p>
 <p><img data-src="https://s2.loli.net/2023/10/06/B3WSiX6vjFgoZLz.png" alt="image-20231006172412512"></p>
 <p><strong>TrackFormer</strong>:它可以联合执行检测和多目标跟踪 (MOT)，而无需进行无差别的后处理。除了对象检测中使用的传统检测查询  之外，还引入了其他跟踪查询来跨帧跟踪代理.</p>
 <p>具体来说，在每个时间步长内，<strong>初始化的检测查询负责检测首次感知到的新生agents</strong>，而<strong>跟踪查询则对前几帧中检测到的agents进行建模</strong>。</p>
@@ -371,7 +381,7 @@
 <p><img data-src="https://s2.loli.net/2023/10/06/ERe2l7duOKzAtI1.png" alt="image-20231006172418732"></p>
 <p><strong>MapFormer</strong>:我们根据二维全景分割方法<code>Panoptic SegFormer</code>设计.我们将道路要素稀疏地表示为地图查询，以帮助下游运动预测，并对位置和结构知识进行编码。</p>
 <p>我们将道路要素稀疏地表示为map queries，以帮助下游运动预测，并对位置和结构知识进行编码。在驾驶场景中，我们将车道、分隔线和交叉路口设置为 “物”，将可驾驶区域设置为 “物”。</p>
-<p>MapFormer 也有 N 个堆叠层，每一层的输出结果都受到监督，只有最后一层的更新查询 QM 才会转发给 MotionFormer，以实现agents与地图之间的交互。</p>
+<p>MapFormer 也有 N 个堆叠层，每一层的输出结果都受到监督，只有最后一层的更新查询 Q~M~才会转发给 MotionFormer，以实现agents与地图之间的交互。</p>
 <h4 id="Prediction-Motion-Forecasting"><a href="#Prediction-Motion-Forecasting" class="headerlink" title="Prediction: Motion Forecasting"></a>Prediction: Motion Forecasting</h4><p>预测运动预测</p>
 <p>这种模式只需一次前向传递就能在帧中生成多代理轨迹，从而大大节省了将整个场景与每个代理的坐标对齐的计算成本。通过分别从 TrackFormer 和 MapFormer 获取的动态代理 QA 和静态地图 QM 的高度抽象查询，MotionFormer 可以以场景为中心预测所有代理的多模态未来运动，即前 k 个可能的轨迹。</p>
 <p>这种范式通过单次前向传递在帧中生成多智能体轨迹，这大大节省了将整个场景与每个智能体的坐标对齐的计算成本.通过分别从 TrackFormer 和 MapFormer 获取的动态agents Q~A~ 和静态map Q~M~ 的高度抽象查询，MotionFormer 可以以场景为中心预测所有agents 的多模态未来运动，即前 k 个可能的轨迹。</p>
@@ -380,6 +390,26 @@
 {\{\hat{\mathrm{x}}_{i,k}~\in~\mathbb{R}^{T\times2}|i~=~1,\ldots,{N}_{a};k~=1,...,K}\}</script><p>其中 i 索引agents，k 索引轨迹模态，T 是预测范围的长度。</p>
 <h4 id="MotionFormer"><a href="#MotionFormer" class="headerlink" title="MotionFormer"></a>MotionFormer</h4><p>它由 N 层组成，每层捕获三种类型的交互：agents-agents、agents-map和agents-goal point.</p>
 <p><img data-src="https://s2.loli.net/2023/10/06/J4AkdG1SruwH92Y.png" alt="image-20231006172423971"></p>
+<script type="math/tex; mode=display">
+Q_{a/m}=\text{MHCA}(\text{MHSA}(Q),Q_{A}/Q_{M}),</script><p>利用多头交叉注意力和多头自注意力计算车与地图元素的交互</p>
+<p>通过deformed注意力计算agent-goal的点注意力</p>
+<script type="math/tex; mode=display">
+Q_{g}=\text{DeformAttn}(Q,\hat{\mathbf{x}}_{T}^{l-1},B),</script><p>x^l−1^ ~T~ 是前一层预测轨迹的最终值。</p>
+<h5 id="Motion-queries"><a href="#Motion-queries" class="headerlink" title="Motion queries"></a>Motion queries</h5><p>MotionFormer的每一层的输入q为motion query.</p>
+<p>包括两个Q：由前一层生成的查询上下文 Qctx 和查询位置 Qpos。具体来说，Qpos整合了位置知识</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+Q_{\mathrm{pos}}& =\mathbf{MLP}(\mathbf{PE}(I^s))+\mathbf{MLP}(\mathbf{PE}(I^a))  \\
+&+\mathbf{MLP}(\mathbf{PE}(\hat{\mathbf{x}}_0))+\mathbf{MLP}(\mathbf{PE}(\hat{\mathbf{x}}_T^{l-1})).
+\end{aligned}</script><h4 id="Occupancy-Prediction"><a href="#Occupancy-Prediction" class="headerlink" title="Occupancy Prediction"></a>Occupancy Prediction</h4><p>由于agents知识的使用不足，他们很难预测所有agents的行为，这对于了解场景如何演变至关重要</p>
+<p>为了解决这个问题，提出了OccFormer，在两个方面结合了<strong>场景级和agents级</strong>语义：（1）密集的场景特征通过精心设计的注意力模块获取agent级别的特征</p>
+<p>（2） 通过代理级特征和密集场景特征之间的矩阵乘法轻松生成实例occ，而无需进行繁重的后期处理。</p>
+<h4 id="Planning"><a href="#Planning" class="headerlink" title="Planning"></a>Planning</h4><p>没有高清地图或者可以预测的路径需要高级命令引导路径.</p>
+<p>将原始导航信号转为可学习的嵌入.</p>
+<p>对BEV特征B进行plan query，使其感知周围环境，然后将其解码为未来的航路点 </p>
+<h4 id="训练"><a href="#训练" class="headerlink" title="训练"></a>训练</h4><p>首先，自动驾驶端到端的训练是很难且不稳定的，因为任务太多，各个任务之间又有依赖关系，因此不能直接训练，得益于UniAD的模块化设计，使得感知，预测等的模块化设计，使得UniAD可以解耦不同的模块，从而分阶段训练。</p>
+<p>UniAD分两个阶段训练，首先联合训练感知部分(包括tracking和mapping模块)6个epochs，然后端到端地训练整个模型(包括感知，预测和规划模块)20个epochs。经验表明，两阶段训练更稳定。</p>
+<p><strong>Shared matching.</strong> 由于UniAD涉及instance-wise的建模，因此在感知和预测任务中需要将预测和gt配对。与DETR类似，在追踪和在线建图阶段引入二分匹配算法。对于tracking，来自检测queries的候选者与新生的gt对象匹配，来自track queries的预测继承了先前帧的分配。tracking模块中的匹配结果在motion会让occupancy节点中被重用，以在端到端的框架中对历史轨迹到未来运动的agent进行一致地建模。</p>
 <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
     </div>
 
@@ -843,7 +873,7 @@ if(canvas.getContext){
 	  
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Planning-oriented-Autonomous-Driving"><span class="nav-number">1.</span> <span class="nav-text">Planning-oriented Autonomous Driving</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%91%98%E8%A6%81"><span class="nav-number">1.1.</span> <span class="nav-text">摘要</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Intro"><span class="nav-number">1.2.</span> <span class="nav-text">Intro</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Methodology"><span class="nav-number">1.3.</span> <span class="nav-text">Methodology</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Perception-Tracking-and-Mapping"><span class="nav-number">1.3.1.</span> <span class="nav-text">Perception: Tracking and Mapping</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Prediction-Motion-Forecasting"><span class="nav-number">1.3.2.</span> <span class="nav-text">Prediction: Motion Forecasting</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#MotionFormer"><span class="nav-number">1.3.3.</span> <span class="nav-text">MotionFormer</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Planning-oriented-Autonomous-Driving"><span class="nav-number">1.</span> <span class="nav-text">Planning-oriented Autonomous Driving</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Motivation"><span class="nav-number">1.1.</span> <span class="nav-text">Motivation</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Contribution"><span class="nav-number">1.1.1.</span> <span class="nav-text">Contribution</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%91%98%E8%A6%81"><span class="nav-number">1.2.</span> <span class="nav-text">摘要</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Intro"><span class="nav-number">1.3.</span> <span class="nav-text">Intro</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Methodology"><span class="nav-number">1.4.</span> <span class="nav-text">Methodology</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Perception-Tracking-and-Mapping"><span class="nav-number">1.4.1.</span> <span class="nav-text">Perception: Tracking and Mapping</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Prediction-Motion-Forecasting"><span class="nav-number">1.4.2.</span> <span class="nav-text">Prediction: Motion Forecasting</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#MotionFormer"><span class="nav-number">1.4.3.</span> <span class="nav-text">MotionFormer</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Motion-queries"><span class="nav-number">1.4.3.1.</span> <span class="nav-text">Motion queries</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Occupancy-Prediction"><span class="nav-number">1.4.4.</span> <span class="nav-text">Occupancy Prediction</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Planning"><span class="nav-number">1.4.5.</span> <span class="nav-text">Planning</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%AD%E7%BB%83"><span class="nav-number">1.4.6.</span> <span class="nav-text">训练</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
       <div class="site-overview-wrap sidebar-panel">
@@ -858,7 +888,7 @@ if(canvas.getContext){
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">137</span>
+          <span class="site-state-item-count">139</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -871,7 +901,7 @@ if(canvas.getContext){
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">169</span>
+        <span class="site-state-item-count">170</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -978,12 +1008,12 @@ if(canvas.getContext){
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">787k</span>
+    <span title="站点总字数">795k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">11:56</span>
+    <span title="站点阅读时长">12:03</span>
 </div>
 
     <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
