@@ -53,7 +53,7 @@
 <meta property="og:image" content="https://i.imgur.com/0mXZUbA.png">
 <meta property="og:image" content="https://i.imgur.com/cozY007.png">
 <meta property="article:published_time" content="2023-10-11T09:26:00.000Z">
-<meta property="article:modified_time" content="2023-10-13T09:38:59.809Z">
+<meta property="article:modified_time" content="2023-10-14T11:40:36.351Z">
 <meta property="article:author" content="Sekyoro">
 <meta property="article:tag" content="CMake">
 <meta name="twitter:card" content="summary">
@@ -277,7 +277,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-10-13 17:38:59" itemprop="dateModified" datetime="2023-10-13T17:38:59+08:00">2023-10-13</time>
+                <time title="修改时间：2023-10-14 19:40:36" itemprop="dateModified" datetime="2023-10-14T19:40:36+08:00">2023-10-14</time>
               </span>
 
           
@@ -293,14 +293,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>3.7k</span>
+              <span>4.1k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>3 分钟</span>
+              <span>4 分钟</span>
             </span>
 
         </div>
@@ -321,8 +321,12 @@
 <p>顶层目录</p>
 <p><code>EXECUTABLE_OUTPUT_PATH</code>以及<code>LIBRARY_OUTPUT_PATH</code></p>
 <p>分别用来重新定义最终结果的存放目录</p>
-<p><code>CMAKE_CXX_FLAG*</code>和<code>CMAKE_C_FLAGS</code></p>
-<p>设置C/ C++编译选项,</p>
+<p><code>CMAKE_ARCHIVE_OUTPUT_DIRECTORY</code>：默认存放静态库的文件夹位置；</p>
+<p><code>CMAKE_LIBRARY_OUTPUT_DIRECTORY</code>：默认存放动态库的文件夹位置；</p>
+<p><code>LIBRARY_OUTPUT_PATH</code>：默认存放库文件的位置，如果产生的是静态库并且没有指定 CMAKE_ARCHIVE_OUTPUT_DIRECTORY 则存放在该目录下，动态库也类似；</p>
+<p><code>CMAKE_RUNTIME_OUTPUT_DIRECTORY</code>：存放可执行软件的目录；</p>
+<p><code>CMAKE_CXX_FLAGS</code>和<code>CMAKE_C_FLAGS</code></p>
+<p>设置C/ C++编译选项,<code>CMAKE_C_COMPILER</code>设置对应编译器路径.</p>
 <p><code>BUILD_SHARED_LIBS</code></p>
 <p>用来控制默认的库编译方式,如果不进行设置,使用ADD_LIBRARY 并没有指定库类型的情况下,默认编译生成的库都是静态库.</p>
 <p>此外还有一些系统信息</p>
@@ -361,7 +365,7 @@
 <figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">add_library</span>( lib_pipe_shared SHARED <span class="variable">$&#123;pipe_src&#125;</span> <span class="variable">$&#123;pipe_header_files&#125;</span>)</span><br></pre></td></tr></table></figure>
 <h2 id="option与add-definitions"><a href="#option与add-definitions" class="headerlink" title="option与add_definitions"></a>option与add_definitions</h2><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">option</span>(&lt;variable&gt; <span class="string">&quot;&lt;help_text&gt;&quot;</span> [value])</span><br></pre></td></tr></table></figure>
 <p>可以在cmake命令中指定该值.</p>
-<p>而add_definition用于源文件中使用该宏</p>
+<p>而add_definition用于指定编译器参数，比如<code>add_definitions(&quot;-Wall -g&quot;)</code>,此外更推荐使用add_compile_definitions将预处理器定义添加到编译器命令行,使用add_compile_options命令添加其它选项。</p>
 <p>比如下面文件,使用add_definition定义了TEST_DEBUG,option定义为OFF并在cmake执行时指定为on,然后在cmake文件中指定option为on,这样就执行了<code>add_definitions(-DTEST_DEBUG)</code>,定义了该宏.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"></span><br><span class="line">cmake -DTEST_DEBUG=ON .</span><br><span class="line">cmake --build .</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">project</span>(<span class="keyword">test</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">option</span>(TEST_DEBUG <span class="string">&quot;option for debug&quot;</span> <span class="keyword">OFF</span>)</span><br><span class="line"><span class="keyword">if</span> (TEST_DEBUG)</span><br><span class="line"><span class="keyword">add_definitions</span>(-DTEST_DEBUG)</span><br><span class="line"><span class="keyword">endif</span>()</span><br></pre></td></tr></table></figure>
@@ -863,7 +867,7 @@ if(canvas.getContext){
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">139</span>
+          <span class="site-state-item-count">140</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -988,12 +992,12 @@ if(canvas.getContext){
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">795k</span>
+    <span title="站点总字数">799k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">12:03</span>
+    <span title="站点阅读时长">12:07</span>
 </div>
 
     <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
