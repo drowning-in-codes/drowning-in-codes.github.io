@@ -69,17 +69,20 @@
 <meta property="og:image" content="https://i.imgur.com/VYCgrZW.png">
 <meta property="og:image" content="https://i.imgur.com/v83gWCu.png">
 <meta property="og:image" content="https://i.imgur.com/eMlaE2s.png">
+<meta property="og:image" content="https://i.imgur.com/ARG5B52.png">
 <meta property="og:image" content="https://i.imgur.com/r4xeKjo.png">
 <meta property="og:image" content="c:/Users/proanimer/AppData/Roaming/Typora/typora-user-images/image-20231023214919424.png">
 <meta property="og:image" content="https://i.imgur.com/8r65rwW.png">
 <meta property="og:image" content="https://github.com/microsoft/AI-For-Beginners/raw/main/lessons/5-NLP/16-RNN/images/multi-layer-lstm.jpg">
 <meta property="og:image" content="https://i.imgur.com/srjJVXN.png">
 <meta property="og:image" content="https://i.imgur.com/SeTNrFy.png">
+<meta property="og:image" content="https://github.com/microsoft/AI-For-Beginners/raw/main/lessons/5-NLP/17-GenerativeNetworks/images/rnn-generate.png">
+<meta property="og:image" content="https://github.com/microsoft/AI-For-Beginners/raw/main/lessons/5-NLP/17-GenerativeNetworks/images/rnn-generate-inf.png">
 <meta property="article:published_time" content="2023-10-23T02:31:33.000Z">
-<meta property="article:modified_time" content="2023-10-23T15:19:47.846Z">
+<meta property="article:modified_time" content="2023-10-26T02:09:00.571Z">
 <meta property="article:author" content="Sekyoro">
-<meta property="article:tag" content="Deep Learning">
 <meta property="article:tag" content="NLP">
+<meta property="article:tag" content="Deep Learning">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://i.imgur.com/MXAQdkP.png">
 
@@ -293,10 +296,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2023-10-23 10:31:33 / 修改时间：23:19:47" itemprop="dateCreated datePublished" datetime="2023-10-23T10:31:33+08:00">2023-10-23</time>
+              <time title="创建时间：2023-10-23 10:31:33" itemprop="dateCreated datePublished" datetime="2023-10-23T10:31:33+08:00">2023-10-23</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-10-26 10:09:00" itemprop="dateModified" datetime="2023-10-26T10:09:00+08:00">2023-10-26</time>
+              </span>
 
           
             <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
@@ -311,14 +320,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>17k</span>
+              <span>21k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>15 分钟</span>
+              <span>19 分钟</span>
             </span>
 
         </div>
@@ -420,6 +429,7 @@
 <p>为了捕捉文本序列的含义，我们需要使用另一种神经网络架构，称为递归神经网络或RNN。在 RNN 中，我们通过<strong>网络一次传递一个符号，网络产生一些状态，然后我们用下一个符号再次传递给网络</strong>。</p>
 <p><img data-src="https://i.imgur.com/FwxIpWX.png" alt="image-20231023222833797"></p>
 <p>pytorch中普通RNN隐状态通过了tanh激活,每一层的隐状态与输出是一样.</p>
+<p>RNN循环网络是每次拿每个batch中的一个sequence中的一个,大小是embed_size(或者直接是one-hot编码的vacab_size,同时可以输入一个初始状态,shape是hidden_size,然后两个矩阵分别是(embed_size,hidden_size),(hidden_size,hidden_size),其实就是连个全连接然后直接concat通过激活函数,这就是简单的RNN,),</p>
 <p><img data-src="https://i.imgur.com/5uUeVVj.png" alt="image-20231023224359316"></p>
 <p>对于一个句子的数据,X是(seq_length,embedding_size),权重W是(embedding_size,hidden_dim),H是(hidden_dim,hidden_dim),S是(seq_length,hidden_dim),S是上一层的输出,也就是W×X~i~+H×S~i-1~+b.</p>
 <p><img data-src="https://github.com/microsoft/AI-For-Beginners/raw/main/lessons/5-NLP/16-RNN/images/rnn.png" alt="RNN"></p>
@@ -441,11 +451,12 @@
 <ul>
 <li>忘记门采用隐藏的向量并确定我们需要忘记向量 c 的哪些分量，以及要通过哪些分量。</li>
 <li>输入门从输入和隐藏向量中获取一些信息，并将其插入状态。</li>
-<li>输出门通过具有tanh激活的某个线性层转换状态，然后使用隐藏向量H~i~选择其部分组件以产生新的状态c~i + 1~。</li>
+<li>输出门通过具有tanh激活的某个线性层转换状态，然后使用隐藏向量H~i~选择其部分组件以产生新的状态c~i+1~。</li>
 </ul>
 <p>而GRU结构要简单一些,支持隐状态的门控. 重置门允许我们控制“可能还想记住”的过去状态的数量, 更新门将允许我们控制新状态中有多少个是旧状态的副本。</p>
 <p><img data-src="https://i.imgur.com/v83gWCu.png" alt="image-20231023214736240"></p>
 <p><img data-src="https://i.imgur.com/eMlaE2s.png" alt="image-20231023214808081"></p>
+<p><img data-src="https://i.imgur.com/ARG5B52.png" alt="image-20231026095926569"></p>
 <p><img data-src="https://i.imgur.com/r4xeKjo.png" alt="image-20231023214906219"></p>
 <p><img data-src="C:\Users\proanimer\AppData\Roaming\Typora\typora-user-images\image-20231023214919424.png" alt="image-20231023214919424"></p>
 <p><img data-src="https://i.imgur.com/8r65rwW.png" alt="image-20231023214931931"></p>
@@ -478,7 +489,44 @@
 <li>多对一对应于我们在上一个单元中描述的 RNN 架构，例如文本分类</li>
 <li>多对多或<strong>序列到序列</strong>对应于机器翻译等任务，其中我们首先让 RNN 将所有信息从输入序列收集到隐藏状态，另一个 RNN 链将此状态展开到输出序列中。</li>
 </ul>
-<h3 id="Transformers"><a href="#Transformers" class="headerlink" title="Transformers"></a>Transformers</h3><link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
+<p>对于生成序列任务而言,在每一步中，我们将获取长度为 nchars 的字符序列，并要求网络为每个输入字符生成下一个输出字符</p>
+<p><img data-src="https://github.com/microsoft/AI-For-Beginners/raw/main/lessons/5-NLP/17-GenerativeNetworks/images/rnn-generate.png" alt="Image showing an example RNN generation of the word &#39;HELLO&#39;."></p>
+<p>在生成文本时（在推理过程中），从一些提示开始，该提示通过 RNN 单元格生成其中间状态，然后从该状态开始生成。我们一次生成一个字符，并将状态和生成的字符传递给另一个 RNN 单元以生成下一个，直到我们生成足够的字符。</p>
+<p><img data-src="https://github.com/microsoft/AI-For-Beginners/raw/main/lessons/5-NLP/17-GenerativeNetworks/images/rnn-generate-inf.png" alt="img"></p>
+<p>这样需要添加一些特殊字符表明开始与结尾,比如\<eos>(在训练数据中添加).</p>
+<p>如果只需要无穷的生成字符,只需要固定序列大小,比如为nchars,在l长的序列中就有l-nchars这么多个数据.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">char_tokenizer</span>(<span class="params">words</span>):</span></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">list</span>(words) <span class="comment">#[word for word in words]</span></span><br><span class="line"></span><br><span class="line">counter = collections.Counter()</span><br><span class="line"><span class="keyword">for</span> (label, line) <span class="keyword">in</span> train_dataset:</span><br><span class="line">    counter.update(char_tokenizer(line))</span><br><span class="line">vocab = torchtext.vocab.vocab(counter)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">enc</span>(<span class="params">x</span>):</span></span><br><span class="line">    <span class="keyword">return</span> torch.LongTensor(encode(x,voc=vocab,tokenizer=char_tokenizer))</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_batch</span>(<span class="params">s,nchars=nchars</span>):</span></span><br><span class="line">    ins = torch.zeros(<span class="built_in">len</span>(s)-nchars,nchars,dtype=torch.long,device=device)</span><br><span class="line">    outs = torch.zeros(<span class="built_in">len</span>(s)-nchars,nchars,dtype=torch.long,device=device)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(s)-nchars):</span><br><span class="line">        ins[i] = enc(s[i:i+nchars])</span><br><span class="line">        outs[i] = enc(s[i+<span class="number">1</span>:i+nchars+<span class="number">1</span>])</span><br><span class="line">    <span class="keyword">return</span> ins,outs <span class="comment"># 获得成对的数据 每个数据长度nchars</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">generate</span>(<span class="params">net,size=<span class="number">100</span>,start=<span class="string">&#x27;today &#x27;</span></span>):</span></span><br><span class="line">        chars = <span class="built_in">list</span>(start)</span><br><span class="line">        out, s = net(enc(chars).view(<span class="number">1</span>,-<span class="number">1</span>).to(device))</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(size):</span><br><span class="line">            nc = torch.argmax(out[<span class="number">0</span>][-<span class="number">1</span>])</span><br><span class="line">            chars.append(vocab.get_itos()[nc])</span><br><span class="line">            out, s = net(nc.view(<span class="number">1</span>,-<span class="number">1</span>),s)</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;&#x27;</span>.join(chars)</span><br></pre></td></tr></table></figure>
+<p>因为网络以字符作为输入，词汇量很小，我们不需要嵌入层，独热编码输入可以直接进入LSTM单元。</p>
+<p>但是，由于我们将字符号作为输入传递，因此我们需要在传递给 LSTM 之前对它们进行独热编码。输出编码器将是一个线性层，它将隐藏状态转换为独热编码输出。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LSTMGenerator</span>(<span class="params">torch.nn.Module</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, vocab_size, hidden_dim</span>):</span></span><br><span class="line">        <span class="built_in">super</span>().__init__()</span><br><span class="line">        self.rnn = torch.nn.LSTM(vocab_size,hidden_dim,batch_first=<span class="literal">True</span>)</span><br><span class="line">        self.fc = torch.nn.Linear(hidden_dim, vocab_size)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span>(<span class="params">self, x, s=<span class="literal">None</span></span>):</span></span><br><span class="line">        x = torch.nn.functional.one_hot(x,vocab_size).to(torch.float32)</span><br><span class="line">        x,s = self.rnn(x,s)</span><br><span class="line">        <span class="keyword">return</span> self.fc(x),s</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>在训练期间希望能够对生成的文本进行采样。定义 generate 函数，该函数将从初始字符串开始生成长度大小的输出字符串。</p>
+</blockquote>
+<p>首先将通过传递整个起始字符串，并取出输出状态 s 和下一个预测字符。由于 out 是独热编码的，我们采用 argmax 来获取词汇表中字符 nc 的索引，并使用 itos 找出实际字符并将其附加到生成的字符字符列表中。生成一个字符的过程是重复<code>size</code>次数以生成所需数量的字符。</p>
+<p>说人话就是,搭建的模型输出shape是vacab_size(就是RNN或者LSTM的输出),其中最大值的index就是vocab的index.使用交叉熵损失,</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">net = LSTMGenerator(vocab_size,<span class="number">64</span>).to(device)</span><br><span class="line"></span><br><span class="line">samples_to_train = <span class="number">10000</span></span><br><span class="line">optimizer = torch.optim.Adam(net.parameters(),<span class="number">0.01</span>)</span><br><span class="line">loss_fn = torch.nn.CrossEntropyLoss()</span><br><span class="line">net.train()</span><br><span class="line"><span class="keyword">for</span> i,x <span class="keyword">in</span> <span class="built_in">enumerate</span>(train_dataset):</span><br><span class="line">    <span class="comment"># x[0] is class label, x[1] is text</span></span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(x[<span class="number">1</span>])-nchars&lt;<span class="number">10</span>:</span><br><span class="line">        <span class="keyword">continue</span></span><br><span class="line">    samples_to_train-=<span class="number">1</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> samples_to_train: <span class="keyword">break</span></span><br><span class="line">    text_in, text_out = get_batch(x[<span class="number">1</span>])</span><br><span class="line">    optimizer.zero_grad()</span><br><span class="line">    out,s = net(text_in)</span><br><span class="line">    loss = torch.nn.functional.cross_entropy(out.view(-<span class="number">1</span>,vocab_size),text_out.flatten()) <span class="comment">#cross_entropy(out,labels)</span></span><br><span class="line">    loss.backward()</span><br><span class="line">    optimizer.step()</span><br><span class="line">    <span class="keyword">if</span> i%<span class="number">1000</span>==<span class="number">0</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;Current loss = <span class="subst">&#123;loss.item()&#125;</span>&quot;</span>)</span><br><span class="line">        <span class="built_in">print</span>(generate(net))</span><br></pre></td></tr></table></figure>
+<p>可以改进的地方</p>
+<ol>
+<li>我们准备训练数据的方式是从一个样本生成一个小批量。这并不理想，因为<strong>小批量的大小都不同，其中一些甚至无法生成</strong>，因为文本小于 nchars。此外，<strong>小批量不能充分利用GPU</strong>。更明智的做法是从<strong>所有样本中获取一大块文本，然后生成所有输入输出对，打乱它们，并生成大小相等的小批量</strong>。</li>
+<li><strong>多层 LSTM</strong>。尝试 2 或 3 层 LSTM 单元是有意义的。正如我们在上一个单元中提到的，LSTM 的每一层都从文本中提取某些模式，在字符级生成器的情况下，我们可以期望较低的 LSTM 级别负责提取音节，而较高的级别负责提取单词和单词组合。这可以通过将层数参数传递给 LSTM 构造函数来简单地实现。</li>
+</ol>
+<h4 id="soft-text-generation-and-temperature"><a href="#soft-text-generation-and-temperature" class="headerlink" title="soft text generation and temperature"></a>soft text generation and temperature</h4><p>在前面的 generate 定义中，我们始终将概率最高的字符作为生成文本中的下一个字符。这导致文本经常一次又一次地在相同的字符序列之间“循环”(来回就是那那几个字符,类似石头剪刀布,石头经常赢剪刀,剪刀经常赢布)</p>
+<p>但是，如果我们看一下下一个字符的概率分布，可能是几个最高概率之间的差异并不大，例如一个字符的概率为 0.2，另一个字符的概率为 0.19，等等。例如，当在序列“play”中查找下一个字符时，下一个字符同样可以是空格或e。</p>
+<p>所以选择概率较高的字符并不总是“公平的”，因为选择第二高的字符仍可能使我们获得有意义的文本。从网络输出给出的概率分布中对字符进行采样更为明智。可以使用实现所谓多项式分布的多项式函数( <strong>multinomial distribution</strong>)进行此采样。实现此软文本生成的函数定义如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">generate_soft</span>(<span class="params">net,size=<span class="number">100</span>,start=<span class="string">&#x27;today &#x27;</span>,temperature=<span class="number">1.0</span></span>):</span></span><br><span class="line">        chars = <span class="built_in">list</span>(start)</span><br><span class="line">        out, s = net(enc(chars).view(<span class="number">1</span>,-<span class="number">1</span>).to(device))</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(size):</span><br><span class="line">            <span class="comment">#nc = torch.argmax(out[0][-1])</span></span><br><span class="line">            out_dist = out[<span class="number">0</span>][-<span class="number">1</span>].div(temperature).exp()</span><br><span class="line">            nc = torch.multinomial(out_dist,<span class="number">1</span>)[<span class="number">0</span>]</span><br><span class="line">            chars.append(vocab.get_itos()[nc])</span><br><span class="line">            out, s = net(nc.view(<span class="number">1</span>,-<span class="number">1</span>),s)</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;&#x27;</span>.join(chars)</span><br><span class="line">    </span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> [<span class="number">0.3</span>,<span class="number">0.8</span>,<span class="number">1.0</span>,<span class="number">1.3</span>,<span class="number">1.8</span>]:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;--- Temperature = <span class="subst">&#123;i&#125;</span>\n<span class="subst">&#123;generate_soft(net,size=<span class="number">300</span>,start=<span class="string">&#x27;Today &#x27;</span>,temperature=i)&#125;</span>\n&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p>引入了一个称为温度的参数，用于指示应该坚持最高概率的力度(温度越低越严格).</p>
+<p>如果温度为 1.0，我们进行公平的多项式采样，当温度变为无穷大时.</p>
+<p>所有概率都变得相等，我们随机选择下一个字符。当我们过度升高温度时，文本变得毫无意义，当它接近 0 时，它类似于“循环”的硬生成文本。</p>
+<p>核心是下面代码</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">out_dist = out[<span class="number">0</span>][-<span class="number">1</span>].div(temperature).exp()</span><br><span class="line">nc = torch.multinomial(out_dist,<span class="number">1</span>)[<span class="number">0</span>]</span><br><span class="line">chars.append(vocab.get_itos()[nc])</span><br></pre></td></tr></table></figure>
+<h3 id="Transformers"><a href="#Transformers" class="headerlink" title="Transformers"></a>Transformers</h3><p>NLP领域最重要的问题之一是机器翻译,这是谷歌翻译等工具的基本任务,或者更一般地说，任何序列到序列的任务.</p>
+<p>循环网络的一个主要缺点是序列中的<strong>所有单词对结果都有相同的影响</strong>。这会导致标准 LSTM 编码器-解码器模型在序列到序列任务（如命名实体识别和机器翻译）中性能欠佳。实际上，输入序列中的特定单词通常比其他单词对顺序输出的影响更大。</p>
+<blockquote>
+<p>GRN,LSTM等引入遗忘门,更新门这种机制试图解决长序列遗忘问题,但不能解决不同单词权重的问题</p>
+</blockquote>
+<p>注意力机制提供了一种<strong>加权每个输入向量对RNN的每个输出预测的上下文影响的方法</strong>。它的实现方式是在输入 RNN 的中间状态和输出 RNN 之间创建快捷方式。</p>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
     </div>
 
     
@@ -586,8 +634,8 @@
       <footer class="post-footer">
           
           <div class="post-tags">
-              <a href="/tags/Deep-Learning/" rel="tag"><i class="fa fa-tag"></i> Deep Learning</a>
               <a href="/tags/NLP/" rel="tag"><i class="fa fa-tag"></i> NLP</a>
+              <a href="/tags/Deep-Learning/" rel="tag"><i class="fa fa-tag"></i> Deep Learning</a>
           </div>
 
         
@@ -599,7 +647,10 @@
     <a href="/2023/10/21/%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B-%E5%88%9D%E8%AF%86/" rel="prev" title="目标检测_初识">
       <i class="fa fa-chevron-left"></i> 目标检测_初识
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2023/10/26/%E5%90%8E%E5%8F%B0%E6%89%A7%E8%A1%8C-%E4%BB%8Enohup%E5%88%B0tmux/" rel="next" title="后台执行:从nohup到tmux">
+      后台执行:从nohup到tmux <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -949,7 +1000,7 @@ if(canvas.getContext){
 	  
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#tokenization-amp-amp-representation"><span class="nav-number">1.</span> <span class="nav-text">tokenization&amp;&amp;representation</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Bag-of-Words"><span class="nav-number">1.0.1.</span> <span class="nav-text">Bag-of-Words</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#N-Grams"><span class="nav-number">1.0.2.</span> <span class="nav-text">N-Grams</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TF-IDF"><span class="nav-number">1.0.3.</span> <span class="nav-text">TF-IDF</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Embedding"><span class="nav-number">2.</span> <span class="nav-text">Embedding</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Word2Vec"><span class="nav-number">2.0.1.</span> <span class="nav-text">Word2Vec</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#FastText"><span class="nav-number">2.0.2.</span> <span class="nav-text">FastText</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#GloVe"><span class="nav-number">2.0.3.</span> <span class="nav-text">GloVe</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Language-Modeling"><span class="nav-number">2.1.</span> <span class="nav-text">Language Modeling</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RNN-Recurrent-Neural-Networks"><span class="nav-number">3.</span> <span class="nav-text">RNN(Recurrent Neural Networks)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#LSTM-amp-amp-GRU"><span class="nav-number">3.0.1.</span> <span class="nav-text">LSTM&amp;&amp;GRU</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#PACKED-SEQUENCE"><span class="nav-number">3.0.2.</span> <span class="nav-text">PACKED SEQUENCE</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Bidirectional-and-Multilayer-RNNs"><span class="nav-number">3.0.3.</span> <span class="nav-text">Bidirectional and Multilayer RNNs</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GRN-Generative-Recurrent-Networks"><span class="nav-number">4.</span> <span class="nav-text">GRN(Generative Recurrent Networks)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Transformers"><span class="nav-number">4.1.</span> <span class="nav-text">Transformers</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#tokenization-amp-amp-representation"><span class="nav-number">1.</span> <span class="nav-text">tokenization&amp;&amp;representation</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Bag-of-Words"><span class="nav-number">1.0.1.</span> <span class="nav-text">Bag-of-Words</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#N-Grams"><span class="nav-number">1.0.2.</span> <span class="nav-text">N-Grams</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TF-IDF"><span class="nav-number">1.0.3.</span> <span class="nav-text">TF-IDF</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Embedding"><span class="nav-number">2.</span> <span class="nav-text">Embedding</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Word2Vec"><span class="nav-number">2.0.1.</span> <span class="nav-text">Word2Vec</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#FastText"><span class="nav-number">2.0.2.</span> <span class="nav-text">FastText</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#GloVe"><span class="nav-number">2.0.3.</span> <span class="nav-text">GloVe</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Language-Modeling"><span class="nav-number">2.1.</span> <span class="nav-text">Language Modeling</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RNN-Recurrent-Neural-Networks"><span class="nav-number">3.</span> <span class="nav-text">RNN(Recurrent Neural Networks)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#LSTM-amp-amp-GRU"><span class="nav-number">3.0.1.</span> <span class="nav-text">LSTM&amp;&amp;GRU</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#PACKED-SEQUENCE"><span class="nav-number">3.0.2.</span> <span class="nav-text">PACKED SEQUENCE</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Bidirectional-and-Multilayer-RNNs"><span class="nav-number">3.0.3.</span> <span class="nav-text">Bidirectional and Multilayer RNNs</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GRN-Generative-Recurrent-Networks"><span class="nav-number">4.</span> <span class="nav-text">GRN(Generative Recurrent Networks)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#soft-text-generation-and-temperature"><span class="nav-number">4.0.1.</span> <span class="nav-text">soft text generation and temperature</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Transformers"><span class="nav-number">4.1.</span> <span class="nav-text">Transformers</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
       <div class="site-overview-wrap sidebar-panel">
@@ -964,7 +1015,7 @@ if(canvas.getContext){
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">144</span>
+          <span class="site-state-item-count">145</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1089,12 +1140,12 @@ if(canvas.getContext){
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">850k</span>
+    <span title="站点总字数">857k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">12:53</span>
+    <span title="站点阅读时长">12:59</span>
 </div>
 
     <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
