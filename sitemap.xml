@@ -688,14 +688,14 @@
   </url>
   
   <url>
-    <loc>https://www.sekyoro.top/2021/04/29/%E5%85%B3%E4%BA%8E%E6%8C%87%E9%92%88%E5%92%8C%E5%87%BD%E6%95%B0/</loc>
+    <loc>https://www.sekyoro.top/2021/04/23/%E5%B9%BF%E4%B9%89%E8%A1%A8%E7%AE%80%E4%BB%8B/</loc>
     
     <lastmod>2022-04-01</lastmod>
     
   </url>
   
   <url>
-    <loc>https://www.sekyoro.top/2021/04/23/%E5%B9%BF%E4%B9%89%E8%A1%A8%E7%AE%80%E4%BB%8B/</loc>
+    <loc>https://www.sekyoro.top/2021/04/29/%E5%85%B3%E4%BA%8E%E6%8C%87%E9%92%88%E5%92%8C%E5%87%BD%E6%95%B0/</loc>
     
     <lastmod>2022-04-01</lastmod>
     
@@ -737,13 +737,6 @@
   </url>
   
   <url>
-    <loc>https://www.sekyoro.top/2021/07/21/Scrapy-%E5%8A%A8%E6%80%81%E7%BD%91%E9%A1%B5%E7%88%AC%E5%8F%96/</loc>
-    
-    <lastmod>2022-04-01</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://www.sekyoro.top/2021/07/20/Scrapy-%E4%B8%8B%E8%BD%BD%E5%9B%BE%E7%89%87-%E6%96%87%E4%BB%B6/</loc>
     
     <lastmod>2022-04-01</lastmod>
@@ -751,7 +744,7 @@
   </url>
   
   <url>
-    <loc>https://www.sekyoro.top/2021/07/31/Python%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0/</loc>
+    <loc>https://www.sekyoro.top/2021/07/21/Scrapy-%E5%8A%A8%E6%80%81%E7%BD%91%E9%A1%B5%E7%88%AC%E5%8F%96/</loc>
     
     <lastmod>2022-04-01</lastmod>
     
@@ -766,6 +759,13 @@
   
   <url>
     <loc>https://www.sekyoro.top/2021/07/29/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%A4%E8%AF%86/</loc>
+    
+    <lastmod>2022-04-01</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.sekyoro.top/2021/07/31/Python%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0/</loc>
     
     <lastmod>2022-04-01</lastmod>
     
@@ -961,14 +961,7 @@
   </url>
   
   <url>
-    <loc>https://www.sekyoro.top/2022/01/17/pandas%E5%AD%A6%E4%B9%A0/</loc>
-    
-    <lastmod>2022-04-01</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.sekyoro.top/2022/01/19/%E5%8F%AF%E8%A7%86%E5%8C%96%E5%9B%BE%E7%9A%84%E5%B7%A5%E5%85%B7/</loc>
+    <loc>https://www.sekyoro.top/2022/01/11/python-opencv%E5%AD%A6%E4%B9%A0/</loc>
     
     <lastmod>2022-04-01</lastmod>
     
@@ -982,7 +975,14 @@
   </url>
   
   <url>
-    <loc>https://www.sekyoro.top/2022/01/11/python-opencv%E5%AD%A6%E4%B9%A0/</loc>
+    <loc>https://www.sekyoro.top/2022/01/17/pandas%E5%AD%A6%E4%B9%A0/</loc>
+    
+    <lastmod>2022-04-01</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.sekyoro.top/2022/01/19/%E5%8F%AF%E8%A7%86%E5%8C%96%E5%9B%BE%E7%9A%84%E5%B7%A5%E5%85%B7/</loc>
     
     <lastmod>2022-04-01</lastmod>
     
@@ -1073,13 +1073,6 @@
   </url>
   
   <url>
-    <loc>https://www.sekyoro.top/lib/jquery_lazyload/bower.json</loc>
-    
-    <lastmod>2021-04-09</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://www.sekyoro.top/lib/jquery_lazyload/README.html</loc>
     
     <lastmod>2021-04-09</lastmod>
@@ -1087,7 +1080,14 @@
   </url>
   
   <url>
-    <loc>https://www.sekyoro.top/lib/bookmark/package.json</loc>
+    <loc>https://www.sekyoro.top/lib/jquery_lazyload/bower.json</loc>
+    
+    <lastmod>2021-04-09</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.sekyoro.top/lib/bookmark/README.html</loc>
     
     <lastmod>2021-04-09</lastmod>
     
@@ -1101,7 +1101,7 @@
   </url>
   
   <url>
-    <loc>https://www.sekyoro.top/lib/bookmark/README.html</loc>
+    <loc>https://www.sekyoro.top/lib/bookmark/package.json</loc>
     
     <lastmod>2021-04-09</lastmod>
     
@@ -1152,6 +1152,20 @@
   </url>
   
   <url>
+    <loc>https://www.sekyoro.top/tags/zsh/</loc>
+    <lastmod>2023-11-02</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.sekyoro.top/tags/shell/</loc>
+    <lastmod>2023-11-02</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://www.sekyoro.top/tags/CSS/</loc>
     <lastmod>2023-11-02</lastmod>
     <changefreq>daily</changefreq>
@@ -1167,20 +1181,6 @@
   
   <url>
     <loc>https://www.sekyoro.top/tags/front/</loc>
-    <lastmod>2023-11-02</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.sekyoro.top/tags/zsh/</loc>
-    <lastmod>2023-11-02</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.sekyoro.top/tags/shell/</loc>
     <lastmod>2023-11-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1313,13 +1313,6 @@
   </url>
   
   <url>
-    <loc>https://www.sekyoro.top/tags/jQuery/</loc>
-    <lastmod>2023-11-02</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://www.sekyoro.top/tags/%E4%B8%83%E7%89%9B%E4%BA%91/</loc>
     <lastmod>2023-11-02</lastmod>
     <changefreq>daily</changefreq>
@@ -1334,6 +1327,20 @@
   </url>
   
   <url>
+    <loc>https://www.sekyoro.top/tags/jQuery/</loc>
+    <lastmod>2023-11-02</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.sekyoro.top/tags/vue3-x/</loc>
+    <lastmod>2023-11-02</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://www.sekyoro.top/tags/python/</loc>
     <lastmod>2023-11-02</lastmod>
     <changefreq>daily</changefreq>
@@ -1342,13 +1349,6 @@
   
   <url>
     <loc>https://www.sekyoro.top/tags/BaiduNetdisk/</loc>
-    <lastmod>2023-11-02</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.sekyoro.top/tags/vue3-x/</loc>
     <lastmod>2023-11-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1397,13 +1397,6 @@
   </url>
   
   <url>
-    <loc>https://www.sekyoro.top/tags/threading/</loc>
-    <lastmod>2023-11-02</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://www.sekyoro.top/tags/sign-in/</loc>
     <lastmod>2023-11-02</lastmod>
     <changefreq>daily</changefreq>
@@ -1411,14 +1404,7 @@
   </url>
   
   <url>
-    <loc>https://www.sekyoro.top/tags/Qt/</loc>
-    <lastmod>2023-11-02</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.sekyoro.top/tags/C/</loc>
+    <loc>https://www.sekyoro.top/tags/proxy/</loc>
     <lastmod>2023-11-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1432,7 +1418,7 @@
   </url>
   
   <url>
-    <loc>https://www.sekyoro.top/tags/proxy/</loc>
+    <loc>https://www.sekyoro.top/tags/threading/</loc>
     <lastmod>2023-11-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1447,6 +1433,20 @@
   
   <url>
     <loc>https://www.sekyoro.top/tags/GUI/</loc>
+    <lastmod>2023-11-02</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.sekyoro.top/tags/Qt/</loc>
+    <lastmod>2023-11-02</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.sekyoro.top/tags/C/</loc>
     <lastmod>2023-11-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1474,7 +1474,7 @@
   </url>
   
   <url>
-    <loc>https://www.sekyoro.top/tags/pandas/</loc>
+    <loc>https://www.sekyoro.top/tags/opencv/</loc>
     <lastmod>2023-11-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1495,7 +1495,7 @@
   </url>
   
   <url>
-    <loc>https://www.sekyoro.top/tags/opencv/</loc>
+    <loc>https://www.sekyoro.top/tags/pandas/</loc>
     <lastmod>2023-11-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1565,20 +1565,6 @@
   </url>
   
   <url>
-    <loc>https://www.sekyoro.top/tags/Obsidian/</loc>
-    <lastmod>2023-11-02</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.sekyoro.top/tags/workflow/</loc>
-    <lastmod>2023-11-02</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://www.sekyoro.top/tags/vue2/</loc>
     <lastmod>2023-11-02</lastmod>
     <changefreq>daily</changefreq>
@@ -1607,6 +1593,20 @@
   </url>
   
   <url>
+    <loc>https://www.sekyoro.top/tags/Obsidian/</loc>
+    <lastmod>2023-11-02</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.sekyoro.top/tags/workflow/</loc>
+    <lastmod>2023-11-02</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://www.sekyoro.top/tags/vue/</loc>
     <lastmod>2023-11-02</lastmod>
     <changefreq>daily</changefreq>
@@ -1615,6 +1615,20 @@
   
   <url>
     <loc>https://www.sekyoro.top/tags/vue-element-template/</loc>
+    <lastmod>2023-11-02</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.sekyoro.top/tags/leetcode/</loc>
+    <lastmod>2023-11-02</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.sekyoro.top/tags/algorithm/</loc>
     <lastmod>2023-11-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1636,20 +1650,6 @@
   
   <url>
     <loc>https://www.sekyoro.top/tags/overleaf/</loc>
-    <lastmod>2023-11-02</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.sekyoro.top/tags/leetcode/</loc>
-    <lastmod>2023-11-02</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.sekyoro.top/tags/algorithm/</loc>
     <lastmod>2023-11-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1803,6 +1803,34 @@
   </url>
   
   <url>
+    <loc>https://www.sekyoro.top/tags/course/</loc>
+    <lastmod>2023-11-02</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.sekyoro.top/tags/compile/</loc>
+    <lastmod>2023-11-02</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.sekyoro.top/tags/Nginx/</loc>
+    <lastmod>2023-11-02</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.sekyoro.top/tags/crypto/</loc>
+    <lastmod>2023-11-02</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://www.sekyoro.top/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/</loc>
     <lastmod>2023-11-02</lastmod>
     <changefreq>daily</changefreq>
@@ -1811,13 +1839,6 @@
   
   <url>
     <loc>https://www.sekyoro.top/tags/graphviz/</loc>
-    <lastmod>2023-11-02</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.sekyoro.top/tags/Nginx/</loc>
     <lastmod>2023-11-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1839,27 +1860,6 @@
   
   <url>
     <loc>https://www.sekyoro.top/tags/bison/</loc>
-    <lastmod>2023-11-02</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.sekyoro.top/tags/crypto/</loc>
-    <lastmod>2023-11-02</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.sekyoro.top/tags/course/</loc>
-    <lastmod>2023-11-02</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.sekyoro.top/tags/compile/</loc>
     <lastmod>2023-11-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1894,7 +1894,7 @@
   </url>
   
   <url>
-    <loc>https://www.sekyoro.top/tags/html/</loc>
+    <loc>https://www.sekyoro.top/tags/JavaScript/</loc>
     <lastmod>2023-11-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1902,6 +1902,27 @@
   
   <url>
     <loc>https://www.sekyoro.top/tags/django/</loc>
+    <lastmod>2023-11-02</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.sekyoro.top/tags/html/</loc>
+    <lastmod>2023-11-02</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.sekyoro.top/tags/GAN/</loc>
+    <lastmod>2023-11-02</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.sekyoro.top/tags/keras/</loc>
     <lastmod>2023-11-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1929,20 +1950,6 @@
   </url>
   
   <url>
-    <loc>https://www.sekyoro.top/tags/GAN/</loc>
-    <lastmod>2023-11-02</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.sekyoro.top/tags/keras/</loc>
-    <lastmod>2023-11-02</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://www.sekyoro.top/tags/flask/</loc>
     <lastmod>2023-11-02</lastmod>
     <changefreq>daily</changefreq>
@@ -1950,7 +1957,7 @@
   </url>
   
   <url>
-    <loc>https://www.sekyoro.top/tags/JavaScript/</loc>
+    <loc>https://www.sekyoro.top/tags/dart/</loc>
     <lastmod>2023-11-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1993,13 +2000,6 @@
   
   <url>
     <loc>https://www.sekyoro.top/tags/request/</loc>
-    <lastmod>2023-11-02</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.sekyoro.top/tags/dart/</loc>
     <lastmod>2023-11-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -2083,7 +2083,7 @@
   </url>
   
   <url>
-    <loc>https://www.sekyoro.top/tags/docker/</loc>
+    <loc>https://www.sekyoro.top/tags/3D-Object-Detection/</loc>
     <lastmod>2023-11-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -2098,6 +2098,13 @@
   
   <url>
     <loc>https://www.sekyoro.top/tags/stable-diffusion/</loc>
+    <lastmod>2023-11-02</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.sekyoro.top/tags/docker/</loc>
     <lastmod>2023-11-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -2139,13 +2146,6 @@
   </url>
   
   <url>
-    <loc>https://www.sekyoro.top/tags/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%8F%92%E4%BB%B6/</loc>
-    <lastmod>2023-11-02</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://www.sekyoro.top/tags/vscode/</loc>
     <lastmod>2023-11-02</lastmod>
     <changefreq>daily</changefreq>
@@ -2154,6 +2154,13 @@
   
   <url>
     <loc>https://www.sekyoro.top/tags/sumatra/</loc>
+    <lastmod>2023-11-02</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.sekyoro.top/tags/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%8F%92%E4%BB%B6/</loc>
     <lastmod>2023-11-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -2216,20 +2223,6 @@
   </url>
   
   <url>
-    <loc>https://www.sekyoro.top/tags/MNE/</loc>
-    <lastmod>2023-11-02</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.sekyoro.top/tags/EEG/</loc>
-    <lastmod>2023-11-02</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://www.sekyoro.top/tags/logging/</loc>
     <lastmod>2023-11-02</lastmod>
     <changefreq>daily</changefreq>
@@ -2238,6 +2231,20 @@
   
   <url>
     <loc>https://www.sekyoro.top/tags/%E6%97%A5%E5%BF%97/</loc>
+    <lastmod>2023-11-02</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.sekyoro.top/tags/MNE/</loc>
+    <lastmod>2023-11-02</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.sekyoro.top/tags/EEG/</loc>
     <lastmod>2023-11-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -2279,6 +2286,20 @@
   </url>
   
   <url>
+    <loc>https://www.sekyoro.top/tags/dom/</loc>
+    <lastmod>2023-11-02</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.sekyoro.top/tags/bom/</loc>
+    <lastmod>2023-11-02</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://www.sekyoro.top/tags/Astro/</loc>
     <lastmod>2023-11-02</lastmod>
     <changefreq>daily</changefreq>
@@ -2300,28 +2321,7 @@
   </url>
   
   <url>
-    <loc>https://www.sekyoro.top/tags/dom/</loc>
-    <lastmod>2023-11-02</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.sekyoro.top/tags/bom/</loc>
-    <lastmod>2023-11-02</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://www.sekyoro.top/tags/deepLearning/</loc>
-    <lastmod>2023-11-02</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.sekyoro.top/tags/Tailwind/</loc>
     <lastmod>2023-11-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -2342,6 +2342,13 @@
   </url>
   
   <url>
+    <loc>https://www.sekyoro.top/tags/Tailwind/</loc>
+    <lastmod>2023-11-02</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://www.sekyoro.top/tags/huggingface/</loc>
     <lastmod>2023-11-02</lastmod>
     <changefreq>daily</changefreq>
@@ -2349,7 +2356,7 @@
   </url>
   
   <url>
-    <loc>https://www.sekyoro.top/tags/Embedding/</loc>
+    <loc>https://www.sekyoro.top/tags/style-transfer/</loc>
     <lastmod>2023-11-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -2370,14 +2377,7 @@
   </url>
   
   <url>
-    <loc>https://www.sekyoro.top/tags/style-transfer/</loc>
-    <lastmod>2023-11-02</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.sekyoro.top/tags/3D-Object-Detection/</loc>
+    <loc>https://www.sekyoro.top/tags/Embedding/</loc>
     <lastmod>2023-11-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -2470,14 +2470,14 @@
   </url>
   
   <url>
-    <loc>https://www.sekyoro.top/categories/Nginx/</loc>
+    <loc>https://www.sekyoro.top/categories/course/</loc>
     <lastmod>2023-11-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://www.sekyoro.top/categories/course/</loc>
+    <loc>https://www.sekyoro.top/categories/Nginx/</loc>
     <lastmod>2023-11-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>

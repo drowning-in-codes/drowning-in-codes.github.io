@@ -68,10 +68,15 @@
 <meta property="og:image" content="https://i.imgur.com/BL8dkf1.png">
 <meta property="og:image" content="http://lilianweng.github.io/posts/2017-12-31-object-recognition-part-3/mask-rcnn.png">
 <meta property="og:image" content="http://lilianweng.github.io/posts/2017-12-31-object-recognition-part-3/roi-align.png">
+<meta property="og:image" content="https://i.imgur.com/Md5zxS2.png">
 <meta property="og:image" content="https://github.com/microsoft/AI-For-Beginners/raw/main/lessons/4-ComputerVision/11-ObjectDetection/images/r-fcn.png">
+<meta property="og:image" content="https://i.imgur.com/BaAJNpE.png">
+<meta property="og:image" content="https://pic1.zhimg.com/80/v2-0c3fd2c903db6887128ec390b8981ef0_720w.webp">
+<meta property="og:image" content="https://i.imgur.com/fwsdL0f.png">
+<meta property="og:image" content="https://i.imgur.com/9R3Qfia.png">
 <meta property="og:image" content="http://lilianweng.github.io/posts/2017-12-31-object-recognition-part-3/rcnn-family-summary.png">
 <meta property="article:published_time" content="2023-10-17T02:21:51.000Z">
-<meta property="article:modified_time" content="2023-11-02T03:14:00.848Z">
+<meta property="article:modified_time" content="2023-11-02T13:59:11.299Z">
 <meta property="article:author" content="Sekyoro">
 <meta property="article:tag" content="SSD">
 <meta property="article:tag" content="YOLO">
@@ -296,7 +301,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-11-02 11:14:00" itemprop="dateModified" datetime="2023-11-02T11:14:00+08:00">2023-11-02</time>
+                <time title="修改时间：2023-11-02 21:59:11" itemprop="dateModified" datetime="2023-11-02T21:59:11+08:00">2023-11-02</time>
               </span>
 
           
@@ -312,14 +317,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>24k</span>
+              <span>25k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>22 分钟</span>
+              <span>23 分钟</span>
             </span>
 
         </div>
@@ -520,8 +525,36 @@ L_1^\text{smooth}(x) = \begin{cases}
 <h3 id="Mask-R-CNN"><a href="#Mask-R-CNN" class="headerlink" title="Mask R-CNN"></a>Mask R-CNN</h3><p><img data-src="http://lilianweng.github.io/posts/2017-12-31-object-recognition-part-3/mask-rcnn.png" alt="img" style="zoom:67%;" /></p>
 <p>主要是提出了ROIAlign将模型用于实例分割中,可以与原先的任务并行,</p>
 <p><img data-src="http://lilianweng.github.io/posts/2017-12-31-object-recognition-part-3/roi-align.png" alt="img" style="zoom:50%;" /></p>
-<p>RoIAlign 层旨在修复 RoI 池化中由量化(quantization )引起的位置错位。RoIAlign 删除哈希量化，例如，使用 x/16 而不是 [x/16]，以便提取的特征可以与输入像素正确对齐。<strong>双线性插值</strong>用于计算输入中的浮点位置值。</p>
+<p>RoIAlign 层旨在修复 RoI 池化中由量化(quantization)引起的位置错位。RoIAlign 删除哈希量化，例如，使用 x/16 而不是 [x/16]，以便提取的特征可以与输入像素正确对齐。<strong>双线性插值</strong>用于计算输入中的浮点位置值。</p>
+<blockquote>
+<p>作者认为Faster RCNN中ROI pooling的取整(quantization )操作会使得定位不准确</p>
+<p>这种quantization还体现在proposals(在原图上)映射到特征层上的操作,因为这会导致不对准,对于detection任务有较大影响,</p>
+</blockquote>
+<p><img data-src="https://i.imgur.com/Md5zxS2.png" alt="image-20231102202646398"></p>
+<p>上图蓝框就是proposals到feature map上的框,没有取整.然后在每个roi中选择采样点计算这些采样的均值即为每个roi的值</p>
+<p>可以看看这篇文章<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_37541097/article/details/123754766">【精选】Mask R-CNN网络详解_mask rcnn详解-CSDN博客</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_37541097/article/details/112564822">【精选】双线性插值-CSDN博客</a></p>
 <h3 id="Region-based-Fully-Convolutional-Network-R-FCN"><a href="#Region-based-Fully-Convolutional-Network-R-FCN" class="headerlink" title="Region-based Fully Convolutional Network (R-FCN)"></a>Region-based Fully Convolutional Network (R-FCN)</h3><p><img data-src="https://github.com/microsoft/AI-For-Beginners/raw/main/lessons/4-ComputerVision/11-ObjectDetection/images/r-fcn.png" alt="r-fcn image"></p>
+<p>可以了解一下全卷积网络(<a target="_blank" rel="noopener" href="http://zh.d2l.ai/chapter_computer-vision/fcn.html">13.11. 全卷积网络 — 动手学深度学习 2.0.0 documentation (d2l.ai)</a>).1×1卷积层通常用于调整网络层的通道数量和控制模型复杂性</p>
+<blockquote>
+<p>全卷积网络先使用卷积神经网络抽取图像特征，然后通过1×1卷积层将通道数变换为类别个数,最后通过转置卷积层将特征图的高和宽变换为输入图像的尺寸。输出的类别预测与输入图像在像素级别上具有一一对应关系：通道维的输出即该位置对应像素的类别预测</p>
+</blockquote>
+<p>R-FCN核心操作是将ROI pooling改为了position-sensitive score maps.而且原本在ROI pooling之后的卷积层和全连接层(被认为是位置不敏感的操作,这种操作会影响目标检测的精度而且浪费神经网络的分类能力),所以文章将全部操作改为卷积</p>
+<p><img data-src="https://i.imgur.com/BaAJNpE.png" alt="image-20231102205517036"></p>
+<p>大致流程如下:</p>
+<ul>
+<li>首先选择一张需要处理的图片，并对这张图片进行相应的预处理操作；</li>
+<li>接着，我们将预处理后的图片送入一个预训练好的分类网络中（这里使用了ResNet-101网络的Conv4之前的网络），固定其对应的网络参数；</li>
+<li>接着，在预训练网络的最后一个卷积层获得的feature map上存在3个分支，第1个分支就是在该feature map上面进行RPN操作，获得相应的ROI；第2个分支就是在该feature map上获得一个K*K*（C+1）维的位置敏感得分映射（position-sensitive score map），用来进行分类；第3个分支就是在该feature map上获得一个4*K*K维的位置敏感得分映射，用来进行回归；</li>
+<li>最后，在K*K*（C+1）维的位置敏感得分映射和4<em>K</em>K维的位置敏感得分映射上面分别执行位置敏感的ROI池化操作（Position-Sensitive Rol Pooling，这里使用的是平均池化操作），获得对应的类别和位置信息。</li>
+</ul>
+<p>具体来说,通过一个CNN网络后得到feature map,一方面使用全卷积网络将通道数调整为k*k*(C+1)(对于分类任务),此外也需要一个RPN网络,用于提取roi区域,得到roi之后,将每个roi分为k*k个bins,这个时候每个bin就对应一个类别中k*k个通道之一,池化操作也就在这个通道上进行操作.i,j表示每个roi中的某个bin,c表示通道数,其中n表示bin中的像素数,相当于对于某个类别c中的某个bin,计算得到的scores(其实就是一个通道的和)除以bin中的像素数量.论文中的所谓vote就是简单地使用均值得到k*k个position-sensitive scores.</p>
+<p><img data-src="https://pic1.zhimg.com/80/v2-0c3fd2c903db6887128ec390b8981ef0_720w.webp" alt="img"></p>
+<p>然后按此计算某个类别的池化值,也就是k*k个bin的值的和,每个bin是映射在某个score map上的avg pooling.</p>
+<p><img data-src="https://i.imgur.com/fwsdL0f.png" alt="image-20231102214505751"></p>
+<p>得到C+1个值然后做softmax作为评价交叉熵巡视以及对roi的排名.</p>
+<p><img data-src="https://i.imgur.com/9R3Qfia.png" alt="image-20231102214651913"></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/30867916">详解R-FCN - 知乎 (zhihu.com)</a></p>
 <h3 id="Summary-of-R-CNN-family"><a href="#Summary-of-R-CNN-family" class="headerlink" title="Summary of R-CNN family"></a>Summary of R-CNN family</h3><p><img data-src="http://lilianweng.github.io/posts/2017-12-31-object-recognition-part-3/rcnn-family-summary.png" alt="img"></p>
 <p>以上都是two-stage  detector,另一种不同的方法跳过区域建议阶段，直接在可能位置的密集采样上运行检测。这就是单阶段目标检测算法的工作原理。这更快、更简单，但可能会降低performance。</p>
 <p>在One-stage中对象检测是一个简单的回归问题，需要输入并学习概率类和边界框坐标。YOLO、YOLO v2、SSD、RetinaNet等属于一个相位检测器。对象检测是图像分类的一种高级形式，其中神经网络预测图像中的对象，并以边界框的形式引起人们的注意。</p>
@@ -1160,12 +1193,12 @@ if(canvas.getContext){
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">876k</span>
+    <span title="站点总字数">878k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">13:17</span>
+    <span title="站点阅读时长">13:18</span>
 </div>
 
     <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
