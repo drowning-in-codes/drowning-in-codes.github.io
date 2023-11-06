@@ -1,0 +1,1387 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<script src="/live2d-widget/autoload.js"></script>
+
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/blog_32px.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/blog_32px.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/blog_16px.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="EPrJAp11bJwHULpQUaSNSZ8_3RcvTsPDAEGOME4pl1w">
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-VB21D8MKKW"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-VB21D8MKKW');
+</script>
+
+<!-- google adsense in head.swig -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4034523802263123"
+     crossorigin="anonymous"></script>
+  <meta name="msvalidate.01" content="7226864CE87CE9DE8C008385273846FF">
+  <meta name="baidu-site-verification" content="code-fjFXVtiL7j" />
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.lug.ustc.edu.cn/css?family=Roboto Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<link href="https://fonts.googleapis.com/css?family=Noto+Serif+SC|Roboto&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-corner-indicator.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.sekyoro.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":240,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"appID":"3G9PZZIKCH","apiKey":"8eb71f5ca3167e9ef3487882f10cfaad","indexName":"SekyoroSearch","hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+<link href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css" rel="stylesheet">
+  <meta name="description" content="课程作业">
+<meta property="og:type" content="article">
+<meta property="og:title" content="图像融合论文阅读">
+<meta property="og:url" content="https://www.sekyoro.top/2023/11/02/%E5%9B%BE%E5%83%8F%E8%9E%8D%E5%90%88%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/index.html">
+<meta property="og:site_name" content="Sekyoro的博客小屋">
+<meta property="og:description" content="课程作业">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.imgur.com/czqa4Qz.png">
+<meta property="og:image" content="https://i.imgur.com/nP1CzPO.png">
+<meta property="og:image" content="https://pic4.zhimg.com/80/v2-13bb3c60b27920c3ec834e045ec8756f_720w.webp">
+<meta property="og:image" content="https://i.imgur.com/xSMcHqm.png">
+<meta property="og:image" content="https://i.imgur.com/5OAM3nA.png">
+<meta property="og:image" content="https://i.imgur.com/EnD6Jys.png">
+<meta property="og:image" content="https://i.imgur.com/FW1COsX.png">
+<meta property="og:image" content="https://i.imgur.com/qczz1P9.png">
+<meta property="og:image" content="https://i.imgur.com/Hqdxy5j.png">
+<meta property="og:image" content="https://i.imgur.com/DmKSSiy.png">
+<meta property="og:image" content="https://i.imgur.com/OP6inkz.png">
+<meta property="og:image" content="https://i.imgur.com/gcNlg22.png">
+<meta property="og:image" content="https://i.imgur.com/XZhUCg2.png">
+<meta property="og:image" content="https://i.imgur.com/Qwko06N.png">
+<meta property="og:image" content="https://i.imgur.com/lv9Mg1o.png">
+<meta property="article:published_time" content="2023-11-02T14:24:07.000Z">
+<meta property="article:modified_time" content="2023-11-05T02:45:50.694Z">
+<meta property="article:author" content="Sekyoro">
+<meta property="article:tag" content="image fusion">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.imgur.com/czqa4Qz.png">
+
+<link rel="canonical" href="https://www.sekyoro.top/2023/11/02/%E5%9B%BE%E5%83%8F%E8%9E%8D%E5%90%88%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>图像融合论文阅读 | Sekyoro的博客小屋</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Sekyoro的博客小屋" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+<!-- require JQuery -->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+<!-- require pjax -->
+<script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/index.min.js"></script>
+
+
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+   <script type="text/javascript" src="/js/src/fireworks.js"></script>
+
+
+  <div class="container use-motion">
+    <div class="headband"></div>
+	
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Sekyoro的博客小屋</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-bangumis">
+
+    <a href="/bangumis/" rel="section"><i class="fa fa-film fa-fw"></i>追番</a>
+
+  </li>
+        <li class="menu-item menu-item-resume">
+
+    <a href="/resume/" rel="section"><i class="fa fa-file-pdf fa-fw"></i>简历</a>
+
+  </li>
+        <li class="menu-item menu-item-materials">
+
+    <a href="/materials/" rel="section"><i class="fa fa-book fa-fw"></i>学习资料</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container"></div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="algolia-results">
+  <div id="algolia-stats"></div>
+  <div id="algolia-hits"></div>
+  <div id="algolia-pagination" class="algolia-pagination"></div>
+</div>
+
+      
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.sekyoro.top/2023/11/02/%E5%9B%BE%E5%83%8F%E8%9E%8D%E5%90%88%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://i.loli.net/2021/05/17/YqoavnXdGTpPO9R.jpg">
+      <meta itemprop="name" content="Sekyoro">
+      <meta itemprop="description" content="什么也无法舍弃的人，什么也做不了.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sekyoro的博客小屋">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          图像融合论文阅读
+        </h1>
+
+        <div class="post-meta">
+		
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-11-02 22:24:07" itemprop="dateCreated datePublished" datetime="2023-11-02T22:24:07+08:00">2023-11-02</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-11-05 10:45:50" itemprop="dateModified" datetime="2023-11-05T10:45:50+08:00">2023-11-05</time>
+              </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>7.7k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>7 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>课程作业<br><span id="more"></span></p>
+<h1 id="abs"><a href="#abs" class="headerlink" title="abs"></a>abs</h1><p>介绍图像融合概念，回顾sota模型，其中包括数字摄像图像融合，多模态图像融合，</p>
+<p>接着评估一些代表方法</p>
+<p>介绍一些常见应用，比如RGBT目标跟踪，医学图像检查，遥感监测</p>
+<h1 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h1><p>动机：</p>
+<p>由于硬件设备的理论和技术限制，单一传感器或单一拍摄设置所拍摄的图像无法有效、全面地描述成像场景</p>
+<p>图像融合：图像融合能够将不同源图像中的有意义信息结合起来，生成单一图像，该图像包含更丰富的信息，更有利于后续应用</p>
+<p>由于融合图像的优异特性，图像融合作为一种图像增强方法已被广泛应用于许多领域，例如摄影可视化</p>
+<h2 id="传统融合方法："><a href="#传统融合方法：" class="headerlink" title="传统融合方法："></a>传统融合方法：</h2><p>在深度学习盛行之前，图像融合已经得到了深入的研究。早期实现图像融合的方法采用相关的数学变换，在<strong>空间域或变换域</strong>人工分析活动水平并设计融合规则，称为传统融合方法。</p>
+<p>典型的传统融合方法包括基于<strong>多尺度变换</strong>的方法[11]、基于<strong>稀疏表示</strong>的方法[12]、<strong>基于子空间</strong>的方法[13]、基于<strong>显著性</strong>的方法[14]、基于total-variance的方法[15]等。</p>
+<p>传统图像融合方法的缺点：</p>
+<ol>
+<li>为了保证后续图像融合的可行性，传统方法会对不同源的图像采用相同变换来提取特征。这种方法没有考虑到源图像的特征差异，可能导致提取的特征表现力较差。</li>
+<li>融合策略粗糙，表现较差。</li>
+</ol>
+<p>引入深度学习的优势：</p>
+<ol>
+<li><p>可以利用不同的网络实现差异化的特征提取</p>
+</li>
+<li><p>在良好设计的损失函数下，融合策略可以学到更合理的特征</p>
+</li>
+</ol>
+<p>现有的深度学习方法致力于解决图像融合中的三个主要问题：“feature extraction, feature fusion and image reconstruction.” (Zhang 等, 2021, p. 323)</p>
+<p>现有方法可以分为 AutoEncoder-based，CNN- based，GAN-based。</p>
+<h3 id="1-AE-based"><a href="#1-AE-based" class="headerlink" title="1.AE-based"></a>1.AE-based</h3><p>AE 方法通常会预先训练一个自动编码器。然后利用训练好的自编码器实现特征提取和图像重建，中间的特征融合则根据传统的融合规则实现。</p>
+<p>DenseFuse</p>
+<h3 id="2-CNN-based"><a href="#2-CNN-based" class="headerlink" title="2.CNN-based"></a>2.CNN-based</h3><p>他们通常以两种不同的形式将卷积神经网络引入图像融合。一种是通过使用精心设计的损失函数和网络结构，实现端到端的特征提取、特征融合和图像重建</p>
+<p>PMGI。它提出了梯度和强度的比例维护损失，引导网络直接生成融合图像。</p>
+<p>另外还有使用CNN得到融合规则，而使用传统的特征提取和重建方法</p>
+<h3 id="3-GAN-baesd"><a href="#3-GAN-baesd" class="headerlink" title="3.GAN-baesd"></a>3.GAN-baesd</h3><p>GAN 方法依靠生成器和判别器之间的对抗博弈来估计目标的概率分布，从而以隐含的方式共同完成特征提取、特征融合和图像重构</p>
+<p>比如FusionGAN 是基于 GAN 的图像融合的先驱，它在融合图像和可见图像之间建立对抗博弈，以进一步丰富融合图像的纹理细节。由于各种图像融合任务存在显著差异，这些方法在不同融合场景中的实现方式也不尽相同。</p>
+<h2 id="图像融合场景"><a href="#图像融合场景" class="headerlink" title="图像融合场景"></a>图像融合场景</h2><p>digital photography image fusion</p>
+<p>由于数字成像设备的性能限制，传感器无法在单一设置完全表征成像场景中的信息</p>
+<p>例如，数码摄影产生的图像只能承受有限的光照变化，并具有预定的景深。</p>
+<p>多曝光度图像融合和多聚焦图像融合</p>
+<p>以产生高动态范围和完全清晰的效果。</p>
+<p>人们使用摄像机拍摄时,希望可以获得同一场景中所有景物都清晰的图像。但是<strong>摄像机镜头受景深的限制,无法同时聚焦所有目标,因此拍摄的照片中部分区域清晰,部分区域模糊。多聚焦图像融合技术可以将多幅同一场景下聚焦区域不同的图像融合成一幅全清晰的图像</strong>,从而有效地解决这个问题,提高图像的信息利用率。</p>
+<p>multi-modal image fusion</p>
+<p>由于成像原理的限制，单个传感器只能捕捉到部分场景信息。多模态图像融合将多个传感器获取的图像中最重要的信息结合起来，从而实现对场景的有效描述。</p>
+<p>典型的多模态图像融合包括红外和可见光图像融合</p>
+<p>sharpening fusion</p>
+<p>在保证信噪比的前提下，光谱/滤镜与瞬时视场（IFOV）之间存在一定的矛盾。</p>
+<p>换句话说，没有任何传感器能同时捕捉高空间分辨率和高光谱分辨率的图像。</p>
+<p>锐化融合专门用于融合不同空间/光谱分辨率的图像，以生成所需的结果，这些结果不仅具有高空间分辨率，还具有高光谱分辨率。</p>
+<p>典型的锐化融合包括多光谱（MS）锐化和高光谱锐化。从源图像成像的角度来看，锐化融合也属于多模态图像融合。不过，就融合目标而言，锐化融合比上述多模态图像融合要求更高的光谱/空间保真度，能直接提高分辨率。因此，锐化融合将作为一个单独的类别进行讨论。</p>
+<p>多光谱锐化是将低空间分辨率（LRMS）的多光谱图像与全色（PAN）图像融合，生成高空间分辨率的多光谱图像。</p>
+<p>与多光谱图像相比，高光谱图像具有更高的光谱分辨率和更低的空间分辨率。</p>
+<blockquote>
+<p>多光谱: 谱段有多个,可以看做是高光谱的一种情况，即成像的波段数量比高光谱图像少，一般只有几个到十几个。由于光谱信息其实也就对应了色彩信息，所以多波段遥感图像可以得到地物的色彩信息，但是空间分辨率较低。更进一步，光谱通道越多，其分辨物体的能力就越强，即光谱分辨率越高。</p>
+<p>高光谱:高光谱由更窄的波段（10-20 nm）组成，具有较高的光谱分辨率，可以检测物体的光谱特效，可提供更多无形的数据,图像可能有数百或数千个波段</p>
+<p>全色图:全色图像是单通道的，其中全色是指全部可见光波段0.38~0.76um，全色图像为这一波段范围的混合图像。因为是单波段，所以在图上显示为灰度图片。全色遥感图像一般空间分辨率高，但无法显示地物色彩，也就是图像的光谱信息少。</p>
+</blockquote>
+<h3 id="digital-photography-image-fusion"><a href="#digital-photography-image-fusion" class="headerlink" title="digital photography image fusion"></a>digital photography image fusion</h3><p>数字成像设备利用光学镜头捕捉反射的可见光然后采用CCD和CMOS等书子模块记录场景信息。另一方面，由于动态范围有限，这些数字模块无法承受过大的成像曝光差异。</p>
+<p>一方面，由于光学镜头受景深限制，通常无法同时聚焦所有物体。</p>
+<h3 id="Infrared-and-visible-image-fusion”"><a href="#Infrared-and-visible-image-fusion”" class="headerlink" title="Infrared and visible image fusion”"></a>Infrared and visible image fusion”</h3><p>红外图像具有<strong>明显的对比度</strong>，即使在恶劣天气下也能从背景中有效地突出目标。可见光图像包含丰富的纹理细节，更符合人类的视觉感知。红外和可见光图像融合就是要将这两种特性结合起来，生成对比度高、纹理丰富的图像。为了实现这一目标，AE、CNN 和 GAN 方法都被引入到这项任务中。</p>
+<p><strong>高对比度，恶劣条件下也能有效突出目标</strong>。</p>
+<p><strong>可见光图像包含丰富的纹理信息</strong>，更符合人类视觉感知。红外和可见光图像融合就是要<strong>将这两种特性结合起来，生成对比度高、纹理丰富的图像</strong>。为了实现这一目标，AE、CNN 和 GAN 方法都被引入到这项任务中。</p>
+<p>AE方法</p>
+<p>首先使用数据集训练一个autoencoder，训练好的自动编码器自然可以用来解决图像融合中的两个子问题：特征提取和图像重建</p>
+<p>图像融合的关键在于<strong>特征融合策略</strong>的设计。目前，在红外和可见光图像融合中，特征融合的策略仍然是手工计算的，无法学习，如加法、l1-norm [19]、注意力加权等。这种手工计算的融合策略比较粗糙，限制了红外图像和可见光图像融合的进一步改进。</p>
+<p>一种用于红外和可见光图像融合的 CNN 方法是端对端地实现三个子问题。这种CNN结构通常需要残差连接，全连接以及双端结构。</p>
+<p>由于红外图像和可见光图像融合没有ground truth，因此损失函数的设计在于确定<strong>融合结果和源图像之间对比度和纹理的相似性</strong>。</p>
+<p>参与红外和可见光图像融合的另一种 CNN 形式是使用预先训练好的网络（如 VGGNet）从源图像中提取特征，并根据这些特征生成融合权重图。</p>
+<p>从这个角度看，卷积神经网络只实现了融合，而不考虑特征提取和图像重建，带来的融合性能非常有限。</p>
+<h2 id="GAN"><a href="#GAN" class="headerlink" title="GAN"></a>GAN</h2><p>GAN 方法是目前红外和可见光图像融合领域最流行的方法，它能够以<strong>隐含的方式完成特征提取、特征融合和图像重建</strong>。</p>
+<p>一般来说，GAN 方法依赖于两种损失函数，即内容损失和对抗损失。内容损失与 CNN 方法类似，用于初步融合源图像，而对抗损失则进一步限制信息融合的趋势。</p>
+<p>早期GAN方法 fusionGAN，只是在融合后的图像和可见光图像之间建立对抗博弈，以进一步增强对可见光图像丰富细节的保留。</p>
+<p>为了更好地平衡红外信息和可见光信息，随后的方法 [25,66-69] 开始使用具有<strong>多个分类约束条件的单一判别器或双判别器来同时估计源图像的两种概率分布。</strong></p>
+<p>一般来说，GAN 方法可以产生很好的融合结果。然而，在训练过程中保持生成器和判别器之间的平衡并非易事。</p>
+<h3 id="评估"><a href="#评估" class="headerlink" title="评估"></a>评估</h3><p>评估指标包括:EN,SSIM,PSNR,SF,SD,CC,SF,VIF以及融合运行时间等等. </p>
+<h4 id="EN"><a href="#EN" class="headerlink" title="EN"></a>EN</h4><p>熵值</p>
+<p><img data-src="https://i.imgur.com/czqa4Qz.png" alt="image-20231103165404222"></p>
+<p>p~l~是融合图像中相应灰度级的归一化直方图</p>
+<p>熵越大，融合图像包含的信息就越多，融合方法的性能就越好。</p>
+<h4 id="SD"><a href="#SD" class="headerlink" title="SD"></a>SD</h4><p>标准差</p>
+<p><img data-src="https://i.imgur.com/nP1CzPO.png" alt="image-20231103165557350"></p>
+<p>对比度高的区域总是能吸引人的注意力，而对比度高的融合图像往往能产生较大的标清值，这意味着融合图像能达到更好的视觉效果。</p>
+<h4 id="SSIM"><a href="#SSIM" class="headerlink" title="SSIM"></a>SSIM</h4><p>结构相似性,取值[-1,1],<strong>数值越接近1表示结构相似性越高</strong></p>
+<p>SSIM 用于建立图像损失和失真的模型，<strong>衡量源图像和融合图像之间的结构相似性</strong>。SSIM 主要由三部分组成：<strong>相关性损失、亮度失真和对比度失真</strong>。</p>
+<p><img data-src="https://pic4.zhimg.com/80/v2-13bb3c60b27920c3ec834e045ec8756f_720w.webp" alt="img"></p>
+<p>在融合任务中,计算两张源图与融合后图像的SSIM和</p>
+<p><img data-src="https://i.imgur.com/xSMcHqm.png" alt="image-20231103171546346"></p>
+<h4 id="PSNR"><a href="#PSNR" class="headerlink" title="PSNR"></a>PSNR</h4><p>峰值信噪比,衡量图像有效信息与噪声之间的比率,能够反映图像是否失真.<strong>数值越大表示失真越小</strong></p>
+<p><img data-src="https://i.imgur.com/5OAM3nA.png" alt="image-20231103164139843"></p>
+<p>Z表示理想参考图像灰度最大值与最小值之差，通常为255。PSNR的值越大，表示融合图像的质量越好。</p>
+<blockquote>
+<p>PSNR值的范围通常在<strong>0到100之间</strong>，单位为分贝（dB）。 通常情况下，PSNR值越高，表示原始图像与重建图像之间的差异越小，图像质量越接近原始图像。 一般来说，PSNR值在30到40dB之间被认为是可以接受的</p>
+</blockquote>
+<h4 id="CC"><a href="#CC" class="headerlink" title="CC"></a>CC</h4><p>CC 衡量融合图像与源图像的线性相关程度,CC 越大，融合后的图像与源图像越相似，融合效果越好</p>
+<p><img data-src="https://i.imgur.com/EnD6Jys.png" alt="image-20231103172617252"></p>
+<p><img data-src="https://i.imgur.com/FW1COsX.png" alt="image-20231103172623697"></p>
+<h4 id="SF-空间频率"><a href="#SF-空间频率" class="headerlink" title="SF 空间频率"></a>SF 空间频率</h4><p><img data-src="https://i.imgur.com/qczz1P9.png" alt="image-20231103173521300"></p>
+<p>测量图像的梯度分布</p>
+<p><img data-src="https://i.imgur.com/Hqdxy5j.png" alt="image-20231103173745980"></p>
+<p><img data-src="https://i.imgur.com/DmKSSiy.png" alt="image-20231103173758017"></p>
+<p>SF 越大，融合图像的边缘和纹理就越丰富</p>
+<p>​    </p>
+<h4 id="VIF-空间信息保真度"><a href="#VIF-空间信息保真度" class="headerlink" title="VIF 空间信息保真度"></a>VIF 空间信息保真度</h4><p>VIF 衡量融合图像的信息保真度，其计算方法分为四个步骤：首先，将源图像和融合图像划分为不同的区块；然后，评估每个区块在失真和未失真情况下的视觉信息；接着，评估每个子波段的 VIF；最后，根据 VIF 计算总体指标。</p>
+<h3 id="数据集"><a href="#数据集" class="headerlink" title="数据集"></a>数据集</h3><p>TNO TNO影像融合数据集包含不同军事相关场景的单光谱（增强视觉、近红外和长波红外或热）夜间影像，在不同的多波段camnera系统中注册。</p>
+<p> INO RoadScene MSRS LLVIP MFD</p>
+<h2 id="实战"><a href="#实战" class="headerlink" title="实战"></a>实战</h2><h3 id="FusionGAN"><a href="#FusionGAN" class="headerlink" title="FusionGAN"></a>FusionGAN</h3><p>2019年较早的使用GAN作为图像融合算法融合红外和可见光</p>
+<p><img data-src="https://i.imgur.com/OP6inkz.png" alt="image-20231104161851282"></p>
+<h4 id="Generator"><a href="#Generator" class="headerlink" title="Generator"></a>Generator</h4><p><img data-src="https://i.imgur.com/gcNlg22.png" alt="image-20231104161928602"></p>
+<p>注意损失函数设计</p>
+<script type="math/tex; mode=display">
+\mathcal{L}_G=V_\text{FusionGAN}(G)+\lambda\mathcal{L}_{\mathrm{content}},</script><p>使用了一个对于GAN对抗的融合损失以及一个内容损失,对抗损失,这种想法来源LSGAN,a 和 b 分别表示虚假数据和真实数据的标签，c表示生成器希望鉴别器相信的虚假数据值。</p>
+<script type="math/tex; mode=display">
+\begin{aligned}\min_DV_{\mathrm{LSGAN}}(D)&=~\frac12\mathbb{E}_{x\sim p_{data}(x)}[(D(x)-b)^2]+\frac12\mathbb{E}_{z\sim p_z(z)}[(D(G(z))-a)^2],\\\min_GV_{\mathrm{LSGAN}}(G)&=~\frac12\mathbb{E}_{z\sim p_z(z)}[(D(G(z))-c)^2],\end{aligned}</script><p>有两种方法可以确定公式中的 a、b 和 c 值。第一种是设置 b - c = 1 和 b - a = 2，从而最小化公式 ，使 P~data~ +P~g~ 与 P~g~ 之间的 Pearson χ2 最小化</p>
+<p>第二种是设置 c = b，使生成器生成的样本尽可能真实。上述两种方法通常能获得相似的性能。</p>
+<script type="math/tex; mode=display">
+V_{\text{FusionGAN}} ( G ) = \frac 1 N \sum _ { n = 1 }^{N}\left(D_{\theta_D}(I_f^n)-c\right)^2,</script><p>第二项 L~content~代表内容损失，λ 用于在 V~FusionGAN~(G) 和 L~content~之间取得平衡。由于红外图像的热辐射信息由其像素强度表征，而可见光图像的纹理细节信息可部分由其梯度表征. 当然可以有其他用于表征图片的某些特性的指标,比如上面介绍的SSIM等.</p>
+<script type="math/tex; mode=display">
+\mathcal{L}_{\mathrm{content}}=\frac1{HW}(\|I_f-I_r\|_F^2+\xi\|\nabla I_f-\nabla I_v\|_F^2),</script><p>实际上，如果没有 D~θ~，我们也可以得到融合图像，它可以保留红外图像中的热辐射信息和可见光图像中的梯度信息。</p>
+<p>但这往往还不够，因为仅使用梯度信息无法完全表现可见图像中的纹理细节。因此，我们在生成器 G~θG~和判别器 D~θD~ 之间建立了一个对抗博弈，以调整基于可见光图像 IIv 的融合图像 If。</p>
+<h4 id="Discriminator"><a href="#Discriminator" class="headerlink" title="Discriminator"></a>Discriminator</h4><p>从第一层到第四层，我们在卷积层中使用 3 × 3 滤波器，并将stride设为 2，不带填充。这与生成器网络不同。其根本原因在于，鉴别器是一个分类器，它首先从输入图像中提取特征图，然后进行分类。因此，它的工作方式与池化层相同，将stride设置为 2。</p>
+<p><img data-src="https://i.imgur.com/XZhUCg2.png" alt="image-20231104163811787"></p>
+<script type="math/tex; mode=display">
+\mathcal{L}_D=\frac{1}{N}\sum_{n=1}^N\left(D_{\theta_D}(I_v)-b\right)^2+\frac{1}{N}\sum_{n=1}^N\left(D_{\theta_D}(I_f)-a\right)^2,</script><h3 id="TarDAL"><a href="#TarDAL" class="headerlink" title="TarDAL"></a>TarDAL</h3><p>面向检测的融合</p>
+<p>我们采用双层优化公式同时进行图像融合和物体检测，不仅检测精度高，而且融合后的图像视觉效果更好。</p>
+<p>我们设计了一种参数较少的目标感知双对抗学习网络（TarDAL），用于面向检测的融合。这种 “求同存异 “的单生成器双判别器网络可保留红外目标信息和可见光纹理细节。</p>
+<p>我们从双层表述中推导出一种合作训练方案，为快速推理（融合和检测）提供最佳网络参数。</p>
+<p>与以往追求高视觉质量的方法不同，我们认为，IVIF 必须生成既有利于视觉检测又有利于计算机感知的图像，即面向检测的融合。</p>
+<h3 id="问题建模"><a href="#问题建模" class="headerlink" title="问题建模"></a>问题建模</h3><p><img data-src="https://i.imgur.com/Qwko06N.png" alt="image-20231104153245210"></p>
+<p>假设红外图像、可见光图像和融合图像都是大小为 m×n 的灰度图像，分别用列向量 x、y 和 u∈Rmn×1 表示。</p>
+<p>Ld 是检测特定的训练损失,f () 是一个基于能量的保真度项，包含融合图像 u 以及源图像 x 和 y，而 g~T~ () 和 g~D~ () 则是两个可行性约束条件，分别定义在红外图像和可见光图像上。</p>
+<p><img data-src="https://i.imgur.com/lv9Mg1o.png" alt="image-20231104154941474"></p>
+<p>引入一个带有学习参数 ω~f~的融合网络 Φ，并将双级优化转换为单级优化.</p>
+<p>因此，我们将优化分解为两个学习网络 Φ 和 Ψ。我们采用 YOLOv53 作为检测网络 Ψ 的主干，其中 L~d~也沿用其设置，并精心设计了融合网络 Φ 如下。</p>
+<blockquote>
+<p>典型的深度融合方法致力于学习两种不同成像模式的共同特征。相反，我们的融合网络在<strong>学习这两种成像方式互补特征的差异的同时，也在寻求共性</strong>。通常情况下<strong>，红外图像能突出显示目标的独特结构，而可见光图像则能提供背景的纹理细节</strong>。</p>
+</blockquote>
+<h4 id="生成器"><a href="#生成器" class="headerlink" title="生成器"></a>生成器</h4><p>生成器的作用是生成能保留整体结构并保持与源图像相似强度分布的融合图像。常用的结构相似性指数(SSIM)作为损失函数</p>
+<p>另外提出了一个基于显著性pixel loss</p>
+<p>我们使用 5 层密集块 作为 G 来提取共同特征，然后使用包含三个卷积层的合并块进行特征聚合。每个卷积层由一个卷积运算、批处理归一化和 ReLU 激活函数组成。生成的融合图像 u 与源图像大小相同。</p>
+<script type="math/tex; mode=display">
+S_{\mathbf{x}(k)}=\sum_{i=0}^{2\text{55}} \boldsymbol { H _ { \mathbf{x}}}(i)|\mathbf{x}(k)-i|,</script><p>x(k) 是第 k 个像素的值，Hx 是第 i 个像素值的直方图</p>
+<p>目标鉴别器D~T~用于分辨红外融合结果的前景热目标和分辨融合后的背景细节与可见图像.对抗损失如下:</p>
+<script type="math/tex; mode=display">
+\begin{gathered}\mathcal{L}_{D_T}^\mathbf{f}=\mathbb{E}_{x\sim\tilde{p}(\mathcal{R}(\mathbf{x}))}[D(x)]-\mathbb{E}_{\tilde{x}\sim\tilde{p}(\mathcal{R}(\mathbf{u}))}[D(\tilde{x})],\\\mathcal{L}_{D_D}^\mathbf{f}=\mathbb{E}_{x\sim\tilde{p}(\hat{\mathcal{R}}(\nabla\mathbf{y}))}[D(x)]-\mathbb{E}_{\tilde{x}\sim\tilde{p}(\hat{\mathcal{R}}(\nabla\mathbf{u}))}[D(\tilde{x})],\\\mathcal{L}_{\mathbf{f}}^{\mathrm{adv}}=\mathcal{L}_{D_T}^\mathbf{f}+\mathcal{L}_{D_D}^\mathbf{f},\end{gathered}</script><p>R = x*m ,ˆ R = 1 − R. m表示使用预训练模型得到mask.</p>
+<p>两个鉴别器 D~T~ 和 D~D~ 具有相同的网络结构，即四个卷积层和一个全连接层。</p>
+<script type="math/tex; mode=display">
+\begin{aligned}\min_{\boldsymbol{\omega}_{\mathbf{d}},\boldsymbol{\omega}_{\mathbf{f}}}\mathcal{L}^{\mathbf{d}}(\Psi(\mathbf{u}^*;\boldsymbol{\omega}_{\mathbf{d}}))+\lambda\mathcal{L}^{\mathbf{f}}\big(\Phi(\mathbf{x},\mathbf{y};\boldsymbol{\omega}_{\mathbf{f}})\big),\\s.t.\mathbf{~u}^*=\Phi(\mathbf{x},\mathbf{y};\boldsymbol{\omega}_{\mathbf{f}}),\end{aligned}</script><p>我们引入了一个融合正则因子 L^f^，将受融合约束的检测优化转换为相互优化</p>
+<p>请注意，我们的 TarDAL 能够生成目标更清晰、边缘轮廓更锐利、纹理细节更丰富的视觉友好型融合结果。</p>
+<h4 id="IFCNN"><a href="#IFCNN" class="headerlink" title="IFCNN"></a>IFCNN</h4><p>这种策略不仅<strong>能生成视觉上吸引人的图像，还能在给定训练好的网络参数的情况下输出准确的检测结果</strong>，使我们能够找到面向检测的融合的最佳解决方案，并比独立训练方案更有效地收敛</p>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><ol>
+<li><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/Chaolei3/article/details/79404806">详细理解RGB图像、全色图像、多光谱图像、高光谱图像-CSDN博客</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/Linfeng-Tang/Image-Fusion">Linfeng-Tang/Image-Fusion: Deep Learning-based Image Fusion: A Survey (github.com)</a></p>
+<p><strong>综述</strong></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.sciencedirect.com/science/article/abs/pii/S1566253521001342">Image fusion meets deep learning: A survey and perspective - ScienceDirect</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.sciencedirect.com/science/article/abs/pii/S1566253522001518">Current advances and future perspectives of image fusion: A comprehensive review - ScienceDirect</a></p>
+</li>
+</ol>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
+    </div>
+
+    
+    
+    
+    <div>
+	
+     <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+     
+   </div>
+      
+
+        <div class="reward-container">
+  <div>感谢阅读.</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.png" alt="Sekyoro 微信支付">
+        <p>微信支付</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Sekyoro
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://www.sekyoro.top/2023/11/02/%E5%9B%BE%E5%83%8F%E8%9E%8D%E5%90%88%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" title="图像融合论文阅读">https://www.sekyoro.top/2023/11/02/图像融合论文阅读/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/images/wxqrcode.png">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/images/website.png">
+            <span class="icon">
+              <i class="fa fa-user"></i>
+            </span>
+
+            <span class="label">PersonalWebsite</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="https://my-astro-git-main-drowning-in-codes.vercel.app">
+            <span class="icon">
+              <i class="fas fa-share"></i>
+            </span>
+
+            <span class="label">杂鱼分享</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/image-fusion/" rel="tag"><i class="fa fa-tag"></i> image fusion</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/11/01/%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B%E5%AD%A6%E4%B9%A0-P3/" rel="prev" title="目标检测学习_P3">
+      <i class="fa fa-chevron-left"></i> 目标检测学习_P3
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+		  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4034523802263123"
+     crossorigin="anonymous"></script>
+<!-- 评论区 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-4034523802263123"
+     data-ad-slot="6333657257"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+          
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81MzE5Ny8yOTY3Mg=="></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+	
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+      	   
+          <!-- canvas粒子时钟 -->
+          <div style="">
+  <canvas id="canvas" style="width:60%;">当前浏览器不支持canvas，请更换浏览器后再试</canvas>
+</div>
+<script>
+(function(){
+
+   var digit=
+    [
+        [
+            [0,0,1,1,1,0,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,0,1,1,0],
+            [0,0,1,1,1,0,0]
+        ],//0
+        [
+            [0,0,0,1,1,0,0],
+            [0,1,1,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [1,1,1,1,1,1,1]
+        ],//1
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,1,1],
+            [1,1,1,1,1,1,1]
+        ],//2
+        [
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//3
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,0],
+            [0,0,1,1,1,1,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,1,1,0],
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,1]
+        ],//4
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,1,1,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//5
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//6
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0]
+        ],//7
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//8
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,1,1,0,0,0,0]
+        ],//9
+        [
+            [0,0,0,0,0,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,0,0,0]
+        ]//:
+    ];
+
+var canvas = document.getElementById('canvas');
+
+if(canvas.getContext){
+    var cxt = canvas.getContext('2d');
+    //声明canvas的宽高
+    var H = 100,W = 700;
+    canvas.height = H;
+    canvas.width = W;
+    cxt.fillStyle = '#f00';
+    cxt.fillRect(10,10,50,50);
+
+    //存储时间数据
+    var data = [];
+    //存储运动的小球
+    var balls = [];
+    //设置粒子半径
+    var R = canvas.height/20-1;
+    (function(){
+        var temp = /(\d)(\d):(\d)(\d):(\d)(\d)/.exec(new Date());
+        //存储时间数字，由十位小时、个位小时、冒号、十位分钟、个位分钟、冒号、十位秒钟、个位秒钟这7个数字组成
+        data.push(temp[1],temp[2],10,temp[3],temp[4],10,temp[5],temp[6]);
+    })();
+
+    /*生成点阵数字*/
+    function renderDigit(index,num){
+        for(var i = 0; i < digit[num].length; i++){
+            for(var j = 0; j < digit[num][i].length; j++){
+                if(digit[num][i][j] == 1){
+                    cxt.beginPath();
+                    cxt.arc(14*(R+2)*index + j*2*(R+1)+(R+1),i*2*(R+1)+(R+1),R,0,2*Math.PI);
+                    cxt.closePath();
+                    cxt.fill();
+                }
+            }
+        }
+    }
+
+    /*更新时钟*/
+    function updateDigitTime(){
+        var changeNumArray = [];
+        var temp = /(\d)(\d):(\d)(\d):(\d)(\d)/.exec(new Date());
+        var NewData = [];
+        NewData.push(temp[1],temp[2],10,temp[3],temp[4],10,temp[5],temp[6]);
+        for(var i = data.length-1; i >=0 ; i--){
+            //时间发生变化
+            if(NewData[i] !== data[i]){
+                //将变化的数字值和在data数组中的索引存储在changeNumArray数组中
+                changeNumArray.push(i+'_'+(Number(data[i])+1)%10);
+            }
+        }
+        //增加小球
+        for(var i = 0; i< changeNumArray.length; i++){
+            addBalls.apply(this,changeNumArray[i].split('_'));
+        }
+        data = NewData.concat();
+    }
+
+    /*更新小球状态*/
+    function updateBalls(){
+        for(var i = 0; i < balls.length; i++){
+            balls[i].stepY += balls[i].disY;
+            balls[i].x += balls[i].stepX;
+            balls[i].y += balls[i].stepY;
+            if(balls[i].x > W + R || balls[i].y > H + R){
+                balls.splice(i,1);
+                i--;
+            }
+        }
+    }
+
+    /*增加要运动的小球*/
+    function addBalls(index,num){
+        var numArray = [1,2,3];
+        var colorArray =  ["#3BE","#09C","#A6C","#93C","#9C0","#690","#FB3","#F80","#F44","#C00"];
+        for(var i = 0; i < digit[num].length; i++){
+            for(var j = 0; j < digit[num][i].length; j++){
+                if(digit[num][i][j] == 1){
+                    var ball = {
+                        x:14*(R+2)*index + j*2*(R+1)+(R+1),
+                        y:i*2*(R+1)+(R+1),
+                        stepX:Math.floor(Math.random() * 4 -2),
+                        stepY:-2*numArray[Math.floor(Math.random()*numArray.length)],
+                        color:colorArray[Math.floor(Math.random()*colorArray.length)],
+                        disY:1
+                    };
+                    balls.push(ball);
+                }
+            }
+        }
+    }
+
+    /*渲染*/
+    function render(){
+        //重置画布宽度，达到清空画布的效果
+        canvas.height = 100;
+        //渲染时钟
+        for(var i = 0; i < data.length; i++){
+            renderDigit(i,data[i]);
+        }
+        //渲染小球
+        for(var i = 0; i < balls.length; i++){
+            cxt.beginPath();
+            cxt.arc(balls[i].x,balls[i].y,R,0,2*Math.PI);
+            cxt.fillStyle = balls[i].color;
+            cxt.closePath();
+            cxt.fill();
+        }
+    }
+
+    clearInterval(oTimer);
+    var oTimer = setInterval(function(){
+        //更新时钟
+        updateDigitTime();
+        //更新小球状态
+        updateBalls();
+        //渲染
+        render();
+    },50);
+}
+
+})();
+</script>
+        
+
+<!-- require APlayer -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+<script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+<!-- require MetingJS -->
+
+<script src="/js/meting-js.js"></script>
+	  
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+	  
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#abs"><span class="nav-number">1.</span> <span class="nav-text">abs</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Intro"><span class="nav-number">2.</span> <span class="nav-text">Intro</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%A0%E7%BB%9F%E8%9E%8D%E5%90%88%E6%96%B9%E6%B3%95%EF%BC%9A"><span class="nav-number">2.1.</span> <span class="nav-text">传统融合方法：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-AE-based"><span class="nav-number">2.1.1.</span> <span class="nav-text">1.AE-based</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-CNN-based"><span class="nav-number">2.1.2.</span> <span class="nav-text">2.CNN-based</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-GAN-baesd"><span class="nav-number">2.1.3.</span> <span class="nav-text">3.GAN-baesd</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%BE%E5%83%8F%E8%9E%8D%E5%90%88%E5%9C%BA%E6%99%AF"><span class="nav-number">2.2.</span> <span class="nav-text">图像融合场景</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#digital-photography-image-fusion"><span class="nav-number">2.2.1.</span> <span class="nav-text">digital photography image fusion</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Infrared-and-visible-image-fusion%E2%80%9D"><span class="nav-number">2.2.2.</span> <span class="nav-text">Infrared and visible image fusion”</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GAN"><span class="nav-number">2.3.</span> <span class="nav-text">GAN</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%84%E4%BC%B0"><span class="nav-number">2.3.1.</span> <span class="nav-text">评估</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#EN"><span class="nav-number">2.3.1.1.</span> <span class="nav-text">EN</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SD"><span class="nav-number">2.3.1.2.</span> <span class="nav-text">SD</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SSIM"><span class="nav-number">2.3.1.3.</span> <span class="nav-text">SSIM</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#PSNR"><span class="nav-number">2.3.1.4.</span> <span class="nav-text">PSNR</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CC"><span class="nav-number">2.3.1.5.</span> <span class="nav-text">CC</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SF-%E7%A9%BA%E9%97%B4%E9%A2%91%E7%8E%87"><span class="nav-number">2.3.1.6.</span> <span class="nav-text">SF 空间频率</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#VIF-%E7%A9%BA%E9%97%B4%E4%BF%A1%E6%81%AF%E4%BF%9D%E7%9C%9F%E5%BA%A6"><span class="nav-number">2.3.1.7.</span> <span class="nav-text">VIF 空间信息保真度</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E9%9B%86"><span class="nav-number">2.3.2.</span> <span class="nav-text">数据集</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E6%88%98"><span class="nav-number">2.4.</span> <span class="nav-text">实战</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#FusionGAN"><span class="nav-number">2.4.1.</span> <span class="nav-text">FusionGAN</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Generator"><span class="nav-number">2.4.1.1.</span> <span class="nav-text">Generator</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Discriminator"><span class="nav-number">2.4.1.2.</span> <span class="nav-text">Discriminator</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TarDAL"><span class="nav-number">2.4.2.</span> <span class="nav-text">TarDAL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E5%BB%BA%E6%A8%A1"><span class="nav-number">2.4.3.</span> <span class="nav-text">问题建模</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E5%99%A8"><span class="nav-number">2.4.3.1.</span> <span class="nav-text">生成器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#IFCNN"><span class="nav-number">2.4.3.2.</span> <span class="nav-text">IFCNN</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">2.4.4.</span> <span class="nav-text">参考资料</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Sekyoro"
+      src="https://i.loli.net/2021/05/17/YqoavnXdGTpPO9R.jpg">
+  <p class="site-author-name" itemprop="name">Sekyoro</p>
+  <div class="site-description" itemprop="description">什么也无法舍弃的人，什么也做不了.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">148</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">178</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="http://proanimer.com/" title="Personal Website → http:&#x2F;&#x2F;proanimer.com" rel="noopener" target="_blank"><i class="fab fa-internet-explorer fa-fw"></i>Personal Website</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://github.com/drowning-in-codes" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;drowning-in-codes" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:bukalala174@gmail.com" title="E-Mail → mailto:bukalala174@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://mp.weixin.qq.com/s?__biz=Mzg3ODY1MDkzMg==&mid=2247483770&idx=1&sn=fdf88faab01d5c219ac609570a21c9d6&chksm=cf113221f866bb373938cfca03cf095ff4fe1e4dc37d68ef5de4cd4876ee1260fca0c015a4d6&token=1096259873&lang=zh_CN#rd" title="wxPublicAccount → https:&#x2F;&#x2F;mp.weixin.qq.com&#x2F;s?__biz&#x3D;Mzg3ODY1MDkzMg&#x3D;&#x3D;&amp;mid&#x3D;2247483770&amp;idx&#x3D;1&amp;sn&#x3D;fdf88faab01d5c219ac609570a21c9d6&amp;chksm&#x3D;cf113221f866bb373938cfca03cf095ff4fe1e4dc37d68ef5de4cd4876ee1260fca0c015a4d6&amp;token&#x3D;1096259873&amp;lang&#x3D;zh_CN#rd" rel="noopener" target="_blank"><i class="fab fa-weixin fa-fw"></i>wxPublicAccount</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-rss fa-fw"></i>RSS</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/aqwca" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;aqwca" rel="noopener" target="_blank"><i class="fa fa-handshake fa-fw"></i>CSDN</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://my-astro-git-main-drowning-in-codes.vercel.app/" title="杂鱼分享 → https:&#x2F;&#x2F;my-astro-git-main-drowning-in-codes.vercel.app" rel="noopener" target="_blank"><i class="fas fa-share fa-fw"></i>杂鱼分享</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      友情链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="http://myqhs.top/" title="http:&#x2F;&#x2F;myqhs.top&#x2F;" rel="noopener" target="_blank">myqhs</a>
+        </li>
+    </ul>
+  </div>
+
+
+  <div class="motion-element announcement">
+   <div class="title">注意</div>
+   <p class="content">由于最近图床更新,可能有些图片显示不了.如果发现了有些图片无法显示影响阅读的,还烦请联系我,我有空补上. </p>
+   <p class="date"> 2023-10-6 </p>
+  </div>
+      </div>
+<meting-js
+	id="6856787487"
+	server="netease"
+	type="playlist"
+	order="random"
+	>
+</meting-js>
+			<div class="widget-wrap">
+    <h3 class="widget-title" style="margin:0">文章词云</h3>
+    <div id="myCanvasContainer" class="widget tagcloud">
+        <canvas width="250" height="250" id="resCanvas" style="width:100%">
+		  <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/image-fusion/" rel="tag">image fusion</a><span class="tag-list-count">1</span></li></ul>	
+        </canvas>
+    </div>
+</div>
+		<script type="text/javascript" id="clustrmaps" src="//clustrmaps.com/map_v2.js?d=xQdGTxqARTBiNIwX2aUban-ixkj2s6VaZQWo-aVCgY8&cl=ffffff&w=a"></script>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+	 
+	 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4034523802263123"
+     crossorigin="anonymous"></script>
+<!-- 边栏 -->
+
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-4034523802263123"
+     data-ad-slot="6549565089"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+	 
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+	 
+	
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+  
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; Wed Apr 08 2020 08:00:00 GMT+0800 (中国标准时间) – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Sekyoro</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">886k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">13:25</span>
+</div>
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+    <span id="busuanzi_container_site_pv">总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+    <span class="post-meta-divider">|</span>
+    <span id="busuanzi_container_site_uv">总访客数<span id="busuanzi_value_site_uv"></span>人</span>
+    <span class="post-meta-divider">|</span>
+<!-- 不蒜子计数初始值纠正 -->
+<script>
+$(document).ready(function() {
+
+    var int = setInterval(fixCount, 50);  // 50ms周期检测函数
+    var countOffset = 20000;  // 初始化首次数据
+
+    function fixCount() {            
+       if (document.getElementById("busuanzi_container_site_pv").style.display != "none")
+        {
+            $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + countOffset); 
+            clearInterval(int);
+        }                  
+        if ($("#busuanzi_container_site_pv").css("display") != "none")
+        {
+            $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + countOffset); // 加上初始数据 
+            clearInterval(int); // 停止检测
+        }  
+    }
+       	
+});
+</script> 
+
+<div>
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("04/08/2021 20:00:00");
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+    }
+setInterval("createtime()",250);
+</script>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/theme-next/theme-next-pjax@0/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax',
+	'.widget-wrap'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+ 
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+  <script data-pjax>
+    (function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+  </script>
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
+<script src="//cdn.jsdelivr.net/npm/instantsearch.js@4/dist/instantsearch.production.min.js"></script>
+<script src="/js/algolia-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+<script data-pjax>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  let url = element.dataset.target;
+  let pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  let pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  let fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+  
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+ 
+
+<script>
+  var OriginTitile = document.title;
+  var titleTime;
+  document.addEventListener("visibilitychange", function() {
+    if (document.hidden) {
+      document.title = "(つェ⊂)我藏好了哦~" + OriginTitile;
+      clearTimeout(titleTime);
+    } else {
+      document.title = "(*´∇｀*) 被你发现啦~" + OriginTitile;
+      titleTime = setTimeout(function() {
+        document.title = OriginTitile;
+      }, 2000);
+    }
+  });
+</script>
+
+
+
+  <script src="/js/src/activate-power-mode.min.js"></script>
+  <script>
+    POWERMODE.colorful = true;
+    POWERMODE.shake = false;
+    document.body.addEventListener('input', POWERMODE);
+  </script>
+
+
+    </div>  
+  
+  <script  type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+<script  type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+
+<!-- hexo injector body_end start --><script src='/js/outdate.js'></script><!-- hexo injector body_end end --><script async>window.onload=function(){var a=document.createElement('script'),b=document.getElementsByTagName('script')[0];a.type='text/javascript',a.async=!0,a.src='/sw-register.js?v='+Date.now(),b.parentNode.insertBefore(a,b)};</script></body></html>
