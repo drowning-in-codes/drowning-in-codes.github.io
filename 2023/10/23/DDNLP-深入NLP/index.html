@@ -83,7 +83,7 @@
 <meta property="og:image" content="https://i.imgur.com/sFOcUVC.png">
 <meta property="og:image" content="https://github.com/microsoft/AI-For-Beginners/raw/main/lessons/5-NLP/18-Transformers/images/jalammarBERT-language-modeling-masked-lm.png">
 <meta property="article:published_time" content="2023-10-23T02:31:33.000Z">
-<meta property="article:modified_time" content="2023-11-06T14:56:15.798Z">
+<meta property="article:modified_time" content="2023-11-08T04:06:33.657Z">
 <meta property="article:author" content="Sekyoro">
 <meta property="article:tag" content="NLP">
 <meta property="article:tag" content="Deep Learning">
@@ -308,7 +308,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-11-06 22:56:15" itemprop="dateModified" datetime="2023-11-06T22:56:15+08:00">2023-11-06</time>
+                <time title="修改时间：2023-11-08 12:06:33" itemprop="dateModified" datetime="2023-11-08T12:06:33+08:00">2023-11-08</time>
               </span>
 
           
@@ -550,7 +550,7 @@
 <h4 id="BERT"><a href="#BERT" class="headerlink" title="BERT"></a>BERT</h4><p>BERT是一个非常大的多层transformer网络，其中 12 层用于 BERT 基础，24 层用于 BERT-large。该模型首先使用无监督训练（预测句子中的掩饰词）在大型文本数据语料库（WikiPedia + 书籍）上进行预训练。</p>
 <p>在预训练期间，模型吸收了大量语言理解，然后可以通过微调将其与其他数据集一起使用。这个过程称为迁移学习。</p>
 <p><img data-src="https://github.com/microsoft/AI-For-Beginners/raw/main/lessons/5-NLP/18-Transformers/images/jalammarBERT-language-modeling-masked-lm.png" alt="picture from http://jalammar.github.io/illustrated-bert/"></p>
-<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
+<h4 id="Vit"><a href="#Vit" class="headerlink" title="Vit"></a>Vit</h4><link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
     </div>
 
     
@@ -1027,7 +1027,7 @@ if(canvas.getContext){
 	  
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#tokenization-amp-amp-representation"><span class="nav-number">1.</span> <span class="nav-text">tokenization&amp;&amp;representation</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Bag-of-Words"><span class="nav-number">1.0.1.</span> <span class="nav-text">Bag-of-Words</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#N-Grams"><span class="nav-number">1.0.2.</span> <span class="nav-text">N-Grams</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TF-IDF"><span class="nav-number">1.0.3.</span> <span class="nav-text">TF-IDF</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Embedding"><span class="nav-number">2.</span> <span class="nav-text">Embedding</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Word2Vec"><span class="nav-number">2.0.1.</span> <span class="nav-text">Word2Vec</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#FastText"><span class="nav-number">2.0.2.</span> <span class="nav-text">FastText</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#GloVe"><span class="nav-number">2.0.3.</span> <span class="nav-text">GloVe</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Language-Modeling"><span class="nav-number">2.1.</span> <span class="nav-text">Language Modeling</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RNN-Recurrent-Neural-Networks"><span class="nav-number">3.</span> <span class="nav-text">RNN(Recurrent Neural Networks)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#LSTM-amp-amp-GRU"><span class="nav-number">3.0.1.</span> <span class="nav-text">LSTM&amp;&amp;GRU</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#PACKED-SEQUENCE"><span class="nav-number">3.0.2.</span> <span class="nav-text">PACKED SEQUENCE</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Bidirectional-and-Multilayer-RNNs"><span class="nav-number">3.0.3.</span> <span class="nav-text">Bidirectional and Multilayer RNNs</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GRN-Generative-Recurrent-Networks"><span class="nav-number">4.</span> <span class="nav-text">GRN(Generative Recurrent Networks)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#soft-text-generation-and-temperature"><span class="nav-number">4.0.1.</span> <span class="nav-text">soft text generation and temperature</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Transformers"><span class="nav-number">4.1.</span> <span class="nav-text">Transformers</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Positional-Encoding-Embedding"><span class="nav-number">4.1.1.</span> <span class="nav-text">Positional Encoding&#x2F;Embedding</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#BERT"><span class="nav-number">4.1.2.</span> <span class="nav-text">BERT</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#tokenization-amp-amp-representation"><span class="nav-number">1.</span> <span class="nav-text">tokenization&amp;&amp;representation</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Bag-of-Words"><span class="nav-number">1.0.1.</span> <span class="nav-text">Bag-of-Words</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#N-Grams"><span class="nav-number">1.0.2.</span> <span class="nav-text">N-Grams</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TF-IDF"><span class="nav-number">1.0.3.</span> <span class="nav-text">TF-IDF</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Embedding"><span class="nav-number">2.</span> <span class="nav-text">Embedding</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Word2Vec"><span class="nav-number">2.0.1.</span> <span class="nav-text">Word2Vec</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#FastText"><span class="nav-number">2.0.2.</span> <span class="nav-text">FastText</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#GloVe"><span class="nav-number">2.0.3.</span> <span class="nav-text">GloVe</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Language-Modeling"><span class="nav-number">2.1.</span> <span class="nav-text">Language Modeling</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RNN-Recurrent-Neural-Networks"><span class="nav-number">3.</span> <span class="nav-text">RNN(Recurrent Neural Networks)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#LSTM-amp-amp-GRU"><span class="nav-number">3.0.1.</span> <span class="nav-text">LSTM&amp;&amp;GRU</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#PACKED-SEQUENCE"><span class="nav-number">3.0.2.</span> <span class="nav-text">PACKED SEQUENCE</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Bidirectional-and-Multilayer-RNNs"><span class="nav-number">3.0.3.</span> <span class="nav-text">Bidirectional and Multilayer RNNs</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GRN-Generative-Recurrent-Networks"><span class="nav-number">4.</span> <span class="nav-text">GRN(Generative Recurrent Networks)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#soft-text-generation-and-temperature"><span class="nav-number">4.0.1.</span> <span class="nav-text">soft text generation and temperature</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Transformers"><span class="nav-number">4.1.</span> <span class="nav-text">Transformers</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Positional-Encoding-Embedding"><span class="nav-number">4.1.1.</span> <span class="nav-text">Positional Encoding&#x2F;Embedding</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#BERT"><span class="nav-number">4.1.2.</span> <span class="nav-text">BERT</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Vit"><span class="nav-number">4.1.3.</span> <span class="nav-text">Vit</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
       <div class="site-overview-wrap sidebar-panel">
@@ -1042,14 +1042,14 @@ if(canvas.getContext){
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">148</span>
+          <span class="site-state-item-count">149</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-count">17</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -1167,12 +1167,12 @@ if(canvas.getContext){
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">889k</span>
+    <span title="站点总字数">897k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">13:28</span>
+    <span title="站点阅读时长">13:36</span>
 </div>
 
     <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>

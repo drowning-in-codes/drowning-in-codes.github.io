@@ -65,8 +65,16 @@
 <meta property="og:image" content="https://i.imgur.com/XZhUCg2.png">
 <meta property="og:image" content="https://i.imgur.com/Qwko06N.png">
 <meta property="og:image" content="https://i.imgur.com/lv9Mg1o.png">
+<meta property="og:image" content="https://i.imgur.com/vuIYIRj.png">
+<meta property="og:image" content="https://i.imgur.com/A3gJRD2.png">
+<meta property="og:image" content="https://i.imgur.com/Fgpy1VL.png">
+<meta property="og:image" content="https://i.imgur.com/oI8nYfO.png">
+<meta property="og:image" content="https://i.imgur.com/WPHLLvv.png">
+<meta property="og:image" content="https://i.imgur.com/l2ONRey.png">
+<meta property="og:image" content="https://i.imgur.com/veuN5Um.png">
+<meta property="og:image" content="https://i.imgur.com/TYR6p1y.png">
 <meta property="article:published_time" content="2023-11-02T14:24:07.000Z">
-<meta property="article:modified_time" content="2023-11-05T02:45:50.694Z">
+<meta property="article:modified_time" content="2023-11-09T03:11:43.001Z">
 <meta property="article:author" content="Sekyoro">
 <meta property="article:tag" content="image fusion">
 <meta name="twitter:card" content="summary">
@@ -290,7 +298,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-11-05 10:45:50" itemprop="dateModified" datetime="2023-11-05T10:45:50+08:00">2023-11-05</time>
+                <time title="修改时间：2023-11-09 11:11:43" itemprop="dateModified" datetime="2023-11-09T11:11:43+08:00">2023-11-09</time>
               </span>
 
           
@@ -306,14 +314,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>7.7k</span>
+              <span>13k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>7 分钟</span>
+              <span>12 分钟</span>
             </span>
 
         </div>
@@ -425,7 +433,8 @@
 <h4 id="VIF-空间信息保真度"><a href="#VIF-空间信息保真度" class="headerlink" title="VIF 空间信息保真度"></a>VIF 空间信息保真度</h4><p>VIF 衡量融合图像的信息保真度，其计算方法分为四个步骤：首先，将源图像和融合图像划分为不同的区块；然后，评估每个区块在失真和未失真情况下的视觉信息；接着，评估每个子波段的 VIF；最后，根据 VIF 计算总体指标。</p>
 <h3 id="数据集"><a href="#数据集" class="headerlink" title="数据集"></a>数据集</h3><p>TNO TNO影像融合数据集包含不同军事相关场景的单光谱（增强视觉、近红外和长波红外或热）夜间影像，在不同的多波段camnera系统中注册。</p>
 <p> INO RoadScene MSRS LLVIP MFD</p>
-<h2 id="实战"><a href="#实战" class="headerlink" title="实战"></a>实战</h2><h3 id="FusionGAN"><a href="#FusionGAN" class="headerlink" title="FusionGAN"></a>FusionGAN</h3><p>2019年较早的使用GAN作为图像融合算法融合红外和可见光</p>
+<h2 id="实战"><a href="#实战" class="headerlink" title="实战"></a>实战</h2><p>主要关注红外图像与可见光图像融合以及多焦点图像融合,从这些出发,最后到一个统一的图像融合框架.</p>
+<h3 id="FusionGAN"><a href="#FusionGAN" class="headerlink" title="FusionGAN"></a>FusionGAN</h3><p>2019年较早的使用GAN作为图像融合算法融合红外和可见光</p>
 <p><img data-src="https://i.imgur.com/OP6inkz.png" alt="image-20231104161851282"></p>
 <h4 id="Generator"><a href="#Generator" class="headerlink" title="Generator"></a>Generator</h4><p><img data-src="https://i.imgur.com/gcNlg22.png" alt="image-20231104161928602"></p>
 <p>注意损失函数设计</p>
@@ -448,27 +457,96 @@ V_{\text{FusionGAN}} ( G ) = \frac 1 N \sum _ { n = 1 }^{N}\left(D_{\theta_D}(I_
 <p>我们从双层表述中推导出一种合作训练方案，为快速推理（融合和检测）提供最佳网络参数。</p>
 <p>与以往追求高视觉质量的方法不同，我们认为，IVIF 必须生成既有利于视觉检测又有利于计算机感知的图像，即面向检测的融合。</p>
 <h3 id="问题建模"><a href="#问题建模" class="headerlink" title="问题建模"></a>问题建模</h3><p><img data-src="https://i.imgur.com/Qwko06N.png" alt="image-20231104153245210"></p>
-<p>假设红外图像、可见光图像和融合图像都是大小为 m×n 的灰度图像，分别用列向量 x、y 和 u∈Rmn×1 表示。</p>
-<p>Ld 是检测特定的训练损失,f () 是一个基于能量的保真度项，包含融合图像 u 以及源图像 x 和 y，而 g~T~ () 和 g~D~ () 则是两个可行性约束条件，分别定义在红外图像和可见光图像上。</p>
+<p>假设红外图像、可见光图像和融合图像都是大小为 m×n 的灰度图像，分别用列向量 x、y 和 u∈R^mn×1^ 表示。</p>
+<p>L~d~ 是目标检测相关的训练损失,Ψ是一个目标检测网络,f () 是一个基于能量的保真度项，包含融合图像 u 以及源图像 x 和 y，而 g~T~ () 和 g~D~ () 则是两个可行性约束条件,分别定义在红外图像和可见光图像上。</p>
 <p><img data-src="https://i.imgur.com/lv9Mg1o.png" alt="image-20231104154941474"></p>
-<p>引入一个带有学习参数 ω~f~的融合网络 Φ，并将双级优化转换为单级优化.</p>
-<p>因此，我们将优化分解为两个学习网络 Φ 和 Ψ。我们采用 YOLOv53 作为检测网络 Ψ 的主干，其中 L~d~也沿用其设置，并精心设计了融合网络 Φ 如下。</p>
+<p>引入一个带有学习参数 ω~f~的融合网络 Φ，并将双级优化转换为单级优化. </p>
+<p>因此，我们将优化分解为两个学习网络 Φ 和 Ψ。我们采用 YOLOv53 作为检测网络 Ψ 的主干，其中 L~d~也沿用其设置，并精心设计了融合网络 Φ 。</p>
 <blockquote>
 <p>典型的深度融合方法致力于学习两种不同成像模式的共同特征。相反，我们的融合网络在<strong>学习这两种成像方式互补特征的差异的同时，也在寻求共性</strong>。通常情况下<strong>，红外图像能突出显示目标的独特结构，而可见光图像则能提供背景的纹理细节</strong>。</p>
 </blockquote>
-<h4 id="生成器"><a href="#生成器" class="headerlink" title="生成器"></a>生成器</h4><p>生成器的作用是生成能保留整体结构并保持与源图像相似强度分布的融合图像。常用的结构相似性指数(SSIM)作为损失函数</p>
+<h4 id="Target-aware-dual-adversarial-network"><a href="#Target-aware-dual-adversarial-network" class="headerlink" title="Target-aware dual adversarial network"></a>Target-aware dual adversarial network</h4><p><img data-src="https://i.imgur.com/vuIYIRj.png" alt="image-20231107114627598"></p>
+<p>生成器G生成一张逼真的融合图像,目标判别器D~T~使用强度一致性评估红外图像中的目标与G提供的融合图像中被mask的目标.细节判别器 D~D~判别的是可见光梯度分布与融合图像的梯度分布</p>
+<h4 id="生成器"><a href="#生成器" class="headerlink" title="生成器"></a>生成器</h4><p>生成器的作用是生成能保留整体结构并保持与源图像相似强度分布的融合图像。常用的结构相似性指数(SSIM)作为损失函数.</p>
+<p>为了平衡源图像的像素强度分布，引入了基于突出度权重（SDW）的像素损失。</p>
 <p>另外提出了一个基于显著性pixel loss</p>
-<p>我们使用 5 层密集块 作为 G 来提取共同特征，然后使用包含三个卷积层的合并块进行特征聚合。每个卷积层由一个卷积运算、批处理归一化和 ReLU 激活函数组成。生成的融合图像 u 与源图像大小相同。</p>
 <script type="math/tex; mode=display">
-S_{\mathbf{x}(k)}=\sum_{i=0}^{2\text{55}} \boldsymbol { H _ { \mathbf{x}}}(i)|\mathbf{x}(k)-i|,</script><p>x(k) 是第 k 个像素的值，Hx 是第 i 个像素值的直方图</p>
-<p>目标鉴别器D~T~用于分辨红外融合结果的前景热目标和分辨融合后的背景细节与可见图像.对抗损失如下:</p>
+S_{\mathbf{x}(k)}=\sum_{i=0}^{2\text{55}} \boldsymbol { H _ { \mathbf{x}}}(i)|\mathbf{x}(k)-i|,</script><p>其中H~x~(i)表示直方图中i的值,x(k)表示第k个值,因为x为一个大小为mn的vector</p>
 <script type="math/tex; mode=display">
-\begin{gathered}\mathcal{L}_{D_T}^\mathbf{f}=\mathbb{E}_{x\sim\tilde{p}(\mathcal{R}(\mathbf{x}))}[D(x)]-\mathbb{E}_{\tilde{x}\sim\tilde{p}(\mathcal{R}(\mathbf{u}))}[D(\tilde{x})],\\\mathcal{L}_{D_D}^\mathbf{f}=\mathbb{E}_{x\sim\tilde{p}(\hat{\mathcal{R}}(\nabla\mathbf{y}))}[D(x)]-\mathbb{E}_{\tilde{x}\sim\tilde{p}(\hat{\mathcal{R}}(\nabla\mathbf{u}))}[D(\tilde{x})],\\\mathcal{L}_{\mathbf{f}}^{\mathrm{adv}}=\mathcal{L}_{D_T}^\mathbf{f}+\mathcal{L}_{D_D}^\mathbf{f},\end{gathered}</script><p>R = x*m ,ˆ R = 1 − R. m表示使用预训练模型得到mask.</p>
-<p>两个鉴别器 D~T~ 和 D~D~ 具有相同的网络结构，即四个卷积层和一个全连接层。</p>
+\mathscr{L}_{\mathrm{pixe}1}=\|\mathrm{u}-\omega_1\mathrm{x}\|_1+\|\mathrm{u}-\omega_2\mathrm{y}\|_1,</script><p>pixel loss如上,其中</p>
 <script type="math/tex; mode=display">
-\begin{aligned}\min_{\boldsymbol{\omega}_{\mathbf{d}},\boldsymbol{\omega}_{\mathbf{f}}}\mathcal{L}^{\mathbf{d}}(\Psi(\mathbf{u}^*;\boldsymbol{\omega}_{\mathbf{d}}))+\lambda\mathcal{L}^{\mathbf{f}}\big(\Phi(\mathbf{x},\mathbf{y};\boldsymbol{\omega}_{\mathbf{f}})\big),\\s.t.\mathbf{~u}^*=\Phi(\mathbf{x},\mathbf{y};\boldsymbol{\omega}_{\mathbf{f}}),\end{aligned}</script><p>我们引入了一个融合正则因子 L^f^，将受融合约束的检测优化转换为相互优化</p>
-<p>请注意，我们的 TarDAL 能够生成目标更清晰、边缘轮廓更锐利、纹理细节更丰富的视觉友好型融合结果。</p>
-<h4 id="IFCNN"><a href="#IFCNN" class="headerlink" title="IFCNN"></a>IFCNN</h4><p>这种策略不仅<strong>能生成视觉上吸引人的图像，还能在给定训练好的网络参数的情况下输出准确的检测结果</strong>，使我们能够找到面向检测的融合的最佳解决方案，并比独立训练方案更有效地收敛</p>
+\boldsymbol{\omega}_1=S_\mathbf{x}(k)/[S_\mathbf{x}(k)-S_\mathbf{y}(k)],\boldsymbol{\omega}_\mathbf{2}=1-\boldsymbol{\omega}_\mathbf{1}.</script><p>使用 5 层密集块作为 G 来提取共同特征，然后使用包含三个卷积层的合并块进行特征聚合。每个卷积层由一个卷积运算、批处理归一化和 ReLU 激活函数组成。生成的融合图像 u 与源图像大小相同。</p>
+<h4 id="目标鉴别器与细节鉴别器"><a href="#目标鉴别器与细节鉴别器" class="headerlink" title="目标鉴别器与细节鉴别器"></a>目标鉴别器与细节鉴别器</h4><p>目标判别器 D~T~ 用于将融合结果的前景热目标与红外目标区分开来。而细节判别器 D~D~ 的作用是将融合结果的背景细节与可见光图像的细节区分开来。</p>
+<p>采用了预训练的显著性检测网络从红外图像中计算出目标掩码 m，这样两个判别器就能在各自的区域（目标和背景）进行判别(也就是将图像中的目标与背景分割)</p>
+<p>对抗损失如下,R(x)表示红外图像中的目标,R(u)表示融合后图像中的目标,R^^^则表示背景</p>
+<script type="math/tex; mode=display">
+\begin{gathered}\mathcal{L}_{D_T}^\mathbf{f}=\mathbb{E}_{x\sim\tilde{p}(\mathcal{R}(\mathbf{x}))}[D(x)]-\mathbb{E}_{\tilde{x}\sim\tilde{p}(\mathcal{R}(\mathbf{u}))}[D(\tilde{x})],\\\mathcal{L}_{D_D}^\mathbf{f}=\mathbb{E}_{x\sim\tilde{p}(\hat{\mathcal{R}}(\nabla\mathbf{y}))}[D(x)]-\mathbb{E}_{\tilde{x}\sim\tilde{p}(\hat{\mathcal{R}}(\nabla\mathbf{u}))}[D(\tilde{x})],\\\mathcal{L}_{\mathbf{f}}^{\mathrm{adv}}=\mathcal{L}_{D_T}^\mathbf{f}+\mathcal{L}_{D_D}^\mathbf{f},\end{gathered}</script><p>R = x*m ,R^^^= 1 − R. m表示使用预训练模型得到mask.</p>
+<p>对于鉴别器,损失分别是</p>
+<script type="math/tex; mode=display">
+\begin{gathered}
+\mathcal{L}_{D_T}=\mathcal{L}_{D_T}^\mathbf{f}+k\mathbb{E}_{\tilde{x}\sim\tilde{r}(\mathcal{R}(\mathbf{x}))}[(\|\nabla D_T(\tilde{x})\|)^p], \\
+\mathcal{L}_{D_{D}}=\mathcal{L}_{D_{D}}^{\mathbf{f}}+k\mathbb{E}_{\tilde{x}\sim\tilde{r}(\hat{\mathcal{R}}(\nabla\mathbf{x}))}[(\|\nabla D_{D}(\tilde{x})\|)^{p}], 
+\end{gathered}</script><p>两个鉴别器 D~T~ 和 D~D~ 具有相同的网络结构，即四个卷积层和一个全连接层。</p>
+<p><img data-src="https://i.imgur.com/A3gJRD2.png" alt="image-20231107131708716"></p>
+<h4 id="合作训练策略"><a href="#合作训练策略" class="headerlink" title="合作训练策略"></a>合作训练策略</h4><script type="math/tex; mode=display">
+\begin{aligned}\min_{\boldsymbol{\omega}_{\mathbf{d}},\boldsymbol{\omega}_{\mathbf{f}}}\mathcal{L}^{\mathbf{d}}(\Psi(\mathbf{u}^*;\boldsymbol{\omega}_{\mathbf{d}}))+\lambda\mathcal{L}^{\mathbf{f}}\big(\Phi(\mathbf{x},\mathbf{y};\boldsymbol{\omega}_{\mathbf{f}})\big),\\s.t.\mathbf{~u}^*=\Phi(\mathbf{x},\mathbf{y};\boldsymbol{\omega}_{\mathbf{f}}),\end{aligned}</script><p>双层优化自然会衍生出一种合作训练策略，以获得最佳网络参数 ω = (ω~d~, ω~f~)</p>
+<p>引入了一个融合正则因子 L^f^，将受融合约束的检测优化转换为相互优化</p>
+<p>损失函数包含目标检测的损失函数以及融合的损失函数.</p>
+<h3 id="红外与可见光图像的融合结果"><a href="#红外与可见光图像的融合结果" class="headerlink" title="红外与可见光图像的融合结果"></a>红外与可见光图像的融合结果</h3><h4 id="定性比较"><a href="#定性比较" class="headerlink" title="定性比较"></a>定性比较</h4><p>首先，可以很好地保留红外图像中的分辨目标。如图 6（第二组的绿色缠结）所示，我们的方法中的人表现出高对比度和独特的突出轮廓，因此有利于视觉观察.</p>
+<p>其次，我们的结果可以保留可见光图像中丰富的纹理细节（第一组和第三组的绿色缠结），这更符合人类的视觉系统。</p>
+<h4 id="定量比较"><a href="#定量比较" class="headerlink" title="定量比较"></a>定量比较</h4><p>在 400 个图像对（20 个来自 TNO 的图像对、40 个来自 RoadScene 的图像对和 340 个来自 M3FD 的图像对）上对我们的 TarDAL 和上述竞争对手进行了定量比较。</p>
+<p>使用了MI,EN和SD作为评估指标.</p>
+<h3 id="红外与可见光目标检测结果"><a href="#红外与可见光目标检测结果" class="headerlink" title="红外与可见光目标检测结果"></a>红外与可见光目标检测结果</h3><h4 id=""><a href="#" class="headerlink" title=" "></a> </h4><h3 id="多聚焦图像融合"><a href="#多聚焦图像融合" class="headerlink" title="多聚焦图像融合"></a>多聚焦图像融合</h3><h3 id="MFIF-GAN"><a href="#MFIF-GAN" class="headerlink" title="MFIF-GAN"></a>MFIF-GAN</h3><p>针对多焦点图像融合</p>
+<p>在数码摄影领域，有限的景深（DOF）导致单一场景中可能存在多种图像焦点区域，并产生散焦效应（DSE）[1]。作为一种图像增强技术，多焦点图像融合（MFIF）被用来融合图 1(a) 和图 1(b) 所示的多焦点图像，使融合结果（如图 1(c) 所示）能够清晰地保留来源信息。这一操作是各类计算机视觉（CV）任务的前提条件，例如物体检测和定位、识别和分割</p>
+<h4 id="网络结构"><a href="#网络结构" class="headerlink" title="网络结构"></a>网络结构</h4><p>MFIF-GAN 中的生成器将源彩色图像 IA 和 IB 作为输入，旨在生成焦点图 ̂ F。判别器的输入是 IA、IB 和（真实或生成的）焦点图的连接。生成器的目的是尽可能精确地重建焦点图，而鉴别器的目的是将生成的焦点图与真实的焦点图区分开来。</p>
+<p>G 包括一个编码器、一个张量连接模块和一个解码器。<strong>为了有效处理彩色图像，编码器被设计成六个并行子网络分支，共享源图像每个通道的参数</strong>。</p>
+<h3 id="FuseGAN"><a href="#FuseGAN" class="headerlink" title="FuseGAN"></a>FuseGAN</h3><p>我们的目标是通过构建基于 cGAN 的网络 FuseGAN，学习从源图像到置信度图的映射，从而为融合任务提供重点信息。我们首先详细介绍了该架构，然后分析了其目标函数；最后阐述了融合方案.</p>
+<p>生成器 G：如图所示，生成器 G 由三个部分组成：编码器、张量并合器和解码器。<strong>它将一对多焦点图像作为输入，并输出置信度图</strong>。具体来说，编码器有两个分支，每个分支包含 12 个块。为简单起见，我们将卷积层、批规范层和转置卷积层分别称为 Conv、BN 和 Decov。其中，第一块是 Conv-BN-ReLu，滤波器尺寸较大，为 7×7，步长为 1，目的是粗略提取特征。</p>
+<p><img data-src="https://i.imgur.com/Fgpy1VL.png" alt="image-20231108184311430" style="zoom: 80%;" /></p>
+<p>我们利用 中的 PatchGAN 作为判别器 D。从概念上讲，它试图辨别图像中每个大小为 K×K 的patch是真是假。鉴别器对图像中的所有响应进行卷积平均，最后生成输出。。</p>
+<p><img data-src="https://i.imgur.com/oI8nYfO.png" alt="image-20231108190809183"></p>
+<p>因此，我们利用自适应权重块设计的特定内容损失函数可以自适应地引导融合图像在像素级逼近源图像中重点区域的强度分布和梯度分布</p>
+<p>此外,由于我们的优化目标是<strong>基于每个像素</strong>,<strong>为了避免融合后的图像出现色差,保证整体的自然度,我们增加了 SSIM 损失项</strong>。根据统计学原理,计算每个源图像片段中较大分数的平均值,作为相应 SSIM 损失项的权重。</p>
+<h3 id="MFFGAN"><a href="#MFFGAN" class="headerlink" title="MFFGAN"></a>MFFGAN</h3><p>图像融合的理念是从源图像中提取并组合最有意义的信息。<strong>对于多焦点图像融合来说，最有意义的信息是源图像中的锐利区域，这些区域反映在强度分布和纹理细节上</strong>。自然，在信息提取过程中，应保留锐利区域的这些信息，而摒弃模糊区域的这些信息。</p>
+<p>当然，在信息提取过程中，尖锐区域的信息应该保留，模糊区域的信息应该舍弃。因此，有必要在优化过程中<strong>引入损失函数的调整机制</strong>，以约束网络有选择地提取和重构信息。</p>
+<p>首先，我们设计了一个自适应决策块，它可以根据重复模糊原理评估每个像素的清晰度,也就是说，清晰度较高的图像，经过模糊处理后，像素值变化较大。根据这一观察结果，生成screening map来描述有效信息的位置。screening map作用于我们构建的特定内容损失函数，从而在像素尺度上调整优化目标。</p>
+<p>判定块可以自适应地引导融合结果在像素尺度上逼近清晰源图像的强度分布和梯度分布</p>
+<p>.我们的具体方法是选择分数较大的像素（放弃较小的分数）作为两个源图像相应像素位置的优化目标。在决策块和内容损失的共同作用下，生成器可以得到相对清晰自然的结果。</p>
+<p>我们将联合梯度图定义为真实数据，将融合图像的梯度图定义为假数据。持续的对抗性学习可以引导生成器更专注于纹理的保留。因此，我们可以获得更高质量的融合结果，其中包含更丰富的纹理细节。</p>
+<h3 id="损失函数"><a href="#损失函数" class="headerlink" title="损失函数"></a>损失函数</h3><p>损耗函数由生成器损耗L~G~和鉴别器损耗L~D~组成。</p>
+<h4 id="生成器-1"><a href="#生成器-1" class="headerlink" title="生成器"></a>生成器</h4><p>生成器的损失有两部分，即用于提取和重构信息的内容损失L~Gcon~，以及用于增强纹理细节的对抗性损失L~Gadv~。</p>
+<script type="math/tex; mode=display">
+\mathcal{L}_{G}=\mathcal{L}_{G_{\mathrm{adv}}}+\alpha L_{G_{\mathrm{con}}}</script><script type="math/tex; mode=display">
+\mathcal{L}_{G_{\mathrm{adv}}}=\frac{1}{N}\sum_{n=1}^{N}(D(\nabla(I_{\mathrm{fused}}^{n}))-a)^2</script><p>其中 N 是训练期间批次中融合图像的数量，a 是生成器期望判别器确定融合图像的概率标签</p>
+<script type="math/tex; mode=display">
+L_{G_{\mathrm{con}}}=\beta_{1}\mathcal{L}_{\mathrm{int}}+\beta_{2}\mathcal{L}_{\mathrm{grad}}</script><script type="math/tex; mode=display">
+\mathcal{L}_{\mathrm{int}}=\frac{1}{HW}\sum_{\cdot}\sum_{\cdot}S_{1_{i,j}}\cdot(I_{\mathrm{fused}_{i,j}}-I_{1_{i,j}})^{2}+S_{2_{i,j}}\cdot(I_{\mathrm{fused}_{i,j}}-I_{2_{i,j}})^{2}</script><script type="math/tex; mode=display">
+\begin{aligned}S_{1_{i,j}}&=\operatorname{sign}(RB(I_{1_{i,j}})-\min(RB(I_{1_{i,j}}),RB(I_{2_{i,j}}))),\\S_{2_{i,j}}&=1-S_{1_{i,j}},\end{aligned}</script><p>重复模糊函数</p>
+<script type="math/tex; mode=display">
+RB(\cdot)~=~abs(I_{i,j}-LP(I_{i,j}))</script><p>LP （⋅） 表示低通滤波器函数。值得注意的是，S（⋅）的大小也是H × W。</p>
+<script type="math/tex; mode=display">
+\begin{aligned}\mathcal{L}_{\mathrm{grad}}&=\frac1{HW}\sum_i\sum_jS_{\mathbf{1}_{i,j}}\cdot(\nabla I_{\mathrm{fused}_{i,j}}-\nabla I_{\mathbf{1}_{i,j}})^2\\&+S_{2_{i,j}}\cdot(\nabla I_{\mathrm{fused}_{i,j}}-\nabla I_{2_{i,j}})^2.\end{aligned}</script><h3 id="判别器"><a href="#判别器" class="headerlink" title="判别器"></a>判别器</h3><p>判别器的损失功能使判别器能够准确识别真假数据。在我们的方法中，假数据是融合图像的梯度图。真实数据是我们构建的联合梯度图。</p>
+<script type="math/tex; mode=display">
+Grad_{\mathrm{fused}}=\mathrm{abs}(\nabla I_{\mathrm{fused}}) \\
+Grad_{\mathrm{joint}}=\max(\mathrm{abs}(\nabla I_1),\mathrm{abs}(\nabla I_2)),</script><script type="math/tex; mode=display">
+\mathcal{L}_{D_{\mathrm{adv}}}=\frac1N\sum_{n=1}^{N}[D(Grad_{\mathrm{fused}}^{n})-b]^{2}+[D(Grad_{\mathrm{joint}}^{n})-c]^{2}</script><p>其中 b 是融合图像梯度图的标签，应设置为 0。c 是联合梯度图的标签，应设置为 1。</p>
+<p>也就是说，判别器期望准确地将联合梯度图识别为真实数据，将融合图像的梯度图识别为假数据。在这种约束下，判别器可以引导生成器在信息维护方面的倾向，即有利于强纹理保存.</p>
+<h4 id="总体架构"><a href="#总体架构" class="headerlink" title="总体架构"></a>总体架构</h4><p><img data-src="https://i.imgur.com/WPHLLvv.png" alt="image-20231108222112489"></p>
+<h4 id="生成器架构"><a href="#生成器架构" class="headerlink" title="生成器架构"></a>生成器架构</h4><p>我们将生成器拆分为两条路径来提取信息，对应于两个源图像。生成器网络的设计灵感来自pseudo-Siamese，它擅长处理两种相对不同的输入。由于多焦点图像对在相应的像素位置清晰或模糊，因此pseudo-Siamese网络适用于此类图像</p>
+<p><img data-src="https://i.imgur.com/l2ONRey.png" alt="image-20231108215808309"></p>
+<p>在这两条路径中，都有四个卷积层来提取特征。第一个卷积层使用 5 × 5 卷积核，其余三个卷积层使用 3 × 3 卷积核。它们都使用 Leaky ReLU 作为激活函数。为了防止卷积过程中的信息丢失，我们根据 DenseNet 的思想重用了这些特征.</p>
+<p>同时，为了提取更充分的信息，我们在两条路径之间交换信息。具体来说，交换的信息是通过连接和卷积的方法生成的。然后，交换的信息与所有前一个卷积层的输出连接在一起，作为下一个卷积层的输入。</p>
+<p>最后，我们将两条路径中所有卷积层的输出串联起来，然后通过卷积层生成融合图像。卷积层的核大小为 1 × 1，激活函数为 tanh。值得注意的是，在所有卷积层中，填充模式设置为“SAME”，即特征图的大小在整个卷积过程中没有变化，这与源图像的大小相同。</p>
+<h4 id="判别器架构"><a href="#判别器架构" class="headerlink" title="判别器架构"></a>判别器架构</h4><p><img data-src="https://i.imgur.com/veuN5Um.png" alt="image-20231108222051637"></p>
+<p>判别器中的输入有两种类型，一种是<strong>基于源图像的联合梯度图和融合图像的梯度图</strong>。鉴别器由四个卷积层和一个线性层组成。四个卷积层的卷积核大小为 3 × 3，它们都使用了LeakyReLU 激活函数。这些卷积层的步幅设置为 2。最后一层是用于查找分类概率的线性层。</p>
+<h3 id="训练细节"><a href="#训练细节" class="headerlink" title="训练细节"></a>训练细节</h3><p>我们的实验是在两个数据集上进行的，比如Lytro数据集[34]和我们基于公共数据库构建的MFI-WHU数据集。</p>
+<p>在 Lytro 数据集和 MFI-WHU 数据集上，用于测试的图像对数分别为 10 和 30。对于训练，为了获得更多的训练数据，我们采用了剪裁分解的扩展策略。具体来说，对于 Lytro 数据集，我们将其余图像裁剪为 22,090 个大小为 60 × 60 的图像图块对进行训练;对于 MFI-WHU 数据集，我们将其余图像裁剪为 202,246 个大小为 60 × 60 的图像patch对进行训练。</p>
+<p>batch_size=32,epochs=20,训练一个epoch需要m步数,将一张图片分为多个patch,m设置为所有patch数除以b. 一般考虑训练更多的判别器,训练判别器次数是生成器的p倍.</p>
+<p><img data-src="https://i.imgur.com/TYR6p1y.png" alt="image-20231109104901606"></p>
+<p>我们将图像从 RGB 转换为 YCbCr 色彩空间。由于 Y 通道（亮度通道）可以表示结构细节和亮度变化，因此我们只致力于融合 Y 通道值。对于 Cb 和 Cr 通道（色度通道），我们以传统方式融合它们。然后，将这些通道的融合分量转移到RGB以获得最终结果。</p>
+<p>一些想法</p>
+<p>利用预训练模型提供内容和风格 transfer learning?</p>
+<p>利用cGAN思想? </p>
 <h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><ol>
 <li><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/Chaolei3/article/details/79404806">详细理解RGB图像、全色图像、多光谱图像、高光谱图像-CSDN博客</a></p>
 </li>
@@ -594,7 +672,10 @@ S_{\mathbf{x}(k)}=\sum_{i=0}^{2\text{55}} \boldsymbol { H _ { \mathbf{x}}}(i)|\m
     <a href="/2023/11/01/%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B%E5%AD%A6%E4%B9%A0-P3/" rel="prev" title="目标检测学习_P3">
       <i class="fa fa-chevron-left"></i> 目标检测学习_P3
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2023/11/08/ppdlm-%E6%B5%81%E8%A1%8C%E7%9A%84%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%A8%A1%E5%9E%8B/" rel="next" title="ppdlm:流行的深度学习模型">
+      ppdlm:流行的深度学习模型 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -944,7 +1025,7 @@ if(canvas.getContext){
 	  
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#abs"><span class="nav-number">1.</span> <span class="nav-text">abs</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Intro"><span class="nav-number">2.</span> <span class="nav-text">Intro</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%A0%E7%BB%9F%E8%9E%8D%E5%90%88%E6%96%B9%E6%B3%95%EF%BC%9A"><span class="nav-number">2.1.</span> <span class="nav-text">传统融合方法：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-AE-based"><span class="nav-number">2.1.1.</span> <span class="nav-text">1.AE-based</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-CNN-based"><span class="nav-number">2.1.2.</span> <span class="nav-text">2.CNN-based</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-GAN-baesd"><span class="nav-number">2.1.3.</span> <span class="nav-text">3.GAN-baesd</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%BE%E5%83%8F%E8%9E%8D%E5%90%88%E5%9C%BA%E6%99%AF"><span class="nav-number">2.2.</span> <span class="nav-text">图像融合场景</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#digital-photography-image-fusion"><span class="nav-number">2.2.1.</span> <span class="nav-text">digital photography image fusion</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Infrared-and-visible-image-fusion%E2%80%9D"><span class="nav-number">2.2.2.</span> <span class="nav-text">Infrared and visible image fusion”</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GAN"><span class="nav-number">2.3.</span> <span class="nav-text">GAN</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%84%E4%BC%B0"><span class="nav-number">2.3.1.</span> <span class="nav-text">评估</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#EN"><span class="nav-number">2.3.1.1.</span> <span class="nav-text">EN</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SD"><span class="nav-number">2.3.1.2.</span> <span class="nav-text">SD</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SSIM"><span class="nav-number">2.3.1.3.</span> <span class="nav-text">SSIM</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#PSNR"><span class="nav-number">2.3.1.4.</span> <span class="nav-text">PSNR</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CC"><span class="nav-number">2.3.1.5.</span> <span class="nav-text">CC</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SF-%E7%A9%BA%E9%97%B4%E9%A2%91%E7%8E%87"><span class="nav-number">2.3.1.6.</span> <span class="nav-text">SF 空间频率</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#VIF-%E7%A9%BA%E9%97%B4%E4%BF%A1%E6%81%AF%E4%BF%9D%E7%9C%9F%E5%BA%A6"><span class="nav-number">2.3.1.7.</span> <span class="nav-text">VIF 空间信息保真度</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E9%9B%86"><span class="nav-number">2.3.2.</span> <span class="nav-text">数据集</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E6%88%98"><span class="nav-number">2.4.</span> <span class="nav-text">实战</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#FusionGAN"><span class="nav-number">2.4.1.</span> <span class="nav-text">FusionGAN</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Generator"><span class="nav-number">2.4.1.1.</span> <span class="nav-text">Generator</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Discriminator"><span class="nav-number">2.4.1.2.</span> <span class="nav-text">Discriminator</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TarDAL"><span class="nav-number">2.4.2.</span> <span class="nav-text">TarDAL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E5%BB%BA%E6%A8%A1"><span class="nav-number">2.4.3.</span> <span class="nav-text">问题建模</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E5%99%A8"><span class="nav-number">2.4.3.1.</span> <span class="nav-text">生成器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#IFCNN"><span class="nav-number">2.4.3.2.</span> <span class="nav-text">IFCNN</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">2.4.4.</span> <span class="nav-text">参考资料</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#abs"><span class="nav-number">1.</span> <span class="nav-text">abs</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Intro"><span class="nav-number">2.</span> <span class="nav-text">Intro</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%A0%E7%BB%9F%E8%9E%8D%E5%90%88%E6%96%B9%E6%B3%95%EF%BC%9A"><span class="nav-number">2.1.</span> <span class="nav-text">传统融合方法：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-AE-based"><span class="nav-number">2.1.1.</span> <span class="nav-text">1.AE-based</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-CNN-based"><span class="nav-number">2.1.2.</span> <span class="nav-text">2.CNN-based</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-GAN-baesd"><span class="nav-number">2.1.3.</span> <span class="nav-text">3.GAN-baesd</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%BE%E5%83%8F%E8%9E%8D%E5%90%88%E5%9C%BA%E6%99%AF"><span class="nav-number">2.2.</span> <span class="nav-text">图像融合场景</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#digital-photography-image-fusion"><span class="nav-number">2.2.1.</span> <span class="nav-text">digital photography image fusion</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Infrared-and-visible-image-fusion%E2%80%9D"><span class="nav-number">2.2.2.</span> <span class="nav-text">Infrared and visible image fusion”</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GAN"><span class="nav-number">2.3.</span> <span class="nav-text">GAN</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%84%E4%BC%B0"><span class="nav-number">2.3.1.</span> <span class="nav-text">评估</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#EN"><span class="nav-number">2.3.1.1.</span> <span class="nav-text">EN</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SD"><span class="nav-number">2.3.1.2.</span> <span class="nav-text">SD</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SSIM"><span class="nav-number">2.3.1.3.</span> <span class="nav-text">SSIM</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#PSNR"><span class="nav-number">2.3.1.4.</span> <span class="nav-text">PSNR</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CC"><span class="nav-number">2.3.1.5.</span> <span class="nav-text">CC</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SF-%E7%A9%BA%E9%97%B4%E9%A2%91%E7%8E%87"><span class="nav-number">2.3.1.6.</span> <span class="nav-text">SF 空间频率</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#VIF-%E7%A9%BA%E9%97%B4%E4%BF%A1%E6%81%AF%E4%BF%9D%E7%9C%9F%E5%BA%A6"><span class="nav-number">2.3.1.7.</span> <span class="nav-text">VIF 空间信息保真度</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E9%9B%86"><span class="nav-number">2.3.2.</span> <span class="nav-text">数据集</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E6%88%98"><span class="nav-number">2.4.</span> <span class="nav-text">实战</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#FusionGAN"><span class="nav-number">2.4.1.</span> <span class="nav-text">FusionGAN</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Generator"><span class="nav-number">2.4.1.1.</span> <span class="nav-text">Generator</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Discriminator"><span class="nav-number">2.4.1.2.</span> <span class="nav-text">Discriminator</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TarDAL"><span class="nav-number">2.4.2.</span> <span class="nav-text">TarDAL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E5%BB%BA%E6%A8%A1"><span class="nav-number">2.4.3.</span> <span class="nav-text">问题建模</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Target-aware-dual-adversarial-network"><span class="nav-number">2.4.3.1.</span> <span class="nav-text">Target-aware dual adversarial network</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E5%99%A8"><span class="nav-number">2.4.3.2.</span> <span class="nav-text">生成器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%9B%AE%E6%A0%87%E9%89%B4%E5%88%AB%E5%99%A8%E4%B8%8E%E7%BB%86%E8%8A%82%E9%89%B4%E5%88%AB%E5%99%A8"><span class="nav-number">2.4.3.3.</span> <span class="nav-text">目标鉴别器与细节鉴别器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%90%88%E4%BD%9C%E8%AE%AD%E7%BB%83%E7%AD%96%E7%95%A5"><span class="nav-number">2.4.3.4.</span> <span class="nav-text">合作训练策略</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%A2%E5%A4%96%E4%B8%8E%E5%8F%AF%E8%A7%81%E5%85%89%E5%9B%BE%E5%83%8F%E7%9A%84%E8%9E%8D%E5%90%88%E7%BB%93%E6%9E%9C"><span class="nav-number">2.4.4.</span> <span class="nav-text">红外与可见光图像的融合结果</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9A%E6%80%A7%E6%AF%94%E8%BE%83"><span class="nav-number">2.4.4.1.</span> <span class="nav-text">定性比较</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9A%E9%87%8F%E6%AF%94%E8%BE%83"><span class="nav-number">2.4.4.2.</span> <span class="nav-text">定量比较</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%A2%E5%A4%96%E4%B8%8E%E5%8F%AF%E8%A7%81%E5%85%89%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B%E7%BB%93%E6%9E%9C"><span class="nav-number">2.4.5.</span> <span class="nav-text">红外与可见光目标检测结果</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link"><span class="nav-number">2.4.5.1.</span> <span class="nav-text"> </span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E8%81%9A%E7%84%A6%E5%9B%BE%E5%83%8F%E8%9E%8D%E5%90%88"><span class="nav-number">2.4.6.</span> <span class="nav-text">多聚焦图像融合</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MFIF-GAN"><span class="nav-number">2.4.7.</span> <span class="nav-text">MFIF-GAN</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E7%BB%93%E6%9E%84"><span class="nav-number">2.4.7.1.</span> <span class="nav-text">网络结构</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#FuseGAN"><span class="nav-number">2.4.8.</span> <span class="nav-text">FuseGAN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MFFGAN"><span class="nav-number">2.4.9.</span> <span class="nav-text">MFFGAN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0"><span class="nav-number">2.4.10.</span> <span class="nav-text">损失函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E5%99%A8-1"><span class="nav-number">2.4.10.1.</span> <span class="nav-text">生成器</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A4%E5%88%AB%E5%99%A8"><span class="nav-number">2.4.11.</span> <span class="nav-text">判别器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%80%BB%E4%BD%93%E6%9E%B6%E6%9E%84"><span class="nav-number">2.4.11.1.</span> <span class="nav-text">总体架构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E5%99%A8%E6%9E%B6%E6%9E%84"><span class="nav-number">2.4.11.2.</span> <span class="nav-text">生成器架构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%A4%E5%88%AB%E5%99%A8%E6%9E%B6%E6%9E%84"><span class="nav-number">2.4.11.3.</span> <span class="nav-text">判别器架构</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%AD%E7%BB%83%E7%BB%86%E8%8A%82"><span class="nav-number">2.4.12.</span> <span class="nav-text">训练细节</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">2.4.13.</span> <span class="nav-text">参考资料</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
       <div class="site-overview-wrap sidebar-panel">
@@ -959,14 +1040,14 @@ if(canvas.getContext){
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">148</span>
+          <span class="site-state-item-count">149</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-count">17</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -1084,12 +1165,12 @@ if(canvas.getContext){
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">889k</span>
+    <span title="站点总字数">897k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">13:28</span>
+    <span title="站点阅读时长">13:36</span>
 </div>
 
     <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
