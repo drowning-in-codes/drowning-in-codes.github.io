@@ -1,106 +1,15 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-<script src="/live2d-widget/autoload.js"></script>
-
-  <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.4.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/blog_32px.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/blog_32px.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/blog_16px.png">
-  <link rel="mask-icon" href="/images/logo.svg" color="#222">
-  <meta name="google-site-verification" content="EPrJAp11bJwHULpQUaSNSZ8_3RcvTsPDAEGOME4pl1w">
-
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-VB21D8MKKW"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
+<!doctypehtml><html lang=zh-CN><script src=/live2d-widget/autoload.js></script><meta charset=UTF-8><meta content=width=device-width,initial-scale=1,maximum-scale=2 name=viewport><meta content=#222 name=theme-color><meta content="Hexo 5.4.0" name=generator><link href=/images/blog_32px.png rel=apple-touch-icon sizes=180x180><link href=/images/blog_32px.png rel=icon sizes=32x32 type=image/png><link href=/images/blog_16px.png rel=icon sizes=16x16 type=image/png><link color=#222 href=/images/logo.svg rel=mask-icon><meta content=EPrJAp11bJwHULpQUaSNSZ8_3RcvTsPDAEGOME4pl1w name=google-site-verification><!-- Google tag (gtag.js) --><script async src=https://www.googletagmanager.com/gtag/js?id=G-VB21D8MKKW></script><script>window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
-  gtag('config', 'G-VB21D8MKKW');
-</script>
-
-<!-- google adsense in head.swig -->
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4034523802263123"
-     crossorigin="anonymous"></script>
-  <meta name="msvalidate.01" content="7226864CE87CE9DE8C008385273846FF">
-  <meta name="baidu-site-verification" content="code-fjFXVtiL7j" />
-
-<link rel="stylesheet" href="/css/main.css">
-
-<link rel="stylesheet" href="https://fonts.lug.ustc.edu.cn/css?family=Roboto Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
-<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
-<link href="https://fonts.googleapis.com/css?family=Noto+Serif+SC|Roboto&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
-  <link rel="stylesheet" href="/lib/pace/pace-theme-corner-indicator.min.css">
-  <script src="/lib/pace/pace.min.js"></script>
-
-<script id="hexo-configurations">
-    var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"www.sekyoro.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":240,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"appID":"3G9PZZIKCH","apiKey":"8eb71f5ca3167e9ef3487882f10cfaad","indexName":"SekyoroSearch","hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
-  </script>
-<link href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css" rel="stylesheet">
-  <meta name="description" content="深入GAN学习">
-<meta property="og:type" content="article">
-<meta property="og:title" content="GAN深入学习">
-<meta property="og:url" content="https://www.sekyoro.top/2023/08/11/GAN%E6%B7%B1%E5%85%A5%E5%AD%A6%E4%B9%A0/index.html">
-<meta property="og:site_name" content="Sekyoro的博客小屋">
-<meta property="og:description" content="深入GAN学习">
-<meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://github.com/microsoft/AI-For-Beginners/raw/main/lessons/4-ComputerVision/10-GANs/images/gan_architecture.png">
-<meta property="og:image" content="https://pic4.zhimg.com/80/v2-044f8d58f378b088c9a85a8f19dae363_720w.webp">
-<meta property="og:image" content="https://pytorch.org/docs/stable/_images/add_histogram.png">
-<meta property="og:image" content="https://s2.loli.net/2023/08/29/L1aVuqWoiDHfS2z.png">
-<meta property="og:image" content="https://s2.loli.net/2023/08/29/cktnUB7Lj5g6mlI.png">
-<meta property="og:image" content="https://s2.loli.net/2023/08/30/eIhKBaf3t85gVqx.png">
-<meta property="og:image" content="https://s2.loli.net/2023/08/31/6QlMEzeH8vsLy7S.png">
-<meta property="og:image" content="https://pic1.zhimg.com/80/v2-b783ce95d8bdf1499fc88994e170a02c_720w.webp">
-<meta property="og:image" content="https://img1.imgtp.com/2023/09/15/B6W4SQCF.png">
-<meta property="og:image" content="https://pic2.zhimg.com/80/v2-fe9ef30af6166a5eea47c9006bfc27cd_720w.webp">
-<meta property="og:image" content="https://s2.loli.net/2023/09/05/u4hjRmwN5i3E9oG.png">
-<meta property="og:image" content="https://miro.medium.com/v2/resize:fit:700/1*5jF5gbIDwU6k9m1ILl0Utg.jpeg">
-<meta property="og:image" content="https://miro.medium.com/v2/resize:fit:700/1*NVBkG5vDwwz-1ad-zwxddA.jpeg">
-<meta property="og:image" content="https://img1.imgtp.com/2023/09/17/ZwMIQPEx.png">
-<meta property="og:image" content="https://miro.medium.com/v2/resize:fit:700/1*TErKpfBkilA-G24FNFg0FA.png">
-<meta property="og:image" content="https://miro.medium.com/v2/resize:fit:700/1*r8472Sg5fDJ1XKQPUbRC4Q.png">
-<meta property="og:image" content="https://miro.medium.com/v2/resize:fit:700/1*gi2isFNxtXE-pNiQ_CrZ8w.jpeg">
-<meta property="og:image" content="https://pic4.zhimg.com/80/v2-ede0624e4acb54575483852435d0ec2b_720w.webp">
-<meta property="og:image" content="https://miro.medium.com/v2/resize:fit:543/1*c0wSI0WJR9-yagc0ruFGGg.png">
-<meta property="og:image" content="https://img1.imgtp.com/2023/09/18/TvDtnXUu.png">
-<meta property="article:published_time" content="2023-08-11T10:08:06.000Z">
-<meta property="article:modified_time" content="2023-10-23T02:19:10.849Z">
-<meta property="article:author" content="Sekyoro">
-<meta property="article:tag" content="GAN">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://github.com/microsoft/AI-For-Beginners/raw/main/lessons/4-ComputerVision/10-GANs/images/gan_architecture.png">
-
-<link rel="canonical" href="https://www.sekyoro.top/2023/08/11/GAN%E6%B7%B1%E5%85%A5%E5%AD%A6%E4%B9%A0/">
-
-
-<script id="page-configurations">
-  // https://hexo.io/docs/variables.html
+  gtag('config', 'G-VB21D8MKKW');</script><!-- google adsense in head.swig --><script async crossorigin=anonymous src=https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4034523802263123></script><meta content=7226864CE87CE9DE8C008385273846FF name=msvalidate.01><meta content=code-fjFXVtiL7j name=baidu-site-verification><link href=/css/main.css rel=stylesheet><link href=https://fonts.lug.ustc.edu.cn/css?family=Roboto%20Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext rel=stylesheet><link href=/lib/font-awesome/css/all.min.css rel=stylesheet><link href=https://fonts.googleapis.com/css?family=Noto+Serif+SC|Roboto&display=swap rel=stylesheet><link href=https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css rel=stylesheet><link href=/lib/pace/pace-theme-fill-left.min.css rel=stylesheet><script src=/lib/pace/pace.min.js></script><script id=hexo-configurations>var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.sekyoro.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":240,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"appID":"3G9PZZIKCH","apiKey":"8eb71f5ca3167e9ef3487882f10cfaad","indexName":"SekyoroSearch","hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};</script><link href=//cdn.bootcss.com/animate.css/3.5.0/animate.min.css rel=stylesheet><meta content=深入GAN学习 name=description><meta content=article property=og:type><meta content=GAN深入学习 property=og:title><meta content=https://www.sekyoro.top/2023/08/11/GAN%E6%B7%B1%E5%85%A5%E5%AD%A6%E4%B9%A0/index.html property=og:url><meta content=Sekyoro的博客小屋 property=og:site_name><meta content=深入GAN学习 property=og:description><meta content=zh_CN property=og:locale><meta content=https://github.com/microsoft/AI-For-Beginners/raw/main/lessons/4-ComputerVision/10-GANs/images/gan_architecture.png property=og:image><meta content=https://pic4.zhimg.com/80/v2-044f8d58f378b088c9a85a8f19dae363_720w.webp property=og:image><meta content=https://pytorch.org/docs/stable/_images/add_histogram.png property=og:image><meta content=https://s2.loli.net/2023/08/29/L1aVuqWoiDHfS2z.png property=og:image><meta content=https://s2.loli.net/2023/08/29/cktnUB7Lj5g6mlI.png property=og:image><meta content=https://s2.loli.net/2023/08/30/eIhKBaf3t85gVqx.png property=og:image><meta content=https://s2.loli.net/2023/08/31/6QlMEzeH8vsLy7S.png property=og:image><meta content=https://pic1.zhimg.com/80/v2-b783ce95d8bdf1499fc88994e170a02c_720w.webp property=og:image><meta content=https://img1.imgtp.com/2023/09/15/B6W4SQCF.png property=og:image><meta content=https://pic2.zhimg.com/80/v2-fe9ef30af6166a5eea47c9006bfc27cd_720w.webp property=og:image><meta content=https://s2.loli.net/2023/09/05/u4hjRmwN5i3E9oG.png property=og:image><meta content=https://miro.medium.com/v2/resize:fit:700/1*5jF5gbIDwU6k9m1ILl0Utg.jpeg property=og:image><meta content=https://miro.medium.com/v2/resize:fit:700/1*NVBkG5vDwwz-1ad-zwxddA.jpeg property=og:image><meta content=https://img1.imgtp.com/2023/09/17/ZwMIQPEx.png property=og:image><meta content=https://miro.medium.com/v2/resize:fit:700/1*TErKpfBkilA-G24FNFg0FA.png property=og:image><meta content=https://miro.medium.com/v2/resize:fit:700/1*r8472Sg5fDJ1XKQPUbRC4Q.png property=og:image><meta content=https://miro.medium.com/v2/resize:fit:700/1*gi2isFNxtXE-pNiQ_CrZ8w.jpeg property=og:image><meta content=https://pic4.zhimg.com/80/v2-ede0624e4acb54575483852435d0ec2b_720w.webp property=og:image><meta content=https://miro.medium.com/v2/resize:fit:543/1*c0wSI0WJR9-yagc0ruFGGg.png property=og:image><meta content=https://img1.imgtp.com/2023/09/18/TvDtnXUu.png property=og:image><meta content=2023-08-11T10:08:06.000Z property=article:published_time><meta content=2023-10-23T02:19:10.849Z property=article:modified_time><meta content=Sekyoro property=article:author><meta content=GAN property=article:tag><meta content=summary name=twitter:card><meta content=https://github.com/microsoft/AI-For-Beginners/raw/main/lessons/4-ComputerVision/10-GANs/images/gan_architecture.png name=twitter:image><link href=https://www.sekyoro.top/2023/08/11/GAN%E6%B7%B1%E5%85%A5%E5%AD%A6%E4%B9%A0/ rel=canonical><script id=page-configurations>// https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
     isHome : false,
     isPost : true,
     lang   : 'zh-CN'
-  };
-</script>
-
-  <title>GAN深入学习 | Sekyoro的博客小屋</title>
-  
-
-
-
-
-
-
-  <noscript>
-  <style>
-  .use-motion .brand,
+  };</script><title>GAN深入学习 | Sekyoro的博客小屋</title><noscript><style>.use-motion .brand,
   .use-motion .menu-item,
   .sidebar-inner,
   .use-motion .post-block,
@@ -117,569 +26,39 @@
   }
 
   .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
-  </style>
-</noscript>
-
-<link rel="alternate" href="/atom.xml" title="Sekyoro的博客小屋" type="application/atom+xml">
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage">
-<!-- require JQuery -->
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
-<!-- require pjax -->
-<script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/index.min.js"></script>
-
-
-   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
-   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
-   <script type="text/javascript" src="/js/src/fireworks.js"></script>
-
-
-  <div class="container use-motion">
-    <div class="headband"></div>
-	
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
-  <div class="site-nav-toggle">
-    <div class="toggle" aria-label="切换导航栏">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
-    </div>
-  </div>
-
-  <div class="site-meta">
-
-    <a href="/" class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">Sekyoro的博客小屋</h1>
-      <span class="logo-line-after"><i></i></span>
-    </a>
-  </div>
-
-  <div class="site-nav-right">
-    <div class="toggle popup-trigger">
-        <i class="fa fa-search fa-fw fa-lg"></i>
-    </div>
-  </div>
-</div>
-
-
-
-
-<nav class="site-nav">
-  <ul id="menu" class="main-menu menu">
-        <li class="menu-item menu-item-home">
-
-    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
-
-  </li>
-        <li class="menu-item menu-item-about">
-
-    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
-
-  </li>
-        <li class="menu-item menu-item-tags">
-
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
-
-  </li>
-        <li class="menu-item menu-item-categories">
-
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
-
-  </li>
-        <li class="menu-item menu-item-bangumis">
-
-    <a href="/bangumis/" rel="section"><i class="fa fa-film fa-fw"></i>追番</a>
-
-  </li>
-        <li class="menu-item menu-item-resume">
-
-    <a href="/resume/" rel="section"><i class="fa fa-file-pdf fa-fw"></i>简历</a>
-
-  </li>
-        <li class="menu-item menu-item-materials">
-
-    <a href="/materials/" rel="section"><i class="fa fa-book fa-fw"></i>学习资料</a>
-
-  </li>
-        <li class="menu-item menu-item-sitemap">
-
-    <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a>
-
-  </li>
-      <li class="menu-item menu-item-search">
-        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
-        </a>
-      </li>
-  </ul>
-</nav>
-
-
-
-  <div class="search-pop-overlay">
-    <div class="popup search-popup">
-        <div class="search-header">
-  <span class="search-icon">
-    <i class="fa fa-search"></i>
-  </span>
-  <div class="search-input-container"></div>
-  <span class="popup-btn-close">
-    <i class="fa fa-times-circle"></i>
-  </span>
-</div>
-<div class="algolia-results">
-  <div id="algolia-stats"></div>
-  <div id="algolia-hits"></div>
-  <div id="algolia-pagination" class="algolia-pagination"></div>
-</div>
-
-      
-    </div>
-  </div>
-
-</div>
-    </header>
-
-    
-  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
-
-
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
-
-          <div class="content post posts-expand">
-            
-
-    
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.sekyoro.top/2023/08/11/GAN%E6%B7%B1%E5%85%A5%E5%AD%A6%E4%B9%A0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://i.loli.net/2021/05/17/YqoavnXdGTpPO9R.jpg">
-      <meta itemprop="name" content="Sekyoro">
-      <meta itemprop="description" content="什么也无法舍弃的人，什么也做不了.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sekyoro的博客小屋">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          GAN深入学习
-        </h1>
-
-        <div class="post-meta">
-		
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-08-11 18:08:06" itemprop="dateCreated datePublished" datetime="2023-08-11T18:08:06+08:00">2023-08-11</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-10-23 10:19:10" itemprop="dateModified" datetime="2023-10-23T10:19:10+08:00">2023-10-23</time>
-              </span>
-
-          
-            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span id="busuanzi_value_page_pv"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>17k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>16 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-        <p>深入GAN学习<br><span id="more"></span></p>
-<p><img data-src="https://github.com/microsoft/AI-For-Beginners/raw/main/lessons/4-ComputerVision/10-GANs/images/gan_architecture.png" alt="img"></p>
-<p>注意,实验复现时最好设置随机种子固定<a target="_blank" rel="noopener" href="https://pytorch.org/docs/stable/notes/randomness.html">Reproducibility — PyTorch 2.0 documentation</a></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># seed setting</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">same_seeds</span>(<span class="params">seed</span>):</span></span><br><span class="line">    <span class="comment"># Python built-in random module</span></span><br><span class="line">    random.seed(seed)</span><br><span class="line">    <span class="comment"># Numpy</span></span><br><span class="line">    np.random.seed(seed)</span><br><span class="line">    <span class="comment"># Torch</span></span><br><span class="line">    torch.manual_seed(seed)</span><br><span class="line">    <span class="keyword">if</span> torch.cuda.is_available():</span><br><span class="line">        torch.cuda.manual_seed(seed)</span><br><span class="line">        torch.cuda.manual_seed_all(seed)</span><br><span class="line">    torch.backends.cudnn.benchmark = <span class="literal">False</span></span><br><span class="line">    torch.backends.cudnn.deterministic = <span class="literal">True</span></span><br><span class="line">same_seeds(<span class="number">2023</span>)</span><br></pre></td></tr></table></figure>
-<h3 id="GAN"><a href="#GAN" class="headerlink" title="GAN"></a>GAN</h3><p>标题<strong>Generative Adversarial Nets</strong> 2014年</p>
-<p><strong>摘要</strong></p>
-<p>We propose a new framework for estimating generative models via an adversarial process, in which we simultaneously train two models: a generative model G that captures the data distribution, and a discriminative model D that estimates the probability that a sample came from the training data rather than G. The training procedure for G is to maximize the probability of D making a mistake. This framework corresponds to a minimax two-player game. In the space of arbitrary functions G and D, a unique solution exists, with G recovering the training data distribution and D equal to 1 2 everywhere. In the case where G and D are defined by multilayer perceptrons, the entire system can be trained with backpropagation. There is no need for any Markov chains or unrolled approximate inference networks during either training or generation of samples. Experiments demonstrate the potential of the framework through qualitative and quantitative evaluation of the generated samples</p>
-<p><img data-src="https://pic4.zhimg.com/80/v2-044f8d58f378b088c9a85a8f19dae363_720w.webp" alt="img" style="zoom:67%;" /></p>
-<p>主要贡献:提出GAN  定义G和D以及损失函数.由于GAN中使用的极小极大（minmax）优化，训练可能非常不稳定。</p>
-<script type="math/tex; mode=display">
-\min_G\max_DV=E_{x\sim\text{p}_r}[\log D(x)]+E_{x\sim\text{p}_g}[\log(1-D(x))]</script><p>存在问题：梯度不稳定,梯度消失,<strong>模式崩溃</strong>(特别是NS-GAN,使用了the - log D trick),也就是生成器的损失改为-logD(x)<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/25071913">令人拍案叫绝的Wasserstein GAN - 知乎 (zhihu.com)</a></p>
-<p>首先求得生成器固定,最大化V的D</p>
-<script type="math/tex; mode=display">
-\mathrm{P}_r(x)\log D(x)+P_g(x)\log[1-D(x)]</script><p>对D(x)求导,让导数为0</p>
-<script type="math/tex; mode=display">
-\begin{aligned}&\frac{\mathrm{P}_r(x)}{D(x)}-\frac{\mathrm{P}_g(x)}{1-D(x)}=0\\\\&\text{化简上式,得最优的D表达式为}.\\\\&D^*(x)=\frac{\mathrm{P}_r(x)}{\mathrm{P}_r(x)+\mathrm{P}_g(x)}\end{aligned}</script><p>将这个最优的D带入一开始的式子</p>
-<script type="math/tex; mode=display">
+  .use-motion .logo-line-after i { right: initial; }</style></noscript><link href=/atom.xml rel=alternate title=Sekyoro的博客小屋 type=application/atom+xml><body itemscope itemtype=http://schema.org/WebPage><!-- require JQuery --><script src=https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js></script><!-- require pjax --><script src=https://cdn.jsdelivr.net/npm/pjax@0.2.8/index.min.js></script><canvas style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" class=fireworks></canvas><script src=https://cdn.bootcss.com/animejs/2.2.0/anime.min.js></script><script src=/js/src/fireworks.js></script><div class="container use-motion"><div class=headband></div><header class=header itemscope itemtype=http://schema.org/WPHeader><div class=header-inner><div class=site-brand-container><div class=site-nav-toggle><div aria-label=切换导航栏 class=toggle><span class="toggle-line toggle-line-first"></span><span class="toggle-line toggle-line-middle"></span><span class="toggle-line toggle-line-last"></span></div></div><div class=site-meta><a class=brand href=/ rel=start> <span class=logo-line-before><i></i></span> <h1 class=site-title>Sekyoro的博客小屋</h1> <span class=logo-line-after><i></i></span> </a></div><div class=site-nav-right><div class="toggle popup-trigger"><i class="fa fa-search fa-fw fa-lg"></i></div></div></div><nav class=site-nav><ul class="main-menu menu" id=menu><li class="menu-item menu-item-home"><a href=/ rel=section><i class="fa fa-home fa-fw"></i>首页</a><li class="menu-item menu-item-about"><a href=/about/ rel=section><i class="fa fa-user fa-fw"></i>关于</a><li class="menu-item menu-item-tags"><a href=/tags/ rel=section><i class="fa fa-tags fa-fw"></i>标签</a><li class="menu-item menu-item-categories"><a href=/categories/ rel=section><i class="fa fa-th fa-fw"></i>分类</a><li class="menu-item menu-item-archives"><a href=/archives/ rel=section><i class="fa fa-archive fa-fw"></i>归档</a><li class="menu-item menu-item-bangumis"><a href=/bangumis/ rel=section><i class="fa fa-film fa-fw"></i>追番</a><li class="menu-item menu-item-resume"><a href=/resume/ rel=section><i class="fa fa-file-pdf fa-fw"></i>简历</a><li class="menu-item menu-item-materials"><a href=/materials/ rel=section><i class="fa fa-book fa-fw"></i>学习资料</a><li class="menu-item menu-item-sitemap"><a href=/sitemap.xml rel=section><i class="fa fa-sitemap fa-fw"></i>站点地图</a><li class="menu-item menu-item-search"><a class=popup-trigger role=button><i class="fa fa-search fa-fw"></i>搜索 </a></ul></nav><div class=search-pop-overlay><div class="popup search-popup"><div class=search-header><span class=search-icon> <i class="fa fa-search"></i> </span><div class=search-input-container></div><span class=popup-btn-close> <i class="fa fa-times-circle"></i> </span></div><div class=algolia-results><div id=algolia-stats></div><div id=algolia-hits></div><div class=algolia-pagination id=algolia-pagination></div></div></div></div></div></header><a class="book-mark-link book-mark-link-fixed" role=button></a><main class=main><div class=main-inner><div class=content-wrap><div class="content post posts-expand"><article class=post-block itemscope itemtype=http://schema.org/Article lang=zh-CN><link href=https://www.sekyoro.top/2023/08/11/GAN%E6%B7%B1%E5%85%A5%E5%AD%A6%E4%B9%A0/ itemprop=mainEntityOfPage><span hidden itemprop=author itemscope itemtype=http://schema.org/Person> <meta content=https://i.loli.net/2021/05/17/YqoavnXdGTpPO9R.jpg itemprop=image> <meta content=Sekyoro itemprop=name> <meta content=什么也无法舍弃的人，什么也做不了. itemprop=description> </span><span hidden itemprop=publisher itemscope itemtype=http://schema.org/Organization> <meta content=Sekyoro的博客小屋 itemprop=name> </span><header class=post-header><h1 itemprop="name headline" class=post-title>GAN深入学习</h1><div class=post-meta><span class=post-meta-item> <span class=post-meta-item-icon> <i class="far fa-calendar"></i> </span> <span class=post-meta-item-text>发表于</span> <time itemprop="dateCreated datePublished" title="创建时间：2023-08-11 18:08:06" datetime=2023-08-11T18:08:06+08:00>2023-08-11</time> </span><span class=post-meta-item> <span class=post-meta-item-icon> <i class="far fa-calendar-check"></i> </span> <span class=post-meta-item-text>更新于</span> <time title="修改时间：2023-10-23 10:19:10" datetime=2023-10-23T10:19:10+08:00 itemprop=dateModified>2023-10-23</time> </span><span style="display: none;" class=post-meta-item id=busuanzi_container_page_pv title=阅读次数> <span class=post-meta-item-icon> <i class="fa fa-eye"></i> </span> <span class=post-meta-item-text>阅读次数：</span> <span id=busuanzi_value_page_pv></span> </span><br><span class=post-meta-item title=本文字数> <span class=post-meta-item-icon> <i class="far fa-file-word"></i> </span> <span class=post-meta-item-text>本文字数：</span> <span>17k</span> </span><span class=post-meta-item title=阅读时长> <span class=post-meta-item-icon> <i class="far fa-clock"></i> </span> <span class=post-meta-item-text>阅读时长 ≈</span> <span>16 分钟</span> </span></div></header><div class=post-body itemprop=articleBody><p>深入GAN学习<br><span id=more></span><p><img alt=img data-src=https://github.com/microsoft/AI-For-Beginners/raw/main/lessons/4-ComputerVision/10-GANs/images/gan_architecture.png><p>注意,实验复现时最好设置随机种子固定<a href=https://pytorch.org/docs/stable/notes/randomness.html rel=noopener target=_blank>Reproducibility — PyTorch 2.0 documentation</a><figure class="highlight python"><table><tr><td class=gutter><pre><span class=line>1</span><br><span class=line>2</span><br><span class=line>3</span><br><span class=line>4</span><br><span class=line>5</span><br><span class=line>6</span><br><span class=line>7</span><br><span class=line>8</span><br><span class=line>9</span><br><span class=line>10</span><br><span class=line>11</span><br><span class=line>12</span><br><span class=line>13</span><br><span class=line>14</span><br></pre><td class=code><pre><span class=line><span class=comment># seed setting</span></span><br><span class=line><span class=function><span class=keyword>def</span> <span class=title>same_seeds</span>(<span class=params>seed</span>):</span></span><br><span class=line>    <span class=comment># Python built-in random module</span></span><br><span class=line>    random.seed(seed)</span><br><span class=line>    <span class=comment># Numpy</span></span><br><span class=line>    np.random.seed(seed)</span><br><span class=line>    <span class=comment># Torch</span></span><br><span class=line>    torch.manual_seed(seed)</span><br><span class=line>    <span class=keyword>if</span> torch.cuda.is_available():</span><br><span class=line>        torch.cuda.manual_seed(seed)</span><br><span class=line>        torch.cuda.manual_seed_all(seed)</span><br><span class=line>    torch.backends.cudnn.benchmark = <span class=literal>False</span></span><br><span class=line>    torch.backends.cudnn.deterministic = <span class=literal>True</span></span><br><span class=line>same_seeds(<span class=number>2023</span>)</span><br></pre></table></figure><h3 id=GAN><a class=headerlink href=#GAN title=GAN></a>GAN</h3><p>标题<strong>Generative Adversarial Nets</strong> 2014年<p><strong>摘要</strong><p>We propose a new framework for estimating generative models via an adversarial process, in which we simultaneously train two models: a generative model G that captures the data distribution, and a discriminative model D that estimates the probability that a sample came from the training data rather than G. The training procedure for G is to maximize the probability of D making a mistake. This framework corresponds to a minimax two-player game. In the space of arbitrary functions G and D, a unique solution exists, with G recovering the training data distribution and D equal to 1 2 everywhere. In the case where G and D are defined by multilayer perceptrons, the entire system can be trained with backpropagation. There is no need for any Markov chains or unrolled approximate inference networks during either training or generation of samples. Experiments demonstrate the potential of the framework through qualitative and quantitative evaluation of the generated samples<p><img alt=img data-src=https://pic4.zhimg.com/80/v2-044f8d58f378b088c9a85a8f19dae363_720w.webp style=zoom:67%;><p>主要贡献:提出GAN 定义G和D以及损失函数.由于GAN中使用的极小极大（minmax）优化，训练可能非常不稳定。</p><script type="math/tex; mode=display">
+\min_G\max_DV=E_{x\sim\text{p}_r}[\log D(x)]+E_{x\sim\text{p}_g}[\log(1-D(x))]</script><p>存在问题：梯度不稳定,梯度消失,<strong>模式崩溃</strong>(特别是NS-GAN,使用了the - log D trick),也就是生成器的损失改为-logD(x)<a href=https://zhuanlan.zhihu.com/p/25071913 rel=noopener target=_blank>令人拍案叫绝的Wasserstein GAN - 知乎 (zhihu.com)</a><p>首先求得生成器固定,最大化V的D</p><script type="math/tex; mode=display">
+\mathrm{P}_r(x)\log D(x)+P_g(x)\log[1-D(x)]</script><p>对D(x)求导,让导数为0</p><script type="math/tex; mode=display">
+\begin{aligned}&\frac{\mathrm{P}_r(x)}{D(x)}-\frac{\mathrm{P}_g(x)}{1-D(x)}=0\\\\&\text{化简上式,得最优的D表达式为}.\\\\&D^*(x)=\frac{\mathrm{P}_r(x)}{\mathrm{P}_r(x)+\mathrm{P}_g(x)}\end{aligned}</script><p>将这个最优的D带入一开始的式子</p><script type="math/tex; mode=display">
 \begin{aligned}
 &\operatorname*{min}_{G}V=E_{x\sim\mathrm{p}_{r}}[\operatorname{log}D(x)]+E_{x\sim\mathrm{p}_{g}}[\operatorname{log}(1-D(x))] \\
 &\text{将最大化的D即式}1\text{的}D^*(x)\text{代入式得}: \\
 &\operatorname*{min}_{G}V=E_{x\sim\mathrm{p}_{r}}[\operatorname{log}(\frac{\mathrm{p}_{r}(x)}{\mathrm{p}_{r}(x)+\mathrm{p}_{g}(x)})]+E_{x\sim\mathrm{p}_{g}}[\operatorname{log}(\frac{\mathrm{p}_{g}(x)}{\mathrm{p}_{r}(x)+\mathrm{p}_{g}(x)})] \\
 &\text{再化简一步得式:} \\
 &\min_GV=E_{x\sim\mathrm{p}_r}[\log(\frac{\mathrm{p}_r(x)}{\frac12(\mathrm{p}_r(x)+\mathrm{p}_g(x))})]+E_{x\sim\mathrm{p}_g}[\log(\frac{\mathrm{p}_g(x)}{\frac12(\mathrm{p}_r(x)+\mathrm{p}_g(x))}]-2\log2
-\end{aligned}</script><p>将JS散度带入,有</p>
-<script type="math/tex; mode=display">
-\min_GV=2JS(P_r||P_g)-2\log2</script><p>所以当判别器达到固定G情况下最优时,如果两个分布重叠则为JS则为0,否则JS为log2.梯度一直为0,G得不到更新,所以这种原始GAN会面临<strong>梯度消失问题</strong>,导致训练困难.</p>
-<blockquote>
-<p>上述的推导都是建立在最优判别器的基础上的，但是在我们实操过程中往往一开始判别器性能是不理想的，所以生成器还是有梯度更新的</p>
-</blockquote>
-<p>如果使用logD-trick,</p>
-<script type="math/tex; mode=display">
+\end{aligned}</script><p>将JS散度带入,有</p><script type="math/tex; mode=display">
+\min_GV=2JS(P_r||P_g)-2\log2</script><p>所以当判别器达到固定G情况下最优时,如果两个分布重叠则为JS则为0,否则JS为log2.梯度一直为0,G得不到更新,所以这种原始GAN会面临<strong>梯度消失问题</strong>,导致训练困难.<blockquote><p>上述的推导都是建立在最优判别器的基础上的，但是在我们实操过程中往往一开始判别器性能是不理想的，所以生成器还是有梯度更新的</blockquote><p>如果使用logD-trick,</p><script type="math/tex; mode=display">
 \begin{aligned}
 \mathbb{E}_{x\sim P_{g}}\left[-\log D^{*}(x)\right]& =KL(P_{g}||P_{r})-\mathbb{E}_{x\sim P_{g}}\log[1-D^{*}(x)]  \\
 &=KL(P_g||P_r)-2JS(P_r||P_g)+2\log2+\mathbb{E}_{x\sim P_r}[\log D^*(x)]
-\end{aligned}</script><p>所以最后需要最小化前面两项,因为后面两项与G无关. 这个最小化目标需要同时最小化KL散度又要最大化JS散度,直观上荒谬,数值结果上<strong>导致梯度不稳定</strong>,此外第一项的KL散度表示</p>
-<script type="math/tex; mode=display">
-P_{g}(x)\log\frac{P_{g}(x)}{P_{r}(x)}</script><p>当P~g~(x)趋近于1,P~r~(x)趋近于0这种情况与当P~g~(x)趋近于0,P~r~(x)趋近于1这种情况对于KL散度情况不一致,由于要最小化KL散度,会导致后者这种情况,也就是</p>
-<p>这种情况下,梯度可能不会消失,但会存在梯度不稳定,模式崩溃的问题.</p>
-<p>以上内容部分是WGAN中的,从理论上解释了GAN训练的一些问题.</p>
-<h4 id="使用tensorboard记录损失"><a href="#使用tensorboard记录损失" class="headerlink" title="使用tensorboard记录损失"></a>使用tensorboard记录损失</h4><p>大致流程是首先将损失计入到一个文件,然后使用tensorboard读取,便能使用tensorboard打开一个端口,在网页上查看。<a target="_blank" rel="noopener" href="https://pytorch.org/docs/stable/tensorboard.html">torch.utils.tensorboard — PyTorch 2.0 documentation</a></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">!pip install tensorboard</span><br><span class="line"><span class="keyword">from</span> torch.utils.tensorboard <span class="keyword">import</span> SummaryWriter </span><br><span class="line">writer = SummaryWriter(<span class="string">&#x27;./logs&#x27;</span>)  </span><br><span class="line"></span><br><span class="line">transform = transforms.Compose([transforms.ToTensor(), transforms.Normalize((<span class="number">0.5</span>,), (<span class="number">0.5</span>,))])</span><br><span class="line">trainset = datasets.MNIST(<span class="string">&#x27;mnist_train&#x27;</span>, train=<span class="literal">True</span>, download=<span class="literal">True</span>, transform=transform)</span><br><span class="line">trainloader = torch.utils.data.DataLoader(trainset, batch_size=<span class="number">64</span>, shuffle=<span class="literal">True</span>)</span><br><span class="line">model = torchvision.models.resnet50(<span class="literal">False</span>)</span><br><span class="line"><span class="comment"># Have ResNet model take in grayscale rather than RGB</span></span><br><span class="line">model.conv1 = torch.nn.Conv2d(<span class="number">1</span>, <span class="number">64</span>, kernel_size=<span class="number">7</span>, stride=<span class="number">2</span>, padding=<span class="number">3</span>, bias=<span class="literal">False</span>)</span><br><span class="line">images, labels = <span class="built_in">next</span>(<span class="built_in">iter</span>(trainloader))</span><br><span class="line"></span><br><span class="line">grid = torchvision.utils.make_grid(images)</span><br><span class="line">writer.add_image(<span class="string">&#x27;images&#x27;</span>, grid, <span class="number">0</span>)</span><br><span class="line">writer.add_graph(model, images)</span><br><span class="line"><span class="comment"># 关闭writer</span></span><br><span class="line">writer.close()</span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> torch.utils.tensorboard <span class="keyword">import</span> SummaryWriter</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">writer = SummaryWriter()</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>):</span><br><span class="line">    x = np.random.random(<span class="number">1000</span>)</span><br><span class="line">    writer.add_histogram(<span class="string">&#x27;distribution centers&#x27;</span>, x + i, i)</span><br><span class="line">writer.close()</span><br></pre></td></tr></table></figure>
-<p><img data-src="https://pytorch.org/docs/stable/_images/add_histogram.png" alt="_images/add_histogram.png" style="zoom: 67%;" /></p>
-<p>在google colab使用需要搭配一些magic func</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">%load_ext tensorboard  <span class="comment">#使用tensorboard 扩展</span></span><br><span class="line">%tensorboard --logdir logs  <span class="comment">#定位tensorboard读取的文件目录</span></span><br></pre></td></tr></table></figure>
-<h4 id="使用visdom可视化"><a href="#使用visdom可视化" class="headerlink" title="使用visdom可视化"></a>使用visdom可视化</h4><p>visdom一般搭配pytorch,毕竟都是meta的.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">pip install visdom</span><br><span class="line">python -m visdom.server</span><br><span class="line">iz = Visdom()</span><br><span class="line">  </span><br><span class="line">viz.line([<span class="number">0.</span>],    <span class="comment">#Y的第一个点</span></span><br><span class="line">         [<span class="number">0.</span>],    <span class="comment">#X的第一个点</span></span><br><span class="line">         win=<span class="string">&quot;train loss&quot;</span>,   <span class="comment">#右上角窗口的名称 </span></span><br><span class="line">         opts=<span class="built_in">dict</span>(title=<span class="string">&#x27;train_loss&#x27;</span>) <span class="comment">#opt的参数都可以用python字典的格式传入，还有很多其他的类似matplotlib美化图形的参数参考官网</span></span><br><span class="line">        )  </span><br><span class="line">        </span><br><span class="line">viz.line([<span class="number">1</span>,],<span class="comment">#Y的下一个点</span></span><br><span class="line">         [<span class="number">1.</span>],<span class="comment">#X的下一个点</span></span><br><span class="line">         win=<span class="string">&quot;train loss&quot;</span>,</span><br><span class="line">         update=<span class="string">&#x27;append&#x27;</span><span class="comment">#添加到下一个点后面</span></span><br><span class="line">         )</span><br></pre></td></tr></table></figure>
-<p>这里还是推荐选择两者之一即可.</p>
-<h3 id="DCGAN"><a href="#DCGAN" class="headerlink" title="*DCGAN"></a>*DCGAN</h3><p>标题<strong>WITH DEEP CONVOLUTIONAL GENERATIVE ADVERSARIAL NETWORKS</strong></p>
-<p><strong>intro</strong></p>
-<p>Learning reusable feature representations from large unlabeled datasets has been an area of active research. In the context of computer vision, one can leverage the practically unlimited amount of unlabeled images and videos to learn good intermediate representations, which can then be used on a variety of supervised learning tasks such as image classification. We propose that one way to build good image representations is by training Generative Adversarial Networks (GANs) (Goodfellow et al., 2014), and later reusing parts of the generator and discriminator networks as feature extractors for supervised tasks. GANs provide an attractive alternative to maximum likelihood techniques. One can additionally argue that their learning process and the lack of a heuristic cost function (such as pixel-wise independent mean-square error) are attractive to representation learning. GANs have been known to be unstable to train, often resulting in generators that produce nonsensical outputs. There has been very limited published research in trying to understand and visualize what GANs learn, and the intermediate representations of multi-layer GANs. In this paper, we make the following contributions </p>
-<p>• We propose and evaluate a set of constraints on the architectural topology of Convolutional GANs that make them stable to train in most settings. We name this class of architectures Deep Convolutional GANs (DCGAN) </p>
-<p>• We use the trained discriminators for image classification tasks, showing competitive performance with other unsupervised algorithms. </p>
-<p>• We visualize the filters learnt by GANs and empirically show that specific filters have learned to draw specific objects.</p>
-<p>We show that the generators have interesting vector arithmetic properties allowing for easy manipulation of many semantic qualities of generated sample</p>
-<p>贡献:提出卷积GAN,卷积层替代全连接,使用训练过的判别器用于分类任务,可视化了生成器中的某层,显示出良好的绘制特定对象的能力.生成器的向量显示出能控制样本的语义质量行为.介绍了一些超参的初始化.</p>
-<p>• Replace any pooling layers with strided convolutions (discriminator) and fractional-strided convolutions (generator). </p>
-<p>• Use batchnorm in both the generator and the discriminator. • Remove fully connected hidden layers for deeper architectures. </p>
-<p>• Use ReLU activation in generator for all layers except for the output, which uses Tanh. • Use LeakyReLU activation in the discriminator for all layers</p>
-<p>使用了三个数据集</p>
-<ul>
-<li>批量标准化是两个网络中必须的。</li>
-<li>卷积层替代全连接层。</li>
-<li>使用strided卷积(步幅大于1)可以代替池化</li>
-<li>ReLU激活（<em>几乎</em>总是）会有帮助。</li>
-</ul>
-<p><img data-src="https://s2.loli.net/2023/08/29/L1aVuqWoiDHfS2z.png" alt="image-20230829192803486"></p>
-<p>原论文中D判别函数使用的是ReLU,但现在代码中很多其实还是用的LeakyReLU.此外不使用池化,而是使用deconvolution或者叫分数步长卷积(fractionally-strided convolutions).</p>
-<p><img data-src="https://s2.loli.net/2023/08/29/cktnUB7Lj5g6mlI.png" alt="image-20230829214218494"></p>
-<p>pytorch实现中,D判别器使用nn.AvgPool2d平均池化操作.</p>
-<p><img data-src="https://s2.loli.net/2023/08/30/eIhKBaf3t85gVqx.png" alt="image-20230830120457639"></p>
-<p>layer normalization RNN,nlp任务中,每个token的特征数不同,针对每个token</p>
-<p>instance normalization GAN中,针对单个图像不同的通道</p>
-<p><a target="_blank" rel="noopener" href="https://pytorch.org/docs/stable/generated/torch.nn.InstanceNorm2d.html#torch.nn.InstanceNorm2d"><code>InstanceNorm2d</code></a> and <a target="_blank" rel="noopener" href="https://pytorch.org/docs/stable/generated/torch.nn.LayerNorm.html#torch.nn.LayerNorm"><code>LayerNorm</code></a> are very similar, but have some subtle differences. <a target="_blank" rel="noopener" href="https://pytorch.org/docs/stable/generated/torch.nn.InstanceNorm2d.html#torch.nn.InstanceNorm2d"><code>InstanceNorm2d</code></a> is applied on each channel of channeled data like RGB images, but <a target="_blank" rel="noopener" href="https://pytorch.org/docs/stable/generated/torch.nn.LayerNorm.html#torch.nn.LayerNorm"><code>LayerNorm</code></a> is usually applied on entire sample and often in NLP tasks. Additionally, <a target="_blank" rel="noopener" href="https://pytorch.org/docs/stable/generated/torch.nn.LayerNorm.html#torch.nn.LayerNorm"><code>LayerNorm</code></a> applies elementwise affine transform, while <a target="_blank" rel="noopener" href="https://pytorch.org/docs/stable/generated/torch.nn.InstanceNorm2d.html#torch.nn.InstanceNorm2d"><code>InstanceNorm2d</code></a> usually don’t apply affine transform</p>
-<p>ConvTranspose2d</p>
-<p>逆卷积fractionally-strided convolutions,可以利用<code>torchsummary</code>这个库查看模型相关信息</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">myModel = Discriminator().to(DEVICE)</span><br><span class="line">summary(myModel,(<span class="number">1</span>,<span class="number">28</span>,<span class="number">28</span>))</span><br></pre></td></tr></table></figure>
-<figure class="highlight subunit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">----------------------------------------------------------------</span><br><span class="line">        Layer (type)               Output Shape         Param #</span><br><span class="line">================================================================</span><br><span class="line">            Conv2d<span class="string">-1</span>          [<span class="string">-1</span>, 512, 14, 14]           4,608</span><br><span class="line">       BatchNorm2d<span class="string">-2</span>          [<span class="string">-1</span>, 512, 14, 14]           1,024</span><br><span class="line">         LeakyReLU<span class="string">-3</span>          [<span class="string">-1</span>, 512, 14, 14]               0</span><br><span class="line">            Conv2d<span class="string">-4</span>            [<span class="string">-1</span>, 256, 7, 7]       1,179,648</span><br><span class="line">       BatchNorm2d<span class="string">-5</span>            [<span class="string">-1</span>, 256, 7, 7]             512</span><br><span class="line">         LeakyReLU<span class="string">-6</span>            [<span class="string">-1</span>, 256, 7, 7]               0</span><br><span class="line">            Conv2d<span class="string">-7</span>            [<span class="string">-1</span>, 128, 4, 4]         294,912</span><br><span class="line">       BatchNorm2d<span class="string">-8</span>            [<span class="string">-1</span>, 128, 4, 4]             256</span><br><span class="line">         LeakyReLU<span class="string">-9</span>            [<span class="string">-1</span>, 128, 4, 4]               0</span><br><span class="line">        AvgPool2d<span class="string">-10</span>            [<span class="string">-1</span>, 128, 1, 1]               0</span><br><span class="line">           Linear<span class="string">-11</span>                    [<span class="string">-1</span>, 1]             129</span><br><span class="line">          Sigmoid<span class="string">-12</span>                    [<span class="string">-1</span>, 1]               0</span><br><span class="line">================================================================</span><br><span class="line">Total params: 1,481,089</span><br><span class="line">Trainable params: 1,481,089</span><br><span class="line">Non-trainable params: 0</span><br><span class="line">----------------------------------------------------------------</span><br><span class="line">Input size (MB): 0.00</span><br><span class="line">Forward/backward pass size (MB): 2.63</span><br><span class="line">Params size (MB): 5.65</span><br><span class="line">Estimated Total Size (MB): 8.28</span><br><span class="line">----------------------------------------------------------------</span><br></pre></td></tr></table></figure>
-<p>我在测试github上一个DCGAN的代码时,发现其在生成器上除了最后一层使用tanh激活函数,其他层都使用leak激活函数,但是这样生成器会逐渐变大.</p>
-<p><img data-src="https://s2.loli.net/2023/08/31/6QlMEzeH8vsLy7S.png" alt="image-20230831165159320" style="zoom:67%;" /></p>
-<p>因为LeakyReLU照顾到了负数,使得每一线性层输出为负值时也有梯度,这样也许能使得生成器跳出</p>
-<h3 id="WGAN"><a href="#WGAN" class="headerlink" title="*WGAN"></a>*WGAN</h3><p>使用EM距离<a target="_blank" rel="noopener" href="https://jonathan-hui.medium.com/gan-wasserstein-gan-wgan-gp-6a1a2aa1b490">GAN — Wasserstein GAN &amp; WGAN-GP. Training GAN is hard. Models may never… | by Jonathan Hui | Medium</a></p>
-<ul>
-<li>判别器最后一层去掉sigmoid</li>
-<li>生成器和判别器的loss不取log</li>
-<li>每次更新判别器的参数之后把它们的绝对值截断到不超过一个固定常数c</li>
-<li>不要用基于动量的优化算法（包括momentum和Adam），推荐RMSProp，SGD也行</li>
-</ul>
-<p><img data-src="https://pic1.zhimg.com/80/v2-b783ce95d8bdf1499fc88994e170a02c_720w.webp" alt="img"></p>
-<p>上面这个公式是基于推图距离的计算</p>
-<p><img data-src="https://img1.imgtp.com/2023/09/15/B6W4SQCF.png" alt="image-20230915205616738" style="zoom: 67%;" /></p>
-<p><img data-src="https://pic2.zhimg.com/80/v2-fe9ef30af6166a5eea47c9006bfc27cd_720w.webp" alt=""></p>
-<p>下面是WGAN论文的intro</p>
-<p><img data-src="https://s2.loli.net/2023/09/05/u4hjRmwN5i3E9oG.png" alt="image-20230905224350055" style="zoom: 80%;" /></p>
-<p><img data-src="https://miro.medium.com/v2/resize:fit:700/1*5jF5gbIDwU6k9m1ILl0Utg.jpeg" alt="img"></p>
-<p>一开始的GAN的损失函数设计被认为有问题,与KL,JS散度有关.</p>
-<script type="math/tex; mode=display">
+\end{aligned}</script><p>所以最后需要最小化前面两项,因为后面两项与G无关. 这个最小化目标需要同时最小化KL散度又要最大化JS散度,直观上荒谬,数值结果上<strong>导致梯度不稳定</strong>,此外第一项的KL散度表示</p><script type="math/tex; mode=display">
+P_{g}(x)\log\frac{P_{g}(x)}{P_{r}(x)}</script><p>当P~g~(x)趋近于1,P~r~(x)趋近于0这种情况与当P~g~(x)趋近于0,P~r~(x)趋近于1这种情况对于KL散度情况不一致,由于要最小化KL散度,会导致后者这种情况,也就是<p>这种情况下,梯度可能不会消失,但会存在梯度不稳定,模式崩溃的问题.<p>以上内容部分是WGAN中的,从理论上解释了GAN训练的一些问题.<h4 id=使用tensorboard记录损失><a class=headerlink href=#使用tensorboard记录损失 title=使用tensorboard记录损失></a>使用tensorboard记录损失</h4><p>大致流程是首先将损失计入到一个文件,然后使用tensorboard读取,便能使用tensorboard打开一个端口,在网页上查看。<a href=https://pytorch.org/docs/stable/tensorboard.html rel=noopener target=_blank>torch.utils.tensorboard — PyTorch 2.0 documentation</a><figure class="highlight python"><table><tr><td class=gutter><pre><span class=line>1</span><br><span class=line>2</span><br><span class=line>3</span><br><span class=line>4</span><br><span class=line>5</span><br><span class=line>6</span><br><span class=line>7</span><br><span class=line>8</span><br><span class=line>9</span><br><span class=line>10</span><br><span class=line>11</span><br><span class=line>12</span><br><span class=line>13</span><br><span class=line>14</span><br><span class=line>15</span><br><span class=line>16</span><br><span class=line>17</span><br></pre><td class=code><pre><span class=line>!pip install tensorboard</span><br><span class=line><span class=keyword>from</span> torch.utils.tensorboard <span class=keyword>import</span> SummaryWriter </span><br><span class=line>writer = SummaryWriter(<span class=string>'./logs'</span>)  </span><br><span class=line></span><br><span class=line>transform = transforms.Compose([transforms.ToTensor(), transforms.Normalize((<span class=number>0.5</span>,), (<span class=number>0.5</span>,))])</span><br><span class=line>trainset = datasets.MNIST(<span class=string>'mnist_train'</span>, train=<span class=literal>True</span>, download=<span class=literal>True</span>, transform=transform)</span><br><span class=line>trainloader = torch.utils.data.DataLoader(trainset, batch_size=<span class=number>64</span>, shuffle=<span class=literal>True</span>)</span><br><span class=line>model = torchvision.models.resnet50(<span class=literal>False</span>)</span><br><span class=line><span class=comment># Have ResNet model take in grayscale rather than RGB</span></span><br><span class=line>model.conv1 = torch.nn.Conv2d(<span class=number>1</span>, <span class=number>64</span>, kernel_size=<span class=number>7</span>, stride=<span class=number>2</span>, padding=<span class=number>3</span>, bias=<span class=literal>False</span>)</span><br><span class=line>images, labels = <span class=built_in>next</span>(<span class=built_in>iter</span>(trainloader))</span><br><span class=line></span><br><span class=line>grid = torchvision.utils.make_grid(images)</span><br><span class=line>writer.add_image(<span class=string>'images'</span>, grid, <span class=number>0</span>)</span><br><span class=line>writer.add_graph(model, images)</span><br><span class=line><span class=comment># 关闭writer</span></span><br><span class=line>writer.close()</span><br></pre></table></figure><figure class="highlight python"><table><tr><td class=gutter><pre><span class=line>1</span><br><span class=line>2</span><br><span class=line>3</span><br><span class=line>4</span><br><span class=line>5</span><br><span class=line>6</span><br><span class=line>7</span><br></pre><td class=code><pre><span class=line><span class=keyword>from</span> torch.utils.tensorboard <span class=keyword>import</span> SummaryWriter</span><br><span class=line><span class=keyword>import</span> numpy <span class=keyword>as</span> np</span><br><span class=line>writer = SummaryWriter()</span><br><span class=line><span class=keyword>for</span> i <span class=keyword>in</span> <span class=built_in>range</span>(<span class=number>10</span>):</span><br><span class=line>    x = np.random.random(<span class=number>1000</span>)</span><br><span class=line>    writer.add_histogram(<span class=string>'distribution centers'</span>, x + i, i)</span><br><span class=line>writer.close()</span><br></pre></table></figure><p><img style="zoom: 67%;" alt=_images/add_histogram.png data-src=https://pytorch.org/docs/stable/_images/add_histogram.png><p>在google colab使用需要搭配一些magic func<figure class="highlight python"><table><tr><td class=gutter><pre><span class=line>1</span><br><span class=line>2</span><br></pre><td class=code><pre><span class=line>%load_ext tensorboard  <span class=comment>#使用tensorboard 扩展</span></span><br><span class=line>%tensorboard --logdir logs  <span class=comment>#定位tensorboard读取的文件目录</span></span><br></pre></table></figure><h4 id=使用visdom可视化><a class=headerlink href=#使用visdom可视化 title=使用visdom可视化></a>使用visdom可视化</h4><p>visdom一般搭配pytorch,毕竟都是meta的.<figure class="highlight python"><table><tr><td class=gutter><pre><span class=line>1</span><br><span class=line>2</span><br><span class=line>3</span><br><span class=line>4</span><br><span class=line>5</span><br><span class=line>6</span><br><span class=line>7</span><br><span class=line>8</span><br><span class=line>9</span><br><span class=line>10</span><br><span class=line>11</span><br><span class=line>12</span><br><span class=line>13</span><br><span class=line>14</span><br><span class=line>15</span><br></pre><td class=code><pre><span class=line>pip install visdom</span><br><span class=line>python -m visdom.server</span><br><span class=line>iz = Visdom()</span><br><span class=line>  </span><br><span class=line>viz.line([<span class=number>0.</span>],    <span class=comment>#Y的第一个点</span></span><br><span class=line>         [<span class=number>0.</span>],    <span class=comment>#X的第一个点</span></span><br><span class=line>         win=<span class=string>"train loss"</span>,   <span class=comment>#右上角窗口的名称 </span></span><br><span class=line>         opts=<span class=built_in>dict</span>(title=<span class=string>'train_loss'</span>) <span class=comment>#opt的参数都可以用python字典的格式传入，还有很多其他的类似matplotlib美化图形的参数参考官网</span></span><br><span class=line>        )  </span><br><span class=line>        </span><br><span class=line>viz.line([<span class=number>1</span>,],<span class=comment>#Y的下一个点</span></span><br><span class=line>         [<span class=number>1.</span>],<span class=comment>#X的下一个点</span></span><br><span class=line>         win=<span class=string>"train loss"</span>,</span><br><span class=line>         update=<span class=string>'append'</span><span class=comment>#添加到下一个点后面</span></span><br><span class=line>         )</span><br></pre></table></figure><p>这里还是推荐选择两者之一即可.<h3 id=DCGAN><a class=headerlink href=#DCGAN title=*DCGAN></a>*DCGAN</h3><p>标题<strong>WITH DEEP CONVOLUTIONAL GENERATIVE ADVERSARIAL NETWORKS</strong><p><strong>intro</strong><p>Learning reusable feature representations from large unlabeled datasets has been an area of active research. In the context of computer vision, one can leverage the practically unlimited amount of unlabeled images and videos to learn good intermediate representations, which can then be used on a variety of supervised learning tasks such as image classification. We propose that one way to build good image representations is by training Generative Adversarial Networks (GANs) (Goodfellow et al., 2014), and later reusing parts of the generator and discriminator networks as feature extractors for supervised tasks. GANs provide an attractive alternative to maximum likelihood techniques. One can additionally argue that their learning process and the lack of a heuristic cost function (such as pixel-wise independent mean-square error) are attractive to representation learning. GANs have been known to be unstable to train, often resulting in generators that produce nonsensical outputs. There has been very limited published research in trying to understand and visualize what GANs learn, and the intermediate representations of multi-layer GANs. In this paper, we make the following contributions<p>• We propose and evaluate a set of constraints on the architectural topology of Convolutional GANs that make them stable to train in most settings. We name this class of architectures Deep Convolutional GANs (DCGAN)<p>• We use the trained discriminators for image classification tasks, showing competitive performance with other unsupervised algorithms.<p>• We visualize the filters learnt by GANs and empirically show that specific filters have learned to draw specific objects.<p>We show that the generators have interesting vector arithmetic properties allowing for easy manipulation of many semantic qualities of generated sample<p>贡献:提出卷积GAN,卷积层替代全连接,使用训练过的判别器用于分类任务,可视化了生成器中的某层,显示出良好的绘制特定对象的能力.生成器的向量显示出能控制样本的语义质量行为.介绍了一些超参的初始化.<p>• Replace any pooling layers with strided convolutions (discriminator) and fractional-strided convolutions (generator).<p>• Use batchnorm in both the generator and the discriminator. • Remove fully connected hidden layers for deeper architectures.<p>• Use ReLU activation in generator for all layers except for the output, which uses Tanh. • Use LeakyReLU activation in the discriminator for all layers<p>使用了三个数据集<ul><li>批量标准化是两个网络中必须的。<li>卷积层替代全连接层。<li>使用strided卷积(步幅大于1)可以代替池化<li>ReLU激活（<em>几乎</em>总是）会有帮助。</ul><p><img alt=image-20230829192803486 data-src=https://s2.loli.net/2023/08/29/L1aVuqWoiDHfS2z.png><p>原论文中D判别函数使用的是ReLU,但现在代码中很多其实还是用的LeakyReLU.此外不使用池化,而是使用deconvolution或者叫分数步长卷积(fractionally-strided convolutions).<p><img alt=image-20230829214218494 data-src=https://s2.loli.net/2023/08/29/cktnUB7Lj5g6mlI.png><p>pytorch实现中,D判别器使用nn.AvgPool2d平均池化操作.<p><img alt=image-20230830120457639 data-src=https://s2.loli.net/2023/08/30/eIhKBaf3t85gVqx.png><p>layer normalization RNN,nlp任务中,每个token的特征数不同,针对每个token<p>instance normalization GAN中,针对单个图像不同的通道<p><a href=https://pytorch.org/docs/stable/generated/torch.nn.InstanceNorm2d.html#torch.nn.InstanceNorm2d rel=noopener target=_blank><code>InstanceNorm2d</code></a> and <a href=https://pytorch.org/docs/stable/generated/torch.nn.LayerNorm.html#torch.nn.LayerNorm rel=noopener target=_blank><code>LayerNorm</code></a> are very similar, but have some subtle differences. <a href=https://pytorch.org/docs/stable/generated/torch.nn.InstanceNorm2d.html#torch.nn.InstanceNorm2d rel=noopener target=_blank><code>InstanceNorm2d</code></a> is applied on each channel of channeled data like RGB images, but <a href=https://pytorch.org/docs/stable/generated/torch.nn.LayerNorm.html#torch.nn.LayerNorm rel=noopener target=_blank><code>LayerNorm</code></a> is usually applied on entire sample and often in NLP tasks. Additionally, <a href=https://pytorch.org/docs/stable/generated/torch.nn.LayerNorm.html#torch.nn.LayerNorm rel=noopener target=_blank><code>LayerNorm</code></a> applies elementwise affine transform, while <a href=https://pytorch.org/docs/stable/generated/torch.nn.InstanceNorm2d.html#torch.nn.InstanceNorm2d rel=noopener target=_blank><code>InstanceNorm2d</code></a> usually don’t apply affine transform<p>ConvTranspose2d<p>逆卷积fractionally-strided convolutions,可以利用<code>torchsummary</code>这个库查看模型相关信息<figure class="highlight python"><table><tr><td class=gutter><pre><span class=line>1</span><br><span class=line>2</span><br></pre><td class=code><pre><span class=line>myModel = Discriminator().to(DEVICE)</span><br><span class=line>summary(myModel,(<span class=number>1</span>,<span class=number>28</span>,<span class=number>28</span>))</span><br></pre></table></figure><figure class="highlight subunit"><table><tr><td class=gutter><pre><span class=line>1</span><br><span class=line>2</span><br><span class=line>3</span><br><span class=line>4</span><br><span class=line>5</span><br><span class=line>6</span><br><span class=line>7</span><br><span class=line>8</span><br><span class=line>9</span><br><span class=line>10</span><br><span class=line>11</span><br><span class=line>12</span><br><span class=line>13</span><br><span class=line>14</span><br><span class=line>15</span><br><span class=line>16</span><br><span class=line>17</span><br><span class=line>18</span><br><span class=line>19</span><br><span class=line>20</span><br><span class=line>21</span><br><span class=line>22</span><br><span class=line>23</span><br><span class=line>24</span><br><span class=line>25</span><br></pre><td class=code><pre><span class=line>----------------------------------------------------------------</span><br><span class=line>        Layer (type)               Output Shape         Param #</span><br><span class=line>================================================================</span><br><span class=line>            Conv2d<span class=string>-1</span>          [<span class=string>-1</span>, 512, 14, 14]           4,608</span><br><span class=line>       BatchNorm2d<span class=string>-2</span>          [<span class=string>-1</span>, 512, 14, 14]           1,024</span><br><span class=line>         LeakyReLU<span class=string>-3</span>          [<span class=string>-1</span>, 512, 14, 14]               0</span><br><span class=line>            Conv2d<span class=string>-4</span>            [<span class=string>-1</span>, 256, 7, 7]       1,179,648</span><br><span class=line>       BatchNorm2d<span class=string>-5</span>            [<span class=string>-1</span>, 256, 7, 7]             512</span><br><span class=line>         LeakyReLU<span class=string>-6</span>            [<span class=string>-1</span>, 256, 7, 7]               0</span><br><span class=line>            Conv2d<span class=string>-7</span>            [<span class=string>-1</span>, 128, 4, 4]         294,912</span><br><span class=line>       BatchNorm2d<span class=string>-8</span>            [<span class=string>-1</span>, 128, 4, 4]             256</span><br><span class=line>         LeakyReLU<span class=string>-9</span>            [<span class=string>-1</span>, 128, 4, 4]               0</span><br><span class=line>        AvgPool2d<span class=string>-10</span>            [<span class=string>-1</span>, 128, 1, 1]               0</span><br><span class=line>           Linear<span class=string>-11</span>                    [<span class=string>-1</span>, 1]             129</span><br><span class=line>          Sigmoid<span class=string>-12</span>                    [<span class=string>-1</span>, 1]               0</span><br><span class=line>================================================================</span><br><span class=line>Total params: 1,481,089</span><br><span class=line>Trainable params: 1,481,089</span><br><span class=line>Non-trainable params: 0</span><br><span class=line>----------------------------------------------------------------</span><br><span class=line>Input size (MB): 0.00</span><br><span class=line>Forward/backward pass size (MB): 2.63</span><br><span class=line>Params size (MB): 5.65</span><br><span class=line>Estimated Total Size (MB): 8.28</span><br><span class=line>----------------------------------------------------------------</span><br></pre></table></figure><p>我在测试github上一个DCGAN的代码时,发现其在生成器上除了最后一层使用tanh激活函数,其他层都使用leak激活函数,但是这样生成器会逐渐变大.<p><img alt=image-20230831165159320 data-src=https://s2.loli.net/2023/08/31/6QlMEzeH8vsLy7S.png style=zoom:67%;><p>因为LeakyReLU照顾到了负数,使得每一线性层输出为负值时也有梯度,这样也许能使得生成器跳出<h3 id=WGAN><a class=headerlink href=#WGAN title=*WGAN></a>*WGAN</h3><p>使用EM距离<a href=https://jonathan-hui.medium.com/gan-wasserstein-gan-wgan-gp-6a1a2aa1b490 rel=noopener target=_blank>GAN — Wasserstein GAN & WGAN-GP. Training GAN is hard. Models may never… | by Jonathan Hui | Medium</a><ul><li>判别器最后一层去掉sigmoid<li>生成器和判别器的loss不取log<li>每次更新判别器的参数之后把它们的绝对值截断到不超过一个固定常数c<li>不要用基于动量的优化算法（包括momentum和Adam），推荐RMSProp，SGD也行</ul><p><img alt=img data-src=https://pic1.zhimg.com/80/v2-b783ce95d8bdf1499fc88994e170a02c_720w.webp><p>上面这个公式是基于推图距离的计算<p><img style="zoom: 67%;" alt=image-20230915205616738 data-src=https://img1.imgtp.com/2023/09/15/B6W4SQCF.png><p><img alt data-src=https://pic2.zhimg.com/80/v2-fe9ef30af6166a5eea47c9006bfc27cd_720w.webp><p>下面是WGAN论文的intro<p><img style="zoom: 80%;" alt=image-20230905224350055 data-src=https://s2.loli.net/2023/09/05/u4hjRmwN5i3E9oG.png><p><img alt=img data-src=https://miro.medium.com/v2/resize:fit:700/1*5jF5gbIDwU6k9m1ILl0Utg.jpeg><p>一开始的GAN的损失函数设计被认为有问题,与KL,JS散度有关.</p><script type="math/tex; mode=display">
 KL(P_1||P_2)=E_{x\sim P_1}log\frac{P_1}{P_2}</script><script type="math/tex; mode=display">
-KL(P_1||P_2)=\int\limits_xP_1\log\frac{P_1}{P_2}dx\text{或}KL(P_1||P_2)=\sum p_1\log\frac{P_1}{P_2}</script><p>KL散度是熵与交叉熵的差,它不是对称的.</p>
-<p>而JS散度和KL散度是有关联的,可以看出JS散度是对称的,</p>
-<script type="math/tex; mode=display">
-JS(P_1||P_2)=\frac12KL(P_1||\frac{P_1+P_2}2)+\frac12KL(P_2||\frac{P_1+P_2}2)</script><p>经证明,当两个分布不重叠时,JS散度为log2<a target="_blank" rel="noopener" href="https://blog.csdn.net/Invokar/article/details/88917214">GAN：两者分布不重合JS散度为log2的数学证明_为什么深度学习wganjs散度等于log2</a></p>
-<blockquote>
-<p>从理论和经验上来说，真实的数据分布通常是一个<strong>低维流形</strong>，简单地说就是数据不具备高维特性，而是存在一个嵌入在高维度的低维空间内,在实际操作中，我们的维度空间远远不止3维，有可能是上百维，在这样的情况下，数据就更加难于重合.</p>
-</blockquote>
-<p>WGAN打算训练网络得到一个函数,这个函数满足1-Lipschitz,同时也是D辨别器,这样能使得损失函数更有意义,也能解决梯度与模式崩溃问题. </p>
-<p>WGAN贡献:解决GAN训练不稳定与模式崩溃问题,有一个指标(EM距离),这个值越小训练得越好.</p>
-<h4 id="WGAN-GP"><a href="#WGAN-GP" class="headerlink" title="WGAN-GP"></a>WGAN-GP</h4><p>这里的GP就是gradient penalty的意思.在发了第一篇GAN的文章之后,作者又发了这篇.</p>
-<blockquote>
-<p>The recently proposed Wasserstein GAN (WGAN) makes progress toward stable training of GANs, but sometimes can still generate only poor samples or fail to converge. We find that these problems are often <strong>due to the use of weight clipping in WGAN to enforce a Lipschitz constraint on the critic, which can lead to undesired behavior</strong></p>
-</blockquote>
-<p>WGAN以及其衍生主要都是为了满足Lipschitz constraint,包括后面的Spectral Normalizaton<a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1802.05957.pdf">1802.05957.pdf (arxiv.org)</a>.</p>
-<p>意思是强制使用梯度裁剪(clamp)到一个范围会导致不想要的行为,因为本身想要的是让critic满足Lipschitz,所以粗暴地使用了梯度裁剪.</p>
-<p><img data-src="https://miro.medium.com/v2/resize:fit:700/1*NVBkG5vDwwz-1ad-zwxddA.jpeg" alt="img"></p>
-<p>需要使得判别器f的梯度范数处处小于1,WGAN-GP证明了需要使得在真实数据和生成的数据之间插值的点对于f应该具有1的梯度范数。</p>
-<p>范数有多种.<img data-src="https://img1.imgtp.com/2023/09/17/ZwMIQPEx.png" alt="image-20230917103610368"></p>
-<p><img data-src="https://miro.medium.com/v2/resize:fit:700/1*TErKpfBkilA-G24FNFg0FA.png" alt="img"></p>
-<p>所以需要使用到梯度,而且是对于输入的梯度,通过限制输入的梯度,而不是WGAN中限制每次模型的weight和bias的值.<a target="_blank" rel="noopener" href="https://pytorch.org/docs/stable/generated/torch.autograd.grad.html">torch.autograd.grad — PyTorch 2.0 documentation</a>在pytorch中使用autograd.grad计算</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">from</span> torch <span class="keyword">import</span> autograd</span><br><span class="line"><span class="comment"># demo</span></span><br><span class="line">x = torch.rand(<span class="number">3</span>, <span class="number">4</span>)</span><br><span class="line">x.requires_grad_()</span><br><span class="line">y = torch.<span class="built_in">sum</span>(x**<span class="number">2</span>)</span><br><span class="line">grads = autograd.grad(outputs=y, inputs=x,create_graph=<span class="literal">True</span>)</span><br><span class="line"><span class="built_in">print</span>(grads)</span><br></pre></td></tr></table></figure>
-<p><img data-src="https://miro.medium.com/v2/resize:fit:700/1*r8472Sg5fDJ1XKQPUbRC4Q.png" alt=""></p>
-<p><img data-src="https://miro.medium.com/v2/resize:fit:700/1*gi2isFNxtXE-pNiQ_CrZ8w.jpeg" alt="img"></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Gradient Penalty (e.g. gradients w.r.t x_penalty)</span></span><br><span class="line">eps = torch.rand(batch_size, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>).to(DEVICE) <span class="comment"># x shape: (64, 1, 28, 28)</span></span><br><span class="line">x_penalty = eps*x + (<span class="number">1</span>-eps)*x_fake</span><br><span class="line">x_penalty = x_penalty.view(x_penalty.size(<span class="number">0</span>), -<span class="number">1</span>)  <span class="comment"># n 1 28*28</span></span><br><span class="line">p_outputs = D(x_penalty, y)  <span class="comment"># N,1</span></span><br><span class="line">xp_grad = autograd.grad(outputs=p_outputs, inputs=x_penalty, grad_outputs=D_labels, <span class="comment"># N 1</span></span><br><span class="line">                        create_graph=<span class="literal">True</span>, retain_graph=<span class="literal">True</span>, only_inputs=<span class="literal">True</span>)</span><br><span class="line"><span class="built_in">print</span>(xp_grad)</span><br><span class="line">grad_penalty = p_coeff * torch.mean(torch.<span class="built_in">pow</span>(torch.norm(xp_grad[<span class="number">0</span>], <span class="number">2</span>, <span class="number">1</span>) - <span class="number">1</span>, <span class="number">2</span>))</span><br></pre></td></tr></table></figure>
-<p>对于辨别器,WGAN一般叫做critic,损失函数,而生成器依旧是</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Wasserstein loss</span></span><br><span class="line">x_outputs = D(x, y)</span><br><span class="line">z_outputs = D(x_fake, y)</span><br><span class="line">D_x_loss = torch.mean(x_outputs)</span><br><span class="line">D_z_loss = torch.mean(z_outputs)</span><br><span class="line">D_loss = D_z_loss - D_x_loss + grad_penalty</span><br></pre></td></tr></table></figure>
-<p>此外不使用BN,批次标准化会在同一批次中的样本之间创建相关性。它<strong>影响了梯度惩罚的有效性</strong>，实验证实了这一点。</p>
-<p>一般可以使用Layer Normalization也就是对单个样本进行归一化.</p>
-<h3 id="Conditional-GAN"><a href="#Conditional-GAN" class="headerlink" title="*Conditional GAN"></a>*Conditional GAN</h3><p>某种程度上里程碑作品,能够控制GAN生成的东西了,通过添加label,也就是condition.</p>
-<p>例如在MNIST数据上,增加数字对应的label的one-hot变量,cat到图像数据上.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> epoch <span class="keyword">in</span> <span class="built_in">range</span>(max_epoch):</span><br><span class="line">    <span class="keyword">for</span> idx, (images, labels) <span class="keyword">in</span> <span class="built_in">enumerate</span>(data_loader):</span><br><span class="line">        <span class="comment"># Training Discriminator</span></span><br><span class="line">        x = images.to(DEVICE)</span><br><span class="line">        y = labels.view(batch_size, <span class="number">1</span>)</span><br><span class="line">        y = to_onehot(y).to(DEVICE) <span class="comment"># condition</span></span><br><span class="line">        x_outputs = D(x, y)</span><br><span class="line">        D_x_loss = criterion(x_outputs, D_labels)</span><br><span class="line"></span><br><span class="line">        z = torch.randn(batch_size, n_noise).to(DEVICE)</span><br><span class="line">        z_outputs = D(G(z, y), y)</span><br><span class="line">        D_z_loss = criterion(z_outputs, D_fakes)</span><br><span class="line">        D_loss = D_x_loss + D_z_loss</span><br><span class="line">        </span><br><span class="line">        D.zero_grad()</span><br><span class="line">        D_loss.backward()</span><br><span class="line">        D_opt.step()</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> step % n_critic == <span class="number">0</span>:</span><br><span class="line">            <span class="comment"># Training Generator</span></span><br><span class="line">            z = torch.randn(batch_size, n_noise).to(DEVICE)</span><br><span class="line">            z_outputs = D(G(z, y), y)</span><br><span class="line">            G_loss = criterion(z_outputs, D_labels)</span><br><span class="line"></span><br><span class="line">            G.zero_grad()</span><br><span class="line">            G_loss.backward()</span><br><span class="line">            G_opt.step()</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> step % <span class="number">500</span> == <span class="number">0</span>:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&#x27;Epoch: &#123;&#125;/&#123;&#125;, Step: &#123;&#125;, D Loss: &#123;&#125;, G Loss: &#123;&#125;&#x27;</span>.<span class="built_in">format</span>(epoch, max_epoch, step, D_loss.item(), G_loss.item()))</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> step % <span class="number">1000</span> == <span class="number">0</span>:</span><br><span class="line">            G.<span class="built_in">eval</span>()</span><br><span class="line">            img = get_sample_image(G, n_noise)</span><br><span class="line">            imsave(<span class="string">&#x27;samples/&#123;&#125;_step&#123;&#125;.jpg&#x27;</span>.<span class="built_in">format</span>(MODEL_NAME, <span class="built_in">str</span>(step).zfill(<span class="number">3</span>)), img, cmap=<span class="string">&#x27;gray&#x27;</span>)</span><br><span class="line">            G.train()</span><br><span class="line">        step += <span class="number">1</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Generator</span>(<span class="params">nn.Module</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        Simple Generator w/ MLP</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, input_size=<span class="number">100</span>, condition_size=<span class="number">10</span>, num_classes=<span class="number">784</span></span>):</span></span><br><span class="line">        <span class="built_in">super</span>(Generator, self).__init__()</span><br><span class="line">        self.layer = nn.Sequential(</span><br><span class="line">            nn.Linear(input_size+condition_size, <span class="number">128</span>),</span><br><span class="line">            nn.LeakyReLU(<span class="number">0.2</span>),</span><br><span class="line">            nn.Linear(<span class="number">128</span>, <span class="number">256</span>),</span><br><span class="line">            nn.BatchNorm1d(<span class="number">256</span>),</span><br><span class="line">            nn.LeakyReLU(<span class="number">0.2</span>),</span><br><span class="line">            nn.Linear(<span class="number">256</span>, <span class="number">512</span>),</span><br><span class="line">            nn.BatchNorm1d(<span class="number">512</span>),</span><br><span class="line">            nn.LeakyReLU(<span class="number">0.2</span>),</span><br><span class="line">            nn.Linear(<span class="number">512</span>, <span class="number">1024</span>),</span><br><span class="line">            nn.BatchNorm1d(<span class="number">1024</span>),</span><br><span class="line">            nn.LeakyReLU(<span class="number">0.2</span>),</span><br><span class="line">            nn.Linear(<span class="number">1024</span>, num_classes),</span><br><span class="line">            nn.Tanh()</span><br><span class="line">        )</span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span>(<span class="params">self, x, c</span>):</span></span><br><span class="line">        x, c = x.view(x.size(<span class="number">0</span>), -<span class="number">1</span>), c.view(c.size(<span class="number">0</span>), -<span class="number">1</span>).<span class="built_in">float</span>()</span><br><span class="line">        v = torch.cat((x, c), <span class="number">1</span>) <span class="comment"># v: [input, label] concatenated vector</span></span><br><span class="line">        y_ = self.layer(v)</span><br><span class="line">        y_ = y_.view(x.size(<span class="number">0</span>), <span class="number">1</span>, <span class="number">28</span>, <span class="number">28</span>)</span><br><span class="line">        <span class="keyword">return</span> y_</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Discriminator</span>(<span class="params">nn.Module</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        Simple Discriminator w/ MLP</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, input_size=<span class="number">784</span>, condition_size=<span class="number">10</span>, num_classes=<span class="number">1</span></span>):</span></span><br><span class="line">        <span class="built_in">super</span>(Discriminator, self).__init__()</span><br><span class="line">        self.layer = nn.Sequential(</span><br><span class="line">            nn.Linear(input_size+condition_size, <span class="number">512</span>),</span><br><span class="line">            nn.LeakyReLU(<span class="number">0.2</span>),</span><br><span class="line">            nn.Linear(<span class="number">512</span>, <span class="number">256</span>),</span><br><span class="line">            nn.LeakyReLU(<span class="number">0.2</span>),</span><br><span class="line">            nn.Linear(<span class="number">256</span>, num_classes),</span><br><span class="line">            nn.Sigmoid(),</span><br><span class="line">        )</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span>(<span class="params">self, x, c</span>):</span>        </span><br><span class="line">        x, c = x.view(x.size(<span class="number">0</span>), -<span class="number">1</span>), c.view(c.size(<span class="number">0</span>), -<span class="number">1</span>).<span class="built_in">float</span>()</span><br><span class="line">        v = torch.cat((x, c), <span class="number">1</span>) <span class="comment"># v: [input, label] concatenated vector</span></span><br><span class="line">        y_ = self.layer(v)</span><br><span class="line">        <span class="keyword">return</span> y_</span><br></pre></td></tr></table></figure>
-<h3 id="InfoGAN"><a href="#InfoGAN" class="headerlink" title="InfoGAN"></a>InfoGAN</h3><p>提出利用互信息诱导潜变量.该方法将信息最大化引入到标准GAN网络中。</p>
-<p><a target="_blank" rel="noopener" href="https://medium.com/mlearning-ai/infogan-interpretable-representation-learning-to-distangle-data-unsupervised-33a4089d7c09">InfoGAN: Interpretable Representation Learning to Distangle Data Unsupervised | by Renee LIN | MLearning.ai | Medium</a></p>
-<p>期望有良好的特征解耦关系.</p>
-<blockquote>
-<p>GAN公式使用简单的连续输入噪声矢量z，同时对G使用噪声的方式没有限制。因此，噪声可能会被生成器以高度纠缠(entangled)的方式使用，导致 z 的各个维度与数据的语义特征不对应。</p>
-<p>在本文中，将输入噪声向量分解为两部分，而不是使用单个非结构化噪声向量：（i）z，它被视为不可压缩噪声源;（ii） c，我们称之为潜在代码，将针对数据分布的显著结构化语义特征。</p>
-</blockquote>
-<script type="math/tex; mode=display">
-I(X;Y)=H(X)-H(X|Y)=H(Y)-H(Y|X)</script><p>引入互信息,在G输入时加入一个潜变量c,潜在代码 C 和生成器分布 G(z,c) 之间应该有高度的互信息。因此I(c;G(z,c)) 应该很高。给定任何 x ∼ P~G~(x),希望 P~G~（c|x） 有一个较小的熵。换句话说，潜在代码c中的信息不应该在生成过程中丢失。</p>
-<script type="math/tex; mode=display">
-\operatorname*{min}_{G}\operatorname*{max}_{D}V_{I}(D,G)=V(D,G)-\lambda I(c;G(z,c))</script><p>然而上面互信息的计算涉及后验概率分布P(c|x)，而后者在实际中是很难获取的，所以需要定义一个辅助性的概率分布Q(c|x)，采用Variational Information Maximization对互信息进行下界拟合.</p>
-<script type="math/tex; mode=display">
+KL(P_1||P_2)=\int\limits_xP_1\log\frac{P_1}{P_2}dx\text{或}KL(P_1||P_2)=\sum p_1\log\frac{P_1}{P_2}</script><p>KL散度是熵与交叉熵的差,它不是对称的.<p>而JS散度和KL散度是有关联的,可以看出JS散度是对称的,</p><script type="math/tex; mode=display">
+JS(P_1||P_2)=\frac12KL(P_1||\frac{P_1+P_2}2)+\frac12KL(P_2||\frac{P_1+P_2}2)</script><p>经证明,当两个分布不重叠时,JS散度为log2<a href=https://blog.csdn.net/Invokar/article/details/88917214 rel=noopener target=_blank>GAN：两者分布不重合JS散度为log2的数学证明_为什么深度学习wganjs散度等于log2</a><blockquote><p>从理论和经验上来说，真实的数据分布通常是一个<strong>低维流形</strong>，简单地说就是数据不具备高维特性，而是存在一个嵌入在高维度的低维空间内,在实际操作中，我们的维度空间远远不止3维，有可能是上百维，在这样的情况下，数据就更加难于重合.</blockquote><p>WGAN打算训练网络得到一个函数,这个函数满足1-Lipschitz,同时也是D辨别器,这样能使得损失函数更有意义,也能解决梯度与模式崩溃问题.<p>WGAN贡献:解决GAN训练不稳定与模式崩溃问题,有一个指标(EM距离),这个值越小训练得越好.<h4 id=WGAN-GP><a class=headerlink href=#WGAN-GP title=WGAN-GP></a>WGAN-GP</h4><p>这里的GP就是gradient penalty的意思.在发了第一篇GAN的文章之后,作者又发了这篇.<blockquote><p>The recently proposed Wasserstein GAN (WGAN) makes progress toward stable training of GANs, but sometimes can still generate only poor samples or fail to converge. We find that these problems are often <strong>due to the use of weight clipping in WGAN to enforce a Lipschitz constraint on the critic, which can lead to undesired behavior</strong></blockquote><p>WGAN以及其衍生主要都是为了满足Lipschitz constraint,包括后面的Spectral Normalizaton<a href=https://arxiv.org/pdf/1802.05957.pdf rel=noopener target=_blank>1802.05957.pdf (arxiv.org)</a>.<p>意思是强制使用梯度裁剪(clamp)到一个范围会导致不想要的行为,因为本身想要的是让critic满足Lipschitz,所以粗暴地使用了梯度裁剪.<p><img alt=img data-src=https://miro.medium.com/v2/resize:fit:700/1*NVBkG5vDwwz-1ad-zwxddA.jpeg><p>需要使得判别器f的梯度范数处处小于1,WGAN-GP证明了需要使得在真实数据和生成的数据之间插值的点对于f应该具有1的梯度范数。<p>范数有多种.<img alt=image-20230917103610368 data-src=https://img1.imgtp.com/2023/09/17/ZwMIQPEx.png><p><img alt=img data-src=https://miro.medium.com/v2/resize:fit:700/1*TErKpfBkilA-G24FNFg0FA.png><p>所以需要使用到梯度,而且是对于输入的梯度,通过限制输入的梯度,而不是WGAN中限制每次模型的weight和bias的值.<a href=https://pytorch.org/docs/stable/generated/torch.autograd.grad.html rel=noopener target=_blank>torch.autograd.grad — PyTorch 2.0 documentation</a>在pytorch中使用autograd.grad计算<figure class="highlight python"><table><tr><td class=gutter><pre><span class=line>1</span><br><span class=line>2</span><br><span class=line>3</span><br><span class=line>4</span><br><span class=line>5</span><br><span class=line>6</span><br><span class=line>7</span><br><span class=line>8</span><br></pre><td class=code><pre><span class=line><span class=keyword>import</span> torch</span><br><span class=line><span class=keyword>from</span> torch <span class=keyword>import</span> autograd</span><br><span class=line><span class=comment># demo</span></span><br><span class=line>x = torch.rand(<span class=number>3</span>, <span class=number>4</span>)</span><br><span class=line>x.requires_grad_()</span><br><span class=line>y = torch.<span class=built_in>sum</span>(x**<span class=number>2</span>)</span><br><span class=line>grads = autograd.grad(outputs=y, inputs=x,create_graph=<span class=literal>True</span>)</span><br><span class=line><span class=built_in>print</span>(grads)</span><br></pre></table></figure><p><img alt data-src=https://miro.medium.com/v2/resize:fit:700/1*r8472Sg5fDJ1XKQPUbRC4Q.png><p><img alt=img data-src=https://miro.medium.com/v2/resize:fit:700/1*gi2isFNxtXE-pNiQ_CrZ8w.jpeg><figure class="highlight python"><table><tr><td class=gutter><pre><span class=line>1</span><br><span class=line>2</span><br><span class=line>3</span><br><span class=line>4</span><br><span class=line>5</span><br><span class=line>6</span><br><span class=line>7</span><br><span class=line>8</span><br><span class=line>9</span><br></pre><td class=code><pre><span class=line><span class=comment># Gradient Penalty (e.g. gradients w.r.t x_penalty)</span></span><br><span class=line>eps = torch.rand(batch_size, <span class=number>1</span>, <span class=number>1</span>, <span class=number>1</span>).to(DEVICE) <span class=comment># x shape: (64, 1, 28, 28)</span></span><br><span class=line>x_penalty = eps*x + (<span class=number>1</span>-eps)*x_fake</span><br><span class=line>x_penalty = x_penalty.view(x_penalty.size(<span class=number>0</span>), -<span class=number>1</span>)  <span class=comment># n 1 28*28</span></span><br><span class=line>p_outputs = D(x_penalty, y)  <span class=comment># N,1</span></span><br><span class=line>xp_grad = autograd.grad(outputs=p_outputs, inputs=x_penalty, grad_outputs=D_labels, <span class=comment># N 1</span></span><br><span class=line>                        create_graph=<span class=literal>True</span>, retain_graph=<span class=literal>True</span>, only_inputs=<span class=literal>True</span>)</span><br><span class=line><span class=built_in>print</span>(xp_grad)</span><br><span class=line>grad_penalty = p_coeff * torch.mean(torch.<span class=built_in>pow</span>(torch.norm(xp_grad[<span class=number>0</span>], <span class=number>2</span>, <span class=number>1</span>) - <span class=number>1</span>, <span class=number>2</span>))</span><br></pre></table></figure><p>对于辨别器,WGAN一般叫做critic,损失函数,而生成器依旧是<figure class="highlight python"><table><tr><td class=gutter><pre><span class=line>1</span><br><span class=line>2</span><br><span class=line>3</span><br><span class=line>4</span><br><span class=line>5</span><br><span class=line>6</span><br></pre><td class=code><pre><span class=line><span class=comment># Wasserstein loss</span></span><br><span class=line>x_outputs = D(x, y)</span><br><span class=line>z_outputs = D(x_fake, y)</span><br><span class=line>D_x_loss = torch.mean(x_outputs)</span><br><span class=line>D_z_loss = torch.mean(z_outputs)</span><br><span class=line>D_loss = D_z_loss - D_x_loss + grad_penalty</span><br></pre></table></figure><p>此外不使用BN,批次标准化会在同一批次中的样本之间创建相关性。它<strong>影响了梯度惩罚的有效性</strong>，实验证实了这一点。<p>一般可以使用Layer Normalization也就是对单个样本进行归一化.<h3 id=Conditional-GAN><a title="*Conditional GAN" class=headerlink href=#Conditional-GAN></a>*Conditional GAN</h3><p>某种程度上里程碑作品,能够控制GAN生成的东西了,通过添加label,也就是condition.<p>例如在MNIST数据上,增加数字对应的label的one-hot变量,cat到图像数据上.<figure class="highlight python"><table><tr><td class=gutter><pre><span class=line>1</span><br><span class=line>2</span><br><span class=line>3</span><br><span class=line>4</span><br><span class=line>5</span><br><span class=line>6</span><br><span class=line>7</span><br><span class=line>8</span><br><span class=line>9</span><br><span class=line>10</span><br><span class=line>11</span><br><span class=line>12</span><br><span class=line>13</span><br><span class=line>14</span><br><span class=line>15</span><br><span class=line>16</span><br><span class=line>17</span><br><span class=line>18</span><br><span class=line>19</span><br><span class=line>20</span><br><span class=line>21</span><br><span class=line>22</span><br><span class=line>23</span><br><span class=line>24</span><br><span class=line>25</span><br><span class=line>26</span><br><span class=line>27</span><br><span class=line>28</span><br><span class=line>29</span><br><span class=line>30</span><br><span class=line>31</span><br><span class=line>32</span><br><span class=line>33</span><br><span class=line>34</span><br><span class=line>35</span><br><span class=line>36</span><br><span class=line>37</span><br></pre><td class=code><pre><span class=line><span class=keyword>for</span> epoch <span class=keyword>in</span> <span class=built_in>range</span>(max_epoch):</span><br><span class=line>    <span class=keyword>for</span> idx, (images, labels) <span class=keyword>in</span> <span class=built_in>enumerate</span>(data_loader):</span><br><span class=line>        <span class=comment># Training Discriminator</span></span><br><span class=line>        x = images.to(DEVICE)</span><br><span class=line>        y = labels.view(batch_size, <span class=number>1</span>)</span><br><span class=line>        y = to_onehot(y).to(DEVICE) <span class=comment># condition</span></span><br><span class=line>        x_outputs = D(x, y)</span><br><span class=line>        D_x_loss = criterion(x_outputs, D_labels)</span><br><span class=line></span><br><span class=line>        z = torch.randn(batch_size, n_noise).to(DEVICE)</span><br><span class=line>        z_outputs = D(G(z, y), y)</span><br><span class=line>        D_z_loss = criterion(z_outputs, D_fakes)</span><br><span class=line>        D_loss = D_x_loss + D_z_loss</span><br><span class=line>        </span><br><span class=line>        D.zero_grad()</span><br><span class=line>        D_loss.backward()</span><br><span class=line>        D_opt.step()</span><br><span class=line>        </span><br><span class=line>        <span class=keyword>if</span> step % n_critic == <span class=number>0</span>:</span><br><span class=line>            <span class=comment># Training Generator</span></span><br><span class=line>            z = torch.randn(batch_size, n_noise).to(DEVICE)</span><br><span class=line>            z_outputs = D(G(z, y), y)</span><br><span class=line>            G_loss = criterion(z_outputs, D_labels)</span><br><span class=line></span><br><span class=line>            G.zero_grad()</span><br><span class=line>            G_loss.backward()</span><br><span class=line>            G_opt.step()</span><br><span class=line>        </span><br><span class=line>        <span class=keyword>if</span> step % <span class=number>500</span> == <span class=number>0</span>:</span><br><span class=line>            <span class=built_in>print</span>(<span class=string>'Epoch: {}/{}, Step: {}, D Loss: {}, G Loss: {}'</span>.<span class=built_in>format</span>(epoch, max_epoch, step, D_loss.item(), G_loss.item()))</span><br><span class=line>        </span><br><span class=line>        <span class=keyword>if</span> step % <span class=number>1000</span> == <span class=number>0</span>:</span><br><span class=line>            G.<span class=built_in>eval</span>()</span><br><span class=line>            img = get_sample_image(G, n_noise)</span><br><span class=line>            imsave(<span class=string>'samples/{}_step{}.jpg'</span>.<span class=built_in>format</span>(MODEL_NAME, <span class=built_in>str</span>(step).zfill(<span class=number>3</span>)), img, cmap=<span class=string>'gray'</span>)</span><br><span class=line>            G.train()</span><br><span class=line>        step += <span class=number>1</span></span><br></pre></table></figure><figure class="highlight python"><table><tr><td class=gutter><pre><span class=line>1</span><br><span class=line>2</span><br><span class=line>3</span><br><span class=line>4</span><br><span class=line>5</span><br><span class=line>6</span><br><span class=line>7</span><br><span class=line>8</span><br><span class=line>9</span><br><span class=line>10</span><br><span class=line>11</span><br><span class=line>12</span><br><span class=line>13</span><br><span class=line>14</span><br><span class=line>15</span><br><span class=line>16</span><br><span class=line>17</span><br><span class=line>18</span><br><span class=line>19</span><br><span class=line>20</span><br><span class=line>21</span><br><span class=line>22</span><br><span class=line>23</span><br><span class=line>24</span><br><span class=line>25</span><br><span class=line>26</span><br><span class=line>27</span><br><span class=line>28</span><br><span class=line>29</span><br><span class=line>30</span><br><span class=line>31</span><br><span class=line>32</span><br><span class=line>33</span><br><span class=line>34</span><br><span class=line>35</span><br><span class=line>36</span><br><span class=line>37</span><br><span class=line>38</span><br><span class=line>39</span><br><span class=line>40</span><br><span class=line>41</span><br><span class=line>42</span><br><span class=line>43</span><br><span class=line>44</span><br><span class=line>45</span><br><span class=line>46</span><br><span class=line>47</span><br><span class=line>48</span><br></pre><td class=code><pre><span class=line><span class=class><span class=keyword>class</span> <span class=title>Generator</span>(<span class=params>nn.Module</span>):</span></span><br><span class=line>    <span class=string>"""</span></span><br><span class=line><span class=string>        Simple Generator w/ MLP</span></span><br><span class=line><span class=string>    """</span></span><br><span class=line>    <span class=function><span class=keyword>def</span> <span class=title>__init__</span>(<span class=params>self, input_size=<span class=number>100</span>, condition_size=<span class=number>10</span>, num_classes=<span class=number>784</span></span>):</span></span><br><span class=line>        <span class=built_in>super</span>(Generator, self).__init__()</span><br><span class=line>        self.layer = nn.Sequential(</span><br><span class=line>            nn.Linear(input_size+condition_size, <span class=number>128</span>),</span><br><span class=line>            nn.LeakyReLU(<span class=number>0.2</span>),</span><br><span class=line>            nn.Linear(<span class=number>128</span>, <span class=number>256</span>),</span><br><span class=line>            nn.BatchNorm1d(<span class=number>256</span>),</span><br><span class=line>            nn.LeakyReLU(<span class=number>0.2</span>),</span><br><span class=line>            nn.Linear(<span class=number>256</span>, <span class=number>512</span>),</span><br><span class=line>            nn.BatchNorm1d(<span class=number>512</span>),</span><br><span class=line>            nn.LeakyReLU(<span class=number>0.2</span>),</span><br><span class=line>            nn.Linear(<span class=number>512</span>, <span class=number>1024</span>),</span><br><span class=line>            nn.BatchNorm1d(<span class=number>1024</span>),</span><br><span class=line>            nn.LeakyReLU(<span class=number>0.2</span>),</span><br><span class=line>            nn.Linear(<span class=number>1024</span>, num_classes),</span><br><span class=line>            nn.Tanh()</span><br><span class=line>        )</span><br><span class=line>        </span><br><span class=line>    <span class=function><span class=keyword>def</span> <span class=title>forward</span>(<span class=params>self, x, c</span>):</span></span><br><span class=line>        x, c = x.view(x.size(<span class=number>0</span>), -<span class=number>1</span>), c.view(c.size(<span class=number>0</span>), -<span class=number>1</span>).<span class=built_in>float</span>()</span><br><span class=line>        v = torch.cat((x, c), <span class=number>1</span>) <span class=comment># v: [input, label] concatenated vector</span></span><br><span class=line>        y_ = self.layer(v)</span><br><span class=line>        y_ = y_.view(x.size(<span class=number>0</span>), <span class=number>1</span>, <span class=number>28</span>, <span class=number>28</span>)</span><br><span class=line>        <span class=keyword>return</span> y_</span><br><span class=line><span class=class><span class=keyword>class</span> <span class=title>Discriminator</span>(<span class=params>nn.Module</span>):</span></span><br><span class=line>    <span class=string>"""</span></span><br><span class=line><span class=string>        Simple Discriminator w/ MLP</span></span><br><span class=line><span class=string>    """</span></span><br><span class=line>    <span class=function><span class=keyword>def</span> <span class=title>__init__</span>(<span class=params>self, input_size=<span class=number>784</span>, condition_size=<span class=number>10</span>, num_classes=<span class=number>1</span></span>):</span></span><br><span class=line>        <span class=built_in>super</span>(Discriminator, self).__init__()</span><br><span class=line>        self.layer = nn.Sequential(</span><br><span class=line>            nn.Linear(input_size+condition_size, <span class=number>512</span>),</span><br><span class=line>            nn.LeakyReLU(<span class=number>0.2</span>),</span><br><span class=line>            nn.Linear(<span class=number>512</span>, <span class=number>256</span>),</span><br><span class=line>            nn.LeakyReLU(<span class=number>0.2</span>),</span><br><span class=line>            nn.Linear(<span class=number>256</span>, num_classes),</span><br><span class=line>            nn.Sigmoid(),</span><br><span class=line>        )</span><br><span class=line>    </span><br><span class=line>    <span class=function><span class=keyword>def</span> <span class=title>forward</span>(<span class=params>self, x, c</span>):</span>        </span><br><span class=line>        x, c = x.view(x.size(<span class=number>0</span>), -<span class=number>1</span>), c.view(c.size(<span class=number>0</span>), -<span class=number>1</span>).<span class=built_in>float</span>()</span><br><span class=line>        v = torch.cat((x, c), <span class=number>1</span>) <span class=comment># v: [input, label] concatenated vector</span></span><br><span class=line>        y_ = self.layer(v)</span><br><span class=line>        <span class=keyword>return</span> y_</span><br></pre></table></figure><h3 id=InfoGAN><a class=headerlink href=#InfoGAN title=InfoGAN></a>InfoGAN</h3><p>提出利用互信息诱导潜变量.该方法将信息最大化引入到标准GAN网络中。<p><a href=https://medium.com/mlearning-ai/infogan-interpretable-representation-learning-to-distangle-data-unsupervised-33a4089d7c09 rel=noopener target=_blank>InfoGAN: Interpretable Representation Learning to Distangle Data Unsupervised | by Renee LIN | MLearning.ai | Medium</a><p>期望有良好的特征解耦关系.<blockquote><p>GAN公式使用简单的连续输入噪声矢量z，同时对G使用噪声的方式没有限制。因此，噪声可能会被生成器以高度纠缠(entangled)的方式使用，导致 z 的各个维度与数据的语义特征不对应。<p>在本文中，将输入噪声向量分解为两部分，而不是使用单个非结构化噪声向量：（i）z，它被视为不可压缩噪声源;（ii） c，我们称之为潜在代码，将针对数据分布的显著结构化语义特征。</blockquote><script type="math/tex; mode=display">
+I(X;Y)=H(X)-H(X|Y)=H(Y)-H(Y|X)</script><p>引入互信息,在G输入时加入一个潜变量c,潜在代码 C 和生成器分布 G(z,c) 之间应该有高度的互信息。因此I(c;G(z,c)) 应该很高。给定任何 x ∼ P~G~(x),希望 P~G~（c|x） 有一个较小的熵。换句话说，潜在代码c中的信息不应该在生成过程中丢失。</p><script type="math/tex; mode=display">
+\operatorname*{min}_{G}\operatorname*{max}_{D}V_{I}(D,G)=V(D,G)-\lambda I(c;G(z,c))</script><p>然而上面互信息的计算涉及后验概率分布P(c|x)，而后者在实际中是很难获取的，所以需要定义一个辅助性的概率分布Q(c|x)，采用Variational Information Maximization对互信息进行下界拟合.</p><script type="math/tex; mode=display">
 \begin{aligned}
 I(c;G(z,c))& =H(c)-H(c|G(z,c))  \\
 &=\mathbb{E}_{x\sim G(z,c)}[\mathbb{E}_{c^{\prime}\sim P(c|x)}[\log P(c^{\prime}|x)]]+H(c) \\
 &=\mathbb{E}_{x\sim G(z,c)}[\underbrace{D_{\mathrm{KL}}(P(\cdot|x)\parallel Q(\cdot|x))}_{\geq0}+\mathbb{E}_{c^{\prime}\sim P(c|x)}[\log Q(c^{\prime}|x)]]+H(c) \\
 &\geq\mathbb{E}_{x\sim G(z,c)}[\mathbb{E}_{c^{\prime}\sim P(c|x)}[\log Q(c^{\prime}|x)]]+H(c)
-\end{aligned}</script><p>这样互信息计算就能确定最小值,继续推导有</p>
-<script type="math/tex; mode=display">
+\end{aligned}</script><p>这样互信息计算就能确定最小值,继续推导有</p><script type="math/tex; mode=display">
 \begin{aligned}
 L_{I}(G,Q)& =E_{c\sim P(c),x\sim G(z,c)}[\log Q(c|x)]+H(c)  \\
 &=E_{x\sim G(z,c)}[\mathbb{E}_{c^{\prime}\sim P(c|x)}[\log Q(c^{\prime}|x)]]+H(c) \\
 &\leq I(c;G(z,c))
-\end{aligned}</script><p>最后目标函数为</p>
-<p><img data-src="https://pic4.zhimg.com/80/v2-ede0624e4acb54575483852435d0ec2b_720w.webp" alt="img"></p>
-<p><img data-src="https://miro.medium.com/v2/resize:fit:543/1*c0wSI0WJR9-yagc0ruFGGg.png" alt="img" style="zoom: 67%;" /></p>
-<p>z,c均为采样得到,z依旧是正态分布采样,c由两部分组成,一部分是离散分布另一部分是连续分布.论文中使用Categorical与Unif分布,是离散均匀分布与连续均匀分布.</p>
-<p><img data-src="https://img1.imgtp.com/2023/09/18/TvDtnXUu.png" alt="image-20230918102341583" style="zoom:67%;" /></p>
-<p>在MNIST数据集上,比如使用c~1~作为离散变量控制生成的数字的类型,其他的c~2~和c~3~作为连续变量控制其他.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sample_noise</span>(<span class="params">batch_size, n_noise, n_c_discrete, n_c_continuous, label=<span class="literal">None</span>, supervised=<span class="literal">False</span></span>):</span></span><br><span class="line">    z = torch.randn(batch_size, n_noise).to(DEVICE) <span class="comment">#正态分布 潜变量 与VAE的中间变量类似. bottleneck</span></span><br><span class="line">    <span class="comment"># 离散分布 控制数字类型也就是类别 如果supervised 会根据label的值</span></span><br><span class="line">    <span class="keyword">if</span> supervised:</span><br><span class="line">        c_discrete = to_onehot(label).to(DEVICE) <span class="comment"># (B,10)</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="comment"># 否则随机离散均匀生成</span></span><br><span class="line">        c_discrete = to_onehot(torch.LongTensor(batch_size, <span class="number">1</span>).random_(<span class="number">0</span>, n_c_discrete)).to(DEVICE) <span class="comment"># (B,10)</span></span><br><span class="line">    <span class="comment"># 连续分布 控制其他属性 </span></span><br><span class="line">    c_continuous = torch.zeros(batch_size, n_c_continuous).uniform_(-<span class="number">1</span>, <span class="number">1</span>).to(DEVICE) <span class="comment"># (B,2)</span></span><br><span class="line">    c = torch.cat((c_discrete.<span class="built_in">float</span>(), c_continuous), <span class="number">1</span>) <span class="comment">#c (B,12)</span></span><br><span class="line">    <span class="keyword">return</span> z, c</span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment"># Training Discriminator</span></span><br><span class="line">x = images.to(DEVICE)</span><br><span class="line">x_outputs, _, = D(x)</span><br><span class="line">D_x_loss = bce_loss(x_outputs, D_labels)</span><br><span class="line"></span><br><span class="line">z, c = sample_noise(batch_size, n_noise, n_c_discrete, n_c_continuous, label=labels, supervised=<span class="literal">True</span>)</span><br><span class="line">z_outputs, _, = D(G(z, c))</span><br><span class="line">D_z_loss = bce_loss(z_outputs, D_fakes)</span><br><span class="line">D_loss = D_x_loss + D_z_loss</span><br><span class="line"></span><br><span class="line">D_opt.zero_grad()</span><br><span class="line">D_loss.backward()</span><br><span class="line">D_opt.step()</span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">log_gaussian</span>(<span class="params">c, mu, var</span>):</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    criterion for Q(condition classifier)</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="keyword">return</span> -((c - mu)**<span class="number">2</span>)/(<span class="number">2</span>*var+<span class="number">1e-8</span>) - <span class="number">0.5</span>*torch.log(<span class="number">2</span>*np.pi*var+<span class="number">1e-8</span>)</span><br><span class="line">    </span><br><span class="line"> <span class="comment"># Training Generator</span></span><br><span class="line">z, c = sample_noise(batch_size, n_noise, n_c_discrete, n_c_continuous, label=labels, supervised=<span class="literal">True</span>)</span><br><span class="line">c_discrete_label = torch.<span class="built_in">max</span>(c[:, :-<span class="number">2</span>], <span class="number">1</span>)[<span class="number">1</span>].view(-<span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">z_outputs, features = D(G(z, c)) <span class="comment"># (B,1), (B,10), (B,4)</span></span><br><span class="line">c_discrete_out, cc_mu, cc_var = Q(features)</span><br><span class="line"></span><br><span class="line">G_loss = bce_loss(z_outputs, D_labels)</span><br><span class="line">Q_loss_discrete = ce_loss(c_discrete_out, c_discrete_label.view(-<span class="number">1</span>))</span><br><span class="line">Q_loss_continuous = -torch.mean(torch.<span class="built_in">sum</span>(log_gaussian(c[:, -<span class="number">2</span>:], cc_mu, cc_var), <span class="number">1</span>)) <span class="comment"># N(x | mu,var) -&gt; (B, 2) -&gt; (,1)</span></span><br><span class="line">mutual_info_loss = Q_loss_discrete + Q_loss_continuous*<span class="number">0.1</span></span><br><span class="line"></span><br><span class="line">GnQ_loss = G_loss + mutual_info_loss</span><br><span class="line"></span><br><span class="line">G_opt.zero_grad()</span><br><span class="line">GnQ_loss.backward()</span><br><span class="line">G_opt.step()</span><br></pre></td></tr></table></figure>
-<p>离散分布的c求损失使用交叉熵,利用一个Q网络,输入是D的倒数第二层输出,得到离散输出与连续输出的均值和logV. 相当于利用Q的输出与D的倒数第二层输出计算损失,判断在生成过程中是否有损失.</p>
-<p>其中log_gaussian是在计算log(q(x)),看来还是要学好数理统计和矩阵论才行.</p>
-<h3 id="BIGGAN"><a href="#BIGGAN" class="headerlink" title="BIGGAN"></a>BIGGAN</h3><h3 id="proGAN"><a href="#proGAN" class="headerlink" title="proGAN"></a>proGAN</h3><h3 id="StyleGAN"><a href="#StyleGAN" class="headerlink" title="StyleGAN"></a>StyleGAN</h3><p>与cycleGAN都是比较重要的jia</p>
-<h3 id="CycleGAN"><a href="#CycleGAN" class="headerlink" title="CycleGAN"></a>CycleGAN</h3><h3 id="SAGAN"><a href="#SAGAN" class="headerlink" title="SAGAN"></a>SAGAN</h3><h3 id="TelDiGAN"><a href="#TelDiGAN" class="headerlink" title="TelDiGAN"></a>TelDiGAN</h3><h3 id="SRGAN"><a href="#SRGAN" class="headerlink" title="SRGAN"></a>SRGAN</h3><h2 id="evaluate-GAN"><a href="#evaluate-GAN" class="headerlink" title="evaluate GAN"></a>evaluate GAN</h2><p>通过FID等方法(使用预训练模型看分类)(quality)</p>
-<p>但无法解决model collapse问题</p>
-<p>model drop问题(diversity),平均每张图像的分布,要求均匀.</p>
-<p>Inception Score(IS),quality高,diversity大</p>
-<p>FID(Frechet Inception)</p>
-<p>不使用分类器后得到的结果,使用feature层提取的结果,计算生成与实际feature层shu’chu’d</p>
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ol>
-<li><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/44926155">盘点各种GAN及资源整理（1） - 知乎 (zhihu.com)</a></p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://github.com/soumith/ganhacks">soumith/ganhacks: starter from “How to Train a GAN?” at NIPS2016 (github.com)</a></p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://github.com/Yangyangii/GAN-Tutorial/tree/master">Yangyangii/GAN-Tutorial: Simple Implementation of many GAN models with PyTorch. (github.com)</a> 在一些数据集上的GAN</p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://github.com/eriklindernoren/PyTorch-GAN">eriklindernoren/PyTorch-GAN: PyTorch implementations of Generative Adversarial Networks. (github.com)</a>pytorch实现的GAN</p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://github.com/ccc013/GAN_Study">ccc013/GAN_Study: 学习GAN的笔记和代码 (github.com)</a></p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://github.com/torchgan/torchgan">torchgan/torchgan: Research Framework for easy and efficient training of GANs based on Pytorch (github.com)</a> pytorch实现的库</p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://github.com/tensorflow/models/tree/master/research/gan">File not found (github.com)</a>tensorflow实现的GAN</p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://github.com/eriklindernoren/Keras-GAN">eriklindernoren/Keras-GAN: Keras implementations of Generative Adversarial Networks. (github.com)</a>keras实现的GAN</p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://github.com/zhangqianhui/AdversarialNetsPapers">zhangqianhui/AdversarialNetsPapers: Awesome paper list with code about generative adversarial nets (github.com)</a>GAN论文与代码</p>
-</li>
-</ol>
-<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
-    </div>
-
-    
-    
-    
-    <div>
-	
-     <div>
-    
-        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
-    
-</div>
-     
-   </div>
-      
-  <div class="popular-posts-header">相关文章</div>
-  <ul class="popular-posts">
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\2022\04\30\GAN学习\" rel="bookmark">GAN学习</a></div>
-    </li>
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\2022\06\14\animeGAN\" rel="bookmark">animeGAN</a></div>
-    </li>
-  </ul>
-
-        <div class="reward-container">
-  <div>感谢阅读.</div>
-  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
-    打赏
-  </button>
-  <div id="qr" style="display: none;">
-      
-      <div style="display: inline-block;">
-        <img src="/images/wechatpay.png" alt="Sekyoro 微信支付">
-        <p>微信支付</p>
-      </div>
-
-  </div>
-</div>
-
-        
-
-<div>
-<ul class="post-copyright">
-  <li class="post-copyright-author">
-    <strong>本文作者： </strong>Sekyoro
-  </li>
-  <li class="post-copyright-link">
-    <strong>本文链接：</strong>
-    <a href="https://www.sekyoro.top/2023/08/11/GAN%E6%B7%B1%E5%85%A5%E5%AD%A6%E4%B9%A0/" title="GAN深入学习">https://www.sekyoro.top/2023/08/11/GAN深入学习/</a>
-  </li>
-  <li class="post-copyright-license">
-    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
-  </li>
-</ul>
-</div>
-
-        
-
-  <div class="followme">
-    <p>欢迎关注我的其它发布渠道</p>
-
-    <div class="social-list">
-
-        <div class="social-item">
-          <a target="_blank" class="social-link" href="/images/wxqrcode.png">
-            <span class="icon">
-              <i class="fab fa-weixin"></i>
-            </span>
-
-            <span class="label">WeChat</span>
-          </a>
-        </div>
-
-        <div class="social-item">
-          <a target="_blank" class="social-link" href="/images/website.png">
-            <span class="icon">
-              <i class="fa fa-user"></i>
-            </span>
-
-            <span class="label">PersonalWebsite</span>
-          </a>
-        </div>
-
-        <div class="social-item">
-          <a target="_blank" class="social-link" href="https://my-astro-git-main-drowning-in-codes.vercel.app">
-            <span class="icon">
-              <i class="fas fa-share"></i>
-            </span>
-
-            <span class="label">杂鱼分享</span>
-          </a>
-        </div>
-
-        <div class="social-item">
-          <a target="_blank" class="social-link" href="/atom.xml">
-            <span class="icon">
-              <i class="fa fa-rss"></i>
-            </span>
-
-            <span class="label">RSS</span>
-          </a>
-        </div>
-    </div>
-  </div>
-
-
-      <footer class="post-footer">
-          
-          <div class="post-tags">
-              <a href="/tags/GAN/" rel="tag"><i class="fa fa-tag"></i> GAN</a>
-          </div>
-
-        
-
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/2023/08/04/tailwind%E9%80%9F%E6%88%90/" rel="prev" title="tailwind速成">
-      <i class="fa fa-chevron-left"></i> tailwind速成
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/2023/08/12/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86(%E4%BA%8C)/" rel="next" title="深度学习基础知识(二)">
-      深度学习基础知识(二) <i class="fa fa-chevron-right"></i>
-    </a></div>
-    </div>
-      </footer>
-    
-  </article>
-  
-  
-  
-
-
-
-          </div>
-		  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4034523802263123"
-     crossorigin="anonymous"></script>
-<!-- 评论区 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-4034523802263123"
-     data-ad-slot="6333657257"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-          
-    
-  <div class="comments">
-    <div id="lv-container" data-id="city" data-uid="MTAyMC81MzE5Ny8yOTY3Mg=="></div>
-  </div>
-  
-
-<script>
-  window.addEventListener('tabs:register', () => {
+\end{aligned}</script><p>最后目标函数为<p><img alt=img data-src=https://pic4.zhimg.com/80/v2-ede0624e4acb54575483852435d0ec2b_720w.webp><p><img style="zoom: 67%;" alt=img data-src=https://miro.medium.com/v2/resize:fit:543/1*c0wSI0WJR9-yagc0ruFGGg.png><p>z,c均为采样得到,z依旧是正态分布采样,c由两部分组成,一部分是离散分布另一部分是连续分布.论文中使用Categorical与Unif分布,是离散均匀分布与连续均匀分布.<p><img alt=image-20230918102341583 data-src=https://img1.imgtp.com/2023/09/18/TvDtnXUu.png style=zoom:67%;><p>在MNIST数据集上,比如使用c~1~作为离散变量控制生成的数字的类型,其他的c~2~和c~3~作为连续变量控制其他.<figure class="highlight python"><table><tr><td class=gutter><pre><span class=line>1</span><br><span class=line>2</span><br><span class=line>3</span><br><span class=line>4</span><br><span class=line>5</span><br><span class=line>6</span><br><span class=line>7</span><br><span class=line>8</span><br><span class=line>9</span><br><span class=line>10</span><br><span class=line>11</span><br><span class=line>12</span><br></pre><td class=code><pre><span class=line><span class=function><span class=keyword>def</span> <span class=title>sample_noise</span>(<span class=params>batch_size, n_noise, n_c_discrete, n_c_continuous, label=<span class=literal>None</span>, supervised=<span class=literal>False</span></span>):</span></span><br><span class=line>    z = torch.randn(batch_size, n_noise).to(DEVICE) <span class=comment>#正态分布 潜变量 与VAE的中间变量类似. bottleneck</span></span><br><span class=line>    <span class=comment># 离散分布 控制数字类型也就是类别 如果supervised 会根据label的值</span></span><br><span class=line>    <span class=keyword>if</span> supervised:</span><br><span class=line>        c_discrete = to_onehot(label).to(DEVICE) <span class=comment># (B,10)</span></span><br><span class=line>    <span class=keyword>else</span>:</span><br><span class=line>        <span class=comment># 否则随机离散均匀生成</span></span><br><span class=line>        c_discrete = to_onehot(torch.LongTensor(batch_size, <span class=number>1</span>).random_(<span class=number>0</span>, n_c_discrete)).to(DEVICE) <span class=comment># (B,10)</span></span><br><span class=line>    <span class=comment># 连续分布 控制其他属性 </span></span><br><span class=line>    c_continuous = torch.zeros(batch_size, n_c_continuous).uniform_(-<span class=number>1</span>, <span class=number>1</span>).to(DEVICE) <span class=comment># (B,2)</span></span><br><span class=line>    c = torch.cat((c_discrete.<span class=built_in>float</span>(), c_continuous), <span class=number>1</span>) <span class=comment>#c (B,12)</span></span><br><span class=line>    <span class=keyword>return</span> z, c</span><br></pre></table></figure><figure class="highlight python"><table><tr><td class=gutter><pre><span class=line>1</span><br><span class=line>2</span><br><span class=line>3</span><br><span class=line>4</span><br><span class=line>5</span><br><span class=line>6</span><br><span class=line>7</span><br><span class=line>8</span><br><span class=line>9</span><br><span class=line>10</span><br><span class=line>11</span><br><span class=line>12</span><br><span class=line>13</span><br></pre><td class=code><pre><span class=line> <span class=comment># Training Discriminator</span></span><br><span class=line>x = images.to(DEVICE)</span><br><span class=line>x_outputs, _, = D(x)</span><br><span class=line>D_x_loss = bce_loss(x_outputs, D_labels)</span><br><span class=line></span><br><span class=line>z, c = sample_noise(batch_size, n_noise, n_c_discrete, n_c_continuous, label=labels, supervised=<span class=literal>True</span>)</span><br><span class=line>z_outputs, _, = D(G(z, c))</span><br><span class=line>D_z_loss = bce_loss(z_outputs, D_fakes)</span><br><span class=line>D_loss = D_x_loss + D_z_loss</span><br><span class=line></span><br><span class=line>D_opt.zero_grad()</span><br><span class=line>D_loss.backward()</span><br><span class=line>D_opt.step()</span><br></pre></table></figure><figure class="highlight python"><table><tr><td class=gutter><pre><span class=line>1</span><br><span class=line>2</span><br><span class=line>3</span><br><span class=line>4</span><br><span class=line>5</span><br><span class=line>6</span><br><span class=line>7</span><br><span class=line>8</span><br><span class=line>9</span><br><span class=line>10</span><br><span class=line>11</span><br><span class=line>12</span><br><span class=line>13</span><br><span class=line>14</span><br><span class=line>15</span><br><span class=line>16</span><br><span class=line>17</span><br><span class=line>18</span><br><span class=line>19</span><br><span class=line>20</span><br><span class=line>21</span><br><span class=line>22</span><br><span class=line>23</span><br></pre><td class=code><pre><span class=line><span class=function><span class=keyword>def</span> <span class=title>log_gaussian</span>(<span class=params>c, mu, var</span>):</span></span><br><span class=line><span class=string>"""</span></span><br><span class=line><span class=string>    criterion for Q(condition classifier)</span></span><br><span class=line><span class=string>"""</span></span><br><span class=line><span class=keyword>return</span> -((c - mu)**<span class=number>2</span>)/(<span class=number>2</span>*var+<span class=number>1e-8</span>) - <span class=number>0.5</span>*torch.log(<span class=number>2</span>*np.pi*var+<span class=number>1e-8</span>)</span><br><span class=line>    </span><br><span class=line> <span class=comment># Training Generator</span></span><br><span class=line>z, c = sample_noise(batch_size, n_noise, n_c_discrete, n_c_continuous, label=labels, supervised=<span class=literal>True</span>)</span><br><span class=line>c_discrete_label = torch.<span class=built_in>max</span>(c[:, :-<span class=number>2</span>], <span class=number>1</span>)[<span class=number>1</span>].view(-<span class=number>1</span>, <span class=number>1</span>)</span><br><span class=line></span><br><span class=line>z_outputs, features = D(G(z, c)) <span class=comment># (B,1), (B,10), (B,4)</span></span><br><span class=line>c_discrete_out, cc_mu, cc_var = Q(features)</span><br><span class=line></span><br><span class=line>G_loss = bce_loss(z_outputs, D_labels)</span><br><span class=line>Q_loss_discrete = ce_loss(c_discrete_out, c_discrete_label.view(-<span class=number>1</span>))</span><br><span class=line>Q_loss_continuous = -torch.mean(torch.<span class=built_in>sum</span>(log_gaussian(c[:, -<span class=number>2</span>:], cc_mu, cc_var), <span class=number>1</span>)) <span class=comment># N(x | mu,var) -> (B, 2) -> (,1)</span></span><br><span class=line>mutual_info_loss = Q_loss_discrete + Q_loss_continuous*<span class=number>0.1</span></span><br><span class=line></span><br><span class=line>GnQ_loss = G_loss + mutual_info_loss</span><br><span class=line></span><br><span class=line>G_opt.zero_grad()</span><br><span class=line>GnQ_loss.backward()</span><br><span class=line>G_opt.step()</span><br></pre></table></figure><p>离散分布的c求损失使用交叉熵,利用一个Q网络,输入是D的倒数第二层输出,得到离散输出与连续输出的均值和logV. 相当于利用Q的输出与D的倒数第二层输出计算损失,判断在生成过程中是否有损失.<p>其中log_gaussian是在计算log(q(x)),看来还是要学好数理统计和矩阵论才行.<h3 id=BIGGAN><a class=headerlink href=#BIGGAN title=BIGGAN></a>BIGGAN</h3><h3 id=proGAN><a class=headerlink href=#proGAN title=proGAN></a>proGAN</h3><h3 id=StyleGAN><a class=headerlink href=#StyleGAN title=StyleGAN></a>StyleGAN</h3><p>与cycleGAN都是比较重要的jia<h3 id=CycleGAN><a class=headerlink href=#CycleGAN title=CycleGAN></a>CycleGAN</h3><h3 id=SAGAN><a class=headerlink href=#SAGAN title=SAGAN></a>SAGAN</h3><h3 id=TelDiGAN><a class=headerlink href=#TelDiGAN title=TelDiGAN></a>TelDiGAN</h3><h3 id=SRGAN><a class=headerlink href=#SRGAN title=SRGAN></a>SRGAN</h3><h2 id=evaluate-GAN><a title="evaluate GAN" class=headerlink href=#evaluate-GAN></a>evaluate GAN</h2><p>通过FID等方法(使用预训练模型看分类)(quality)<p>但无法解决model collapse问题<p>model drop问题(diversity),平均每张图像的分布,要求均匀.<p>Inception Score(IS),quality高,diversity大<p>FID(Frechet Inception)<p>不使用分类器后得到的结果,使用feature层提取的结果,计算生成与实际feature层shu’chu’d<h2 id=参考资料><a class=headerlink href=#参考资料 title=参考资料></a>参考资料</h2><ol><li><p><a href=https://zhuanlan.zhihu.com/p/44926155 rel=noopener target=_blank>盘点各种GAN及资源整理（1） - 知乎 (zhihu.com)</a></p><li><p><a href=https://github.com/soumith/ganhacks rel=noopener target=_blank>soumith/ganhacks: starter from “How to Train a GAN?” at NIPS2016 (github.com)</a></p><li><p><a href=https://github.com/Yangyangii/GAN-Tutorial/tree/master rel=noopener target=_blank>Yangyangii/GAN-Tutorial: Simple Implementation of many GAN models with PyTorch. (github.com)</a> 在一些数据集上的GAN</p><li><p><a href=https://github.com/eriklindernoren/PyTorch-GAN rel=noopener target=_blank>eriklindernoren/PyTorch-GAN: PyTorch implementations of Generative Adversarial Networks. (github.com)</a>pytorch实现的GAN</p><li><p><a href=https://github.com/ccc013/GAN_Study rel=noopener target=_blank>ccc013/GAN_Study: 学习GAN的笔记和代码 (github.com)</a></p><li><p><a href=https://github.com/torchgan/torchgan rel=noopener target=_blank>torchgan/torchgan: Research Framework for easy and efficient training of GANs based on Pytorch (github.com)</a> pytorch实现的库</p><li><p><a href=https://github.com/tensorflow/models/tree/master/research/gan rel=noopener target=_blank>File not found (github.com)</a>tensorflow实现的GAN</p><li><p><a href=https://github.com/eriklindernoren/Keras-GAN rel=noopener target=_blank>eriklindernoren/Keras-GAN: Keras implementations of Generative Adversarial Networks. (github.com)</a>keras实现的GAN</p><li><p><a href=https://github.com/zhangqianhui/AdversarialNetsPapers rel=noopener target=_blank>zhangqianhui/AdversarialNetsPapers: Awesome paper list with code about generative adversarial nets (github.com)</a>GAN论文与代码</p></ol><link href=/css/spoiler.css rel=stylesheet><script async src=/js/spoiler.js></script></div><div><div><div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div></div></div><div class=popular-posts-header>相关文章</div><ul class=popular-posts><li class=popular-posts-item><div class=popular-posts-title><a href=\2022\06\14\animeGAN\ rel=bookmark>animeGAN</a></div><li class=popular-posts-item><div class=popular-posts-title><a href=\2022\04\30\GAN学习\ rel=bookmark>GAN学习</a></div></ul><div class=reward-container><div>感谢阅读.</div><button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">打赏</button><div style="display: none;" id=qr><div style="display: inline-block;"><img alt="Sekyoro 微信支付" src=/images/wechatpay.png><p>微信支付</div></div></div><div><ul class=post-copyright><li class=post-copyright-author><strong>本文作者： </strong>Sekyoro<li class=post-copyright-link><strong>本文链接：</strong> <a href=https://www.sekyoro.top/2023/08/11/GAN%E6%B7%B1%E5%85%A5%E5%AD%A6%E4%B9%A0/ title=GAN深入学习>https://www.sekyoro.top/2023/08/11/GAN深入学习/</a><li class=post-copyright-license><strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href=https://creativecommons.org/licenses/by-nc-sa/4.0/ rel=noopener target=_blank><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</ul></div><div class=followme><p>欢迎关注我的其它发布渠道<div class=social-list><div class=social-item><a class=social-link href=/images/wxqrcode.png target=_blank> <span class=icon> <i class="fab fa-weixin"></i> </span> <span class=label>WeChat</span> </a></div><div class=social-item><a class=social-link href=/images/website.png target=_blank> <span class=icon> <i class="fa fa-user"></i> </span> <span class=label>PersonalWebsite</span> </a></div><div class=social-item><a class=social-link href=https://my-astro-git-main-drowning-in-codes.vercel.app target=_blank> <span class=icon> <i class="fas fa-share"></i> </span> <span class=label>杂鱼分享</span> </a></div><div class=social-item><a class=social-link href=/atom.xml target=_blank> <span class=icon> <i class="fa fa-rss"></i> </span> <span class=label>RSS</span> </a></div></div></div><footer class=post-footer><div class=post-tags><a href=/tags/GAN/ rel=tag><i class="fa fa-tag"></i> GAN</a></div><div class=post-nav><div class=post-nav-item><a href=/2023/08/04/tailwind%E9%80%9F%E6%88%90/ rel=prev title=tailwind速成> <i class="fa fa-chevron-left"></i> tailwind速成 </a></div><div class=post-nav-item><a href=/2023/08/12/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86(%E4%BA%8C)/ rel=next title=深度学习基础知识(二)> 深度学习基础知识(二) <i class="fa fa-chevron-right"></i> </a></div></div></footer></article></div><script async crossorigin=anonymous src=https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4034523802263123></script><!-- 评论区 --><ins class=adsbygoogle data-ad-client=ca-pub-4034523802263123 data-ad-format=auto data-ad-slot=6333657257 data-full-width-responsive=true style=display:block></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script><div class=comments><div data-id=city data-uid=MTAyMC81MzE5Ny8yOTY3Mg== id=lv-container></div></div><script>window.addEventListener('tabs:register', () => {
     let { activeClass } = CONFIG.comments;
     if (CONFIG.comments.storage) {
       activeClass = localStorage.getItem('comments_active') || activeClass;
@@ -697,27 +76,7 @@ L_{I}(G,Q)& =E_{c\sim P(c),x\sim G(z,c)}[\log Q(c|x)]+H(c)  \\
       let commentClass = event.target.classList[1];
       localStorage.setItem('comments_active', commentClass);
     });
-  }
-</script>
-
-        </div>
-          
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
-  </div>
-	
-  <aside class="sidebar">
-    <div class="sidebar-inner">
-      	   
-          <!-- canvas粒子时钟 -->
-          <div style="">
-  <canvas id="canvas" style="width:60%;">当前浏览器不支持canvas，请更换浏览器后再试</canvas>
-</div>
-<script>
-(function(){
+  }</script></div><div class="toggle sidebar-toggle"><span class="toggle-line toggle-line-first"></span><span class="toggle-line toggle-line-middle"></span><span class="toggle-line toggle-line-last"></span></div><aside class=sidebar><div class=sidebar-inner><!-- canvas粒子时钟 --><div><canvas id=canvas style=width:60%;>当前浏览器不支持canvas，请更换浏览器后再试</canvas></div><script>(function(){
 
    var digit=
     [
@@ -975,185 +334,7 @@ if(canvas.getContext){
     },50);
 }
 
-})();
-</script>
-        
-
-<!-- require APlayer -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
-<script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
-<!-- require MetingJS -->
-
-<script src="/js/meting-js.js"></script>
-	  
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          文章目录
-        </li>
-        <li class="sidebar-nav-overview">
-          站点概览
-        </li>
-      </ul>
-	  
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#GAN"><span class="nav-number">1.</span> <span class="nav-text">GAN</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8tensorboard%E8%AE%B0%E5%BD%95%E6%8D%9F%E5%A4%B1"><span class="nav-number">1.1.</span> <span class="nav-text">使用tensorboard记录损失</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8visdom%E5%8F%AF%E8%A7%86%E5%8C%96"><span class="nav-number">1.2.</span> <span class="nav-text">使用visdom可视化</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DCGAN"><span class="nav-number">2.</span> <span class="nav-text">*DCGAN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WGAN"><span class="nav-number">3.</span> <span class="nav-text">*WGAN</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#WGAN-GP"><span class="nav-number">3.1.</span> <span class="nav-text">WGAN-GP</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Conditional-GAN"><span class="nav-number">4.</span> <span class="nav-text">*Conditional GAN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#InfoGAN"><span class="nav-number">5.</span> <span class="nav-text">InfoGAN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BIGGAN"><span class="nav-number">6.</span> <span class="nav-text">BIGGAN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#proGAN"><span class="nav-number">7.</span> <span class="nav-text">proGAN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#StyleGAN"><span class="nav-number">8.</span> <span class="nav-text">StyleGAN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CycleGAN"><span class="nav-number">9.</span> <span class="nav-text">CycleGAN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SAGAN"><span class="nav-number">10.</span> <span class="nav-text">SAGAN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TelDiGAN"><span class="nav-number">11.</span> <span class="nav-text">TelDiGAN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SRGAN"><span class="nav-number">12.</span> <span class="nav-text">SRGAN</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#evaluate-GAN"><span class="nav-number"></span> <span class="nav-text">evaluate GAN</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number"></span> <span class="nav-text">参考资料</span></a></div>
-      </div>
-      <!--/noindex-->
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image" alt="Sekyoro"
-      src="https://i.loli.net/2021/05/17/YqoavnXdGTpPO9R.jpg">
-  <p class="site-author-name" itemprop="name">Sekyoro</p>
-  <div class="site-description" itemprop="description">什么也无法舍弃的人，什么也做不了.</div>
-</div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">149</span>
-          <span class="site-state-item-name">日志</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
-        <span class="site-state-item-count">17</span>
-        <span class="site-state-item-name">分类</span></a>
-      </div>
-      <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-          
-        <span class="site-state-item-count">178</span>
-        <span class="site-state-item-name">标签</span></a>
-      </div>
-  </nav>
-</div>
-  <div class="links-of-author motion-element">
-      <span class="links-of-author-item">
-        <a href="http://proanimer.com/" title="Personal Website → http:&#x2F;&#x2F;proanimer.com" rel="noopener" target="_blank"><i class="fab fa-internet-explorer fa-fw"></i>Personal Website</a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="https://github.com/drowning-in-codes" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;drowning-in-codes" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="mailto:bukalala174@gmail.com" title="E-Mail → mailto:bukalala174@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="https://mp.weixin.qq.com/s?__biz=Mzg3ODY1MDkzMg==&mid=2247483770&idx=1&sn=fdf88faab01d5c219ac609570a21c9d6&chksm=cf113221f866bb373938cfca03cf095ff4fe1e4dc37d68ef5de4cd4876ee1260fca0c015a4d6&token=1096259873&lang=zh_CN#rd" title="wxPublicAccount → https:&#x2F;&#x2F;mp.weixin.qq.com&#x2F;s?__biz&#x3D;Mzg3ODY1MDkzMg&#x3D;&#x3D;&amp;mid&#x3D;2247483770&amp;idx&#x3D;1&amp;sn&#x3D;fdf88faab01d5c219ac609570a21c9d6&amp;chksm&#x3D;cf113221f866bb373938cfca03cf095ff4fe1e4dc37d68ef5de4cd4876ee1260fca0c015a4d6&amp;token&#x3D;1096259873&amp;lang&#x3D;zh_CN#rd" rel="noopener" target="_blank"><i class="fab fa-weixin fa-fw"></i>wxPublicAccount</a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-rss fa-fw"></i>RSS</a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="https://blog.csdn.net/aqwca" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;aqwca" rel="noopener" target="_blank"><i class="fa fa-handshake fa-fw"></i>CSDN</a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="https://my-astro-git-main-drowning-in-codes.vercel.app/" title="杂鱼分享 → https:&#x2F;&#x2F;my-astro-git-main-drowning-in-codes.vercel.app" rel="noopener" target="_blank"><i class="fas fa-share fa-fw"></i>杂鱼分享</a>
-      </span>
-  </div>
-
-
-  <div class="links-of-blogroll motion-element">
-    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
-      友情链接
-    </div>
-    <ul class="links-of-blogroll-list">
-        <li class="links-of-blogroll-item">
-          <a href="http://myqhs.top/" title="http:&#x2F;&#x2F;myqhs.top&#x2F;" rel="noopener" target="_blank">myqhs</a>
-        </li>
-    </ul>
-  </div>
-
-
-  <div class="motion-element announcement">
-   <div class="title">注意</div>
-   <p class="content">由于最近图床更新,可能有些图片显示不了.如果发现了有些图片无法显示影响阅读的,还烦请联系我,我有空补上. </p>
-   <p class="date"> 2023-10-6 </p>
-  </div>
-      </div>
-<meting-js
-	id="6856787487"
-	server="netease"
-	type="playlist"
-	order="random"
-	>
-</meting-js>
-			<div class="widget-wrap">
-    <h3 class="widget-title" style="margin:0">文章词云</h3>
-    <div id="myCanvasContainer" class="widget tagcloud">
-        <canvas width="250" height="250" id="resCanvas" style="width:100%">
-		  <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/GAN/" rel="tag">GAN</a><span class="tag-list-count">3</span></li></ul>	
-        </canvas>
-    </div>
-</div>
-		<script type="text/javascript" id="clustrmaps" src="//clustrmaps.com/map_v2.js?d=xQdGTxqARTBiNIwX2aUban-ixkj2s6VaZQWo-aVCgY8&cl=ffffff&w=a"></script>
-        <div class="back-to-top motion-element">
-          <i class="fa fa-arrow-up"></i>
-          <span>0%</span>
-        </div>
-	 
-	 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4034523802263123"
-     crossorigin="anonymous"></script>
-<!-- 边栏 -->
-
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-4034523802263123"
-     data-ad-slot="6549565089"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-	 
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-	 
-	
-    </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
-  
-
-
-      </div>
-    </main>
-
-    <footer class="footer">
-      <div class="footer-inner">
-        
-
-        
-
-<div class="copyright">
-  
-  &copy; Wed Apr 08 2020 08:00:00 GMT+0800 (中国标准时间) – 
-  <span itemprop="copyrightYear">2023</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">Sekyoro</span>
-    <span class="post-meta-divider">|</span>
-    <span class="post-meta-item-icon">
-      <i class="fa fa-chart-area"></i>
-    </span>
-    <span title="站点总字数">897k</span>
-    <span class="post-meta-divider">|</span>
-    <span class="post-meta-item-icon">
-      <i class="fa fa-coffee"></i>
-    </span>
-    <span title="站点阅读时长">13:36</span>
-</div>
-
-    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-    <span id="busuanzi_container_site_pv">总访问量<span id="busuanzi_value_site_pv"></span>次</span>
-    <span class="post-meta-divider">|</span>
-    <span id="busuanzi_container_site_uv">总访客数<span id="busuanzi_value_site_uv"></span>人</span>
-    <span class="post-meta-divider">|</span>
-<!-- 不蒜子计数初始值纠正 -->
-<script>
-$(document).ready(function() {
+})();</script><!-- require APlayer --><link href=https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css rel=stylesheet><script src=https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js></script><!-- require MetingJS --><script src=/js/meting-js.js></script><ul class="sidebar-nav motion-element"><li class=sidebar-nav-toc>文章目录<li class=sidebar-nav-overview>站点概览</ul><!--noindex--><div class="post-toc-wrap sidebar-panel"><div class="post-toc motion-element"><ol class=nav><li class="nav-item nav-level-3"><a class=nav-link href=#GAN><span class=nav-number>1.</span> <span class=nav-text>GAN</span></a><ol class=nav-child><li class="nav-item nav-level-4"><a class=nav-link href=#%E4%BD%BF%E7%94%A8tensorboard%E8%AE%B0%E5%BD%95%E6%8D%9F%E5%A4%B1><span class=nav-number>1.1.</span> <span class=nav-text>使用tensorboard记录损失</span></a><li class="nav-item nav-level-4"><a class=nav-link href=#%E4%BD%BF%E7%94%A8visdom%E5%8F%AF%E8%A7%86%E5%8C%96><span class=nav-number>1.2.</span> <span class=nav-text>使用visdom可视化</span></a></ol><li class="nav-item nav-level-3"><a class=nav-link href=#DCGAN><span class=nav-number>2.</span> <span class=nav-text>*DCGAN</span></a><li class="nav-item nav-level-3"><a class=nav-link href=#WGAN><span class=nav-number>3.</span> <span class=nav-text>*WGAN</span></a><ol class=nav-child><li class="nav-item nav-level-4"><a class=nav-link href=#WGAN-GP><span class=nav-number>3.1.</span> <span class=nav-text>WGAN-GP</span></a></ol><li class="nav-item nav-level-3"><a class=nav-link href=#Conditional-GAN><span class=nav-number>4.</span> <span class=nav-text>*Conditional GAN</span></a><li class="nav-item nav-level-3"><a class=nav-link href=#InfoGAN><span class=nav-number>5.</span> <span class=nav-text>InfoGAN</span></a><li class="nav-item nav-level-3"><a class=nav-link href=#BIGGAN><span class=nav-number>6.</span> <span class=nav-text>BIGGAN</span></a><li class="nav-item nav-level-3"><a class=nav-link href=#proGAN><span class=nav-number>7.</span> <span class=nav-text>proGAN</span></a><li class="nav-item nav-level-3"><a class=nav-link href=#StyleGAN><span class=nav-number>8.</span> <span class=nav-text>StyleGAN</span></a><li class="nav-item nav-level-3"><a class=nav-link href=#CycleGAN><span class=nav-number>9.</span> <span class=nav-text>CycleGAN</span></a><li class="nav-item nav-level-3"><a class=nav-link href=#SAGAN><span class=nav-number>10.</span> <span class=nav-text>SAGAN</span></a><li class="nav-item nav-level-3"><a class=nav-link href=#TelDiGAN><span class=nav-number>11.</span> <span class=nav-text>TelDiGAN</span></a><li class="nav-item nav-level-3"><a class=nav-link href=#SRGAN><span class=nav-number>12.</span> <span class=nav-text>SRGAN</span></a></ol><li class="nav-item nav-level-2"><a class=nav-link href=#evaluate-GAN><span class=nav-number></span> <span class=nav-text>evaluate GAN</span></a><li class="nav-item nav-level-2"><a class=nav-link href=#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99><span class=nav-number></span> <span class=nav-text>参考资料</span></a></div></div><!--/noindex--><div class="site-overview-wrap sidebar-panel"><div class="site-author motion-element" itemprop=author itemscope itemtype=http://schema.org/Person><img alt=Sekyoro class=site-author-image itemprop=image src=https://i.loli.net/2021/05/17/YqoavnXdGTpPO9R.jpg><p class=site-author-name itemprop=name>Sekyoro<div class=site-description itemprop=description>什么也无法舍弃的人，什么也做不了.</div></div><div class="site-state-wrap motion-element"><nav class=site-state><div class="site-state-item site-state-posts"><a href=/archives/> <span class=site-state-item-count>149</span> <span class=site-state-item-name>日志</span> </a></div><div class="site-state-item site-state-categories"><a href=/categories/> <span class=site-state-item-count>17</span> <span class=site-state-item-name>分类</span></a></div><div class="site-state-item site-state-tags"><a href=/tags/> <span class=site-state-item-count>178</span> <span class=site-state-item-name>标签</span></a></div></nav></div><div class="links-of-author motion-element"><span class=links-of-author-item> <a title="Personal Website → http://proanimer.com" href=http://proanimer.com/ rel=noopener target=_blank><i class="fab fa-internet-explorer fa-fw"></i>Personal Website</a> </span><span class=links-of-author-item> <a title="GitHub → https://github.com/drowning-in-codes" href=https://github.com/drowning-in-codes rel=noopener target=_blank><i class="fab fa-github fa-fw"></i>GitHub</a> </span><span class=links-of-author-item> <a title="E-Mail → mailto:bukalala174@gmail.com" href=mailto:bukalala174@gmail.com rel=noopener target=_blank><i class="fa fa-envelope fa-fw"></i>E-Mail</a> </span><span class=links-of-author-item> <a title="wxPublicAccount → https://mp.weixin.qq.com/s?__biz=Mzg3ODY1MDkzMg==&mid=2247483770&idx=1&sn=fdf88faab01d5c219ac609570a21c9d6&chksm=cf113221f866bb373938cfca03cf095ff4fe1e4dc37d68ef5de4cd4876ee1260fca0c015a4d6&token=1096259873&lang=zh_CN#rd" href=https://mp.weixin.qq.com/s?__biz=Mzg3ODY1MDkzMg==&mid=2247483770&idx=1&sn=fdf88faab01d5c219ac609570a21c9d6&chksm=cf113221f866bb373938cfca03cf095ff4fe1e4dc37d68ef5de4cd4876ee1260fca0c015a4d6&token=1096259873&lang=zh_CN#rd rel=noopener target=_blank><i class="fab fa-weixin fa-fw"></i>wxPublicAccount</a> </span><span class=links-of-author-item> <a title="RSS → /atom.xml" href=/atom.xml><i class="fa fa-rss fa-fw"></i>RSS</a> </span><span class=links-of-author-item> <a title="CSDN → https://blog.csdn.net/aqwca" href=https://blog.csdn.net/aqwca rel=noopener target=_blank><i class="fa fa-handshake fa-fw"></i>CSDN</a> </span><span class=links-of-author-item> <a title="杂鱼分享 → https://my-astro-git-main-drowning-in-codes.vercel.app" href=https://my-astro-git-main-drowning-in-codes.vercel.app/ rel=noopener target=_blank><i class="fas fa-share fa-fw"></i>杂鱼分享</a> </span></div><div class="links-of-blogroll motion-element"><div class=links-of-blogroll-title><i class="fa fa-link fa-fw"></i> 友情链接</div><ul class=links-of-blogroll-list><li class=links-of-blogroll-item><a href=http://myqhs.top/ rel=noopener target=_blank title=http://myqhs.top/>myqhs</a></ul></div><div class="motion-element announcement"><div class=title>注意</div><p class=content>由于最近图床更新,可能有些图片显示不了.如果发现了有些图片无法显示影响阅读的,还烦请联系我,我有空补上.<p class=date>2023-10-6</div></div><meting-js id=6856787487 order=random server=netease type=playlist> </meting-js><div class=widget-wrap><h3 class=widget-title style=margin:0>文章词云</h3><div class="widget tagcloud" id=myCanvasContainer><canvas height=250 id=resCanvas style=width:100% width=250><ul class=tag-list itemprop=keywords><li class=tag-list-item><a class=tag-list-link href=/tags/GAN/ rel=tag>GAN</a><span class=tag-list-count>3</span></ul></canvas></div></div><script id=clustrmaps src=https://clustrmaps.com/map_v2.js?d=xQdGTxqARTBiNIwX2aUban-ixkj2s6VaZQWo-aVCgY8&cl=ffffff&w=a></script><div class="back-to-top motion-element"><i class="fa fa-arrow-up"></i><span>0%</span></div><script async crossorigin=anonymous src=https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4034523802263123></script><!-- 边栏 --><ins class=adsbygoogle data-ad-client=ca-pub-4034523802263123 data-ad-format=auto data-ad-slot=6549565089 data-full-width-responsive=true style=display:block></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div></aside><div id=sidebar-dimmer></div></div></main><footer class=footer><div class=footer-inner><div class=copyright>© Wed Apr 08 2020 08:00:00 GMT+0800 (中国标准时间) – <span itemprop=copyrightYear>2023</span><span class=with-love> <i class="fa fa-heart"></i> </span><span class=author itemprop=copyrightHolder>Sekyoro</span><span class=post-meta-divider>|</span><span class=post-meta-item-icon> <i class="fa fa-chart-area"></i> </span><span title=站点总字数>898k</span><span class=post-meta-divider>|</span><span class=post-meta-item-icon> <i class="fa fa-coffee"></i> </span><span title=站点阅读时长>13:36</span></div><script async src=https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js></script><span id=busuanzi_container_site_pv>总访问量<span id=busuanzi_value_site_pv></span>次</span><span class=post-meta-divider>|</span><span id=busuanzi_container_site_uv>总访客数<span id=busuanzi_value_site_uv></span>人</span><span class=post-meta-divider>|</span><!-- 不蒜子计数初始值纠正 --><script>$(document).ready(function() {
 
     var int = setInterval(fixCount, 50);  // 50ms周期检测函数
     var countOffset = 20000;  // 初始化首次数据
@@ -1171,13 +352,7 @@ $(document).ready(function() {
         }  
     }
        	
-});
-</script> 
-
-<div>
-<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
-<script>
-    var now = new Date();
+});</script><div><span id=timeDate>载入天数...</span><span id=times>载入时分秒...</span><script>var now = new Date();
     function createtime() {
         var grt= new Date("04/08/2021 20:00:00");
         now.setTime(now.getTime()+250);
@@ -1190,68 +365,7 @@ $(document).ready(function() {
         document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
         document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
     }
-setInterval("createtime()",250);
-</script>
-</div>
-
-        
-<div class="busuanzi-count">
-  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-user"></i>
-      </span>
-      <span class="site-uv" title="总访客量">
-        <span id="busuanzi_value_site_uv"></span>
-      </span>
-    </span>
-    <span class="post-meta-divider">|</span>
-    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-eye"></i>
-      </span>
-      <span class="site-pv" title="总访问量">
-        <span id="busuanzi_value_site_pv"></span>
-      </span>
-    </span>
-</div>
-
-
-
-
-
-
-
-
-      </div>
-    </footer>
-  </div>
-
-  
-  
-  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
-  <script src="/lib/anime.min.js"></script>
-  <script src="//cdn.jsdelivr.net/gh/theme-next/theme-next-pjax@0/pjax.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
-  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
-  <script src="/lib/velocity/velocity.min.js"></script>
-  <script src="/lib/velocity/velocity.ui.min.js"></script>
-
-<script src="/js/utils.js"></script>
-
-<script src="/js/motion.js"></script>
-
-
-<script src="/js/schemes/pisces.js"></script>
-
-
-<script src="/js/next-boot.js"></script>
-
-<script src="/js/bookmark.js"></script>
-
-  <script>
-var pjax = new Pjax({
+setInterval("createtime()",250);</script></div><div class=busuanzi-count><script async data-pjax src=https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script><span style="display: none;" class=post-meta-item id=busuanzi_container_site_uv> <span class=post-meta-item-icon> <i class="fa fa-user"></i> </span> <span class=site-uv title=总访客量> <span id=busuanzi_value_site_uv></span> </span> </span><span class=post-meta-divider>|</span><span style="display: none;" class=post-meta-item id=busuanzi_container_site_pv> <span class=post-meta-item-icon> <i class="fa fa-eye"></i> </span> <span class=site-pv title=总访问量> <span id=busuanzi_value_site_pv></span> </span> </span></div></div></footer></div><script color=0,0,255 count=99 opacity=0.5 src=/lib/canvas-nest/canvas-nest.min.js zindex=-1></script><script src=/lib/anime.min.js></script><script src=https://cdn.jsdelivr.net/gh/theme-next/theme-next-pjax@0/pjax.min.js></script><script src=https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js></script><script src=https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js></script><script src=https://cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js></script><script src=/lib/velocity/velocity.min.js></script><script src=/lib/velocity/velocity.ui.min.js></script><script src=/js/utils.js></script><script src=/js/motion.js></script><script src=/js/schemes/pisces.js></script><script src=/js/next-boot.js></script><script src=/js/bookmark.js></script><script>var pjax = new Pjax({
   selectors: [
     'head title',
     '#page-configurations',
@@ -1308,15 +422,7 @@ window.addEventListener('pjax:success', () => {
       .bootstrap();
   }
   NexT.utils.updateSidebarPosition();
-});
-</script>
-
-
-
-
-  
-  <script data-pjax>
-    (function(){
+});</script><script data-pjax>(function(){
       var canonicalURL, curProtocol;
       //Get the <link> tag
       var x=document.getElementsByTagName("link");
@@ -1338,28 +444,7 @@ window.addEventListener('pjax:success', () => {
       //Get current URL if the canonical URL does not exist
 	    if (!canonicalURL) canonicalURL = window.location.href;
 	    //Assign script content. Replace current URL with the canonical URL
-      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
-  </script>
-
-
-
-
-  
-<script src="//cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
-<script src="//cdn.jsdelivr.net/npm/instantsearch.js@4/dist/instantsearch.production.min.js"></script>
-<script src="/js/algolia-search.js"></script>
-
-
-
-
-
-
-
-
-
-
-<script data-pjax>
-document.querySelectorAll('.pdfobject-container').forEach(element => {
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();</script><script src=https://cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js></script><script src=https://cdn.jsdelivr.net/npm/instantsearch.js@4/dist/instantsearch.production.min.js></script><script src=/js/algolia-search.js></script><script data-pjax>document.querySelectorAll('.pdfobject-container').forEach(element => {
   let url = element.dataset.target;
   let pdfOpenParams = {
     navpanes : 0,
@@ -1376,21 +461,7 @@ document.querySelectorAll('.pdfobject-container').forEach(element => {
   } else {
     element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
   }
-});
-</script>
-
-
-
-
-    <div id="pjax">
-  
-
-  
-
-  
-
-<script>
-NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+});</script><div id=pjax><script>NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
   window.livereOptions = {
     refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
   };
@@ -1402,12 +473,7 @@ NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
     j.async = true;
     e.parentNode.insertBefore(j, e);
   })(document, 'script');
-});
-</script>
- 
-
-<script>
-  var OriginTitile = document.title;
+});</script><script>var OriginTitile = document.title;
   var titleTime;
   document.addEventListener("visibilitychange", function() {
     if (document.hidden) {
@@ -1419,22 +485,6 @@ NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
         document.title = OriginTitile;
       }, 2000);
     }
-  });
-</script>
-
-
-
-  <script src="/js/src/activate-power-mode.min.js"></script>
-  <script>
-    POWERMODE.colorful = true;
+  });</script><script src=/js/src/activate-power-mode.min.js></script><script>POWERMODE.colorful = true;
     POWERMODE.shake = false;
-    document.body.addEventListener('input', POWERMODE);
-  </script>
-
-
-    </div>  
-  
-  <script  type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
-<script  type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
-
-<!-- hexo injector body_end start --><script src='/js/outdate.js'></script><!-- hexo injector body_end end --><script async>window.onload=function(){var a=document.createElement('script'),b=document.getElementsByTagName('script')[0];a.type='text/javascript',a.async=!0,a.src='/sw-register.js?v='+Date.now(),b.parentNode.insertBefore(a,b)};</script></body></html>
+    document.body.addEventListener('input', POWERMODE);</script></div><script charset=utf-8 src=/js/tagcloud.js></script><script charset=utf-8 src=/js/tagcanvas.js></script><!-- hexo injector body_end start --><script src=/js/outdate.js></script><!-- hexo injector body_end end -->
