@@ -1,3 +1,5 @@
+https://www.sekyoro.top/2023/12/04/Python%E7%9A%84%E5%B7%A5%E7%A8%8B%E5%8C%96%E4%B9%8B%E8%B7%AF/
+https://www.sekyoro.top/2023/12/03/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B8%8E%E9%87%8D%E6%9E%84/
 https://www.sekyoro.top/2023/11/30/%E5%9B%BE%E5%83%8F%E7%89%B9%E5%BE%81%E5%8D%8F%E5%90%8C%E6%84%9F%E7%9F%A5%E8%9E%8D%E5%90%88%E7%AE%97%E6%B3%95/
 https://www.sekyoro.top/2023/11/24/tip-types-in-python/
 https://www.sekyoro.top/2023/11/16/%E5%9B%BE%E5%83%8F%E8%AF%BB%E5%8F%96%E4%B8%8E%E6%98%BE%E7%A4%BA%E7%9A%84%E9%97%AE%E9%A2%98/
@@ -26,5 +28,3 @@ https://www.sekyoro.top/2023/09/12/pytorch%E5%AD%A6%E4%B9%A0%E2%80%94%E2%80%94%E
 https://www.sekyoro.top/2023/09/01/Autoencoder%E5%AD%A6%E4%B9%A0/
 https://www.sekyoro.top/2023/08/12/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86(%E4%BA%8C)/
 https://www.sekyoro.top/2023/08/11/GAN%E6%B7%B1%E5%85%A5%E5%AD%A6%E4%B9%A0/
-https://www.sekyoro.top/2023/08/04/tailwind%E9%80%9F%E6%88%90/
-https://www.sekyoro.top/2023/08/02/%E6%B7%B1%E5%BA%A6%E7%9F%A5%E8%AF%86%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0(%E4%B8%80)/
