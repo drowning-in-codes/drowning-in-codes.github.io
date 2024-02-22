@@ -1,0 +1,462 @@
+<!doctypehtml><html lang=zh-CN><script defer src=/live2d-widget/autoload.js></script><meta charset=UTF-8><meta content=width=device-width,initial-scale=1,maximum-scale=2 name=viewport><meta content=#222 name=theme-color><meta content="Hexo 5.4.0" name=generator><link href=/images/blog_32px.png rel=apple-touch-icon sizes=180x180><link href=/images/blog_32px.png rel=icon sizes=32x32 type=image/png><link href=/images/blog_16px.png rel=icon sizes=16x16 type=image/png><link color=#222 href=/images/logo.svg rel=mask-icon><meta content=EPrJAp11bJwHULpQUaSNSZ8_3RcvTsPDAEGOME4pl1w name=google-site-verification><!-- Google tag (gtag.js) --><!-- 
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-VB21D8MKKW"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-VB21D8MKKW');
+</script> --><!-- google adsense in head.swig --><script async crossorigin=anonymous src=https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4034523802263123></script><meta content=7226864CE87CE9DE8C008385273846FF name=msvalidate.01><meta content=code-fjFXVtiL7j name=baidu-site-verification><link href=/css/main.css rel=stylesheet><link as=style href=https://fonts.googleapis.com/css?family=Roboto%20Mono,Roboto:300,300italic,400,400italic,700,700italic|Roboto:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext onload=this.rel='stylesheet' rel=preload><link as=style href=https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css onload=this.rel='stylesheet' rel=preload><link href=https://fonts.googleapis.com/css?family=Noto+Serif+SC|Roboto&display=swap rel=stylesheet><link href=https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css rel=stylesheet><link href=https://cdn.jsdelivr.net/npm/pace-js@1/themes/blue/pace-theme-minimal.css rel=stylesheet><script src=https://cdn.jsdelivr.net/npm/pace-js@1/pace.min.js></script><script id=hexo-configurations>var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.sekyoro.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":240,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"appID":"3G9PZZIKCH","apiKey":"8eb71f5ca3167e9ef3487882f10cfaad","indexName":"SekyoroSearch","hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};</script><link href=//cdn.bootcss.com/animate.css/3.5.0/animate.min.css rel=stylesheet><meta content=马上又要到农历新年了,趁现在回顾一下过去一年的前端发展.当然是站在我的角度,因为有许多新的技术,对于不同领域的人以及不同层面的开发者都有不同的意味.对于我来说,快捷、轻松的开发体验是比较重要的,臃肿的大型框架并不是优秀的代名词,所以我会尽量使用或者倾向喜欢一些生态发展好,开发者使用体验好,社区也比较活跃的框架或者技术.此外,随着事件发展肯定会不断涌现一些新型技术甚至新的思想,对于学习者来说,这些东 name=description><meta content=article property=og:type><meta content=回头再看前端框架 property=og:title><meta content=https://www.sekyoro.top/2024/02/03/%E5%9B%9E%E5%A4%B4%E5%86%8D%E7%9C%8B%E5%89%8D%E7%AB%AF%E6%A1%86%E6%9E%B6/index.html property=og:url><meta content=Sekyoro的博客小屋 property=og:site_name><meta content=马上又要到农历新年了,趁现在回顾一下过去一年的前端发展.当然是站在我的角度,因为有许多新的技术,对于不同领域的人以及不同层面的开发者都有不同的意味.对于我来说,快捷、轻松的开发体验是比较重要的,臃肿的大型框架并不是优秀的代名词,所以我会尽量使用或者倾向喜欢一些生态发展好,开发者使用体验好,社区也比较活跃的框架或者技术.此外,随着事件发展肯定会不断涌现一些新型技术甚至新的思想,对于学习者来说,这些东 property=og:description><meta content=zh_CN property=og:locale><meta content=https://s2.loli.net/2024/02/03/gZW9YjzshmFBXnx.png property=og:image><meta content=https://nextjs.org/_next/image?url=%2Fdocs%2Flight%2Fterminology-url-anatomy.png&w=3840&q=75&dpl=dpl_8JSreCCcxctwsnJ6FNFujsNZdfsZ property=og:image><meta content=https://nextjs.org/_next/image?url=%2Fdocs%2Flight%2Floading-ui.png&w=3840&q=75&dpl=dpl_7E1cZLB9sZWvkjQY6Ei4tJ18mYN7 property=og:image><meta content=https://s2.loli.net/2024/02/06/Zav7h3fXBkOIR8g.png property=og:image><meta content=https://nextjs.org/_next/image?url=%2Fdocs%2Flight%2Froute-group-multiple-root-layouts.png&w=3840&q=75&dpl=dpl_Fr1VCq6W9RFeEuXYFe2L4sUmaW7a property=og:image><meta content=https://nextjs.org/_next/image?url=%2Fdocs%2Flight%2Fproject-organization-private-folders.png&w=3840&q=75&dpl=dpl_FhZP1LTtukMJX1yNmAQ5DmdgAZ2Q property=og:image><meta content=https://nextjs.org/_next/image?url=%2Fdocs%2Flight%2Fproject-organization-project-root.png&w=3840&q=75&dpl=dpl_FhZP1LTtukMJX1yNmAQ5DmdgAZ2Q property=og:image><meta content=https://nextjs.org/_next/image?url=%2Fdocs%2Flight%2Fproject-organization-app-root-split.png&w=3840&q=75&dpl=dpl_FhZP1LTtukMJX1yNmAQ5DmdgAZ2Q property=og:image><meta content=https://s2.loli.net/2024/02/06/rcxIzpTYlAGDZPK.png property=og:image><meta content=https://s2.loli.net/2024/02/07/z9TjK2Om3EcICDY.png property=og:image><meta content=https://s2.loli.net/2024/02/06/iU72dluEKhtOkI9.png property=og:image><meta content=https://s2.loli.net/2024/02/03/kOdja1mSY925byP.png property=og:image><meta content=https://s2.loli.net/2024/02/08/CwB6zkX5yPvnf4q.png property=og:image><meta content=2024-02-03T06:34:45.000Z property=article:published_time><meta content=2024-02-11T07:28:06.000Z property=article:modified_time><meta content=Sekyoro property=article:author><meta content="front end" property=article:tag><meta content=summary name=twitter:card><meta content=https://s2.loli.net/2024/02/03/gZW9YjzshmFBXnx.png name=twitter:image><link href=https://www.sekyoro.top/2024/02/03/%E5%9B%9E%E5%A4%B4%E5%86%8D%E7%9C%8B%E5%89%8D%E7%AB%AF%E6%A1%86%E6%9E%B6/ rel=canonical><script id=page-configurations>// https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };</script><title>回头再看前端框架 | Sekyoro的博客小屋</title><noscript><style>.use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }</style></noscript><link href=/atom.xml rel=alternate title=Sekyoro的博客小屋 type=application/atom+xml><body itemscope itemtype=http://schema.org/WebPage><canvas style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" class=fireworks></canvas><script defer src=https://cdn.bootcss.com/animejs/2.2.0/anime.min.js></script><script defer src=/js/src/fireworks.js></script><div class="container use-motion"><div class=headband></div><header class=header itemscope itemtype=http://schema.org/WPHeader><div class=header-inner><div class=site-brand-container><div class=site-nav-toggle><div aria-label=切换导航栏 class=toggle><span class="toggle-line toggle-line-first"></span><span class="toggle-line toggle-line-middle"></span><span class="toggle-line toggle-line-last"></span></div></div><div class=site-meta><a class=brand href=/ rel=start> <span class=logo-line-before><i></i></span> <h1 class=site-title>Sekyoro的博客小屋</h1> <span class=logo-line-after><i></i></span> </a></div><div class=site-nav-right><div class="toggle popup-trigger"><i class="fa fa-search fa-fw fa-lg"></i></div></div></div><nav class=site-nav><ul class="main-menu menu" id=menu><li class="menu-item menu-item-home"><a href=/ rel=section><i class="fa fa-home fa-fw"></i>首页</a><li class="menu-item menu-item-about"><a href=/about/ rel=section><i class="fa fa-user fa-fw"></i>关于</a><li class="menu-item menu-item-tags"><a href=/tags/ rel=section><i class="fa fa-tags fa-fw"></i>标签</a><li class="menu-item menu-item-categories"><a href=/categories/ rel=section><i class="fa fa-th fa-fw"></i>分类</a><li class="menu-item menu-item-archives"><a href=/archives/ rel=section><i class="fa fa-archive fa-fw"></i>归档</a><li class="menu-item menu-item-bangumis"><a href=/bangumis/ rel=section><i class="fa fa-film fa-fw"></i>追番</a><li class="menu-item menu-item-resume"><a href=/resume/ rel=section><i class="fa fa-file-pdf fa-fw"></i>简历</a><li class="menu-item menu-item-materials"><a href=/materials/ rel=section><i class="fa fa-book fa-fw"></i>学习资料</a><li class="menu-item menu-item-sitemap"><a href=/sitemap.xml rel=section><i class="fa fa-sitemap fa-fw"></i>站点地图</a><li class="menu-item menu-item-search"><a class=popup-trigger role=button><i class="fa fa-search fa-fw"></i>搜索 </a></ul></nav><div class=search-pop-overlay><div class="popup search-popup"><div class=search-header><span class=search-icon> <i class="fa fa-search"></i> </span><div class=search-input-container></div><span class=popup-btn-close> <i class="fa fa-times-circle"></i> </span></div><div class=algolia-results><div id=algolia-stats></div><div id=algolia-hits></div><div class=algolia-pagination id=algolia-pagination></div></div></div></div></div></header><a class="book-mark-link book-mark-link-fixed" role=button></a><main class=main><div class=main-inner><div class=content-wrap><div class="content post posts-expand"><article class=post-block itemscope itemtype=http://schema.org/Article lang=zh-CN><link href=https://www.sekyoro.top/2024/02/03/%E5%9B%9E%E5%A4%B4%E5%86%8D%E7%9C%8B%E5%89%8D%E7%AB%AF%E6%A1%86%E6%9E%B6/ itemprop=mainEntityOfPage><span hidden itemprop=author itemscope itemtype=http://schema.org/Person> <meta content=https://i.loli.net/2021/05/17/YqoavnXdGTpPO9R.jpg itemprop=image> <meta content=Sekyoro itemprop=name> <meta content=什么也无法舍弃的人，什么也做不了. itemprop=description> </span><span hidden itemprop=publisher itemscope itemtype=http://schema.org/Organization> <meta content=Sekyoro的博客小屋 itemprop=name> </span><header class=post-header><h1 itemprop="name headline" class=post-title>回头再看前端框架</h1><div class=post-meta><span class=post-meta-item> <span class=post-meta-item-icon> <i class="far fa-calendar"></i> </span> <span class=post-meta-item-text>发表于</span> <time itemprop="dateCreated datePublished" title="创建时间：2024-02-03 14:34:45" datetime=2024-02-03T14:34:45+08:00>2024-02-03</time> </span><span class=post-meta-item> <span class=post-meta-item-icon> <i class="far fa-calendar-check"></i> </span> <span class=post-meta-item-text>更新于</span> <time title="修改时间：2024-02-11 15:28:06" datetime=2024-02-11T15:28:06+08:00 itemprop=dateModified>2024-02-11</time> </span><span style="display: none;" class=post-meta-item id=busuanzi_container_page_pv title=阅读次数> <span class=post-meta-item-icon> <i class="fa fa-eye"></i> </span> <span class=post-meta-item-text>阅读次数：</span> <span id=busuanzi_value_page_pv></span> </span><br><span class=post-meta-item title=本文字数> <span class=post-meta-item-icon> <i class="far fa-file-word"></i> </span> <span class=post-meta-item-text>本文字数：</span> <span>11k</span> </span><span class=post-meta-item title=阅读时长> <span class=post-meta-item-icon> <i class="far fa-clock"></i> </span> <span class=post-meta-item-text>阅读时长 ≈</span> <span>10 分钟</span> </span></div></header><div class=post-body itemprop=articleBody><p>马上又要到农历新年了,趁现在回顾一下过去一年的前端发展.当然是站在我的角度,因为有许多新的技术,对于不同领域的人以及不同层面的开发者都有不同的意味.<br>对于我来说,快捷、轻松的开发体验是比较重要的,臃肿的大型框架并不是优秀的代名词,所以我会尽量使用或者倾向喜欢一些生态发展好,开发者使用体验好,社区也比较活跃的框架或者技术.此外,随着事件发展肯定会不断涌现一些新型技术甚至新的思想,对于学习者来说,这些东西还需要一些观望.<br><span id=more></span><p>除开一些基本概念,我来写一些我平常会用的框架和技术.当然我这里并不是想做一个技术栈的介绍,更多的是在做一个web前端项目时可以考虑的提升开发效率的工具.<h2 id=Tailwind-css><a title="Tailwind css" class=headerlink href=#Tailwind-css></a>Tailwind css</h2><p>虽然有争议,但这个css工具已经是极为方便的工具了,目前浏览器已经支持许多css新的特性,所以我觉得可以说,类似less和scss的工具是不需要的了.<p>Bootstrap或许过于臃肿,使用tailwind css本身并没有组件库,这里我推荐两个组件库，一个是<a href=https://daisyui.com/ rel=noopener target=_blank>daisyUI — Tailwind CSS Components ( version 4 update is here )</a>另一个是<a href=https://ui.shadcn.com/docs rel=noopener target=_blank>Introduction - shadcn/ui</a><p>搭配现代的css特性,这样写css基本就够了.实在觉得不行可以再往Element-Plus也就是更抽象高级的组件库上靠.<h2 id=React><a class=headerlink href=#React title=React></a>React</h2><p>react的生态很好,状态管理工具以及搭配的一些动效库都很多.此外搭配Next.js,Remix.js等等成为一个较为完整的web前端解决方案.React是一个library,关键是使用了JSX,很多其他库也是受此影响,比如Solid,Preact,Millions等等.<h2 id=Vue><a class=headerlink href=#Vue title=Vue></a>Vue</h2><p>Vue在国内用的很多,当然国外也不少.相对来说我认为较大的差别是Vue的官方本身已经提供了整套的解决方案,Vue也有Nuxt解决SSR的问题,它有Pinia解决状态管理的问题,不像React状态管理通常会选用第三方的Zusland或者jotai等等(当然,如果需要管理的不多直接使用context也可以).目前vue2已经不在维护了,我也大力推荐直接上vue3.Vue使用单独的一个.vue文件表示一个或多个组件,svelte框架也类似.<p>可以这么说,如果要做一个中大型的前端项目,使用vue或者react的以及它们各自的生态工具是完全没有问题,也没有太大差异的.而且vue对于国内开发者还是比较友好的,各类文档的中文支持还是要比react好.<p>React和Vue都有SSR的框架,分别是Next和Nuxt,当然React还有Gatsby,Expo这些<h2 id=Svelte-or-Solid><a title="Svelte or Solid" class=headerlink href=#Svelte-or-Solid></a>Svelte or Solid</h2><p>在virtual dom上不再赘述.而svelte和solid都是使用的真实的dom.<p>有的时候你并不需要也并不想要写一个较大的应用,并不想引入过多依赖,但是又想使用一些方便的库.<p>这时候react,vue就可以稍微退退,使用一些既新颖又成熟的方案,比如Svelte,Solid,Preact或者Million等等.前端框架的发展特别快,在使用过程中掌握一些基本概念会更好.<p>在浏览这些框架时,我也体会到一个深刻的事情,作为普通开发者在选择这些框架时,即使文档宣传有多么好多么快,如果背后的社区不坚持做下去不坚持宣传,背后的生态,背后没有一个较为统一的解决方案,还是无法做的长久.<p>我说这些话的意思是,在这么多前端框架出现的今天,如果想要有一个顺畅的开发体验,除了框架本身宣传的技术,还有背后的生态工具链也很重要,毕竟,当项目体积变大,事情就更复杂了.<p>Svelte官方提供了一个SvelteKit工具,也支持SSR等功能.<p>Solid也是类似.可以简单粗暴地说在语法上Svelte更像Vue,Solid更像React.而且后两者都提供了SSR的能力.<h2 id=对比一下Next-Nuxt以及SvelteKit和solid-js><a class=headerlink href=#对比一下Next-Nuxt以及SvelteKit和solid-js title=对比一下Next,Nuxt以及SvelteKit和solid.js></a>对比一下Next,Nuxt以及SvelteKit和solid.js</h2><p>平常我们写前端代码关注哪些点?<p>Next官网给了以下几点<p><img alt=image-20240203185447263 data-src=https://s2.loli.net/2024/02/03/gZW9YjzshmFBXnx.png style=zoom:67%;><h3 id=构建工具><a class=headerlink href=#构建工具 title=构建工具></a>构建工具</h3><p>对于Next,可以使用<code>create-next-app</code><figure class="highlight bash"><table><tr><td class=gutter><pre><span class=line>1</span><br></pre><td class=code><pre><span class=line>npx create-next-app@latest</span><br></pre></table></figure><p>使用Next或者Nuxt一般主要目的是使用SSR功能.当然除了SSR之外这些框架本身也提供了很多功能,一些开箱即用的库,一些默认的目录结构.不过不是为了强调SSR,SEO,貌似也没有必要使用Next(事实上你也可以使用这些框架但不过多使用它们的一些feature,好处是不用费时费力安装一些常用库)<p>如果不使用Next而是用React,可以考虑使用Vite等构建工具.<h3 id=目录结构><a class=headerlink href=#目录结构 title=目录结构></a>目录结构</h3><p>使用不同的构建工具或者框架会默认一些目录结构.<p>Next使用基于文件结构的路由,所录在目录结构上需要注意的.在Next的大更新也就是v13之后,路由默认使用App Router. App Router默认使用app目录进行路由,而Page Router 使用Page目录.<p>推荐只是用app router就够了.<p>在<code>app/layout.tsx</code>中创建html,在<code>app/page.tsx</code>中创建组件,然后创建public文件夹放图像和字体等静态文件.<p>具体Next项目结构参看<a href=https://nextjs.org/docs/getting-started/project-structure rel=noopener target=_blank>Getting Started: Project Structure | Next.js (nextjs.org)</a>,可以看到还是有很多默认规则的.<h3 id=如何写一个组件><a class=headerlink href=#如何写一个组件 title=如何写一个组件></a>如何写一个组件</h3><p>由于有了SSR功能,组件分为了服务端和客户端组件<h4 id=服务端组件><a class=headerlink href=#服务端组件 title=服务端组件></a>服务端组件</h4><p>服务器组件相比于原本的CSR应用有很多好处.比如数据获取更快,更安全,有缓存,客户端需要的Bundle更小,更好的SEO.<p>渲染过程:在服务器上，Next.js使用React的API来编排渲染。渲染工作分为多个块：按各个route segments和suspense boundaries。<p>每个块(chunks)分两个步骤呈现：React将服务器组件呈现为一种特殊的数据格式，称为React服务器组件有效载荷（RSC Payload）。Next.js使用RSC Payload和Client Component JavaScript指令在服务器上呈现HTML。<p>然后，在客户端上：HTML用于立即显示对应路由的快速非交互式预览-这仅用于初始页面加载。React服务器组件有效负载用于协调客户端和服务器组件树，并更新DOM。JavaScript指令用于水合客户端组件并使应用程序具有交互性。<p><strong>渲染策略</strong><p>有静态渲染,动态渲染<p>默认是静态渲染,使用静态渲染，路由在构建时渲染，或在数据重新验证后在后台渲染。结果被缓存，并且可以被推送到内容交付网络（CDN）。此优化允许您在用户和服务器请求之间共享渲染工作的结果。当路由包含的数据不是针对用户个性化的，并且可能在构建时已知时（例如静态博客文章或产品页面），静态渲染非常有用。<p>使用动态渲染，<strong>可以在请求时为每个用户渲染路由</strong>。当路由具有针对用户个性化的数据或具有只能在请求时才知道的信息（如cookie或URL的搜索参数）时，动态呈现非常有用。<blockquote><p>作为开发人员，您不需要在静态和动态渲染之间进行选择，因为Next.js会根据所使用的功能和API自动为每条路由选择最佳渲染策略。相反，您可以选择何时缓存或重新验证特定数据，也可以选择流式处理UI的部分内容。</blockquote><p>此外还有streaming,流式处理使您能够从服务器逐步渲染UI。工作被分割成块，并在准备就绪时流式传输到客户端。这允许用户在整个内容完成呈现之前立即查看页面的部分内容。<h4 id=客户端组件><a class=headerlink href=#客户端组件 title=客户端组件></a>客户端组件</h4><p>客户端组件<strong>可以使用state,effects以及事件监听.此外还可以使用浏览器的API</strong>.<p>“use client”用于声明服务器和客户端组件模块之间的边界。这意味着，通过在文件中定义“use clinet”，导入其中的所有其他模块，包括子组件，都被视为客户端捆绑包的一部分。<p>一旦定义了边界，导入其中的所有子组件和模块都将被视为客户端捆绑包的一部分。<h3 id=styling><a class=headerlink href=#styling title=styling></a>styling</h3><p>一般来说可以使用tailwind css,像这种主要关注的是组件化,也就是不同的组件之间的css不要互相污染.全局的css可以方便插入.除了tailwind css外还有css in js,css modules等方法,我建议使用其中两种搭配就行了,不然会让人confused(推荐css modules和tailwind css搭配).<h3 id=路由><a class=headerlink href=#路由 title=路由></a>路由</h3><p><img alt="Terminology for URL Anatomy" data-src=https://nextjs.org/_next/image?url=%2Fdocs%2Flight%2Fterminology-url-anatomy.png&w=3840&q=75&dpl=dpl_8JSreCCcxctwsnJ6FNFujsNZdfsZ><p>Next的app router支持共享布局,嵌套路由,加载状态,错误处理等等.文件用于定义路由.<p>每个目录表示一个路由段,使用<code>page.tsx</code>表示对于那个该路由的组件.<p>page默认是服务端组件,可以改为客户端组件<p>layouts在不同pages中是共享的,跳转时layouts保留state,不再重新渲染.这个组件应该接受一个<code>children</code>属性作为一个child layout或者一个child page.<p>顶层有一个Root Layout,这是必须的.在所有pages中共享.包含html和body.<p>每个路由段可以选择性定义自己的layout,路由中的layout默认被包含,每个父layout把子layout通过children包含在一起.layout和page可以在同一个目录下,layoput会包含这个page.<p>此外Next还有template,跟layouts类似,但是它并不会保持routes之间的state,这意思是当一个用户在共享一个template的不同路由之间跳转时,不会保持状态.会重新渲染元素.<p>在定义metadata信息时可以在page或者layout中导出metadata对象.<h3 id=链接与页面导航><a class=headerlink href=#链接与页面导航 title=链接与页面导航></a>链接与页面导航</h3><p>Next有四种跳转路由的方式<ol><li>使用Link组件<li>使用useRouter hook(客户端组件)<li>使用redirect函数(服务端组件)<li>浏览器的History API</ol><h4 id=Link组件><a class=headerlink href=#Link组件 title=Link组件></a>Link组件</h4><p>继承了\<a \>标签并且使得在客户端跳转提供了prefetching功能,优选方式 <p>跳转路由时默认行为会到顶端,可以使用属性<code>scroll={false}</code></p> <h4 id=useRouter><a class=headerlink href=#useRouter title=useRouter></a>useRouter</h4><p>使用useRouter hook</p> <figure class="highlight js"><table><tr><td class=gutter><pre><span class=line>1</span><br><span class=line>2</span><br><span class=line>3</span><br><span class=line>4</span><br><span class=line>5</span><br><span class=line>6</span><br><span class=line>7</span><br><span class=line>8</span><br><span class=line>9</span><br><span class=line>10</span><br><span class=line>11</span><br><span class=line>12</span><br><span class=line>13</span><br></pre><td class=code><pre><span class=line><span class=string>'use client'</span></span><br><span class=line> </span><br><span class=line><span class=keyword>import</span> { useRouter } <span class=keyword>from</span> <span class=string>'next/navigation'</span></span><br><span class=line> </span><br><span class=line><span class=keyword>export</span> <span class=keyword>default</span> <span class=function><span class=keyword>function</span> <span class=title>Page</span>(<span class=params></span>) </span>{</span><br><span class=line>  <span class=keyword>const</span> router = useRouter()</span><br><span class=line> </span><br><span class=line>  <span class=keyword>return</span> (</span><br><span class=line>    <span class=xml><span class=tag><<span class=name>button</span> <span class=attr>type</span>=<span class=string>"button"</span> <span class=attr>onClick</span>=<span class=string>{()</span> =></span> router.push('/dashboard')}></span></span><br><span class=line><span class=xml>      Dashboard</span></span><br><span class=line><span class=xml>    <span class=tag>&LT/<span class=name>button</span>></span></span></span><br><span class=line>  )</span><br><span class=line>}</span><br></pre></table></figure> <p>对于服务端组件,可以使用redirect.</p> <figure class="highlight js"><table><tr><td class=gutter><pre><span class=line>1</span><br><span class=line>2</span><br><span class=line>3</span><br><span class=line>4</span><br><span class=line>5</span><br><span class=line>6</span><br><span class=line>7</span><br><span class=line>8</span><br><span class=line>9</span><br><span class=line>10</span><br><span class=line>11</span><br><span class=line>12</span><br><span class=line>13</span><br><span class=line>14</span><br><span class=line>15</span><br><span class=line>16</span><br></pre><td class=code><pre><span class=line><span class=keyword>import</span> { redirect } <span class=keyword>from</span> <span class=string>'next/navigation'</span></span><br><span class=line> </span><br><span class=line><span class=keyword>async</span> <span class=function><span class=keyword>function</span> <span class=title>fetchTeam</span>(<span class=params>id: string</span>) </span>{</span><br><span class=line>  <span class=keyword>const</span> res = <span class=keyword>await</span> fetch(<span class=string>'https://...'</span>)</span><br><span class=line>  <span class=keyword>if</span> (!res.ok) <span class=keyword>return</span> <span class=literal>undefined</span></span><br><span class=line>  <span class=keyword>return</span> res.json()</span><br><span class=line>}</span><br><span class=line> </span><br><span class=line><span class=keyword>export</span> <span class=keyword>default</span> <span class=keyword>async</span> <span class=function><span class=keyword>function</span> <span class=title>Profile</span>(<span class=params>{ params }: { params: { id: string } }</span>) </span>{</span><br><span class=line>  <span class=keyword>const</span> team = <span class=keyword>await</span> fetchTeam(params.id)</span><br><span class=line>  <span class=keyword>if</span> (!team) {</span><br><span class=line>    redirect(<span class=string>'/login'</span>)</span><br><span class=line>  }</span><br><span class=line> </span><br><span class=line>  <span class=comment>// ...</span></span><br><span class=line>}</span><br></pre></table></figure> <p>Next.js路由默认缓存等机制.</p> <p>使用<code>loading.js</code>加载一些内容,原本是React中的suspense.</p> <p><img alt="Loading UI" data-src=https://nextjs.org/_next/image?url=%2Fdocs%2Flight%2Floading-ui.png&w=3840&q=75&dpl=dpl_7E1cZLB9sZWvkjQY6Ei4tJ18mYN7></p> <figure class="highlight plaintext"><table><tr><td class=gutter><pre><span class=line>1</span><br><span class=line>2</span><br><span class=line>3</span><br><span class=line>4</span><br></pre><td class=code><pre><span class=line>export default function Loading() {</span><br><span class=line>  // You can add any UI inside Loading, including a Skeleton.</span><br><span class=line>  return &LTLoadingSkeleton /></span><br><span class=line>}</span><br></pre></table></figure> <p>使用loading.js与suspense可以获得<strong>Streaming Server Rendering</strong> 和<strong>Selective Hydration</strong>的效果.</p> <h4 id=错误处理><a class=headerlink href=#错误处理 title=错误处理></a>错误处理</h4><p>使用error.js进行错误处理.如果要处理根目录下的错误,需要使用<code>global-error.tsx</code>文件,它可以处理包括根下layout.tsx和template.tsx中丢出的错误,此外也推荐再定义error.tsx处理根下page.tsx中的错误.</p> <p>error.tsx文件会被嵌入到layout之中,所以不会处理layout.tsx中丢出的错误.</p> <h4 id=重定向><a class=headerlink href=#重定向 title=重定向></a>重定向</h4><p><img alt=image-20240206130511356 data-src=https://s2.loli.net/2024/02/06/Zav7h3fXBkOIR8g.png></p> <p>重定向跟路由类似,也分在服务端组件和客户端使用.</p> <h4 id=redirect><a class=headerlink href=#redirect title=redirect></a>redirect</h4><figure class="highlight plaintext"><table><tr><td class=gutter><pre><span class=line>1</span><br><span class=line>2</span><br><span class=line>3</span><br><span class=line>4</span><br><span class=line>5</span><br><span class=line>6</span><br><span class=line>7</span><br><span class=line>8</span><br><span class=line>9</span><br><span class=line>10</span><br><span class=line>11</span><br><span class=line>12</span><br><span class=line>13</span><br><span class=line>14</span><br><span class=line>15</span><br></pre><td class=code><pre><span class=line>'use server'</span><br><span class=line> </span><br><span class=line>import { redirect } from 'next/navigation'</span><br><span class=line>import { revalidatePath } from 'next/cache'</span><br><span class=line> </span><br><span class=line>export async function createPost(id: string) {</span><br><span class=line>  try {</span><br><span class=line>    // Call database</span><br><span class=line>  } catch (error) {</span><br><span class=line>    // Handle errors</span><br><span class=line>  }</span><br><span class=line> </span><br><span class=line>  revalidatePath('/posts') // Update cached posts</span><br><span class=line>  redirect(`/post/${id}`) // Navigate to the new post page</span><br><span class=line>}</span><br></pre></table></figure> <p>也可以在<code>next.config.js</code>中设置redirects使得在请求的页面渲染之前进行跳转.</p> <figure class="highlight js"><table><tr><td class=gutter><pre><span class=line>1</span><br><span class=line>2</span><br><span class=line>3</span><br><span class=line>4</span><br><span class=line>5</span><br><span class=line>6</span><br><span class=line>7</span><br><span class=line>8</span><br><span class=line>9</span><br><span class=line>10</span><br><span class=line>11</span><br><span class=line>12</span><br><span class=line>13</span><br><span class=line>14</span><br><span class=line>15</span><br><span class=line>16</span><br><span class=line>17</span><br><span class=line>18</span><br></pre><td class=code><pre><span class=line><span class=built_in>module</span>.exports = {</span><br><span class=line>  <span class=keyword>async</span> <span class=function><span class=title>redirects</span>(<span class=params></span>)</span> {</span><br><span class=line>    <span class=keyword>return</span> [</span><br><span class=line>      <span class=comment>// Basic redirect</span></span><br><span class=line>      {</span><br><span class=line>        <span class=attr>source</span>: <span class=string>'/about'</span>,</span><br><span class=line>        <span class=attr>destination</span>: <span class=string>'/'</span>,</span><br><span class=line>        <span class=attr>permanent</span>: <span class=literal>true</span>,</span><br><span class=line>      },</span><br><span class=line>      <span class=comment>// Wildcard path matching</span></span><br><span class=line>      {</span><br><span class=line>        <span class=attr>source</span>: <span class=string>'/blog/:slug'</span>,</span><br><span class=line>        <span class=attr>destination</span>: <span class=string>'/news/:slug'</span>,</span><br><span class=line>        <span class=attr>permanent</span>: <span class=literal>true</span>,</span><br><span class=line>      },</span><br><span class=line>    ]</span><br><span class=line>  },</span><br><span class=line>}</span><br></pre></table></figure> <p>此外还有在Middleware中的跳转,方便在进行验证之后进行选择性跳转.</p> <figure class="highlight ts"><table><tr><td class=gutter><pre><span class=line>1</span><br><span class=line>2</span><br><span class=line>3</span><br><span class=line>4</span><br><span class=line>5</span><br><span class=line>6</span><br><span class=line>7</span><br><span class=line>8</span><br><span class=line>9</span><br><span class=line>10</span><br><span class=line>11</span><br><span class=line>12</span><br><span class=line>13</span><br><span class=line>14</span><br><span class=line>15</span><br><span class=line>16</span><br><span class=line>17</span><br><span class=line>18</span><br></pre><td class=code><pre><span class=line><span class=keyword>import</span> { NextResponse, NextRequest } <span class=keyword>from</span> <span class=string>'next/server'</span></span><br><span class=line><span class=keyword>import</span> { authenticate } <span class=keyword>from</span> <span class=string>'auth-provider'</span></span><br><span class=line> </span><br><span class=line><span class=keyword>export</span> <span class=function><span class=keyword>function</span> <span class=title>middleware</span>(<span class=params>request: NextRequest</span>) </span>{</span><br><span class=line>  <span class=keyword>const</span> isAuthenticated = authenticate(request)</span><br><span class=line> </span><br><span class=line>  <span class=comment>// If the user is authenticated, continue as normal</span></span><br><span class=line>  <span class=keyword>if</span> (isAuthenticated) {</span><br><span class=line>    <span class=keyword>return</span> NextResponse.next()</span><br><span class=line>  }</span><br><span class=line> </span><br><span class=line>  <span class=comment>// Redirect to login page if not authenticated</span></span><br><span class=line>  <span class=keyword>return</span> NextResponse.redirect(<span class=keyword>new</span> URL(<span class=string>'/login'</span>, request.url))</span><br><span class=line>}</span><br><span class=line> </span><br><span class=line><span class=keyword>export</span> <span class=keyword>const</span> config = {</span><br><span class=line>  <span class=attr>matcher</span>: <span class=string>'/dashboard/:path*'</span>,</span><br><span class=line>}</span><br></pre></table></figure> <h4 id=路由组><a class=headerlink href=#路由组 title=路由组></a>路由组</h4><p>路由组可以将路由分成一组,同时使得在一个路由段建立多个嵌套的layout.</p> <p>使用<code>()</code>包含一个目录名,这个目录不会被当作一个路由.在这个路由组中的路由可以共享一个layout.这个目录不会被处理成路由段,此外可以利用这个创建多个root layout.</p> <p><img alt="Route Groups with Multiple Root Layouts" data-src=https://nextjs.org/_next/image?url=%2Fdocs%2Flight%2Froute-group-multiple-root-layouts.png&w=3840&q=75&dpl=dpl_Fr1VCq6W9RFeEuXYFe2L4sUmaW7a></p> <h4 id=项目结构和文件安排><a class=headerlink href=#项目结构和文件安排 title=项目结构和文件安排></a>项目结构和文件安排</h4><p>在目录前加<code>_</code>使得其不可访问.</p> <blockquote><p>：_folderName这表示文件夹是一个专用的实现细节，路由系统不应考虑它，从而选择不路由文件夹及其所有子文件夹。</blockquote> <p>这样做可以使得UI与路由分开.</p> <p><img alt="An example folder structure using private folders" data-src=https://nextjs.org/_next/image?url=%2Fdocs%2Flight%2Fproject-organization-private-folders.png&w=3840&q=75&dpl=dpl_FhZP1LTtukMJX1yNmAQ5DmdgAZ2Q style=zoom:67%;></p> <p>此外可以配置module aliases方便导入.</p> <figure class="highlight js"><table><tr><td class=gutter><pre><span class=line>1</span><br><span class=line>2</span><br><span class=line>3</span><br><span class=line>4</span><br><span class=line>5</span><br><span class=line>6</span><br><span class=line>7</span><br><span class=line>8</span><br></pre><td class=code><pre><span class=line>{</span><br><span class=line>  <span class=string>"compilerOptions"</span>: {</span><br><span class=line>    <span class=string>"baseUrl"</span>: <span class=string>"."</span>,</span><br><span class=line>    <span class=string>"paths"</span>: {</span><br><span class=line>      <span class=string>"@/components/*"</span>: [<span class=string>"components/*"</span>]</span><br><span class=line>    }</span><br><span class=line>  }</span><br><span class=line>}</span><br></pre></table></figure> <p><strong>项目组织策略</strong></p> <p>可以将组件和lib库放在根目录,跟app目录同层.</p> <p><img alt="An example folder structure with project files outside of app" data-src=https://nextjs.org/_next/image?url=%2Fdocs%2Flight%2Fproject-organization-project-root.png&w=3840&q=75&dpl=dpl_FhZP1LTtukMJX1yNmAQ5DmdgAZ2Q style=zoom:50%;></p> <p>还可以将这些目录放在app目录下,此外还可以放在路由目录下.</p> <p><img alt="An example folder structure with project files split by feature or route" data-src=https://nextjs.org/_next/image?url=%2Fdocs%2Flight%2Fproject-organization-app-root-split.png&w=3840&q=75&dpl=dpl_FhZP1LTtukMJX1yNmAQ5DmdgAZ2Q></p> <h4 id=动态路由><a class=headerlink href=#动态路由 title=动态路由></a>动态路由</h4><p>给目录命名的时候使用<code>[]</code>,这样在layout,page,route或者generateMetadata函数中可以访问动态路由的参数.</p> <p>此外使用<code>[...slug]</code>不仅可以捕获该路由下其下的子路由也能被捕获</p> <p>使用<code>dynamicParams</code>控制<code>generateStaticParams</code>得到的结果之外的能否访问.</p> <figure class="highlight plaintext"><table><tr><td class=gutter><pre><span class=line>1</span><br></pre><td class=code><pre><span class=line>export const dynamicParams = false</span><br></pre></table></figure> <p>存在multiple-dynamic route以及catch-all segments</p> <p><img alt=image-20240206163014573 data-src=https://s2.loli.net/2024/02/06/rcxIzpTYlAGDZPK.png></p> <p>此外还有Optional Catch-all Segments,<code>[[...]]</code>既可以匹配原本路由也可以匹配子路由</p> <h4 id=并行路由><a class=headerlink href=#并行路由 title=并行路由></a>并行路由</h4><p>并行路由允许您同时或有条件地呈现同一布局中的一个或多个页面。它们适用于应用程序的高度动态部分，如社交网站上的仪表板和提要。</p> <p>使用<code>@</code>开头的目录,类似slot可以插入到layout中.</p> <h4 id=插入路由><a class=headerlink href=#插入路由 title=插入路由></a>插入路由</h4><p>截取路由允许您在当前布局中从应用程序的另一部分加载路由。当您希望在不让用户切换到不同上下文的情况下显示路线的内容时，这种路由范例可能很有用。</p> <h4 id=路由处理器><a class=headerlink href=#路由处理器 title=路由处理器></a>路由处理器</h4><p>这也是Next能作为全栈框架的原因,当然在这方面不如Nest.</p> <p>路由处理器类似page.js而且不能跟其重合.</p> <figure class="highlight plaintext"><table><tr><td class=gutter><pre><span class=line>1</span><br><span class=line>2</span><br><span class=line>3</span><br></pre><td class=code><pre><span class=line>export const dynamic = 'force-dynamic' // defaults to auto</span><br><span class=line>export async function GET(request: Request) {}</span><br><span class=line></span><br></pre></table></figure> <p>使用GET方法并用Response返回能自动缓存.并且可以使用revalidate验证缓存数据.</p> <figure class="highlight plaintext"><table><tr><td class=gutter><pre><span class=line>1</span><br><span class=line>2</span><br><span class=line>3</span><br><span class=line>4</span><br><span class=line>5</span><br><span class=line>6</span><br><span class=line>7</span><br><span class=line>8</span><br></pre><td class=code><pre><span class=line>export async function GET() {</span><br><span class=line>  const res = await fetch('https://data.mongodb-api.com/...', {</span><br><span class=line>    next: { revalidate: 60 }, // Revalidate every 60 seconds</span><br><span class=line>  })</span><br><span class=line>  const data = await res.json()</span><br><span class=line> </span><br><span class=line>  return Response.json(data)</span><br><span class=line>}</span><br></pre></table></figure> <p>page,layout和route handler有个<code>dynamic</code>属性,控制静态和动态的渲染和缓存.</p> <p>默认为<code>auto</code>表示尽可能地缓存,<code>force-dynamic</code>表示强制动态渲染,使得每此渲染在每次请求的时候渲染.<code>error</code>如果每个组件使用了动态函数或者没有缓存的数据基会报错.</p> <p><code>force-static</code>强制静态渲染并且缓存数据,cookies和headers等返回空值.</p> <p>动态函数包括cookies和headers.</p> <p>动态路由也可以处理请求的参数.</p> <h4 id=Middleware><a class=headerlink href=#Middleware title=Middleware></a>Middleware</h4><blockquote><p>Middleware允许在请求完成之前运行代码。然后，根据传入的请求，您可以通<strong>过重写、重定向、修改请求或响应标头或直接响应</strong>来修改响应。</blockquote> <p>在根目录使用<code>middleware.ts</code>进行对请求的拦截相应.</p> <p><img alt=image-20240207234054276 data-src=https://s2.loli.net/2024/02/07/z9TjK2Om3EcICDY.png></p> <h3 id=Data-Fetching><a title="Data Fetching" class=headerlink href=#Data-Fetching></a>Data Fetching</h3><p>由于引入了SSR等,数据获取也有了变化.分为在server上和在client上.</p> <h4 id=fetch><a class=headerlink href=#fetch title=fetch></a>fetch</h4><p>在Next.js服务端中,fetch可以配置缓存和重验证.</p> <p>在客户端中可以调用route handler获取数据,也可以使用React Query等第三方库.</p> <h4 id=Server-Actions和Mutations><a title="Server Actions和Mutations" class=headerlink href=#Server-Actions和Mutations></a>Server Actions和Mutations</h4><p>Server Actions是在服务上的异步函数,既可以在服务和客户端的组件来处理提交和和数据改变.</p> <p>对于服务端组件,将”use server”放在一个异步函数的最顶部.</p> <figure class="highlight plaintext"><table><tr><td class=gutter><pre><span class=line>1</span><br><span class=line>2</span><br><span class=line>3</span><br><span class=line>4</span><br><span class=line>5</span><br><span class=line>6</span><br><span class=line>7</span><br><span class=line>8</span><br><span class=line>9</span><br><span class=line>10</span><br><span class=line>11</span><br><span class=line>12</span><br><span class=line>13</span><br></pre><td class=code><pre><span class=line>// Server Component</span><br><span class=line>export default function Page() {</span><br><span class=line>  // Server Action</span><br><span class=line>  async function create() {</span><br><span class=line>    'use server'</span><br><span class=line> </span><br><span class=line>    // ...</span><br><span class=line>  }</span><br><span class=line> </span><br><span class=line>  return (</span><br><span class=line>    // ...</span><br><span class=line>  )</span><br><span class=line>}</span><br></pre></table></figure> <p>对于客户端组件,将”use server”放在客户端组件最顶部.</p> <h3 id=Nuxt><a class=headerlink href=#Nuxt title=Nuxt></a>Nuxt</h3><p>Vue的SSR框架,Nuxt默认使用Vite构建工具.官方文档将它的和核心概念分为以下几个部分</p> <p><img alt=image-20240206000905397 data-src=https://s2.loli.net/2024/02/06/iU72dluEKhtOkI9.png></p> <p>总体看来跟Next差别不大,具体的可以查看<a href=https://nuxt.com/docs/getting-started/introduction rel=noopener target=_blank>Introduction · Get Started with Nuxt</a>.</p> <h3 id=SvelteKit><a class=headerlink href=#SvelteKit title=SvelteKit></a>SvelteKit</h3><p>SvelteKit默认使用Vite构建,推荐使用SvelteKit创建一个svelte项目</p> <blockquote><p>SvelteKit将处理调用Svelte编译器，将.Svelte文件转换为.js文件，这些文件创建DOM和.css文件。它还提供构建web应用程序所需的所有其他部分，如开发服务器、路由、部署以及SSR支持.</blockquote> <p><img alt=image-20240203190856868 data-src=https://s2.loli.net/2024/02/03/kOdja1mSY925byP.png></p> <p>值得注意的是,Svelte是的更新是基于赋值,使用数组的push等操作不会自动更新.</p> <p>sveltekit类似Next也在路由,fetch数据,headers,cookies等有很多opinioned的配置.</p> <h3 id=Solid><a class=headerlink href=#Solid title=Solid></a>Solid</h3><p>Solid也是使用Vite构建,使用<code>createSignal</code>来管理状态实现交互性.目前github上的star没有svelte多,因为发展成熟度还没有svelte高,但是solid目前更像一个方便的动态库,比较轻巧.</p> <p>Solid的SSR支持有点特别.</p> <blockquote><p>Solid有一个动态服务器端渲染解决方案，可以实现真正同构的开发体验。通过使用我们的Resource原语，可以轻松地进行异步数据请求，更重要的是，可以在客户端和浏览器之间自动序列化和同步。</blockquote> <p>Solid的响应式基于Signal,Memo以及Effect.</p> <p>目前Solid正在开发Solid Start,目的也是提供一个较为整体的Solid生态的解决方案.</p> <p><img alt=image-20240208002623304 data-src=https://s2.loli.net/2024/02/08/CwB6zkX5yPvnf4q.png></p> <p>Solid和Svelte都有很好的tutorial而且在掌握vue或者react之后再去看它们的文档也并不困难.</p> <h3 id=小结><a class=headerlink href=#小结 title=小结></a>小结</h3><p>对于这一类前端框架,以后可能还会不断涌现,但是其中的生态还是很重要的,如果想要快速没有太多心智负担的开发一个较为成熟生产应用,还是推荐使用React或者Vue等较为成熟的框架或者库.此外这些框架其中的要解决的问题是一致的,解决方法也是趋同的.</p> <p>响应性,组件创建,生命周期等等,此外附带路由,状态管理,数据获取操作等等都有解决方法.</p> <h2 id=Astro><a class=headerlink href=#Astro title=Astro></a>Astro</h2><p>我一看到这个框架的官网介绍就觉得这个框架适合写博客.当然它很灵活,功能很强大.</p> <p>Astro本身并不与React和Vue冲突,所以一起用并没问题.<a href=https://docs.astro.build/zh-cn/guides/integrations-guide/ rel=noopener target=_blank>使用集成 | Docs (astro.build)</a></p> <h2 id=Typescript><a class=headerlink href=#Typescript title=Typescript></a>Typescript</h2><p>现在流行用ts代替js了,所以还是学习一下.其实并不是很难.</p> <h2 id=Bun-Deno><a class=headerlink href=#Bun-Deno title=Bun?Deno?></a>Bun?Deno?</h2><p>node之后的运行时.Deno现在没声了,可以考虑用用Bun.</p> <blockquote><p>开发、测试、运行和捆绑JavaScript&TypeScript项目——所有这些都使用Bun。Bun是一个一体化的JavaScript运行时和工具包，专为速度而设计，配有bundler、测试运行程序和Node.js兼容的包管理器。</blockquote> <h2 id=htmlx><a class=headerlink href=#htmlx title=htmlx??></a>htmlx??</h2><p>最近比较火,但其实本身就是使用html的语法增加了一些原本用js才能实现的比如传文件、发送请求的功能.</p> <p>但我总感觉定制化能力有点弱,可能本身也是为了快速开发一些web工具用的.</p> <h2 id=最后><a class=headerlink href=#最后 title=最后></a>最后</h2><p>有很多技术我并没有提到,比如还有前端框架Angular以及WASM<a href=https://developer.mozilla.org/zh-CN/docs/WebAssembly rel=noopener target=_blank>WebAssembly | MDN (mozilla.org)</a>,Qwik等等,因为我现实中并没有过多使用它们,还是让子弹飞一会吧.</p> <p>一些前端框架的黑盒有点多,对于初学者还是要多多学习基础,学习框架时建议从简单入手,慢慢深入,毕竟很多框架的一些功能其实平常可能用不上.我推荐在掌握React,Next之后可以往Svelte或者Solid框架学习.因为Vue从一些概念上我觉得并没有与React太大的差异,主要是生态上差别,Vue的官方给的工具链已经比较齐全了,而React的生态可以说比较多样化,但也会导致在选择工具上的犹豫和困难.</p> <p>Solid目前正在开发Solid Start框架,预计应该是类似于SvelteKit之于Svelte,期待后续发展.</p> <p>而Astro这类框架用于个人博客等等还是很不错的.最后推荐几位Youtube上的前端博主,<a href=https://www.youtube.com/@WebDevSimplified rel=noopener target=_blank>Web Dev Simplified - YouTube</a>,<a href=https://www.youtube.com/@TraversyMedia rel=noopener target=_blank>Traversy Media - YouTube</a>,<a href=https://www.youtube.com/@Fireship rel=noopener target=_blank>Fireship - YouTube</a>以及<a href=https://www.youtube.com/@freecodecamp rel=noopener target=_blank>freeCodeCamp.org - YouTube</a>.当然不只是前端以及一些技术趋势.</p> <h2 id=可以观看的一些视频和文章><a class=headerlink href=#可以观看的一些视频和文章 title=可以观看的一些视频和文章></a>可以观看的一些视频和文章</h2><ol><li><a href=https://www.youtube.com/watch?v=Gc4Xh8u19NU rel=noopener target=_blank>YouTube</a><li><a href=https://www.youtube.com/watch?v=9He4UBLyk8Y&list=PLWKjhJtqVAbmMuZ3saqRIBimAKIMYkt0E&ab_channel=freeCodeCamp.org rel=noopener target=_blank>Front End Developer Roadmap 2024 - YouTube</a><li><a href=https://www.youtube.com/watch?v=8sXRyHI3bLw&ab_channel=TraversyMedia rel=noopener target=_blank>Web Development In 2024 - A Practical Guide (youtube.com)</a><li><a href=https://risingstars.js.org/2023/en rel=noopener target=_blank>2023 JavaScript Rising Stars</a><li><a href=https://www.satellytes.com/blog/post/getting-started-gatsby-next-remix/ rel=noopener target=_blank>Getting Started: Gatsby vs. Next.js vs. Remix | Satellytes</a><li><a href=https://clonecoding.com/zh-cn/next-js-三种渲染方式-ssr-csr-ssg-优缺点分析/ rel=noopener target=_blank>[Next.js] 三种渲染方式 - SSR、CSR、SSG：优缺点分析 - CloneCoding</a><li><a href=https://juejin.cn/post/7145669817428049957 rel=noopener target=_blank>后起之秀svelte和solid是否值得花时间学习？ - 掘金 (juejin.cn)</a><li><a href=https://www.jdon.com/59675.html rel=noopener target=_blank>比较前端框架ReactJs、SolidJS、Svelte和Lit底层逻辑 - Smashing - 极道 (jdon.com)</a></ol> <link href=/css/spoiler.css rel=stylesheet><script async src=/js/spoiler.js></script> <div><div><div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div></div></div> <div class=reward-container><div>感谢阅读.</div><button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">打赏</button><div style="display: none;" id=qr><div style="display: inline-block;"><img alt="Sekyoro 微信支付" src=/images/wechatpay.png><p>微信支付</div></div></div> <div><ul class=post-copyright><li class=post-copyright-author><strong>本文作者： </strong>Sekyoro<li class=post-copyright-link><strong>本文链接：</strong> <a href=https://www.sekyoro.top/2024/02/03/%E5%9B%9E%E5%A4%B4%E5%86%8D%E7%9C%8B%E5%89%8D%E7%AB%AF%E6%A1%86%E6%9E%B6/ title=回头再看前端框架>https://www.sekyoro.top/2024/02/03/回头再看前端框架/</a><li class=post-copyright-license><strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href=https://creativecommons.org/licenses/by-nc-sa/4.0/ rel=noopener target=_blank><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</ul></div> <div class=followme><p>欢迎关注我的其它发布渠道<div class=social-list><div class=social-item><a class=social-link href=/images/wxqrcode.png target=_blank> <span class=icon> <i class="fab fa-weixin"></i> </span> <span class=label>WeChat</span> </a></div><div class=social-item><a class=social-link href=/images/website.png target=_blank> <span class=icon> <i class="fa fa-user"></i> </span> <span class=label>PersonalWebsite</span> </a></div><div class=social-item><a class=social-link href=https://my-astro-git-main-drowning-in-codes.vercel.app target=_blank> <span class=icon> <i class="fas fa-share"></i> </span> <span class=label>杂鱼分享</span> </a></div><div class=social-item><a class=social-link href=/atom.xml target=_blank> <span class=icon> <i class="fa fa-rss"></i> </span> <span class=label>RSS</span> </a></div></div></div> <footer class=post-footer><div class=post-tags><a href=/tags/front-end/ rel=tag><i class="fa fa-tag"></i> front end</a></div><div class=post-nav><div class=post-nav-item><a href=/2024/01/31/%E5%8D%8F%E5%90%8C%E8%9E%8D%E5%90%88%E4%BB%A3%E7%A0%81%E5%AD%A6%E4%B9%A0/ rel=prev title=协同融合代码学习> <i class="fa fa-chevron-left"></i> 协同融合代码学习 </a></div><div class=post-nav-item><a title="TypeScript on the way:学习TypeScript" href=/2024/02/11/TypeScript-on-the-way-%E5%AD%A6%E4%B9%A0TypeScript/ rel=next> TypeScript on the way:学习TypeScript <i class="fa fa-chevron-right"></i> </a></div></div></footer> <!-- 评论区 --> <div class=comments><div data-id=city data-uid=MTAyMC81MzE5Ny8yOTY3Mg== id=lv-container></div></div> <script>window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }</script> <div class="toggle sidebar-toggle"><span class="toggle-line toggle-line-first"></span><span class="toggle-line toggle-line-middle"></span><span class="toggle-line toggle-line-last"></span></div> <aside class=sidebar><div class=sidebar-inner><!-- canvas粒子时钟 --><div><canvas id=canvas style=width:60%;>当前浏览器不支持canvas，请更换浏览器后再试</canvas></div><script>(function(){
+
+   var digit=
+    [
+        [
+            [0,0,1,1,1,0,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,0,1,1,0],
+            [0,0,1,1,1,0,0]
+        ],//0
+        [
+            [0,0,0,1,1,0,0],
+            [0,1,1,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [1,1,1,1,1,1,1]
+        ],//1
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,1,1],
+            [1,1,1,1,1,1,1]
+        ],//2
+        [
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//3
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,0],
+            [0,0,1,1,1,1,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,1,1,0],
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,1]
+        ],//4
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,1,1,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//5
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//6
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0]
+        ],//7
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//8
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,1,1,0,0,0,0]
+        ],//9
+        [
+            [0,0,0,0,0,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,0,0,0]
+        ]//:
+    ];
+
+var canvas = document.getElementById('canvas');
+
+if(canvas.getContext){
+    var cxt = canvas.getContext('2d');
+    //声明canvas的宽高
+    var H = 100,W = 700;
+    canvas.height = H;
+    canvas.width = W;
+    cxt.fillStyle = '#f00';
+    cxt.fillRect(10,10,50,50);
+
+    //存储时间数据
+    var data = [];
+    //存储运动的小球
+    var balls = [];
+    //设置粒子半径
+    var R = canvas.height/20-1;
+    (function(){
+        var temp = /(\d)(\d):(\d)(\d):(\d)(\d)/.exec(new Date());
+        //存储时间数字，由十位小时、个位小时、冒号、十位分钟、个位分钟、冒号、十位秒钟、个位秒钟这7个数字组成
+        data.push(temp[1],temp[2],10,temp[3],temp[4],10,temp[5],temp[6]);
+    })();
+
+    /*生成点阵数字*/
+    function renderDigit(index,num){
+        for(var i = 0; i < digit[num].length; i++){
+            for(var j = 0; j < digit[num][i].length; j++){
+                if(digit[num][i][j] == 1){
+                    cxt.beginPath();
+                    cxt.arc(14*(R+2)*index + j*2*(R+1)+(R+1),i*2*(R+1)+(R+1),R,0,2*Math.PI);
+                    cxt.closePath();
+                    cxt.fill();
+                }
+            }
+        }
+    }
+
+    /*更新时钟*/
+    function updateDigitTime(){
+        var changeNumArray = [];
+        var temp = /(\d)(\d):(\d)(\d):(\d)(\d)/.exec(new Date());
+        var NewData = [];
+        NewData.push(temp[1],temp[2],10,temp[3],temp[4],10,temp[5],temp[6]);
+        for(var i = data.length-1; i >=0 ; i--){
+            //时间发生变化
+            if(NewData[i] !== data[i]){
+                //将变化的数字值和在data数组中的索引存储在changeNumArray数组中
+                changeNumArray.push(i+'_'+(Number(data[i])+1)%10);
+            }
+        }
+        //增加小球
+        for(var i = 0; i< changeNumArray.length; i++){
+            addBalls.apply(this,changeNumArray[i].split('_'));
+        }
+        data = NewData.concat();
+    }
+
+    /*更新小球状态*/
+    function updateBalls(){
+        for(var i = 0; i < balls.length; i++){
+            balls[i].stepY += balls[i].disY;
+            balls[i].x += balls[i].stepX;
+            balls[i].y += balls[i].stepY;
+            if(balls[i].x > W + R || balls[i].y > H + R){
+                balls.splice(i,1);
+                i--;
+            }
+        }
+    }
+
+    /*增加要运动的小球*/
+    function addBalls(index,num){
+        var numArray = [1,2,3];
+        var colorArray =  ["#3BE","#09C","#A6C","#93C","#9C0","#690","#FB3","#F80","#F44","#C00"];
+        for(var i = 0; i < digit[num].length; i++){
+            for(var j = 0; j < digit[num][i].length; j++){
+                if(digit[num][i][j] == 1){
+                    var ball = {
+                        x:14*(R+2)*index + j*2*(R+1)+(R+1),
+                        y:i*2*(R+1)+(R+1),
+                        stepX:Math.floor(Math.random() * 4 -2),
+                        stepY:-2*numArray[Math.floor(Math.random()*numArray.length)],
+                        color:colorArray[Math.floor(Math.random()*colorArray.length)],
+                        disY:1
+                    };
+                    balls.push(ball);
+                }
+            }
+        }
+    }
+
+    /*渲染*/
+    function render(){
+        //重置画布宽度，达到清空画布的效果
+        canvas.height = 100;
+        //渲染时钟
+        for(var i = 0; i < data.length; i++){
+            renderDigit(i,data[i]);
+        }
+        //渲染小球
+        for(var i = 0; i < balls.length; i++){
+            cxt.beginPath();
+            cxt.arc(balls[i].x,balls[i].y,R,0,2*Math.PI);
+            cxt.fillStyle = balls[i].color;
+            cxt.closePath();
+            cxt.fill();
+        }
+    }
+
+    clearInterval(oTimer);
+    var oTimer = setInterval(function(){
+        //更新时钟
+        updateDigitTime();
+        //更新小球状态
+        updateBalls();
+        //渲染
+        render();
+    },50);
+}
+
+})();</script><!-- require APlayer --><link href=https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css rel=stylesheet><script src=https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js></script><!-- require MetingJS --><script src=/js/meting-js.js></script><ul class="sidebar-nav motion-element"><li class=sidebar-nav-toc>文章目录<li class=sidebar-nav-overview>站点概览</ul><!--noindex--><div class="post-toc-wrap sidebar-panel"><div class="post-toc motion-element"><ol class=nav><li class="nav-item nav-level-2"><a class=nav-link href=#Tailwind-css><span class=nav-number>1.</span> <span class=nav-text>Tailwind css</span></a><li class="nav-item nav-level-2"><a class=nav-link href=#React><span class=nav-number>2.</span> <span class=nav-text>React</span></a><li class="nav-item nav-level-2"><a class=nav-link href=#Vue><span class=nav-number>3.</span> <span class=nav-text>Vue</span></a><li class="nav-item nav-level-2"><a class=nav-link href=#Svelte-or-Solid><span class=nav-number>4.</span> <span class=nav-text>Svelte or Solid</span></a><li class="nav-item nav-level-2"><a class=nav-link href=#%E5%AF%B9%E6%AF%94%E4%B8%80%E4%B8%8BNext-Nuxt%E4%BB%A5%E5%8F%8ASvelteKit%E5%92%8Csolid-js><span class=nav-number>5.</span> <span class=nav-text>对比一下Next,Nuxt以及SvelteKit和solid.js</span></a><ol class=nav-child><li class="nav-item nav-level-3"><a class=nav-link href=#%E6%9E%84%E5%BB%BA%E5%B7%A5%E5%85%B7><span class=nav-number>5.1.</span> <span class=nav-text>构建工具</span></a><li class="nav-item nav-level-3"><a class=nav-link href=#%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84><span class=nav-number>5.2.</span> <span class=nav-text>目录结构</span></a><li class="nav-item nav-level-3"><a class=nav-link href=#%E5%A6%82%E4%BD%95%E5%86%99%E4%B8%80%E4%B8%AA%E7%BB%84%E4%BB%B6><span class=nav-number>5.3.</span> <span class=nav-text>如何写一个组件</span></a><ol class=nav-child><li class="nav-item nav-level-4"><a class=nav-link href=#%E6%9C%8D%E5%8A%A1%E7%AB%AF%E7%BB%84%E4%BB%B6><span class=nav-number>5.3.1.</span> <span class=nav-text>服务端组件</span></a><li class="nav-item nav-level-4"><a class=nav-link href=#%E5%AE%A2%E6%88%B7%E7%AB%AF%E7%BB%84%E4%BB%B6><span class=nav-number>5.3.2.</span> <span class=nav-text>客户端组件</span></a></ol><li class="nav-item nav-level-3"><a class=nav-link href=#styling><span class=nav-number>5.4.</span> <span class=nav-text>styling</span></a><li class="nav-item nav-level-3"><a class=nav-link href=#%E8%B7%AF%E7%94%B1><span class=nav-number>5.5.</span> <span class=nav-text>路由</span></a><li class="nav-item nav-level-3"><a class=nav-link href=#%E9%93%BE%E6%8E%A5%E4%B8%8E%E9%A1%B5%E9%9D%A2%E5%AF%BC%E8%88%AA><span class=nav-number>5.6.</span> <span class=nav-text>链接与页面导航</span></a><ol class=nav-child><li class="nav-item nav-level-4"><a class=nav-link href=#Link%E7%BB%84%E4%BB%B6><span class=nav-number>5.6.1.</span> <span class=nav-text>Link组件</span></a><li class="nav-item nav-level-4"><a class=nav-link href=#useRouter><span class=nav-number>5.6.2.</span> <span class=nav-text>useRouter</span></a><li class="nav-item nav-level-4"><a class=nav-link href=#%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86><span class=nav-number>5.6.3.</span> <span class=nav-text>错误处理</span></a><li class="nav-item nav-level-4"><a class=nav-link href=#%E9%87%8D%E5%AE%9A%E5%90%91><span class=nav-number>5.6.4.</span> <span class=nav-text>重定向</span></a><li class="nav-item nav-level-4"><a class=nav-link href=#redirect><span class=nav-number>5.6.5.</span> <span class=nav-text>redirect</span></a><li class="nav-item nav-level-4"><a class=nav-link href=#%E8%B7%AF%E7%94%B1%E7%BB%84><span class=nav-number>5.6.6.</span> <span class=nav-text>路由组</span></a><li class="nav-item nav-level-4"><a class=nav-link href=#%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84%E5%92%8C%E6%96%87%E4%BB%B6%E5%AE%89%E6%8E%92><span class=nav-number>5.6.7.</span> <span class=nav-text>项目结构和文件安排</span></a><li class="nav-item nav-level-4"><a class=nav-link href=#%E5%8A%A8%E6%80%81%E8%B7%AF%E7%94%B1><span class=nav-number>5.6.8.</span> <span class=nav-text>动态路由</span></a><li class="nav-item nav-level-4"><a class=nav-link href=#%E5%B9%B6%E8%A1%8C%E8%B7%AF%E7%94%B1><span class=nav-number>5.6.9.</span> <span class=nav-text>并行路由</span></a><li class="nav-item nav-level-4"><a class=nav-link href=#%E6%8F%92%E5%85%A5%E8%B7%AF%E7%94%B1><span class=nav-number>5.6.10.</span> <span class=nav-text>插入路由</span></a><li class="nav-item nav-level-4"><a class=nav-link href=#%E8%B7%AF%E7%94%B1%E5%A4%84%E7%90%86%E5%99%A8><span class=nav-number>5.6.11.</span> <span class=nav-text>路由处理器</span></a><li class="nav-item nav-level-4"><a class=nav-link href=#Middleware><span class=nav-number>5.6.12.</span> <span class=nav-text>Middleware</span></a></ol><li class="nav-item nav-level-3"><a class=nav-link href=#Data-Fetching><span class=nav-number>5.7.</span> <span class=nav-text>Data Fetching</span></a><ol class=nav-child><li class="nav-item nav-level-4"><a class=nav-link href=#fetch><span class=nav-number>5.7.1.</span> <span class=nav-text>fetch</span></a><li class="nav-item nav-level-4"><a class=nav-link href=#Server-Actions%E5%92%8CMutations><span class=nav-number>5.7.2.</span> <span class=nav-text>Server Actions和Mutations</span></a></ol><li class="nav-item nav-level-3"><a class=nav-link href=#Nuxt><span class=nav-number>5.8.</span> <span class=nav-text>Nuxt</span></a><li class="nav-item nav-level-3"><a class=nav-link href=#SvelteKit><span class=nav-number>5.9.</span> <span class=nav-text>SvelteKit</span></a><li class="nav-item nav-level-3"><a class=nav-link href=#Solid><span class=nav-number>5.10.</span> <span class=nav-text>Solid</span></a><li class="nav-item nav-level-3"><a class=nav-link href=#%E5%B0%8F%E7%BB%93><span class=nav-number>5.11.</span> <span class=nav-text>小结</span></a></ol><li class="nav-item nav-level-2"><a class=nav-link href=#Astro><span class=nav-number>6.</span> <span class=nav-text>Astro</span></a><li class="nav-item nav-level-2"><a class=nav-link href=#Typescript><span class=nav-number>7.</span> <span class=nav-text>Typescript</span></a><li class="nav-item nav-level-2"><a class=nav-link href=#Bun-Deno><span class=nav-number>8.</span> <span class=nav-text>Bun?Deno?</span></a><li class="nav-item nav-level-2"><a class=nav-link href=#htmlx><span class=nav-number>9.</span> <span class=nav-text>htmlx??</span></a><li class="nav-item nav-level-2"><a class=nav-link href=#%E6%9C%80%E5%90%8E><span class=nav-number>10.</span> <span class=nav-text>最后</span></a><li class="nav-item nav-level-2"><a class=nav-link href=#%E5%8F%AF%E4%BB%A5%E8%A7%82%E7%9C%8B%E7%9A%84%E4%B8%80%E4%BA%9B%E8%A7%86%E9%A2%91%E5%92%8C%E6%96%87%E7%AB%A0><span class=nav-number>11.</span> <span class=nav-text>可以观看的一些视频和文章</span></a></ol></div></div><!--/noindex--><div class="site-overview-wrap sidebar-panel"><div class="site-author motion-element" itemprop=author itemscope itemtype=http://schema.org/Person><img alt=Sekyoro class=site-author-image itemprop=image src=https://i.loli.net/2021/05/17/YqoavnXdGTpPO9R.jpg><p class=site-author-name itemprop=name>Sekyoro<div class=site-description itemprop=description>什么也无法舍弃的人，什么也做不了.</div></div><div class="site-state-wrap motion-element"><nav class=site-state><div class="site-state-item site-state-posts"><a href=/archives/> <span class=site-state-item-count>166</span> <span class=site-state-item-name>日志</span> </a></div><div class="site-state-item site-state-categories"><a href=/categories/> <span class=site-state-item-count>17</span> <span class=site-state-item-name>分类</span></a></div><div class="site-state-item site-state-tags"><a href=/tags/> <span class=site-state-item-count>184</span> <span class=site-state-item-name>标签</span></a></div></nav></div><div class="links-of-author motion-element"><span class=links-of-author-item> <a title="Personal Website → http://proanimer.com" href=http://proanimer.com/ rel=noopener target=_blank><i class="fab fa-internet-explorer fa-fw"></i>Personal Website</a> </span><span class=links-of-author-item> <a title="GitHub → https://github.com/drowning-in-codes" href=https://github.com/drowning-in-codes rel=noopener target=_blank><i class="fab fa-github fa-fw"></i>GitHub</a> </span><span class=links-of-author-item> <a title="E-Mail → mailto:bukalala174@gmail.com" href=mailto:bukalala174@gmail.com rel=noopener target=_blank><i class="fa fa-envelope fa-fw"></i>E-Mail</a> </span><span class=links-of-author-item> <a title="wxPublicAccount → https://mp.weixin.qq.com/s?__biz=Mzg3ODY1MDkzMg==&mid=2247483770&idx=1&sn=fdf88faab01d5c219ac609570a21c9d6&chksm=cf113221f866bb373938cfca03cf095ff4fe1e4dc37d68ef5de4cd4876ee1260fca0c015a4d6&token=1096259873&lang=zh_CN#rd" href=https://mp.weixin.qq.com/s?__biz=Mzg3ODY1MDkzMg==&mid=2247483770&idx=1&sn=fdf88faab01d5c219ac609570a21c9d6&chksm=cf113221f866bb373938cfca03cf095ff4fe1e4dc37d68ef5de4cd4876ee1260fca0c015a4d6&token=1096259873&lang=zh_CN#rd rel=noopener target=_blank><i class="fab fa-weixin fa-fw"></i>wxPublicAccount</a> </span><span class=links-of-author-item> <a title="RSS → /atom.xml" href=/atom.xml><i class="fa fa-rss fa-fw"></i>RSS</a> </span><span class=links-of-author-item> <a title="CSDN → https://blog.csdn.net/aqwca" href=https://blog.csdn.net/aqwca rel=noopener target=_blank><i class="fa fa-handshake fa-fw"></i>CSDN</a> </span><span class=links-of-author-item> <a title="杂鱼分享 → https://my-astro-git-main-drowning-in-codes.vercel.app" href=https://my-astro-git-main-drowning-in-codes.vercel.app/ rel=noopener target=_blank><i class="fas fa-share fa-fw"></i>杂鱼分享</a> </span></div><div class="links-of-blogroll motion-element"><div class=links-of-blogroll-title><i class="fa fa-link fa-fw"></i> 友情链接</div><ul class=links-of-blogroll-list><li class=links-of-blogroll-item><a href=http://myqhs.top/ rel=noopener target=_blank title=http://myqhs.top/>myqhs</a></ul></div><div class="motion-element announcement"><div class=title>注意</div><p class=content>由于最近图床更新,可能有些图片显示不了.如果发现了有些图片无法显示影响阅读的,还烦请联系我,我有空补上.<p class=date>2023-10-6</div></div><meting-js id=6856787487 order=random server=netease type=playlist> </meting-js><div class=widget-wrap><h3 class=widget-title style=margin:0>文章词云</h3><div class="widget tagcloud" id=myCanvasContainer><canvas height=250 id=resCanvas style=width:100% width=250><ul class=tag-list itemprop=keywords><li class=tag-list-item><a class=tag-list-link href=/tags/front-end/ rel=tag>front end</a><span class=tag-list-count>1</span></ul></canvas></div></div><script id=clustrmaps src=https://clustrmaps.com/map_v2.js?d=xQdGTxqARTBiNIwX2aUban-ixkj2s6VaZQWo-aVCgY8&cl=ffffff&w=a></script><div class="back-to-top motion-element"><i class="fa fa-arrow-up"></i><span>0%</span></div><!-- 边栏 --></div></aside> <div id=sidebar-dimmer></div> <footer class=footer><div class=footer-inner><div class=copyright>© Wed Apr 08 2020 08:00:00 GMT+0800 (中国标准时间) – <span itemprop=copyrightYear>2024</span><span class=with-love> <i class="fa fa-heart"></i> </span><span class=author itemprop=copyrightHolder>Sekyoro</span><span class=post-meta-divider>|</span><span class=post-meta-item-icon> <i class="fa fa-chart-area"></i> </span><span title=站点总字数>1.2m</span><span class=post-meta-divider>|</span><span class=post-meta-item-icon> <i class="fa fa-coffee"></i> </span><span title=站点阅读时长>17:51</span></div><script async src=https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js></script><span id=busuanzi_container_site_pv>总访问量<span id=busuanzi_value_site_pv></span>次</span><span class=post-meta-divider>|</span><span id=busuanzi_container_site_uv>总访客数<span id=busuanzi_value_site_uv></span>人</span><span class=post-meta-divider>|</span><!-- 不蒜子计数初始值纠正 --><script>$(document).ready(function() {
+
+    var int = setInterval(fixCount, 50);  // 50ms周期检测函数
+    var countOffset = 20000;  // 初始化首次数据
+
+    function fixCount() {            
+       if (document.getElementById("busuanzi_container_site_pv").style.display != "none")
+        {
+            $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + countOffset); 
+            clearInterval(int);
+        }                  
+        if ($("#busuanzi_container_site_pv").css("display") != "none")
+        {
+            $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + countOffset); // 加上初始数据 
+            clearInterval(int); // 停止检测
+        }  
+    }
+       	
+});</script><div><span id=timeDate>载入天数...</span><span id=times>载入时分秒...</span><script>var now = new Date();
+    function createtime() {
+        var grt= new Date("04/08/2021 20:00:00");
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+    }
+setInterval("createtime()",250);</script></div><div class=busuanzi-count><script async data-pjax src=https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script><span style="display: none;" class=post-meta-item id=busuanzi_container_site_uv> <span class=post-meta-item-icon> <i class="fa fa-user"></i> </span> <span class=site-uv title=总访客量> <span id=busuanzi_value_site_uv></span> </span> </span><span class=post-meta-divider>|</span><span style="display: none;" class=post-meta-item id=busuanzi_container_site_pv> <span class=post-meta-item-icon> <i class="fa fa-eye"></i> </span> <span class=site-pv title=总访问量> <span id=busuanzi_value_site_pv></span> </span> </span></div></div></footer> <script color=0,0,255 count=99 opacity=0.5 src=/lib/canvas-nest/canvas-nest.min.js zindex=-1></script> <script src=/lib/anime.min.js></script> <script src=https://cdn.jsdelivr.net/gh/theme-next/theme-next-pjax@0/pjax.min.js></script> <script src=https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js></script> <script src=https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js></script> <script src=https://cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js></script> <script src=https://cdn.jsdelivr.net/npm/velocity-animate@1/velocity.min.js></script> <script src=https://cdn.jsdelivr.net/npm/velocity-animate@1/velocity.ui.min.js></script> <script src=/js/utils.js></script> <script src=/js/motion.js></script> <script src=/js/schemes/pisces.js></script> <script src=/js/next-boot.js></script> <script src=/js/bookmark.js></script> <script>var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax',
+	'.widget-wrap'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+ 
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});</script> <script data-pjax>(function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();</script> <script src=https://cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js></script> <script src=https://cdn.jsdelivr.net/npm/instantsearch.js@4/dist/instantsearch.production.min.js></script> <script src=/js/algolia-search.js></script> <script data-pjax>document.querySelectorAll('.pdfobject-container').forEach(element => {
+  let url = element.dataset.target;
+  let pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  let pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  let fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});</script> <div id=pjax><script charset=utf-8 defer src=/js/outdate.js></script></div> <script charset=utf-8 defer src=/js/tagcanvas.js></script> <script charset=utf-8 defer src=/js/tagcloud.js></script> <script>NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});</script> <script>var OriginTitile = document.title;
+  var titleTime;
+  document.addEventListener("visibilitychange", function() {
+    if (document.hidden) {
+      document.title = "(つェ⊂)我藏好了哦~" + OriginTitile;
+      clearTimeout(titleTime);
+    } else {
+      document.title = "(*´∇｀*) 被你发现啦~" + OriginTitile;
+      titleTime = setTimeout(function() {
+        document.title = OriginTitile;
+      }, 2000);
+    }
+  });</script> <script src=/js/src/activate-power-mode.min.js></script> <script>POWERMODE.colorful = true;
+    POWERMODE.shake = false;
+    document.body.addEventListener('input', POWERMODE);</script> 
