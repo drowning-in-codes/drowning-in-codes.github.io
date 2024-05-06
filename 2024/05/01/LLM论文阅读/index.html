@@ -1,0 +1,466 @@
+<!doctypehtml><html lang=zh-CN><script defer src=/live2d-widget/autoload.js></script><meta charset=UTF-8><meta content=width=device-width,initial-scale=1,maximum-scale=2 name=viewport><meta content=#222 name=theme-color><meta content="Hexo 5.4.0" name=generator><link href=/images/blog_32px.png rel=apple-touch-icon sizes=180x180><link href=/images/blog_32px.png rel=icon sizes=32x32 type=image/png><link href=/images/blog_16px.png rel=icon sizes=16x16 type=image/png><link color=#222 href=/images/logo.svg rel=mask-icon><meta content=EPrJAp11bJwHULpQUaSNSZ8_3RcvTsPDAEGOME4pl1w name=google-site-verification><!-- Google tag (gtag.js) --><!-- 
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-VB21D8MKKW"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-VB21D8MKKW');
+</script> --><!-- google adsense in head.swig --><script async crossorigin=anonymous src=https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4034523802263123></script><meta content=7226864CE87CE9DE8C008385273846FF name=msvalidate.01><meta content=code-fjFXVtiL7j name=baidu-site-verification><link href=/css/main.css rel=stylesheet><link as=style href=https://fonts.googleapis.com/css?family=Roboto%20Mono,Roboto:300,300italic,400,400italic,700,700italic|Roboto:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext onload=this.rel='stylesheet' rel=preload><link as=style href=https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css onload=this.rel='stylesheet' rel=preload><link href=https://fonts.googleapis.com/css?family=Noto+Serif+SC|Roboto&display=swap rel=stylesheet><link href=https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css rel=stylesheet><link href=https://cdn.jsdelivr.net/npm/pace-js@1/themes/blue/pace-theme-minimal.css rel=stylesheet><script src=https://cdn.jsdelivr.net/npm/pace-js@1/pace.min.js></script><script id=hexo-configurations>var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.sekyoro.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":240,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"appID":"3G9PZZIKCH","apiKey":"8eb71f5ca3167e9ef3487882f10cfaad","indexName":"SekyoroSearch","hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};</script><link href=//cdn.bootcss.com/animate.css/3.5.0/animate.min.css rel=stylesheet><meta content=最近大语言模型及其相关应用实在是太火了,可以在一些公司或者个人博客查看最前沿进展,也可以通过代码项目、课程学习,还可以看看经典论文.这里就看看一些LLM的论文学习学习. name=description><meta content=article property=og:type><meta content=LLM论文阅读 property=og:title><meta content=https://www.sekyoro.top/2024/05/01/LLM%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/index.html property=og:url><meta content=Sekyoro的博客小屋 property=og:site_name><meta content=最近大语言模型及其相关应用实在是太火了,可以在一些公司或者个人博客查看最前沿进展,也可以通过代码项目、课程学习,还可以看看经典论文.这里就看看一些LLM的论文学习学习. property=og:description><meta content=zh_CN property=og:locale><meta content=https://s2.loli.net/2024/05/06/F5zWu6VldQqDBjs.png property=og:image><meta content=https://s2.loli.net/2024/05/06/hFNoCHDY23OmxiR.png property=og:image><meta content=https://s2.loli.net/2024/05/06/FcjiyX4oesVva2B.png property=og:image><meta content=https://proanimer-img.oss-cn-shanghai.aliyuncs.com/alimg/image-20240505224532005.png property=og:image><meta content=https://proanimer-img.oss-cn-shanghai.aliyuncs.com/alimg/image-20240505223449790.png property=og:image><meta content=https://proanimer-img.oss-cn-shanghai.aliyuncs.com/alimg/image-20240505231432035.png property=og:image><meta content=https://proanimer-img.oss-cn-shanghai.aliyuncs.com/alimg/image-20240505231734946.png property=og:image><meta content=https://limokii.github.io/2023/12/24/Parameter%20Efficient%20Fine-Tuning(PEFT property=og:image><meta content=2024-05-01T07:39:46.000Z property=article:published_time><meta content=2024-05-06T03:21:22.384Z property=article:modified_time><meta content=Sekyoro property=article:author><meta content="个人博客 技术学习 计算机 互联网 人工智能" property=article:tag><meta content=summary name=twitter:card><meta content=https://s2.loli.net/2024/05/06/F5zWu6VldQqDBjs.png name=twitter:image><link href=https://www.sekyoro.top/2024/05/01/LLM%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/ rel=canonical><script id=page-configurations>// https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };</script><title>LLM论文阅读 | Sekyoro的博客小屋</title><noscript><style>.use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }</style></noscript><link href=/atom.xml rel=alternate title=Sekyoro的博客小屋 type=application/atom+xml><body itemscope itemtype=http://schema.org/WebPage><canvas style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" class=fireworks></canvas><script defer src=https://cdn.bootcss.com/animejs/2.2.0/anime.min.js></script><script defer src=/js/src/fireworks.js></script><div class="container use-motion"><div class=headband></div><header class=header itemscope itemtype=http://schema.org/WPHeader><div class=header-inner><div class=site-brand-container><div class=site-nav-toggle><div aria-label=切换导航栏 class=toggle><span class="toggle-line toggle-line-first"></span><span class="toggle-line toggle-line-middle"></span><span class="toggle-line toggle-line-last"></span></div></div><div class=site-meta><a class=brand href=/ rel=start> <span class=logo-line-before><i></i></span> <h1 class=site-title>Sekyoro的博客小屋</h1> <span class=logo-line-after><i></i></span> </a></div><div class=site-nav-right><div class="toggle popup-trigger"><i class="fa fa-search fa-fw fa-lg"></i></div></div></div><nav class=site-nav><ul class="main-menu menu" id=menu><li class="menu-item menu-item-home"><a href=/ rel=section><i class="fa fa-home fa-fw"></i>首页</a><li class="menu-item menu-item-about"><a href=/about/ rel=section><i class="fa fa-user fa-fw"></i>关于</a><li class="menu-item menu-item-tags"><a href=/tags/ rel=section><i class="fa fa-tags fa-fw"></i>标签</a><li class="menu-item menu-item-categories"><a href=/categories/ rel=section><i class="fa fa-th fa-fw"></i>分类</a><li class="menu-item menu-item-archives"><a href=/archives/ rel=section><i class="fa fa-archive fa-fw"></i>归档</a><li class="menu-item menu-item-bangumis"><a href=/bangumis/ rel=section><i class="fa fa-film fa-fw"></i>追番</a><li class="menu-item menu-item-resume"><a href=/resume/ rel=section><i class="fa fa-file-pdf fa-fw"></i>简历</a><li class="menu-item menu-item-materials"><a href=/materials/ rel=section><i class="fa fa-book fa-fw"></i>学习资料</a><li class="menu-item menu-item-sitemap"><a href=/sitemap.xml rel=section><i class="fa fa-sitemap fa-fw"></i>站点地图</a><li class="menu-item menu-item-search"><a class=popup-trigger role=button><i class="fa fa-search fa-fw"></i>搜索 </a></ul></nav><div class=search-pop-overlay><div class="popup search-popup"><div class=search-header><span class=search-icon> <i class="fa fa-search"></i> </span><div class=search-input-container></div><span class=popup-btn-close> <i class="fa fa-times-circle"></i> </span></div><div class=algolia-results><div id=algolia-stats></div><div id=algolia-hits></div><div class=algolia-pagination id=algolia-pagination></div></div></div></div></div></header><a class="book-mark-link book-mark-link-fixed" role=button></a><main class=main><div class=main-inner><div class=content-wrap><div class="content post posts-expand"><article class=post-block itemscope itemtype=http://schema.org/Article lang=zh-CN><link href=https://www.sekyoro.top/2024/05/01/LLM%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/ itemprop=mainEntityOfPage><span hidden itemprop=author itemscope itemtype=http://schema.org/Person> <meta content=https://i.loli.net/2021/05/17/YqoavnXdGTpPO9R.jpg itemprop=image> <meta content=Sekyoro itemprop=name> <meta content=什么也无法舍弃的人，什么也做不了. itemprop=description> </span><span hidden itemprop=publisher itemscope itemtype=http://schema.org/Organization> <meta content=Sekyoro的博客小屋 itemprop=name> </span><header class=post-header><h1 itemprop="name headline" class=post-title>LLM论文阅读</h1><div class=post-meta><span class=post-meta-item> <span class=post-meta-item-icon> <i class="far fa-calendar"></i> </span> <span class=post-meta-item-text>发表于</span> <time itemprop="dateCreated datePublished" title="创建时间：2024-05-01 15:39:46" datetime=2024-05-01T15:39:46+08:00>2024-05-01</time> </span><span class=post-meta-item> <span class=post-meta-item-icon> <i class="far fa-calendar-check"></i> </span> <span class=post-meta-item-text>更新于</span> <time title="修改时间：2024-05-06 11:21:22" datetime=2024-05-06T11:21:22+08:00 itemprop=dateModified>2024-05-06</time> </span><span style="display: none;" class=post-meta-item id=busuanzi_container_page_pv title=阅读次数> <span class=post-meta-item-icon> <i class="fa fa-eye"></i> </span> <span class=post-meta-item-text>阅读次数：</span> <span id=busuanzi_value_page_pv></span> </span><br><span class=post-meta-item title=本文字数> <span class=post-meta-item-icon> <i class="far fa-file-word"></i> </span> <span class=post-meta-item-text>本文字数：</span> <span>2.6k</span> </span><span class=post-meta-item title=阅读时长> <span class=post-meta-item-icon> <i class="far fa-clock"></i> </span> <span class=post-meta-item-text>阅读时长 ≈</span> <span>2 分钟</span> </span></div></header><div class=post-body itemprop=articleBody><p>最近大语言模型及其相关应用实在是太火了,可以在一些公司或者个人博客查看最前沿进展,也可以通过代码项目、课程学习,还可以看看经典论文.这里就看看一些LLM的论文学习学习.<br><span id=more></span><p>下面论文都可以在Arxiv上找到.<h3 id=A-Survey-of-Large-Language-Models><a title="A Survey of Large Language Models" class=headerlink href=#A-Survey-of-Large-Language-Models></a>A Survey of Large Language Models</h3><p>这篇文章有80多页,引用有40页.<h4 id=Scaling-laws><a title="Scaling laws" class=headerlink href=#Scaling-laws></a>Scaling laws</h4><script type="math/tex; mode=display">
+\begin{aligned}&L(N)&&=\quad\left(\frac{N_c}N\right)^{\alpha_N},\quad\alpha_N\sim0.076,N_c\sim8.8\times10^{13}\\&L(D)&&=\quad\left(\frac{D_c}D\right)^{\alpha_D},\quad\alpha_D\sim0.095,D_c\sim5.4\times10^{13}\\&L(C)&&=\quad\left(\frac{C_c}C\right)^{\alpha_C},\quad\alpha_C\sim0.050,C_c\sim3.1\times10^8\end{aligned}</script><p><strong>KM scaling law</strong><p>Scaling laws for neural language models首次提出了神经语言模型的模型性能与<strong>模型大小</strong>（N）、<strong>数据集大小</strong>（D）和<strong>训练计算量</strong>（C）三大因素的幂律关系模型。<p>$N<em>{c}$、$D</em>{c}$ 和 Cc 分别以非嵌入参数数、训练标记数和 FP 日数来衡量。<p>L(-) 表示 nats 中的交叉熵损失，OpenAI 的后续研究 表明，语言建模损失可分解为两部分，即不可还原损失（真实数据分布的熵）和可还原损失（真实分布和模型分布之间 KL 分歧的估计值）。<p>在一些假设条件下(如一个因素的分析不应受到其他两个因素的瓶颈限制),通过拟合不同数据量(2200 万到 2300 亿个 token)、模型大小(768 万到 1500 亿个非嵌入参数)和训练计算的模型性能,得出了这三个定律.他们的研究表明,模型性能与三个因素有很强的依赖关系.<p><strong>Chinchilla scaling law</strong><p>霍夫曼等人提出了另一种缩放定律形式，用于指导 LLM 的计算优化训练.其中E = 1.69, A = 406.4, B = 410.7, α = 0.34 and β = 0.28</p><script type="math/tex; mode=display">
+L(N,D)=E+\frac{A}{N^\alpha}+\frac{B}{D^\beta}</script><p>通过优化 C ≈ 6N D 约束条件下的损失 L(N，D),他们证明了计算预算对模型大小和数据大小的最优分配如下</p><script type="math/tex; mode=display">
+N_{opt}(C)=G{\left(\frac C6\right)}^a,\quad D_{opt}(C)=G^{-1}{\left(\frac C6\right)}^b</script><p>a = α/(α+β) , b = β/(α+β) ,G 是一个缩放系数,可由 A、B、α 和 β 计算得出。<h4 id=涌现能力><a class=headerlink href=#涌现能力 title=涌现能力></a>涌现能力</h4><p>在Emergent abilities of large language models中LLMs 的涌现能力被正式定义为 “在小型模型中不存在而在大型模型中出现的能力”，这是 LLMs 区别于以往 PLMs 的最显著特征之一。它进一步引入了出现突发性能力时的一个显著特征：<strong>当规模达到一定程度时，性能会明显高于随机水平。通过类比，这种突现模式与物理学中的相变现象有着密切联系</strong>。原则上，新兴能力可以根据某些复杂任务来定义，而我们更关注的是可用于解决各种任务的一般能力。<p>简要介绍 LLMs 的三种典型涌现能力以及具备这种能力的代表性模型: 1)In-context learning 2) Instruction following 3)step-by-step reasoning<p>GPT-3正式引入了语境中学习（ICL）能力：假设语言模型已经获得了自然语言指令和/或多个任务演示，那么它就可以<strong>通过完成输入文本的词序来生成测试实例的预期输出，而无需额外的训练或梯度更新</strong>。<p>通过对自然语言描述格式的多任务数据集进行微调（称为指令微调）,LLM 在同样以指令形式描述的未见任务上表现出色。<strong>通过指令调整，LLMs 可以在不使用明确示例的情况下，根据任务指令完成新任务，从而提高泛化能力</strong>.<p>对于小型语言模型而言，通常很难解决涉及多个推理步骤的复杂任务，例如数学文字问题.相比之下,使用思维链（CoT）提示策略,LLM 可以利用提示机制来解决此类任务,这种机制涉及到推导最终答案的中间推理步骤.<p><img alt=image-20240506105955822 data-src=https://s2.loli.net/2024/05/06/F5zWu6VldQqDBjs.png><p>LLM 经过漫长的发展才达到了目前的状态：通用的、有能力的学习者。在发展过程中，人们提出了许多重要技术，这些技术在很大程度上提高了 LLM 的能力,包括scaling,training,ability eliciting,Alignment tuning等等.<p><img alt=image-20240506110530834 data-src=https://s2.loli.net/2024/05/06/hFNoCHDY23OmxiR.png><p><img alt=image-20240506110409299 data-src=https://s2.loli.net/2024/05/06/FcjiyX4oesVva2B.png><h2 id=PEFT方法><a class=headerlink href=#PEFT方法 title=PEFT方法></a>PEFT方法</h2><h3 id=Prefix-Tuning><a title="Prefix Tuning" class=headerlink href=#Prefix-Tuning></a>Prefix Tuning</h3><p>Prefix Tuning在语言模型的每个transformer层中预置一系列前缀，这些前缀是一组可训练的连续向量。这些前缀向量是针对特定任务的,可视为虚拟标记嵌入。<h4 id=摘要><a class=headerlink href=#摘要 title=摘要></a>摘要</h4><p>在本文中,我们提出了前缀调整技术,它是自然语言生成任务中微调技术的轻量级替代方案,可<strong>保持语言模型参数不变,但会优化一个小的连续任务特定向量</strong>(称为前缀).<p><strong>Prefix-tuning draws inspiration from prompting, allowing subsequent tokens to attend to this prefix as if it were “virtual tokens”</strong>.<p>相当于让模型参数不变,优化连续的任务相关数据,让模型关注增加的前缀.<p>我们发现,只需学习 0.1% 的参数,前缀调整就能在全数据环境下获得与之相当的性能,在低数据环境下优于微调,并能更好地推断出训练期间未见过主题的示例.<h4 id=方法><a class=headerlink href=#方法 title=方法></a>方法</h4><p>我们认为适当的语境<strong>可以在不改变 LM 参数的情况下引导 LM</strong>。例如，如果我们希望 LM 生成一个单词（如 Obama），我们可以将其常见搭配作为上下文（如 Barack）的前置词，这样 LM 就会为所需单词分配更高的概率。<p>我们可以将指令优化为连续的单词嵌入，而不是对离散的标记进行优化，其效果将向上传播到所有转换器激活层，并向右传播到后续标记。<p>前缀调整为自回归 LM 预置前缀,得到 z = [PREFIX;x;y],或为编码器和编码器预置前缀,得到 z = [PREFIX;x;PREFIX′;y]。<p><img alt=image-20240505224532005 data-src=https://proanimer-img.oss-cn-shanghai.aliyuncs.com/alimg/image-20240505224532005.png></p><script type="math/tex; mode=display">
+h_i=\begin{cases}P_\theta[i,:],&\text{if }i\in\mathsf{P_{idx}},\\\mathsf{LM}_\phi(z_i,h_{<i}),&\text{otherwise.}\end{cases}</script><p>前缀调整初始化一个维度为 |$P<em>{idx}$| × dim($h</em>{i}$) 的可训练矩阵 $P<em>{θ}$（参数为 θ）,用于存储前缀参数.$P</em>{idx}$ 表示前缀索引序列,我们用 |$P_{idx}$| 表示前缀长度.语言模型参数 φ 是固定的,前缀参数 θ 是唯一可训练的参数.<p>$h<em>{i}$（对于所有 i）是可训练 $P</em>{θ}$ 的函数。<p>Prefix Tuning<code>是</code>PEFT<code>方法之一，</code>Prefix Tuning<code>之前的工作主要是人工设计模板或者自动化搜索模板，也是</code>prompt<code>范式的第一阶段，就是在输入上加上</code>prompt<code>文本，再对输出进行映射。这种离散模板对模型的鲁棒性很差。所以后续的研究都将离散的方式转成连续。</code>Prefix Tuning在<strong>模型输入前添加一个连续的且任务特定的向量序列称之为prefix</strong><code>，固定</code>PLM(预训练模型)<code>的所有参数，只更新优化特定任务的</code>prefix<h3 id=P-tuning-V1-amp-amp-V2><a title="P-tuning V1&&V2" class=headerlink href=#P-tuning-V1-amp-amp-V2></a>P-tuning V1&&V2</h3><p>提示调整只对使用冻结语言模型的连续提示进行调整，从而大大减少了训练时每个任务的存储和内存使用量。<p><img alt=image-20240505223449790 data-src=https://proanimer-img.oss-cn-shanghai.aliyuncs.com/alimg/image-20240505223449790.png><p>在情感分析中,我们可以将样本（如 “了不起的电影！”）与提示语 “这部电影是[MASK]”连接起来，然后要求预先训练好的语言模型预测屏蔽标记为 “好 “和 “坏 “的概率,从而决定样本的标签.<p>提示法完全不需要训练,只需存储一份模型参数。<p>Prompt tuning2 是一种只对连续提示进行调整的想法.在原始输入词嵌入序列中添加可训练的连续嵌入(也称为连续提示)<p><code>P-Tuning v2</code>（论文： <strong>P-Tuning v2: Prompt Tuning Can Be Comparable to Fine-tuning Universally Across Scales and Tasks</strong>），该方法在<strong>每一层</strong>都加入了<code>Prompts tokens</code>作为输入，而不是仅仅加在输入层，这带来两个方面的好处：<ul><li>更多可学习的参数（从<code>P-Tuning</code>和<code>Prompt Tuning</code>的0.01%增加到0.1%-3%），同时也足够参数高效。<li>加入到更深层结构中的<code>Promp</code>能给模型预测带来更直接的影响</ul><p>大模型的<code>Prompt</code>构造方式严重影响下游任务的效果。比如：<code>GPT-3</code>采用人工构造的模版来做上下文学习<code>(in-context learning)</code>，但人工设计的模版的变化特别敏感，加一个词或者少一个词，或者变动位置都会造成比较大的变化<h3 id=LoRA><a class=headerlink href=#LoRA title=LoRA></a>LoRA</h3><p>自然语言处理的一个重要范式是在一般领域数据上进行大规模预训练，然后适应特定任务或领域。随着我们预训练的模型越来越大，重新训练所有模型参数的全面微调就变得不那么可行了。以 GPT-3 175B 为例，部署微调模型的独立实例（每个实例有 175B 个参数）的成本过高。我们提出了（Low-Rank Adaptation，简称 LoRA）技术，它<strong>可以冻结预训练模型权重，并将可训练的等级分解矩阵注入 Transformer 架构的每一层(injects trainable rank decomposition matrices into each layer of the Transformer architecture)，从而大大减少下游任务的可训练参数数量</strong>.<p>LoRA 允许我们通过优化密集层在适应过程中的变化的秩分解矩阵来间接训练神经网络中的某些密集层,同时保持预先训练的权重不变.<p><img alt=image-20240505231432035 data-src=https://proanimer-img.oss-cn-shanghai.aliyuncs.com/alimg/image-20240505231432035.png style=zoom:67%;><p>神经网络包含许多执行矩阵乘法的密集层.这些层中的<strong>权重矩阵通常具有全秩</strong>。Aghajanyan 等人（2020）的研究表明,在适应特定任务时,<strong>预训练的语言模型具有较低的 “本征维度”，即使随机投影到较小的子空间，仍能高效学习</strong>.受此启发，我们假设权重更新在适应过程中也具有较低的 “本征等级”。<p>对于一个预先训练好的权重矩阵 $W<em>{0}∈R^{d×k}$, d是满秩,r是低秩.我们用一个低秩分解 $W</em>{0} + ∆W = W<em>{0} + BA$ 来表示后者,其中 B∈$R</em>{d×r}$, A∈$R_{r×k}$, 秩为 r<< min(d,k).<p>在训练过程中,$W_{0}$被冻结,不会接收梯度更新,而 A 和 B 则包含可训练参数.<p>注意,$W_{0}$ 和 ∆W = BA 都与相同的输入相乘.它们各自的输出向量按坐标相加.<p>对 A 使用随机高斯初始化,对 B 使用零初始化,因此训练开始时 ∆W = BA 为零.然后，我们用 α/r 对 $∆Wx$ 进行缩放,其中 α 是 r 中的一个常数.在使用Adam进行优化时,如果我们适当缩放初始化,调整 α 与调整学习率大致相同.因此,我们只需将 α 设为我们尝试的第一个 r,而无需调整.<p>1、选择目标层<p>2、初始化映射矩阵和逆映射矩阵<p>为目标层创建两个较小的矩阵<code>A</code>和<code>B</code>，然后进行变换<p><code>A</code>是映射矩阵(一般用随机高斯分布初始化，维度上是降维）<p><code>B</code>是逆映射矩阵(用0矩阵初始化)，维度上是升维<p>之后做参数变换：将目标层的原始参数矩阵W通过映射矩阵<code>A</code>和逆映射矩阵<code>B</code>进行变换，计算公式为：<code>W' = W + A * B</code>，这里<code>W'</code>是变换后的参数矩阵<p>3、微调模型<p>使用新的参数矩阵<code>W'</code>替换目标层的原始参数矩阵<code>W</code>，然后在特定任务的训练数据上对模型进行微调<p>4、梯度更新<h3 id=Adapter><a class=headerlink href=#Adapter title=Adapter></a>Adapter</h3><p>适配器调整将小型神经网络模块（称为适配器）纳入变换器模型 .为了实现适配器模块,中提出了一种瓶颈架构,它首先将原始特征向量压缩到较小的维度（然后进行非线性变换）,然后将其恢复到原始维度.<p><img alt=image-20240505231734946 data-src=https://proanimer-img.oss-cn-shanghai.aliyuncs.com/alimg/image-20240505231734946.png style=zoom:67%;><p>在 NLP 中，微调大型预训练模型是一种有效的传输机制。然而，在有许多下游任务的情况下，微调的参数效率很低：每个任务都需要一个全新的模型。作为替代方案，我们建议<strong>使用适配器模块进行转移。适配器模块产生了一个紧凑且可扩展的模型；它们只为每个任务添加少量可训练参数，并且可以添加新任务，而无需重新检查之前的任务</strong>。原始网络的参数保持不变，从而实现了高度的参数共享。<h3 id=Prompt-Tuning><a title="Prompt Tuning" class=headerlink href=#Prompt-Tuning></a>Prompt Tuning</h3><p>Prompt Tuning主要侧重于在输入层加入可训练的提示向量.<p>在离散提示的情况下（Schick 和 Schütze, 2020）,提示标记 {“它”、”是”、”[MASK]”} ⊂ V 可用来对电影评论进行分类。<p>Lester 等人引入了可训练连续提示,作为自然语言提示的替代,用于冻结预训练语言模型的参数的 NLU。给定可训练连续嵌入[h0, …, hi],输入嵌入序列被写成[e(x), h0, …, hi, e(“[MASK]”)], 事实证明,在简单的分类任务中,即时调整的效果与对百亿参数模型进行微调的效果相当.<p><img alt=image-20240107102116261 data-src=https://limokii.github.io/2023/12/24/Parameter%20Efficient%20Fine-Tuning(PEFT>%E7%B3%BB%E5%88%97%E8%AE%BA%E6%96%87%E6%80%BB%E7%BB%93/image-20240107102116261.png)<p>在这项工作中，我们探索了 “提示调整”，这是一种简单而有效的机制，用于学习 “软提示”，使冻结语言模型能够执行特定的下游任务。与 GPT-3 使用的离散文本提示不同，软提示是通过反向传播学习的，可以进行调整，以纳入来自任意数量标注示例的信号<h2 id=Quantization方法><a class=headerlink href=#Quantization方法 title=Quantization方法></a>Quantization方法</h2><p>在模型压缩领域,量化已成为一种广受欢迎的技术，可减轻深度学习模型的存储和计算开销.<strong>传统表示法采用浮点数，而量化则将其转换为整数或其他离散形式</strong>。这种转换大大降低了存储要求和计算复杂度。虽然会有一些固有的精度损失，但仔细的量化技术可以在实现大量模型压缩的同时，将精度降低到最低程度。<p>这方面可以看看<a href=https://www.deeplearning.ai/short-courses/ rel=noopener target=_blank>Short Courses | Learn Generative AI from DeepLearning.AI</a>上的视频,质量很高.<h2 id=参考资料><a class=headerlink href=#参考资料 title=参考资料></a>参考资料</h2><ol><li><a href=https://github.com/luban-agi/Awesome-AIGC-Tutorials?tab=readme-ov-file#-multimodal rel=noopener target=_blank>luban-agi/Awesome-AIGC-Tutorials: Curated tutorials and resources for Large Language Models, AI Painting, and more. (github.com)</a><li><a href=https://github.com/mlabonne/llm-course rel=noopener target=_blank>mlabonne/llm-course: Course to get into Large Language Models (LLMs) with roadmaps and Colab notebooks. (github.com)</a><li><a href=https://github.com/BradyFU/Awesome-Multimodal-Large-Language-Models rel=noopener target=_blank>BradyFU/Awesome-Multimodal-Large-Language-Models: :sparkles::sparkles:Latest Papers and Datasets on Multimodal Large Language Models, and Their Evaluation. (github.com)</a></ol><link href=/css/spoiler.css rel=stylesheet><script async src=/js/spoiler.js></script></div><div><div><div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div></div></div><div class=reward-container><div>感谢阅读.</div><button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">打赏</button><div style="display: none;" id=qr><div style="display: inline-block;"><img alt="Sekyoro 微信支付" src=/images/wechatpay.png><p>微信支付</div></div></div><div><ul class=post-copyright><li class=post-copyright-author><strong>本文作者： </strong>Sekyoro<li class=post-copyright-link><strong>本文链接：</strong> <a href=https://www.sekyoro.top/2024/05/01/LLM%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/ title=LLM论文阅读>https://www.sekyoro.top/2024/05/01/LLM论文阅读/</a><li class=post-copyright-license><strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href=https://creativecommons.org/licenses/by-nc-sa/4.0/ rel=noopener target=_blank><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</ul></div><div class=followme><p>欢迎关注我的其它发布渠道<div class=social-list><div class=social-item><a class=social-link href=/images/wxqrcode.png target=_blank> <span class=icon> <i class="fab fa-weixin"></i> </span> <span class=label>WeChat</span> </a></div><div class=social-item><a class=social-link href=/images/website.png target=_blank> <span class=icon> <i class="fa fa-user"></i> </span> <span class=label>PersonalWebsite</span> </a></div><div class=social-item><a class=social-link href=https://my-astro-git-main-drowning-in-codes.vercel.app target=_blank> <span class=icon> <i class="fas fa-share"></i> </span> <span class=label>杂鱼分享</span> </a></div><div class=social-item><a class=social-link href=/atom.xml target=_blank> <span class=icon> <i class="fa fa-rss"></i> </span> <span class=label>RSS</span> </a></div></div></div><footer class=post-footer><div class=post-nav><div class=post-nav-item><a href=/2024/05/01/%E8%AE%BA%E6%96%87%E5%BC%95%E7%94%A8%E8%BD%AC%E6%8D%A2%E5%B0%8F%E5%B7%A5%E5%85%B7/ rel=prev title=论文引用转换小工具> <i class="fa fa-chevron-left"></i> 论文引用转换小工具 </a></div><div class=post-nav-item><a href=/2024/05/02/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80%E7%9A%84%E4%B8%80%E4%BA%9B%E7%89%B9%E6%80%A7/ rel=next title=编程语言的一些特性> 编程语言的一些特性 <i class="fa fa-chevron-right"></i> </a></div></div></footer></article></div><!-- 评论区 --><div class=comments><div data-id=city data-uid=MTAyMC81MzE5Ny8yOTY3Mg== id=lv-container></div></div><script>window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }</script></div><div class="toggle sidebar-toggle"><span class="toggle-line toggle-line-first"></span><span class="toggle-line toggle-line-middle"></span><span class="toggle-line toggle-line-last"></span></div><aside class=sidebar><div class=sidebar-inner><!-- canvas粒子时钟 --><div><canvas id=canvas style=width:60%;>当前浏览器不支持canvas，请更换浏览器后再试</canvas></div><script>(function(){
+
+   var digit=
+    [
+        [
+            [0,0,1,1,1,0,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,0,1,1,0],
+            [0,0,1,1,1,0,0]
+        ],//0
+        [
+            [0,0,0,1,1,0,0],
+            [0,1,1,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [1,1,1,1,1,1,1]
+        ],//1
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,1,1],
+            [1,1,1,1,1,1,1]
+        ],//2
+        [
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//3
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,0],
+            [0,0,1,1,1,1,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,1,1,0],
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,1]
+        ],//4
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,1,1,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//5
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//6
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0]
+        ],//7
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//8
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,1,1,0,0,0,0]
+        ],//9
+        [
+            [0,0,0,0,0,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,0,0,0]
+        ]//:
+    ];
+
+var canvas = document.getElementById('canvas');
+
+if(canvas.getContext){
+    var cxt = canvas.getContext('2d');
+    //声明canvas的宽高
+    var H = 100,W = 700;
+    canvas.height = H;
+    canvas.width = W;
+    cxt.fillStyle = '#f00';
+    cxt.fillRect(10,10,50,50);
+
+    //存储时间数据
+    var data = [];
+    //存储运动的小球
+    var balls = [];
+    //设置粒子半径
+    var R = canvas.height/20-1;
+    (function(){
+        var temp = /(\d)(\d):(\d)(\d):(\d)(\d)/.exec(new Date());
+        //存储时间数字，由十位小时、个位小时、冒号、十位分钟、个位分钟、冒号、十位秒钟、个位秒钟这7个数字组成
+        data.push(temp[1],temp[2],10,temp[3],temp[4],10,temp[5],temp[6]);
+    })();
+
+    /*生成点阵数字*/
+    function renderDigit(index,num){
+        for(var i = 0; i < digit[num].length; i++){
+            for(var j = 0; j < digit[num][i].length; j++){
+                if(digit[num][i][j] == 1){
+                    cxt.beginPath();
+                    cxt.arc(14*(R+2)*index + j*2*(R+1)+(R+1),i*2*(R+1)+(R+1),R,0,2*Math.PI);
+                    cxt.closePath();
+                    cxt.fill();
+                }
+            }
+        }
+    }
+
+    /*更新时钟*/
+    function updateDigitTime(){
+        var changeNumArray = [];
+        var temp = /(\d)(\d):(\d)(\d):(\d)(\d)/.exec(new Date());
+        var NewData = [];
+        NewData.push(temp[1],temp[2],10,temp[3],temp[4],10,temp[5],temp[6]);
+        for(var i = data.length-1; i >=0 ; i--){
+            //时间发生变化
+            if(NewData[i] !== data[i]){
+                //将变化的数字值和在data数组中的索引存储在changeNumArray数组中
+                changeNumArray.push(i+'_'+(Number(data[i])+1)%10);
+            }
+        }
+        //增加小球
+        for(var i = 0; i< changeNumArray.length; i++){
+            addBalls.apply(this,changeNumArray[i].split('_'));
+        }
+        data = NewData.concat();
+    }
+
+    /*更新小球状态*/
+    function updateBalls(){
+        for(var i = 0; i < balls.length; i++){
+            balls[i].stepY += balls[i].disY;
+            balls[i].x += balls[i].stepX;
+            balls[i].y += balls[i].stepY;
+            if(balls[i].x > W + R || balls[i].y > H + R){
+                balls.splice(i,1);
+                i--;
+            }
+        }
+    }
+
+    /*增加要运动的小球*/
+    function addBalls(index,num){
+        var numArray = [1,2,3];
+        var colorArray =  ["#3BE","#09C","#A6C","#93C","#9C0","#690","#FB3","#F80","#F44","#C00"];
+        for(var i = 0; i < digit[num].length; i++){
+            for(var j = 0; j < digit[num][i].length; j++){
+                if(digit[num][i][j] == 1){
+                    var ball = {
+                        x:14*(R+2)*index + j*2*(R+1)+(R+1),
+                        y:i*2*(R+1)+(R+1),
+                        stepX:Math.floor(Math.random() * 4 -2),
+                        stepY:-2*numArray[Math.floor(Math.random()*numArray.length)],
+                        color:colorArray[Math.floor(Math.random()*colorArray.length)],
+                        disY:1
+                    };
+                    balls.push(ball);
+                }
+            }
+        }
+    }
+
+    /*渲染*/
+    function render(){
+        //重置画布宽度，达到清空画布的效果
+        canvas.height = 100;
+        //渲染时钟
+        for(var i = 0; i < data.length; i++){
+            renderDigit(i,data[i]);
+        }
+        //渲染小球
+        for(var i = 0; i < balls.length; i++){
+            cxt.beginPath();
+            cxt.arc(balls[i].x,balls[i].y,R,0,2*Math.PI);
+            cxt.fillStyle = balls[i].color;
+            cxt.closePath();
+            cxt.fill();
+        }
+    }
+
+    clearInterval(oTimer);
+    var oTimer = setInterval(function(){
+        //更新时钟
+        updateDigitTime();
+        //更新小球状态
+        updateBalls();
+        //渲染
+        render();
+    },50);
+}
+
+})();</script><!-- require APlayer --><link href=https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css rel=stylesheet><script src=https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js></script><!-- require MetingJS --><script src=/js/meting-js.js></script><ul class="sidebar-nav motion-element"><li class=sidebar-nav-toc>文章目录<li class=sidebar-nav-overview>站点概览</ul><!--noindex--><div class="post-toc-wrap sidebar-panel"><div class="post-toc motion-element"><ol class=nav><li class="nav-item nav-level-3"><a class=nav-link href=#A-Survey-of-Large-Language-Models><span class=nav-number>1.</span> <span class=nav-text>A Survey of Large Language Models</span></a><ol class=nav-child><li class="nav-item nav-level-4"><a class=nav-link href=#Scaling-laws><span class=nav-number>1.1.</span> <span class=nav-text>Scaling laws</span></a><li class="nav-item nav-level-4"><a class=nav-link href=#%E6%B6%8C%E7%8E%B0%E8%83%BD%E5%8A%9B><span class=nav-number>1.2.</span> <span class=nav-text>涌现能力</span></a></ol></ol><li class="nav-item nav-level-2"><a class=nav-link href=#PEFT%E6%96%B9%E6%B3%95><span class=nav-number></span> <span class=nav-text>PEFT方法</span></a><ol class=nav-child><li class="nav-item nav-level-3"><a class=nav-link href=#Prefix-Tuning><span class=nav-number>1.</span> <span class=nav-text>Prefix Tuning</span></a><ol class=nav-child><li class="nav-item nav-level-4"><a class=nav-link href=#%E6%91%98%E8%A6%81><span class=nav-number>1.1.</span> <span class=nav-text>摘要</span></a><li class="nav-item nav-level-4"><a class=nav-link href=#%E6%96%B9%E6%B3%95><span class=nav-number>1.2.</span> <span class=nav-text>方法</span></a></ol><li class="nav-item nav-level-3"><a class=nav-link href=#P-tuning-V1-amp-amp-V2><span class=nav-number>2.</span> <span class=nav-text>P-tuning V1&&V2</span></a><li class="nav-item nav-level-3"><a class=nav-link href=#LoRA><span class=nav-number>3.</span> <span class=nav-text>LoRA</span></a><li class="nav-item nav-level-3"><a class=nav-link href=#Adapter><span class=nav-number>4.</span> <span class=nav-text>Adapter</span></a><li class="nav-item nav-level-3"><a class=nav-link href=#Prompt-Tuning><span class=nav-number>5.</span> <span class=nav-text>Prompt Tuning</span></a></ol><li class="nav-item nav-level-2"><a class=nav-link href=#Quantization%E6%96%B9%E6%B3%95><span class=nav-number></span> <span class=nav-text>Quantization方法</span></a><li class="nav-item nav-level-2"><a class=nav-link href=#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99><span class=nav-number></span> <span class=nav-text>参考资料</span></a></div></div><!--/noindex--><div class="site-overview-wrap sidebar-panel"><div class="site-author motion-element" itemprop=author itemscope itemtype=http://schema.org/Person><img alt=Sekyoro class=site-author-image itemprop=image src=https://i.loli.net/2021/05/17/YqoavnXdGTpPO9R.jpg><p class=site-author-name itemprop=name>Sekyoro<div class=site-description itemprop=description>什么也无法舍弃的人，什么也做不了.</div></div><div class="site-state-wrap motion-element"><nav class=site-state><div class="site-state-item site-state-posts"><a href=/archives/> <span class=site-state-item-count>185</span> <span class=site-state-item-name>日志</span> </a></div><div class="site-state-item site-state-categories"><a href=/categories/> <span class=site-state-item-count>17</span> <span class=site-state-item-name>分类</span></a></div><div class="site-state-item site-state-tags"><a href=/tags/> <span class=site-state-item-count>187</span> <span class=site-state-item-name>标签</span></a></div></nav></div><div class="links-of-author motion-element"><span class=links-of-author-item> <a title="Personal Website → http://proanimer.com" href=http://proanimer.com/ rel=noopener target=_blank><i class="fab fa-internet-explorer fa-fw"></i>Personal Website</a> </span><span class=links-of-author-item> <a title="GitHub → https://github.com/drowning-in-codes" href=https://github.com/drowning-in-codes rel=noopener target=_blank><i class="fab fa-github fa-fw"></i>GitHub</a> </span><span class=links-of-author-item> <a title="E-Mail → mailto:bukalala174@gmail.com" href=mailto:bukalala174@gmail.com rel=noopener target=_blank><i class="fa fa-envelope fa-fw"></i>E-Mail</a> </span><span class=links-of-author-item> <a title="wxPublicAccount → https://mp.weixin.qq.com/s?__biz=Mzg3ODY1MDkzMg==&mid=2247483770&idx=1&sn=fdf88faab01d5c219ac609570a21c9d6&chksm=cf113221f866bb373938cfca03cf095ff4fe1e4dc37d68ef5de4cd4876ee1260fca0c015a4d6&token=1096259873&lang=zh_CN#rd" href=https://mp.weixin.qq.com/s?__biz=Mzg3ODY1MDkzMg==&mid=2247483770&idx=1&sn=fdf88faab01d5c219ac609570a21c9d6&chksm=cf113221f866bb373938cfca03cf095ff4fe1e4dc37d68ef5de4cd4876ee1260fca0c015a4d6&token=1096259873&lang=zh_CN#rd rel=noopener target=_blank><i class="fab fa-weixin fa-fw"></i>wxPublicAccount</a> </span><span class=links-of-author-item> <a title="RSS → /atom.xml" href=/atom.xml><i class="fa fa-rss fa-fw"></i>RSS</a> </span><span class=links-of-author-item> <a title="CSDN → https://blog.csdn.net/aqwca" href=https://blog.csdn.net/aqwca rel=noopener target=_blank><i class="fa fa-handshake fa-fw"></i>CSDN</a> </span><span class=links-of-author-item> <a title="杂鱼分享 → https://my-astro-git-main-drowning-in-codes.vercel.app" href=https://my-astro-git-main-drowning-in-codes.vercel.app/ rel=noopener target=_blank><i class="fas fa-share fa-fw"></i>杂鱼分享</a> </span></div><div class="links-of-blogroll motion-element"><div class=links-of-blogroll-title><i class="fa fa-link fa-fw"></i> 友情链接</div><ul class=links-of-blogroll-list><li class=links-of-blogroll-item><a href=http://myqhs.top/ rel=noopener target=_blank title=http://myqhs.top/>myqhs</a><li class=links-of-blogroll-item><a href=https://www.lllomh.com/ rel=noopener target=_blank title=https://www.lllomh.com/>芈渡</a></ul></div><div class="motion-element announcement"><div class=title>注意</div><p class=content>由于最近图床更新,可能有些图片显示不了.如果发现了有些图片无法显示影响阅读的,还烦请联系我,我有空补上.<p class=date>2023-10-6</div></div><meting-js id=6856787487 order=random server=netease type=playlist> </meting-js><div class=widget-wrap><h3 class=widget-title style=margin:0>此文章目前无词云</h3></div><script id=clustrmaps src=https://clustrmaps.com/map_v2.js?d=xQdGTxqARTBiNIwX2aUban-ixkj2s6VaZQWo-aVCgY8&cl=ffffff&w=a></script><div class="back-to-top motion-element"><i class="fa fa-arrow-up"></i><span>0%</span></div><!-- 边栏 --></div></aside><div id=sidebar-dimmer></div></div></main><footer class=footer><div class=footer-inner><div class=copyright>© Wed Apr 08 2020 08:00:00 GMT+0800 (中国标准时间) – <span itemprop=copyrightYear>2024</span><span class=with-love> <i class="fa fa-heart"></i> </span><span class=author itemprop=copyrightHolder>Sekyoro</span><span class=post-meta-divider>|</span><span class=post-meta-item-icon> <i class="fa fa-chart-area"></i> </span><span title=站点总字数>1.3m</span><span class=post-meta-divider>|</span><span class=post-meta-item-icon> <i class="fa fa-coffee"></i> </span><span title=站点阅读时长>20:09</span></div><script async src=https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js></script><span id=busuanzi_container_site_pv>总访问量<span id=busuanzi_value_site_pv></span>次</span><span class=post-meta-divider>|</span><span id=busuanzi_container_site_uv>总访客数<span id=busuanzi_value_site_uv></span>人</span><span class=post-meta-divider>|</span><!-- 不蒜子计数初始值纠正 --><script>$(document).ready(function() {
+
+    var int = setInterval(fixCount, 50);  // 50ms周期检测函数
+    var countOffset = 20000;  // 初始化首次数据
+
+    function fixCount() {            
+       if (document.getElementById("busuanzi_container_site_pv").style.display != "none")
+        {
+            $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + countOffset); 
+            clearInterval(int);
+        }                  
+        if ($("#busuanzi_container_site_pv").css("display") != "none")
+        {
+            $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + countOffset); // 加上初始数据 
+            clearInterval(int); // 停止检测
+        }  
+    }
+       	
+});</script><div><span id=timeDate>载入天数...</span><span id=times>载入时分秒...</span><script>var now = new Date();
+    function createtime() {
+        var grt= new Date("04/08/2021 20:00:00");
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+    }
+setInterval("createtime()",250);</script></div><div class=busuanzi-count><script async data-pjax src=https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script><span style="display: none;" class=post-meta-item id=busuanzi_container_site_uv> <span class=post-meta-item-icon> <i class="fa fa-user"></i> </span> <span class=site-uv title=总访客量> <span id=busuanzi_value_site_uv></span> </span> </span><span class=post-meta-divider>|</span><span style="display: none;" class=post-meta-item id=busuanzi_container_site_pv> <span class=post-meta-item-icon> <i class="fa fa-eye"></i> </span> <span class=site-pv title=总访问量> <span id=busuanzi_value_site_pv></span> </span> </span></div></div></footer></div><script color=0,0,255 count=99 opacity=0.5 src=/lib/canvas-nest/canvas-nest.min.js zindex=-1></script><script src=/lib/anime.min.js></script><script src=https://cdn.jsdelivr.net/gh/theme-next/theme-next-pjax@0/pjax.min.js></script><script src=https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js></script><script src=https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js></script><script src=https://cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js></script><script src=https://cdn.jsdelivr.net/npm/velocity-animate@1/velocity.min.js></script><script src=https://cdn.jsdelivr.net/npm/velocity-animate@1/velocity.ui.min.js></script><script src=/js/utils.js></script><script src=/js/motion.js></script><script src=/js/schemes/pisces.js></script><script src=/js/next-boot.js></script><script src=/js/bookmark.js></script><script>var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax',
+	'.widget-wrap'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+ 
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});</script><script data-pjax>(function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();</script><script src=https://cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js></script><script src=https://cdn.jsdelivr.net/npm/instantsearch.js@4/dist/instantsearch.production.min.js></script><script src=/js/algolia-search.js></script><script data-pjax>document.querySelectorAll('.pdfobject-container').forEach(element => {
+  let url = element.dataset.target;
+  let pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  let pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  let fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});</script><div id=pjax><script charset=utf-8 defer src=/js/outdate.js></script></div><script charset=utf-8 defer src=/js/tagcanvas.js></script><script charset=utf-8 defer src=/js/tagcloud.js></script><script>NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});</script><script>var OriginTitile = document.title;
+  var titleTime;
+  document.addEventListener("visibilitychange", function() {
+    if (document.hidden) {
+      document.title = "(つェ⊂)我藏好了哦~" + OriginTitile;
+      clearTimeout(titleTime);
+    } else {
+      document.title = "(*´∇｀*) 被你发现啦~" + OriginTitile;
+      titleTime = setTimeout(function() {
+        document.title = OriginTitile;
+      }, 2000);
+    }
+  });</script><script src=/js/src/activate-power-mode.min.js></script><script>POWERMODE.colorful = true;
+    POWERMODE.shake = false;
+    document.body.addEventListener('input', POWERMODE);</script>
