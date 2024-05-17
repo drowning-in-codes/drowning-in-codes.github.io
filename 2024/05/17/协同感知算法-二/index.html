@@ -1,0 +1,496 @@
+<!doctypehtml><html lang=zh-CN><script defer src=/live2d-widget/autoload.js></script><meta charset=UTF-8><meta content=width=device-width,initial-scale=1,maximum-scale=2 name=viewport><meta content=#222 name=theme-color><meta content="Hexo 5.4.0" name=generator><link href=/images/blog_32px.png rel=apple-touch-icon sizes=180x180><link href=/images/blog_32px.png rel=icon sizes=32x32 type=image/png><link href=/images/blog_16px.png rel=icon sizes=16x16 type=image/png><link color=#222 href=/images/logo.svg rel=mask-icon><meta content=EPrJAp11bJwHULpQUaSNSZ8_3RcvTsPDAEGOME4pl1w name=google-site-verification><!-- Google tag (gtag.js) --><!-- 
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-VB21D8MKKW"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-VB21D8MKKW');
+</script> --><!-- google adsense in head.swig --><script async crossorigin=anonymous src=https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4034523802263123></script><meta content=7226864CE87CE9DE8C008385273846FF name=msvalidate.01><meta content=code-fjFXVtiL7j name=baidu-site-verification><link href=/css/main.css rel=stylesheet><link as=style href=https://fonts.googleapis.com/css?family=Roboto%20Mono,Roboto:300,300italic,400,400italic,700,700italic|Roboto:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext onload=this.rel='stylesheet' rel=preload><link as=style href=https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css onload=this.rel='stylesheet' rel=preload><link href=https://fonts.googleapis.com/css?family=Noto+Serif+SC|Roboto&display=swap rel=stylesheet><link href=https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css rel=stylesheet><link href=https://cdn.jsdelivr.net/npm/pace-js@1/themes/blue/pace-theme-minimal.css rel=stylesheet><script src=https://cdn.jsdelivr.net/npm/pace-js@1/pace.min.js></script><script id=hexo-configurations>var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.sekyoro.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":240,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"appID":"3G9PZZIKCH","apiKey":"8eb71f5ca3167e9ef3487882f10cfaad","indexName":"SekyoroSearch","hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};</script><link href=//cdn.bootcss.com/animate.css/3.5.0/animate.min.css rel=stylesheet><meta content="随着深度学习 Domain gapBridging the Domain Gap for Multi-Agent Perception摘要现有的多智能体感知算法通常选择在智能体之间共享从原始感知数据中提取的深度神经特征，以实现精度和通信带宽限制之间的权衡.然而,这些方法假设所有智能体具有相同的神经网络，这在现实世界中可能是不实用的。 当模型不同时,传递的特征可能存在较大的领域差距(domain g" name=description><meta content=article property=og:type><meta content=协同感知学习(二) property=og:title><meta content=https://www.sekyoro.top/2024/05/17/%E5%8D%8F%E5%90%8C%E6%84%9F%E7%9F%A5%E7%AE%97%E6%B3%95-%E4%BA%8C/index.html property=og:url><meta content=Sekyoro的博客小屋 property=og:site_name><meta content="随着深度学习 Domain gapBridging the Domain Gap for Multi-Agent Perception摘要现有的多智能体感知算法通常选择在智能体之间共享从原始感知数据中提取的深度神经特征，以实现精度和通信带宽限制之间的权衡.然而,这些方法假设所有智能体具有相同的神经网络，这在现实世界中可能是不实用的。 当模型不同时,传递的特征可能存在较大的领域差距(domain g" property=og:description><meta content=zh_CN property=og:locale><meta content=https://s2.loli.net/2024/05/17/R4nUZOVyzfJCTcw.png property=og:image><meta content=https://s2.loli.net/2024/05/08/GZMfEleua21jYVv.png property=og:image><meta content=https://s2.loli.net/2024/05/08/AjeXstVr2Ih6E5g.png property=og:image><meta content=https://s2.loli.net/2024/05/13/D38nvIVKNeUi6xB.png property=og:image><meta content=https://s2.loli.net/2024/05/13/kZdD3lKJYPfWLue.png property=og:image><meta content=https://s2.loli.net/2024/05/14/s9KUC8vfEXOgTNb.png property=og:image><meta content=https://s2.loli.net/2024/05/14/v4PD6HNOp1ercGx.png property=og:image><meta content=https://s2.loli.net/2024/05/14/MA5Ia4qDBscdp1L.png property=og:image><meta content=https://s2.loli.net/2024/05/17/DbfYtlhCnFSpTE7.png property=og:image><meta content=2024-05-17T14:42:49.000Z property=article:published_time><meta content=2024-05-17T14:44:11.858Z property=article:modified_time><meta content=Sekyoro property=article:author><meta content="collaborative perception" property=article:tag><meta content=summary name=twitter:card><meta content=https://s2.loli.net/2024/05/17/R4nUZOVyzfJCTcw.png name=twitter:image><link href=https://www.sekyoro.top/2024/05/17/%E5%8D%8F%E5%90%8C%E6%84%9F%E7%9F%A5%E7%AE%97%E6%B3%95-%E4%BA%8C/ rel=canonical><script id=page-configurations>// https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };</script><title>协同感知学习(二) | Sekyoro的博客小屋</title><noscript><style>.use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }</style></noscript><link href=/atom.xml rel=alternate title=Sekyoro的博客小屋 type=application/atom+xml><body itemscope itemtype=http://schema.org/WebPage><canvas style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" class=fireworks></canvas><script defer src=https://cdn.bootcss.com/animejs/2.2.0/anime.min.js></script><script defer src=/js/src/fireworks.js></script><div class="container use-motion"><div class=headband></div><header class=header itemscope itemtype=http://schema.org/WPHeader><div class=header-inner><div class=site-brand-container><div class=site-nav-toggle><div aria-label=切换导航栏 class=toggle><span class="toggle-line toggle-line-first"></span><span class="toggle-line toggle-line-middle"></span><span class="toggle-line toggle-line-last"></span></div></div><div class=site-meta><a class=brand href=/ rel=start> <span class=logo-line-before><i></i></span> <h1 class=site-title>Sekyoro的博客小屋</h1> <span class=logo-line-after><i></i></span> </a></div><div class=site-nav-right><div class="toggle popup-trigger"><i class="fa fa-search fa-fw fa-lg"></i></div></div></div><nav class=site-nav><ul class="main-menu menu" id=menu><li class="menu-item menu-item-home"><a href=/ rel=section><i class="fa fa-home fa-fw"></i>首页</a><li class="menu-item menu-item-about"><a href=/about/ rel=section><i class="fa fa-user fa-fw"></i>关于</a><li class="menu-item menu-item-tags"><a href=/tags/ rel=section><i class="fa fa-tags fa-fw"></i>标签</a><li class="menu-item menu-item-categories"><a href=/categories/ rel=section><i class="fa fa-th fa-fw"></i>分类</a><li class="menu-item menu-item-archives"><a href=/archives/ rel=section><i class="fa fa-archive fa-fw"></i>归档</a><li class="menu-item menu-item-bangumis"><a href=/bangumis/ rel=section><i class="fa fa-film fa-fw"></i>追番</a><li class="menu-item menu-item-resume"><a href=/resume/ rel=section><i class="fa fa-file-pdf fa-fw"></i>简历</a><li class="menu-item menu-item-materials"><a href=/materials/ rel=section><i class="fa fa-book fa-fw"></i>学习资料</a><li class="menu-item menu-item-sitemap"><a href=/sitemap.xml rel=section><i class="fa fa-sitemap fa-fw"></i>站点地图</a><li class="menu-item menu-item-search"><a class=popup-trigger role=button><i class="fa fa-search fa-fw"></i>搜索 </a></ul></nav><div class=search-pop-overlay><div class="popup search-popup"><div class=search-header><span class=search-icon> <i class="fa fa-search"></i> </span><div class=search-input-container></div><span class=popup-btn-close> <i class="fa fa-times-circle"></i> </span></div><div class=algolia-results><div id=algolia-stats></div><div id=algolia-hits></div><div class=algolia-pagination id=algolia-pagination></div></div></div></div></div></header><a class="book-mark-link book-mark-link-fixed" role=button></a><main class=main><div class=main-inner><div class=content-wrap><div class="content post posts-expand"><article class=post-block itemscope itemtype=http://schema.org/Article lang=zh-CN><link href=https://www.sekyoro.top/2024/05/17/%E5%8D%8F%E5%90%8C%E6%84%9F%E7%9F%A5%E7%AE%97%E6%B3%95-%E4%BA%8C/ itemprop=mainEntityOfPage><span hidden itemprop=author itemscope itemtype=http://schema.org/Person> <meta content=https://i.loli.net/2021/05/17/YqoavnXdGTpPO9R.jpg itemprop=image> <meta content=Sekyoro itemprop=name> <meta content=什么也无法舍弃的人，什么也做不了. itemprop=description> </span><span hidden itemprop=publisher itemscope itemtype=http://schema.org/Organization> <meta content=Sekyoro的博客小屋 itemprop=name> </span><header class=post-header><h1 itemprop="name headline" class=post-title>协同感知学习(二)</h1><div class=post-meta><span class=post-meta-item> <span class=post-meta-item-icon> <i class="far fa-calendar"></i> </span> <span class=post-meta-item-text>发表于</span> <time itemprop="dateCreated datePublished" title="创建时间：2024-05-17 22:42:49 / 修改时间：22:44:11" datetime=2024-05-17T22:42:49+08:00>2024-05-17</time> </span><span style="display: none;" class=post-meta-item id=busuanzi_container_page_pv title=阅读次数> <span class=post-meta-item-icon> <i class="fa fa-eye"></i> </span> <span class=post-meta-item-text>阅读次数：</span> <span id=busuanzi_value_page_pv></span> </span><br><span class=post-meta-item title=本文字数> <span class=post-meta-item-icon> <i class="far fa-file-word"></i> </span> <span class=post-meta-item-text>本文字数：</span> <span>6.4k</span> </span><span class=post-meta-item title=阅读时长> <span class=post-meta-item-icon> <i class="far fa-clock"></i> </span> <span class=post-meta-item-text>阅读时长 ≈</span> <span>6 分钟</span> </span></div></header><div class=post-body itemprop=articleBody><p>随着深度学习<h2 id=Domain-gap><a title="Domain gap" class=headerlink href=#Domain-gap></a>Domain gap</h2><h3 id=Bridging-the-Domain-Gap-for-Multi-Agent-Perception><a title="Bridging the Domain Gap for Multi-Agent Perception" class=headerlink href=#Bridging-the-Domain-Gap-for-Multi-Agent-Perception></a>Bridging the Domain Gap for Multi-Agent Perception</h3><h4 id=摘要><a class=headerlink href=#摘要 title=摘要></a>摘要</h4><p>现有的多智能体感知算法通常选择在智能体之间共享从原始感知数据中提取的深度神经特征，以实现精度和通信带宽限制之间的权衡.然而,<strong>这些方法假设所有智能体具有相同的神经网络，这在现实世界中可能是不实用的</strong>。<p>当模型不同时,传递的特征可能存在较大的<strong>领域差距</strong>(domain gap)，导致多智能体感知性能急剧下降.<p>在本文中，我们提出了第一个轻量级框架来为多智能体感知弥合这种领域鸿沟,它可以作为大多数现有系统的插件模块,同时保持机密性.<p>我们的框架包括一个可学习的特征成形模来对齐多个维度的特征,以及一个用于领域自适应的稀疏跨域转换器.在公开的多智能体感知数据集V2XSet上的大量实验表明,对于基于点云的三维目标检测,我们的方法可以有效地弥合不同领域特征之间的差距,并显著优于其他基线方法至少8%。<h4 id=引言><a class=headerlink href=#引言 title=引言></a>引言</h4><p>最近的研究表明，通过利用车联网( Vehicle-to- Everything，V2X )通信技术共享视觉信息，多智能体感知系统可以通过透视遮挡和感知更远的范围来显著提高单智能体系统的性能.<p>现有方法通常不共享原始感知数据或检测输出,而是共享由传感器数据计算得到的中间神经特征,因为它们可以在精度和带宽需求之间实现最佳权衡.<p>此外,传递的中间特征对GPS噪声和通信延迟的鲁棒性更强.<p>这忽略了一个关键的事实<strong>:为所有智能体部署相同的模型是不现实的,特别是对于连接的自动驾驶</strong>.<p>不同公司的网联自动驾驶汽车( CAV )和基础设施产品的检测模型通常是不同的。即使对于同一公司,由于车载软件版本的不同,也可能存在不同的检测模型.当共享特征来自不同的骨干时,存在一个明显的域间隙,这很容易削弱协作的好处。<p>在本文中，我们深入研究了多智能体感知中，特别是自动驾驶中这一尚未解决的实际问题。我们首先仔细<strong>研究了不同特征图的领域差距</strong>，然后在分析的基础上提出了我们的框架。<p><img alt=image-20240517150815672 data-src=https://s2.loli.net/2024/05/17/R4nUZOVyzfJCTcw.png><h4 id=Learnable-Feature-Resizer><a title="Learnable Feature Resizer" class=headerlink href=#Learnable-Feature-Resizer></a>Learnable Feature Resizer</h4><p>在ego代理上计算特征图作为source domain,接受其他代理的特征作为target domain.<p>特征缩放器Φ的目标是以可学习的方式将源域特征的维度与目标域进行对齐</p><script type="math/tex; mode=display">
+F_T^{'}=\Phi(F_T),\mathrm{~s.t.~}F_T^{'}\in\mathbb{R}^{N\times H_S\times W_S\times C_S}</script><p>我们将Φ与多智能体检测模型联合训练，使其能够智能地学习调整特征尺寸的最优方法，这与双线性插值等简单的尺寸调整方法有根本的不同。<p>可学习特征成形模的体系结构设计所示,它包括四个主要组件:通道对齐器，FAX成形模，跳跃连接和res - block。<p><strong>Channel Aligner</strong>:使用一个简单的1 × 1卷积层对齐通道维度,其输入通道数为$C_{in}$ = 2$C_S$,输出CS通道。当$C^T > C^{in}$时,随机丢弃$C^{in} - C^{T}$通道,应用1 × 1卷积层得到新的特征.我们在$F^T$上重复这个过程n次,得到$n×H^T×W^T×C^S$维度的特征，并沿第一个维度进行平均。<p>通过这种方式,我们改善了由于信道衰落造成的信息丢失.当$C<em>T$ < $C</em>{in}$时，我们从FT中随机选择通道进行填充,以满足1 × 1卷积所需的输入通道数。<p><strong>FAX Resizer</strong><p>由于LiDAR特征通常由于空体素而具有稀疏性,应用大核卷积获取全局信息可能会将无意义的信息扩散到重要区域.因此,我们在双线性缩放之前应用了融合的轴向( FAX )注意力块,以获得更好的特征表示.<p><strong>跳跃连接</strong>:在跳跃连接中,使用了双线性特征调整方法,以使学习更容易。<p><strong>残差块</strong>( Res-Block ):在重新调整特征图大小后执行标准残差块r次,以进一步细化特征图.<h4 id=Sparse-Cross-Domain-Transformer><a title="Sparse Cross-Domain Transformer" class=headerlink href=#Sparse-Cross-Domain-Transformer></a>Sparse Cross-Domain Transformer</h4><p>在检索到缩放后的特征$F^′_{T}$后,需要将其模式从domain classifier中转换为不可区分的模式,以获得领域不变特征.为了达到这个目的,我们需要有效地从局部和全局两个方面来推理$F^{′}_T$和$F_S$之间的相关性.因此,我们提出了稀疏跨域变压器,在避免昂贵计算的同时,享受了变压器架构带来的动态和全局关注的好处.</p><script type="math/tex; mode=display">
+Q=W_{Q}(F_{T}^{'}),\quad K=W_{K}(F_{S}),\quad V=W_{V}(F_{S}),\\\hat{F_{T}^{'}}=Q+LN(FAX(Q,K,V)),\\F_{T}^{''}=\hat{F_{T}^{'}}+LN(FFN(\hat{F_{T}^{'}})),</script><p>其中LN是层标准化,Q是查询,K是键,V是值.然后,我们将$F^{′′}_T$和$F_S$配对在一起，并将它们送入域分类器和多智能体融合模块.<h4 id=Domain-Classifier><a title="Domain Classifier" class=headerlink href=#Domain-Classifier></a>Domain Classifier</h4><p>设X为可能来自源域或目标域的特征图,h:X→{ 0,1 }为域分类器,试图预测源域样本$X_S$为0,目标域样本$X_T$为1</p><script type="math/tex; mode=display">
+\max_G\min_{h\in H}\left(\mathbf{E}_S(h(X))+\mathbf{E}_T(h(X))\right.</script><h4 id=Multi-Agent-Fusion><a title="Multi-Agent Fusion" class=headerlink href=#Multi-Agent-Fusion></a>Multi-Agent Fusion</h4><p>在这项工作中，我们选择了一个最先进的模型V2X - ViT作为我们的多智能体融合算法。V2X - ViT依次采用异构多智能体自注意力块和多尺度窗口注意力块,对不同智能体的特征进行智能融合。</p><script type="math/tex; mode=display">
+\min_{G,M}(\mathbf{E}_D(V)),\quad V=M(F_S,F_T^{''})</script><h3 id=MACP-Efficient-Model-Adaptation-for-Cooperative-Perception><a title="MACP: Efficient Model Adaptation for Cooperative Perception" class=headerlink href=#MACP-Efficient-Model-Adaptation-for-Cooperative-Perception></a>MACP: Efficient Model Adaptation for Cooperative Perception</h3><h4 id=abstract><a class=headerlink href=#abstract title=abstract></a>abstract</h4><p>车对车（V2V）通信通过信息共享实现了 “看穿遮挡物”，极大地增强了联网和自动驾驶车辆（CAV）的感知能力，从而显著提高了性能。然而，当现有的单个代理模型显示出卓越的泛化能力时，从头开始开发和训练复杂的多代理感知模型可能既昂贵又没有必要。在本文中，我们提出了一个名为 MACP 的新框架，它能使预先训练好的单个代理模型具备合作能力。为了实现这一目标，我们<strong>确定了从单一代理转向合作设置所面临的关键挑战，并通过冻结大部分参数和添加一些轻量级模块来调整模型</strong>。我们在实验中证明，所提出的框架可以有效地利用合作观察，并在模拟和真实世界合作感知基准中优于其他最先进的方法，同时所需的可调参数大大减少，通信成本也降低了。<h4 id=方法><a class=headerlink href=#方法 title=方法></a>方法</h4><p>我们的目标是求解一个最佳模型 $f^{∗}$，该模型能够检测和划定周围物体的边界框，并分配适当的标签.<p>为了简化符号，我们用一个 d′维向量 $y_j∈R^{d′}$ 来表示每个边界框及其类别标签。<p>在不失一般性的前提下，物体检测模型 f 是一个从点云空间到边界框及其标签的联合空间 f : X → Y 的映射，经过训练的模型理想地描述了以观测点云集 x 为条件观测边界框集 y 的概率，其值为</p><script type="math/tex; mode=display">
+p(\mathbf{y}|\mathbf{x};f)=\frac{p(\mathbf{x},\mathbf{y})}{p(\mathbf{x})}</script><p>如果我们用 pS (x) 表示在单个代理感知中观察到点云集的边际概率，用 pC(x) 表示在合作感知中观察到精确点云集的概率，由于 V2V 通信共享了额外的点云，这两个概率可能不同，即 pS (x) ̸= pC(x) 。<p>预训练模型给出的点云和边界框的联合分布偏离合作环境下的地面实况联合分布</p><script type="math/tex; mode=display">
+\hat{p}_{\mathcal{C}}(\mathbf{x},\mathbf{y};f)=\frac{p_{\mathcal{S}}(\mathbf{x},\mathbf{y})}{p_{\mathcal{S}}(\mathbf{x})}\cdot p_{\mathcal{C}}(\mathbf{x})\neq p_{\mathcal{C}}(\mathbf{x},\mathbf{y}) \\
+g^*=\underset{g\in\mathcal{G}}{\text{argmin}\mathcal{L}}\left(p_{\mathcal{C}}(\mathbf{x},\mathbf{y}),\hat{p}_{\mathcal{C}}(\mathbf{x},\mathbf{y};f\cdot g)\right) \\
+p(\mathbf{y}|\mathbf{x};f\cdot g)=g\left\lfloor\frac{p_{\mathcal{S}}(\mathbf{x},\mathbf{y})}{p_{\mathcal{S}}(\mathbf{x})}\right\rfloor</script><p><img alt=image-20240508151535055 data-src=https://s2.loli.net/2024/05/08/GZMfEleua21jYVv.png><h4 id=Convolution-Adapter><a title="Convolution Adapter" class=headerlink href=#Convolution-Adapter></a>Convolution Adapter</h4><p>ConAda 模块是特征编码器的关键组件。特征编码器网络是卷积块的级联，其中卷积层的输出经过 ConAda 模块，并通过残差连接加回自身。我们只在训练过程中训练 ConAda 参数，并在卷积层和 ConAda 模块之后的其他层中冻结预训练参数。<p>同时，ConAda 还充当车辆之间的通信通道。在通信过程中，ConAda 模块中的下卷积层和激活层帮助压缩和加密编码特征，以便进行广播，而上卷积层则用于解压缩接收信号，以便进行特征融合。<h4 id=SSF-Operator-for-Fused-Feature><a title="SSF Operator for Fused Feature" class=headerlink href=#SSF-Operator-for-Fused-Feature></a>SSF Operator for Fused Feature</h4><p>我们在连续的神经网络层中执行 SSF 算子，以考虑域偏移.<p>假设卷积层的输出特征图由 $X^{output}_{i,j}$ ∈ $R^{H′×W ′×C′}$ 给出，我们使用缩放因子 $\gamma$∈ $R^{C′}$和移动因子 β ∈ $R^{C′}$更新特征图</p><script type="math/tex; mode=display">
+X_{i,j}^{\mathrm{output}}=\gamma\odot X_{i,j}^{\mathrm{output}}+\beta</script><p>最后,基于 ConAda 的通信信道可以灵活压缩信号传输,从而缓解通信瓶颈.<p><img alt=image-20240508165439383 data-src=https://s2.loli.net/2024/05/08/AjeXstVr2Ih6E5g.png><p>这篇文章主要基于微调的方法和思想,使用的是Adapter,此外还有LoRA等.关于大模型压缩技术还有剪枝、蒸馏以及量化等等,感觉都可以试试.<h3 id=DI-V2X-Learning-Domain-Invariant-Representation-for-Vehicle-Infrastructure-Collaborative-3D-Object-Detection><a title="DI-V2X: Learning Domain-Invariant Representation for Vehicle-Infrastructure Collaborative 3D Object Detection" class=headerlink href=#DI-V2X-Learning-Domain-Invariant-Representation-for-Vehicle-Infrastructure-Collaborative-3D-Object-Detection></a>DI-V2X: Learning Domain-Invariant Representation for Vehicle-Infrastructure Collaborative 3D Object Detection</h3><p><strong>Task</strong> Collaborative 3D Object Detection<p><strong>method</strong> learn domain-invariant representation<p><strong>inner thoughts</strong> distillation<h4 id=摘要-1><a class=headerlink href=#摘要-1 title=摘要></a>摘要</h4><p>车对物（V2X）协同感知最近获得了极大关注，因为它能够通过整合来自不同代理（如车辆和基础设施）的信息来增强场景理解能力。<strong>然而，目前的研究通常对来自每个代理的信息一视同仁，忽略了每个代理使用不同激光雷达传感器所造成的固有领域差距，从而导致性能不尽如人意</strong>。<blockquote><p>也就是不同的LiDAR传感器本身的不同会导致一种domain gap,会使性能下降.这种说法看起来make sense,但加上一些示意图补充可能更好.这篇文章就加了一张.</blockquote><p>提出了 DI-V2X,旨在通过一个<strong>新的蒸馏框架来学习领域不变表征</strong>,以减轻 V2X 3D 物体检测中的领域差异。<p>DI-V2X 包括三个基本组件：域混合实例增强（DMA）模块、渐进式域不变性蒸馏（PDD）模块和域自适应融合（DAF）模块.<p>具体来说,DMA 在训练过程中为教师模型和学生模型建立了一个领域混合三维实例库，从而形成对齐的数据表示.接下来,PDD 鼓励来自不同领域的学生模型逐步学习与教师领域无关的特征表示,并利用代理之间的重叠区域作为指导,促进提炼过程.<p>此外,DAF 通过校准感知领域自适应注意力,缩小了学生之间的领域差距.在具有挑战性的 DAIR-V2X 和 V2XSet 基准数据集上进行的大量实验表明,DI-V2X 性能卓越,超过了之前所有的 V2X 模型.<h4 id=Introduction><a class=headerlink href=#Introduction title=Introduction></a>Introduction</h4><p>它充分利用从不同代理（即车辆和路边基础设施）收集到的传感器数据，精确感知复杂的驾驶场景.例如,在车辆视线可能受阻的情况下,由于基础设施的视角不同,它们提供的信息可以作为重要的冗余.<p>与以往的单车自动驾驶系统相比,这种合作从根本上扩大了感知范围,减少了盲点,提高了整体感知能力.<p>为了有效融合来自不同代理的信息,领先的 V2X 方法倾向于采用基于特征的中间协作,即中间融合）。这种方法在特征层保留了每个代理的基本信息，然后对其进行压缩以提高效率。因此，中间融合确保了性能与带宽的权衡，优于早期融合或后期融合方法，前者需要在代理之间传输原始点云数据，而后者则容易受到每个模型产生的不完整结果的影响。<p>然而，当前的中间融合模型主要集中在增强来自不同代理的特征之间的交互。<p>如图 1(a)所示，<strong>车辆和基础设施可能拥有不同类型的激光雷达传感器，因此直接融合不同来源的点云数据或中间特征难免会影响最终性能</strong>。因此，在这种情况下，如何从多源数据中明确学习域不变表示仍有待探索。<p><img alt=image-20240513150627484 data-src=https://s2.loli.net/2024/05/13/D38nvIVKNeUi6xB.png><p>为此，DI-V2X 引入了一种新的师生提炼模型.<strong>在训练过程中，我们强制要求学生模型（即车辆和基础设施）学习与早期融合的教师模型一致的领域不变表示法</strong>,即把来自多个视角的点云整合为一个整体视图来训练教师。<strong>在推理过程中，只保留学生模型</strong>。具体来说，DI-V2X 由三个必要组件组成：领域混合实例增强（DMA）模块、渐进式领域不变性提炼（PDD）模块和领域自适应融合（DAF）模块<blockquote><p>其实基础思想就是蒸馏,搞一个结构相似但参数量更小的模型替代原本较大的模型. 关键是让小模型学会大模型的”知识”</blockquote><p>DMA 的目的是在训练过程中建立一个mixed ground-truth instance bank，以对齐教师和学生的点云输入，其中的实例来自车侧、路侧或融合侧。<p>之后，PDD 的目标是在不同阶段，即在领域适应性融合之前和之后，逐步将信息从教师传递给学生.例如,在融合之前,引导学生在<strong>非重叠区域分别学习领域不变的表征</strong>。而在融合之后，我们将重点放在重叠区域内的提炼上，因为信息已经得到了很好的汇总.<p>在 DAF 模块中，来自不同领域的特征会根据其空间重要性进行自适应融合。此外，DAF 还通过整合校准偏移来增强模型对姿态误差的适应能力，从而确保 V2X 检测性能的稳健性。<p><img alt=image-20240513214314409 data-src=https://s2.loli.net/2024/05/13/kZdD3lKJYPfWLue.png><p>在DMA中,对于教师模型,使用车端数据,路端数据以及早期融合后的数据(就是转换到统一坐标系后的点云结果)利用PointPillars的decoder进行增强,使用增强后的$P_e$,再使用VoxelNet处理成BEV的二维特征图$B_t$.<p>学生模型结构跟教师模型类似,处理$P_v$和$P_i$提取得到对应特征图.然后使用DAF进行融合得到$B_f$<p>在训练的时候,在DAF融合之前和之后会有一个PDD模型将学生模型得到的特征和老师模型得到的特征利用overlapping area进行对齐.<p>DMA本是类似一个数据增强模块,首先将 $P<em>i$ 投影到自我车辆的坐标系上，这样 $P^T_i$ =$T(i→v)$$P^T_i$,其中 $T(i→v)$ ∈ $R^{4×4} $是基础设施到车辆系统的变换矩阵.然后,我们利用地面实况边界框 $B</em>{gt}$ = {$b<em>k$} 从 $P_v$ 和 $P_i$ 获取实例.来自不同domain、对应于同一地面实况对象的实例将被合并，得到一个早期融合实例 pk = Concat($p^v_k$, $p^i_k$) ∈ $R^{N</em>{k}×4}$，其中 $p^v_k$∈ Pv 和 $p^i_k$∈ Pi 是来自两个领域、以 $b_k$为索引的实例点。由于代理之间的相对位置会随着自我车辆的运动而发生动态变化，因此有些实例可能仅来自单个域，而另一些实例则可能直接来自早期融合的重叠区域。为了确定每个实例的域来源，我们通过计算来自每个域的点比例，将这些实例分为三类：</p><script type="math/tex; mode=display">
+\begin{aligned}
+&D_{i} =\{\mathbf{p}_k|N_k^v/(N_k^v+N_k^i)<\tau_l\}  \\
+&D_{f} =\{\mathbf{p}_k|\tau_l<N_k^v/(N_k^v+N_k^i)<\tau_h\}  \\
+&D_{v} =\{\mathbf{p}_k|N_k^v/(N_k^v+N_k^i)>\tau_h\} 
+\end{aligned}</script><p>$N^{v}<em>{k}$ 和 $N^{i}</em>{k}$ 分别代表车辆侧和基础设施侧的点数，τl、τh 表示阈值.然后，得到一个实例库$D<em>{mixed}$ = $D_i$ ∪ $D_f$ ∪ $D_v$，其中包含来自所有领域（即包括融合领域）的混合实例。在训练过程中，我们按照一定的概率从$D</em>{mixed}$中随机抽取实例，并将这些实例添加给教师和学生.<p>通过涉及不同领域的实例<strong>增强了训练数据的多样性</strong>.此外,从每个学生的角度来看,来自其他领域的信息也会通过实例级混合被纳入其中（Zhang 等人，2018 年）.这种方法从根本上调整了教师模型和学生模型之间的数据分布,从而在随后的知识提炼过程中产生了更具普适性的特征。<p>为了获得跟域无关的特征,采用了两阶段蒸馏策略，即在领域自适应融合（DAF）模块之前和之后进行蒸馏。第一个蒸馏阶段是将学生的分布与教师模型相一致，作为 DAF 的输入，这对准确的信息融合至关重要。<p>然而，根据经验发现，直接对学生和教师之间的整个特征图进行蒸馏会产生次优性能.为此选择在第一阶段对非重叠区域进行蒸馏.在第二阶段,由于学生特征已通过 DAF 得到很好的融合,我们可以集中精力对重叠区域进行蒸馏.这种两阶段的提炼过程可使学生模型与来自不同区域的教师模型的特征表示相匹配,从而缩小学生之间的差距.<p>在融合之前的蒸馏,首先需要计算重叠掩码,以确定重叠区域.<p>将基础设施一侧的感知区域转换到车辆一侧，得到一个新的矩形 $A<em>i$ = ($x_i,y_i,2R_x, 2R_y, θ_i$)。然后我们可以计算 $A_v$ 和 $A_i$ 之间的重叠区域，即 $P</em>{overlap}$ = Intersection($A<em>v$，$A_i$)。然后对得到的 $P</em>{overlap}$（即多边形）进行下采样,以匹配特征地图 $B_v$ ∈ $R^{H×W ×C}$ 的大小.</p><script type="math/tex; mode=display">
+\left.\mathbf{M}(i,j)=\left\{\begin{array}{cc}1&,&\mathrm{if~}(i,j)\in\mathbf{P}_{overlap}\\0&,&\mathrm{otherwise}\end{array}\right.\right.</script><p>M(i, j) ∈ 0, 1 表示（i, j）坐标处的二进制值。通过只对非重叠区域 进行提炼,我们允许每个学生集中学习与各自领域一致的表征。这就避免了强制要求不完整的学生特征向教师的完整特征学习的严格约束</p><script type="math/tex; mode=display">
+\begin{aligned}
+\mathcal{L}_{da}& =\mathcal{L}_1(\mathbf{B}_t,\mathbf{B}_v\odot\tilde{\mathbf{M}}_v)+\mathcal{L}_1(\mathbf{B}_t,\mathbf{B}_i\odot\tilde{\mathbf{M}}_i)  \\
+&=\frac1{HW}\sum_m^H\sum_m^W|\mathbf{B}_t(m,n)-\mathbf{B}_v(m,n)|\times\tilde{\mathbf{M}}_v(m,n) \\
+&+\frac1{HW}\sum_m^H\sum_n^W|\mathbf{B}_t(m,n)-\mathbf{B}_i(m,n)|\times\tilde{\mathbf{M}}_i(m,n)
+\end{aligned}</script><p>在融合后的蒸馏,使用 DAF 模块有效地合并了来自不同领域的学生特征.因此,我们得到了一个能力很强的融合表征,用 Bf 表示,它可以与教师的特征表征 $B_t$ 配对.<p>直观地说,Bt 是通过混合点云数据的早期协作获得的,其本质上涉及最小的信息损失.通过强制中间融合特征 $B_f$ 逐步与$B_t$ 保持一致,可以有效地确保在整个学习过程中始终整合通过早期融合阶段获得的基本知识,从而形成与领域无关的特征表征.<p>此外，我们还可以超越特征级对齐，扩展到预测级对齐.由于我们的最终目标是从两个 $B_f$ 解码出最终的三维边界框，确保预测层面的对齐将进一步提高结果的一致性和准确性.</p><script type="math/tex; mode=display">
+\begin{aligned}
+\mathcal{L}_{f}& =\mathcal{L}_1(\mathbf{B}_t,\mathbf{B}_f\odot\mathbf{M}_v)  \\
+&=\frac1{HW}\sum_m^H\sum_m^W|\mathbf{B}_t(m,n)-\mathbf{B}_f(m,n)|\times\tilde{\mathbf{M}}_v(m,n)
+\end{aligned}</script><script type="math/tex; mode=display">
+\begin{aligned}
+\mathcal{L}_{p}& =\mathcal{L}_{class}+\mathcal{L}_{regression}  \\
+&=\frac1K\sum_k^K(|\mathbf{c}_k-\mathbf{c}_k^s|+|\mathbf{r}_k-\mathbf{r}_k^s|)
+\end{aligned}</script><script type="math/tex; mode=display">
+\mathcal{L}=\mathcal{L}_{detect}+\lambda_{kd}(\mathcal{L}_{da}+\mathcal{L}_f+\mathcal{L}_p)</script><p>DAF 模块的目标是聚合车辆和基础设施的特征,创建一个包含各领域有价值信息的增强表示.然而,这一融合过程面临着两大挑战:双方姿势的潜在错位和设计合适的特征交互策略.<p><img alt=image-20240514152437112 data-src=https://s2.loli.net/2024/05/14/s9KUC8vfEXOgTNb.png><p>由于<strong>传感器噪声</strong>、<strong>动态运动</strong>和不同时间戳的不一致性等原因，现实世界中车辆和基础设施的相对姿态很容易受到影响，这将影响 V2X 感知的准确性.为了解决这个问题,利用校准偏移来动态纠正潜在的姿势误差.<p>首先用卷积层预测校准偏移,使$B_i$与$B_v$更好地对齐,记为</p><script type="math/tex; mode=display">
+\Delta_{(i\to v)}=\text{Conv}(\text{Concat}(\mathbf{B}_v,\mathbf{B}_i))\in\mathbb{R}^{H\times W\times2}</script><script type="math/tex; mode=display">
+\mathbf{B}_i^{^{\prime}}(p_k)=\mathbf{B}_i(p_k+\mathbf{\Delta}_{(i\to v)}(p_k)),0\leq k<HW</script><script type="math/tex; mode=display">
+\mathbf{A}_d=\mathrm{Softmax}(\mathrm{Conv}(\mathbf{B}_{cat}))\in\mathbb{R}^{H\times W\times C\times2}\\
+\mathbf{A}_s=\mathrm{Conv}(\mathbf{B}_{cat})+\max(\mathbf{B}_{cat})\\
+\mathbf{B}_f=\mathrm{Conv}(\mathbf{A}_d\odot\mathbf{A}_s\cdot\mathbf{B}_{cat})\in\mathbb{R}^{H\times W\times C}</script><p>空间自适应注意力可以通过聚合多粒度特征,提供稳健而灵活的注意力图<p>最后结果展示包括在两个数据集上与No fusion,early和late fusion以及一些列经典中期融合模型对比.<p>然后证明domain generalization实验证明模型学到了域不变的特征.辞海还有消融实验,证明提出的每个组件的作用.<p><img alt=image-20240514172721623 data-src=https://s2.loli.net/2024/05/14/v4PD6HNOp1ercGx.png><p><img alt=image-20240514172919650 data-src=https://s2.loli.net/2024/05/14/MA5Ia4qDBscdp1L.png><h2 id=Sim2Real><a class=headerlink href=#Sim2Real title=Sim2Real></a>Sim2Real</h2><h3 id=S2R-ViT-for-Multi-Agent-Cooperative-Perception-Bridging-the-Gap-from-Simulation-to-Reality><a title="S2R-ViT for Multi-Agent Cooperative Perception: Bridging the Gap from Simulation to Reality" class=headerlink href=#S2R-ViT-for-Multi-Agent-Cooperative-Perception-Bridging-the-Gap-from-Simulation-to-Reality></a>S2R-ViT for Multi-Agent Cooperative Perception: Bridging the Gap from Simulation to Reality</h3><h4 id=摘要-2><a class=headerlink href=#摘要-2 title=摘要></a>摘要</h4><p>由于缺乏足够的真实多智能体数据且标注耗时，现有的多智能体协同感知算法通常选取模拟的传感器数据进行训练和验证。<strong>然而，当这些经过仿真训练的模型被部署到真实世界时，由于仿真数据和真实数据之间存在显著的领域差距，感知性能会下降</strong>。<p>在本文中，我们提出了第一个使用新型视觉转换器的多智能体协作感知的仿真到现实迁移学习框架，命名为S2R - ViT，它同时考虑了模拟数据和真实数据之间的部署差距和特征差距。<p>我们研究了这两种类型的域间隙的影响，并提出了一种新的不确定感知视觉转换器来有效地缓解部署间隙，并提出了一种基于代理的特征自适应模块，通过代理间和代理间的鉴别器来减小特征间隙。<p>在公开的多智能体协同感知数据集OPV2V和V2V4Real上的大量实验表明，本文提出的S2R - ViT方法能够有效地弥补仿真与现实之间的差距，在基于点云的三维目标检测中显著优于其他方法。<h4 id=引言-1><a class=headerlink href=#引言-1 title=引言></a>引言</h4><p>多智能体协作感知的最新进展显示出克服单智能体感知受感知范围和遮挡挑战的局限性的潜力.多智能体协作感知系统通过利用智能体之间的通信技术共享信息，相比于单智能体感知，能够显著提升感知性能<p>由于在真实世界中收集具有通信的多智能体数据的困难，<strong>在多样化和复杂的真实世界环境中收集足够多的真实数据是昂贵且不容易的。此外，多智能体协同感知系统的地面真值数据标注和统一坐标投影尤为耗时。</strong>因此，现有的许多多智能体协同感知研究工作通常选取模拟数据进行模型训练和验证<p>然而，<strong>当我们将用模拟数据训练的模型应用于真实世界时，感知性能通常会下降。这种现象是由于模拟数据和真实数据之间存在显著的域差距</strong>。<p>在本文中，我们的研究重点是<strong>利用有标记的模拟数据和无标记的真实世界数据作为迁移学习，以减少多智能体协作感知的领域差距</strong>。<p><img alt=image-20240517203347621 data-src=https://s2.loli.net/2024/05/17/DbfYtlhCnFSpTE7.png><p>我们观察到，多智能体协作感知从模拟到现实的领域差距包括以下两个角度<p>部署间隙( Deployment Gap )：与理想的仿真环境不同，<strong>在现实世界的智能体通信过程中，由于不可避免的GPS误差和通信延迟(时间延迟)，多个智能体可能存在定位(位置和航向)错误</strong><p><strong>特征间隙( Feature Gap )：现实世界的点云特征分布可能与仿真数据有显著差异，例如更复杂的驾驶场景、不同的激光雷达通道数、混合交通流、各种点云变化等</strong>。<p>在本文中，我们提出了第一个使用新型视觉转换器( ViT )的多智能体协作感知的仿真到现实( S2R )迁移学习框架，命名为S2R - ViT，同时考虑了部署间隙和特征间隙。我们选择车辆到车辆( Vehicle-to-Vehicle，V2V )协同感知任务作为基于点云的三维目标检测的算法开发。具体来说，我们的框架将来自模拟的有标记点云数据和来自真实世界的无标记数据作为输入，从而大量地利用模拟数据。在机器学习研究中，这种设置被广泛称为从源域(模拟)到目标域(现实)的无监督域适应。<p>S2R - ViT包括两个关键部分：( 1 ) <strong>S2R-UViT：一种新型的S2R不确定感知视觉转换器，可以有效地缓解develomment gap带来的不确定性</strong>。具体来说，S2R - UViT包括一个<strong>局部和全局的多头自注意力( LG-MSA )模块</strong>，以<strong>增强所有智能体空间位置上的特征交互，以容忍不确定性的缺陷</strong>；<strong>还包括一个不确定性感知模块( UAM )，通过考虑不同不确定性水平的共享其他智能体特征来增强自我智能体的特征</strong>.(2)S2R-AFA：基于<strong>S2R Agent的特征自适应以缩小特征差距</strong>。<strong>S2RAFA利用智能体间和智能体间的判别器提取领域不变特征</strong>，以弥合特征鸿沟。<blockquote><p>Uncertainty-aware vision Transformer，可有效缓解部署间隙带来的不确定性</blockquote><link href=/css/spoiler.css rel=stylesheet><script async src=/js/spoiler.js></script></div><div><div><div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div></div></div><div class=reward-container><div>感谢阅读.</div><button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">打赏</button><div style="display: none;" id=qr><div style="display: inline-block;"><img alt="Sekyoro 微信支付" src=/images/wechatpay.png><p>微信支付</div></div></div><div><ul class=post-copyright><li class=post-copyright-author><strong>本文作者： </strong>Sekyoro<li class=post-copyright-link><strong>本文链接：</strong> <a href=https://www.sekyoro.top/2024/05/17/%E5%8D%8F%E5%90%8C%E6%84%9F%E7%9F%A5%E7%AE%97%E6%B3%95-%E4%BA%8C/ title=协同感知学习(二)>https://www.sekyoro.top/2024/05/17/协同感知算法-二/</a><li class=post-copyright-license><strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href=https://creativecommons.org/licenses/by-nc-sa/4.0/ rel=noopener target=_blank><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</ul></div><div class=followme><p>欢迎关注我的其它发布渠道<div class=social-list><div class=social-item><a class=social-link href=/images/wxqrcode.png target=_blank> <span class=icon> <i class="fab fa-weixin"></i> </span> <span class=label>WeChat</span> </a></div><div class=social-item><a class=social-link href=/images/website.png target=_blank> <span class=icon> <i class="fa fa-user"></i> </span> <span class=label>PersonalWebsite</span> </a></div><div class=social-item><a class=social-link href=https://my-astro-git-main-drowning-in-codes.vercel.app target=_blank> <span class=icon> <i class="fas fa-share"></i> </span> <span class=label>杂鱼分享</span> </a></div><div class=social-item><a class=social-link href=/atom.xml target=_blank> <span class=icon> <i class="fa fa-rss"></i> </span> <span class=label>RSS</span> </a></div></div></div><footer class=post-footer><div class=post-tags><a href=/tags/collaborative-perception/ rel=tag><i class="fa fa-tag"></i> collaborative perception</a></div><div class=post-nav><div class=post-nav-item><a title="computer graphics:计算机图形学学习" href=/2024/05/07/computer-graphics-%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6%E5%AD%A6%E4%B9%A0/ rel=prev> <i class="fa fa-chevron-left"></i> computer graphics:计算机图形学学习 </a></div><div class=post-nav-item></div></div></footer></article></div><!-- 评论区 --><div class=comments><div data-id=city data-uid=MTAyMC81MzE5Ny8yOTY3Mg== id=lv-container></div></div><script>window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }</script></div><div class="toggle sidebar-toggle"><span class="toggle-line toggle-line-first"></span><span class="toggle-line toggle-line-middle"></span><span class="toggle-line toggle-line-last"></span></div><aside class=sidebar><div class=sidebar-inner><!-- canvas粒子时钟 --><div><canvas id=canvas style=width:60%;>当前浏览器不支持canvas，请更换浏览器后再试</canvas></div><script>(function(){
+
+   var digit=
+    [
+        [
+            [0,0,1,1,1,0,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,0,1,1,0],
+            [0,0,1,1,1,0,0]
+        ],//0
+        [
+            [0,0,0,1,1,0,0],
+            [0,1,1,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [1,1,1,1,1,1,1]
+        ],//1
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,1,1],
+            [1,1,1,1,1,1,1]
+        ],//2
+        [
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//3
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,0],
+            [0,0,1,1,1,1,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,1,1,0],
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,1]
+        ],//4
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,1,1,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//5
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//6
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0]
+        ],//7
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//8
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,1,1,0,0,0,0]
+        ],//9
+        [
+            [0,0,0,0,0,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,0,0,0]
+        ]//:
+    ];
+
+var canvas = document.getElementById('canvas');
+
+if(canvas.getContext){
+    var cxt = canvas.getContext('2d');
+    //声明canvas的宽高
+    var H = 100,W = 700;
+    canvas.height = H;
+    canvas.width = W;
+    cxt.fillStyle = '#f00';
+    cxt.fillRect(10,10,50,50);
+
+    //存储时间数据
+    var data = [];
+    //存储运动的小球
+    var balls = [];
+    //设置粒子半径
+    var R = canvas.height/20-1;
+    (function(){
+        var temp = /(\d)(\d):(\d)(\d):(\d)(\d)/.exec(new Date());
+        //存储时间数字，由十位小时、个位小时、冒号、十位分钟、个位分钟、冒号、十位秒钟、个位秒钟这7个数字组成
+        data.push(temp[1],temp[2],10,temp[3],temp[4],10,temp[5],temp[6]);
+    })();
+
+    /*生成点阵数字*/
+    function renderDigit(index,num){
+        for(var i = 0; i < digit[num].length; i++){
+            for(var j = 0; j < digit[num][i].length; j++){
+                if(digit[num][i][j] == 1){
+                    cxt.beginPath();
+                    cxt.arc(14*(R+2)*index + j*2*(R+1)+(R+1),i*2*(R+1)+(R+1),R,0,2*Math.PI);
+                    cxt.closePath();
+                    cxt.fill();
+                }
+            }
+        }
+    }
+
+    /*更新时钟*/
+    function updateDigitTime(){
+        var changeNumArray = [];
+        var temp = /(\d)(\d):(\d)(\d):(\d)(\d)/.exec(new Date());
+        var NewData = [];
+        NewData.push(temp[1],temp[2],10,temp[3],temp[4],10,temp[5],temp[6]);
+        for(var i = data.length-1; i >=0 ; i--){
+            //时间发生变化
+            if(NewData[i] !== data[i]){
+                //将变化的数字值和在data数组中的索引存储在changeNumArray数组中
+                changeNumArray.push(i+'_'+(Number(data[i])+1)%10);
+            }
+        }
+        //增加小球
+        for(var i = 0; i< changeNumArray.length; i++){
+            addBalls.apply(this,changeNumArray[i].split('_'));
+        }
+        data = NewData.concat();
+    }
+
+    /*更新小球状态*/
+    function updateBalls(){
+        for(var i = 0; i < balls.length; i++){
+            balls[i].stepY += balls[i].disY;
+            balls[i].x += balls[i].stepX;
+            balls[i].y += balls[i].stepY;
+            if(balls[i].x > W + R || balls[i].y > H + R){
+                balls.splice(i,1);
+                i--;
+            }
+        }
+    }
+
+    /*增加要运动的小球*/
+    function addBalls(index,num){
+        var numArray = [1,2,3];
+        var colorArray =  ["#3BE","#09C","#A6C","#93C","#9C0","#690","#FB3","#F80","#F44","#C00"];
+        for(var i = 0; i < digit[num].length; i++){
+            for(var j = 0; j < digit[num][i].length; j++){
+                if(digit[num][i][j] == 1){
+                    var ball = {
+                        x:14*(R+2)*index + j*2*(R+1)+(R+1),
+                        y:i*2*(R+1)+(R+1),
+                        stepX:Math.floor(Math.random() * 4 -2),
+                        stepY:-2*numArray[Math.floor(Math.random()*numArray.length)],
+                        color:colorArray[Math.floor(Math.random()*colorArray.length)],
+                        disY:1
+                    };
+                    balls.push(ball);
+                }
+            }
+        }
+    }
+
+    /*渲染*/
+    function render(){
+        //重置画布宽度，达到清空画布的效果
+        canvas.height = 100;
+        //渲染时钟
+        for(var i = 0; i < data.length; i++){
+            renderDigit(i,data[i]);
+        }
+        //渲染小球
+        for(var i = 0; i < balls.length; i++){
+            cxt.beginPath();
+            cxt.arc(balls[i].x,balls[i].y,R,0,2*Math.PI);
+            cxt.fillStyle = balls[i].color;
+            cxt.closePath();
+            cxt.fill();
+        }
+    }
+
+    clearInterval(oTimer);
+    var oTimer = setInterval(function(){
+        //更新时钟
+        updateDigitTime();
+        //更新小球状态
+        updateBalls();
+        //渲染
+        render();
+    },50);
+}
+
+})();</script><!-- require APlayer --><link href=https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css rel=stylesheet><script src=https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js></script><!-- require MetingJS --><script src=/js/meting-js.js></script><ul class="sidebar-nav motion-element"><li class=sidebar-nav-toc>文章目录<li class=sidebar-nav-overview>站点概览</ul><!--noindex--><div class="post-toc-wrap sidebar-panel"><div class="post-toc motion-element"><ol class=nav><li class="nav-item nav-level-2"><a class=nav-link href=#Domain-gap><span class=nav-number>1.</span> <span class=nav-text>Domain gap</span></a><ol class=nav-child><li class="nav-item nav-level-3"><a class=nav-link href=#Bridging-the-Domain-Gap-for-Multi-Agent-Perception><span class=nav-number>1.1.</span> <span class=nav-text>Bridging the Domain Gap for Multi-Agent Perception</span></a><ol class=nav-child><li class="nav-item nav-level-4"><a class=nav-link href=#%E6%91%98%E8%A6%81><span class=nav-number>1.1.1.</span> <span class=nav-text>摘要</span></a><li class="nav-item nav-level-4"><a class=nav-link href=#%E5%BC%95%E8%A8%80><span class=nav-number>1.1.2.</span> <span class=nav-text>引言</span></a><li class="nav-item nav-level-4"><a class=nav-link href=#Learnable-Feature-Resizer><span class=nav-number>1.1.3.</span> <span class=nav-text>Learnable Feature Resizer</span></a><li class="nav-item nav-level-4"><a class=nav-link href=#Sparse-Cross-Domain-Transformer><span class=nav-number>1.1.4.</span> <span class=nav-text>Sparse Cross-Domain Transformer</span></a><li class="nav-item nav-level-4"><a class=nav-link href=#Domain-Classifier><span class=nav-number>1.1.5.</span> <span class=nav-text>Domain Classifier</span></a><li class="nav-item nav-level-4"><a class=nav-link href=#Multi-Agent-Fusion><span class=nav-number>1.1.6.</span> <span class=nav-text>Multi-Agent Fusion</span></a></ol><li class="nav-item nav-level-3"><a class=nav-link href=#MACP-Efficient-Model-Adaptation-for-Cooperative-Perception><span class=nav-number>1.2.</span> <span class=nav-text>MACP: Efficient Model Adaptation for Cooperative Perception</span></a><ol class=nav-child><li class="nav-item nav-level-4"><a class=nav-link href=#abstract><span class=nav-number>1.2.1.</span> <span class=nav-text>abstract</span></a><li class="nav-item nav-level-4"><a class=nav-link href=#%E6%96%B9%E6%B3%95><span class=nav-number>1.2.2.</span> <span class=nav-text>方法</span></a><li class="nav-item nav-level-4"><a class=nav-link href=#Convolution-Adapter><span class=nav-number>1.2.3.</span> <span class=nav-text>Convolution Adapter</span></a><li class="nav-item nav-level-4"><a class=nav-link href=#SSF-Operator-for-Fused-Feature><span class=nav-number>1.2.4.</span> <span class=nav-text>SSF Operator for Fused Feature</span></a></ol><li class="nav-item nav-level-3"><a class=nav-link href=#DI-V2X-Learning-Domain-Invariant-Representation-for-Vehicle-Infrastructure-Collaborative-3D-Object-Detection><span class=nav-number>1.3.</span> <span class=nav-text>DI-V2X: Learning Domain-Invariant Representation for Vehicle-Infrastructure Collaborative 3D Object Detection</span></a><ol class=nav-child><li class="nav-item nav-level-4"><a class=nav-link href=#%E6%91%98%E8%A6%81-1><span class=nav-number>1.3.1.</span> <span class=nav-text>摘要</span></a><li class="nav-item nav-level-4"><a class=nav-link href=#Introduction><span class=nav-number>1.3.2.</span> <span class=nav-text>Introduction</span></a></ol></ol><li class="nav-item nav-level-2"><a class=nav-link href=#Sim2Real><span class=nav-number>2.</span> <span class=nav-text>Sim2Real</span></a><ol class=nav-child><li class="nav-item nav-level-3"><a class=nav-link href=#S2R-ViT-for-Multi-Agent-Cooperative-Perception-Bridging-the-Gap-from-Simulation-to-Reality><span class=nav-number>2.1.</span> <span class=nav-text>S2R-ViT for Multi-Agent Cooperative Perception: Bridging the Gap from Simulation to Reality</span></a><ol class=nav-child><li class="nav-item nav-level-4"><a class=nav-link href=#%E6%91%98%E8%A6%81-2><span class=nav-number>2.1.1.</span> <span class=nav-text>摘要</span></a><li class="nav-item nav-level-4"><a class=nav-link href=#%E5%BC%95%E8%A8%80-1><span class=nav-number>2.1.2.</span> <span class=nav-text>引言</span></a></ol></ol></ol></div></div><!--/noindex--><div class="site-overview-wrap sidebar-panel"><div class="site-author motion-element" itemprop=author itemscope itemtype=http://schema.org/Person><img alt=Sekyoro class=site-author-image itemprop=image src=https://i.loli.net/2021/05/17/YqoavnXdGTpPO9R.jpg><p class=site-author-name itemprop=name>Sekyoro<div class=site-description itemprop=description>什么也无法舍弃的人，什么也做不了.</div></div><div class="site-state-wrap motion-element"><nav class=site-state><div class="site-state-item site-state-posts"><a href=/archives/> <span class=site-state-item-count>186</span> <span class=site-state-item-name>日志</span> </a></div><div class="site-state-item site-state-categories"><a href=/categories/> <span class=site-state-item-count>17</span> <span class=site-state-item-name>分类</span></a></div><div class="site-state-item site-state-tags"><a href=/tags/> <span class=site-state-item-count>188</span> <span class=site-state-item-name>标签</span></a></div></nav></div><div class="links-of-author motion-element"><span class=links-of-author-item> <a title="Personal Website → http://proanimer.com" href=http://proanimer.com/ rel=noopener target=_blank><i class="fab fa-internet-explorer fa-fw"></i>Personal Website</a> </span><span class=links-of-author-item> <a title="GitHub → https://github.com/drowning-in-codes" href=https://github.com/drowning-in-codes rel=noopener target=_blank><i class="fab fa-github fa-fw"></i>GitHub</a> </span><span class=links-of-author-item> <a title="E-Mail → mailto:bukalala174@gmail.com" href=mailto:bukalala174@gmail.com rel=noopener target=_blank><i class="fa fa-envelope fa-fw"></i>E-Mail</a> </span><span class=links-of-author-item> <a title="wxPublicAccount → https://mp.weixin.qq.com/s?__biz=Mzg3ODY1MDkzMg==&mid=2247483770&idx=1&sn=fdf88faab01d5c219ac609570a21c9d6&chksm=cf113221f866bb373938cfca03cf095ff4fe1e4dc37d68ef5de4cd4876ee1260fca0c015a4d6&token=1096259873&lang=zh_CN#rd" href=https://mp.weixin.qq.com/s?__biz=Mzg3ODY1MDkzMg==&mid=2247483770&idx=1&sn=fdf88faab01d5c219ac609570a21c9d6&chksm=cf113221f866bb373938cfca03cf095ff4fe1e4dc37d68ef5de4cd4876ee1260fca0c015a4d6&token=1096259873&lang=zh_CN#rd rel=noopener target=_blank><i class="fab fa-weixin fa-fw"></i>wxPublicAccount</a> </span><span class=links-of-author-item> <a title="RSS → /atom.xml" href=/atom.xml><i class="fa fa-rss fa-fw"></i>RSS</a> </span><span class=links-of-author-item> <a title="CSDN → https://blog.csdn.net/aqwca" href=https://blog.csdn.net/aqwca rel=noopener target=_blank><i class="fa fa-handshake fa-fw"></i>CSDN</a> </span><span class=links-of-author-item> <a title="杂鱼分享 → https://my-astro-git-main-drowning-in-codes.vercel.app" href=https://my-astro-git-main-drowning-in-codes.vercel.app/ rel=noopener target=_blank><i class="fas fa-share fa-fw"></i>杂鱼分享</a> </span></div><div class="links-of-blogroll motion-element"><div class=links-of-blogroll-title><i class="fa fa-link fa-fw"></i> 友情链接</div><ul class=links-of-blogroll-list><li class=links-of-blogroll-item><a href=http://myqhs.top/ rel=noopener target=_blank title=http://myqhs.top/>myqhs</a><li class=links-of-blogroll-item><a href=https://www.lllomh.com/ rel=noopener target=_blank title=https://www.lllomh.com/>芈渡</a></ul></div><div class="motion-element announcement"><div class=title>注意</div><p class=content>由于最近图床更新,可能有些图片显示不了.如果发现了有些图片无法显示影响阅读的,还烦请联系我,我有空补上.<p class=date>2023-10-6</div></div><meting-js id=6856787487 order=random server=netease type=playlist> </meting-js><div class=widget-wrap><h3 class=widget-title style=margin:0>文章词云</h3><div class="widget tagcloud" id=myCanvasContainer><canvas height=250 id=resCanvas style=width:100% width=250><ul class=tag-list itemprop=keywords><li class=tag-list-item><a class=tag-list-link href=/tags/collaborative-perception/ rel=tag>collaborative perception</a><span class=tag-list-count>1</span></ul></canvas></div></div><script id=clustrmaps src=https://clustrmaps.com/map_v2.js?d=xQdGTxqARTBiNIwX2aUban-ixkj2s6VaZQWo-aVCgY8&cl=ffffff&w=a></script><div class="back-to-top motion-element"><i class="fa fa-arrow-up"></i><span>0%</span></div><!-- 边栏 --></div></aside><div id=sidebar-dimmer></div></div></main><footer class=footer><div class=footer-inner><div class=copyright>© Wed Apr 08 2020 08:00:00 GMT+0800 (中国标准时间) – <span itemprop=copyrightYear>2024</span><span class=with-love> <i class="fa fa-heart"></i> </span><span class=author itemprop=copyrightHolder>Sekyoro</span><span class=post-meta-divider>|</span><span class=post-meta-item-icon> <i class="fa fa-chart-area"></i> </span><span title=站点总字数>1.4m</span><span class=post-meta-divider>|</span><span class=post-meta-item-icon> <i class="fa fa-coffee"></i> </span><span title=站点阅读时长>20:31</span></div><script async src=https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js></script><span id=busuanzi_container_site_pv>总访问量<span id=busuanzi_value_site_pv></span>次</span><span class=post-meta-divider>|</span><span id=busuanzi_container_site_uv>总访客数<span id=busuanzi_value_site_uv></span>人</span><span class=post-meta-divider>|</span><!-- 不蒜子计数初始值纠正 --><script>$(document).ready(function() {
+
+    var int = setInterval(fixCount, 50);  // 50ms周期检测函数
+    var countOffset = 20000;  // 初始化首次数据
+
+    function fixCount() {            
+       if (document.getElementById("busuanzi_container_site_pv").style.display != "none")
+        {
+            $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + countOffset); 
+            clearInterval(int);
+        }                  
+        if ($("#busuanzi_container_site_pv").css("display") != "none")
+        {
+            $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + countOffset); // 加上初始数据 
+            clearInterval(int); // 停止检测
+        }  
+    }
+       	
+});</script><div><span id=timeDate>载入天数...</span><span id=times>载入时分秒...</span><script>var now = new Date();
+    function createtime() {
+        var grt= new Date("04/08/2021 20:00:00");
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+    }
+setInterval("createtime()",250);</script></div><div class=busuanzi-count><script async data-pjax src=https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script><span style="display: none;" class=post-meta-item id=busuanzi_container_site_uv> <span class=post-meta-item-icon> <i class="fa fa-user"></i> </span> <span class=site-uv title=总访客量> <span id=busuanzi_value_site_uv></span> </span> </span><span class=post-meta-divider>|</span><span style="display: none;" class=post-meta-item id=busuanzi_container_site_pv> <span class=post-meta-item-icon> <i class="fa fa-eye"></i> </span> <span class=site-pv title=总访问量> <span id=busuanzi_value_site_pv></span> </span> </span></div></div></footer></div><script color=0,0,255 count=99 opacity=0.5 src=/lib/canvas-nest/canvas-nest.min.js zindex=-1></script><script src=/lib/anime.min.js></script><script src=https://cdn.jsdelivr.net/gh/theme-next/theme-next-pjax@0/pjax.min.js></script><script src=https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js></script><script src=https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js></script><script src=https://cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js></script><script src=https://cdn.jsdelivr.net/npm/velocity-animate@1/velocity.min.js></script><script src=https://cdn.jsdelivr.net/npm/velocity-animate@1/velocity.ui.min.js></script><script src=/js/utils.js></script><script src=/js/motion.js></script><script src=/js/schemes/pisces.js></script><script src=/js/next-boot.js></script><script src=/js/bookmark.js></script><script>var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax',
+	'.widget-wrap'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+ 
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});</script><script data-pjax>(function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();</script><script src=https://cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js></script><script src=https://cdn.jsdelivr.net/npm/instantsearch.js@4/dist/instantsearch.production.min.js></script><script src=/js/algolia-search.js></script><script data-pjax>document.querySelectorAll('.pdfobject-container').forEach(element => {
+  let url = element.dataset.target;
+  let pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  let pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  let fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});</script><div id=pjax><script charset=utf-8 defer src=/js/outdate.js></script></div><script charset=utf-8 defer src=/js/tagcanvas.js></script><script charset=utf-8 defer src=/js/tagcloud.js></script><script>NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});</script><script>var OriginTitile = document.title;
+  var titleTime;
+  document.addEventListener("visibilitychange", function() {
+    if (document.hidden) {
+      document.title = "(つェ⊂)我藏好了哦~" + OriginTitile;
+      clearTimeout(titleTime);
+    } else {
+      document.title = "(*´∇｀*) 被你发现啦~" + OriginTitile;
+      titleTime = setTimeout(function() {
+        document.title = OriginTitile;
+      }, 2000);
+    }
+  });</script><script src=/js/src/activate-power-mode.min.js></script><script>POWERMODE.colorful = true;
+    POWERMODE.shake = false;
+    document.body.addEventListener('input', POWERMODE);</script>
