@@ -1,3 +1,5 @@
+https://www.sekyoro.top/2024/08/17/dive-deeper-into-functional-programming/
+https://www.sekyoro.top/2024/08/16/CUDA101/
 https://www.sekyoro.top/2024/08/11/typst%E5%AD%A6%E4%B9%A0%E4%B8%8E%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/
 https://www.sekyoro.top/2024/07/30/profile-a-deep-learning-model/
 https://www.sekyoro.top/2024/07/27/go-htmx-web%E5%BC%80%E5%8F%91%E9%99%8D%E4%BD%8E%E5%BF%83%E6%99%BA%E8%B4%9F%E6%8B%85%E7%9A%84%E4%B8%80%E7%A7%8D%E9%80%89%E6%8B%A9/
@@ -26,5 +28,3 @@ https://www.sekyoro.top/2024/05/07/computer-graphics-%E8%AE%A1%E7%AE%97%E6%9C%BA
 https://www.sekyoro.top/2024/05/03/%E6%B5%8F%E8%A7%88%E5%99%A8%E7%AE%80%E5%8D%95JS%E9%80%86%E5%90%91Tricks/
 https://www.sekyoro.top/2024/05/02/%E4%BB%8E%E8%AE%BA%E6%96%87%E4%B8%AD%E7%9C%8BAI%E7%BB%98%E7%94%BB(%E4%B8%80)/
 https://www.sekyoro.top/2024/05/02/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80%E7%9A%84%E4%B8%80%E4%BA%9B%E7%89%B9%E6%80%A7/
-https://www.sekyoro.top/2024/05/01/LLM%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/
-https://www.sekyoro.top/2024/05/01/%E8%AE%BA%E6%96%87%E5%BC%95%E7%94%A8%E8%BD%AC%E6%8D%A2%E5%B0%8F%E5%B7%A5%E5%85%B7/
