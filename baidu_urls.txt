@@ -1,6 +1,5 @@
 https://www.sekyoro.top/2024/09/11/C-%E7%8E%B0%E4%BB%A3%E6%9E%84%E5%BB%BA%E7%B3%BB%E7%BB%9F/
 https://www.sekyoro.top/2024/09/11/Dear-ImGUI-%E4%B8%8D%E5%A4%AA%E4%B8%80%E6%A0%B7%E7%9A%84GUI/
-https://www.sekyoro.top/2024/09/05/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%B9%BB%E8%A7%89/
 https://www.sekyoro.top/2024/09/01/cs144-intro-to-computer-network/
 https://www.sekyoro.top/2024/08/17/dive-deeper-into-functional-programming/
 https://www.sekyoro.top/2024/08/16/CUDA101/
@@ -28,3 +27,4 @@ https://www.sekyoro.top/2024/05/29/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%8F%AF
 https://www.sekyoro.top/2024/05/23/%E5%8D%8F%E5%90%8C%E6%84%9F%E7%9F%A5%E6%95%B0%E6%8D%AE%E9%9B%86%E4%BB%8B%E7%BB%8D/
 https://www.sekyoro.top/2024/05/21/Domain-Adaptation-Method/
 https://www.sekyoro.top/2024/05/17/%E5%8D%8F%E5%90%8C%E6%84%9F%E7%9F%A5%E7%AE%97%E6%B3%95-%E4%BA%8C/
+https://www.sekyoro.top/2024/05/07/computer-graphics-%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6%E5%AD%A6%E4%B9%A0/
