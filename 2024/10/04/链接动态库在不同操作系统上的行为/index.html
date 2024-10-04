@@ -1,0 +1,462 @@
+<!doctypehtml><html lang=zh-CN><script defer src=/live2d-widget/autoload.js></script><meta charset=UTF-8><meta content=width=device-width,initial-scale=1,maximum-scale=2 name=viewport><meta content=#222 name=theme-color><meta content="Hexo 5.4.0" name=generator><link href=/images/blog_32px.png rel=apple-touch-icon sizes=180x180><link href=/images/blog_32px.png rel=icon sizes=32x32 type=image/png><link href=/images/blog_16px.png rel=icon sizes=16x16 type=image/png><link color=#222 href=/images/logo.svg rel=mask-icon><meta content=EPrJAp11bJwHULpQUaSNSZ8_3RcvTsPDAEGOME4pl1w name=google-site-verification><!-- Google tag (gtag.js) --><!-- 
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-VB21D8MKKW"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-VB21D8MKKW');
+</script> --><!-- google adsense in head.swig --><script async crossorigin=anonymous src=https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4034523802263123></script><meta content=7226864CE87CE9DE8C008385273846FF name=msvalidate.01><meta content=code-fjFXVtiL7j name=baidu-site-verification><link href=/css/main.css rel=stylesheet><link as=style href=https://fonts.googleapis.com/css?family=Roboto%20Mono,Roboto:300,300italic,400,400italic,700,700italic|Roboto:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext onload=this.rel='stylesheet' rel=preload><link as=style href=https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css onload=this.rel='stylesheet' rel=preload><link href=https://fonts.googleapis.com/css?family=Noto+Serif+SC|Roboto&display=swap rel=stylesheet><link href=https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css rel=stylesheet><link href=https://cdn.jsdelivr.net/npm/pace-js@1/themes/blue/pace-theme-minimal.css rel=stylesheet><script src=https://cdn.jsdelivr.net/npm/pace-js@1/pace.min.js></script><script id=hexo-configurations>var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.sekyoro.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":240,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"appID":"0F9LEEVW82","apiKey":"78839e9f9be09d081c5c4da81975cd19","indexName":"sekyoblog_sec","hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};</script><link href=//cdn.bootcss.com/animate.css/3.5.0/animate.min.css rel=stylesheet><meta content="想必很多人已经了解了动态库与静态库,在实际开发中也经常使用. 但是,有必要了解在windows和Linux上开发c++程序生成和链接动态库的不同行为,因为经常混淆或者自以为找到了动态库,这里简单学习并澄清一下.其中许多内容来自官方文档" name=description><meta content=article property=og:type><meta content=链接动态库在不同操作系统上的行为 property=og:title><meta content=https://www.sekyoro.top/2024/10/04/%E9%93%BE%E6%8E%A5%E5%8A%A8%E6%80%81%E5%BA%93%E5%9C%A8%E4%B8%8D%E5%90%8C%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E4%B8%8A%E7%9A%84%E8%A1%8C%E4%B8%BA/index.html property=og:url><meta content=Sekyoro的博客小屋 property=og:site_name><meta content="想必很多人已经了解了动态库与静态库,在实际开发中也经常使用. 但是,有必要了解在windows和Linux上开发c++程序生成和链接动态库的不同行为,因为经常混淆或者自以为找到了动态库,这里简单学习并澄清一下.其中许多内容来自官方文档" property=og:description><meta content=zh_CN property=og:locale><meta content=https://s2.loli.net/2024/10/04/w37nS5PECGmVyjc.png property=og:image><meta content=https://s2.loli.net/2024/10/04/wKgcNut2XI1T6VD.png property=og:image><meta content=https://s2.loli.net/2024/10/04/kYxoIivzWmrOuGd.png property=og:image><meta content=https://learn.microsoft.com/zh-cn/cpp/build/media/mathclient-additional-dependencies-property.png?view=msvc-170 property=og:image><meta content=https://learn.microsoft.com/zh-cn/cpp/build/media/mathclient-post-build-command-line.png?view=msvc-170 property=og:image><meta content=https://s2.loli.net/2024/10/04/yH5w6uk8spCKgnW.png property=og:image><meta content=2024-10-04T03:23:29.000Z property=article:published_time><meta content=2024-10-04T09:22:57.518Z property=article:modified_time><meta content=Sekyoro property=article:author><meta content="个人博客 技术学习 计算机 互联网 人工智能" property=article:tag><meta content=summary name=twitter:card><meta content=https://s2.loli.net/2024/10/04/w37nS5PECGmVyjc.png name=twitter:image><link href=https://www.sekyoro.top/2024/10/04/%E9%93%BE%E6%8E%A5%E5%8A%A8%E6%80%81%E5%BA%93%E5%9C%A8%E4%B8%8D%E5%90%8C%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E4%B8%8A%E7%9A%84%E8%A1%8C%E4%B8%BA/ rel=canonical><script id=page-configurations>// https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };</script><title>链接动态库在不同操作系统上的行为 | Sekyoro的博客小屋</title><noscript><style>.use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }</style></noscript><link href=/atom.xml rel=alternate title=Sekyoro的博客小屋 type=application/atom+xml><body itemscope itemtype=http://schema.org/WebPage><canvas style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" class=fireworks></canvas><script defer src=https://cdn.bootcss.com/animejs/2.2.0/anime.min.js></script><script defer src=/js/src/fireworks.js></script><div class="container use-motion"><div class=headband></div><header class=header itemscope itemtype=http://schema.org/WPHeader><div class=header-inner><div class=site-brand-container><div class=site-nav-toggle><div aria-label=切换导航栏 class=toggle><span class="toggle-line toggle-line-first"></span><span class="toggle-line toggle-line-middle"></span><span class="toggle-line toggle-line-last"></span></div></div><div class=site-meta><a class=brand href=/ rel=start> <span class=logo-line-before><i></i></span> <h1 class=site-title>Sekyoro的博客小屋</h1> <span class=logo-line-after><i></i></span> </a></div><div class=site-nav-right><div class="toggle popup-trigger"><i class="fa fa-search fa-fw fa-lg"></i></div></div></div><nav class=site-nav><ul class="main-menu menu" id=menu><li class="menu-item menu-item-home"><a href=/ rel=section><i class="fa fa-home fa-fw"></i>首页</a><li class="menu-item menu-item-about"><a href=/about/ rel=section><i class="fa fa-user fa-fw"></i>关于</a><li class="menu-item menu-item-tags"><a href=/tags/ rel=section><i class="fa fa-tags fa-fw"></i>标签</a><li class="menu-item menu-item-categories"><a href=/categories/ rel=section><i class="fa fa-th fa-fw"></i>分类</a><li class="menu-item menu-item-archives"><a href=/archives/ rel=section><i class="fa fa-archive fa-fw"></i>归档</a><li class="menu-item menu-item-bangumis"><a href=/bangumis/ rel=section><i class="fa fa-film fa-fw"></i>追番</a><li class="menu-item menu-item-resume"><a href=/resume/ rel=section><i class="fa fa-file-pdf fa-fw"></i>简历</a><li class="menu-item menu-item-materials"><a href=/materials/ rel=section><i class="fa fa-book fa-fw"></i>学习资料</a><li class="menu-item menu-item-sitemap"><a href=/sitemap.xml rel=section><i class="fa fa-sitemap fa-fw"></i>站点地图</a><li class="menu-item menu-item-search"><a class=popup-trigger role=button><i class="fa fa-search fa-fw"></i>搜索 </a></ul></nav><div class=search-pop-overlay><div class="popup search-popup"><div class=search-header><span class=search-icon> <i class="fa fa-search"></i> </span><div class=search-input-container></div><span class=popup-btn-close> <i class="fa fa-times-circle"></i> </span></div><div class=algolia-results><div id=algolia-stats></div><div id=algolia-hits></div><div class=algolia-pagination id=algolia-pagination></div></div></div></div></div></header><a class="book-mark-link book-mark-link-fixed" role=button></a><main class=main><div class=main-inner><div class=content-wrap><div class="content post posts-expand"><article class=post-block itemscope itemtype=http://schema.org/Article lang=zh-CN><link href=https://www.sekyoro.top/2024/10/04/%E9%93%BE%E6%8E%A5%E5%8A%A8%E6%80%81%E5%BA%93%E5%9C%A8%E4%B8%8D%E5%90%8C%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E4%B8%8A%E7%9A%84%E8%A1%8C%E4%B8%BA/ itemprop=mainEntityOfPage><span hidden itemprop=author itemscope itemtype=http://schema.org/Person> <meta content=https://i.loli.net/2021/05/17/YqoavnXdGTpPO9R.jpg itemprop=image> <meta content=Sekyoro itemprop=name> <meta content=什么也无法舍弃的人，什么也做不了. itemprop=description> </span><span hidden itemprop=publisher itemscope itemtype=http://schema.org/Organization> <meta content=Sekyoro的博客小屋 itemprop=name> </span><header class=post-header><h1 itemprop="name headline" class=post-title>链接动态库在不同操作系统上的行为</h1><div class=post-meta><span class=post-meta-item> <span class=post-meta-item-icon> <i class="far fa-calendar"></i> </span> <span class=post-meta-item-text>发表于</span> <time itemprop="dateCreated datePublished" title="创建时间：2024-10-04 11:23:29 / 修改时间：17:22:57" datetime=2024-10-04T11:23:29+08:00>2024-10-04</time> </span><span style="display: none;" class=post-meta-item id=busuanzi_container_page_pv title=阅读次数> <span class=post-meta-item-icon> <i class="fa fa-eye"></i> </span> <span class=post-meta-item-text>阅读次数：</span> <span id=busuanzi_value_page_pv></span> </span><br><span class=post-meta-item title=本文字数> <span class=post-meta-item-icon> <i class="far fa-file-word"></i> </span> <span class=post-meta-item-text>本文字数：</span> <span>12k</span> </span><span class=post-meta-item title=阅读时长> <span class=post-meta-item-icon> <i class="far fa-clock"></i> </span> <span class=post-meta-item-text>阅读时长 ≈</span> <span>11 分钟</span> </span></div></header><div class=post-body itemprop=articleBody><p>想必很多人已经了解了动态库与静态库,在实际开发中也经常使用. 但是,有必要了解在windows和Linux上开发c++程序生成和链接动态库的不同行为,因为经常混淆或者自以为找到了动态库,这里简单学习并澄清一下.其中许多内容来自官方文档<br><span id=more></span><p>在linux上静态库常常以.a结尾,动态库以.so结尾,而windows上分别以.lib与.dll结尾. 于是很多人就把.dll等同于.so使用了,但其实并不一样.<h2 id=编译与链接静态库><a class=headerlink href=#编译与链接静态库 title=编译与链接静态库></a>编译与链接静态库</h2><p><strong>生成动态库</strong><figure class="highlight sh"><table><tr><td class=gutter><pre><span class=line>1</span><br></pre><td class=code><pre><span class=line>gcc -shared -fPIC -o libfoo.so foo.c</span><br></pre></table></figure><p><strong>生成静态库</strong><figure class="highlight sh"><table><tr><td class=gutter><pre><span class=line>1</span><br><span class=line>2</span><br></pre><td class=code><pre><span class=line>gcc -o libfoo.o foo.c -I include </span><br><span class=line>ar cr libfoo.a libfoo.o</span><br></pre></table></figure><div class=table-container><table><thead><tr><th>选项<th>作用<tbody><tr><td><strong>-ggdb</strong><td>此选项将尽可能的生成 gdb 的可以使用的调试信息.<tr><td>-l [lib]<td>（这里是小写的L,命令无中括号,下同）指定程序要链接的库,[lib]为库文件名称.如果gcc编译选项中加入了“-static”表示寻找静态库文件<tr><td>-L [dir]<td>指定-l（小写-L）所使用到的库文件所在路径(链接时而非动态查找),不然编译器将只在标准库的目录找<tr><td>-I [dir]<td>（这里是大写的I）增加 include 头文件路径<tr><td>-static<td>链接静态库生成目标文件,禁止使用动态库（在支持动态链接的系统上） 所以编译出来的东西一般都很大,也不需要什么动态连接库就可以运行.<tr><td>-shared<td>生成共享文件,可以与其它文件链接生成可执行文件<tr><td>-fpic<td>生成适用于共享库的<strong>与地址无关的代码</strong>（PIC）（如果机器支持的话）<tr><td>-fPIC<td>生成<strong>与位置无关的的代码</strong>,适用于使用动态库,与“-fpic”的区别在于去除去全局偏移表的任何限制（如果机器支持的话）</table></div><p>链接动态库和链接静态库差别不大,但是需要设置一些路径方便linux查找.<figure class="highlight sh"><table><tr><td class=gutter><pre><span class=line>1</span><br></pre><td class=code><pre><span class=line>gcc -o main main.c -I/home/alice/foo -lfoo</span><br></pre></table></figure><blockquote><p>如果静态库和动态库在同一目录并且前缀相同,e.g. libxx.so和libxx.a,使用<code>g++ -o main main.cpp -L build/lib -l xx -I lib/include</code>会默认链接动态库,添加<code>-static</code>可解决(不过一般也不会同时把动态库和静态库同名放一个目录吧😅)</blockquote><p>gcc <code>-L</code> <code>-l</code>含义是什么,不管是动态库还是链接库,如果使用了库,都需要使用<code>-L</code>和<code>-l</code>进行编译时链接,如果是静态库,<code>-l</code>往往就够了,但如果是动态库,<code>-l</code>作用是在编译时让编译器直到用到了库中的某些东西存在,但是运行时还需要另外设置,如果链接动态库不使用<code>-l</code>也会报错<p><img alt=image-20241004132437629 data-src=https://s2.loli.net/2024/10/04/w37nS5PECGmVyjc.png><figure class="highlight bash"><table><tr><td class=gutter><pre><span class=line>1</span><br></pre><td class=code><pre><span class=line>g++ -o main main.cpp   ./build/lib/libdy_lib.so -I lib/include</span><br></pre></table></figure><p>或者直接使用<code>.so</code>与<code>.cpp</code>编译链接,注意这在windows上行不通,根本原因是动态库的路径搜索方式不同<p>文件一多,项目一大肯定需要使用构建系统的,包括make,Ninja,MSBuilg等等,而cmake就是生成这些构建系统的,当使用cmake时就没有太大必要考虑编译器细节了.<figure class="highlight cmake"><table><tr><td class=gutter><pre><span class=line>1</span><br><span class=line>2</span><br><span class=line>3</span><br><span class=line>4</span><br><span class=line>5</span><br></pre><td class=code><pre><span class=line><span class=comment># 生成</span></span><br><span class=line><span class=keyword>add_library</span>(dy_lib STATIC <span class=keyword>test</span>.cpp)</span><br><span class=line><span class=comment># add_library(dy_lib SHARED test.cpp)</span></span><br><span class=line><span class=comment># 链接</span></span><br><span class=line><span class=keyword>target_link_libraries</span>(cpp_test PRIVATE dy_lib)</span><br></pre></table></figure><h3 id=链接动态库在cmake中的行为><a class=headerlink href=#链接动态库在cmake中的行为 title=链接动态库在cmake中的行为></a>链接动态库在cmake中的行为</h3><p>RPATH在开发过程中很有用,因为可以将构建树中的库链接到可执行文件中.CMake提供了相当多的选项来优化构建树链接和安装链接期间的行为<p>我们知道要使用动态库,光是<code>-l</code>是不行的,在windows上需要看链接方式(下面详细介绍),在linux上也要设置动态库搜索路径. 使用cmake时链接动态库,cmake会默认设置buil_rpath,但安装时使用install_rpath<a href=https://cmake.org/cmake/help/latest/prop_tgt/BUILD_RPATH.html rel=noopener target=_blank>BUILD_RPATH — CMake 3.30.4 Documentation</a><p><strong>BUILD_PATH</strong><p>一个分号分隔的列表,指定要添加到构建树中链接的二进制文件中的运行时路径(RPATH)条目(对于支持它的平台).默认情况下,CMake在构建树中设置二进制文件的运行时路径,以包含它知道需要查找它们链接的共享库的搜索路径.项目可以设置BUILD_RPATH来指定额外的搜索路径.<ul><li>The <a href=https://cmake.org/cmake/help/latest/variable/CMAKE_SKIP_RPATH.html#variable:CMAKE_SKIP_RPATH rel=noopener target=_blank><code>CMAKE_SKIP_RPATH</code></a> variable completely disables runtime paths in both the build tree and install tree.<li>The <a href=https://cmake.org/cmake/help/latest/prop_tgt/SKIP_BUILD_RPATH.html#prop_tgt:SKIP_BUILD_RPATH rel=noopener target=_blank><code>SKIP_BUILD_RPATH</code></a> target property disables setting any runtime path in the build tree.<li>The <a href=https://cmake.org/cmake/help/latest/prop_tgt/BUILD_RPATH_USE_ORIGIN.html#prop_tgt:BUILD_RPATH_USE_ORIGIN rel=noopener target=_blank><code>BUILD_RPATH_USE_ORIGIN</code></a> target property causes the automatically-generated runtime path to use entries relative to <code>$ORIGIN</code>.<li>The <a href=https://cmake.org/cmake/help/latest/prop_tgt/BUILD_WITH_INSTALL_RPATH.html#prop_tgt:BUILD_WITH_INSTALL_RPATH rel=noopener target=_blank><code>BUILD_WITH_INSTALL_RPATH</code></a> target property causes binaries in the build tree to be built with the install-tree runtime path.</ul><p>下面是默认设置.默认情况下,如果不更改任何 RPATH 相关设置,CMake 将以完整的 RPATH 连接可执行文件和共享库,并将其连接到联编树中所有使用过的库.安装时,它会清除这些目标的 RPATH,因此它们在安装时的 RPATH 为空<figure class="highlight cmake"><table><tr><td class=gutter><pre><span class=line>1</span><br><span class=line>2</span><br><span class=line>3</span><br><span class=line>4</span><br><span class=line>5</span><br><span class=line>6</span><br><span class=line>7</span><br><span class=line>8</span><br><span class=line>9</span><br><span class=line>10</span><br><span class=line>11</span><br><span class=line>12</span><br><span class=line>13</span><br></pre><td class=code><pre><span class=line><span class=comment># use, i.e. don't skip the full RPATH for the build tree</span></span><br><span class=line><span class=keyword>set</span>(CMAKE_SKIP_BUILD_RPATH <span class=keyword>FALSE</span>)</span><br><span class=line></span><br><span class=line><span class=comment># when building, don't use the install RPATH already</span></span><br><span class=line><span class=comment># (but later on when installing)</span></span><br><span class=line><span class=keyword>set</span>(CMAKE_BUILD_WITH_INSTALL_RPATH <span class=keyword>FALSE</span>)</span><br><span class=line></span><br><span class=line><span class=comment># the RPATH to be used when installing</span></span><br><span class=line><span class=keyword>set</span>(CMAKE_INSTALL_RPATH <span class=string>""</span>)</span><br><span class=line></span><br><span class=line><span class=comment># don't add the automatically determined parts of the RPATH</span></span><br><span class=line><span class=comment># which point to directories outside the build tree to the install RPATH</span></span><br><span class=line><span class=keyword>set</span>(CMAKE_INSTALL_RPATH_USE_LINK_PATH <span class=keyword>FALSE</span>)</span><br></pre></table></figure><p>也就是说cmake在build时默认添加在build目录下使用的动态库路径,在安装库时rpath默认为空<h2 id=Linux><a class=headerlink href=#Linux title=Linux></a>Linux</h2><p>在Linux系统中,动态链接器（如ld-linux.so）负责在应用程序启动时解析其依赖的共享库.动态链接器根据一定的搜索顺序来查找这些共享库,这个顺序通常包括：<ol><li><strong>RPATH</strong>：如果可执行文件中指定了RPATH,动态链接器会首先在这个路径下搜索共享库.<li><strong>LD_LIBRARY_PATH</strong>：如果未找到所需的库,动态链接器会继续在由环境变量LD_LIBRARY_PATH指定的目录中搜索.<li>配置文件/etc/ld.so.conf<li><strong>系统默认路径</strong>：如果仍未找到,动态链接器会在系统默认的库路径（如<code>/lib</code>和<code>/usr/lib</code>）中搜索.</ol><p>理解这个搜索机制有助于我们更好地掌握如何通过调整RPATH来控制应用程序的动态链接行为<figure class="highlight livecodeserver"><table><tr><td class=gutter><pre><span class=line>1</span><br><span class=line>2</span><br><span class=line>3</span><br><span class=line>4</span><br><span class=line>5</span><br><span class=line>6</span><br><span class=line>7</span><br><span class=line>8</span><br><span class=line>9</span><br><span class=line>10</span><br><span class=line>11</span><br></pre><td class=code><pre><span class=line>Unless loading object has RUNPATH:</span><br><span class=line>    RPATH <span class=keyword>of</span> <span class=keyword>the</span> loading object,</span><br><span class=line>        <span class=keyword>then</span> <span class=keyword>the</span> RPATH <span class=keyword>of</span> its loader (unless <span class=keyword>it</span> has <span class=keyword>a</span> RUNPATH), ...,</span><br><span class=line>        <span class=keyword>until</span> <span class=keyword>the</span> <span class=function><span class=keyword>end</span> <span class=title>of</span> <span class=title>the</span> <span class=title>chain</span>, <span class=title>which</span> <span class=title>is</span> <span class=title>either</span> <span class=title>the</span> <span class=title>executable</span></span></span><br><span class=line>        <span class=keyword>or</span> <span class=keyword>an</span> object loaded <span class=keyword>by</span> dlopen</span><br><span class=line>    Unless executable has RUNPATH:</span><br><span class=line>        RPATH <span class=keyword>of</span> <span class=keyword>the</span> executable</span><br><span class=line>LD_LIBRARY_PATH</span><br><span class=line>RUNPATH <span class=keyword>of</span> <span class=keyword>the</span> loading object</span><br><span class=line>ld.so.cache</span><br><span class=line>default dirs</span><br></pre></table></figure><h3 id=RPATH><a class=headerlink href=#RPATH title=RPATH></a>RPATH</h3><p>rpath优先级最高,会优先让执行档去寻找相应的动态库(如果设置了RUNPATH就会忽略RPATH<a href=https://stackoverflow.com/questions/7967848/use-rpath-but-not-runpath rel=noopener target=_blank>c - use RPATH but not RUNPATH? - Stack Overflow</a>,简单来说,如果设置了RUN_PATH,那么RPATH会被忽略,但是RUNPATH优先级又低于<code>LD_LIBRAY_PATH</code><p>作者给的建议是<code>当您发布二进制文件时,要么使用RPATH而不是RUNPATH,要么确保在运行它们之前设置了LD_LIBRARY_PATH</code>,当然也有推荐只使用<code>LIBRARY_PATH</code>的.<p>注意,runpath和rpath也许操作系统支持有关,新版本的os<strong>应该</strong>默认使用runpath了,也就是使用<code>gcc -rpath</code>时默认设置<code>runpath</code><p>设置rpath,告诉新系统使用老行为<figure class="highlight sh"><table><tr><td class=gutter><pre><span class=line>1</span><br></pre><td class=code><pre><span class=line>gcc ... -Wl --disable-new-dtags -rpath=<span class=string>""</span></span><br></pre></table></figure><p>设置runpath,告诉旧系统使用新行为<figure class="highlight sh"><table><tr><td class=gutter><pre><span class=line>1</span><br></pre><td class=code><pre><span class=line>gcc ... -Wl --enable-new-dtags -rpath=<span class=string>""</span></span><br></pre></table></figure><p>查看一个elf文件的PATH,可以看到目前默认是runpath,rpath是depreacated了,这两者最大差异就是优先级<figure class="highlight sh"><table><tr><td class=gutter><pre><span class=line>1</span><br></pre><td class=code><pre><span class=line>readelf --dynamic obj | grep PATH</span><br></pre></table></figure><p><img alt=image-20241004140806996 data-src=https://s2.loli.net/2024/10/04/wKgcNut2XI1T6VD.png><p>使用cmake开发时,默认就是这样使用动态库的<h3 id=LIBRAY-PATH><a class=headerlink href=#LIBRAY-PATH title=LIBRAY_PATH></a>LIBRAY_PATH</h3><p>LIBRAY_PATH不是运行时搜索动态库,其效果类似于<code>gcc -L</code>,设置编译时查找路径<figure class="highlight sh"><table><tr><td class=gutter><pre><span class=line>1</span><br><span class=line>2</span><br><span class=line>3</span><br><span class=line>4</span><br></pre><td class=code><pre><span class=line><span class=built_in>export</span> LIBRARY_PATH=/home/foo</span><br><span class=line>gcc -o main main.c -I/home/foo -lfoo</span><br><span class=line>ls</span><br><span class=line>main  main.c</span><br></pre></table></figure><p>推荐使用<code>gcc -L</code>即可<blockquote><p>事实上实践中直接使用cmake</blockquote><figure class="highlight cmake"><table><tr><td class=gutter><pre><span class=line>1</span><br><span class=line>2</span><br></pre><td class=code><pre><span class=line><span class=keyword>link_directories</span>()</span><br><span class=line><span class=keyword>target_link_libraries</span>()</span><br></pre></table></figure><h3 id=LD-LIBRAY-PATH><a class=headerlink href=#LD-LIBRAY-PATH title=LD_LIBRAY_PATH></a>LD_LIBRAY_PATH</h3><p>你会发现在链接动态库后执行程序也无法成功,因为linux搜索动态库的路径并没有包括动态库的路径,道理同<code>rpath</code><figure class="highlight sh"><table><tr><td class=gutter><pre><span class=line>1</span><br><span class=line>2</span><br></pre><td class=code><pre><span class=line><span class=built_in>export</span> LD_LIBRARY_PATH=<span class=variable>$LD_LIBRARY_PATH</span>:/home/work</span><br><span class=line>./main</span><br></pre></table></figure><h3 id=etc-ld-so-conf><a class=headerlink href=#etc-ld-so-conf title=/etc/ld.so.conf></a>/etc/ld.so.conf</h3><blockquote><p>将非标准路经加入 /etc/ld.so.conf,然后运行 ldconfig 生成 /etc/ld.so.cache. ld.so 加载共享库的时候,会从 ld.so.cache 查找</blockquote><figure class="highlight sh"><table><tr><td class=gutter><pre><span class=line>1</span><br><span class=line>2</span><br><span class=line>3</span><br></pre><td class=code><pre><span class=line>vim /etc/ld.so.conf</span><br><span class=line><span class=comment># 在文件中添加库路径 e.g. /project/build/libdy_lib.so</span></span><br><span class=line>sudo ldconfig</span><br></pre></table></figure><p>原理是ldconfig这个程序,程序运行时会通过这个程序查找库.<h3 id=默认搜索路径><a class=headerlink href=#默认搜索路径 title=默认搜索路径></a>默认搜索路径</h3><p>可执行程序动态库默认搜索路径包括/usr/lib和/lib<figure class="highlight sh"><table><tr><td class=gutter><pre><span class=line>1</span><br><span class=line>2</span><br><span class=line>3</span><br><span class=line>4</span><br></pre><td class=code><pre><span class=line>cp libdy_lib.so /lib</span><br><span class=line><span class=comment># 以下命令均可</span></span><br><span class=line>cp libdy_lib.so /usr/lib</span><br><span class=line>ln -s libdy_lib.so /usr/lib</span><br></pre></table></figure><h2 id=Windows><a class=headerlink href=#Windows title=Windows></a>Windows</h2><p>windows并没有类似linux的rpath机制<a href=https://stackoverflow.com/questions/107888/is-there-a-windows-msvc-equivalent-to-the-rpath-linker-flag rel=noopener target=_blank>dll - Is there a Windows/MSVC equivalent to the -rpath linker flag? - Stack Overflow</a><blockquote><p>当你使用visual studio开发使用了动态库时,也许你在vs上执行并没有问题,但直接点击可执行程序执行就报错了(即使你给可执行程序添加了相关引用). 主要原因是vs在编译链接时会去引用生成的目录找相关.dll和.lib(即使是动态库,vs也会生成DLL导入库,这类似一个查找表,方便获取DLL中的函数、变量等)<p>而在运行时,动态库的查找机制就不一样了<p><img alt=链接时加载了.dll库,成功执行 data-src=https://s2.loli.net/2024/10/04/kYxoIivzWmrOuGd.png></blockquote><h3 id=链接方法><a class=headerlink href=#链接方法 title=链接方法></a>链接方法</h3><p>可执行文件通过以下两种方式之一链接到（或加载）DLL：<ul><li>隐式链接,其中操作系统会与使用 DLL 的可执行文件同时加载它. 客户端<strong>可执行文件调用 DLL 的导出函数的方式与函数进行静态链接并包含在可执行文件中时的方式相同</strong>. 隐式链接有时称为静态加载或加载时动态链接.<li>显式链接,其中操作系统会在运行时按需加载 DLL. 通过显式链接使用 DLL 的可执行文件必须显式加载和卸载 DLL. 它还必须设置函数指针,用于访问它从 DLL 使用的每个函数. 与静态链接的库或隐式链接 DLL 中的函数调用不同,客户端可执行文件必须通过函数指针调用显式链接 DLL 中的导出函数. 显式链接有时称为动态加载或运行时动态链接.</ul><h4 id=隐式链接><a class=headerlink href=#隐式链接 title=隐式链接></a>隐式链接</h4><p>当应用程序的代码调用导出 DLL 函数时,会进行隐式链接. 当编译或汇编调用可执行文件的源代码时,DLL 函数调用会在对象代码中生成外部函数引用.<p><strong>若要解析此外部引用,应用程序必须与 DLL 创建者提供的导入库（.lib 文件）链接</strong>.<p>导入库包含的代码仅用于加载 DLL 和实现对 DLL 中函数的调用. 在导入库中查找外部函数会告知链接器该函数的代码处于 DLL 中. 若要解析对 DLL 的外部引用,链接器只需将信息添加到可执行文件,告知系统在进程启动时查找 DLL 代码的位置.<p>当系统启动包含动态链接引用的程序时,它将使用该程序可执行文件中的信息查找所需 DLL. 如果找不到 DLL,则系统将终止进程,并显示报告错误的对话框. 否则,系统会将 DLL 模块映射到进程地址空间中.<p>所以我们需要一个.lib文件方便静态加载,也就是程序在编译时就知道了动态库的位置(通过.lib),这样方便查找,而不是像上面提到的linux再通过rpath等路径去看. 那这样做需要什么呢? 那就是经典的<code>__declspec(dllexport)</code>了<a href=https://learn.microsoft.com/zh-cn/cpp/cpp/dllexport-dllimport?view=msvc-170 rel=noopener target=_blank>dllexport、dllimport | Microsoft Learn</a><figure class="highlight c"><table><tr><td class=gutter><pre><span class=line>1</span><br><span class=line>2</span><br><span class=line>3</span><br><span class=line>4</span><br><span class=line>5</span><br><span class=line>6</span><br><span class=line>7</span><br></pre><td class=code><pre><span class=line><span class=meta>#<span class=meta-keyword>define</span> DllImport   __declspec( dllimport )</span></span><br><span class=line><span class=meta>#<span class=meta-keyword>define</span> DllExport   __declspec( dllexport )</span></span><br><span class=line></span><br><span class=line><span class=function>DllExport <span class=keyword>void</span> <span class=title>func</span><span class=params>()</span></span>;</span><br><span class=line>DllExport <span class=keyword>int</span> i = <span class=number>10</span>;</span><br><span class=line>DllImport <span class=keyword>int</span> j;</span><br><span class=line>DllExport <span class=keyword>int</span> n;</span><br></pre></table></figure><p>使用 <strong><code>dllexport</code></strong> 意味着定义,而使用 <strong><code>dllimport</code></strong> 则意味着声明. 必须使用带 <strong><code>extern</code></strong> 的 <strong><code>dllexport</code></strong> 关键字来强制进行声明；否则,会进行隐式定义.<figure class="highlight c"><table><tr><td class=gutter><pre><span class=line>1</span><br><span class=line>2</span><br><span class=line>3</span><br><span class=line>4</span><br><span class=line>5</span><br><span class=line>6</span><br><span class=line>7</span><br><span class=line>8</span><br><span class=line>9</span><br><span class=line>10</span><br><span class=line>11</span><br><span class=line>12</span><br><span class=line>13</span><br><span class=line>14</span><br><span class=line>15</span><br><span class=line>16</span><br></pre><td class=code><pre><span class=line><span class=keyword>static</span> __declspec( dllimport ) <span class=keyword>int</span> l; <span class=comment>// Error; not declared extern.</span></span><br><span class=line></span><br><span class=line><span class=function><span class=keyword>void</span> <span class=title>func</span><span class=params>()</span> </span>{</span><br><span class=line>    <span class=keyword>static</span> __declspec( dllimport ) <span class=keyword>int</span> s;  <span class=comment>// Error; not declared</span></span><br><span class=line>                                           <span class=comment>// extern.</span></span><br><span class=line>    __declspec( dllimport ) <span class=keyword>int</span> m;         <span class=comment>// Okay; this is a</span></span><br><span class=line>                                           <span class=comment>// declaration.</span></span><br><span class=line>    __declspec( dllexport ) <span class=keyword>int</span> n;         <span class=comment>// Error; implies external</span></span><br><span class=line>                                           <span class=comment>// definition in local scope.</span></span><br><span class=line>    <span class=keyword>extern</span> __declspec( dllimport ) <span class=keyword>int</span> i;  <span class=comment>// Okay; this is a</span></span><br><span class=line>                                           <span class=comment>// declaration.</span></span><br><span class=line>    <span class=keyword>extern</span> __declspec( dllexport ) <span class=keyword>int</span> k;  <span class=comment>// Okay; extern implies</span></span><br><span class=line>                                           <span class=comment>// declaration.</span></span><br><span class=line>    __declspec( dllexport ) <span class=keyword>int</span> x = <span class=number>5</span>;     <span class=comment>// Error; implies external</span></span><br><span class=line>                                           <span class=comment>// definition in local scope.</span></span><br><span class=line>}</span><br></pre></table></figure><p>当声明 <strong><code>dllexport</code></strong> 类时,它的所有成员函数和静态数据成员都会导出. 必须在同一程序中提供所有此类成员的定义. 否则,将生成链接器错误. 此规则有一个例外情况,即对于纯虚函数,无需为其提供显式定义. 但是,由于基类的析构函数始终在调用继承类的析构函数,因此纯虚析构函数必须始终提供定义<p>当声明 <strong><code>dllimport</code></strong> 类时,它的所有成员函数和静态数据成员都会导入. 与非类类型上的 <strong><code>dllimport</code></strong> 和 <strong><code>dllexport</code></strong> 的行为不同,静态数据成员无法在定义 <strong><code>dllimport</code></strong> 类的同一程序中指定定义. 如果整个类都已导入或导出,则禁止将成员函数和数据显式声明为 <strong><code>dllimport</code></strong> 或 <strong><code>dllexport</code></strong><figure class="highlight c"><table><tr><td class=gutter><pre><span class=line>1</span><br><span class=line>2</span><br><span class=line>3</span><br><span class=line>4</span><br><span class=line>5</span><br><span class=line>6</span><br></pre><td class=code><pre><span class=line><span class=meta>#<span class=meta-keyword>define</span> DllExport   __declspec( dllexport )</span></span><br><span class=line></span><br><span class=line><span class=class><span class=keyword>class</span> <span class=title>DllExport</span> <span class=title>C</span> {</span></span><br><span class=line>   <span class=keyword>int</span> i;</span><br><span class=line>   <span class=function><span class=keyword>virtual</span> <span class=keyword>int</span> <span class=title>func</span><span class=params>( <span class=keyword>void</span> )</span> </span>{ <span class=keyword>return</span> <span class=number>1</span>; }</span><br><span class=line>};</span><br></pre></table></figure><figure class="highlight cpp"><table><tr><td class=gutter><pre><span class=line>1</span><br><span class=line>2</span><br><span class=line>3</span><br><span class=line>4</span><br><span class=line>5</span><br><span class=line>6</span><br><span class=line>7</span><br></pre><td class=code><pre><span class=line><span class=comment>// lib_link_input_2.cpp</span></span><br><span class=line><span class=comment>// compile by using: cl /EHsc lib_link_input_1.lib lib_link_input_2.cpp</span></span><br><span class=line>__declspec(dllimport) <span class=function><span class=keyword>int</span> <span class=title>Test</span><span class=params>()</span></span>;</span><br><span class=line><span class=meta>#<span class=meta-keyword>include</span> <span class=meta-string>&LTiostream></span></span></span><br><span class=line><span class=function><span class=keyword>int</span> <span class=title>main</span><span class=params>()</span> </span>{</span><br><span class=line>   std::cout << <span class=built_in>Test</span>() << std::endl;</span><br><span class=line>}</span><br></pre></table></figure><p>在windows上,这几乎成了常用的方式,不管你使用的什么编译器,即便是mingw,clang<p>如果使用vc++,那会生成xx.dll与libxx.lib,后者用于找动态库,而使用mingw,clang会生成xx.dll和xx.dll.a,效果一样.<p>若要通过隐式链接使用 DLL,客户端可执行文件必须从 DLL 的提供程序获取以下文件：<ul><li>一个或多个头文件（.h 文件）,其中包含 DLL 中的导出数据、函数和 C++ 类的声明. DLL 导出的类、函数和数据全都必须在头文件中标记为 <code>__declspec(dllimport)</code><li>要链接到可执行文件中的导入库. 生成 DLL 时,链接器会创建导入库<li>实际 DLL 文件.</ul><p>我们在windows上默认都是使用的隐式链接,如果你要使用动态库,还挺麻烦的.<h4 id=显式链接><a class=headerlink href=#显式链接 title=显式链接></a>显式链接</h4><p>有时需要显式链接. 下面是使用显式链接的一些常见原因：<ul><li>应用程序直到运行时才知道它所加载的 DLL 的名称. 例如,应用程序可能会在启动时从配置文件获取 DLL 的名称和导出函数.<li>如果在使用隐式链接的进程启动时找不到 DLL,则操作系统会终止进程. 使用显式链接的进程在这种情况下不会终止,可以尝试从错误中恢复. 例如,进程可以向用户通知错误,并让用户指定 DLL 的其他路径.<li>如果使用隐式链接的进程所链接到的任何 DLL 的 <code>DllMain</code> 函数失败,则进程也会终止. 使用显式链接的进程在这种情况下不会终止.<li>隐式链接到许多 DLL 的应用程序可能会速度较慢,因为 Windows 会在应用程序加载时加载所有 DLL. 若要提高启动性能,应用程序可以只对在加载之后立即需要的 DLL 使用隐式链接. 它可以仅在需要时才使用显式链接加载其他 DLL.<li>显式链接无需使用导入库链接应用程序. 如果 DLL 中的更改导致导出序号发生更改,则在使用函数名称而不是序号值调用 <code>GetProcAddress</code> 时,应用程序无需重新链接. 使用隐式链接的应用程序仍必须重新链接到更改的导入库.</ul><p>若要通过显式链接使用 DLL,应用程序必须在运行时进行函数调用以显式加载 DLL. 若要显式链接到 DLL,应用程序必须：<ul><li>调用LoadLibraryEx或类似函数以加载 DLL 并获取模块句柄.<li>调用 GetProcAddress以获取应用程序调用的每个导出函数的函数指针. 由于应用程序通过指针调用 DLL 函数,因此编译器不生成外部引用,从而不需要与导入库链接. 不过必须有 <strong><code>typedef</code></strong> 或 <strong><code>using</code></strong> 语句,此语句定义调用的已导出函数的调用签名.<li>处理完 DLL 时,调用 FreeLibrary</ul><figure class="highlight cpp"><table><tr><td class=gutter><pre><span class=line>1</span><br><span class=line>2</span><br><span class=line>3</span><br><span class=line>4</span><br><span class=line>5</span><br><span class=line>6</span><br><span class=line>7</span><br><span class=line>8</span><br><span class=line>9</span><br><span class=line>10</span><br><span class=line>11</span><br><span class=line>12</span><br><span class=line>13</span><br><span class=line>14</span><br><span class=line>15</span><br><span class=line>16</span><br><span class=line>17</span><br><span class=line>18</span><br><span class=line>19</span><br><span class=line>20</span><br><span class=line>21</span><br><span class=line>22</span><br><span class=line>23</span><br><span class=line>24</span><br><span class=line>25</span><br><span class=line>26</span><br><span class=line>27</span><br><span class=line>28</span><br><span class=line>29</span><br><span class=line>30</span><br><span class=line>31</span><br><span class=line>32</span><br></pre><td class=code><pre><span class=line><span class=meta>#<span class=meta-keyword>include</span> <span class=meta-string>"windows.h"</span></span></span><br><span class=line></span><br><span class=line><span class=function><span class=keyword>typedef</span> <span class=title>HRESULT</span> <span class=params>(CALLBACK* LPFNDLLFUNC1)</span><span class=params>(DWORD,UINT*)</span></span>;</span><br><span class=line></span><br><span class=line><span class=function>HRESULT <span class=title>LoadAndCallSomeFunction</span><span class=params>(DWORD dwParam1, UINT * puParam2)</span></span></span><br><span class=line><span class=function></span>{</span><br><span class=line>    HINSTANCE hDLL;               <span class=comment>// Handle to DLL</span></span><br><span class=line>    LPFNDLLFUNC1 lpfnDllFunc1;    <span class=comment>// Function pointer</span></span><br><span class=line>    HRESULT hrReturnVal;</span><br><span class=line></span><br><span class=line>    hDLL = <span class=built_in>LoadLibrary</span>(<span class=string>"MyDLL"</span>);</span><br><span class=line>    <span class=keyword>if</span> (<span class=literal>NULL</span> != hDLL)</span><br><span class=line>    {</span><br><span class=line>        lpfnDllFunc1 = (LPFNDLLFUNC1)<span class=built_in>GetProcAddress</span>(hDLL, <span class=string>"DLLFunc1"</span>);</span><br><span class=line>        <span class=keyword>if</span> (<span class=literal>NULL</span> != lpfnDllFunc1)</span><br><span class=line>        {</span><br><span class=line>            <span class=comment>// call the function</span></span><br><span class=line>            hrReturnVal = <span class=built_in>lpfnDllFunc1</span>(dwParam1, puParam2);</span><br><span class=line>        }</span><br><span class=line>        <span class=keyword>else</span></span><br><span class=line>        {</span><br><span class=line>            <span class=comment>// report the error</span></span><br><span class=line>            hrReturnVal = ERROR_DELAY_LOAD_FAILED;</span><br><span class=line>        }</span><br><span class=line>        <span class=built_in>FreeLibrary</span>(hDLL);</span><br><span class=line>    }</span><br><span class=line>    <span class=keyword>else</span></span><br><span class=line>    {</span><br><span class=line>        hrReturnVal = ERROR_DELAY_LOAD_FAILED;</span><br><span class=line>    }</span><br><span class=line>    <span class=keyword>return</span> hrReturnVal;</span><br><span class=line>}</span><br></pre></table></figure><h3 id=动态库查找路径><a class=headerlink href=#动态库查找路径 title=动态库查找路径></a>动态库查找路径</h3><blockquote><p>查找路径不仅针对显式链接,隐式链接也能用. 比较方便的就是可执行程序文件、或环境变量PATH</blockquote><p>当应用程序调用 LoadLibrary或 LoadLibraryEx函数时,系统会尝试查找 DLL . 如果搜索成功,系统会将 DLL 模块映射到进程的虚拟地址空间,并递增引用计数.<p><a href=https://learn.microsoft.com/zh-cn/windows/win32/dlls/dynamic-link-library-search-order rel=noopener target=_blank>Dynamic-link library search order - Win32 apps | Microsoft Learn</a><p>windows搜索dll路径顺序比较麻烦,需要看是否是打包应用(loadPackagedLibrary ),是否开启了安全DLL搜索模式(默认开启)<blockquote><p>若要禁用安全 DLL 搜索模式,将<code>HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\SafeDllSearchMode</code> 创建注册表值并将其设置为 0</blockquote><p>如果是未打包并且是安全搜索模式,那么搜索顺序如下,前六个感觉不用看<ol><li>DLL 重定向.<li>API sets.<li>SxS manifest redirection.<li>Loaded-module list.<li>Known DLLs.<li><strong>Windows 11,版本 21H2 (10.0;内部版本 22000) 及更高版本</strong>. The package dependency graph of the process. This is the application’s package plus any dependencies specified as <code>&LTPackageDependency></code> in the <code>&LTDependencies></code> section of the application’s package manifest. Dependencies are searched in the order they appear in the manifest.<li>从中加载应用程序的文件夹.<li>系统文件夹. 使用GetSystemDirectory函数检索此文件夹的路径.<li>16 位系统文件夹. 没有获取此文件夹路径的函数,但会对其进行搜索.<li>Windows 文件夹. 使用GetWindowsDirectory函数获取此文件夹的路径.<li>当前文件夹.<li>环境变量中列出的 <code>PATH</code> 目录. 这不包括由应用路径注册表项指定的<strong>App Paths</strong> . 计算 DLL 搜索路径时,不使用 <strong>App Paths</strong> 变量</ol><p>如果禁用安全DLL 搜索模式,则搜索顺序基本相同,只是位置11和8交换顺序<h2 id=总结><a class=headerlink href=#总结 title=总结></a>总结</h2><p>总结一下,在linux使用cmake开发c/c++程序链接动态库时使用rpath添加搜索目录,使用windows开发开发动态库实在麻烦,一般默认隐式链接然后使用<code>__declspec( dllexport)</code>导出(因为默认不导出),如果使用现成的xx.dll和libxx.lib就不需要声明<code>__declspec(__dllimport)</code>宏了,因为链接了DLL导入库(也就是libxx.lib) <a href=https://www.youtube.com/watch?v=pLy69V2F_8M&t=481s&ab_channel=TheCherno rel=noopener target=_blank>Using Dynamic Libraries in C++ (youtube.com)</a><p><img alt="Screenshot of the Property Pages dialog showing the Edit command in the Linker > Input > Additional Dependencies property drop-down." data-src=https://learn.microsoft.com/zh-cn/cpp/build/media/mathclient-additional-dependencies-property.png?view=msvc-170><p>至于生成的DLL放哪,连微软自己都说放在可执行文件同一目录中,在vs<code>可将“后期生成事件”添加到项目中,以此添加一条命令,将 DLL 复制到生成输出目录.</code><figure class="highlight awk"><table><tr><td class=gutter><pre><span class=line>1</span><br></pre><td class=code><pre><span class=line>xcopy <span class=regexp>/y /</span>d <span class=string>"..\..\MathLibrary\$(IntDir)MathLibrary.dll"</span> <span class=string>"$(OutDir)"</span></span><br></pre></table></figure><p><img alt="Screenshot of the Property Pages dialog showing the post build event command line property." data-src=https://learn.microsoft.com/zh-cn/cpp/build/media/mathclient-post-build-command-line.png?view=msvc-170><p>我的配置如下<p><img alt=image-20241004164950315 data-src=https://s2.loli.net/2024/10/04/yH5w6uk8spCKgnW.png><figure class="highlight nsis"><table><tr><td class=gutter><pre><span class=line>1</span><br></pre><td class=code><pre><span class=line>xcopy /y /d <span class=string>"<span class=variable>$(OutDir)</span><span class=variable>$(TargetFileName)</span>"</span> <span class=string>"<span class=variable>$(SolutionDir)</span>bin\<span class=variable>$(Platform)</span>\<span class=variable>$(Configuration)</span>\"</span></span><br></pre></table></figure><p>在cmake中添加自定义command,道理相同,使用了<code>cmake -E</code><figure class="highlight cmake"><table><tr><td class=gutter><pre><span class=line>1</span><br><span class=line>2</span><br><span class=line>3</span><br><span class=line>4</span><br></pre><td class=code><pre><span class=line><span class=keyword>add_custom_command</span>(<span class=keyword>TARGET</span> MyTest POST_BUILD        </span><br><span class=line>    <span class=keyword>COMMAND</span> <span class=variable>${CMAKE_COMMAND}</span> -E copy_if_different  </span><br><span class=line>        <span class=string>"${PROJECT_SOURCE_DIR}/libs/test.dll"</span>      </span><br><span class=line>        $&LTTARGET_FILE_DIR:MyTest>)                 </span><br></pre></table></figure><p>或者类似的使用更好的生成器表达式<code>$&LTTARGET_RUNTIME_DLLS:MyTest></code><figure class="highlight cmake"><table><tr><td class=gutter><pre><span class=line>1</span><br><span class=line>2</span><br><span class=line>3</span><br><span class=line>4</span><br><span class=line>5</span><br><span class=line>6</span><br><span class=line>7</span><br><span class=line>8</span><br></pre><td class=code><pre><span class=line><span class=keyword>find_package</span>(foo CONFIG REQUIRED) <span class=comment># package generated by install(EXPORT)</span></span><br><span class=line></span><br><span class=line><span class=keyword>add_executable</span>(exe main.c)</span><br><span class=line><span class=keyword>target_link_libraries</span>(exe PRIVATE foo::foo foo::bar)</span><br><span class=line><span class=keyword>add_custom_command</span>(<span class=keyword>TARGET</span> exe POST_BUILD</span><br><span class=line>  <span class=keyword>COMMAND</span> <span class=variable>${CMAKE_COMMAND}</span> -E copy -t $&LTTARGET_FILE_DIR:exe> $&LTTARGET_RUNTIME_DLLS:exe></span><br><span class=line>  COMMAND_EXPAND_LISTS</span><br><span class=line>)</span><br></pre></table></figure><p><code>cmake -E copy_if_different</code><figure class="highlight vim"><table><tr><td class=gutter><pre><span class=line>1</span><br><span class=line>2</span><br><span class=line>3</span><br><span class=line>4</span><br></pre><td class=code><pre><span class=line><span class=keyword>copy</span> <span class=symbol>&LTfile></span>... destination  - <span class=keyword>copy</span> <span class=keyword>files</span> <span class=keyword>to</span> destination (either <span class=keyword>file</span> <span class=built_in>or</span> directory)</span><br><span class=line>copy_directory <span class=symbol>&LTdir></span>... destination   - <span class=keyword>copy</span> content of <span class=symbol>&LTdir></span>... directories <span class=keyword>to</span> <span class=string>'destination'</span> directory</span><br><span class=line>copy_directory_if_different <span class=symbol>&LTdir></span>... destination   - <span class=keyword>copy</span> changed content of <span class=symbol>&LTdir></span>... directories <span class=keyword>to</span> <span class=string>'destination'</span> directory</span><br><span class=line>copy_if_different <span class=symbol>&LTfile></span>... destination  - <span class=keyword>copy</span> <span class=keyword>files</span> <span class=keyword>if</span> it <span class=built_in>has</span> changed</span><br></pre></table></figure><h2 id=参考资料><a class=headerlink href=#参考资料 title=参考资料></a>参考资料</h2><ol><li><a href=https://learn.microsoft.com/zh-cn/cpp/build/linking-an-executable-to-a-dll?view=msvc-170 rel=noopener target=_blank>将可执行文件链接到 DLL | Microsoft Learn</a><li><a href=https://learn.microsoft.com/zh-cn/cpp/build/walkthrough-creating-and-using-a-dynamic-link-library-cpp?view=msvc-170 rel=noopener target=_blank>演练：创建和使用自己的动态链接库 (C++) | Microsoft Learn</a><li><a href=https://blog.csdn.net/feikudai8460/article/details/121823029 rel=noopener target=_blank>gcc/g++ 动态库和静态库,编译与链接（含示例）_g++ 链接静态库-CSDN博客</a><li><a href=https://www.baeldung.com/linux/library_path-vs-ld_library_path rel=noopener target=_blank>LIBRARY_PATH vs LD_LIBRARY_PATH | Baeldung on Linux</a><li><a href=https://developer.aliyun.com/article/1469309 rel=noopener target=_blank>【Linux 应用开发 】Linux环境下动态链接库路径（RPATH）的调整策略-阿里云开发者社区 (aliyun.com)</a><li><a href=https://www.cnblogs.com/AndyJee/p/3835092.html rel=noopener target=_blank>Linux动态库(.so)搜索路径 - AndyJee - 博客园 (cnblogs.com)</a><li><a href=https://web.archive.org/web/20120418232524/http://labs.qt.nokia.com/2011/10/28/rpath-and-runpath/ rel=noopener target=_blank>RPATH and RUNPATH (archive.org)</a><li><a href=https://blog.tremily.us/posts/rpath/ rel=noopener target=_blank>RPATH, RUNPATH, and dynamic linking (tremily.us)</a><li><a href=https://gitlab.kitware.com/cmake/community/-/wikis/doc/cmake/RPATH-handling rel=noopener target=_blank>RPATH handling · Wiki · CMake / Community · GitLab (kitware.com)</a><li><a href=https://stackoverflow.com/questions/10671916/how-to-copy-dll-files-into-the-same-folder-as-the-executable-using-cmake rel=noopener target=_blank>How to copy DLL files into the same folder as the executable using CMake? - Stack Overflow</a><li><a href=https://cmake.org/cmake/help/latest/manual/cmake-generator-expressions.7.html#genex:TARGET_RUNTIME_DLLS rel=noopener target=_blank>cmake-generator-expressions(7) — CMake 3.30.4 Documentation</a></ol><link href=/css/spoiler.css rel=stylesheet><script async src=/js/spoiler.js></script></div><div><div><div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div></div></div><div class=reward-container><div>感谢阅读.</div><button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">打赏</button><div style="display: none;" id=qr><div style="display: inline-block;"><img alt="Sekyoro 微信支付" src=/images/wechatpay.png><p>微信支付</div></div></div><div><ul class=post-copyright><li class=post-copyright-author><strong>本文作者： </strong>Sekyoro<li class=post-copyright-link><strong>本文链接：</strong> <a href=https://www.sekyoro.top/2024/10/04/%E9%93%BE%E6%8E%A5%E5%8A%A8%E6%80%81%E5%BA%93%E5%9C%A8%E4%B8%8D%E5%90%8C%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E4%B8%8A%E7%9A%84%E8%A1%8C%E4%B8%BA/ title=链接动态库在不同操作系统上的行为>https://www.sekyoro.top/2024/10/04/链接动态库在不同操作系统上的行为/</a><li class=post-copyright-license><strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href=https://creativecommons.org/licenses/by-nc-sa/4.0/ rel=noopener target=_blank><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</ul></div><div class=followme><p>欢迎关注我的其它发布渠道<div class=social-list><div class=social-item><a class=social-link href=/images/wxqrcode.png target=_blank> <span class=icon> <i class="fab fa-weixin"></i> </span> <span class=label>WeChat</span> </a></div><div class=social-item><a class=social-link href=/images/website.png target=_blank> <span class=icon> <i class="fa fa-user"></i> </span> <span class=label>PersonalWebsite</span> </a></div><div class=social-item><a class=social-link href=https://my-astro-git-main-drowning-in-codes.vercel.app target=_blank> <span class=icon> <i class="fas fa-share"></i> </span> <span class=label>杂鱼分享</span> </a></div><div class=social-item><a class=social-link href=/atom.xml target=_blank> <span class=icon> <i class="fa fa-rss"></i> </span> <span class=label>RSS</span> </a></div></div></div><footer class=post-footer><div class=post-nav><div class=post-nav-item><a href=/2024/10/02/%E7%AA%97%E5%8F%A3%E7%B3%BB%E7%BB%9F%E4%B8%8E%E5%9B%BE%E5%BD%A2%E7%BB%98%E5%88%B6%E6%8E%A5%E5%8F%A3/ rel=prev title=窗口系统与图形绘制接口> <i class="fa fa-chevron-left"></i> 窗口系统与图形绘制接口 </a></div><div class=post-nav-item><a href=/2024/10/04/%E7%AA%97%E5%8F%A3%E5%B7%A5%E5%85%B7%E5%BA%93GLFW%E4%BD%BF%E7%94%A8/ rel=next title=窗口工具库GLFW使用> 窗口工具库GLFW使用 <i class="fa fa-chevron-right"></i> </a></div></div></footer></article></div><!-- 评论区 --><div class=comments><div data-id=city data-uid=MTAyMC81MzE5Ny8yOTY3Mg== id=lv-container></div></div><script>window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }</script></div><div class="toggle sidebar-toggle"><span class="toggle-line toggle-line-first"></span><span class="toggle-line toggle-line-middle"></span><span class="toggle-line toggle-line-last"></span></div><aside class=sidebar><div class=sidebar-inner><!-- canvas粒子时钟 --><div><canvas id=canvas style=width:60%;>当前浏览器不支持canvas，请更换浏览器后再试</canvas></div><script>(function(){
+
+   var digit=
+    [
+        [
+            [0,0,1,1,1,0,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,0,1,1,0],
+            [0,0,1,1,1,0,0]
+        ],//0
+        [
+            [0,0,0,1,1,0,0],
+            [0,1,1,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [1,1,1,1,1,1,1]
+        ],//1
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,1,1],
+            [1,1,1,1,1,1,1]
+        ],//2
+        [
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//3
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,0],
+            [0,0,1,1,1,1,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,1,1,0],
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,1]
+        ],//4
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,1,1,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//5
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//6
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0]
+        ],//7
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//8
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,1,1,0,0,0,0]
+        ],//9
+        [
+            [0,0,0,0,0,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,0,0,0]
+        ]//:
+    ];
+
+var canvas = document.getElementById('canvas');
+
+if(canvas.getContext){
+    var cxt = canvas.getContext('2d');
+    //声明canvas的宽高
+    var H = 100,W = 700;
+    canvas.height = H;
+    canvas.width = W;
+    cxt.fillStyle = '#f00';
+    cxt.fillRect(10,10,50,50);
+
+    //存储时间数据
+    var data = [];
+    //存储运动的小球
+    var balls = [];
+    //设置粒子半径
+    var R = canvas.height/20-1;
+    (function(){
+        var temp = /(\d)(\d):(\d)(\d):(\d)(\d)/.exec(new Date());
+        //存储时间数字，由十位小时、个位小时、冒号、十位分钟、个位分钟、冒号、十位秒钟、个位秒钟这7个数字组成
+        data.push(temp[1],temp[2],10,temp[3],temp[4],10,temp[5],temp[6]);
+    })();
+
+    /*生成点阵数字*/
+    function renderDigit(index,num){
+        for(var i = 0; i < digit[num].length; i++){
+            for(var j = 0; j < digit[num][i].length; j++){
+                if(digit[num][i][j] == 1){
+                    cxt.beginPath();
+                    cxt.arc(14*(R+2)*index + j*2*(R+1)+(R+1),i*2*(R+1)+(R+1),R,0,2*Math.PI);
+                    cxt.closePath();
+                    cxt.fill();
+                }
+            }
+        }
+    }
+
+    /*更新时钟*/
+    function updateDigitTime(){
+        var changeNumArray = [];
+        var temp = /(\d)(\d):(\d)(\d):(\d)(\d)/.exec(new Date());
+        var NewData = [];
+        NewData.push(temp[1],temp[2],10,temp[3],temp[4],10,temp[5],temp[6]);
+        for(var i = data.length-1; i >=0 ; i--){
+            //时间发生变化
+            if(NewData[i] !== data[i]){
+                //将变化的数字值和在data数组中的索引存储在changeNumArray数组中
+                changeNumArray.push(i+'_'+(Number(data[i])+1)%10);
+            }
+        }
+        //增加小球
+        for(var i = 0; i< changeNumArray.length; i++){
+            addBalls.apply(this,changeNumArray[i].split('_'));
+        }
+        data = NewData.concat();
+    }
+
+    /*更新小球状态*/
+    function updateBalls(){
+        for(var i = 0; i < balls.length; i++){
+            balls[i].stepY += balls[i].disY;
+            balls[i].x += balls[i].stepX;
+            balls[i].y += balls[i].stepY;
+            if(balls[i].x > W + R || balls[i].y > H + R){
+                balls.splice(i,1);
+                i--;
+            }
+        }
+    }
+
+    /*增加要运动的小球*/
+    function addBalls(index,num){
+        var numArray = [1,2,3];
+        var colorArray =  ["#3BE","#09C","#A6C","#93C","#9C0","#690","#FB3","#F80","#F44","#C00"];
+        for(var i = 0; i < digit[num].length; i++){
+            for(var j = 0; j < digit[num][i].length; j++){
+                if(digit[num][i][j] == 1){
+                    var ball = {
+                        x:14*(R+2)*index + j*2*(R+1)+(R+1),
+                        y:i*2*(R+1)+(R+1),
+                        stepX:Math.floor(Math.random() * 4 -2),
+                        stepY:-2*numArray[Math.floor(Math.random()*numArray.length)],
+                        color:colorArray[Math.floor(Math.random()*colorArray.length)],
+                        disY:1
+                    };
+                    balls.push(ball);
+                }
+            }
+        }
+    }
+
+    /*渲染*/
+    function render(){
+        //重置画布宽度，达到清空画布的效果
+        canvas.height = 100;
+        //渲染时钟
+        for(var i = 0; i < data.length; i++){
+            renderDigit(i,data[i]);
+        }
+        //渲染小球
+        for(var i = 0; i < balls.length; i++){
+            cxt.beginPath();
+            cxt.arc(balls[i].x,balls[i].y,R,0,2*Math.PI);
+            cxt.fillStyle = balls[i].color;
+            cxt.closePath();
+            cxt.fill();
+        }
+    }
+
+    clearInterval(oTimer);
+    var oTimer = setInterval(function(){
+        //更新时钟
+        updateDigitTime();
+        //更新小球状态
+        updateBalls();
+        //渲染
+        render();
+    },50);
+}
+
+})();</script><!-- require APlayer --><link href=https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css rel=stylesheet><script src=https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js></script><!-- require MetingJS --><script src=/js/meting-js.js></script><ul class="sidebar-nav motion-element"><li class=sidebar-nav-toc>文章目录<li class=sidebar-nav-overview>站点概览</ul><!--noindex--><div class="post-toc-wrap sidebar-panel"><div class="post-toc motion-element"><ol class=nav><li class="nav-item nav-level-2"><a class=nav-link href=#%E7%BC%96%E8%AF%91%E4%B8%8E%E9%93%BE%E6%8E%A5%E9%9D%99%E6%80%81%E5%BA%93><span class=nav-number>1.</span> <span class=nav-text>编译与链接静态库</span></a><ol class=nav-child><li class="nav-item nav-level-3"><a class=nav-link href=#%E9%93%BE%E6%8E%A5%E5%8A%A8%E6%80%81%E5%BA%93%E5%9C%A8cmake%E4%B8%AD%E7%9A%84%E8%A1%8C%E4%B8%BA><span class=nav-number>1.1.</span> <span class=nav-text>链接动态库在cmake中的行为</span></a></ol><li class="nav-item nav-level-2"><a class=nav-link href=#Linux><span class=nav-number>2.</span> <span class=nav-text>Linux</span></a><ol class=nav-child><li class="nav-item nav-level-3"><a class=nav-link href=#RPATH><span class=nav-number>2.1.</span> <span class=nav-text>RPATH</span></a><li class="nav-item nav-level-3"><a class=nav-link href=#LIBRAY-PATH><span class=nav-number>2.2.</span> <span class=nav-text>LIBRAY_PATH</span></a><li class="nav-item nav-level-3"><a class=nav-link href=#LD-LIBRAY-PATH><span class=nav-number>2.3.</span> <span class=nav-text>LD_LIBRAY_PATH</span></a><li class="nav-item nav-level-3"><a class=nav-link href=#etc-ld-so-conf><span class=nav-number>2.4.</span> <span class=nav-text>/etc/ld.so.conf</span></a><li class="nav-item nav-level-3"><a class=nav-link href=#%E9%BB%98%E8%AE%A4%E6%90%9C%E7%B4%A2%E8%B7%AF%E5%BE%84><span class=nav-number>2.5.</span> <span class=nav-text>默认搜索路径</span></a></ol><li class="nav-item nav-level-2"><a class=nav-link href=#Windows><span class=nav-number>3.</span> <span class=nav-text>Windows</span></a><ol class=nav-child><li class="nav-item nav-level-3"><a class=nav-link href=#%E9%93%BE%E6%8E%A5%E6%96%B9%E6%B3%95><span class=nav-number>3.1.</span> <span class=nav-text>链接方法</span></a><ol class=nav-child><li class="nav-item nav-level-4"><a class=nav-link href=#%E9%9A%90%E5%BC%8F%E9%93%BE%E6%8E%A5><span class=nav-number>3.1.1.</span> <span class=nav-text>隐式链接</span></a><li class="nav-item nav-level-4"><a class=nav-link href=#%E6%98%BE%E5%BC%8F%E9%93%BE%E6%8E%A5><span class=nav-number>3.1.2.</span> <span class=nav-text>显式链接</span></a></ol><li class="nav-item nav-level-3"><a class=nav-link href=#%E5%8A%A8%E6%80%81%E5%BA%93%E6%9F%A5%E6%89%BE%E8%B7%AF%E5%BE%84><span class=nav-number>3.2.</span> <span class=nav-text>动态库查找路径</span></a></ol><li class="nav-item nav-level-2"><a class=nav-link href=#%E6%80%BB%E7%BB%93><span class=nav-number>4.</span> <span class=nav-text>总结</span></a><li class="nav-item nav-level-2"><a class=nav-link href=#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99><span class=nav-number>5.</span> <span class=nav-text>参考资料</span></a></ol></div></div><!--/noindex--><div class="site-overview-wrap sidebar-panel"><div class="site-author motion-element" itemprop=author itemscope itemtype=http://schema.org/Person><img alt=Sekyoro class=site-author-image itemprop=image src=https://i.loli.net/2021/05/17/YqoavnXdGTpPO9R.jpg><p class=site-author-name itemprop=name>Sekyoro<div class=site-description itemprop=description>什么也无法舍弃的人，什么也做不了.</div></div><div class="site-state-wrap motion-element"><nav class=site-state><div class="site-state-item site-state-posts"><a href=/archives/> <span class=site-state-item-count>211</span> <span class=site-state-item-name>日志</span> </a></div><div class="site-state-item site-state-categories"><a href=/categories/> <span class=site-state-item-count>16</span> <span class=site-state-item-name>分类</span></a></div><div class="site-state-item site-state-tags"><a href=/tags/> <span class=site-state-item-count>196</span> <span class=site-state-item-name>标签</span></a></div></nav></div><div class="links-of-author motion-element"><span class=links-of-author-item> <a title="Personal Website → http://proanimer.com" href=http://proanimer.com/ rel=noopener target=_blank><i class="fab fa-internet-explorer fa-fw"></i>Personal Website</a> </span><span class=links-of-author-item> <a title="GitHub → https://github.com/drowning-in-codes" href=https://github.com/drowning-in-codes rel=noopener target=_blank><i class="fab fa-github fa-fw"></i>GitHub</a> </span><span class=links-of-author-item> <a title="E-Mail → mailto:bukalala174@gmail.com" href=mailto:bukalala174@gmail.com rel=noopener target=_blank><i class="fa fa-envelope fa-fw"></i>E-Mail</a> </span><span class=links-of-author-item> <a title="wxPublicAccount → https://mp.weixin.qq.com/s?__biz=Mzg3ODY1MDkzMg==&mid=2247483770&idx=1&sn=fdf88faab01d5c219ac609570a21c9d6&chksm=cf113221f866bb373938cfca03cf095ff4fe1e4dc37d68ef5de4cd4876ee1260fca0c015a4d6&token=1096259873&lang=zh_CN#rd" href=https://mp.weixin.qq.com/s?__biz=Mzg3ODY1MDkzMg==&mid=2247483770&idx=1&sn=fdf88faab01d5c219ac609570a21c9d6&chksm=cf113221f866bb373938cfca03cf095ff4fe1e4dc37d68ef5de4cd4876ee1260fca0c015a4d6&token=1096259873&lang=zh_CN#rd rel=noopener target=_blank><i class="fab fa-weixin fa-fw"></i>wxPublicAccount</a> </span><span class=links-of-author-item> <a title="RSS → /atom.xml" href=/atom.xml><i class="fa fa-rss fa-fw"></i>RSS</a> </span><span class=links-of-author-item> <a title="CSDN → https://blog.csdn.net/aqwca" href=https://blog.csdn.net/aqwca rel=noopener target=_blank><i class="fa fa-handshake fa-fw"></i>CSDN</a> </span><span class=links-of-author-item> <a title="杂鱼分享 → https://my-astro-git-main-drowning-in-codes.vercel.app" href=https://my-astro-git-main-drowning-in-codes.vercel.app/ rel=noopener target=_blank><i class="fas fa-share fa-fw"></i>杂鱼分享</a> </span></div><div class="links-of-blogroll motion-element"><div class=links-of-blogroll-title><i class="fa fa-link fa-fw"></i> 友情链接</div><ul class=links-of-blogroll-list><li class=links-of-blogroll-item><a href=http://myqhs.top/ rel=noopener target=_blank title=http://myqhs.top/>myqhs</a><li class=links-of-blogroll-item><a href=https://www.lllomh.com/ rel=noopener target=_blank title=https://www.lllomh.com/>芈渡</a><li class=links-of-blogroll-item><a href=https://protool-ten.vercel.app/ rel=noopener target=_blank title=https://protool-ten.vercel.app/>protools</a></ul></div><div class="motion-element announcement"><div class=title></div><p class=content><p class=date></div></div><meting-js id=6856787487 order=random server=netease type=playlist> </meting-js><div class=widget-wrap><h3 class=widget-title style=margin:0>此文章目前无词云</h3></div><script id=clustrmaps src=https://clustrmaps.com/map_v2.js?d=xQdGTxqARTBiNIwX2aUban-ixkj2s6VaZQWo-aVCgY8&cl=ffffff&w=a></script><div class="back-to-top motion-element"><i class="fa fa-arrow-up"></i><span>0%</span></div><!-- 边栏 --></div></aside><div id=sidebar-dimmer></div></div></main><footer class=footer><div class=footer-inner><div class=copyright>© Wed Apr 08 2020 08:00:00 GMT+0800 (中国标准时间) – <span itemprop=copyrightYear>2024</span><span class=with-love> <i class="fa fa-heart"></i> </span><span class=author itemprop=copyrightHolder>Sekyoro</span><span class=post-meta-divider>|</span><span class=post-meta-item-icon> <i class="fa fa-chart-area"></i> </span><span title=站点总字数>2m</span><span class=post-meta-divider>|</span><span class=post-meta-item-icon> <i class="fa fa-coffee"></i> </span><span title=站点阅读时长>29:44</span></div><script async src=https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js></script><span id=busuanzi_container_site_pv>总访问量<span id=busuanzi_value_site_pv></span>次</span><span class=post-meta-divider>|</span><span id=busuanzi_container_site_uv>总访客数<span id=busuanzi_value_site_uv></span>人</span><span class=post-meta-divider>|</span><!-- 不蒜子计数初始值纠正 --><script>$(document).ready(function() {
+
+    var int = setInterval(fixCount, 50);  // 50ms周期检测函数
+    var countOffset = 20000;  // 初始化首次数据
+
+    function fixCount() {            
+       if (document.getElementById("busuanzi_container_site_pv").style.display != "none")
+        {
+            $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + countOffset); 
+            clearInterval(int);
+        }                  
+        if ($("#busuanzi_container_site_pv").css("display") != "none")
+        {
+            $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + countOffset); // 加上初始数据 
+            clearInterval(int); // 停止检测
+        }  
+    }
+       	
+});</script><div><span id=timeDate>载入天数...</span><span id=times>载入时分秒...</span><script>var now = new Date();
+    function createtime() {
+        var grt= new Date("04/08/2021 20:00:00");
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+    }
+setInterval("createtime()",250);</script></div><div class=busuanzi-count><script async data-pjax src=https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script><span style="display: none;" class=post-meta-item id=busuanzi_container_site_uv> <span class=post-meta-item-icon> <i class="fa fa-user"></i> </span> <span class=site-uv title=总访客量> <span id=busuanzi_value_site_uv></span> </span> </span><span class=post-meta-divider>|</span><span style="display: none;" class=post-meta-item id=busuanzi_container_site_pv> <span class=post-meta-item-icon> <i class="fa fa-eye"></i> </span> <span class=site-pv title=总访问量> <span id=busuanzi_value_site_pv></span> </span> </span></div></div></footer></div><script color=0,0,255 count=99 opacity=0.5 src=/lib/canvas-nest/canvas-nest.min.js zindex=-1></script><script src=/lib/anime.min.js></script><script src=https://cdn.jsdelivr.net/gh/theme-next/theme-next-pjax@0/pjax.min.js></script><script src=https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js></script><script src=https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js></script><script src=https://cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js></script><script src=https://cdn.jsdelivr.net/npm/velocity-animate@1/velocity.min.js></script><script src=https://cdn.jsdelivr.net/npm/velocity-animate@1/velocity.ui.min.js></script><script src=/js/utils.js></script><script src=/js/motion.js></script><script src=/js/schemes/pisces.js></script><script src=/js/next-boot.js></script><script src=/js/bookmark.js></script><script>var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax',
+	'.widget-wrap'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+ 
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});</script><script data-pjax>(function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();</script><script src=https://cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js></script><script src=https://cdn.jsdelivr.net/npm/instantsearch.js@4/dist/instantsearch.production.min.js></script><script src=/js/algolia-search.js></script><script data-pjax>document.querySelectorAll('.pdfobject-container').forEach(element => {
+  let url = element.dataset.target;
+  let pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  let pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  let fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});</script><div id=pjax><script charset=utf-8 defer src=/js/outdate.js></script></div><script charset=utf-8 defer src=/js/tagcanvas.js></script><script charset=utf-8 defer src=/js/tagcloud.js></script><script>NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});</script><script>var OriginTitile = document.title;
+  var titleTime;
+  document.addEventListener("visibilitychange", function() {
+    if (document.hidden) {
+      document.title = "(つェ⊂)我藏好了哦~" + OriginTitile;
+      clearTimeout(titleTime);
+    } else {
+      document.title = "(*´∇｀*) 被你发现啦~" + OriginTitile;
+      titleTime = setTimeout(function() {
+        document.title = OriginTitile;
+      }, 2000);
+    }
+  });</script><script src=/js/src/activate-power-mode.min.js></script><script>POWERMODE.colorful = true;
+    POWERMODE.shake = false;
+    document.body.addEventListener('input', POWERMODE);</script>
