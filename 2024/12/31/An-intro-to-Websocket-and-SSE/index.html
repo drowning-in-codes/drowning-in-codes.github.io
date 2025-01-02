@@ -1,0 +1,462 @@
+<!doctypehtml><html lang=zh-CN><script defer src=/live2d-widget/autoload.js></script><meta charset=UTF-8><meta content=width=device-width,initial-scale=1,maximum-scale=2 name=viewport><meta content=#222 name=theme-color><meta content="Hexo 5.4.0" name=generator><link href=/images/blog_32px.png rel=apple-touch-icon sizes=180x180><link href=/images/blog_32px.png rel=icon sizes=32x32 type=image/png><link href=/images/blog_16px.png rel=icon sizes=16x16 type=image/png><link color=#222 href=/images/logo.svg rel=mask-icon><meta content=EPrJAp11bJwHULpQUaSNSZ8_3RcvTsPDAEGOME4pl1w name=google-site-verification><!-- Google tag (gtag.js) --><!-- 
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-VB21D8MKKW"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-VB21D8MKKW');
+</script> --><!-- google adsense in head.swig --><script async crossorigin=anonymous src=https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4034523802263123></script><meta content=7226864CE87CE9DE8C008385273846FF name=msvalidate.01><meta content=code-fjFXVtiL7j name=baidu-site-verification><link href=/css/main.css rel=stylesheet><link as=style href=https://fonts.googleapis.com/css?family=Roboto%20Mono,Roboto:300,300italic,400,400italic,700,700italic|Roboto:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext onload=this.rel='stylesheet' rel=preload><link as=style href=https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css onload=this.rel='stylesheet' rel=preload><link href=https://fonts.googleapis.com/css?family=Noto+Serif+SC|Roboto&display=swap rel=stylesheet><link href=https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css rel=stylesheet><link href=https://cdn.jsdelivr.net/npm/pace-js@1/themes/blue/pace-theme-minimal.css rel=stylesheet><script src=https://cdn.jsdelivr.net/npm/pace-js@1/pace.min.js></script><script id=hexo-configurations>var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.sekyoro.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":240,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"appID":"0F9LEEVW82","apiKey":"78839e9f9be09d081c5c4da81975cd19","indexName":"sekyoblog_sec","hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};</script><link href=//cdn.bootcss.com/animate.css/3.5.0/animate.min.css rel=stylesheet><meta content="最近在看LLM的流式输出如何反映到json输出上,现有的解决方案包括 WebSocket 或 Server-Sent Events (SSE) 实时通信技术." name=description><meta content=article property=og:type><meta content="An intro to Websocket and SSE" property=og:title><meta content=https://www.sekyoro.top/2024/12/31/An-intro-to-Websocket-and-SSE/index.html property=og:url><meta content=Sekyoro的博客小屋 property=og:site_name><meta content="最近在看LLM的流式输出如何反映到json输出上,现有的解决方案包括 WebSocket 或 Server-Sent Events (SSE) 实时通信技术." property=og:description><meta content=zh_CN property=og:locale><meta content=https://www.ruanyifeng.com/blogimg/asset/2017/bg2017051502.png property=og:image><meta content=2024-12-31T11:29:32.000Z property=article:published_time><meta content=2024-12-31T15:44:07.739Z property=article:modified_time><meta content=Sekyoro property=article:author><meta content="个人博客 技术学习 计算机 互联网 人工智能" property=article:tag><meta content=summary name=twitter:card><meta content=https://www.ruanyifeng.com/blogimg/asset/2017/bg2017051502.png name=twitter:image><link href=https://www.sekyoro.top/2024/12/31/An-intro-to-Websocket-and-SSE/ rel=canonical><script id=page-configurations>// https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };</script><title>An intro to Websocket and SSE | Sekyoro的博客小屋</title><noscript><style>.use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }</style></noscript><link href=/atom.xml rel=alternate title=Sekyoro的博客小屋 type=application/atom+xml><body itemscope itemtype=http://schema.org/WebPage><canvas style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" class=fireworks></canvas><script defer src=https://cdn.bootcss.com/animejs/2.2.0/anime.min.js></script><script defer src=/js/src/fireworks.js></script><div class="container use-motion"><div class=headband></div><header class=header itemscope itemtype=http://schema.org/WPHeader><div class=header-inner><div class=site-brand-container><div class=site-nav-toggle><div aria-label=切换导航栏 class=toggle><span class="toggle-line toggle-line-first"></span><span class="toggle-line toggle-line-middle"></span><span class="toggle-line toggle-line-last"></span></div></div><div class=site-meta><a class=brand href=/ rel=start> <span class=logo-line-before><i></i></span> <h1 class=site-title>Sekyoro的博客小屋</h1> <span class=logo-line-after><i></i></span> </a></div><div class=site-nav-right><div class="toggle popup-trigger"><i class="fa fa-search fa-fw fa-lg"></i></div></div></div><nav class=site-nav><ul class="main-menu menu" id=menu><li class="menu-item menu-item-home"><a href=/ rel=section><i class="fa fa-home fa-fw"></i>首页</a><li class="menu-item menu-item-about"><a href=/about/ rel=section><i class="fa fa-user fa-fw"></i>关于</a><li class="menu-item menu-item-tags"><a href=/tags/ rel=section><i class="fa fa-tags fa-fw"></i>标签</a><li class="menu-item menu-item-categories"><a href=/categories/ rel=section><i class="fa fa-th fa-fw"></i>分类</a><li class="menu-item menu-item-archives"><a href=/archives/ rel=section><i class="fa fa-archive fa-fw"></i>归档</a><li class="menu-item menu-item-bangumis"><a href=/bangumis/ rel=section><i class="fa fa-film fa-fw"></i>追番</a><li class="menu-item menu-item-resume"><a href=/resume/ rel=section><i class="fa fa-file-pdf fa-fw"></i>简历</a><li class="menu-item menu-item-materials"><a href=/materials/ rel=section><i class="fa fa-book fa-fw"></i>学习资料</a><li class="menu-item menu-item-sitemap"><a href=/sitemap.xml rel=section><i class="fa fa-sitemap fa-fw"></i>站点地图</a><li class="menu-item menu-item-search"><a class=popup-trigger role=button><i class="fa fa-search fa-fw"></i>搜索 </a></ul></nav><div class=search-pop-overlay><div class="popup search-popup"><div class=search-header><span class=search-icon> <i class="fa fa-search"></i> </span><div class=search-input-container></div><span class=popup-btn-close> <i class="fa fa-times-circle"></i> </span></div><div class=algolia-results><div id=algolia-stats></div><div id=algolia-hits></div><div class=algolia-pagination id=algolia-pagination></div></div></div></div></div></header><a class="book-mark-link book-mark-link-fixed" role=button></a><main class=main><div class=main-inner><div class=content-wrap><div class="content post posts-expand"><article class=post-block itemscope itemtype=http://schema.org/Article lang=zh-CN><link href=https://www.sekyoro.top/2024/12/31/An-intro-to-Websocket-and-SSE/ itemprop=mainEntityOfPage><span hidden itemprop=author itemscope itemtype=http://schema.org/Person> <meta content=https://i.loli.net/2021/05/17/YqoavnXdGTpPO9R.jpg itemprop=image> <meta content=Sekyoro itemprop=name> <meta content=什么也无法舍弃的人，什么也做不了. itemprop=description> </span><span hidden itemprop=publisher itemscope itemtype=http://schema.org/Organization> <meta content=Sekyoro的博客小屋 itemprop=name> </span><header class=post-header><h1 itemprop="name headline" class=post-title>An intro to Websocket and SSE</h1><div class=post-meta><span class=post-meta-item> <span class=post-meta-item-icon> <i class="far fa-calendar"></i> </span> <span class=post-meta-item-text>发表于</span> <time itemprop="dateCreated datePublished" title="创建时间：2024-12-31 19:29:32 / 修改时间：23:44:07" datetime=2024-12-31T19:29:32+08:00>2024-12-31</time> </span><span style="display: none;" class=post-meta-item id=busuanzi_container_page_pv title=阅读次数> <span class=post-meta-item-icon> <i class="fa fa-eye"></i> </span> <span class=post-meta-item-text>阅读次数：</span> <span id=busuanzi_value_page_pv></span> </span><br><span class=post-meta-item title=本文字数> <span class=post-meta-item-icon> <i class="far fa-file-word"></i> </span> <span class=post-meta-item-text>本文字数：</span> <span>5.6k</span> </span><span class=post-meta-item title=阅读时长> <span class=post-meta-item-icon> <i class="far fa-clock"></i> </span> <span class=post-meta-item-text>阅读时长 ≈</span> <span>5 分钟</span> </span></div></header><div class=post-body itemprop=articleBody><p>最近在看LLM的流式输出如何反映到json输出上,现有的解决方案包括 WebSocket 或 Server-Sent Events (SSE) 实时通信技术.<br><span id=more></span><h2 id=WebSocket><a class=headerlink href=#WebSocket title=WebSocket></a>WebSocket</h2><p><strong>WebSocket API</strong> 可在用户浏览器和服务器之间开启双向交互式通信会话。利用该 API，可以向服务器发送信息，并接收事件驱动的响应，而无需轮询服务器以获得回复。<p><img alt=img data-src=https://www.ruanyifeng.com/blogimg/asset/2017/bg2017051502.png><p>（1）建立在 TCP 协议之上，服务器端的实现比较容易。<p>（2）与 HTTP 协议有着良好的兼容性。默认端口也是80和443，并且握手阶段采用 HTTP 协议，因此握手时不容易屏蔽，能通过各种 HTTP 代理服务器。<p>（3）数据格式比较轻量，性能开销小，通信高效。<p>（4）可以发送文本，也可以发送二进制数据。<p>（5）没有同源限制，客户端可以与任意服务器通信。<p>（6）协议标识符是<code>ws</code>（如果加密，则为<code>wss</code>），服务器网址就是 URL。<p><strong>客户端</strong><figure class="highlight qml"><table><tr><td class=gutter><pre><span class=line>1</span><br><span class=line>2</span><br><span class=line>3</span><br><span class=line>4</span><br><span class=line>5</span><br><span class=line>6</span><br><span class=line>7</span><br><span class=line>8</span><br><span class=line>9</span><br><span class=line>10</span><br><span class=line>11</span><br><span class=line>12</span><br><span class=line>13</span><br><span class=line>14</span><br><span class=line>15</span><br><span class=line>16</span><br></pre><td class=code><pre><span class=line><span class=keyword>let</span> webSocket = <span class=keyword>new</span> WebSocket(<span class=built_in>url</span>, protocols);</span><br><span class=line>ws.onopen = <span class=function><span class=keyword>function</span>(<span class=params>evt</span>) </span>{ </span><br><span class=line>  <span class=built_in>console</span>.log(<span class=string>"Connection open ..."</span>); </span><br><span class=line>  ws.send(<span class=string>"Hello WebSockets!"</span>);</span><br><span class=line>};</span><br><span class=line></span><br><span class=line>ws.onmessage = <span class=function><span class=keyword>function</span>(<span class=params>evt</span>) </span>{</span><br><span class=line>  <span class=built_in>console</span>.log( <span class=string>"Received Message: "</span> + evt.data);</span><br><span class=line>  ws.close();</span><br><span class=line>};</span><br><span class=line></span><br><span class=line>ws.onclose = <span class=function><span class=keyword>function</span>(<span class=params>evt</span>) </span>{</span><br><span class=line>  <span class=built_in>console</span>.log(<span class=string>"Connection closed."</span>);</span><br><span class=line>};    </span><br><span class=line></span><br><span class=line></span><br></pre></table></figure><p>发送JSON<figure class="highlight js"><table><tr><td class=gutter><pre><span class=line>1</span><br><span class=line>2</span><br><span class=line>3</span><br><span class=line>4</span><br><span class=line>5</span><br><span class=line>6</span><br><span class=line>7</span><br><span class=line>8</span><br><span class=line>9</span><br><span class=line>10</span><br><span class=line>11</span><br><span class=line>12</span><br><span class=line>13</span><br><span class=line>14</span><br><span class=line>15</span><br><span class=line>16</span><br></pre><td class=code><pre><span class=line><span class=comment>// 服务器向所有用户发送文本</span></span><br><span class=line><span class=function><span class=keyword>function</span> <span class=title>sendText</span>(<span class=params></span>) </span>{</span><br><span class=line>  <span class=comment>// 构造一个 msg 对象，包含了服务器处理所需的数据</span></span><br><span class=line>  <span class=keyword>var</span> msg = {</span><br><span class=line>    <span class=attr>type</span>: <span class=string>"message"</span>,</span><br><span class=line>    <span class=attr>text</span>: <span class=built_in>document</span>.getElementById(<span class=string>"text"</span>).value,</span><br><span class=line>    <span class=attr>id</span>: clientID,</span><br><span class=line>    <span class=attr>date</span>: <span class=built_in>Date</span>.now(),</span><br><span class=line>  };</span><br><span class=line></span><br><span class=line>  <span class=comment>// 把 msg 对象作为 JSON 格式字符串发送</span></span><br><span class=line>  exampleSocket.send(<span class=built_in>JSON</span>.stringify(msg));</span><br><span class=line></span><br><span class=line>  <span class=comment>// 清空文本输入元素，为接收下一条消息做好准备。</span></span><br><span class=line>  <span class=built_in>document</span>.getElementById(<span class=string>"text"</span>).value = <span class=string>""</span>;</span><br><span class=line>}</span><br></pre></table></figure><p><strong>服务端</strong><p>可以使用<a href=https://socket.io/ rel=noopener target=_blank>Socket.IO</a>,<figure class="highlight js"><table><tr><td class=gutter><pre><span class=line>1</span><br><span class=line>2</span><br><span class=line>3</span><br><span class=line>4</span><br><span class=line>5</span><br><span class=line>6</span><br><span class=line>7</span><br><span class=line>8</span><br><span class=line>9</span><br></pre><td class=code><pre><span class=line><span class=keyword>const</span> { Server } = <span class=built_in>require</span>(<span class=string>"socket.io"</span>);</span><br><span class=line></span><br><span class=line><span class=keyword>const</span> io = <span class=keyword>new</span> Server({ <span class=comment>/* options */</span> });</span><br><span class=line></span><br><span class=line>io.on(<span class=string>"connection"</span>, <span class=function>(<span class=params>socket</span>) =></span> {</span><br><span class=line>  <span class=comment>// ...</span></span><br><span class=line>});</span><br><span class=line></span><br><span class=line>io.listen(<span class=number>3000</span>);</span><br></pre></table></figure><figure class="highlight js"><table><tr><td class=gutter><pre><span class=line>1</span><br><span class=line>2</span><br><span class=line>3</span><br><span class=line>4</span><br><span class=line>5</span><br><span class=line>6</span><br><span class=line>7</span><br><span class=line>8</span><br><span class=line>9</span><br><span class=line>10</span><br><span class=line>11</span><br><span class=line>12</span><br><span class=line>13</span><br><span class=line>14</span><br><span class=line>15</span><br><span class=line>16</span><br></pre><td class=code><pre><span class=line><span class=keyword>const</span> { readFileSync } = <span class=built_in>require</span>(<span class=string>"fs"</span>);</span><br><span class=line><span class=keyword>const</span> { createServer } = <span class=built_in>require</span>(<span class=string>"https"</span>);</span><br><span class=line><span class=keyword>const</span> { Server } = <span class=built_in>require</span>(<span class=string>"socket.io"</span>);</span><br><span class=line></span><br><span class=line><span class=keyword>const</span> httpsServer = createServer({</span><br><span class=line>  <span class=attr>key</span>: readFileSync(<span class=string>"/path/to/my/key.pem"</span>),</span><br><span class=line>  <span class=attr>cert</span>: readFileSync(<span class=string>"/path/to/my/cert.pem"</span>)</span><br><span class=line>});</span><br><span class=line></span><br><span class=line><span class=keyword>const</span> io = <span class=keyword>new</span> Server(httpsServer, { <span class=comment>/* options */</span> });</span><br><span class=line></span><br><span class=line>io.on(<span class=string>"connection"</span>, <span class=function>(<span class=params>socket</span>) =></span> {</span><br><span class=line>  <span class=comment>// ...</span></span><br><span class=line>});</span><br><span class=line></span><br><span class=line>httpsServer.listen(<span class=number>3000</span>);</span><br></pre></table></figure><h2 id=SSE><a class=headerlink href=#SSE title=SSE></a>SSE</h2><p>HTTP 协议本身不允许服务器主动给客户端发送信息，但有一种方法可以让服务器持续向客户端发送数据流。这种方法不是发送一次性数据包，而是保持连接开放，像视频播放那样连续发送数据。这种长时间的下载过程实际上是以数据流的形式进行的。<p>服务器发送事件（SSE）就是利用了这个特性，通过HTTP协议让服务器可以向浏览器推送实时更新的信息。传统上，网页需要先请求服务器才能获取新数据，但是使用SSE，服务器可以在任何时候主动向网页推送新的数据和消息，这些消息可以在网页内作为事件来处理。<p>服务端推送的数据是单向的，只从服务器到客户端流动。当不需要从客户端向服务器发送信息时，比如更新社交媒体状态、新闻推送或把数据传送到客户端存储（如IndexedDB或Web Storage），SSE就非常适合。<p>与SSE不同的是，WebSocket提供了一个更强大的双向通信通道，允许客户端和服务器之间互相发送信息。SSE则是单向的，主要用于服务器向浏览器发送信息。如果浏览器需要向服务器发送信息，它必须发起一个新的HTTP请求。<p>这里有几个关于SSE和WebSocket的区别：<ul><li>SSE基于HTTP，因此所有现有的服务器软件都能支持它；而WebSocket是一个独立的协议。<li>SSE设置起来简单得多，适合轻量级应用；WebSocket则更为复杂。<li>SSE自带断线重连功能，而WebSocket需要开发者自己实现这一功能。<li>SSE主要用于传输文本数据，若要发送二进制数据则需编码；WebSocket直接支持二进制数据传输。<li>SSE允许自定义消息类型，增加了灵活性。</ul><h3 id=事件流格式><a class=headerlink href=#事件流格式 title=事件流格式></a>事件流格式</h3><p>事件流是一个简单的文本数据流，文本应该使用UTF-8格式的编码。事件流中的消息由一对换行符分开。以冒号开头的行为注释行，会被忽略。<p><strong>备注：</strong> 注释行可以用来防止连接超时，服务器可以定期发送一条消息注释行，以保持连接不断。<p>每条消息由一行或多行文字组成，列出该消息的字段。每个字段由字段名表示，后面是冒号，然后是该字段值的文本数据。<p>规范中规定了下面这些字段：<ul><li><p>event</p> <p>一个用于标识事件类型的字符串。如果指定了这个字符串，浏览器会将具有指定事件名称的事件分派给相应的监听器；网站源代码应该使用 <code>addEventListener()</code> 来监听指定的事件。如果一个消息没有指定事件名称，那么 <code>onmessage</code> 处理程序就会被调用。</p><li><p>data</p> <p>消息的数据字段。当 <code>EventSource</code> 接收到多个以 <code>data:</code> 开头的连续行时，<a href=https://html.spec.whatwg.org/multipage/#dispatchMessage rel=noopener target=_blank>会将它们连接起来</a>，在它们之间插入一个换行符。末尾的换行符会被删除。</p><li><p>id</p> <p>事件 ID，会成为当前 <a href=https://developer.mozilla.org/zh-CN/docs/Web/API/EventSource rel=noopener target=_blank><code>EventSource</code></a> 对象的内部属性“最后一个事件 ID”的属性值。</p><li><p>retry</p> <p>重新连接的时间。如果与服务器的连接丢失，浏览器将等待指定的时间，然后尝试重新连接。这必须是一个整数，以毫秒为单位指定重新连接的时间。如果指定了一个非整数值，该字段将被忽略。</p></ul><p>所有其他的字段名都会被忽略<h3 id=事件流具体例子><a class=headerlink href=#事件流具体例子 title=事件流具体例子></a>事件流具体例子</h3><figure class="highlight markdown"><table><tr><td class=gutter><pre><span class=line>1</span><br><span class=line>2</span><br><span class=line>3</span><br></pre><td class=code><pre><span class=line>Content-Type: text/event-stream</span><br><span class=line>Cache-Control: no-cache</span><br><span class=line>Connection: keep-alive</span><br></pre></table></figure><p>每一次发送的信息，由若干个<code>message</code>组成，每个<code>message</code>之间用<code>\n\n</code>分隔。每个<code>message</code>内部由若干行组成，每一行都是如下格式。<figure class="highlight markdown"><table><tr><td class=gutter><pre><span class=line>1</span><br></pre><td class=code><pre><span class=line>[<span class=symbol>field</span>]: <span class=link>value\n</span></span><br></pre></table></figure><figure class="highlight markdown"><table><tr><td class=gutter><pre><span class=line>1</span><br><span class=line>2</span><br><span class=line>3</span><br><span class=line>4</span><br><span class=line>5</span><br><span class=line>6</span><br><span class=line>7</span><br></pre><td class=code><pre><span class=line>: comment</span><br><span class=line>id: 2025\n </span><br><span class=line>event: foo\n</span><br><span class=line>retry: 100\n \\指定浏览器重新发起连接的时间间隔。</span><br><span class=line>data: This is the mesage\n</span><br><span class=line>data: test\n</span><br><span class=line>data: this is the end\n\n</span><br></pre></table></figure><p>在浏览器上<code>lastEventId</code>属性读取这个值。一旦连接断线，浏览器会发送一个 HTTP 头，里面包含一个特殊的<code>Last-Event-ID</code>头信息，将这个值发送回来，用来帮助服务器端重建连接。因此，这个头信息可以被视为一种同步机制。<h4 id=命名事件><a class=headerlink href=#命名事件 title=命名事件></a>命名事件</h4><figure class="highlight markdown"><table><tr><td class=gutter><pre><span class=line>1</span><br><span class=line>2</span><br><span class=line>3</span><br><span class=line>4</span><br><span class=line>5</span><br><span class=line>6</span><br><span class=line>7</span><br><span class=line>8</span><br><span class=line>9</span><br><span class=line>10</span><br><span class=line>11</span><br><span class=line>12</span><br></pre><td class=code><pre><span class=line>event: userconnect</span><br><span class=line>data: {"username": "bobby", "time": "02:33:48"}</span><br><span class=line></span><br><span class=line>event: usermessage</span><br><span class=line>data: {"username": "bobby", "time": "02:34:11", "text": "Hi everyone."}</span><br><span class=line></span><br><span class=line>event: userdisconnect</span><br><span class=line>data: {"username": "bobby", "time": "02:34:23"}</span><br><span class=line></span><br><span class=line>event: usermessage</span><br><span class=line>data: {"username": "sean", "time": "02:34:36", "text": "Bye, bobby."}</span><br><span class=line></span><br></pre></table></figure><p>每个事件都有一个由 <code>event</code> 字段指定的事件名称和一个 <code>data</code> 字段，其值是一个适当的 JSON 字符串，包含客户端对该事件采取行动所需的数据。<code>data</code> 字段可以包含任何字符串数据，它不一定是 JSON。<h4 id=混合两种事件><a class=headerlink href=#混合两种事件 title=混合两种事件></a>混合两种事件</h4><p>可以在一个事件流中同时使用命名事件和未命名事件。<figure class="highlight markdown"><table><tr><td class=gutter><pre><span class=line>1</span><br><span class=line>2</span><br><span class=line>3</span><br><span class=line>4</span><br><span class=line>5</span><br><span class=line>6</span><br><span class=line>7</span><br><span class=line>8</span><br></pre><td class=code><pre><span class=line>event: userconnect</span><br><span class=line>data: {"username": "bobby", "time": "02:33:48"}</span><br><span class=line></span><br><span class=line>data: Here's a system message of some kind that will get used</span><br><span class=line>data: to accomplish some task.</span><br><span class=line></span><br><span class=line>event: usermessage</span><br><span class=line>data: {"username": "bobby", "time": "02:34:11", "text": "Hi everyone."}</span><br></pre></table></figure><p><strong>客户端</strong><p>默认情况下，如果客户端和服务器之间的连接关闭，则连接将重新启动。可以使用 <code>.close()</code> 方法终止连接。<figure class="highlight js"><table><tr><td class=gutter><pre><span class=line>1</span><br><span class=line>2</span><br><span class=line>3</span><br><span class=line>4</span><br><span class=line>5</span><br><span class=line>6</span><br><span class=line>7</span><br><span class=line>8</span><br><span class=line>9</span><br><span class=line>10</span><br><span class=line>11</span><br><span class=line>12</span><br><span class=line>13</span><br><span class=line>14</span><br></pre><td class=code><pre><span class=line><span class=keyword>const</span> evtSource = <span class=keyword>new</span> EventSource(<span class=string>"xxx"</span>);<span class=comment>//url可以与当前网址同域，也可以跨域。</span></span><br><span class=line>evtSource.onmessage = <span class=function><span class=keyword>function</span>(<span class=params>event</span>) </span>{</span><br><span class=line>    xxx</span><br><span class=line>}</span><br><span class=line>evtSource.onerror = <span class=function>(<span class=params>err</span>) =></span> {</span><br><span class=line>  <span class=built_in>console</span>.error(<span class=string>"EventSource failed:"</span>, err);</span><br><span class=line>};</span><br><span class=line></span><br><span class=line><span class=comment>//自定义事件</span></span><br><span class=line>source.addEventListener(<span class=string>'foo'</span>, <span class=function><span class=keyword>function</span> (<span class=params>event</span>) </span>{</span><br><span class=line>  <span class=keyword>var</span> data = event.data;</span><br><span class=line>  <span class=comment>// handle message</span></span><br><span class=line>}, <span class=literal>false</span>);</span><br><span class=line></span><br></pre></table></figure><p><strong>服务端</strong><figure class="highlight php"><table><tr><td class=gutter><pre><span class=line>1</span><br><span class=line>2</span><br><span class=line>3</span><br><span class=line>4</span><br><span class=line>5</span><br><span class=line>6</span><br><span class=line>7</span><br><span class=line>8</span><br><span class=line>9</span><br><span class=line>10</span><br><span class=line>11</span><br><span class=line>12</span><br><span class=line>13</span><br><span class=line>14</span><br><span class=line>15</span><br><span class=line>16</span><br><span class=line>17</span><br><span class=line>18</span><br><span class=line>19</span><br><span class=line>20</span><br><span class=line>21</span><br><span class=line>22</span><br><span class=line>23</span><br><span class=line>24</span><br></pre><td class=code><pre><span class=line>date_default_timezone_set(<span class=string>"America/New_York"</span>);</span><br><span class=line>header(<span class=string>"Cache-Control: no-store"</span>);</span><br><span class=line>header(<span class=string>"Content-Type: text/event-stream"</span>);</span><br><span class=line></span><br><span class=line><span class=variable>$counter</span> = rand(<span class=number>1</span>, <span class=number>10</span>);</span><br><span class=line><span class=keyword>while</span> (<span class=literal>true</span>) {</span><br><span class=line>  <span class=comment>// Every second, send a "ping" event.</span></span><br><span class=line>  <span class=keyword>echo</span> <span class=string>"event: ping\n"</span>; <span class=comment># 声明事件</span></span><br><span class=line>  <span class=variable>$curDate</span> = date(DATE_ISO8601);</span><br><span class=line>  <span class=keyword>echo</span> <span class=string>'data: {"time": "'</span> . <span class=variable>$curDate</span> . <span class=string>'"}'</span>;</span><br><span class=line>  <span class=keyword>echo</span> <span class=string>"\n\n"</span>;  <span class=comment># 一个事件结束</span></span><br><span class=line>  <span class=comment>// Send a simple message at random intervals.</span></span><br><span class=line>  <span class=variable>$counter</span>--;</span><br><span class=line>  <span class=keyword>if</span> (!<span class=variable>$counter</span>) {</span><br><span class=line>    <span class=keyword>echo</span> <span class=string>'data: This is a message at time '</span> . <span class=variable>$curDate</span> . <span class=string>"\n\n"</span>; <span class=comment># 默认onmessage事件处理</span></span><br><span class=line>    <span class=variable>$counter</span> = rand(<span class=number>1</span>, <span class=number>10</span>);</span><br><span class=line>  }</span><br><span class=line>  ob_end_flush();</span><br><span class=line>  flush();</span><br><span class=line>  <span class=comment>// Break the loop if the client aborted the connection (closed the page)</span></span><br><span class=line>  <span class=keyword>if</span> (connection_aborted()) <span class=keyword>break</span>;</span><br><span class=line>  sleep(<span class=number>1</span>);</span><br><span class=line>}</span><br><span class=line></span><br></pre></table></figure><h2 id=相关资料><a class=headerlink href=#相关资料 title=相关资料></a>相关资料</h2><ol><li><a href=https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events rel=noopener target=_blank>Using server-sent events - Web APIs | MDN</a><li><a href=https://developer.mozilla.org/en-US/docs/Web/API/WebSocket rel=noopener target=_blank>WebSocket - Web APIs | MDN</a><li><a href=https://www.ruanyifeng.com/blog/2017/05/websocket.html rel=noopener target=_blank>WebSocket 教程 - 阮一峰的网络日志</a><li><a href=https://www.ruanyifeng.com/blog/2017/05/server-sent_events.html rel=noopener target=_blank>Server-Sent Events 教程 - 阮一峰的网络日志</a></ol><link href=/css/spoiler.css rel=stylesheet><script async src=/js/spoiler.js></script></div><div><div><div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div></div></div><div class=reward-container><div>感谢阅读.</div><button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">打赏</button><div style="display: none;" id=qr><div style="display: inline-block;"><img alt="Sekyoro 微信支付" src=/images/wechatpay.png><p>微信支付</div></div></div><div><ul class=post-copyright><li class=post-copyright-author><strong>本文作者： </strong>Sekyoro<li class=post-copyright-link><strong>本文链接：</strong> <a title="An intro to Websocket and SSE" href=https://www.sekyoro.top/2024/12/31/An-intro-to-Websocket-and-SSE/>https://www.sekyoro.top/2024/12/31/An-intro-to-Websocket-and-SSE/</a><li class=post-copyright-license><strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href=https://creativecommons.org/licenses/by-nc-sa/4.0/ rel=noopener target=_blank><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</ul></div><div class=followme><p>欢迎关注我的其它发布渠道<div class=social-list><div class=social-item><a class=social-link href=/images/wxqrcode.png target=_blank> <span class=icon> <i class="fab fa-weixin"></i> </span> <span class=label>WeChat</span> </a></div><div class=social-item><a class=social-link href=/images/website.png target=_blank> <span class=icon> <i class="fa fa-user"></i> </span> <span class=label>PersonalWebsite</span> </a></div><div class=social-item><a class=social-link href=https://my-astro-git-main-drowning-in-codes.vercel.app target=_blank> <span class=icon> <i class="fas fa-share"></i> </span> <span class=label>杂鱼分享</span> </a></div><div class=social-item><a class=social-link href=/atom.xml target=_blank> <span class=icon> <i class="fa fa-rss"></i> </span> <span class=label>RSS</span> </a></div></div></div><footer class=post-footer><div class=post-nav><div class=post-nav-item><a title="Learn OpenGL(二):模型加载与高级OpenGL" href=/2024/12/27/Learn-OpenGL-%E4%BA%8C/ rel=prev> <i class="fa fa-chevron-left"></i> Learn OpenGL(二):模型加载与高级OpenGL </a></div><div class=post-nav-item><a title="Dive into fine-tuning methods for SD" href=/2025/01/02/Dive-into-fine-tuning-methods-for-SD/ rel=next> Dive into fine-tuning methods for SD <i class="fa fa-chevron-right"></i> </a></div></div></footer></article></div><!-- 评论区 --><div class=comments><div data-id=city data-uid=MTAyMC81MzE5Ny8yOTY3Mg== id=lv-container></div></div><script>window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }</script></div><div class="toggle sidebar-toggle"><span class="toggle-line toggle-line-first"></span><span class="toggle-line toggle-line-middle"></span><span class="toggle-line toggle-line-last"></span></div><aside class=sidebar><div class=sidebar-inner><!-- canvas粒子时钟 --><div><canvas id=canvas style=width:60%;>当前浏览器不支持canvas，请更换浏览器后再试</canvas></div><script>(function(){
+
+   var digit=
+    [
+        [
+            [0,0,1,1,1,0,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,0,1,1,0],
+            [0,0,1,1,1,0,0]
+        ],//0
+        [
+            [0,0,0,1,1,0,0],
+            [0,1,1,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [1,1,1,1,1,1,1]
+        ],//1
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,1,1],
+            [1,1,1,1,1,1,1]
+        ],//2
+        [
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//3
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,0],
+            [0,0,1,1,1,1,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,1,1,0],
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,1]
+        ],//4
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,1,1,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//5
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//6
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0]
+        ],//7
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//8
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,1,1,0,0,0,0]
+        ],//9
+        [
+            [0,0,0,0,0,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,0,0,0]
+        ]//:
+    ];
+
+var canvas = document.getElementById('canvas');
+
+if(canvas.getContext){
+    var cxt = canvas.getContext('2d');
+    //声明canvas的宽高
+    var H = 100,W = 700;
+    canvas.height = H;
+    canvas.width = W;
+    cxt.fillStyle = '#f00';
+    cxt.fillRect(10,10,50,50);
+
+    //存储时间数据
+    var data = [];
+    //存储运动的小球
+    var balls = [];
+    //设置粒子半径
+    var R = canvas.height/20-1;
+    (function(){
+        var temp = /(\d)(\d):(\d)(\d):(\d)(\d)/.exec(new Date());
+        //存储时间数字，由十位小时、个位小时、冒号、十位分钟、个位分钟、冒号、十位秒钟、个位秒钟这7个数字组成
+        data.push(temp[1],temp[2],10,temp[3],temp[4],10,temp[5],temp[6]);
+    })();
+
+    /*生成点阵数字*/
+    function renderDigit(index,num){
+        for(var i = 0; i < digit[num].length; i++){
+            for(var j = 0; j < digit[num][i].length; j++){
+                if(digit[num][i][j] == 1){
+                    cxt.beginPath();
+                    cxt.arc(14*(R+2)*index + j*2*(R+1)+(R+1),i*2*(R+1)+(R+1),R,0,2*Math.PI);
+                    cxt.closePath();
+                    cxt.fill();
+                }
+            }
+        }
+    }
+
+    /*更新时钟*/
+    function updateDigitTime(){
+        var changeNumArray = [];
+        var temp = /(\d)(\d):(\d)(\d):(\d)(\d)/.exec(new Date());
+        var NewData = [];
+        NewData.push(temp[1],temp[2],10,temp[3],temp[4],10,temp[5],temp[6]);
+        for(var i = data.length-1; i >=0 ; i--){
+            //时间发生变化
+            if(NewData[i] !== data[i]){
+                //将变化的数字值和在data数组中的索引存储在changeNumArray数组中
+                changeNumArray.push(i+'_'+(Number(data[i])+1)%10);
+            }
+        }
+        //增加小球
+        for(var i = 0; i< changeNumArray.length; i++){
+            addBalls.apply(this,changeNumArray[i].split('_'));
+        }
+        data = NewData.concat();
+    }
+
+    /*更新小球状态*/
+    function updateBalls(){
+        for(var i = 0; i < balls.length; i++){
+            balls[i].stepY += balls[i].disY;
+            balls[i].x += balls[i].stepX;
+            balls[i].y += balls[i].stepY;
+            if(balls[i].x > W + R || balls[i].y > H + R){
+                balls.splice(i,1);
+                i--;
+            }
+        }
+    }
+
+    /*增加要运动的小球*/
+    function addBalls(index,num){
+        var numArray = [1,2,3];
+        var colorArray =  ["#3BE","#09C","#A6C","#93C","#9C0","#690","#FB3","#F80","#F44","#C00"];
+        for(var i = 0; i < digit[num].length; i++){
+            for(var j = 0; j < digit[num][i].length; j++){
+                if(digit[num][i][j] == 1){
+                    var ball = {
+                        x:14*(R+2)*index + j*2*(R+1)+(R+1),
+                        y:i*2*(R+1)+(R+1),
+                        stepX:Math.floor(Math.random() * 4 -2),
+                        stepY:-2*numArray[Math.floor(Math.random()*numArray.length)],
+                        color:colorArray[Math.floor(Math.random()*colorArray.length)],
+                        disY:1
+                    };
+                    balls.push(ball);
+                }
+            }
+        }
+    }
+
+    /*渲染*/
+    function render(){
+        //重置画布宽度，达到清空画布的效果
+        canvas.height = 100;
+        //渲染时钟
+        for(var i = 0; i < data.length; i++){
+            renderDigit(i,data[i]);
+        }
+        //渲染小球
+        for(var i = 0; i < balls.length; i++){
+            cxt.beginPath();
+            cxt.arc(balls[i].x,balls[i].y,R,0,2*Math.PI);
+            cxt.fillStyle = balls[i].color;
+            cxt.closePath();
+            cxt.fill();
+        }
+    }
+
+    clearInterval(oTimer);
+    var oTimer = setInterval(function(){
+        //更新时钟
+        updateDigitTime();
+        //更新小球状态
+        updateBalls();
+        //渲染
+        render();
+    },50);
+}
+
+})();</script><!-- require APlayer --><link href=https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css rel=stylesheet><script src=https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js></script><!-- require MetingJS --><script src=/js/meting-js.js></script><ul class="sidebar-nav motion-element"><li class=sidebar-nav-toc>文章目录<li class=sidebar-nav-overview>站点概览</ul><!--noindex--><div class="post-toc-wrap sidebar-panel"><div class="post-toc motion-element"><ol class=nav><li class="nav-item nav-level-2"><a class=nav-link href=#WebSocket><span class=nav-number>1.</span> <span class=nav-text>WebSocket</span></a><li class="nav-item nav-level-2"><a class=nav-link href=#SSE><span class=nav-number>2.</span> <span class=nav-text>SSE</span></a><ol class=nav-child><li class="nav-item nav-level-3"><a class=nav-link href=#%E4%BA%8B%E4%BB%B6%E6%B5%81%E6%A0%BC%E5%BC%8F><span class=nav-number>2.1.</span> <span class=nav-text>事件流格式</span></a><li class="nav-item nav-level-3"><a class=nav-link href=#%E4%BA%8B%E4%BB%B6%E6%B5%81%E5%85%B7%E4%BD%93%E4%BE%8B%E5%AD%90><span class=nav-number>2.2.</span> <span class=nav-text>事件流具体例子</span></a><ol class=nav-child><li class="nav-item nav-level-4"><a class=nav-link href=#%E5%91%BD%E5%90%8D%E4%BA%8B%E4%BB%B6><span class=nav-number>2.2.1.</span> <span class=nav-text>命名事件</span></a><li class="nav-item nav-level-4"><a class=nav-link href=#%E6%B7%B7%E5%90%88%E4%B8%A4%E7%A7%8D%E4%BA%8B%E4%BB%B6><span class=nav-number>2.2.2.</span> <span class=nav-text>混合两种事件</span></a></ol></ol><li class="nav-item nav-level-2"><a class=nav-link href=#%E7%9B%B8%E5%85%B3%E8%B5%84%E6%96%99><span class=nav-number>3.</span> <span class=nav-text>相关资料</span></a></ol></div></div><!--/noindex--><div class="site-overview-wrap sidebar-panel"><div class="site-author motion-element" itemprop=author itemscope itemtype=http://schema.org/Person><img alt=Sekyoro class=site-author-image itemprop=image src=https://i.loli.net/2021/05/17/YqoavnXdGTpPO9R.jpg><p class=site-author-name itemprop=name>Sekyoro<div class=site-description itemprop=description>什么也无法舍弃的人，什么也做不了.</div></div><div class="site-state-wrap motion-element"><nav class=site-state><div class="site-state-item site-state-posts"><a href=/archives/> <span class=site-state-item-count>224</span> <span class=site-state-item-name>日志</span> </a></div><div class="site-state-item site-state-categories"><a href=/categories/> <span class=site-state-item-count>16</span> <span class=site-state-item-name>分类</span></a></div><div class="site-state-item site-state-tags"><a href=/tags/> <span class=site-state-item-count>206</span> <span class=site-state-item-name>标签</span></a></div></nav></div><div class="links-of-author motion-element"><span class=links-of-author-item> <a title="Personal Website → http://proanimer.com" href=http://proanimer.com/ rel=noopener target=_blank><i class="fab fa-internet-explorer fa-fw"></i>Personal Website</a> </span><span class=links-of-author-item> <a title="GitHub → https://github.com/drowning-in-codes" href=https://github.com/drowning-in-codes rel=noopener target=_blank><i class="fab fa-github fa-fw"></i>GitHub</a> </span><span class=links-of-author-item> <a title="E-Mail → mailto:bukalala174@gmail.com" href=mailto:bukalala174@gmail.com rel=noopener target=_blank><i class="fa fa-envelope fa-fw"></i>E-Mail</a> </span><span class=links-of-author-item> <a title="wxPublicAccount → https://mp.weixin.qq.com/s?__biz=Mzg3ODY1MDkzMg==&mid=2247483770&idx=1&sn=fdf88faab01d5c219ac609570a21c9d6&chksm=cf113221f866bb373938cfca03cf095ff4fe1e4dc37d68ef5de4cd4876ee1260fca0c015a4d6&token=1096259873&lang=zh_CN#rd" href=https://mp.weixin.qq.com/s?__biz=Mzg3ODY1MDkzMg==&mid=2247483770&idx=1&sn=fdf88faab01d5c219ac609570a21c9d6&chksm=cf113221f866bb373938cfca03cf095ff4fe1e4dc37d68ef5de4cd4876ee1260fca0c015a4d6&token=1096259873&lang=zh_CN#rd rel=noopener target=_blank><i class="fab fa-weixin fa-fw"></i>wxPublicAccount</a> </span><span class=links-of-author-item> <a title="RSS → /atom.xml" href=/atom.xml><i class="fa fa-rss fa-fw"></i>RSS</a> </span><span class=links-of-author-item> <a title="CSDN → https://blog.csdn.net/aqwca" href=https://blog.csdn.net/aqwca rel=noopener target=_blank><i class="fa fa-handshake fa-fw"></i>CSDN</a> </span><span class=links-of-author-item> <a title="杂鱼分享 → https://my-astro-git-main-drowning-in-codes.vercel.app" href=https://my-astro-git-main-drowning-in-codes.vercel.app/ rel=noopener target=_blank><i class="fas fa-share fa-fw"></i>杂鱼分享</a> </span></div><div class="links-of-blogroll motion-element"><div class=links-of-blogroll-title><i class="fa fa-link fa-fw"></i> 友情链接</div><ul class=links-of-blogroll-list><li class=links-of-blogroll-item><a href=http://myqhs.top/ rel=noopener target=_blank title=http://myqhs.top/>myqhs</a><li class=links-of-blogroll-item><a href=https://www.lllomh.com/ rel=noopener target=_blank title=https://www.lllomh.com/>芈渡</a><li class=links-of-blogroll-item><a href=https://protool-ten.vercel.app/ rel=noopener target=_blank title=https://protool-ten.vercel.app/>protools</a></ul></div><div class="motion-element announcement"><div class=title></div><p class=content><p class=date></div></div><meting-js id=6856787487 order=random server=netease type=playlist> </meting-js><div class=widget-wrap><h3 class=widget-title style=margin:0>此文章目前无词云</h3></div><script id=clustrmaps src=https://clustrmaps.com/map_v2.js?d=xQdGTxqARTBiNIwX2aUban-ixkj2s6VaZQWo-aVCgY8&cl=ffffff&w=a></script><div class="back-to-top motion-element"><i class="fa fa-arrow-up"></i><span>0%</span></div><!-- 边栏 --></div></aside><div id=sidebar-dimmer></div></div></main><footer class=footer><div class=footer-inner><div class=copyright>© Wed Apr 08 2020 08:00:00 GMT+0800 (中国标准时间) – <span itemprop=copyrightYear>2025</span><span class=with-love> <i class="fa fa-heart"></i> </span><span class=author itemprop=copyrightHolder>Sekyoro</span><span class=post-meta-divider>|</span><span class=post-meta-item-icon> <i class="fa fa-chart-area"></i> </span><span title=站点总字数>2.2m</span><span class=post-meta-divider>|</span><span class=post-meta-item-icon> <i class="fa fa-coffee"></i> </span><span title=站点阅读时长>32:46</span></div><script async src=https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js></script><span id=busuanzi_container_site_pv>总访问量<span id=busuanzi_value_site_pv></span>次</span><span class=post-meta-divider>|</span><span id=busuanzi_container_site_uv>总访客数<span id=busuanzi_value_site_uv></span>人</span><span class=post-meta-divider>|</span><!-- 不蒜子计数初始值纠正 --><script>$(document).ready(function() {
+
+    var int = setInterval(fixCount, 50);  // 50ms周期检测函数
+    var countOffset = 20000;  // 初始化首次数据
+
+    function fixCount() {            
+       if (document.getElementById("busuanzi_container_site_pv").style.display != "none")
+        {
+            $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + countOffset); 
+            clearInterval(int);
+        }                  
+        if ($("#busuanzi_container_site_pv").css("display") != "none")
+        {
+            $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + countOffset); // 加上初始数据 
+            clearInterval(int); // 停止检测
+        }  
+    }
+       	
+});</script><div><span id=timeDate>载入天数...</span><span id=times>载入时分秒...</span><script>var now = new Date();
+    function createtime() {
+        var grt= new Date("04/08/2021 20:00:00");
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+    }
+setInterval("createtime()",250);</script></div><div class=busuanzi-count><script async data-pjax src=https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script><span style="display: none;" class=post-meta-item id=busuanzi_container_site_uv> <span class=post-meta-item-icon> <i class="fa fa-user"></i> </span> <span class=site-uv title=总访客量> <span id=busuanzi_value_site_uv></span> </span> </span><span class=post-meta-divider>|</span><span style="display: none;" class=post-meta-item id=busuanzi_container_site_pv> <span class=post-meta-item-icon> <i class="fa fa-eye"></i> </span> <span class=site-pv title=总访问量> <span id=busuanzi_value_site_pv></span> </span> </span></div></div></footer></div><script color=0,0,255 count=99 opacity=0.5 src=/lib/canvas-nest/canvas-nest.min.js zindex=-1></script><script src=/lib/anime.min.js></script><script src=https://cdn.jsdelivr.net/gh/theme-next/theme-next-pjax@0/pjax.min.js></script><script src=https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js></script><script src=https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js></script><script src=https://cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js></script><script src=https://cdn.jsdelivr.net/npm/velocity-animate@1/velocity.min.js></script><script src=https://cdn.jsdelivr.net/npm/velocity-animate@1/velocity.ui.min.js></script><script src=/js/utils.js></script><script src=/js/motion.js></script><script src=/js/schemes/pisces.js></script><script src=/js/next-boot.js></script><script src=/js/bookmark.js></script><script>var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax',
+	'.widget-wrap'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+ 
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});</script><script data-pjax>(function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();</script><script src=https://cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js></script><script src=https://cdn.jsdelivr.net/npm/instantsearch.js@4/dist/instantsearch.production.min.js></script><script src=/js/algolia-search.js></script><script data-pjax>document.querySelectorAll('.pdfobject-container').forEach(element => {
+  let url = element.dataset.target;
+  let pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  let pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  let fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});</script><div id=pjax><script charset=utf-8 defer src=/js/outdate.js></script></div><script charset=utf-8 defer src=/js/tagcanvas.js></script><script charset=utf-8 defer src=/js/tagcloud.js></script><script>NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});</script><script>var OriginTitile = document.title;
+  var titleTime;
+  document.addEventListener("visibilitychange", function() {
+    if (document.hidden) {
+      document.title = "(つェ⊂)我藏好了哦~" + OriginTitile;
+      clearTimeout(titleTime);
+    } else {
+      document.title = "(*´∇｀*) 被你发现啦~" + OriginTitile;
+      titleTime = setTimeout(function() {
+        document.title = OriginTitile;
+      }, 2000);
+    }
+  });</script><script src=/js/src/activate-power-mode.min.js></script><script>POWERMODE.colorful = true;
+    POWERMODE.shake = false;
+    document.body.addEventListener('input', POWERMODE);</script>
