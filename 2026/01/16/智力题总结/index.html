@@ -1,0 +1,503 @@
+<!doctypehtml><html lang=zh-CN><script defer src=/live2d-widget/autoload.js></script><meta charset=UTF-8><meta content=width=device-width,initial-scale=1,maximum-scale=2 name=viewport><meta content=#222 name=theme-color><meta content="Hexo 5.4.0" name=generator><link href=/images/blog_32px.png rel=apple-touch-icon sizes=180x180><link href=/images/blog_32px.png rel=icon sizes=32x32 type=image/png><link href=/images/blog_16px.png rel=icon sizes=16x16 type=image/png><link color=#222 href=/images/logo.svg rel=mask-icon><meta content=EPrJAp11bJwHULpQUaSNSZ8_3RcvTsPDAEGOME4pl1w name=google-site-verification><!-- Google tag (gtag.js) --><!-- 
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-VB21D8MKKW"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-VB21D8MKKW');
+</script> --><!-- google adsense in head.swig --><script async crossorigin=anonymous src=https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4034523802263123></script><meta content=7226864CE87CE9DE8C008385273846FF name=msvalidate.01><meta content=code-fjFXVtiL7j name=baidu-site-verification><link href=/css/main.css rel=stylesheet><link as=style href=https://fonts.googleapis.com/css?family=Roboto%20Mono,Roboto:300,300italic,400,400italic,700,700italic|Roboto:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext onload=this.rel='stylesheet' rel=preload><link as=style href=https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css onload=this.rel='stylesheet' rel=preload><link href=https://fonts.googleapis.com/css?family=Noto+Serif+SC|Roboto&display=swap rel=stylesheet><link href=https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css rel=stylesheet><link href=https://cdn.jsdelivr.net/npm/pace-js@1/themes/blue/pace-theme-minimal.css rel=stylesheet><script src=https://cdn.jsdelivr.net/npm/pace-js@1/pace.min.js></script><script id=hexo-configurations>var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.sekyoro.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":240,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"appID":"0F9LEEVW82","apiKey":"78839e9f9be09d081c5c4da81975cd19","indexName":"sekyoblog_sec","hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};</script><link href=//cdn.bootcss.com/animate.css/3.5.0/animate.min.css rel=stylesheet><meta content=一些智力题涉及到分治，贪心以及递推优化等问题，这里参考网上的资料进行总结 name=description><meta content=article property=og:type><meta content=智力题总结 property=og:title><meta content=https://www.sekyoro.top/2026/01/16/%E6%99%BA%E5%8A%9B%E9%A2%98%E6%80%BB%E7%BB%93/index.html property=og:url><meta content=Sekyoro的博客小屋 property=og:site_name><meta content=一些智力题涉及到分治，贪心以及递推优化等问题，这里参考网上的资料进行总结 property=og:description><meta content=zh_CN property=og:locale><meta content=2026-01-16T08:36:18.000Z property=article:published_time><meta content=2026-01-17T07:56:59.423Z property=article:modified_time><meta content=Sekyoro property=article:author><meta content="个人博客 技术学习 计算机 互联网 人工智能" property=article:tag><meta content=summary name=twitter:card><link href=https://www.sekyoro.top/2026/01/16/%E6%99%BA%E5%8A%9B%E9%A2%98%E6%80%BB%E7%BB%93/ rel=canonical><script id=page-configurations>// https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };</script><title>智力题总结 | Sekyoro的博客小屋</title><noscript><style>.use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }</style></noscript><link href=/atom.xml rel=alternate title=Sekyoro的博客小屋 type=application/atom+xml><body itemscope itemtype=http://schema.org/WebPage><canvas style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" class=fireworks></canvas><script defer src=https://cdn.bootcss.com/animejs/2.2.0/anime.min.js></script><script defer src=/js/src/fireworks.js></script><div class="container use-motion"><div class=headband></div><header class=header itemscope itemtype=http://schema.org/WPHeader><div class=header-inner><div class=site-brand-container><div class=site-nav-toggle><div aria-label=切换导航栏 class=toggle><span class="toggle-line toggle-line-first"></span><span class="toggle-line toggle-line-middle"></span><span class="toggle-line toggle-line-last"></span></div></div><div class=site-meta><a class=brand href=/ rel=start> <span class=logo-line-before><i></i></span> <h1 class=site-title>Sekyoro的博客小屋</h1> <span class=logo-line-after><i></i></span> </a></div><div class=site-nav-right><div class="toggle popup-trigger"><i class="fa fa-search fa-fw fa-lg"></i></div></div></div><nav class=site-nav><ul class="main-menu menu" id=menu><li class="menu-item menu-item-home"><a href=/ rel=section><i class="fa fa-home fa-fw"></i>首页</a><li class="menu-item menu-item-about"><a href=/about/ rel=section><i class="fa fa-user fa-fw"></i>关于</a><li class="menu-item menu-item-tags"><a href=/tags/ rel=section><i class="fa fa-tags fa-fw"></i>标签</a><li class="menu-item menu-item-categories"><a href=/categories/ rel=section><i class="fa fa-th fa-fw"></i>分类</a><li class="menu-item menu-item-archives"><a href=/archives/ rel=section><i class="fa fa-archive fa-fw"></i>归档</a><li class="menu-item menu-item-bangumis"><a href=/bangumis/ rel=section><i class="fa fa-film fa-fw"></i>追番</a><li class="menu-item menu-item-resume"><a href=/resume/ rel=section><i class="fa fa-file-pdf fa-fw"></i>简历</a><li class="menu-item menu-item-materials"><a href=/materials/ rel=section><i class="fa fa-book fa-fw"></i>学习资料</a><li class="menu-item menu-item-sitemap"><a href=/sitemap.xml rel=section><i class="fa fa-sitemap fa-fw"></i>站点地图</a><li class="menu-item menu-item-search"><a class=popup-trigger role=button><i class="fa fa-search fa-fw"></i>搜索 </a></ul></nav><div class=search-pop-overlay><div class="popup search-popup"><div class=search-header><span class=search-icon> <i class="fa fa-search"></i> </span><div class=search-input-container></div><span class=popup-btn-close> <i class="fa fa-times-circle"></i> </span></div><div class=algolia-results><div id=algolia-stats></div><div id=algolia-hits></div><div class=algolia-pagination id=algolia-pagination></div></div></div></div></div></header><a class="book-mark-link book-mark-link-fixed" role=button></a><main class=main><div class=main-inner><div class=content-wrap><div class="content post posts-expand"><article class=post-block itemscope itemtype=http://schema.org/Article lang=zh-CN><link href=https://www.sekyoro.top/2026/01/16/%E6%99%BA%E5%8A%9B%E9%A2%98%E6%80%BB%E7%BB%93/ itemprop=mainEntityOfPage><span hidden itemprop=author itemscope itemtype=http://schema.org/Person> <meta content=https://i.loli.net/2021/05/17/YqoavnXdGTpPO9R.jpg itemprop=image> <meta content=Sekyoro itemprop=name> <meta content=什么也无法舍弃的人，什么也做不了. itemprop=description> </span><span hidden itemprop=publisher itemscope itemtype=http://schema.org/Organization> <meta content=Sekyoro的博客小屋 itemprop=name> </span><header class=post-header><h1 itemprop="name headline" class=post-title>智力题总结</h1><div class=post-meta><span class=post-meta-item> <span class=post-meta-item-icon> <i class="far fa-calendar"></i> </span> <span class=post-meta-item-text>发表于</span> <time itemprop="dateCreated datePublished" title="创建时间：2026-01-16 16:36:18" datetime=2026-01-16T16:36:18+08:00>2026-01-16</time> </span><span class=post-meta-item> <span class=post-meta-item-icon> <i class="far fa-calendar-check"></i> </span> <span class=post-meta-item-text>更新于</span> <time title="修改时间：2026-01-17 15:56:59" datetime=2026-01-17T15:56:59+08:00 itemprop=dateModified>2026-01-17</time> </span><span style="display: none;" class=post-meta-item id=busuanzi_container_page_pv title=阅读次数> <span class=post-meta-item-icon> <i class="fa fa-eye"></i> </span> <span class=post-meta-item-text>阅读次数：</span> <span id=busuanzi_value_page_pv></span> </span><br><span class=post-meta-item title=本文字数> <span class=post-meta-item-icon> <i class="far fa-file-word"></i> </span> <span class=post-meta-item-text>本文字数：</span> <span>14k</span> </span><span class=post-meta-item title=阅读时长> <span class=post-meta-item-icon> <i class="far fa-clock"></i> </span> <span class=post-meta-item-text>阅读时长 ≈</span> <span>13 分钟</span> </span></div></header><div class=post-body itemprop=articleBody><p>一些智力题涉及到分治，贪心以及递推优化等问题，这里参考网上的资料进行总结<br><span id=more></span><h2 id=赛马问题><a class=headerlink href=#赛马问题 title=赛马问题></a>赛马问题</h2><p>有25匹赛马，每次赛跑最多只能有5匹马同场竞技，且没有计时设备。请设计一个方法，找出这25匹马中跑得最快的 前3名，最少需要进行多少次比赛？<blockquote><p>题目要求在 25 匹赛马中找到最快的前三名，但每次最多只能让 5 匹马同时比赛，且没有计时设备（只能通过相对排名判断快慢）。我们需要设计一种最优策略，使比赛次数最少</blockquote><p>思路：每5匹马进行一次比赛可以得到这5匹中最快的结果，但是比赛5次得到的5匹马中，有可能其中只有1匹在前三名中。所以先进行初步竞争，得到5组的第一名，再进行比赛得到最快的一匹马S1。剩下二三名S2,S3的竞争对手可能来自S1同组的第二三名以及S2同组的第二名。刚好5匹马再进行一次比赛就能确定全局第二三名。<p>可以通过逐步筛选的方式减少需要比较的赛马数量，尽快找到前三名。关键点在于：<ol><li><strong>初步分组</strong>：将 25 匹马分成 5 组，每组 5 匹，进行 5 场比赛，记录各组的排名。<li><strong>组间竞争</strong>：让 5 组的第一名再进行一场比赛，找到整体最快的马，同时确认可能的前三名范围。<li><strong>进一步筛选</strong>：基于已有排名，缩小搜索范围，最终找出前三名</ol><p><strong>详细解法</strong><ol><li><strong>第一阶段：分组比赛（5 场）</strong><ul><li>将 25 匹马随机分成 5 组，每组 5 匹。<li>对每组进行一场比赛，记下每组的相对排名（例如 A 组排名：A1 > A2 > A3 > A4 > A5）。<li>共进行 5 场比赛。</ul><li><strong>第二阶段：组内冠军赛（1 场）</strong><ul><li>让 5 组的第一名进行一场比赛，得到最快的赛马（记作 S1），以及相对排名（S1 > S2 > S3 > S4 > S5）。<li>这场比赛能确定 S1 是整体最快的。<li>共进行 1 场比赛，累计 6 场比赛。</ul><li><strong>第三阶段：筛选可能的前 3 名</strong><ul><li>已知 S1 是最快的，但 S2、S3 也可能进入前三。<li>S2、S3 的竞争对手来自：<ol><li>S2 和 S3 本身（上一场比赛的第二、第三名）。<li>S1 原组的第二、第三名（S1 原组的前 3 名很可能都是整体前三）。<li>S2 原组的第二名（如果 S2 是全局第二，那它的组内第二名可能是全局第三）。</ol><li>让 S2、S3，S1 组的第二、第三名，S2 组的第二名进行一场比赛（总共 5 匹马）。 S1同组的两匹马，S2<li>这场比赛的前两名就是最终的第二、第三名。<li>进行 1 场比赛，累计 7 场比赛</ul></ol><p><strong>深入思考</strong><ol><li><strong>为什么不能更少？</strong><ul><li>每场比赛最多 5 匹马，<strong>无法一次性比较 25 匹，因此至少需要先分组筛选。</strong><li>不能用计时设备，必须通过相对排名逐步筛选。</ul><li><strong>如果要找前 5 名呢？</strong><ul><li>额外增加一场比赛，<strong>在前三名的基础上再筛选可能的两匹马，总共 8 场比赛</strong>。</ul><li><strong>如果马匹数量增加呢？</strong><ul><li>N 匹马，每次比赛 M 匹，可以采用分组 + 逐步筛选的方法，比赛次数约为 ( O(N/M + log M) )。</ul></ol><p>这类题也有许多变种，<ul><li><p>赛马问题的变种：如果可以使用计时设备，策略会如何变化？ 有了计时器，<strong>每一场比赛的结果都是绝对的</strong>。</p><li><p>赛马问题的推广：如果需要找到前 K 名，如何优化？ 寻找前 $K$ 名时，核心在于<strong>实时更新“可能进入前 K 名”的候选名单</strong>。</p><li><p>竞赛排名算法：如何用更少的比较次数找到前 K 名（如锦标赛排序）？</p> <p>寻找前 $K$ 名时，核心在于<strong>实时更新“可能进入前 K 名”的候选名单</strong>。</p> <p>对于较大的 $K$，可以使用树状竞争结构：</p> <ul><li><strong>建立胜者树：</strong> 每一轮比赛决出胜者向上晋级。<li><strong>回溯寻找：</strong> 找第 1 名需要 $N-1$ 次比较（在赛马模型中是分组并行）。<li><strong>求下一名：</strong> 找第 2 名时，只需在“输给过第 1 名”的那些马中寻找。以此类推，每找下一个名次，只需在局部被击败的集合中进行有限次数的比赛。</ul></ul><p>这个问题考察的是贪心策略、<strong>逐步筛选、递推优化的思维方式</strong>，适用于面试中的逻辑推理与算法设计考察。<h2 id=砝码称轻重><a class=headerlink href=#砝码称轻重 title=砝码称轻重></a>砝码称轻重</h2><p>有8个外观完全相同的球，其中有一个球的重量与其他球不同，但不知道是更重还是更轻。使用一架天平秤，如何在最少的称重次数内确定这个特殊的球？<blockquote><p>由于我们不知道特殊球是更重还是更轻，因此在每次称重时都要尽量获得最大的信息量，以减少后续的判断次数。关键在于合理分组，并通过天平的倾斜情况缩小范围。</blockquote><p>思路：每次天平称重获取的信息是哪一方更重，<p>使用三分法策略，每次称重都能最大化筛选范围：<ol><li>每次将球分为三组：左盘、右盘、未称重组<li>根据天平的倾斜情况，逐步缩小可能的范围<li>最终在有限轮数内确定出特殊球及其重量差异（更重或更轻）</ol><p>这个问题不仅考察逻辑推理，还涉及信息论中的“三进制”思想（天平有三种状态：左重、右重、平衡）。<p>第一步：将球分为 3 组<p>我们将球编号为 1, 2, 3, 4, 5, 6, 7, 8。<p><strong>第一次称重：左盘 {1, 2, 3} vs 右盘 {4, 5, 6}</strong><p>根据称重结果，分为两种主要情况：<p>情况 A：天平平衡（特殊球在 {7, 8} 中）<p>如果平衡，说明 1-6 号全是标准球。<ul><li><strong>第二次称重：左盘 {7} vs 右盘 {1} (标准球)</strong><ul><li><strong>平衡</strong>：说明特殊球是 <strong>8</strong>。<ul><li><strong>第三次称重</strong>：{8} vs {1}。如果 8 重，则 8 是重球；反之亦然。</ul><li><strong>不平衡</strong>：说明特殊球就是 <strong>7</strong>。<ul><li>通过这次称重的结果直接知道 7 是偏重还是偏轻（例如 7 端下沉，则 7 重）。<li><strong>第三次称重</strong>：虽然已经知道是 7，但为了补齐逻辑（或验证），可以象征性完成。</ul></ul></ul><p>情况 B：天平不平衡（特殊球在 {1-6} 中）<p>假设左盘 <strong>{1, 2, 3} 下沉</strong>，右盘 <strong>{4, 5, 6} 上浮</strong>。 这意味着：要么 {1, 2, 3} 中有一个<strong>重</strong>球，要么 {4, 5, 6} 中有一个<strong>轻</strong>球。<p><strong>第二次称重：左盘 {1, 4} vs 右盘 {2, 5}</strong> （这里使用了“位置交换法”：保留 1 和 2，交换 4 和 5，排除 3 和 6）<ol><li><strong>依然左盘下沉</strong>：<ul><li>说明原因没变。特殊球只能是留在原位的 <strong>1 (重)</strong> 或 <strong>5 (轻)</strong>。<li><strong>第三次称重</strong>：{1} vs {标准球}。平衡则 5 轻，不平衡则 1 重。</ul><li><strong>变为右盘下沉（反转）</strong>：<ul><li>说明原因互换了。特殊球只能是交换了位置的 <strong>4 (轻)</strong> 或 <strong>2 (重)</strong>。<li><strong>第三次称重</strong>：{2} vs {标准球}。平衡则 4 轻，不平衡则 2 重。</ul><li><p><strong>天平平衡</strong>：</p> <ul><li>说明特殊球是被拿掉的 <strong>3</strong> 或 <strong>6</strong>。<li><strong>第三次称重</strong>：{3} vs {标准球}。平衡则 6 轻，不平衡则 3 重。</ul> <p><strong>相关题目</strong></p></ol><ul><li>如果是 12 个球，其中 1 个特殊球，最少称重次数是多少？（答案是 3 次，使用三分法）<li>如果可以使用数字秤（可以直接称重），是否有更快的方法？ 质数<li>如果有两个特殊球，如何优化称重策略？</ul><p>本质上是 <strong>信息熵最大化策略</strong> 的应用，广泛用于搜索优化、问题拆解和决策树构建，是一个经典的逻辑推理题。<h2 id=药瓶毒白鼠><a class=headerlink href=#药瓶毒白鼠 title=药瓶毒白鼠></a>药瓶毒白鼠</h2><p>有1000瓶药水，其中仅有一瓶是有毒的。已知服用毒药后，小白鼠会在24小时内死亡。你有10只小白鼠，如何在24小时内确定哪一瓶是毒药？<blockquote><p>在 24 小时内，我们最多只能进行 <strong>一次实验</strong>，即每只小白鼠在实验结束后要么存活，要么死亡（两种状态）。因此，我们需要用 <strong>10 只小白鼠的死亡情况来编码并唯一确定毒药瓶号</strong>。<p>10 只小白鼠，每只可以有 <strong>2 种状态（生存/死亡）</strong>，那么 10 只小白鼠能表示的最大编号数量为：<br>[ 2^{10} = 1024 ] 这足以唯一确定 1000 瓶药水中的毒药</blockquote><p>思路：将药瓶编号转换为二进制，并利用小白鼠的生死情况表示毒药编号<p>步骤1：药瓶编号二进制表示<p>将 1000 瓶药水从 1 号到 1000 号进行编号，并将编号转换为 <strong>10 位二进制数</strong>（因为 (2^{10} = 1024) 足够表示 1000 个编号）。例如：<ul><li>1 号药瓶 → 0000000001<li>2 号药瓶 → 0000000010<li>1000 号药瓶 → 1111101000</ul><p>步骤2：喝药<ul><li>每个药瓶的二进制位对应一只小白鼠。<li>如果该位是 1，则给对应的小白鼠喂这一瓶药，否则不喂。<li><p>例如：</p> <ul><li>1 号药瓶（0000000001）→ 只喂第 10 只小白鼠。<li>2 号药瓶（0000000010）→ 只喂第 9 只小白鼠。<li>1000 号药瓶（1111101000）→ 1-5、7 只小白鼠都会喝到这一瓶药。</ul><li><p>记录哪些小白鼠死亡，哪些存活，并按 <strong>二进制位顺序</strong> 组合成一个 10 位的二进制数。</p><li>这个二进制数就是毒药瓶的编号。例如：<ul><li>如果第 1、3、5 只小白鼠死亡（其余存活），那么死亡的二进制码是 <strong>1010000000</strong>，转换成十进制就是 <strong>640</strong>，说明 <strong>640 号瓶子是毒药</strong></ul></ul><p>整个实验 <strong>仅需 1 次</strong>（24 小时）。<ul><li><strong>本质</strong>：利用二进制编码，将 10 只小白鼠的生死状态转换为唯一的药瓶编号。<li><strong>最少实验次数</strong>：1 次（24 小时内确定唯一毒药瓶）。<li><strong>最大可测范围</strong>：如果有 <strong>N 只小白鼠</strong>，最多可检测 <strong>(2^N - 1)</strong> 瓶药水。<li><strong>扩展</strong>：如果允许 48 小时（即 2 轮实验），则可用 <strong>信息熵最大化策略</strong> 进一步优化可检测的瓶子数量。</ul><p><strong>相关题目</strong><ul><li>如果有 2000 瓶药水，仍然只有 10 只小白鼠，如何优化实验策略？<li>如果毒药不是立即生效，而是需要 2-3 天才能导致小白鼠死亡，该如何调整策略？<li>如果能多次实验，但仍要尽快找到毒药，如何设计最优实验方案？</ul><p>如果实验要求“一次解决”，且毒药发作有时间窗（例如喂食后 24 小时内必死），我们可以通过<strong>错开喂食时间</strong>来增加每只老鼠携带的“信息进制”。<p><strong>策略：多轮筛选</strong><p>如果你有充足的时间进行多轮实验，可以将 2000 瓶药水分步处理。<p><strong>步骤：</strong><ol><li><strong>分组：</strong> 将 2000 瓶分为两组，A 组 1024 瓶，B 组 976 瓶。<li><strong>第一轮测试：</strong> 对 A 组进行二进制编码测试（10 只老鼠各喝对应位为 1 的混合液）。<ul><li><strong>结果 A：</strong> 如果有老鼠死亡，根据死亡组合直接锁定 A 组中的毒药。<li><strong>结果 B：</strong> 如果老鼠全活，毒药必在 B 组。</ul><li><strong>第二轮测试（若必要）：</strong> 针对 B 组再次进行二进制编码测试。</ol><p><strong>策略：三进制编码</strong><p>假设你有两天时间观察：<ul><li><strong>第 1 天：</strong> 给老鼠喝 A 组混合液。<li><strong>第 2 天：</strong> 给老鼠喝 B 组混合液。<li><strong>第 3 天看结果：</strong><ul><li>老鼠在第 1 天喂食后死（即第 2 天死）：代表状态 <strong>1</strong>。<li>老鼠在第 2 天喂食后死（即第 3 天死）：代表状态 <strong>2</strong>。<li>老鼠一直没死：代表状态 <strong>0</strong>。</ul></ul><p><strong>数学容量：</strong> 此时每只老鼠有 3 种状态，10 只老鼠的容量变为：<p>这个问题体现了 <strong>信息论、位运算、搜索优化</strong> 等思想，是经典的面试智力题<h2 id=绳子两头烧问题><a class=headerlink href=#绳子两头烧问题 title=绳子两头烧问题></a>绳子两头烧问题</h2><p>有两根 <strong>燃烧时间为 1 小时</strong> 的绳子，但燃烧速度不均匀（某些部分烧得快，某些部分烧得慢）。如何 <strong>精确测量 45 分钟</strong>？<p>问题分析：<ol><li>绳子的燃烧时间为 1 小时，但燃烧速度不均匀。<li>两头点燃可以加速燃烧，如果 <strong>一根绳子从两头同时点燃，则其燃烧完时间是 30 分钟</strong>，即 <strong>燃烧速度加倍</strong>。<li>核心思路：<ul><li>通过 <strong>两头点燃</strong> 控制燃烧速度。<li>利用第二根绳子开始燃烧的时间点 来确保测量精确的 45 分钟。</ul></ol><p><strong>解法</strong><p><strong>步骤 1：点燃第一根绳子的两头</strong><ul><li>点燃绳子 A 的两头，同时 点燃绳子 B 的一头。<li>由于 A 两头点燃，它将在 30 分钟内完全烧完（即使燃烧速度不均匀，整个过程始终不会超过 30 分钟）。</ul><p><strong>步骤 2：点燃第二根绳子的另一头</strong><ul><li>当 A 完全烧完的瞬间（30 分钟过去了），立即 点燃 B 的另一头。<li>此时，B 已经燃烧了一半的时间（剩 30 分钟），如果现在再点燃另一头，它将 在 15 分钟内完全燃烧完（因为两头点燃燃烧速度加倍）。</ul><p><strong>步骤 3：等待 B 完全烧完</strong><ul><li>经过 <strong>15 分钟</strong>，B 也完全燃尽。<li>此时，总共时间：<strong>30 + 15 = 45 分钟</strong></ul><ol><li>利用两头点燃的特性，将 1 小时缩短到 30 分钟，或 30 分钟缩短到 15 分钟。<li>先点燃 A 的两头，精确得到 30 分钟。<li>利用 A 结束的时刻，点燃 B 的另一头，精确得到 15 分钟。<li><strong>最终总计 45 分钟，成功完成测量！</strong></ol><p><strong>相关题目</strong><ul><li>如果需要测量 15 分钟，该如何做？<ul><li>只需 <strong>两头点燃一根绳子</strong>，等待烧完即可。</ul><li>如果有 3 根相同性质的绳子，如何测量 75 分钟？<ul><li>先测 1 小时，再测 15 分钟，组合得到 75 分钟。</ul><li>如果绳子长度不同，但仍然是不均匀燃烧，如何测量精确时间？<ul><li>需要 按比例分割并利用两头点燃的技巧 进行组合测量。</ul></ul><h2 id=犯人猜颜色><a class=headerlink href=#犯人猜颜色 title=犯人猜颜色></a>犯人猜颜色</h2><p>有 <strong>100 名犯人</strong> 站成一列，每人头上戴着一个 <strong>红色或蓝色</strong> 的帽子，自己看不到自己的帽子颜色，但能看到前面所有人的帽子颜色。<br>每个犯人只能说 <strong>“红色” 或 “蓝色”</strong>，从最后面（第 100 个人）开始依次说出自己帽子的颜色。如果猜错，立即被处决。请设计一个策略，使得 <strong>尽可能多的人存活</strong>。<blockquote><p>最优策略：使用奇偶校验</blockquote><p><strong>目标</strong>：确保 <strong>99 人存活</strong>，仅第 100 个人（最后面的人）可能被牺牲。<p>具体方法：<ol><li><strong>第 100 个人（最后面的犯人）说出前面 99 顶帽子的“奇偶性”</strong><ul><li>设定一个约定：<strong>红色 = 1，蓝色 = 0</strong><li>第 100 个人计算前面 <strong>99 个人帽子的“红色帽子总数”是奇数还是偶数</strong>，然后：<ul><li>如果总数是 <strong>偶数</strong>，他说“蓝色”<li>如果总数是 <strong>奇数</strong>，他说“红色”</ul><li><strong>他自己可能会被牺牲</strong>，但这一信息给后面的 99 个人提供了参考。</ul><li><strong>第 99 个人开始，根据第 100 个人的提示推理自己的帽子颜色</strong><ul><li>第 99 个人 <strong>已经知道前面 98 个人的帽子颜色</strong>，并且听到了第 100 个人报出的奇偶性。<li>他计算出 <strong>如果不包含自己的帽子，前 98 个人的红色帽子数量是否符合第 100 个人报的奇偶性</strong>：<ul><li><strong>如果符合</strong>，说明自己的帽子是 <strong>蓝色</strong><li><strong>如果不符合</strong>，说明自己的帽子是 <strong>红色</strong></ul><li>他说出正确的颜色，确保存活。</ul><li><strong>第 98 个人依次类推</strong><ul><li>每个人在听到前一个人报出的帽子颜色后，计算是否还保持 <strong>红色帽子数的奇偶性</strong>，以此确定自己的颜色。<li>依次进行，直到第 1 个人。</ul></ol><ul><li><strong>第 100 个人有 50% 概率生还</strong>（因为他只能根据奇偶性猜测自己的帽子）。<li><strong>其余 99 个人全部生还</strong>（因为他们完全可以通过前人的信息推理出自己的帽子颜色）。<li><strong>总存活人数：99 人或 100 人（最少 99 人存活）</strong>。</ul><p><strong>方案总结</strong><ol><li><strong>核心思想</strong>：使用 <strong>奇偶校验</strong> 作为全局信息，让第 100 个人提供 <strong>公共信息</strong>，后续所有人都可以准确判断自己的帽子颜色。<li><strong>牺牲最少人数</strong>：最坏情况下 <strong>仅第 100 个人可能被处决</strong>，而其他 <strong>99 个人必定存活</strong>。<li><strong>适用于更大规模的犯人</strong>：即使是 <strong>N 个人</strong>，此策略仍然有效，最多牺牲 1 人</ol><h2 id=猴子搬香蕉><a class=headerlink href=#猴子搬香蕉 title=猴子搬香蕉></a>猴子搬香蕉</h2><p>有一堆香蕉和一只猴子。猴子 <strong>每次最多能搬 50 个香蕉</strong>，但 <strong>每次搬运 50 个香蕉需要消耗 1 个香蕉作为能量</strong>。<br>请问猴子最远能把香蕉搬运到 <strong>多远的地方</strong>？<p>假设香蕉总数为 <strong>N</strong>，我们用 <strong>分段搬运</strong> 的方式，把香蕉一点一点地运远。<p><strong>第一阶段：在起点的搬运逻辑</strong><ol><li><strong>猴子能带走的最大量 = 50 个</strong>，但每次 <strong>来回</strong> 需要消耗 1 个香蕉。<li>为了保证香蕉能够移动，猴子 <strong>每次必须携带多于 1 个香蕉，否则会在搬运过程中消耗完毕</strong>。<li>由于来回都要消耗香蕉，我们要计算 <strong>如何在不同距离下分批次运输香蕉</strong>。</ol><p><strong>第二阶段：递推计算最大搬运距离</strong><ol><li><strong>第一步：确定香蕉减少到足够少，可以一次性搬运完的阶段</strong><ul><li>例如：当香蕉数量 ≤ 50 时，一次就可以运完，无需往返。<li>但在初始阶段，猴子必须进行 <strong>多次搬运</strong>，因此需要优化香蕉消耗策略。</ul><li><strong>第二步：计算每个阶段的损耗</strong><ul><li>假设在某个距离 <strong>X</strong> 处，猴子还有 <strong>M</strong> 个香蕉，它可以继续向前搬运。<li>由于 <strong>每次 50 个为单位搬运</strong>，我们需要分批次将香蕉运输到一个新的存放点，直到香蕉数量少到可以一次运完。</ul></ol><p>假设起点香蕉总数为 <strong>N</strong>。<ol><li><strong>确定能完全搬运香蕉的终点</strong>：<ul><li>起初，猴子每次最多携带 50 个，每次来回都消耗 1 个。<li>运输到更远的地方时，每次运输成本会变高。<li>计算出 <strong>能运送的最大距离</strong>，并确保香蕉没有提前消耗完毕。</ul><li><strong>使用数学公式推导递推公式</strong><ul><li>假设起点香蕉数为 <strong>N</strong>，运输到距离 <strong>D</strong> 时，还剩下 <strong>M</strong> 个香蕉。<li>由于来回运输消耗，香蕉剩余量 <strong>M</strong> 递减，直到达到 <strong>小于等于 50</strong> 的情况时，猴子就可以一次性搬完剩余香蕉，不再消耗额外的香蕉</ul></ol><p>假设最初有 <strong>N = 300 个香蕉</strong>，计算猴子能搬运的最大距离。<ol><li><strong>第 1 段（起点到第一个存储点）</strong><ul><li>每次最多搬 <strong>50 个</strong>，但往返 <strong>需要消耗 1 个</strong>，所以实际 <strong>每 49 个香蕉才能推进 1 次</strong>。<li>如果要把 <strong>300 个香蕉搬运前进</strong>，需要分批次：<ul><li><strong>300 / 49 ≈ 6.12</strong>，所以大约可以推进 <strong>6 步</strong>（假设每一步 1 米）。<li>搬运到距离 <strong>6 米</strong> 时，还剩下 <strong>300 - 6 × 6 ≈ 264</strong> 个香蕉。</ul></ul><li><strong>第 2 段（继续往前推进）</strong><ul><li>由于此时香蕉变少，每次搬运的损耗降低（来回次数减少）。<li>继续计算，最终到达某个距离时，香蕉减少到 50 个左右，可以直接搬运完毕。</ul><li><strong>最终搬运距离</strong><ul><li>通过逐步计算可以得出，在 <strong>大约 30-35 米</strong> 左右的地方，猴子还能剩下 <strong>50 个香蕉</strong>，可以一次性运完。</ul></ol><p><strong>最终结论</strong><ul><li><strong>猴子最远可以搬运的距离 ≈ 30 到 35 米</strong>（具体数值取决于初始香蕉数量 N）。<li><strong>优化策略</strong>：<ul><li>先分批次搬运，把 <strong>香蕉集中存放到更远的地方</strong>，再逐步递推计算最大可搬运距离。<li>确保每个阶段的搬运量尽可能 <strong>减少不必要的损耗</strong>。<li>采用 <strong>分段存放策略</strong>，保证香蕉不在中途消耗完毕。</ul></ul><p><strong>相关面试题</strong><ul><li><strong>如果香蕉数量变成 10000 个，该策略如何扩展？</strong><li><strong>如果猴子每次消耗 2 个香蕉（而不是 1 个），如何影响最远搬运距离？</strong><li><strong>如果允许猴子暂存香蕉（类似于中转站），如何优化搬运策略？</strong></ul><p>这道题考察了 <strong>贪心算法、递推关系、优化策略</strong>，是一道 <strong>经典的数学与逻辑推理题</strong><h2 id=高楼扔鸡蛋><a class=headerlink href=#高楼扔鸡蛋 title=高楼扔鸡蛋></a>高楼扔鸡蛋</h2><p>有一栋 <strong>100 层</strong> 高的建筑，给你 <strong>2 个相同的鸡蛋</strong>。已知鸡蛋从某一特定楼层或更高的楼层扔下 <strong>会碎</strong>，低于此楼层扔下 <strong>不会碎</strong>。请 <strong>设计一个策略</strong>，确定这个 <strong>临界楼层</strong>，要求 <strong>最坏情况下的扔鸡蛋次数最少</strong>。<ol><li><strong>核心目标</strong>：在最坏情况下，尽可能 <strong>减少扔鸡蛋的次数</strong>，确定鸡蛋会碎的最小楼层。<li><strong>基本约束</strong>：<ul><li><strong>两个鸡蛋</strong>：意味着我们无法像二分查找一样随意尝试高楼层（因为如果第一个鸡蛋碎了，第二个鸡蛋只能逐层检查）。<li><strong>最坏情况</strong>：要求策略在 <strong>任何情况下</strong>，最大扔鸡蛋次数尽可能少。</ul><li><strong>临界点</strong>：<ul><li>如果鸡蛋在某层 <strong>碎了</strong>，那么它的 <strong>安全楼层</strong> 只能在这层以下。<li>如果鸡蛋 <strong>没有碎</strong>，那么它的 <strong>临界楼层</strong> 只能在这层以上。</ul></ol><p><strong>思路</strong><ol><li>由于 <strong>只有 2 个鸡蛋</strong>，我们不能一次跳跃太多层，否则第一个鸡蛋碎了，第二个鸡蛋需要 <strong>一层一层试</strong>，导致次数过多。<li><strong>目标</strong>：减少最坏情况下的扔蛋次数。<li><strong>梯度递减策略</strong>：<ul><li>第一次从 <strong>某一层 X 开始扔</strong>，如果碎了，直接逐层检查 1 到 X-1 层；<li>如果 <strong>没碎</strong>，下一次 <strong>减少 1 层的跳跃步长</strong>，即从 X + (X-1) 层扔，以此类推；<li>这样保证即使第一个鸡蛋碎了，剩下的楼层数也不会太多，可以快速检查。</ul></ol><p>用第一个鸡蛋按递减步长投掷，使得无论在哪一层碎掉， 剩余次数都足以用第二个鸡蛋线性查找。<p>设鸡蛋的扔法为：<ul><li>第一次扔 X 层<li>第二次扔 X + (X-1) 层<li>第三次扔 X + (X-1) + (X-2) 层<li>…<li>直到 <strong>累加的总和 ≥ 100</strong></ul><p>即： [ X + (X-1) + (X-2) + … + 1 \geq 100 ] 这是一个 <strong>等差数列求和</strong>： [ \frac{X(X+1)}{2} \geq 100 ] 解得： [ X \approx 14 ] 即 <strong>第一步应从 14 层开始</strong>，然后 <strong>下一次递增 13 层，再递增 12 层</strong>，直到找到临界点。<ol><li><strong>最少需要 14 次扔鸡蛋</strong>，即可 <strong>保证在最坏情况下找到临界楼层</strong>。<li><strong>核心策略</strong>：<ul><li><strong>第一颗鸡蛋用来筛选大致范围</strong>，采用递减步长策略。<li><strong>第二颗鸡蛋用于精准查找</strong>，在较小范围内逐层检查。</ul></ol><p><strong>相关问题</strong><ul><li>如果鸡蛋数量增加到 3 个，该如何优化？<li>如果是 1000 层高楼，而鸡蛋仍然是 2 个，该策略如何调整？<li>如果允许鸡蛋被摔碎后还能继续使用，该问题如何简化？</ul><h2 id=轮流拿石子><a class=headerlink href=#轮流拿石子 title=轮流拿石子></a>轮流拿石子</h2><p>桌上有一堆石子，两位玩家轮流从中拿取石子，每次至少拿1颗，最多拿3颗。拿到最后一颗石子的人获胜。请问先手是否有必胜策略？如果有，策略是什么？<p>思路： 如果最后只剩1-3颗石子且轮到己方则胜，如果是4颗轮到己方则必败。总结规律，如果是4倍数，则必须对方先手，如果不是，则己方先手，将石子拿到只剩4的倍数。<p><strong>基本分析</strong><ol><li><strong>小规模情况分析</strong><ul><li><strong>1 颗石子</strong>：先手直接拿走，<strong>胜利</strong> ✅<li><strong>2 颗石子</strong>：先手拿走全部，<strong>胜利</strong> ✅<li><strong>3 颗石子</strong>：先手拿走全部，<strong>胜利</strong> ✅<li><strong>4 颗石子</strong>：无论先手拿 1、2 或 3 颗，后手总能拿到最后一颗，因此先手 <strong>必败</strong> ❌</ul><li><strong>更大规模</strong><ul><li><strong>5 颗石子</strong>：先手拿 1 颗，剩下 4 颗，后手进入 <strong>必败</strong> 状态，先手 <strong>必胜</strong> ✅<li><strong>6 颗石子</strong>：先手拿 2 颗，剩下 4 颗，后手进入 <strong>必败</strong> 状态，先手 <strong>必胜</strong> ✅<li><strong>7 颗石子</strong>：先手拿 3 颗，剩下 4 颗，后手进入 <strong>必败</strong> 状态，先手 <strong>必胜</strong> ✅<li><strong>8 颗石子</strong>：无论先手拿 1、2、3 颗，后手都可以让剩余的石子变成 4 颗（必败状态），所以 <strong>先手必败</strong> ❌</ul></ol><p>由此可以发现：<ul><li>如果石子数是 <strong>4 的倍数</strong>，则 <strong>先手必败</strong>。<li>如果石子数 <strong>不是 4 的倍数</strong>，先手总能通过拿取合适数量，使对手进入 <strong>4 的倍数状态（必败状态）</strong>，从而 <strong>保证自己获胜</strong>。</ul><p><strong>结论与策略</strong><ol><li><strong>必胜条件</strong>：如果石子总数 <strong>不是 4 的倍数</strong>，先手可以 <strong>控制局势</strong>，让后手进入 4 的倍数状态，从而获胜。<li><strong>必败条件</strong>：如果石子总数 <strong>是 4 的倍数</strong>，先手无论如何操作，都会让对手进入 <strong>非 4 的倍数状态（必胜）</strong>，所以必败。<li><strong>具体策略</strong>：<ul><li><strong>若石子数为 4 的倍数</strong>，无论怎么拿都会输，<strong>先手必败</strong>。<li><strong>若石子数不是 4 的倍数</strong>，先手应该：<ul><li>先拿走 <strong>使剩余石子数变成 4 的倍数</strong>。<li>例如，石子总数 <strong>N % 4 = X（1≤X≤3）</strong>，先手应该 <strong>拿 X 颗</strong>，让剩余的石子变成 4 的倍数，使后手进入必败状态。</ul></ul></ol><p><strong>相关问题</strong><ul><li>如果每次可以拿 1~4 颗石子，策略如何变化？<li>如果游戏变成拿到最后一颗石子的人输，策略如何变化？4n+1先手必输<li>如果增加第三名玩家，游戏策略会发生怎样的变化？</ul><h2 id=蚂蚁走树枝><a class=headerlink href=#蚂蚁走树枝 title=蚂蚁走树枝></a>蚂蚁走树枝</h2><p>在一根长度为L的树枝上，有n只蚂蚁，初始时它们分别位于不同的位置，且每只蚂蚁只能向左或向右直线行走，速度相同。当两只蚂蚁相遇时，它们会同时掉头反向行走。请问，所有蚂蚁离开树枝的最短时间是多少？<p>思路：相遇时同时掉头反向行走，完全可以当作不影响。因此离开树枝的最短时间就是每只蚂蚁到达距离自己前进方向最近端所需的最长时间<p>最短时间 = <strong>所有蚂蚁到最近端点的最短距离的最大值</strong><br>[ T_{\min} = \max(\min(x_1, L - x_1), \min(x_2, L - x_2), …, \min(x_n, L - x_n)) ] 其中 ( x_i ) 表示第 ( i ) 只蚂蚁的初始位置。<p>假设树枝长度 ( L = 10 )，蚂蚁位置为 {2, 6, 7}：<ul><li>蚂蚁 A 在 2，最短时间是 ( \min(2, 10 - 2) = 2 )<li>蚂蚁 B 在 6，最短时间是 ( \min(6, 10 - 6) = 4 )<li>蚂蚁 C 在 7，最短时间是 ( \min(7, 10 - 7) = 3 )</ul><p>所以最短时间为 <strong>4 秒</strong>，最长时间为 <strong>8 秒</strong>（假设所有蚂蚁都向右走）。<p>蚂蚁相遇后掉头，在数学上等价于直接穿过彼此。因此，为了让所有蚂蚁尽快离开树枝，每只蚂蚁都应朝最近的端点前进，总时间等于这些最短距离中的最大值<p><strong>相关问题</strong><ul><li>若蚂蚁改为相遇时不掉头怎么办？ 完全不变<li>若蚂蚁的速度不同，最短时间和最长时间如何计算？</ul><h2 id=海盗分金币><a class=headerlink href=#海盗分金币 title=海盗分金币></a>海盗分金币</h2><p>有 5 个海盗抢到了一批金币，他们决定按以下方式分配：<strong>最年长的海盗提出一个分配方案</strong>，所有海盗（包括他自己）投票表决。如果<strong>不少于半数的海盗同意</strong>，则方案通过；否则，<strong>最年长的海盗被扔进海里</strong>，剩下的海盗继续上述过程。已知每个海盗都是<strong>理性的</strong>，既要保命，又要追求利益最大化。请问，<strong>最年长的海盗应如何分配金币</strong>？<ul><li><strong>海盗的目标</strong>：<ol><li><strong>保命</strong>：如果方案被否决，他就会被扔进海里。<li><strong>利益最大化</strong>：在确保不被扔进海里的前提下，自己要尽可能多地拿到金币。</ol><li><strong>投票规则</strong>：<ul><li>方案通过的最低票数 = <strong>总人数的一半或以上</strong>。<li>当海盗人数是奇数时，<strong>需要 ≥ ⌊N/2⌋ + 1 票</strong> 才能通过。<li>当海盗人数是偶数时，<strong>需要 ≥ N/2 票</strong> 才能通过</ul></ul><p><strong>逆向推理法</strong>（从少数海盗的情况推导）：<ol><li>设定基础情况（少数海盗时的分配方案）。<li>逐步增加海盗人数，推导出当前局势下的最优方案</ol><p>思路：从1个海盗来说，P1抢完，从两个海盗来说，P1,P2，P1提出方案自己同意即可。因此P1一定分100%<p>P1,P2,P3情况下，P1需要拉拢P3，否则会被P2完全拿完，因此P1可以给P3金币1%，自己分99%<p>P1,P2,P3,P4情况下，类似的，P1需要拉拢P3，否则剩下的P2和P4会进行分配。所以P1给P3金币1%，自己拿99%. 类似的，五个人的情况，P1需要拉拢P3和P5，否则会被P2和P4分配。<p>总结规律，当人数大于等于3人时，第一个提议的人需要拉拢其他一些人<p><strong>结论</strong><p><strong>最年长的海盗（P5）应提出的分配方案</strong>：<ul><li><strong>P5 = 97%</strong><li><strong>P4 = 0%</strong><li><strong>P3 = 1%</strong><li><strong>P2 = 0%</strong><li><strong>P1 = 2%</strong></ul><p>这样，P3 和 P1 会支持 P5，方案获得 3 票通过，P5 <strong>成功活下来</strong> 且获得最多的金币。<p><strong>相关题目</strong><ol><li><strong>如果是 6 个海盗，分配方案如何变化？</strong><ul><li>需要至少 3 票支持，P6 需要贿赂 P2 和 P4 等最容易被收买的海盗。</ul><li><strong>如果投票通过规则改为 3 票（无论总人数多少），该策略如何调整？</strong><ul><li>需要调整贿赂策略，可能需要更少金币换取 3 票。</ul><li><strong>如果金币数量不固定，而是 X 枚，该如何计算最优分配？</strong><ul><li>可以建立递推公式，计算最佳分配方案。</ul></ol><p>这道题考察了 <strong>逆向推理、博弈论、策略优化</strong>，是<strong>经典的智力题</strong>。<br>关键点：<ul><li>从少数海盗推导，逐步递推优化方案。<li>最年长海盗必须拉拢足够多的支持者，通过巧妙分配确保自己不被扔进海里。<li>每个海盗都理性，会尽可能选择对自己最有利的策略。</ul><h2 id=三个火枪手决斗策略><a class=headerlink href=#三个火枪手决斗策略 title=三个火枪手决斗策略></a>三个火枪手决斗策略</h2><p>有三个火枪手，他们的射击准确率分别为 <strong>A、B、C</strong>（A < B < C）。他们按照顺序轮流开枪，直到<strong>只剩下一个人存活</strong>。每个人都希望<strong>自己活到最后</strong>。请问，他们各自的<strong>最佳策略</strong>是什么<p><strong>分析问题</strong><ol><li><strong>射击规则</strong>：<ul><li>三人按照顺序轮流射击（A → B → C → A → …）。<li>一旦某人被击中，他立即出局，不再行动。<li>直到最后只剩下 1 个人，决斗结束。</ul><li><strong>目标</strong>：<ul><li>每个人都希望自己存活到最后，所以他们会选择<strong>最优的射击策略</strong>，而不仅仅是击中对手。</ul><li><strong>射击策略的影响</strong>：<ul><li>如果某个射手<strong>直接击杀最强对手</strong>，可能让另一个对手获胜。<li>如果某个射手<strong>故意偏离目标</strong>，可能影响局势，提升自己胜率。<li>低命中率的射手<strong>可能希望让强者互相攻击</strong>，增加生存概率。</ul></ol><p><strong>最佳策略分析</strong><p><strong>第一步：最差的射手 A 的策略</strong><ul><li><strong>A 的准确率最低</strong>（A < B < C），如果他直接射杀 B 或 C，可能让剩下的强者立即反击他。<li><strong>A 的最佳策略</strong>：<strong>故意射偏！</strong><ul><li>如果 A 开枪但不射中，B 和 C 可能会互相攻击，A 可能得利。</ul></ul><p><strong>第二步：B 的策略</strong><ul><li><strong>B 知道 C 是最强的射手</strong>，如果不射杀 C，那么 C 可能会立即消灭他。<li><strong>B 的最佳策略</strong>：<strong>射杀 C</strong>，因为如果 C 存活，他的胜算极低。</ul><p><strong>第三步：C 的策略</strong><ul><li><strong>C 是最强的射手</strong>，如果轮到他时 B 还活着，他应该击杀 B。<li><strong>如果 C 和 A 对决，C 会选择射杀 A</strong>，因为他不会让 A 活到下一轮。</ul><p><strong>局势推导</strong><p>假设 A、B、C 的命中率分别是 30%（A）、60%（B）、90%（C）。<ol><li><strong>A 的回合</strong>：<ul><li>如果 A 直接射杀 B 或 C，他会立即成为下一个目标。<li><strong>A 的最佳策略是射偏</strong>，让 B 和 C 互相攻击。</ul><li><strong>B 的回合</strong>：<ul><li>B 发现 C 是最强者，必须射杀 C，否则 C 轮到后就会击杀他。<li><strong>B 会射向 C</strong>，并有 60% 的概率成功。</ul><li><strong>C 的回合</strong>（如果存活）：<ul><li>如果 C 存活，他一定会射杀 B。<li>如果 B 已经被 A 或 C 杀死，那么 C 会射击 A。</ul></ol><p><strong>最终策略总结</strong><div class=table-container><table><thead><tr><th>轮次<th>当前射手<th>目标选择<th>影响<tbody><tr><td>1<td>A<td><strong>故意射偏</strong><td>让 B 和 C 互相攻击<tr><td>2<td>B<td><strong>射击 C</strong><td>60% 概率击杀 C，40% 失败<tr><td>3<td>C<td><strong>如果 C 还活着，射杀 B</strong><td>C 如果成功存活，就射杀 A</table></div><ul><li><strong>A 的最佳策略</strong>：<strong>第一枪故意射偏，让 B 和 C 互相攻击</strong>，然后对剩下的人伺机而动。<li><strong>B 的最佳策略</strong>：<strong>射杀 C</strong>，否则自己很难存活。<li><strong>C 的最佳策略</strong>：<strong>射杀 B</strong>，然后在 A 面前稳赢。</ul><p><strong>相关题目</strong><ol><li><strong>如果四个火枪手进行决斗，策略如何变化？</strong><ul><li>A 可能仍然选择射偏，等待其他人互相攻击。<li>B、C、D 需要选择合适的目标，避免让自己成为被集火的对象。</ul><li><strong>如果他们的命中率更接近，例如 50%、60%、70%，策略是否会不同？</strong><ul><li>A 仍然可能射偏，但 B 可能不一定会射击 C，而是考虑击杀 A，减少竞争者。</ul><li><strong>如果他们可以移动，如何影响策略？</strong><ul><li>他们可能会选择躲避攻击，并寻找合适的时机射击。</ul></ol><p><strong>总结</strong><p>这道题考察了<strong>博弈论、概率分析和策略选择</strong>。<br>关键点：<ul><li><strong>A 需要利用 B 和 C 的冲突，自己存活下来</strong>。<li><strong>B 必须射杀 C，否则自己几乎没有胜算</strong>。<li><strong>C 必须先射杀 B，然后再对 A 取胜</strong>。<br>最终，<strong>A 通过射偏提高生存率，B 和 C 互相攻击，从而增加胜率</strong>。</ul><h2 id=囚犯拿豆子><a class=headerlink href=#囚犯拿豆子 title=囚犯拿豆子></a>囚犯拿豆子</h2><p>有一群囚犯需要从一个装满豆子的罐子中拿豆子。每个人<strong>每次至少拿 1 颗，最多拿 4 颗</strong>。<strong>拿到最后一颗豆子的人将被释放</strong>。请问，<strong>先手是否有必胜策略？如果有，策略是什么？</strong><p>思路：如果还剩1-4颗豆子，则轮到自己胜利，如果是5颗，轮到自己则不论怎样对方都会进入1-4颗豆子，则己方必输。如果还剩6-9颗，则让对方进入5颗的状态。<p>因此：<ol><li><strong>如果豆子总数 N 是 5 的倍数</strong>，先手无论如何都会输。<li><strong>如果 N 不是 5 的倍数</strong>，先手应该拿走 1 ~ 4 颗，使得剩下的豆子变成 5 的倍数。</ol><p>总结规律，如果5的倍数则己方必输，否则将豆子拿到5的倍数让对方拿则己方必胜。<ul><li><strong>核心规律</strong>：<strong>5 的倍数是必败局面</strong>，否则先手有必胜策略。<li><strong>必胜策略</strong>：如果 N 不是 5 的倍数，先手应该让剩下的豆子变成 5 的倍数，这样对手无论如何都会输。<li>这道题本质上是<strong>尼姆博弈（Nim Game）</strong>的一种特殊形式，通过找出必败状态<strong>，反向推导</strong>必胜策略</ul><h2 id=学生猜生日><a class=headerlink href=#学生猜生日 title=学生猜生日></a>学生猜生日</h2><p><strong>描述</strong>：有一个学生的生日在以下 10 个日期之一：<ul><li><strong>5月</strong>：15日、16日、19日<li><strong>6月</strong>：17日、18日<li><strong>7月</strong>：14日、16日<li><strong>8月</strong>：14日、15日、17日</ul><p>该学生分别告诉了两位同学 <strong>A</strong> 和 <strong>B</strong> 他的生日的月份和日期，但没有告诉他们具体的日期。<ul><li>A 只知道 <strong>月份</strong>，B 只知道 <strong>日期</strong>。<li><strong>A 说</strong>：“我不知道他的生日，但我知道 B 也不知道。”<li><strong>B 说</strong>：“起初我确实不知道他的生日，但现在我知道了。”<li><strong>A 说</strong>：“哦，那我也知道了。”</ul><p><strong>请问：这个学生的生日是哪一天？</strong><blockquote><p>经典 Cheryl 的生日问题</blockquote><p>思路：因为A确定B不知道，所以A的月份包含的日期应该不是唯一的，例如排除5月，6月。<p>所以B知道了A是7月或者8月，由于B起初不知道他生日，但知道月份只有可能是7、8月，则可能是7月16，8月15以及8月17日。由于A的月份是7或者8月，但其现在根据可能的日期15，16，17日确定了结果，则只有可能是7月，因此答案是7月16日。因为8月的话不能确定具体日期。<p><strong>相关题</strong><ul><li>如果日期不是 10 个，而是 20 个，如何推理？<li>如果 A 知道的是年份，B 知道的是月份，如何改编问题？<li>如何用程序实现该逻辑推理？</ul><p>这道题考察了 <strong>逻辑推理能力、排除法、信息传递分析</strong>，是一道 <strong>经典的信息推理题</strong>。<h2 id=水桶测量问题><a class=headerlink href=#水桶测量问题 title=水桶测量问题></a>水桶测量问题</h2><p>你有一个 <strong>5 升</strong> 和一个 <strong>6 升</strong> 的水桶，如何精确地量出 <strong>3 升</strong> 的水？<blockquote><p><strong>贝祖定理</strong>：d=gcd(a,b) = a x + b y<p><strong>互质情况（gcd=1）</strong>：<ul><li>可以通过整数倍加减得到任意整数</ul><p><strong>非互质情况（gcd=d>1）</strong>：<ul><li>只能得到 d 的倍数</ul></blockquote><ul><li><strong>基本规则</strong>：<ol><li>只能使用 <strong>两个水桶</strong>（5L 和 6L）。<li>只能 <strong>装满、倒空、互相倒水</strong>。<li>目标是 <strong>精确量出 3 升的水</strong>。</ol><li><strong>核心思路</strong>：<ol><li>这类问题属于 <strong>贝祖定理（Bézout’s Identity）</strong> 应用：如果两个数 <strong>a 和 b</strong> 互质（即最大公约数 GCD(a, b) = 1），那么可以通过整数加减得到从 <strong>1 到 GCD(a, b) 的倍数</strong> 的任意值。<li>6 和 5 的 <strong>GCD = 1</strong>，所以可以量出任意 1-5 升的水（因为 6 - 5 = 1）。<li>需要通过不断倒水，让其中一个桶最终留下 3 升。</ol></ul><p>如果有两个水桶，容量分别是 <strong>aL 和 bL</strong>，且它们互质，那么一定能量出从 <strong>1L 到 min(a, b) 的任意体积</strong><p><strong>更大的容量如何处理？</strong><ul><li>如果是 <strong>8L 和 12L</strong>，由于 <strong>GCD(8,12) = 4</strong>，那么只能量出 <strong>4L 的倍数</strong>（4L, 8L, 12L）。<li>只有当 <strong>水桶的容量互质</strong> 时，才能测量出任意 1L 到小桶容量的水量</ul><p><strong>相关题目</strong><ul><li><strong>如果水桶的容量是 4L 和 6L，能否量出 3L？</strong>（答案：不能，因为 GCD(4,6) = 2，无法得到 3L。）<li><strong>如何用程序实现找出所有可测量的水量？</strong>（可用 BFS/DFS 模拟水的倒入倒出状态。）<li><strong>如果允许有一个无限大的水源，如何优化步骤？</strong>（可以直接装满最大桶减少步骤。）</ul><p>这道题考察了 <strong>逻辑推理、数学定理（GCD/贝祖定理）、模拟思维</strong>，是一道 <strong>经典的智力题</strong>！<h2 id=沙漏计时问题><a class=headerlink href=#沙漏计时问题 title=沙漏计时问题></a>沙漏计时问题</h2><p>有一个 <strong>6 分钟</strong> 和一个 <strong>8 分钟</strong> 的沙漏，如何利用它们精准计时 <strong>10 分钟</strong><ul><li><strong>沙漏的基本操作</strong>：<ol><li><strong>翻转</strong>：沙漏可以随时翻转，使沙子重新流动。<li><strong>暂停</strong>：可以在特定时间点观察沙漏状态，来控制计时。<li><strong>同步使用</strong>：可以同时启动两个沙漏，观察它们的相对状态来确定时间点。</ol><li><strong>目标</strong>：精准计时 <strong>10 分钟</strong>，需要找到合理的翻转时机</ul><p><strong>分析问题</strong><ul><li><strong>沙漏的基本操作</strong>：<ol><li><strong>翻转</strong>：沙漏可以随时翻转，使沙子重新流动。<li><strong>暂停</strong>：可以在特定时间点观察沙漏状态，来控制计时。<li><strong>同步使用</strong>：可以同时启动两个沙漏，观察它们的相对状态来确定时间点。</ol><li><strong>目标</strong>：精准计时 <strong>10 分钟</strong>，需要找到合理的翻转时机。</ul><p><strong>解法</strong><p><strong>步骤 1：同时启动两个沙漏</strong><ul><li><strong>开始时</strong>，同时翻转 <strong>6 分钟沙漏</strong> 和 <strong>8 分钟沙漏</strong>。<li>当 <strong>6 分钟沙漏流完</strong> 时，说明已经过去了 <strong>6 分钟</strong>，此时 <strong>8 分钟沙漏还剩 2 分钟的沙子</strong>。</ul><p><strong>步骤 2：翻转 6 分钟沙漏</strong><ul><li><strong>6 分钟沙漏用完的瞬间（6 分钟时刻）</strong>，立即翻转它，重新开始计时。<li><strong>同时等待 8 分钟沙漏流完</strong>（此时总共已经过去 <strong>8 分钟</strong>）。</ul><p><strong>步骤 3：8 分钟后，6 分钟沙漏还剩 4 分钟的沙子</strong><ul><li><strong>8 分钟到达时</strong>，6 分钟沙漏刚翻转过 <strong>2 分钟</strong>，因此它还剩 <strong>4 分钟的沙子</strong>。<li>这 <strong>4 分钟的沙子</strong> 继续流完，<strong>总共经过 10 分钟</strong>。</ul><p><strong>推广思考</strong><ol><li><strong>如何计时 4 分钟？</strong><ul><li>先让 <strong>6 分钟沙漏流完</strong>，然后翻转它，此时沙漏里有 <strong>2 分钟的沙子</strong>。<li>当 <strong>8 分钟沙漏流完时（总共 8 分钟）</strong>，6 分钟沙漏还剩 <strong>4 分钟的沙子</strong>，让它继续流完即可。</ul><li><strong>如果有 7 分钟和 11 分钟的沙漏，如何计时 10 分钟？</strong><ul><li>先让 <strong>7 分钟沙漏流完</strong>，同时 <strong>11 分钟沙漏还剩 4 分钟</strong>。<li>翻转 <strong>7 分钟沙漏</strong>，再等 <strong>4 分钟</strong>，共计 <strong>10 分钟</strong>。</ul><li><strong>如何用程序模拟沙漏计时？</strong><ul><li>可以用 <strong>两个计时变量</strong> 模拟流沙状态，并在特定时间点执行翻转操作。<li>使用 <strong>BFS/DFS 搜索状态变化</strong>，找出满足目标时间的最优策略。</ul></ol><p><strong>相关题</strong><ul><li>如果沙漏分别是 9 分钟和 12 分钟，如何计时 15 分钟？<li>如何用两个沙漏找出它们的最小公倍数（LCM）？<li>如何用沙漏计时非整分钟（如 7.5 分钟）？</ul><p>这道题考察了 <strong>时间管理、数学推理、状态转换思维</strong>，是一道 <strong>经典的逻辑推理面试题</strong>！<h2 id=电梯钻石问题><a class=headerlink href=#电梯钻石问题 title=电梯钻石问题></a>电梯钻石问题</h2><p>你乘坐电梯从 <strong>1 楼</strong> 到 <strong>n 楼</strong>，每层电梯门都会打开，你可以看到该层的 <strong>钻石大小</strong>。你<strong>只能拿一次钻石</strong>，拿完后不能更换。请问如何才能拿到<strong>最大的一颗钻石</strong>？<blockquote><p>描述：你乘坐电梯从 <strong>1 楼</strong> 到 <strong>n 楼</strong>，每层电梯门都会打开，你可以看到该层的 <strong>钻石大小</strong>。你<strong>只能拿一次钻石</strong>，拿完后不能更换。请问如何才能拿到<strong>最大的一颗钻石</strong>？</blockquote><ul><li>你只能<strong>一次性决定是否拿钻石</strong>，一旦错过就不能回头。<li>你不知道后面的楼层会有什么样的钻石，所以要<strong>在合适的时机做决策</strong>。<li>这类似于经典的 <strong>“秘书问题”（The Secretary Problem）</strong>，也称为<strong>最佳停留问题（Optimal Stopping Problem）</strong>。</ul><script type="math/tex; mode=display">
+P(\text{最大钻石在第 k 层被拿到}) = \frac{1}{n} \cdot \frac{r}{k-1}\\ 
+P(n,r) = \sum_{k=r+1}^{n} \frac{1}{n} \cdot \frac{r}{k-1}\\
+P(n,r) \approx \int_{r/n}^{1} \frac{r}{n x} dx = \frac{r}{n} \int_{r/n}^{1} \frac{1}{x} dx = \frac{r}{n} (\ln 1 - \ln(r/n)) = \frac{r}{n} \ln \frac{n}{r}\\
+f'(x) = \ln\frac{1}{x} - 1 = 0 \implies \ln\frac{1}{x} = 1 \implies x = \frac{1}{e} \approx 0.3679</script><p>1/n → 最大钻石出现在第 k 层<p>r/(k-1) → 在前 k-1 层，最大值出现在前 r 层的概率<p><strong>解法</strong><p>这个问题的最优策略是<strong>“37% 规则”（1/e 规则）</strong>，具体方法如下：<p><strong>第一阶段（观察期）</strong><ul><li><strong>前 37% 的楼层</strong>（即 <code>m ≈ 0.37 * n</code>，向下取整）<strong>不拿钻石</strong>，只是<strong>记录当前最大值</strong>。<li>这个阶段的目的是<strong>建立一个参考标准</strong>，大致了解钻石的大小分布情况。</ul><p><strong>第二阶段（决策期）</strong><ul><li>从 <code>m+1</code> 层开始，只要发现一个<strong>比观察期最大值还大的钻石</strong>，就立即拿下。<li>如果到了最后一层仍未发现更大的，只能拿最后一颗钻石（虽然可能不是最优，但至少保证有钻石）。</ul><p><strong>数学推导</strong><ul><li>采用 <strong>37% 规则</strong> 的策略，能保证在大多数情况下拿到接近最大的一颗钻石。<li><strong>成功率大约为 37%</strong>，而随机拿一颗钻石的成功率仅为 <code>1/n</code>，因此该策略能显著提高拿到最大钻石的概率。</ul><ol><li><strong>如果 <code>n</code> 变得很大，比如 1000 层，该策略是否依然适用？</strong><ul><li>是的，仍然可以用 37% 规则，只是 <code>m ≈ 370</code> 层观察，接下来寻找比观察期最大值更大的钻石。</ul><li><strong>如果你可以额外获得一次重新选择的机会，策略如何变化？</strong><ul><li><strong>第一轮使用 37% 规则</strong>，如果没拿到特别大的，可以在 <strong>剩余楼层中重新应用 37% 规则</strong>，提高成功率。</ul><li><strong>如果钻石的分布是已知的（例如，大多数大钻石在上层），如何优化策略？</strong><ul><li>可以调整观察期，比如在前 50% 楼层观察，以适应不同的分布情况</ul></ol><p><strong>相关题目</strong><ul><li><strong>“秘书问题”</strong>：如何在 <code>n</code> 名候选人中，选择最佳秘书？<li><strong>“停车问题”</strong>：如何在一条街道上，选择最佳停车位？<li><strong>“相亲问题”</strong>：如何在 <code>n</code> 次约会中，选择最合适的伴侣</ul><h2 id=金条切割问题><a class=headerlink href=#金条切割问题 title=金条切割问题></a>金条切割问题</h2><p>有一根金条，需要支付给工人 <strong>7 天的工资</strong>，每天支付 <strong>金条的 1/7</strong>。你只能<strong>切割两次</strong>，请问如何完成支付？<p>思路：通过两次切割方式，使得切割得到的结果可以组合得到1，2，3，4，5，6值<p>可以<strong>采用贪心策略</strong>，让工人每次归还部分金条，使得支付刚好满足每天的要求<p><strong>切割方案</strong><ol><li><strong>第一次切割</strong>：把金条切出 <strong>1/7</strong>。<li><p><strong>第二次切割</strong>：把剩余部分切出 <strong>2/7</strong>，此时金条分成了 1/7、2/7 和 4/7 三段。</p><li><p><strong>切割出 1/7 和 2/7</strong>，剩下的部分自然就是 4/7。</p><li><strong>让工人归还部分金条</strong>，这样可以灵活组合每天的支付。<li><strong>保证每天都能精确支付 1/7</strong>，最终用完金条。</ol><p><strong>相关题目</strong><ul><li><strong>如果是 15 天工资，最少需要几次切割？</strong><li>1 2 3 4 5 6 7 8 9 10 11 12 13 14<ul><li>答案是 <strong>3 次</strong>，可以切出 1/15、2/15、4/15 和 8/15。</ul><li><strong>如果工人不能归还金条，该如何操作？</strong><ul><li>只能切割 <strong>6 次</strong>，每天给一块 1/7，无法优化支付方式。</ul></ul><link href=/css/spoiler.css rel=stylesheet><script async src=/js/spoiler.js></script></div><div><div><div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div></div></div><div class=reward-container><div>感谢阅读.</div><button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">打赏</button><div style="display: none;" id=qr><div style="display: inline-block;"><img alt="Sekyoro 微信支付" src=/images/wechatpay.png><p>微信支付</div></div></div><div><ul class=post-copyright><li class=post-copyright-author><strong>本文作者： </strong>Sekyoro<li class=post-copyright-link><strong>本文链接：</strong> <a href=https://www.sekyoro.top/2026/01/16/%E6%99%BA%E5%8A%9B%E9%A2%98%E6%80%BB%E7%BB%93/ title=智力题总结>https://www.sekyoro.top/2026/01/16/智力题总结/</a><li class=post-copyright-license><strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href=https://creativecommons.org/licenses/by-nc-sa/4.0/ rel=noopener target=_blank><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</ul></div><div class=followme><p>欢迎关注我的其它发布渠道<div class=social-list><div class=social-item><a class=social-link href=/images/wxqrcode.png target=_blank> <span class=icon> <i class="fab fa-weixin"></i> </span> <span class=label>WeChat</span> </a></div><div class=social-item><a class=social-link href=/images/website.png target=_blank> <span class=icon> <i class="fa fa-user"></i> </span> <span class=label>PersonalWebsite</span> </a></div><div class=social-item><a class=social-link href=https://my-astro-git-main-drowning-in-codes.vercel.app target=_blank> <span class=icon> <i class="fas fa-share"></i> </span> <span class=label>杂鱼分享</span> </a></div><div class=social-item><a class=social-link href=/atom.xml target=_blank> <span class=icon> <i class="fa fa-rss"></i> </span> <span class=label>RSS</span> </a></div></div></div><footer class=post-footer><div class=post-nav><div class=post-nav-item><a href=/2026/01/12/RAG%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/ rel=prev title=RAG系统设计> <i class="fa fa-chevron-left"></i> RAG系统设计 </a></div><div class=post-nav-item></div></div></footer></article></div><!-- 评论区 --><div class=comments><div data-id=city data-uid=MTAyMC81MzE5Ny8yOTY3Mg== id=lv-container></div></div><script>window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }</script></div><div class="toggle sidebar-toggle"><span class="toggle-line toggle-line-first"></span><span class="toggle-line toggle-line-middle"></span><span class="toggle-line toggle-line-last"></span></div><aside class=sidebar><div class=sidebar-inner><!-- canvas粒子时钟 --><div><canvas id=canvas style=width:60%;>当前浏览器不支持canvas，请更换浏览器后再试</canvas></div><script>(function(){
+
+   var digit=
+    [
+        [
+            [0,0,1,1,1,0,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,0,1,1,0],
+            [0,0,1,1,1,0,0]
+        ],//0
+        [
+            [0,0,0,1,1,0,0],
+            [0,1,1,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [1,1,1,1,1,1,1]
+        ],//1
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,1,1],
+            [1,1,1,1,1,1,1]
+        ],//2
+        [
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//3
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,0],
+            [0,0,1,1,1,1,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,1,1,0],
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,1]
+        ],//4
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,1,1,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//5
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//6
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0]
+        ],//7
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//8
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,1,1,0,0,0,0]
+        ],//9
+        [
+            [0,0,0,0,0,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,0,0,0]
+        ]//:
+    ];
+
+var canvas = document.getElementById('canvas');
+
+if(canvas.getContext){
+    var cxt = canvas.getContext('2d');
+    //声明canvas的宽高
+    var H = 100,W = 700;
+    canvas.height = H;
+    canvas.width = W;
+    cxt.fillStyle = '#f00';
+    cxt.fillRect(10,10,50,50);
+
+    //存储时间数据
+    var data = [];
+    //存储运动的小球
+    var balls = [];
+    //设置粒子半径
+    var R = canvas.height/20-1;
+    (function(){
+        var temp = /(\d)(\d):(\d)(\d):(\d)(\d)/.exec(new Date());
+        //存储时间数字，由十位小时、个位小时、冒号、十位分钟、个位分钟、冒号、十位秒钟、个位秒钟这7个数字组成
+        data.push(temp[1],temp[2],10,temp[3],temp[4],10,temp[5],temp[6]);
+    })();
+
+    /*生成点阵数字*/
+    function renderDigit(index,num){
+        for(var i = 0; i < digit[num].length; i++){
+            for(var j = 0; j < digit[num][i].length; j++){
+                if(digit[num][i][j] == 1){
+                    cxt.beginPath();
+                    cxt.arc(14*(R+2)*index + j*2*(R+1)+(R+1),i*2*(R+1)+(R+1),R,0,2*Math.PI);
+                    cxt.closePath();
+                    cxt.fill();
+                }
+            }
+        }
+    }
+
+    /*更新时钟*/
+    function updateDigitTime(){
+        var changeNumArray = [];
+        var temp = /(\d)(\d):(\d)(\d):(\d)(\d)/.exec(new Date());
+        var NewData = [];
+        NewData.push(temp[1],temp[2],10,temp[3],temp[4],10,temp[5],temp[6]);
+        for(var i = data.length-1; i >=0 ; i--){
+            //时间发生变化
+            if(NewData[i] !== data[i]){
+                //将变化的数字值和在data数组中的索引存储在changeNumArray数组中
+                changeNumArray.push(i+'_'+(Number(data[i])+1)%10);
+            }
+        }
+        //增加小球
+        for(var i = 0; i< changeNumArray.length; i++){
+            addBalls.apply(this,changeNumArray[i].split('_'));
+        }
+        data = NewData.concat();
+    }
+
+    /*更新小球状态*/
+    function updateBalls(){
+        for(var i = 0; i < balls.length; i++){
+            balls[i].stepY += balls[i].disY;
+            balls[i].x += balls[i].stepX;
+            balls[i].y += balls[i].stepY;
+            if(balls[i].x > W + R || balls[i].y > H + R){
+                balls.splice(i,1);
+                i--;
+            }
+        }
+    }
+
+    /*增加要运动的小球*/
+    function addBalls(index,num){
+        var numArray = [1,2,3];
+        var colorArray =  ["#3BE","#09C","#A6C","#93C","#9C0","#690","#FB3","#F80","#F44","#C00"];
+        for(var i = 0; i < digit[num].length; i++){
+            for(var j = 0; j < digit[num][i].length; j++){
+                if(digit[num][i][j] == 1){
+                    var ball = {
+                        x:14*(R+2)*index + j*2*(R+1)+(R+1),
+                        y:i*2*(R+1)+(R+1),
+                        stepX:Math.floor(Math.random() * 4 -2),
+                        stepY:-2*numArray[Math.floor(Math.random()*numArray.length)],
+                        color:colorArray[Math.floor(Math.random()*colorArray.length)],
+                        disY:1
+                    };
+                    balls.push(ball);
+                }
+            }
+        }
+    }
+
+    /*渲染*/
+    function render(){
+        //重置画布宽度，达到清空画布的效果
+        canvas.height = 100;
+        //渲染时钟
+        for(var i = 0; i < data.length; i++){
+            renderDigit(i,data[i]);
+        }
+        //渲染小球
+        for(var i = 0; i < balls.length; i++){
+            cxt.beginPath();
+            cxt.arc(balls[i].x,balls[i].y,R,0,2*Math.PI);
+            cxt.fillStyle = balls[i].color;
+            cxt.closePath();
+            cxt.fill();
+        }
+    }
+
+    clearInterval(oTimer);
+    var oTimer = setInterval(function(){
+        //更新时钟
+        updateDigitTime();
+        //更新小球状态
+        updateBalls();
+        //渲染
+        render();
+    },50);
+}
+
+})();</script><!-- require APlayer --><link href=https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css rel=stylesheet><script src=https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js></script><!-- require MetingJS --><script src=/js/meting-js.js></script><ul class="sidebar-nav motion-element"><li class=sidebar-nav-toc>文章目录<li class=sidebar-nav-overview>站点概览</ul><!--noindex--><div class="post-toc-wrap sidebar-panel"><div class="post-toc motion-element"><ol class=nav><li class="nav-item nav-level-2"><a class=nav-link href=#%E8%B5%9B%E9%A9%AC%E9%97%AE%E9%A2%98><span class=nav-number>1.</span> <span class=nav-text>赛马问题</span></a><li class="nav-item nav-level-2"><a class=nav-link href=#%E7%A0%9D%E7%A0%81%E7%A7%B0%E8%BD%BB%E9%87%8D><span class=nav-number>2.</span> <span class=nav-text>砝码称轻重</span></a><li class="nav-item nav-level-2"><a class=nav-link href=#%E8%8D%AF%E7%93%B6%E6%AF%92%E7%99%BD%E9%BC%A0><span class=nav-number>3.</span> <span class=nav-text>药瓶毒白鼠</span></a><li class="nav-item nav-level-2"><a class=nav-link href=#%E7%BB%B3%E5%AD%90%E4%B8%A4%E5%A4%B4%E7%83%A7%E9%97%AE%E9%A2%98><span class=nav-number>4.</span> <span class=nav-text>绳子两头烧问题</span></a><li class="nav-item nav-level-2"><a class=nav-link href=#%E7%8A%AF%E4%BA%BA%E7%8C%9C%E9%A2%9C%E8%89%B2><span class=nav-number>5.</span> <span class=nav-text>犯人猜颜色</span></a><li class="nav-item nav-level-2"><a class=nav-link href=#%E7%8C%B4%E5%AD%90%E6%90%AC%E9%A6%99%E8%95%89><span class=nav-number>6.</span> <span class=nav-text>猴子搬香蕉</span></a><li class="nav-item nav-level-2"><a class=nav-link href=#%E9%AB%98%E6%A5%BC%E6%89%94%E9%B8%A1%E8%9B%8B><span class=nav-number>7.</span> <span class=nav-text>高楼扔鸡蛋</span></a><li class="nav-item nav-level-2"><a class=nav-link href=#%E8%BD%AE%E6%B5%81%E6%8B%BF%E7%9F%B3%E5%AD%90><span class=nav-number>8.</span> <span class=nav-text>轮流拿石子</span></a><li class="nav-item nav-level-2"><a class=nav-link href=#%E8%9A%82%E8%9A%81%E8%B5%B0%E6%A0%91%E6%9E%9D><span class=nav-number>9.</span> <span class=nav-text>蚂蚁走树枝</span></a><li class="nav-item nav-level-2"><a class=nav-link href=#%E6%B5%B7%E7%9B%97%E5%88%86%E9%87%91%E5%B8%81><span class=nav-number>10.</span> <span class=nav-text>海盗分金币</span></a><li class="nav-item nav-level-2"><a class=nav-link href=#%E4%B8%89%E4%B8%AA%E7%81%AB%E6%9E%AA%E6%89%8B%E5%86%B3%E6%96%97%E7%AD%96%E7%95%A5><span class=nav-number>11.</span> <span class=nav-text>三个火枪手决斗策略</span></a><li class="nav-item nav-level-2"><a class=nav-link href=#%E5%9B%9A%E7%8A%AF%E6%8B%BF%E8%B1%86%E5%AD%90><span class=nav-number>12.</span> <span class=nav-text>囚犯拿豆子</span></a><li class="nav-item nav-level-2"><a class=nav-link href=#%E5%AD%A6%E7%94%9F%E7%8C%9C%E7%94%9F%E6%97%A5><span class=nav-number>13.</span> <span class=nav-text>学生猜生日</span></a><li class="nav-item nav-level-2"><a class=nav-link href=#%E6%B0%B4%E6%A1%B6%E6%B5%8B%E9%87%8F%E9%97%AE%E9%A2%98><span class=nav-number>14.</span> <span class=nav-text>水桶测量问题</span></a><li class="nav-item nav-level-2"><a class=nav-link href=#%E6%B2%99%E6%BC%8F%E8%AE%A1%E6%97%B6%E9%97%AE%E9%A2%98><span class=nav-number>15.</span> <span class=nav-text>沙漏计时问题</span></a><li class="nav-item nav-level-2"><a class=nav-link href=#%E7%94%B5%E6%A2%AF%E9%92%BB%E7%9F%B3%E9%97%AE%E9%A2%98><span class=nav-number>16.</span> <span class=nav-text>电梯钻石问题</span></a><li class="nav-item nav-level-2"><a class=nav-link href=#%E9%87%91%E6%9D%A1%E5%88%87%E5%89%B2%E9%97%AE%E9%A2%98><span class=nav-number>17.</span> <span class=nav-text>金条切割问题</span></a></ol></div></div><!--/noindex--><div class="site-overview-wrap sidebar-panel"><div class="site-author motion-element" itemprop=author itemscope itemtype=http://schema.org/Person><img alt=Sekyoro class=site-author-image itemprop=image src=https://i.loli.net/2021/05/17/YqoavnXdGTpPO9R.jpg><p class=site-author-name itemprop=name>Sekyoro<div class=site-description itemprop=description>什么也无法舍弃的人，什么也做不了.</div></div><div class="site-state-wrap motion-element"><nav class=site-state><div class="site-state-item site-state-posts"><a href=/archives/> <span class=site-state-item-count>259</span> <span class=site-state-item-name>日志</span> </a></div><div class="site-state-item site-state-categories"><a href=/categories/> <span class=site-state-item-count>16</span> <span class=site-state-item-name>分类</span></a></div><div class="site-state-item site-state-tags"><a href=/tags/> <span class=site-state-item-count>220</span> <span class=site-state-item-name>标签</span></a></div></nav></div><div class="links-of-author motion-element"><span class=links-of-author-item> <a title="Personal Website → http://proanimer.com" href=http://proanimer.com/ rel=noopener target=_blank><i class="fab fa-internet-explorer fa-fw"></i>Personal Website</a> </span><span class=links-of-author-item> <a title="GitHub → https://github.com/drowning-in-codes" href=https://github.com/drowning-in-codes rel=noopener target=_blank><i class="fab fa-github fa-fw"></i>GitHub</a> </span><span class=links-of-author-item> <a title="E-Mail → mailto:bukalala174@gmail.com" href=mailto:bukalala174@gmail.com rel=noopener target=_blank><i class="fa fa-envelope fa-fw"></i>E-Mail</a> </span><span class=links-of-author-item> <a title="wxPublicAccount → https://mp.weixin.qq.com/s?__biz=Mzg3ODY1MDkzMg==&mid=2247483770&idx=1&sn=fdf88faab01d5c219ac609570a21c9d6&chksm=cf113221f866bb373938cfca03cf095ff4fe1e4dc37d68ef5de4cd4876ee1260fca0c015a4d6&token=1096259873&lang=zh_CN#rd" href=https://mp.weixin.qq.com/s?__biz=Mzg3ODY1MDkzMg==&mid=2247483770&idx=1&sn=fdf88faab01d5c219ac609570a21c9d6&chksm=cf113221f866bb373938cfca03cf095ff4fe1e4dc37d68ef5de4cd4876ee1260fca0c015a4d6&token=1096259873&lang=zh_CN#rd rel=noopener target=_blank><i class="fab fa-weixin fa-fw"></i>wxPublicAccount</a> </span><span class=links-of-author-item> <a title="RSS → /atom.xml" href=/atom.xml><i class="fa fa-rss fa-fw"></i>RSS</a> </span><span class=links-of-author-item> <a title="CSDN → https://blog.csdn.net/aqwca" href=https://blog.csdn.net/aqwca rel=noopener target=_blank><i class="fa fa-handshake fa-fw"></i>CSDN</a> </span><span class=links-of-author-item> <a title="杂鱼分享 → https://my-astro-git-main-drowning-in-codes.vercel.app" href=https://my-astro-git-main-drowning-in-codes.vercel.app/ rel=noopener target=_blank><i class="fas fa-share fa-fw"></i>杂鱼分享</a> </span></div><div class="links-of-blogroll motion-element"><div class=links-of-blogroll-title><i class="fa fa-link fa-fw"></i> 友情链接</div><ul class=links-of-blogroll-list><li class=links-of-blogroll-item><a href=http://myqhs.top/ rel=noopener target=_blank title=http://myqhs.top/>myqhs</a><li class=links-of-blogroll-item><a href=https://www.lllomh.com/ rel=noopener target=_blank title=https://www.lllomh.com/>芈渡</a><li class=links-of-blogroll-item><a href=https://protool-ten.vercel.app/ rel=noopener target=_blank title=https://protool-ten.vercel.app/>protools</a></ul></div><div class="motion-element announcement"><div class=title></div><p class=content><p class=date></div></div><meting-js id=6856787487 order=random server=netease type=playlist> </meting-js><div class=widget-wrap><h3 class=widget-title style=margin:0>此文章目前无词云</h3></div><script id=clustrmaps src=https://clustrmaps.com/map_v2.js?d=xQdGTxqARTBiNIwX2aUban-ixkj2s6VaZQWo-aVCgY8&cl=ffffff&w=a></script><div class="back-to-top motion-element"><i class="fa fa-arrow-up"></i><span>0%</span></div><!-- 边栏 --></div></aside><div id=sidebar-dimmer></div></div></main><footer class=footer><div class=footer-inner><div class=copyright>© Wed Apr 08 2020 08:00:00 GMT+0800 (中国标准时间) – <span itemprop=copyrightYear>2026</span><span class=with-love> <i class="fa fa-heart"></i> </span><span class=author itemprop=copyrightHolder>Sekyoro</span><span class=post-meta-divider>|</span><span class=post-meta-item-icon> <i class="fa fa-chart-area"></i> </span><span title=站点总字数>4.3m</span><span class=post-meta-divider>|</span><span class=post-meta-item-icon> <i class="fa fa-coffee"></i> </span><span title=站点阅读时长>64:40</span></div><script async src=https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js></script><span id=busuanzi_container_site_pv>总访问量<span id=busuanzi_value_site_pv></span>次</span><span class=post-meta-divider>|</span><span id=busuanzi_container_site_uv>总访客数<span id=busuanzi_value_site_uv></span>人</span><span class=post-meta-divider>|</span><!-- 不蒜子计数初始值纠正 --><script>document.addEventListener("DOMContentLoaded", function() {
+    var int = setInterval(fixCount, 50);  // 50ms周期检测函数
+    var countOffset = 20000;  // 初始化首次数据
+
+    function fixCount() {
+        var pvContainer = document.getElementById("busuanzi_container_site_pv");
+        if (pvContainer && pvContainer.style.display !== "none") {
+            var pvElement = document.getElementById("busuanzi_value_site_pv");
+            if (pvElement) {
+                pvElement.innerHTML = parseInt(pvElement.innerHTML) + countOffset;
+                clearInterval(int);
+            }
+        }
+        
+        var uvContainer = document.getElementById("busuanzi_container_site_uv");
+        if (uvContainer && window.getComputedStyle(uvContainer).display !== "none")
+        {
+            var uvElement = document.getElementById("busuanzi_value_site_uv");
+            if (uvElement) {
+                uvElement.innerHTML = parseInt(uvElement.innerHTML) + countOffset; // 加上初始数据 
+                clearInterval(int); // 停止检测
+            }
+        }
+    }
+});</script><div><span id=timeDate>载入天数...</span><span id=times>载入时分秒...</span><script>var now = new Date();
+    function createtime() {
+        var grt= new Date("04/08/2021 20:00:00");
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+    }
+setInterval("createtime()",250);</script></div><div class=busuanzi-count><script async data-pjax src=https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script><span style="display: none;" class=post-meta-item id=busuanzi_container_site_uv> <span class=post-meta-item-icon> <i class="fa fa-user"></i> </span> <span class=site-uv title=总访客量> <span id=busuanzi_value_site_uv></span> </span> </span><span class=post-meta-divider>|</span><span style="display: none;" class=post-meta-item id=busuanzi_container_site_pv> <span class=post-meta-item-icon> <i class="fa fa-eye"></i> </span> <span class=site-pv title=总访问量> <span id=busuanzi_value_site_pv></span> </span> </span></div></div></footer></div><script color=0,0,255 count=99 opacity=0.5 src=/lib/canvas-nest/canvas-nest.min.js zindex=-1></script><script src=/lib/anime.min.js></script><script src=https://cdn.jsdelivr.net/gh/theme-next/theme-next-pjax@0/pjax.min.js></script><script src=https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js></script><script src=https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js></script><script src=https://cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js></script><script src=https://cdn.jsdelivr.net/npm/velocity-animate@1/velocity.min.js></script><script src=https://cdn.jsdelivr.net/npm/velocity-animate@1/velocity.ui.min.js></script><script src=/js/utils.js></script><script src=/js/motion.js></script><script src=/js/schemes/pisces.js></script><script src=/js/next-boot.js></script><script src=/js/bookmark.js></script><script>var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax',
+	 '.widget-wrap'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+ 
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+  
+  // Reinitialize TagCanvas for tag cloud
+  if (typeof TagCanvas !== 'undefined' && document.getElementById('resCanvas')) {
+    try {
+      TagCanvas.textFont = 'Trebuchet MS, Helvetica';
+      TagCanvas.textColour = '#333';
+      TagCanvas.textHeight = 20;
+      TagCanvas.outlineColour = '#E2E1D1';
+      TagCanvas.maxSpeed = 0.3;
+      TagCanvas.freezeActive = true;
+      TagCanvas.outlineMethod = 'block';
+      TagCanvas.minBrightness = 0.2;
+      TagCanvas.depth = 0.92;
+      TagCanvas.pulsateTo = 0.6;
+      TagCanvas.initial = [0.1,-0.1];
+      TagCanvas.decel = 0.98;
+      TagCanvas.reverse = true;
+      TagCanvas.hideTags = false;
+      TagCanvas.shadow = '#ccf';
+      TagCanvas.shadowBlur = 3;
+      TagCanvas.weight = false;
+      TagCanvas.imageScale = null;
+      TagCanvas.fadeIn = 1000;
+      TagCanvas.clickToFront = 600;
+      TagCanvas.lock = false;
+      TagCanvas.Start('resCanvas');
+      TagCanvas.tc['resCanvas'].Wheel(true);
+    } catch(e) {
+      console.log('TagCanvas initialization failed:', e);
+    }
+  }
+});</script><script data-pjax>(function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();</script><script src=https://cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js></script><script src=https://cdn.jsdelivr.net/npm/instantsearch.js@4/dist/instantsearch.production.min.js></script><script src=/js/algolia-search.js></script><script data-pjax>document.querySelectorAll('.pdfobject-container').forEach(element => {
+  let url = element.dataset.target;
+  let pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  let pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  let fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});</script><div id=pjax><script charset=utf-8 defer src=/js/outdate.js></script></div><script charset=utf-8 defer src=/js/tagcanvas.js></script><script charset=utf-8 defer src=/js/tagcloud.js></script><script>NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});</script><script>var OriginTitile = document.title;
+  var titleTime;
+  document.addEventListener("visibilitychange", function() {
+    if (document.hidden) {
+      document.title = "(つェ⊂)我藏好了哦~" + OriginTitile;
+      clearTimeout(titleTime);
+    } else {
+      document.title = "(*´∇｀*) 被你发现啦~" + OriginTitile;
+      titleTime = setTimeout(function() {
+        document.title = OriginTitile;
+      }, 2000);
+    }
+  });</script><script src=/js/src/activate-power-mode.min.js></script><script>POWERMODE.colorful = true;
+    POWERMODE.shake = false;
+    document.body.addEventListener('input', POWERMODE);</script>
