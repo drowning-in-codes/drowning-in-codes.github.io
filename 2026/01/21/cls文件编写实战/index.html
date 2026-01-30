@@ -1,0 +1,499 @@
+<!doctypehtml><html lang=zh-CN><script defer src=/live2d-widget/autoload.js></script><meta charset=UTF-8><meta content=width=device-width,initial-scale=1,maximum-scale=2 name=viewport><meta content=#222 name=theme-color><meta content="Hexo 5.4.0" name=generator><link href=/images/blog_32px.png rel=apple-touch-icon sizes=180x180><link href=/images/blog_32px.png rel=icon sizes=32x32 type=image/png><link href=/images/blog_16px.png rel=icon sizes=16x16 type=image/png><link color=#222 href=/images/logo.svg rel=mask-icon><meta content=EPrJAp11bJwHULpQUaSNSZ8_3RcvTsPDAEGOME4pl1w name=google-site-verification><!-- Google tag (gtag.js) --><!-- 
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-VB21D8MKKW"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-VB21D8MKKW');
+</script> --><!-- google adsense in head.swig --><script async crossorigin=anonymous src=https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4034523802263123></script><meta content=7226864CE87CE9DE8C008385273846FF name=msvalidate.01><meta content=code-fjFXVtiL7j name=baidu-site-verification><link href=/css/main.css rel=stylesheet><link as=style href=https://fonts.googleapis.com/css?family=Roboto%20Mono,Roboto:300,300italic,400,400italic,700,700italic|Roboto:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext onload=this.rel='stylesheet' rel=preload><link as=style href=https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css onload=this.rel='stylesheet' rel=preload><link href=https://fonts.googleapis.com/css?family=Noto+Serif+SC|Roboto&display=swap rel=stylesheet><link href=https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css rel=stylesheet><link href=https://cdn.jsdelivr.net/npm/pace-js@1/themes/blue/pace-theme-minimal.css rel=stylesheet><script src=https://cdn.jsdelivr.net/npm/pace-js@1/pace.min.js></script><script id=hexo-configurations>var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.sekyoro.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":240,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"appID":"0F9LEEVW82","apiKey":"78839e9f9be09d081c5c4da81975cd19","indexName":"sekyoblog_sec","hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};</script><link href=//cdn.bootcss.com/animate.css/3.5.0/animate.min.css rel=stylesheet><meta content=已经使用latex写论文一段时间了，但对于cls模板还是缺乏认识。这里尝试从基础命令开始写一个简单模板。 name=description><meta content=article property=og:type><meta content=cls文件编写实战 property=og:title><meta content=https://www.sekyoro.top/2026/01/21/cls%E6%96%87%E4%BB%B6%E7%BC%96%E5%86%99%E5%AE%9E%E6%88%98/index.html property=og:url><meta content=Sekyoro的博客小屋 property=og:site_name><meta content=已经使用latex写论文一段时间了，但对于cls模板还是缺乏认识。这里尝试从基础命令开始写一个简单模板。 property=og:description><meta content=zh_CN property=og:locale><meta content=2026-01-21T14:31:40.000Z property=article:published_time><meta content=2026-01-28T08:27:52.112Z property=article:modified_time><meta content=Sekyoro property=article:author><meta content="个人博客 技术学习 计算机 互联网 人工智能" property=article:tag><meta content=summary name=twitter:card><link href=https://www.sekyoro.top/2026/01/21/cls%E6%96%87%E4%BB%B6%E7%BC%96%E5%86%99%E5%AE%9E%E6%88%98/ rel=canonical><script id=page-configurations>// https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };</script><title>cls文件编写实战 | Sekyoro的博客小屋</title><noscript><style>.use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }</style></noscript><link href=/atom.xml rel=alternate title=Sekyoro的博客小屋 type=application/atom+xml><body itemscope itemtype=http://schema.org/WebPage><canvas style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" class=fireworks></canvas><script defer src=https://cdn.bootcss.com/animejs/2.2.0/anime.min.js></script><script defer src=/js/src/fireworks.js></script><div class="container use-motion"><div class=headband></div><header class=header itemscope itemtype=http://schema.org/WPHeader><div class=header-inner><div class=site-brand-container><div class=site-nav-toggle><div aria-label=切换导航栏 class=toggle><span class="toggle-line toggle-line-first"></span><span class="toggle-line toggle-line-middle"></span><span class="toggle-line toggle-line-last"></span></div></div><div class=site-meta><a class=brand href=/ rel=start> <span class=logo-line-before><i></i></span> <h1 class=site-title>Sekyoro的博客小屋</h1> <span class=logo-line-after><i></i></span> </a></div><div class=site-nav-right><div class="toggle popup-trigger"><i class="fa fa-search fa-fw fa-lg"></i></div></div></div><nav class=site-nav><ul class="main-menu menu" id=menu><li class="menu-item menu-item-home"><a href=/ rel=section><i class="fa fa-home fa-fw"></i>首页</a><li class="menu-item menu-item-about"><a href=/about/ rel=section><i class="fa fa-user fa-fw"></i>关于</a><li class="menu-item menu-item-tags"><a href=/tags/ rel=section><i class="fa fa-tags fa-fw"></i>标签</a><li class="menu-item menu-item-categories"><a href=/categories/ rel=section><i class="fa fa-th fa-fw"></i>分类</a><li class="menu-item menu-item-archives"><a href=/archives/ rel=section><i class="fa fa-archive fa-fw"></i>归档</a><li class="menu-item menu-item-bangumis"><a href=/bangumis/ rel=section><i class="fa fa-film fa-fw"></i>追番</a><li class="menu-item menu-item-resume"><a href=/resume/ rel=section><i class="fa fa-file-pdf fa-fw"></i>简历</a><li class="menu-item menu-item-materials"><a href=/materials/ rel=section><i class="fa fa-book fa-fw"></i>学习资料</a><li class="menu-item menu-item-sitemap"><a href=/sitemap.xml rel=section><i class="fa fa-sitemap fa-fw"></i>站点地图</a><li class="menu-item menu-item-search"><a class=popup-trigger role=button><i class="fa fa-search fa-fw"></i>搜索 </a></ul></nav><div class=search-pop-overlay><div class="popup search-popup"><div class=search-header><span class=search-icon> <i class="fa fa-search"></i> </span><div class=search-input-container></div><span class=popup-btn-close> <i class="fa fa-times-circle"></i> </span></div><div class=algolia-results><div id=algolia-stats></div><div id=algolia-hits></div><div class=algolia-pagination id=algolia-pagination></div></div></div></div></div></header><a class="book-mark-link book-mark-link-fixed" role=button></a><main class=main><div class=main-inner><div class=content-wrap><div class="content post posts-expand"><article class=post-block itemscope itemtype=http://schema.org/Article lang=zh-CN><link href=https://www.sekyoro.top/2026/01/21/cls%E6%96%87%E4%BB%B6%E7%BC%96%E5%86%99%E5%AE%9E%E6%88%98/ itemprop=mainEntityOfPage><span hidden itemprop=author itemscope itemtype=http://schema.org/Person> <meta content=https://i.loli.net/2021/05/17/YqoavnXdGTpPO9R.jpg itemprop=image> <meta content=Sekyoro itemprop=name> <meta content=什么也无法舍弃的人，什么也做不了. itemprop=description> </span><span hidden itemprop=publisher itemscope itemtype=http://schema.org/Organization> <meta content=Sekyoro的博客小屋 itemprop=name> </span><header class=post-header><h1 itemprop="name headline" class=post-title>cls文件编写实战</h1><div class=post-meta><span class=post-meta-item> <span class=post-meta-item-icon> <i class="far fa-calendar"></i> </span> <span class=post-meta-item-text>发表于</span> <time itemprop="dateCreated datePublished" title="创建时间：2026-01-21 22:31:40" datetime=2026-01-21T22:31:40+08:00>2026-01-21</time> </span><span class=post-meta-item> <span class=post-meta-item-icon> <i class="far fa-calendar-check"></i> </span> <span class=post-meta-item-text>更新于</span> <time title="修改时间：2026-01-28 16:27:52" datetime=2026-01-28T16:27:52+08:00 itemprop=dateModified>2026-01-28</time> </span><span style="display: none;" class=post-meta-item id=busuanzi_container_page_pv title=阅读次数> <span class=post-meta-item-icon> <i class="fa fa-eye"></i> </span> <span class=post-meta-item-text>阅读次数：</span> <span id=busuanzi_value_page_pv></span> </span><br><span class=post-meta-item title=本文字数> <span class=post-meta-item-icon> <i class="far fa-file-word"></i> </span> <span class=post-meta-item-text>本文字数：</span> <span>12k</span> </span><span class=post-meta-item title=阅读时长> <span class=post-meta-item-icon> <i class="far fa-clock"></i> </span> <span class=post-meta-item-text>阅读时长 ≈</span> <span>11 分钟</span> </span></div></header><div class=post-body itemprop=articleBody><p>已经使用latex写论文一段时间了，但对于cls模板还是缺乏认识。这里尝试从基础命令开始写一个简单模板。<br><span id=more></span><p>当我们撰写一个Latex文档时，可能会使用.cls以及.sty包,在 LaTeX 体系中，<code>.cls</code> 和 <code>.sty</code> 是两类地位完全不同、但经常配合使用的文件。Latex的模板就捆绑了 <strong>class</strong> (<code>.cls</code>)、<strong>style</strong> (<code>.sty</code>)、示例 <code>.tex</code> 文件和支持资源(徽标、参考书目文件等)，这些资源定义了特定文档类型(期刊文章、论文、简历、海报、幻灯片等)的布局、排版和结构。<p><code>.cls</code> 定义的是 <strong>文档的“身份”和全局结构”</strong>，例如：<ul><li>单栏 / 双栏<li>页面尺寸、边距<li>字号体系<li>章节结构（section / subsection）<li>浮动体整体规则（figure / table）</ul><p><code>.sty</code> 是 <strong>“功能或样式插件”</strong>，用于<strong>扩展或局部修改 LaTeX 的能力</strong>。<p>一个tex文件内容如下<figure class="highlight tex"><table><tr><td class=gutter><pre><span class=line>1</span><br><span class=line>2</span><br><span class=line>3</span><br><span class=line>4</span><br><span class=line>5</span><br><span class=line>6</span><br><span class=line>7</span><br><span class=line>8</span><br></pre><td class=code><pre><span class=line><span class=keyword>\documentclass</span>[options]{mytemplate}   <span class=comment>% class supplied by the template</span></span><br><span class=line><span class=keyword>\usepackage</span>{mytemplate}               <span class=comment>% sometimes a .sty instead of .cls</span></span><br><span class=line><span class=keyword>\begin</span>{document}</span><br><span class=line>  <span class=keyword>\title</span>{My Title}</span><br><span class=line>  <span class=keyword>\author</span>{Me}</span><br><span class=line>  <span class=keyword>\maketitle</span></span><br><span class=line>  <span class=comment>% &LTcontent></span></span><br><span class=line><span class=keyword>\end</span>{document}</span><br></pre></table></figure><p>创建自己的模板需要同时使用cls类完全控制文档结构，同时使用stl样式文件包含额外的宏或者格式。编写cls的方式一是可以通过编写dtx文件另一个是直接基于现有cls模板进行调整。考虑到常见情况，其实基于cls模板进行更改更实际。<div class=table-container><table><thead><tr><th>LaTeX<th>软件工程<tbody><tr><td>dtx<td>source code<tr><td>ins<td>build script<tr><td>cls/sty<td>binary<tr><td>pdf<td>documentation</table></div><h2 id=dtx文件><a class=headerlink href=#dtx文件 title=dtx文件></a>dtx文件</h2><p>而dtx本质是文学化编程(literate programming)+docstrip.<p>一个标准 dtx 文件 = 3 个部分：<ol><li>driver（生成文档）<li>documentation（说明文档）<li>tagged code（可提取代码）</ol><p>文学化编程含义就是在源代码中包含注解并且生成的内容也会包含注解pdf,让人看dtx源码就能容易看懂。<h3 id=dtx包含内容><a class=headerlink href=#dtx包含内容 title=dtx包含内容></a>dtx包含内容</h3><h4 id=driver部分><a class=headerlink href=#driver部分 title=driver部分></a>driver部分</h4><p>driver 部分主要用于 <strong>生成 PDF 文档</strong>，也就是文档化源码（ltxdoc 风格）：<ul><li>显示文档说明文字<li>显示代码块示例<li>可以生成宏索引、代码行索引等<li><strong>不执行 cls/sty 的核心功能</strong>（否则可能报错）</ul><blockquote><p>核心目标：把 dtx 文件生成 <strong>可读的文档</strong>。作用：生成<strong>说明文档</strong> PDF。</blockquote><figure class="highlight taggerscript"><table><tr><td class=gutter><pre><span class=line>1</span><br><span class=line>2</span><br><span class=line>3</span><br><span class=line>4</span><br><span class=line>5</span><br><span class=line>6</span><br><span class=line>7</span><br><span class=line>8</span><br><span class=line>9</span><br><span class=line>10</span><br><span class=line>11</span><br></pre><td class=code><pre><span class=line><span class=variable>% \iffalse</span></span><br><span class=line><span class=variable>%</span><*driver></span><br><span class=line><span class=symbol>\d</span>ocumentclass{ltxdoc}</span><br><span class=line><span class=symbol>\E</span>nableCrossrefs</span><br><span class=line><span class=symbol>\C</span>odelineIndex</span><br><span class=line><span class=symbol>\R</span>ecordChanges</span><br><span class=line><span class=symbol>\b</span>egin{document}</span><br><span class=line><span class=symbol>\D</span>ocInput{myclass.dtx}</span><br><span class=line><span class=symbol>\e</span>nd{document}</span><br><span class=line><span class=variable>%&LT/driver></span></span><br><span class=line><span class=variable>%</span> <span class=symbol>\f</span>i</span><br></pre></table></figure><p><code>% \iffalse ... % \fi</code><br> 防止 driver 被 docstrip 提取<p><code><*driver></code> tag<br> 只用于文档，不用于 cls<p><strong><code>\EnableCrossrefs</code></strong> 和 <strong><code>\CodelineIndex</code></strong>：自动为宏包生成代码索引。<p><strong><code>\PrintChanges</code></strong>：根据 <code>% \changes</code> 记录自动生成修订历史，这对大型项目<p><strong><code>\ProvidesFile{latex.dtx}</code></strong>：向 LaTeX 系统声明当前文件的名称。<p><strong><code>\documentclass{ltxdoc}</code></strong>：加载 LaTeX 官方专门为编写宏包文档设计的 <strong><code>ltxdoc</code></strong> 文档类。它提供了诸如列出宏定义、生成索引等特殊功能。<p><strong><code>\usepackage{hypdoc}</code></strong>：为文档添加超链接支持（基于 <code>hyperref</code>），并针对文档中的宏和索引进行了优化。<p><strong><code>\EnableCrossrefs</code></strong>：开启宏定义的交叉引用功能，自动记录每个宏在代码中的位置。<p><strong><code>\CodelineIndex</code></strong>：设置索引以<strong>行号</strong>为基准，而不是页码，方便读者精确定位代码。<p><strong><code>\RecordChanges</code></strong>：开启变更记录功能，配合下文的 <code>\changes</code> 命令生成版本修订历史。<p>开头的 <code>%<*driver></code> 部分是告诉 LaTeX 如何编译这份文档。它通常加载 <code>ltxdoc</code> 类，这是专门为记录 LaTeX 宏包设计的类。<p><strong><code>macrocode</code> 环境</strong>：这是 <code>.dtx</code> 最特殊的地方。它内部的代码会被提取到 <code>.sty</code> 或 <code>.cls</code> 文件中，而在 PDF 文档里则会带有行号显示。也就是对于pdf排版和cls文件都有用，主要是告诉 PDF 排版引擎“这是代码，请原样打印并加行号”。<strong>提取为cls</strong>：必须配合 <strong>Guard Tags</strong>（如 <code>%<*...></code>）且在 <strong><code>.ins</code> 文件</strong>中正确配置，内容才会进入 <code>.cls</code>。<strong>ltxdoc 类的核心行为</strong><p>dtx 文件的 driver 部分通常是：<figure class="highlight dust"><table><tr><td class=gutter><pre><span class=line>1</span><br><span class=line>2</span><br><span class=line>3</span><br><span class=line>4</span><br></pre><td class=code><pre><span class=line><span class=xml>\documentclass</span><span class=template-variable>{ltxdoc}</span><span class=xml></span></span><br><span class=line><span class=xml>\begin</span><span class=template-variable>{document}</span><span class=xml></span></span><br><span class=line><span class=xml>\DocInput</span><span class=template-variable>{myclass.dtx}</span><span class=xml></span></span><br><span class=line><span class=xml>\end</span><span class=template-variable>{document}</span></span><br></pre></table></figure><p>ltxdoc 的会把 dtx 文件中 <strong>特殊注释</strong>（如 <code>% \section{…}</code>、<code>% \begin{macro}{…}</code>）识别为文档命令，而不是普通注释，<code>%</code> 只是标记注释行，driver 编译时会 <strong>去掉前导 <code>%</code></strong> 并执行其中的 LaTeX 文档命令。<p><code>\begin{macro}</code>当读者快速翻页查找某个特定宏的实现时，眼睛只需要盯着左侧边缘的标签，而不需要阅读中间密集的代码。<p>ltxdoc 会区分：<div class=table-container><table><thead><tr><th>类型<th>编译结果<th>注释方式<tbody><tr><td>文档文字<td>PDF 普通文本<td><code>%</code> 开头普通文字<tr><td>文档命令<td>PDF 按样式渲染<td><code>%</code> 开头，但行中有 <code>\section</code>, <code>\subsection</code>, <code>\begin{macro}</code> 等<tr><td>宏代码<td>PDF 代码块显示<td><code>% \begin{macrocode} … % \end{macrocode}</code></table></div><p>核心规律：<strong>ltxdoc 会自动识别 <code>%</code> 注释中的 LaTeX 文档命令并执行它来生成 PDF 样式，而普通文字不会被执行</strong><h4 id=documentation部分><a class=headerlink href=#documentation部分 title=documentation部分></a>documentation部分</h4><figure class="highlight tex"><table><tr><td class=gutter><pre><span class=line>1</span><br><span class=line>2</span><br><span class=line>3</span><br><span class=line>4</span><br><span class=line>5</span><br><span class=line>6</span><br></pre><td class=code><pre><span class=line><span class=comment>% \section{Introduction}</span></span><br><span class=line><span class=comment>% This is my custom class.</span></span><br><span class=line><span class=comment>%</span></span><br><span class=line><span class=comment>% \subsection{Features}</span></span><br><span class=line><span class=comment>% - Custom section style</span></span><br><span class=line><span class=comment>% - Custom layout</span></span><br></pre></table></figure><p>规则：<ul><li>每行必须以 <code>%</code> 开头<li>可以写完整 LaTeX 文档<li>会出现在 PDF 文档中</ul><h4 id=tagged-code部分><a title="tagged code部分" class=headerlink href=#tagged-code部分></a>tagged code部分</h4><figure class="highlight tex"><table><tr><td class=gutter><pre><span class=line>1</span><br><span class=line>2</span><br><span class=line>3</span><br><span class=line>4</span><br><span class=line>5</span><br></pre><td class=code><pre><span class=line><span class=comment>%<*class></span></span><br><span class=line><span class=keyword>\NeedsTeXFormat</span>{LaTeX2e}</span><br><span class=line><span class=keyword>\ProvidesClass</span>{myclass}[2026/01/22 My class]</span><br><span class=line><span class=keyword>\LoadClass</span>{article}</span><br><span class=line><span class=comment>%&LT/class></span></span><br></pre></table></figure><p><code>%<*tag></code> 开始<p><code>%&LT/tag></code> 结束<p>中间是纯 TeX 代码（不能加 % 注释）。tagged code 是 <strong>源码块</strong>，可以被 docstrip 提取生成可执行的 cls/sty 文件，同时也可以用来生成 PDF 中的代码显示：<ul><li>定义 class/package 的宏命令、环境、选项<li>可以写文档注释（% 开头）用于 PDF 文档显示<li>提供 <strong>可控模块化</strong>（通过 tag 提取不同内容生成不同文件）核心目标：把源码和文档组织在同一个文件，方便提取和展示。</ul><blockquote><p><code>\begin{macro}</code> 用来<strong>文档化一个宏（命令）</strong>，并生成“宏索引”和结构化说明。</blockquote><p>它的主要作用是：<ol><li>给某个宏建立“文档条目”<li>在 PDF 中生成“宏说明块”<li>在索引中登记宏名（配合 <code>\CodelineIndex</code>）<li>让 dtx 文档变得像 API 文档</ol><blockquote><p>宏就是“自定义命令”。比如：<code>\newcommand{\hello}{Hello}</code></blockquote><h4 id=模块化设计><a class=headerlink href=#模块化设计 title=模块化设计></a>模块化设计</h4><figure class="highlight tex"><table><tr><td class=gutter><pre><span class=line>1</span><br><span class=line>2</span><br><span class=line>3</span><br><span class=line>4</span><br><span class=line>5</span><br><span class=line>6</span><br><span class=line>7</span><br><span class=line>8</span><br><span class=line>9</span><br><span class=line>10</span><br><span class=line>11</span><br><span class=line>12</span><br><span class=line>13</span><br><span class=line>14</span><br><span class=line>15</span><br><span class=line>16</span><br><span class=line>17</span><br><span class=line>18</span><br><span class=line>19</span><br><span class=line>20</span><br></pre><td class=code><pre><span class=line><span class=comment>%<*base></span></span><br><span class=line>基础宏定义</span><br><span class=line><span class=comment>%&LT/base></span></span><br><span class=line></span><br><span class=line><span class=comment>%<*layout></span></span><br><span class=line>版式控制</span><br><span class=line><span class=comment>%&LT/layout></span></span><br><span class=line></span><br><span class=line><span class=comment>%<*section></span></span><br><span class=line>章节结构</span><br><span class=line><span class=comment>%&LT/section></span></span><br><span class=line></span><br><span class=line><span class=comment>%<*option></span></span><br><span class=line>class options</span><br><span class=line><span class=comment>%&LT/option></span></span><br><span class=line></span><br><span class=line><span class=comment>%<*class></span></span><br><span class=line>主类文件</span><br><span class=line><span class=comment>%&LT/class></span></span><br><span class=line></span><br></pre></table></figure><p>简单来说,<code>%</code>开头的都会在pdf中显示,除非tagged code块中除开%后是<code>\指令</code>则会执行，如果不是%开头，则会出现在cls文件中，如果是在tagged code中类似。<p>docstrip 会把 <strong>非注释行（不以 <code>%</code> 开头）的内容</strong> 当作 <strong>真正源码</strong>。也就是说，无论它在 <code>%<*tag></code> 中还是不在，docstrip 都会把这些行写进目标文件。有了 tag，你可以控制 docstrip 只提取 <code>class</code> 或 <code>macro</code>如果不使用 tag，所有非 <code>%</code> 行都会默认被提取到生成文件<h3 id=如何让dtx生成cls><a class=headerlink href=#如何让dtx生成cls title=如何让dtx生成cls></a>如何让dtx生成cls</h3><p>使用dtx生成cls文件流程：<ol><li>写 dtx<li>写 ins<li>运行 ins</ol><figure class="highlight plaintext"><table><tr><td class=gutter><pre><span class=line>1</span><br><span class=line>2</span><br><span class=line>3</span><br><span class=line>4</span><br><span class=line>5</span><br><span class=line>6</span><br><span class=line>7</span><br><span class=line>8</span><br><span class=line>9</span><br><span class=line>10</span><br><span class=line>11</span><br><span class=line>12</span><br><span class=line>13</span><br><span class=line>14</span><br><span class=line>15</span><br><span class=line>16</span><br><span class=line>17</span><br><span class=line>18</span><br></pre><td class=code><pre><span class=line>% \iffalse meta-comment</span><br><span class=line>% \iffalse</span><br><span class=line>%<*driver></span><br><span class=line>\documentclass{ltxdoc}</span><br><span class=line>\begin{document}</span><br><span class=line>\DocInput{myclass.dtx}</span><br><span class=line>\end{document}</span><br><span class=line>%&LT/driver></span><br><span class=line>% \fi</span><br><span class=line></span><br><span class=line>% \section{MyClass}</span><br><span class=line>% This is a demo class.</span><br><span class=line></span><br><span class=line>%<*class></span><br><span class=line>\NeedsTeXFormat{LaTeX2e}</span><br><span class=line>\ProvidesClass{myclass}[2026/01/22 Demo class]</span><br><span class=line>\LoadClass{article}</span><br><span class=line>%&LT/class></span><br></pre></table></figure><p><code>% \iffalse meta-comment</code> 是实现“<strong>文学编程</strong>”的一种核心机制。它允许你将排版文档所需的指令（如编译说明和驱动程序）隐藏起来，不让它们出现在最终提取的宏包代码中。<p>而ins文件是”安装文件”，需要利用ins文件生成cls<figure class="highlight plaintext"><table><tr><td class=gutter><pre><span class=line>1</span><br><span class=line>2</span><br><span class=line>3</span><br><span class=line>4</span><br><span class=line>5</span><br><span class=line>6</span><br><span class=line>7</span><br></pre><td class=code><pre><span class=line>\input docstrip.tex</span><br><span class=line></span><br><span class=line>\generate{</span><br><span class=line>  \file{myclass.cls}{\from{myclass.dtx}{class}}</span><br><span class=line>}</span><br><span class=line></span><br><span class=line>\endbatchfile</span><br></pre></table></figure><p>最后运行命令<figure class="highlight shell"><table><tr><td class=gutter><pre><span class=line>1</span><br></pre><td class=code><pre><span class=line>latex myclass.ins</span><br></pre></table></figure><p>其中安装文件使用了docstrip生成cls.所以需要利用ins生成cls文件,如果直接执行<code>latex *.dtx</code>,执行 dtx 时：<blockquote><p>driver 会被执行<br> documentation 会被排版进 PDF<br> tagged code 不会被提取<br> 不会生成 cls/sty</blockquote><p>换句话说：<blockquote><p><code>.dtx</code> 被当成“说明文档”编译，而不是“源码”。</blockquote><figure class="highlight stylus"><table><tr><td class=gutter><pre><span class=line>1</span><br><span class=line>2</span><br><span class=line>3</span><br><span class=line>4</span><br></pre><td class=code><pre><span class=line>xelatex latex<span class=selector-class>.dtx</span></span><br><span class=line>makeindex -s gind<span class=selector-class>.ist</span> -o latex<span class=selector-class>.ind</span> latex<span class=selector-class>.idx</span></span><br><span class=line>makeindex -s gglo<span class=selector-class>.ist</span> -o latex<span class=selector-class>.gls</span> latex<span class=selector-class>.glo</span></span><br><span class=line>xelatex latex.dtx</span><br></pre></table></figure><p>如果使用了中文等，可以考虑xelatex<h2 id=cls文件><a class=headerlink href=#cls文件 title=cls文件></a>cls文件</h2><p>cls文件格式往往如下。<figure class="highlight tex"><table><tr><td class=gutter><pre><span class=line>1</span><br><span class=line>2</span><br><span class=line>3</span><br><span class=line>4</span><br><span class=line>5</span><br><span class=line>6</span><br><span class=line>7</span><br><span class=line>8</span><br><span class=line>9</span><br><span class=line>10</span><br><span class=line>11</span><br><span class=line>12</span><br><span class=line>13</span><br><span class=line>14</span><br></pre><td class=code><pre><span class=line><span class=comment>% mytemplate.cls – a very simple article‑style class</span></span><br><span class=line><span class=keyword>\NeedsTeXFormat</span>{LaTeX2e}</span><br><span class=line><span class=keyword>\ProvidesClass</span>{mytemplate}[2025/12/03 v1.0 My custom class]</span><br><span class=line><span class=keyword>\LoadClass</span>[12pt]{article}   <span class=comment>% inherit from article</span></span><br><span class=line></span><br><span class=line><span class=comment>% ---- custom settings ----</span></span><br><span class=line><span class=keyword>\RequirePackage</span>{geometry}</span><br><span class=line><span class=keyword>\geometry</span>{margin=2cm}</span><br><span class=line><span class=keyword>\RequirePackage</span>{fontspec}</span><br><span class=line><span class=keyword>\setmainfont</span>{Latin Modern Roman}</span><br><span class=line></span><br><span class=line><span class=comment>% ---- user‑level commands ----</span></span><br><span class=line><span class=keyword>\newcommand</span><span class=keyword>\mytitle</span>[1]{<span class=keyword>\centerline</span>{<span class=keyword>\LARGE</span><span class=keyword>\bfseries</span> <span class=params>#1</span>}}</span><br><span class=line><span class=keyword>\endinput</span></span><br></pre></table></figure><p>cls文件底层是Tex,而不是Latex,其核心问题包含三个：<ol><li>文档类如何加载？<li>类如何定义结构和命令？<li>类如何控制版式？</ol><p>下面围绕这三点说明。<figure class="highlight tex"><table><tr><td class=gutter><pre><span class=line>1</span><br><span class=line>2</span><br><span class=line>3</span><br><span class=line>4</span><br></pre><td class=code><pre><span class=line><span class=keyword>\NeedsTeXFormat</span>{LaTeX2e}</span><br><span class=line><span class=keyword>\ProvidesClass</span>{myclass}[2026/01/22 My custom class]</span><br><span class=line></span><br><span class=line><span class=keyword>\LoadClass</span>{article}</span><br></pre></table></figure><div class=table-container><table><thead><tr><th>命令<th>作用<tbody><tr><td><code>\NeedsTeXFormat</code><td>声明 LaTeX 版本<tr><td><code>\ProvidesClass</code><td>声明类信息<tr><td><code>\LoadClass</code><td>继承已有类<tr><td><code>\RequirePackage</code><td>加载宏包</table></div><h2 id=宏定义><a class=headerlink href=#宏定义 title=宏定义></a>宏定义</h2><p>LaTeX 中的宏定义分为：Tex原生宏以及Latex宏接口。<p>来自 TeX 引擎,cls/sty内部大量使用<ul><li><code>\def</code><li><code>\edef</code><li><code>\xdef</code><li><code>\gdef</code><li><code>\let</code><li><code>\futurelet</code></ul><p>来自 LaTeX,用户和宏包作者推荐使用<ul><li><code>\newcommand</code><li><code>\renewcommand</code><li><code>\providecommand</code><li><code>\DeclareRobustCommand</code><li><code>\NewDocumentCommand</code>（xparse）<li><code>\NewExpandableDocumentCommand</code></ul><p>最常用的就是<code>\def</code>和<code>\newcommand</code>,<figure class="highlight tex"><table><tr><td class=gutter><pre><span class=line>1</span><br></pre><td class=code><pre><span class=line><span class=keyword>\def</span><span class=keyword>\foo</span>{Hello}</span><br></pre></table></figure><p>特点：<p>不检查是否已定义（会覆盖）<p>语法灵活<p>可定义复杂参数模式<p>\newcommand（LaTeX 推荐）<figure class="highlight tex"><table><tr><td class=gutter><pre><span class=line>1</span><br></pre><td class=code><pre><span class=line><span class=keyword>\newcommand</span>{<span class=keyword>\foo</span>}{Hello}</span><br></pre></table></figure><p>特点：<ul><li>如果宏已存在 → 报错<li>语法安全<li>参数规则固定</ul><p>另外还有 \renewcommand（重新定义）<figure class="highlight nim"><table><tr><td class=gutter><pre><span class=line>1</span><br></pre><td class=code><pre><span class=line>\renewcommand{\section}<span class=meta>{...}</span></span><br></pre></table></figure><p>如果宏不存在 → 报错。<p>\providecommand（如果不存在才定义）<figure class="highlight dust"><table><tr><td class=gutter><pre><span class=line>1</span><br></pre><td class=code><pre><span class=line><span class=xml>\providecommand</span><span class=template-variable>{\foo}</span><span class=template-variable>{Hello}</span></span><br></pre></table></figure><p>逻辑：<ul><li>如果 \foo 已存在 → 什么都不做<li>如果不存在 → 定义</ul><div class=table-container><table><thead><tr><th>类别<th>命令<th>作用<tbody><tr><td>TeX<td>\def<td>定义宏<tr><td>TeX<td>\gdef<td>全局宏<tr><td>TeX<td>\edef<td>展开定义<tr><td>TeX<td>\xdef<td>全局展开<tr><td>TeX<td>\let<td>赋值宏<tr><td>LaTeX<td>\newcommand<td>新宏<tr><td>LaTeX<td>\renewcommand<td>重定义<tr><td>LaTeX<td>\providecommand<td>安全定义<tr><td>LaTeX<td>\DeclareRobustCommand<td>鲁棒宏<tr><td>LaTeX<td>\NewDocumentCommand<td>现代宏<tr><td>LaTeX<td>\NewExpandableDocumentCommand<td>可展开宏</table></div><p>\newcommand<p>\renewcommand<p>\def<p>\let<p>\DeclareRobustCommand<p>\NewDocumentCommand<h4 id=常用宏><a class=headerlink href=#常用宏 title=常用宏></a>常用宏</h4><p><code>\newifif</code><p><code>\newif</code> 用来<strong>创建一个布尔型开关宏</strong>（true/false），通常用于：<ul><li>选项开关（class/package options）<li>控制是否执行某段代码</ul><p>它会生成三个宏：<ol><li><code>\&LTname>true</code> — 设置开关为真<li><code>\&LTname>false</code> — 设置开关为假<li><code>\&LTname>?</code> — 查询开关状态（返回 true/false 可用在 if 语句中）</ol><figure class="highlight haxe"><table><tr><td class=gutter><pre><span class=line>1</span><br></pre><td class=code><pre><span class=line>\<span class=keyword>new</span><span class=type>if</span>\<span class=keyword>if</span>&LTname></span><br></pre></table></figure><ul><li><code>&LTname></code>：开关名称（不带 <code>if</code> 前缀）<li>自动生成 <code>\if&LTname></code> 条件宏</ul><p>例子：<figure class="highlight haxe"><table><tr><td class=gutter><pre><span class=line>1</span><br></pre><td class=code><pre><span class=line>\<span class=keyword>new</span><span class=type>if</span>\ifdraft</span><br></pre></table></figure><p>生成：<ul><li><code>\ifdraft</code> → 条件宏<li><code>\drafttrue</code> → 将 <code>\ifdraft</code> 设置为真<li><code>\draftfalse</code> → 将 <code>\ifdraft</code> 设置为假</ul><p><code>\def</code>重定义宏<h2 id=有了基础之后><a class=headerlink href=#有了基础之后 title=有了基础之后></a>有了基础之后</h2><p>所谓文学编程，本质还是利用%表示注解并可以输出到pdf中供使用者查看，而不使用%可以输出到cls源码进行构建。因为dtx文件本质包含了cls文件和可以导出pdf的注释，所以我们直接看cls文件。<p>以一个硕士毕业论文模板讨论。<a href=https://github.dev/drowning-in-codes/Yet-Another-LaTeX-Template-for-NPU-Thesis rel=noopener target=_blank>yanputhesis.cls</a><figure class="highlight tex"><table><tr><td class=gutter><pre><span class=line>1</span><br><span class=line>2</span><br><span class=line>3</span><br></pre><td class=code><pre><span class=line><span class=keyword>\NeedsTeXFormat</span>{LaTeX2e}[2005/12/01]</span><br><span class=line><span class=keyword>\ProvidesClass</span>{yanputhesis}</span><br><span class=line>    [2023/03/07 v1.8.5 Yet Another NPU Thesis Template]</span><br></pre></table></figure><figure class="highlight awk"><table><tr><td class=gutter><pre><span class=line>1</span><br></pre><td class=code><pre><span class=line>\NeedsTeXFormat{LaTeX2e}[<span class=number>2005</span><span class=regexp>/12/</span><span class=number>01</span>]</span><br></pre></table></figure><ul><li><strong>作用</strong>：指定运行该文件所需的最低格式版本。<li><strong>含义</strong>：它告诉编译器，该模板必须在核心宏包版本日期不能早于 <strong>2005年12月1日</strong>。如果用户使用的系统过于陈旧，编译器会发出警告。</ul><figure class="highlight dust"><table><tr><td class=gutter><pre><span class=line>1</span><br></pre><td class=code><pre><span class=line><span class=xml>\ProvidesClass</span><span class=template-variable>{yanputhesis}</span></span><br></pre></table></figure><ul><li><strong>作用</strong>：向系统声明这个文件的名称。<li><strong>重要性</strong>：这个名字必须与你文件夹中的文件名 <strong>严格一致</strong>（即文件名必须是 <code>yanputhesis.cls</code>）。当用户在 <code>.tex</code> 主文件中写下 <code>\documentclass{yanputhesis}</code> 时，系统就是通过这个命令来确认“找对人了”。</ul><figure class="highlight tex"><table><tr><td class=gutter><pre><span class=line>1</span><br></pre><td class=code><pre><span class=line><span class=keyword>\RequirePackage</span>{xkeyval}</span><br></pre></table></figure><ul><li><strong>作用</strong>：引入高级参数处理宏包。<li><strong>意义</strong>：原生的 LaTeX 只支持简单的 <code>[option]</code>。使用 <code>xkeyval</code> 后，模板可以处理像 <code>type=phd</code> 或 <code>font=adobe</code> 这样“键-值对”格式的复杂选项。</ul><p>定义状态开关 (<code>\newif</code>)<p>这一部分定义了大量的布尔变量（即只有“真”或“假”两种状态的开关）。<blockquote><p><strong>注意</strong>：命令中包含 <code>@</code> 符号，说明这些是<strong>内部命令</strong>，防止普通用户在正文中误改。</blockquote><div class=table-container><table><thead><tr><th><strong>命令</strong><th><strong>对应功能</strong><th><strong>默认含义</strong><tbody><tr><td><code>\if@npu@lang@chs</code><td><strong>语言环境</strong><td>如果为真，则排版中文版；为假则排版英文版。<tr><td><code>\if@npu@type@phd</code><td><strong>博士学位</strong><td>标记当前是否为博士论文。<tr><td><code>\if@npu@type@mst</code><td><strong>硕士学位</strong><td>标记当前是否为硕士论文。<tr><td><code>\if@npu@type@bcl</code><td><strong>本科毕业设计</strong><td>标记当前是否为本科生论文。<tr><td><code>\if@npu@academic</code><td><strong>学术/专业</strong><td>用于区分“学术学位”和“专业学位”（工程硕士等）。<tr><td><code>\if@npu@output@blindreview</code><td><strong>盲评模式</strong><td><strong>重要开关</strong>。开启后会隐藏作者姓名、导师等敏感信息。<tr><td><code>\if@npu@font@adobe</code><td><strong>Adobe 字体</strong><td>是否使用 Adobe 系列字体进行排版。<tr><td><code>\if@npu@font@winfonts</code><td><strong>Windows 字体</strong><td>是否强制调用 Windows 系统内置字体（如中易宋体）。</table></div><p><code>\def</code> 定义的宏是用来具体“拨动”上面那些开关的。最巧妙的是<strong>互斥（Mutex）</strong>逻辑：<p>代码段<figure class="highlight tex"><table><tr><td class=gutter><pre><span class=line>1</span><br></pre><td class=code><pre><span class=line><span class=keyword>\def</span><span class=keyword>\set@type@phd</span>{ <span class=keyword>\@npu@type@phdtrue</span> <span class=keyword>\@npu@type@mstfalse</span> <span class=keyword>\@npu@type@bclfalse</span>}</span><br></pre></table></figure><ul><li><strong>逻辑解析</strong>：当你设置论文类型为“博士（phd）”时，程序会自动将 <code>phd</code> 设为 <code>true</code>，同时<strong>强制</strong>将 <code>mst</code>（硕士）和 <code>bcl</code>（本科）设为 <code>false</code>。<li><strong>目的</strong>：防止用户由于误操作同时开启了多个学位类型，导致封面排版冲突。</ul><p>当你写下： <code>\documentclass[type=phd, lang=chs]{yanputhesis}</code><ol><li><code>xkeyval</code> 会解析出 <code>type=phd</code>。<li>模板内部会调用 <code>\set@type@phd</code>。<li>随后模板会根据 <code>\if@npu@type@phd</code> 这个开关是否为真，来决定封面上打印“<strong>博士学位论文</strong>”还是“<strong>硕士学位论文</strong>”。</ol><p>代码中多次出现的 <code>\csname ... \endcsname</code> 是底层命令，用于<strong>将字符串动态转换为命令名</strong>。<ul><li><strong>示例</strong>：<code>\DeclareOptionX{lang}[chs]{\csname set@lang@#1\endcsname}</code><ul><li>如果用户写 <code>lang=eng</code>，<code>#1</code> 就是 <code>eng</code>。<li>系统会自动拼接成 <code>\set@lang@eng</code> 并执行，从而调用你上一段代码中定义的语言设置宏。</ul></ul><p>使用模板,其中lang=chs等选项就是通过<code>\DeclareOptionX{键名}[默认值]{执行代码}</code>设置的<figure class="highlight tex"><table><tr><td class=gutter><pre><span class=line>1</span><br></pre><td class=code><pre><span class=line><span class=keyword>\documentclass</span>[lang=chs, degree=phd, blindreview=false, winfonts=true, academic=true]{yanputhesis}</span><br></pre></table></figure><figure class="highlight tex"><table><tr><td class=gutter><pre><span class=line>1</span><br><span class=line>2</span><br><span class=line>3</span><br><span class=line>4</span><br><span class=line>5</span><br><span class=line>6</span><br><span class=line>7</span><br></pre><td class=code><pre><span class=line><span class=keyword>\DeclareOptionX</span>{lang}[chs]{<span class=keyword>\csname</span> set@lang@<span class=params>#1</span><span class=keyword>\endcsname</span>}</span><br><span class=line><span class=keyword>\DeclareOptionX</span>{degree}[phd]{<span class=keyword>\csname</span> set@type@<span class=params>#1</span><span class=keyword>\endcsname</span>}</span><br><span class=line><span class=keyword>\DeclareOptionX</span>{blindreview}[true]{<span class=keyword>\csname</span> @npu@output@blindreview<span class=params>#1</span><span class=keyword>\endcsname</span>}</span><br><span class=line><span class=keyword>\DeclareOptionX</span>{adobe}[true]{<span class=keyword>\csname</span> @npu@font@adobe<span class=params>#1</span><span class=keyword>\endcsname</span>}</span><br><span class=line><span class=keyword>\DeclareOptionX</span>{winfonts}[true]{<span class=keyword>\csname</span> @npu@font@winfonts<span class=params>#1</span><span class=keyword>\endcsname</span>}</span><br><span class=line><span class=keyword>\DeclareOptionX</span>{academic}[true]{<span class=keyword>\csname</span> @npu@academic<span class=params>#1</span><span class=keyword>\endcsname</span>}</span><br><span class=line><span class=keyword>\DeclareOptionX</span>*{<span class=keyword>\PassOptionsToClass</span>{<span class=keyword>\CurrentOption</span>}{book}} <span class=comment>% 传递参数到 book 类</span></span><br></pre></table></figure><figure class="highlight tex"><table><tr><td class=gutter><pre><span class=line>1</span><br></pre><td class=code><pre><span class=line><span class=keyword>\DeclareOptionX</span>{键名}[默认值]{执行代码}</span><br></pre></table></figure><ul><li><strong>键名 (Key)</strong>：用户在 <code>\documentclass[...]</code> 中写的参数名（如 <code>lang</code>、<code>degree</code>）。<li><strong>默认值 (Default)</strong>：如果用户只写了键名而没给值（例如只写 <code>[lang]</code> 而非 <code>[lang=chs]</code>），系统会自动套用的值。<li><strong>执行代码</strong>：当该选项被激活时运行的 LaTeX 指令。在代码中，<strong><code>#1</code></strong> 代表用户输入的数据。</ul><p><code>\ExecuteOptionsX</code>这些命令的作用是设定<strong>默认值</strong>。如果在 <code>\documentclass{yanputhesis}</code> 中没有输入任何参数，模板将自动按照以下配置运行<p><strong><code>\ProcessOptionsX \relax</code></strong> 这是整个参数解析流程的“开关”。它会对比用户在文档开头输入的参数与上述默认值，最终决定当前编译环境的各项指标。<p><strong><code>\LoadClass[...] {book}</code></strong> 这行代码表明 <code>yanputhesis</code> 是<strong>继承自基础 <code>book</code> 类</strong>开发的<p>所以上面的代码通过<code>DecareOptionX</code>声明选项,并设置变量,方便后续通过变量设置属性。<figure class="highlight tex"><table><tr><td class=gutter><pre><span class=line>1</span><br><span class=line>2</span><br><span class=line>3</span><br><span class=line>4</span><br><span class=line>5</span><br><span class=line>6</span><br><span class=line>7</span><br><span class=line>8</span><br><span class=line>9</span><br><span class=line>10</span><br><span class=line>11</span><br></pre><td class=code><pre><span class=line><span class=keyword>\newcommand</span><span class=keyword>\@npu@replaceitwithblank</span>[1]{{<span class=keyword>\setlength</span>{<span class=comment>%        % 替换成相同宽度空白</span></span><br><span class=line>                <span class=keyword>\fboxsep</span>}{0pt}<span class=keyword>\colorbox</span>{white}{<span class=keyword>\phantom</span>{<span class=params>#1</span>}}}}</span><br><span class=line><span class=keyword>\newcommand</span><span class=keyword>\@npu@replaceitwithblack</span>[1]{{<span class=keyword>\setlength</span>{<span class=comment>%        % 替换成涂黑方块</span></span><br><span class=line>                <span class=keyword>\fboxsep</span>}{0pt}<span class=keyword>\colorbox</span>{black}{<span class=keyword>\phantom</span>{<span class=params>#1</span>}}}}</span><br><span class=line><span class=keyword>\newcommand</span><span class=keyword>\@npu@replaceitwithstars</span>{ *** }                  <span class=comment>% 替换成 3 个星号</span></span><br><span class=line><span class=keyword>\newcommand</span>{<span class=keyword>\blindreview</span>}[1]{<span class=keyword>\if@npu@output@blindreview</span><span class=comment>%    % 空白盲评标记</span></span><br><span class=line>        <span class=keyword>\@npu@replaceitwithblank</span>{<span class=params>#1</span>}<span class=keyword>\relax</span><span class=keyword>\else</span> <span class=params>#1</span><span class=keyword>\fi</span>}      <span class=comment>%</span></span><br><span class=line><span class=keyword>\newcommand</span>{<span class=keyword>\blackbox</span>}[1]{<span class=keyword>\if@npu@output@blindreview</span><span class=comment>%       % 涂黑盲评标记</span></span><br><span class=line>        <span class=keyword>\@npu@replaceitwithblack</span>{<span class=params>#1</span>}<span class=keyword>\relax</span><span class=keyword>\else</span> <span class=params>#1</span><span class=keyword>\fi</span>}      <span class=comment>%</span></span><br><span class=line><span class=keyword>\newcommand</span>{<span class=keyword>\markname</span>}[1]{<span class=keyword>\if@npu@output@blindreview</span><span class=comment>%       % 打星盲评标记</span></span><br><span class=line>        <span class=keyword>\@npu@replaceitwithstars</span><span class=keyword>\relax</span><span class=keyword>\else</span> <span class=params>#1</span><span class=keyword>\fi</span>}          <span class=comment>%</span></span><br></pre></table></figure><p>利用<code>\newcommand</code>自定义命令,现代latex也可以使用<figure class="highlight tex"><table><tr><td class=gutter><pre><span class=line>1</span><br></pre><td class=code><pre><span class=line><span class=keyword>\NewDocumentCommand</span>{<span class=keyword>\命</span>令名}{参数类型}{定义内容}</span><br></pre></table></figure><ul><li><strong><code>m</code></strong>：代表必选参数 (Mandatory)。<li><strong><code>O{默认值}</code></strong>：代表可选参数 (Optional)，且带有默认值。</ul><div class=table-container><table><thead><tr><th><strong>组成部分</strong><th><strong>是否必选</strong><th><strong>作用描述</strong><tbody><tr><td><strong><code>{\命令名}</code></strong><td><strong>必选</strong><td>你要创建的新命令名称，必须以反斜杠 <code>\</code> 开头。<tr><td><strong><code>[参数个数]</code></strong><td>可选<td>定义该命令接受多少个参数，取值范围是 <strong>1–9</strong>。如果不写，默认为 0（即无参数）。<tr><td><strong><code>[默认值]</code></strong><td>可选<td>如果写了这一项，新命令的<strong>第一个参数</strong>就变成了“可选参数”。如果不填，则使用这个默认值。<tr><td><strong><code>{具体定义}</code></strong><td><strong>必选</strong><td>命令实际执行的内容。使用 <strong><code>#1</code>, <code>#2</code> … <code>#9</code></strong> 来代表传入的参数。</table></div><div class=table-container><table><thead><tr><th><strong>命令</strong><th><strong>行为逻辑</strong><th><strong>适用场景</strong><tbody><tr><td><strong><code>\newcommand</code></strong><td>如果已存在，<strong>报错</strong><td>定义全新的、确定没有重名的命令。<tr><td><strong><code>\renewcommand</code></strong><td>如果不存在，<strong>报错</strong><td><strong>修改</strong>现有的命令（比如修改西工大模板默认的标题格式）。<tr><td><strong><code>\providecommand</code></strong><td>无论是否存在，<strong>都不报错</strong><td>“如果没有就定义，有就跳过”。常用于编写兼容性代码。<tr><td><strong><code>\DeclareRobustCommand</code></strong><td>无论是否存在，直接覆盖<td>增强型定义，防止命令在页眉、目录等“移动参数”中失效。</table></div><p>另外也有利用<code>\let</code>和<code>\renewcommand</code>重新定义声明,<figure class="highlight tex"><table><tr><td class=gutter><pre><span class=line>1</span><br><span class=line>2</span><br><span class=line>3</span><br><span class=line>4</span><br><span class=line>5</span><br><span class=line>6</span><br><span class=line>7</span><br><span class=line>8</span><br><span class=line>9</span><br><span class=line>10</span><br><span class=line>11</span><br><span class=line>12</span><br><span class=line>13</span><br><span class=line>14</span><br><span class=line>15</span><br><span class=line>16</span><br><span class=line>17</span><br><span class=line>18</span><br><span class=line>19</span><br></pre><td class=code><pre><span class=line><span class=keyword>\let</span><span class=keyword>\old@toc</span><span class=keyword>\tableofcontents</span>                                <span class=comment>% 目录</span></span><br><span class=line><span class=keyword>\renewcommand</span>{<span class=keyword>\tableofcontents</span>}{                            <span class=comment>%</span></span><br><span class=line>    <span class=keyword>\sDefault</span><span class=keyword>\phantomsection</span>                                <span class=comment>%</span></span><br><span class=line>    <span class=comment>% \addcontentsline{toc}{chapter}{\contentsname}           %</span></span><br><span class=line>    <span class=keyword>\bookmark</span>[dest=<span class=keyword>\HyperLocalCurrentHref</span>, level=0]{<span class=keyword>\contentsname</span>}</span><br><span class=line>    <span class=keyword>\old@toc</span> <span class=keyword>\cleardoublepage</span>                               <span class=comment>%</span></span><br><span class=line>}                                                           <span class=comment>%</span></span><br><span class=line><span class=keyword>\let</span><span class=keyword>\old@lof</span><span class=keyword>\listoffigures</span>                                  <span class=comment>% 图目录</span></span><br><span class=line><span class=keyword>\renewcommand</span>{<span class=keyword>\listoffigures</span>}{                              <span class=comment>%</span></span><br><span class=line>    <span class=keyword>\sDefault</span><span class=keyword>\phantomsection</span>                                <span class=comment>%</span></span><br><span class=line>    <span class=keyword>\addcontentsline</span>{toc}{chapter}{<span class=keyword>\listfigurename</span>}         <span class=comment>%</span></span><br><span class=line>    <span class=keyword>\old@lof</span> <span class=keyword>\cleardoublepage</span>                               <span class=comment>%</span></span><br><span class=line>}                                                           <span class=comment>%</span></span><br><span class=line><span class=keyword>\let</span><span class=keyword>\old@log</span><span class=keyword>\listoftables</span>                                   <span class=comment>% 表目录</span></span><br><span class=line><span class=keyword>\renewcommand</span>{<span class=keyword>\listoftables</span>}{                               <span class=comment>%</span></span><br><span class=line>    <span class=keyword>\sDefault</span><span class=keyword>\phantomsection</span>                                <span class=comment>%</span></span><br><span class=line>    <span class=keyword>\addcontentsline</span>{toc}{chapter}{<span class=keyword>\listtablename</span>}          <span class=comment>%</span></span><br><span class=line>    <span class=keyword>\old@log</span> <span class=keyword>\cleardoublepage</span>                               <span class=comment>%</span></span><br><span class=line>}  </span><br></pre></table></figure><h2 id=相关资料><a class=headerlink href=#相关资料 title=相关资料></a>相关资料</h2><ol><li><a href=https://zhuanlan.zhihu.com/p/77537952 rel=noopener target=_blank>【LaTex】cls文件编写和使用入门 - 知乎</a><li><a href=https://docs.aspose.com/tex/zh/net/latex-templates/ rel=noopener target=_blank>LaTeX 模板 - 快速入门指南</a><li><a href=https://xi-han.top/note/docs/latexcls.html rel=noopener target=_blank>LaTeX .cls 文件编写经验 | 学，行之，上也</a><li><a href=https://github.com/rockyzhz/latexdoc-chinese-translation/blob/main/clsguide-current-zh-cn/clsguide-zh-cn.pdf rel=noopener target=_blank>latexdoc-chinese-translation/clsguide-current-zh-cn/clsguide-zh-cn.pdf at main · rockyzhz/latexdoc-chinese-translation</a><li><a href=https://github.com/rockyzhz/latexdoc-chinese-translation rel=noopener target=_blank>rockyzhz/latexdoc-chinese-translation: LaTeX 文档中文翻译项目</a></ol><link href=/css/spoiler.css rel=stylesheet><script async src=/js/spoiler.js></script></div><div><div><div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div></div></div><div class=reward-container><div>感谢阅读.</div><button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">打赏</button><div style="display: none;" id=qr><div style="display: inline-block;"><img alt="Sekyoro 微信支付" src=/images/wechatpay.png><p>微信支付</div></div></div><div><ul class=post-copyright><li class=post-copyright-author><strong>本文作者： </strong>Sekyoro<li class=post-copyright-link><strong>本文链接：</strong> <a href=https://www.sekyoro.top/2026/01/21/cls%E6%96%87%E4%BB%B6%E7%BC%96%E5%86%99%E5%AE%9E%E6%88%98/ title=cls文件编写实战>https://www.sekyoro.top/2026/01/21/cls文件编写实战/</a><li class=post-copyright-license><strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href=https://creativecommons.org/licenses/by-nc-sa/4.0/ rel=noopener target=_blank><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</ul></div><div class=followme><p>欢迎关注我的其它发布渠道<div class=social-list><div class=social-item><a class=social-link href=/images/wxqrcode.png target=_blank> <span class=icon> <i class="fab fa-weixin"></i> </span> <span class=label>WeChat</span> </a></div><div class=social-item><a class=social-link href=/images/website.png target=_blank> <span class=icon> <i class="fa fa-user"></i> </span> <span class=label>PersonalWebsite</span> </a></div><div class=social-item><a class=social-link href=https://my-astro-git-main-drowning-in-codes.vercel.app target=_blank> <span class=icon> <i class="fas fa-share"></i> </span> <span class=label>杂鱼分享</span> </a></div><div class=social-item><a class=social-link href=/atom.xml target=_blank> <span class=icon> <i class="fa fa-rss"></i> </span> <span class=label>RSS</span> </a></div></div></div><footer class=post-footer><div class=post-nav><div class=post-nav-item><a href=/2026/01/16/%E6%99%BA%E5%8A%9B%E9%A2%98%E6%80%BB%E7%BB%93/ rel=prev title=智力题总结> <i class="fa fa-chevron-left"></i> 智力题总结 </a></div><div class=post-nav-item><a href=/2026/01/24/%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BD%91%E7%AB%99%E5%A4%87%E4%BB%BD%E5%AE%9E%E6%88%98/ rel=next title=服务器网站备份实战> 服务器网站备份实战 <i class="fa fa-chevron-right"></i> </a></div></div></footer></article></div><!-- 评论区 --><div class=comments><div data-id=city data-uid=MTAyMC81MzE5Ny8yOTY3Mg== id=lv-container></div></div><script>window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }</script></div><div class="toggle sidebar-toggle"><span class="toggle-line toggle-line-first"></span><span class="toggle-line toggle-line-middle"></span><span class="toggle-line toggle-line-last"></span></div><aside class=sidebar><div class=sidebar-inner><!-- canvas粒子时钟 --><div><canvas id=canvas style=width:60%;>当前浏览器不支持canvas，请更换浏览器后再试</canvas></div><script>(function(){
+
+   var digit=
+    [
+        [
+            [0,0,1,1,1,0,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,0,1,1,0],
+            [0,0,1,1,1,0,0]
+        ],//0
+        [
+            [0,0,0,1,1,0,0],
+            [0,1,1,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [1,1,1,1,1,1,1]
+        ],//1
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,1,1],
+            [1,1,1,1,1,1,1]
+        ],//2
+        [
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//3
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,0],
+            [0,0,1,1,1,1,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,1,1,0],
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,1]
+        ],//4
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,1,1,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//5
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//6
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0]
+        ],//7
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//8
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,1,1,0,0,0,0]
+        ],//9
+        [
+            [0,0,0,0,0,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,0,0,0]
+        ]//:
+    ];
+
+var canvas = document.getElementById('canvas');
+
+if(canvas.getContext){
+    var cxt = canvas.getContext('2d');
+    //声明canvas的宽高
+    var H = 100,W = 700;
+    canvas.height = H;
+    canvas.width = W;
+    cxt.fillStyle = '#f00';
+    cxt.fillRect(10,10,50,50);
+
+    //存储时间数据
+    var data = [];
+    //存储运动的小球
+    var balls = [];
+    //设置粒子半径
+    var R = canvas.height/20-1;
+    (function(){
+        var temp = /(\d)(\d):(\d)(\d):(\d)(\d)/.exec(new Date());
+        //存储时间数字，由十位小时、个位小时、冒号、十位分钟、个位分钟、冒号、十位秒钟、个位秒钟这7个数字组成
+        data.push(temp[1],temp[2],10,temp[3],temp[4],10,temp[5],temp[6]);
+    })();
+
+    /*生成点阵数字*/
+    function renderDigit(index,num){
+        for(var i = 0; i < digit[num].length; i++){
+            for(var j = 0; j < digit[num][i].length; j++){
+                if(digit[num][i][j] == 1){
+                    cxt.beginPath();
+                    cxt.arc(14*(R+2)*index + j*2*(R+1)+(R+1),i*2*(R+1)+(R+1),R,0,2*Math.PI);
+                    cxt.closePath();
+                    cxt.fill();
+                }
+            }
+        }
+    }
+
+    /*更新时钟*/
+    function updateDigitTime(){
+        var changeNumArray = [];
+        var temp = /(\d)(\d):(\d)(\d):(\d)(\d)/.exec(new Date());
+        var NewData = [];
+        NewData.push(temp[1],temp[2],10,temp[3],temp[4],10,temp[5],temp[6]);
+        for(var i = data.length-1; i >=0 ; i--){
+            //时间发生变化
+            if(NewData[i] !== data[i]){
+                //将变化的数字值和在data数组中的索引存储在changeNumArray数组中
+                changeNumArray.push(i+'_'+(Number(data[i])+1)%10);
+            }
+        }
+        //增加小球
+        for(var i = 0; i< changeNumArray.length; i++){
+            addBalls.apply(this,changeNumArray[i].split('_'));
+        }
+        data = NewData.concat();
+    }
+
+    /*更新小球状态*/
+    function updateBalls(){
+        for(var i = 0; i < balls.length; i++){
+            balls[i].stepY += balls[i].disY;
+            balls[i].x += balls[i].stepX;
+            balls[i].y += balls[i].stepY;
+            if(balls[i].x > W + R || balls[i].y > H + R){
+                balls.splice(i,1);
+                i--;
+            }
+        }
+    }
+
+    /*增加要运动的小球*/
+    function addBalls(index,num){
+        var numArray = [1,2,3];
+        var colorArray =  ["#3BE","#09C","#A6C","#93C","#9C0","#690","#FB3","#F80","#F44","#C00"];
+        for(var i = 0; i < digit[num].length; i++){
+            for(var j = 0; j < digit[num][i].length; j++){
+                if(digit[num][i][j] == 1){
+                    var ball = {
+                        x:14*(R+2)*index + j*2*(R+1)+(R+1),
+                        y:i*2*(R+1)+(R+1),
+                        stepX:Math.floor(Math.random() * 4 -2),
+                        stepY:-2*numArray[Math.floor(Math.random()*numArray.length)],
+                        color:colorArray[Math.floor(Math.random()*colorArray.length)],
+                        disY:1
+                    };
+                    balls.push(ball);
+                }
+            }
+        }
+    }
+
+    /*渲染*/
+    function render(){
+        //重置画布宽度，达到清空画布的效果
+        canvas.height = 100;
+        //渲染时钟
+        for(var i = 0; i < data.length; i++){
+            renderDigit(i,data[i]);
+        }
+        //渲染小球
+        for(var i = 0; i < balls.length; i++){
+            cxt.beginPath();
+            cxt.arc(balls[i].x,balls[i].y,R,0,2*Math.PI);
+            cxt.fillStyle = balls[i].color;
+            cxt.closePath();
+            cxt.fill();
+        }
+    }
+
+    clearInterval(oTimer);
+    var oTimer = setInterval(function(){
+        //更新时钟
+        updateDigitTime();
+        //更新小球状态
+        updateBalls();
+        //渲染
+        render();
+    },50);
+}
+
+})();</script><!-- require APlayer --><link href=https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css rel=stylesheet><script src=https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js></script><!-- require MetingJS --><script src=/js/meting-js.js></script><ul class="sidebar-nav motion-element"><li class=sidebar-nav-toc>文章目录<li class=sidebar-nav-overview>站点概览</ul><!--noindex--><div class="post-toc-wrap sidebar-panel"><div class="post-toc motion-element"><ol class=nav><li class="nav-item nav-level-2"><a class=nav-link href=#dtx%E6%96%87%E4%BB%B6><span class=nav-number>1.</span> <span class=nav-text>dtx文件</span></a><ol class=nav-child><li class="nav-item nav-level-3"><a class=nav-link href=#dtx%E5%8C%85%E5%90%AB%E5%86%85%E5%AE%B9><span class=nav-number>1.1.</span> <span class=nav-text>dtx包含内容</span></a><ol class=nav-child><li class="nav-item nav-level-4"><a class=nav-link href=#driver%E9%83%A8%E5%88%86><span class=nav-number>1.1.1.</span> <span class=nav-text>driver部分</span></a><li class="nav-item nav-level-4"><a class=nav-link href=#documentation%E9%83%A8%E5%88%86><span class=nav-number>1.1.2.</span> <span class=nav-text>documentation部分</span></a><li class="nav-item nav-level-4"><a class=nav-link href=#tagged-code%E9%83%A8%E5%88%86><span class=nav-number>1.1.3.</span> <span class=nav-text>tagged code部分</span></a><li class="nav-item nav-level-4"><a class=nav-link href=#%E6%A8%A1%E5%9D%97%E5%8C%96%E8%AE%BE%E8%AE%A1><span class=nav-number>1.1.4.</span> <span class=nav-text>模块化设计</span></a></ol><li class="nav-item nav-level-3"><a class=nav-link href=#%E5%A6%82%E4%BD%95%E8%AE%A9dtx%E7%94%9F%E6%88%90cls><span class=nav-number>1.2.</span> <span class=nav-text>如何让dtx生成cls</span></a></ol><li class="nav-item nav-level-2"><a class=nav-link href=#cls%E6%96%87%E4%BB%B6><span class=nav-number>2.</span> <span class=nav-text>cls文件</span></a><li class="nav-item nav-level-2"><a class=nav-link href=#%E5%AE%8F%E5%AE%9A%E4%B9%89><span class=nav-number>3.</span> <span class=nav-text>宏定义</span></a><ol class=nav-child><li class="nav-item nav-level-4"><a class=nav-link href=#%E5%B8%B8%E7%94%A8%E5%AE%8F><span class=nav-number>3.0.1.</span> <span class=nav-text>常用宏</span></a></ol></ol><li class="nav-item nav-level-2"><a class=nav-link href=#%E6%9C%89%E4%BA%86%E5%9F%BA%E7%A1%80%E4%B9%8B%E5%90%8E><span class=nav-number>4.</span> <span class=nav-text>有了基础之后</span></a><li class="nav-item nav-level-2"><a class=nav-link href=#%E7%9B%B8%E5%85%B3%E8%B5%84%E6%96%99><span class=nav-number>5.</span> <span class=nav-text>相关资料</span></a></div></div><!--/noindex--><div class="site-overview-wrap sidebar-panel"><div class="site-author motion-element" itemprop=author itemscope itemtype=http://schema.org/Person><img alt=Sekyoro class=site-author-image itemprop=image src=https://i.loli.net/2021/05/17/YqoavnXdGTpPO9R.jpg><p class=site-author-name itemprop=name>Sekyoro<div class=site-description itemprop=description>什么也无法舍弃的人，什么也做不了.</div></div><div class="site-state-wrap motion-element"><nav class=site-state><div class="site-state-item site-state-posts"><a href=/archives/> <span class=site-state-item-count>263</span> <span class=site-state-item-name>日志</span> </a></div><div class="site-state-item site-state-categories"><a href=/categories/> <span class=site-state-item-count>16</span> <span class=site-state-item-name>分类</span></a></div><div class="site-state-item site-state-tags"><a href=/tags/> <span class=site-state-item-count>224</span> <span class=site-state-item-name>标签</span></a></div></nav></div><div class="links-of-author motion-element"><span class=links-of-author-item> <a title="Personal Website → http://proanimer.com" href=http://proanimer.com/ rel=noopener target=_blank><i class="fab fa-internet-explorer fa-fw"></i>Personal Website</a> </span><span class=links-of-author-item> <a title="GitHub → https://github.com/drowning-in-codes" href=https://github.com/drowning-in-codes rel=noopener target=_blank><i class="fab fa-github fa-fw"></i>GitHub</a> </span><span class=links-of-author-item> <a title="E-Mail → mailto:bukalala174@gmail.com" href=mailto:bukalala174@gmail.com rel=noopener target=_blank><i class="fa fa-envelope fa-fw"></i>E-Mail</a> </span><span class=links-of-author-item> <a title="wxPublicAccount → https://mp.weixin.qq.com/s?__biz=Mzg3ODY1MDkzMg==&mid=2247483770&idx=1&sn=fdf88faab01d5c219ac609570a21c9d6&chksm=cf113221f866bb373938cfca03cf095ff4fe1e4dc37d68ef5de4cd4876ee1260fca0c015a4d6&token=1096259873&lang=zh_CN#rd" href=https://mp.weixin.qq.com/s?__biz=Mzg3ODY1MDkzMg==&mid=2247483770&idx=1&sn=fdf88faab01d5c219ac609570a21c9d6&chksm=cf113221f866bb373938cfca03cf095ff4fe1e4dc37d68ef5de4cd4876ee1260fca0c015a4d6&token=1096259873&lang=zh_CN#rd rel=noopener target=_blank><i class="fab fa-weixin fa-fw"></i>wxPublicAccount</a> </span><span class=links-of-author-item> <a title="RSS → /atom.xml" href=/atom.xml><i class="fa fa-rss fa-fw"></i>RSS</a> </span><span class=links-of-author-item> <a title="CSDN → https://blog.csdn.net/aqwca" href=https://blog.csdn.net/aqwca rel=noopener target=_blank><i class="fa fa-handshake fa-fw"></i>CSDN</a> </span><span class=links-of-author-item> <a title="杂鱼分享 → https://my-astro-git-main-drowning-in-codes.vercel.app" href=https://my-astro-git-main-drowning-in-codes.vercel.app/ rel=noopener target=_blank><i class="fas fa-share fa-fw"></i>杂鱼分享</a> </span></div><div class="links-of-blogroll motion-element"><div class=links-of-blogroll-title><i class="fa fa-link fa-fw"></i> 友情链接</div><ul class=links-of-blogroll-list><li class=links-of-blogroll-item><a href=http://myqhs.top/ rel=noopener target=_blank title=http://myqhs.top/>myqhs</a><li class=links-of-blogroll-item><a href=https://www.lllomh.com/ rel=noopener target=_blank title=https://www.lllomh.com/>芈渡</a><li class=links-of-blogroll-item><a href=https://protool-ten.vercel.app/ rel=noopener target=_blank title=https://protool-ten.vercel.app/>protools</a></ul></div><div class="motion-element announcement"><div class=title></div><p class=content><p class=date></div></div><meting-js id=6856787487 order=random server=netease type=playlist> </meting-js><div class=widget-wrap><h3 class=widget-title style=margin:0>此文章目前无词云</h3></div><script id=clustrmaps src=https://clustrmaps.com/map_v2.js?d=xQdGTxqARTBiNIwX2aUban-ixkj2s6VaZQWo-aVCgY8&cl=ffffff&w=a></script><div class="back-to-top motion-element"><i class="fa fa-arrow-up"></i><span>0%</span></div><!-- 边栏 --></div></aside><div id=sidebar-dimmer></div></div></main><footer class=footer><div class=footer-inner><div class=copyright>© Wed Apr 08 2020 08:00:00 GMT+0800 (中国标准时间) – <span itemprop=copyrightYear>2026</span><span class=with-love> <i class="fa fa-heart"></i> </span><span class=author itemprop=copyrightHolder>Sekyoro</span><span class=post-meta-divider>|</span><span class=post-meta-item-icon> <i class="fa fa-chart-area"></i> </span><span title=站点总字数>4.4m</span><span class=post-meta-divider>|</span><span class=post-meta-item-icon> <i class="fa fa-coffee"></i> </span><span title=站点阅读时长>66:09</span></div><script async src=https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js></script><span id=busuanzi_container_site_pv>总访问量<span id=busuanzi_value_site_pv></span>次</span><span class=post-meta-divider>|</span><span id=busuanzi_container_site_uv>总访客数<span id=busuanzi_value_site_uv></span>人</span><span class=post-meta-divider>|</span><!-- 不蒜子计数初始值纠正 --><script>document.addEventListener("DOMContentLoaded", function() {
+    var int = setInterval(fixCount, 50);  // 50ms周期检测函数
+    var countOffset = 20000;  // 初始化首次数据
+
+    function fixCount() {
+        var pvContainer = document.getElementById("busuanzi_container_site_pv");
+        if (pvContainer && pvContainer.style.display !== "none") {
+            var pvElement = document.getElementById("busuanzi_value_site_pv");
+            if (pvElement) {
+                pvElement.innerHTML = parseInt(pvElement.innerHTML) + countOffset;
+                clearInterval(int);
+            }
+        }
+        
+        var uvContainer = document.getElementById("busuanzi_container_site_uv");
+        if (uvContainer && window.getComputedStyle(uvContainer).display !== "none")
+        {
+            var uvElement = document.getElementById("busuanzi_value_site_uv");
+            if (uvElement) {
+                uvElement.innerHTML = parseInt(uvElement.innerHTML) + countOffset; // 加上初始数据 
+                clearInterval(int); // 停止检测
+            }
+        }
+    }
+});</script><div><span id=timeDate>载入天数...</span><span id=times>载入时分秒...</span><script>var now = new Date();
+    function createtime() {
+        var grt= new Date("04/08/2021 20:00:00");
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+    }
+setInterval("createtime()",250);</script></div><div class=busuanzi-count><script async data-pjax src=https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script><span style="display: none;" class=post-meta-item id=busuanzi_container_site_uv> <span class=post-meta-item-icon> <i class="fa fa-user"></i> </span> <span class=site-uv title=总访客量> <span id=busuanzi_value_site_uv></span> </span> </span><span class=post-meta-divider>|</span><span style="display: none;" class=post-meta-item id=busuanzi_container_site_pv> <span class=post-meta-item-icon> <i class="fa fa-eye"></i> </span> <span class=site-pv title=总访问量> <span id=busuanzi_value_site_pv></span> </span> </span></div></div></footer></div><script color=0,0,255 count=99 opacity=0.5 src=/lib/canvas-nest/canvas-nest.min.js zindex=-1></script><script src=/lib/anime.min.js></script><script src=https://cdn.jsdelivr.net/gh/theme-next/theme-next-pjax@0/pjax.min.js></script><script src=https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js></script><script src=https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js></script><script src=https://cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js></script><script src=https://cdn.jsdelivr.net/npm/velocity-animate@1/velocity.min.js></script><script src=https://cdn.jsdelivr.net/npm/velocity-animate@1/velocity.ui.min.js></script><script src=/js/utils.js></script><script src=/js/motion.js></script><script src=/js/schemes/pisces.js></script><script src=/js/next-boot.js></script><script src=/js/bookmark.js></script><script>var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax',
+	 '.widget-wrap'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+ 
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+  
+  // Reinitialize TagCanvas for tag cloud
+  if (typeof TagCanvas !== 'undefined' && document.getElementById('resCanvas')) {
+    try {
+      TagCanvas.textFont = 'Trebuchet MS, Helvetica';
+      TagCanvas.textColour = '#333';
+      TagCanvas.textHeight = 20;
+      TagCanvas.outlineColour = '#E2E1D1';
+      TagCanvas.maxSpeed = 0.3;
+      TagCanvas.freezeActive = true;
+      TagCanvas.outlineMethod = 'block';
+      TagCanvas.minBrightness = 0.2;
+      TagCanvas.depth = 0.92;
+      TagCanvas.pulsateTo = 0.6;
+      TagCanvas.initial = [0.1,-0.1];
+      TagCanvas.decel = 0.98;
+      TagCanvas.reverse = true;
+      TagCanvas.hideTags = false;
+      TagCanvas.shadow = '#ccf';
+      TagCanvas.shadowBlur = 3;
+      TagCanvas.weight = false;
+      TagCanvas.imageScale = null;
+      TagCanvas.fadeIn = 1000;
+      TagCanvas.clickToFront = 600;
+      TagCanvas.lock = false;
+      TagCanvas.Start('resCanvas');
+      TagCanvas.tc['resCanvas'].Wheel(true);
+    } catch(e) {
+      console.log('TagCanvas initialization failed:', e);
+    }
+  }
+});</script><script data-pjax>(function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();</script><script src=https://cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js></script><script src=https://cdn.jsdelivr.net/npm/instantsearch.js@4/dist/instantsearch.production.min.js></script><script src=/js/algolia-search.js></script><script data-pjax>document.querySelectorAll('.pdfobject-container').forEach(element => {
+  let url = element.dataset.target;
+  let pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  let pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  let fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});</script><div id=pjax><script charset=utf-8 defer src=/js/outdate.js></script></div><script charset=utf-8 defer src=/js/tagcanvas.js></script><script charset=utf-8 defer src=/js/tagcloud.js></script><script>NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});</script><script>var OriginTitile = document.title;
+  var titleTime;
+  document.addEventListener("visibilitychange", function() {
+    if (document.hidden) {
+      document.title = "(つェ⊂)我藏好了哦~" + OriginTitile;
+      clearTimeout(titleTime);
+    } else {
+      document.title = "(*´∇｀*) 被你发现啦~" + OriginTitile;
+      titleTime = setTimeout(function() {
+        document.title = OriginTitile;
+      }, 2000);
+    }
+  });</script><script src=/js/src/activate-power-mode.min.js></script><script>POWERMODE.colorful = true;
+    POWERMODE.shake = false;
+    document.body.addEventListener('input', POWERMODE);</script>
