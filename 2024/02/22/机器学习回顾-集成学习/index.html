@@ -1,4 +1,20 @@
-<!doctypehtml><html lang=zh-CN><script defer src=/live2d-widget/autoload.js></script><meta charset=UTF-8><meta content=width=device-width,initial-scale=1,maximum-scale=2 name=viewport><meta content=#222 name=theme-color><meta content="Hexo 5.4.0" name=generator><link href=/images/blog_32px.png rel=apple-touch-icon sizes=180x180><link href=/images/blog_32px.png rel=icon sizes=32x32 type=image/png><link href=/images/blog_16px.png rel=icon sizes=16x16 type=image/png><link color=#222 href=/images/logo.svg rel=mask-icon><meta content=EPrJAp11bJwHULpQUaSNSZ8_3RcvTsPDAEGOME4pl1w name=google-site-verification><!-- Google tag (gtag.js) --><!-- 
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<script defer src="/live2d-widget/autoload.js"></script>
+
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 8.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/blog_32px.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/blog_32px.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/blog_16px.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="EPrJAp11bJwHULpQUaSNSZ8_3RcvTsPDAEGOME4pl1w">
+
+<!-- Google tag (gtag.js) -->
+<!-- 
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-VB21D8MKKW"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -6,14 +22,67 @@
   gtag('js', new Date());
 
   gtag('config', 'G-VB21D8MKKW');
-</script> --><!-- google adsense in head.swig --><script async crossorigin=anonymous src=https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4034523802263123></script><meta content=7226864CE87CE9DE8C008385273846FF name=msvalidate.01><meta content=code-fjFXVtiL7j name=baidu-site-verification><link href=/css/main.css rel=stylesheet><link as=style href=https://fonts.googleapis.com/css?family=Roboto%20Mono,Roboto:300,300italic,400,400italic,700,700italic|Roboto:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext onload=this.rel='stylesheet' rel=preload><link as=style href=https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css onload=this.rel='stylesheet' rel=preload><link href=https://fonts.googleapis.com/css?family=Noto+Serif+SC|Roboto&display=swap rel=stylesheet><link href=https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css rel=stylesheet><link href=https://cdn.jsdelivr.net/npm/pace-js@1/themes/blue/pace-theme-minimal.css rel=stylesheet><script src=https://cdn.jsdelivr.net/npm/pace-js@1/pace.min.js></script><script id=hexo-configurations>var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"www.sekyoro.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":240,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"appID":"0F9LEEVW82","apiKey":"78839e9f9be09d081c5c4da81975cd19","indexName":"sekyoblog_sec","hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};</script><link href=//cdn.bootcss.com/animate.css/3.5.0/animate.min.css rel=stylesheet><meta content=传统的机器学习方法,现在用得不多了(自我感觉).但是有必要稍微了解一下原理。 name=description><meta content=article property=og:type><meta content=机器学习回顾:集成学习 property=og:title><meta content=https://www.sekyoro.top/2024/02/22/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9B%9E%E9%A1%BE-%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0/index.html property=og:url><meta content=Sekyoro的博客小屋 property=og:site_name><meta content=传统的机器学习方法,现在用得不多了(自我感觉).但是有必要稍微了解一下原理。 property=og:description><meta content=zh_CN property=og:locale><meta content=https://pic1.zhimg.com/80/v2-6a1eb954185433e79498dea9bf87e0e0_720w.webp property=og:image><meta content=2024-02-22T15:49:54.000Z property=article:published_time><meta content=2024-02-23T04:55:42.000Z property=article:modified_time><meta content=Sekyoro property=article:author><meta content="Ensemble Learning" property=article:tag><meta content=summary name=twitter:card><meta content=https://pic1.zhimg.com/80/v2-6a1eb954185433e79498dea9bf87e0e0_720w.webp name=twitter:image><link href=https://www.sekyoro.top/2024/02/22/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9B%9E%E9%A1%BE-%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0/ rel=canonical><script id=page-configurations>// https://hexo.io/docs/variables.html
+</script> -->
+
+<!-- google adsense in head.swig -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4034523802263123"
+     crossorigin="anonymous"></script>
+  <meta name="msvalidate.01" content="7226864CE87CE9DE8C008385273846FF">
+  <meta name="baidu-site-verification" content="code-fjFXVtiL7j" />
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto Mono,Roboto:300,300italic,400,400italic,700,700italic|Roboto:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css">
+<link href="https://fonts.googleapis.com/css?family=Noto+Serif+SC|Roboto&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@1/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.sekyoro.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":240,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"appID":"0F9LEEVW82","apiKey":"78839e9f9be09d081c5c4da81975cd19","indexName":"sekyoblog_sec","hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+<link href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css" rel="stylesheet">
+  <meta name="description" content="传统的机器学习方法,现在用得不多了(自我感觉).但是有必要稍微了解一下原理。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器学习回顾:集成学习">
+<meta property="og:url" content="https://www.sekyoro.top/2024/02/22/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9B%9E%E9%A1%BE-%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0/index.html">
+<meta property="og:site_name" content="Sekyoro的博客小屋">
+<meta property="og:description" content="传统的机器学习方法,现在用得不多了(自我感觉).但是有必要稍微了解一下原理。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://pic1.zhimg.com/80/v2-6a1eb954185433e79498dea9bf87e0e0_720w.webp">
+<meta property="article:published_time" content="2024-02-22T15:49:54.000Z">
+<meta property="article:modified_time" content="2024-02-23T04:55:42.000Z">
+<meta property="article:author" content="Sekyoro">
+<meta property="article:tag" content="Ensemble Learning">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pic1.zhimg.com/80/v2-6a1eb954185433e79498dea9bf87e0e0_720w.webp">
+
+<link rel="canonical" href="https://www.sekyoro.top/2024/02/22/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9B%9E%E9%A1%BE-%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
     isHome : false,
     isPost : true,
     lang   : 'zh-CN'
-  };</script><title>机器学习回顾:集成学习 | Sekyoro的博客小屋</title><noscript><style>.use-motion .brand,
+  };
+</script>
+
+  <title>机器学习回顾:集成学习 | Sekyoro的博客小屋</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
   .use-motion .menu-item,
   .sidebar-inner,
   .use-motion .post-block,
@@ -30,12 +99,383 @@
   }
 
   .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }</style></noscript><link href=/atom.xml rel=alternate title=Sekyoro的博客小屋 type=application/atom+xml><body itemscope itemtype=http://schema.org/WebPage><canvas style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" class=fireworks></canvas><script defer src=https://cdn.bootcss.com/animejs/2.2.0/anime.min.js></script><script defer src=/js/src/fireworks.js></script><div class="container use-motion"><div class=headband></div><header class=header itemscope itemtype=http://schema.org/WPHeader><div class=header-inner><div class=site-brand-container><div class=site-nav-toggle><div aria-label=切换导航栏 class=toggle><span class="toggle-line toggle-line-first"></span><span class="toggle-line toggle-line-middle"></span><span class="toggle-line toggle-line-last"></span></div></div><div class=site-meta><a class=brand href=/ rel=start> <span class=logo-line-before><i></i></span> <h1 class=site-title>Sekyoro的博客小屋</h1> <span class=logo-line-after><i></i></span> </a></div><div class=site-nav-right><div class="toggle popup-trigger"><i class="fa fa-search fa-fw fa-lg"></i></div></div></div><nav class=site-nav><ul class="main-menu menu" id=menu><li class="menu-item menu-item-home"><a href=/ rel=section><i class="fa fa-home fa-fw"></i>首页</a><li class="menu-item menu-item-about"><a href=/about/ rel=section><i class="fa fa-user fa-fw"></i>关于</a><li class="menu-item menu-item-tags"><a href=/tags/ rel=section><i class="fa fa-tags fa-fw"></i>标签</a><li class="menu-item menu-item-categories"><a href=/categories/ rel=section><i class="fa fa-th fa-fw"></i>分类</a><li class="menu-item menu-item-archives"><a href=/archives/ rel=section><i class="fa fa-archive fa-fw"></i>归档</a><li class="menu-item menu-item-bangumis"><a href=/bangumis/ rel=section><i class="fa fa-film fa-fw"></i>追番</a><li class="menu-item menu-item-resume"><a href=/resume/ rel=section><i class="fa fa-file-pdf fa-fw"></i>简历</a><li class="menu-item menu-item-materials"><a href=/materials/ rel=section><i class="fa fa-book fa-fw"></i>学习资料</a><li class="menu-item menu-item-sitemap"><a href=/sitemap.xml rel=section><i class="fa fa-sitemap fa-fw"></i>站点地图</a><li class="menu-item menu-item-search"><a class=popup-trigger role=button><i class="fa fa-search fa-fw"></i>搜索 </a></ul></nav><div class=search-pop-overlay><div class="popup search-popup"><div class=search-header><span class=search-icon> <i class="fa fa-search"></i> </span><div class=search-input-container></div><span class=popup-btn-close> <i class="fa fa-times-circle"></i> </span></div><div class=algolia-results><div id=algolia-stats></div><div id=algolia-hits></div><div class=algolia-pagination id=algolia-pagination></div></div></div></div></div></header><a class="book-mark-link book-mark-link-fixed" role=button></a><main class=main><div class=main-inner><div class=content-wrap><div class="content post posts-expand"><article class=post-block itemscope itemtype=http://schema.org/Article lang=zh-CN><link href=https://www.sekyoro.top/2024/02/22/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9B%9E%E9%A1%BE-%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0/ itemprop=mainEntityOfPage><span hidden itemprop=author itemscope itemtype=http://schema.org/Person> <meta content=https://i.loli.net/2021/05/17/YqoavnXdGTpPO9R.jpg itemprop=image> <meta content=Sekyoro itemprop=name> <meta content=什么也无法舍弃的人，什么也做不了. itemprop=description> </span><span hidden itemprop=publisher itemscope itemtype=http://schema.org/Organization> <meta content=Sekyoro的博客小屋 itemprop=name> </span><header class=post-header><h1 itemprop="name headline" class=post-title>机器学习回顾:集成学习</h1><div class=post-meta><span class=post-meta-item> <span class=post-meta-item-icon> <i class="far fa-calendar"></i> </span> <span class=post-meta-item-text>发表于</span> <time itemprop="dateCreated datePublished" title="创建时间：2024-02-22 23:49:54" datetime=2024-02-22T23:49:54+08:00>2024-02-22</time> </span><span class=post-meta-item> <span class=post-meta-item-icon> <i class="far fa-calendar-check"></i> </span> <span class=post-meta-item-text>更新于</span> <time title="修改时间：2024-02-23 12:55:42" datetime=2024-02-23T12:55:42+08:00 itemprop=dateModified>2024-02-23</time> </span><span style="display: none;" class=post-meta-item id=busuanzi_container_page_pv title=阅读次数> <span class=post-meta-item-icon> <i class="fa fa-eye"></i> </span> <span class=post-meta-item-text>阅读次数：</span> <span id=busuanzi_value_page_pv></span> </span><br><span class=post-meta-item title=本文字数> <span class=post-meta-item-icon> <i class="far fa-file-word"></i> </span> <span class=post-meta-item-text>本文字数：</span> <span>6.8k</span> </span><span class=post-meta-item title=阅读时长> <span class=post-meta-item-icon> <i class="far fa-clock"></i> </span> <span class=post-meta-item-text>阅读时长 ≈</span> <span>6 分钟</span> </span></div></header><div class=post-body itemprop=articleBody><div class=post-tags><a href=/tags/Ensemble-Learning/ rel=tag># Ensemble Learning</a></div><p>传统的机器学习方法,现在用得不多了(自我感觉).但是有必要稍微了解一下原理。<br><span id=more></span><p>集成学习方法可以分为Bagging,Boosting以及Stacking.<p>Bagging也称为bootstrap聚合，是预测模型的多个版本的聚合。每个模型都是单独训练的，并使用平均过程进行组合。装袋的主要重点是实现比任何模型单独具有的方差更小的方差。<p>Bootstrapping 是从给定的数据集中生成自举样本的过程。样本是通过随机抽取数据点并进行替换而形成的。<p>重新采样的数据包含原始数据中作为一个整体的不同特征。它绘制了数据点中存在的分布，并且往往保持彼此不同，即数据分布必须保持完整，同时保持Bootstrapping 样本之间的不相似性.其实这跟目前深度学习中的样本增强等概念又何尝不同呢.<p>在Bagging中,首先创建自举样本.然后,对每个样本应用回归算法或分类算法.最后在回归的情况下,对个体学习者预测的所有输出取平均值.对于分类,要么接受投票最多的类别（硬投票）,要么将所有类别概率的最高平均值作为输出（软投票）</p><script type="math/tex; mode=display">
-\widehat{f_{bag}}=\widehat{f_1}\left(X\right)+\widehat{f_2}\left(X\right)+\cdots+\widehat{f_b}\left(X\right)</script><figure class="highlight python"><table><tr><td class=gutter><pre><span class=line>1</span><br><span class=line>2</span><br><span class=line>3</span><br><span class=line>4</span><br><span class=line>5</span><br><span class=line>6</span><br><span class=line>7</span><br><span class=line>8</span><br><span class=line>9</span><br><span class=line>10</span><br><span class=line>11</span><br><span class=line>12</span><br></pre><td class=code><pre><span class=line><span class=keyword>import</span> pandas</span><br><span class=line><span class=keyword>from</span> sklearn <span class=keyword>import</span> model_selection</span><br><span class=line><span class=keyword>from</span> sklearn.ensemble <span class=keyword>import</span> BaggingClassifier</span><br><span class=line><span class=keyword>from</span> sklearn.tree <span class=keyword>import</span> DecisionTreeClassifier</span><br><span class=line>seed = <span class=number>7</span></span><br><span class=line>kfold = model_selection.KFold(n_splits=<span class=number>10</span>, random_state=seed)</span><br><span class=line>cart = DecisionTreeClassifier()</span><br><span class=line>num_trees = <span class=number>100</span></span><br><span class=line>model = BaggingClassifier(base_estimator=cart,n_estimators=num_trees, random_state=seed)</span><br><span class=line></span><br><span class=line>results = model_selection.cross_val_score(model, X, Y, cv=kfold)</span><br><span class=line><span class=built_in>print</span>(results.mean())</span><br></pre></table></figure><p>Stacking是通过一个元分类器或者元回归器来整合多个分类模型或回归模型的集成学习技术。基础模型利用整个训练集做训练，元模型将基础模型的特征作为特征进行训练.感觉有点类似于元学习(meta learning)的概念.<p><img alt=img data-src=https://pic1.zhimg.com/80/v2-6a1eb954185433e79498dea9bf87e0e0_720w.webp><p>或者又可以分为顺序的和并行的训练器.不同的模型按顺序生成,之前模型的错误由后面的分类器学习.这旨在通过赋予错误标记的示例更高的权重（例如AdaBoost）来利用模型之间的相关性。<p>并行训练器,其中基础模型是并行生成的.这通过平均错误来利用模型之间的独立性（例如随机森林）<p>这里主要介绍其中的Boosting,Boosting算法试图从几个较弱模型的错误中建立一个强大的学习者（预测模型）。首先从训练数据创建模型.然后通过尝试减少上一个模型中的错误,从上一个创建第二个模型.依次添加模型,每个模型都对其前身进行校正,直到训练数据得到完美预测或添加了最大数量的模型。<p>Boosting包括AdaBoost,Gradient Tree Boosting等等.<h3 id=AdaBoost><a class=headerlink href=#AdaBoost title=AdaBoost></a>AdaBoost</h3><p>AdaBoost是一种非常流行的Boosting技术,旨在将多个弱分类器组合起来构建一个强分类器.弱分类器比随机猜测性能更好，但在为对象指定类方面仍然表现不佳。单个分类器可能无法准确预测对象的类别，但当我们将多个弱分类器分组，每个弱分类器从其他错误分类的对象中逐步学习时，我们可以建立一个这样的强模型。这里提到的分类器可以是任何基本分类器，从决策树（通常是默认的）到逻辑回归等。<p>步骤1：基于加权样本在训练数据之上进行弱分类器（例如decision stump）.每个样本的权重表明正确分类的重要性。最初，对于第一个stump,我们给予所有样本相等的权重。<p>第2步：我们为每个变量创建一个决策树桩,看看每个树桩将样本分类到目标类的效果如何.<p>步骤3：将更多的权重分配给分类错误的样本,以便在下一个决策阶段对其进行正确分类.权重也根据分类器的精度分配给每个分类器,这意味着高精度=高权重<p>第4步：从第2步开始重复,直到所有数据点都被正确分类,或者达到最大迭代级别.<p>首先给每个样本相同权重,计算得到的预测结果错误率,根据错误率得到α</p><script type="math/tex; mode=display">
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Sekyoro的博客小屋" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+
+
+  <div class="container use-motion">
+    <div class="headband"></div>
+	
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Sekyoro的博客小屋</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-bangumis">
+
+    <a href="/bangumis/" rel="section"><i class="fa fa-film fa-fw"></i>追番</a>
+
+  </li>
+        <li class="menu-item menu-item-resume">
+
+    <a href="/resume/" rel="section"><i class="fa fa-file-pdf fa-fw"></i>简历</a>
+
+  </li>
+        <li class="menu-item menu-item-materials">
+
+    <a href="/materials/" rel="section"><i class="fa fa-book fa-fw"></i>学习资料</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container"></div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="algolia-results">
+  <div id="algolia-stats"></div>
+  <div id="algolia-hits"></div>
+  <div id="algolia-pagination" class="algolia-pagination"></div>
+</div>
+
+      
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.sekyoro.top/2024/02/22/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9B%9E%E9%A1%BE-%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://i.loli.net/2021/05/17/YqoavnXdGTpPO9R.jpg">
+      <meta itemprop="name" content="Sekyoro">
+      <meta itemprop="description" content="什么也无法舍弃的人，什么也做不了.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sekyoro的博客小屋">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          机器学习回顾:集成学习
+        </h1>
+
+        <div class="post-meta">
+		
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-02-22 23:49:54" itemprop="dateCreated datePublished" datetime="2024-02-22T23:49:54+08:00">2024-02-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-02-23 12:55:42" itemprop="dateModified" datetime="2024-02-23T12:55:42+08:00">2024-02-23</time>
+              </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>1.9k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span>7 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+        <div class="post-body" itemprop="articleBody">
+            <div class="post-tags">
+                <a href="/tags/Ensemble-Learning/" rel="tag"># Ensemble Learning</a>
+            </div>
+    
+          
+        <p>传统的机器学习方法,现在用得不多了(自我感觉).但是有必要稍微了解一下原理。<br><span id="more"></span></p>
+<p>集成学习方法可以分为Bagging,Boosting以及Stacking.</p>
+<p>Bagging也称为bootstrap聚合，是预测模型的多个版本的聚合。每个模型都是单独训练的，并使用平均过程进行组合。装袋的主要重点是实现比任何模型单独具有的方差更小的方差。</p>
+<p>Bootstrapping 是从给定的数据集中生成自举样本的过程。样本是通过随机抽取数据点并进行替换而形成的。</p>
+<p>重新采样的数据包含原始数据中作为一个整体的不同特征。它绘制了数据点中存在的分布，并且往往保持彼此不同，即数据分布必须保持完整，同时保持Bootstrapping 样本之间的不相似性.其实这跟目前深度学习中的样本增强等概念又何尝不同呢.</p>
+<p>在Bagging中,首先创建自举样本.然后,对每个样本应用回归算法或分类算法.最后在回归的情况下,对个体学习者预测的所有输出取平均值.对于分类,要么接受投票最多的类别（硬投票）,要么将所有类别概率的最高平均值作为输出（软投票）</p>
+<script type="math/tex; mode=display">
+\widehat{f_{bag}}=\widehat{f_1}\left(X\right)+\widehat{f_2}\left(X\right)+\cdots+\widehat{f_b}\left(X\right)</script><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas</span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> model_selection</span><br><span class="line"><span class="keyword">from</span> sklearn.ensemble <span class="keyword">import</span> BaggingClassifier</span><br><span class="line"><span class="keyword">from</span> sklearn.tree <span class="keyword">import</span> DecisionTreeClassifier</span><br><span class="line">seed = <span class="number">7</span></span><br><span class="line">kfold = model_selection.KFold(n_splits=<span class="number">10</span>, random_state=seed)</span><br><span class="line">cart = DecisionTreeClassifier()</span><br><span class="line">num_trees = <span class="number">100</span></span><br><span class="line">model = BaggingClassifier(base_estimator=cart,n_estimators=num_trees, random_state=seed)</span><br><span class="line"></span><br><span class="line">results = model_selection.cross_val_score(model, X, Y, cv=kfold)</span><br><span class="line"><span class="built_in">print</span>(results.mean())</span><br></pre></td></tr></table></figure>
+<p>Stacking是通过一个元分类器或者元回归器来整合多个分类模型或回归模型的集成学习技术。基础模型利用整个训练集做训练，元模型将基础模型的特征作为特征进行训练.感觉有点类似于元学习(meta learning)的概念.</p>
+<p><img data-src="https://pic1.zhimg.com/80/v2-6a1eb954185433e79498dea9bf87e0e0_720w.webp" alt="img"></p>
+<p>或者又可以分为顺序的和并行的训练器.不同的模型按顺序生成,之前模型的错误由后面的分类器学习.这旨在通过赋予错误标记的示例更高的权重（例如AdaBoost）来利用模型之间的相关性。</p>
+<p> 并行训练器,其中基础模型是并行生成的.这通过平均错误来利用模型之间的独立性（例如随机森林）</p>
+<p>这里主要介绍其中的Boosting,Boosting算法试图从几个较弱模型的错误中建立一个强大的学习者（预测模型）。首先从训练数据创建模型.然后通过尝试减少上一个模型中的错误,从上一个创建第二个模型.依次添加模型,每个模型都对其前身进行校正,直到训练数据得到完美预测或添加了最大数量的模型。</p>
+<p>Boosting包括AdaBoost,Gradient Tree Boosting等等.</p>
+<h3 id="AdaBoost"><a href="#AdaBoost" class="headerlink" title="AdaBoost"></a>AdaBoost</h3><p>AdaBoost是一种非常流行的Boosting技术,旨在将多个弱分类器组合起来构建一个强分类器.弱分类器比随机猜测性能更好，但在为对象指定类方面仍然表现不佳。单个分类器可能无法准确预测对象的类别，但当我们将多个弱分类器分组，每个弱分类器从其他错误分类的对象中逐步学习时，我们可以建立一个这样的强模型。这里提到的分类器可以是任何基本分类器，从决策树（通常是默认的）到逻辑回归等。</p>
+<p>步骤1：基于加权样本在训练数据之上进行弱分类器（例如decision stump）.每个样本的权重表明正确分类的重要性。最初，对于第一个stump,我们给予所有样本相等的权重。</p>
+<p>第2步：我们为每个变量创建一个决策树桩,看看每个树桩将样本分类到目标类的效果如何.</p>
+<p>步骤3：将更多的权重分配给分类错误的样本,以便在下一个决策阶段对其进行正确分类.权重也根据分类器的精度分配给每个分类器,这意味着高精度=高权重</p>
+<p>第4步：从第2步开始重复,直到所有数据点都被正确分类,或者达到最大迭代级别.</p>
+<p>首先给每个样本相同权重,计算得到的预测结果错误率,根据错误率得到α</p>
+<script type="math/tex; mode=display">
 error = sum(w(i) * terror(i)) / sum(w) \\
 terror = 0 if(y == p), otherwise 1</script><script type="math/tex; mode=display">
-\alpha_t=\frac12ln\frac{(1-TotalError)}{TotalError}</script><p>然后对权重进行更新</p><script type="math/tex; mode=display">
-w_i=w_{i-1}*e^{\pm\alpha}</script><p>当预测输出和实际输出一致时（样本分类正确），Alpha为正。在这种情况下，我们减少了样权重，因为已经表现得很好了。<p>当预测输出与实际类别不一致时（即样本分类错误），Alpha为负值。在这种情况下需要增加样本权重，以便在下一个树桩中不会重复相同的错误分类。<figure class="highlight python"><table><tr><td class=gutter><pre><span class=line>1</span><br><span class=line>2</span><br><span class=line>3</span><br><span class=line>4</span><br><span class=line>5</span><br><span class=line>6</span><br><span class=line>7</span><br><span class=line>8</span><br><span class=line>9</span><br><span class=line>10</span><br><span class=line>11</span><br><span class=line>12</span><br><span class=line>13</span><br><span class=line>14</span><br><span class=line>15</span><br><span class=line>16</span><br><span class=line>17</span><br><span class=line>18</span><br><span class=line>19</span><br><span class=line>20</span><br><span class=line>21</span><br><span class=line>22</span><br><span class=line>23</span><br><span class=line>24</span><br><span class=line>25</span><br><span class=line>26</span><br><span class=line>27</span><br><span class=line>28</span><br><span class=line>29</span><br><span class=line>30</span><br><span class=line>31</span><br><span class=line>32</span><br><span class=line>33</span><br><span class=line>34</span><br><span class=line>35</span><br><span class=line>36</span><br><span class=line>37</span><br><span class=line>38</span><br><span class=line>39</span><br><span class=line>40</span><br><span class=line>41</span><br><span class=line>42</span><br><span class=line>43</span><br><span class=line>44</span><br><span class=line>45</span><br><span class=line>46</span><br><span class=line>47</span><br><span class=line>48</span><br><span class=line>49</span><br><span class=line>50</span><br><span class=line>51</span><br><span class=line>52</span><br><span class=line>53</span><br><span class=line>54</span><br><span class=line>55</span><br><span class=line>56</span><br><span class=line>57</span><br><span class=line>58</span><br><span class=line>59</span><br><span class=line>60</span><br><span class=line>61</span><br><span class=line>62</span><br><span class=line>63</span><br><span class=line>64</span><br><span class=line>65</span><br><span class=line>66</span><br><span class=line>67</span><br><span class=line>68</span><br><span class=line>69</span><br><span class=line>70</span><br><span class=line>71</span><br><span class=line>72</span><br><span class=line>73</span><br><span class=line>74</span><br><span class=line>75</span><br><span class=line>76</span><br><span class=line>77</span><br><span class=line>78</span><br><span class=line>79</span><br><span class=line>80</span><br><span class=line>81</span><br><span class=line>82</span><br><span class=line>83</span><br><span class=line>84</span><br><span class=line>85</span><br><span class=line>86</span><br><span class=line>87</span><br><span class=line>88</span><br><span class=line>89</span><br><span class=line>90</span><br><span class=line>91</span><br><span class=line>92</span><br><span class=line>93</span><br><span class=line>94</span><br><span class=line>95</span><br><span class=line>96</span><br><span class=line>97</span><br><span class=line>98</span><br><span class=line>99</span><br><span class=line>100</span><br><span class=line>101</span><br><span class=line>102</span><br><span class=line>103</span><br><span class=line>104</span><br><span class=line>105</span><br><span class=line>106</span><br><span class=line>107</span><br><span class=line>108</span><br><span class=line>109</span><br><span class=line>110</span><br><span class=line>111</span><br><span class=line>112</span><br><span class=line>113</span><br><span class=line>114</span><br><span class=line>115</span><br><span class=line>116</span><br><span class=line>117</span><br><span class=line>118</span><br><span class=line>119</span><br><span class=line>120</span><br><span class=line>121</span><br><span class=line>122</span><br><span class=line>123</span><br><span class=line>124</span><br><span class=line>125</span><br><span class=line>126</span><br></pre><td class=code><pre><span class=line><span class=string>'''</span></span><br><span class=line><span class=string>Created on Nov 28, 2010</span></span><br><span class=line><span class=string>Adaboost is short for Adaptive Boosting</span></span><br><span class=line><span class=string>@author: Peter</span></span><br><span class=line><span class=string>'''</span></span><br><span class=line><span class=keyword>from</span> numpy <span class=keyword>import</span> *</span><br><span class=line></span><br><span class=line><span class=function><span class=keyword>def</span> <span class=title>loadSimpData</span>():</span></span><br><span class=line>    datMat = matrix([[ <span class=number>1.</span> ,  <span class=number>2.1</span>],</span><br><span class=line>        [ <span class=number>2.</span> ,  <span class=number>1.1</span>],</span><br><span class=line>        [ <span class=number>1.3</span>,  <span class=number>1.</span> ],</span><br><span class=line>        [ <span class=number>1.</span> ,  <span class=number>1.</span> ],</span><br><span class=line>        [ <span class=number>2.</span> ,  <span class=number>1.</span> ]])</span><br><span class=line>    classLabels = [<span class=number>1.0</span>, <span class=number>1.0</span>, -<span class=number>1.0</span>, -<span class=number>1.0</span>, <span class=number>1.0</span>]</span><br><span class=line>    <span class=keyword>return</span> datMat,classLabels</span><br><span class=line></span><br><span class=line><span class=function><span class=keyword>def</span> <span class=title>loadDataSet</span>(<span class=params>fileName</span>):</span>      <span class=comment>#general function to parse tab -delimited floats</span></span><br><span class=line>    numFeat = <span class=built_in>len</span>(<span class=built_in>open</span>(fileName).readline().split(<span class=string>'\t'</span>)) <span class=comment>#get number of fields </span></span><br><span class=line>    dataMat = []; labelMat = []</span><br><span class=line>    fr = <span class=built_in>open</span>(fileName)</span><br><span class=line>    <span class=keyword>for</span> line <span class=keyword>in</span> fr.readlines():</span><br><span class=line>        lineArr =[]</span><br><span class=line>        curLine = line.strip().split(<span class=string>'\t'</span>)</span><br><span class=line>        <span class=keyword>for</span> i <span class=keyword>in</span> <span class=built_in>range</span>(numFeat-<span class=number>1</span>):</span><br><span class=line>            lineArr.append(<span class=built_in>float</span>(curLine[i]))</span><br><span class=line>        dataMat.append(lineArr)</span><br><span class=line>        labelMat.append(<span class=built_in>float</span>(curLine[-<span class=number>1</span>]))</span><br><span class=line>    <span class=keyword>return</span> dataMat,labelMat</span><br><span class=line></span><br><span class=line><span class=function><span class=keyword>def</span> <span class=title>stumpClassify</span>(<span class=params>dataMatrix,dimen,threshVal,threshIneq</span>):</span><span class=comment>#just classify the data</span></span><br><span class=line>    retArray = ones((shape(dataMatrix)[<span class=number>0</span>],<span class=number>1</span>))</span><br><span class=line>    <span class=keyword>if</span> threshIneq == <span class=string>'lt'</span>:</span><br><span class=line>        retArray[dataMatrix[:,dimen] <= threshVal] = -<span class=number>1.0</span></span><br><span class=line>    <span class=keyword>else</span>:</span><br><span class=line>        retArray[dataMatrix[:,dimen] > threshVal] = -<span class=number>1.0</span></span><br><span class=line>    <span class=keyword>return</span> retArray</span><br><span class=line>    </span><br><span class=line></span><br><span class=line><span class=function><span class=keyword>def</span> <span class=title>buildStump</span>(<span class=params>dataArr,classLabels,D</span>):</span></span><br><span class=line>    dataMatrix = mat(dataArr); labelMat = mat(classLabels).T</span><br><span class=line>    m,n = shape(dataMatrix)</span><br><span class=line>    numSteps = <span class=number>10.0</span>; bestStump = {}; bestClasEst = mat(zeros((m,<span class=number>1</span>)))</span><br><span class=line>    minError = inf <span class=comment>#init error sum, to +infinity</span></span><br><span class=line>    <span class=keyword>for</span> i <span class=keyword>in</span> <span class=built_in>range</span>(n):<span class=comment>#loop over all dimensions</span></span><br><span class=line>        rangeMin = dataMatrix[:,i].<span class=built_in>min</span>(); rangeMax = dataMatrix[:,i].<span class=built_in>max</span>();</span><br><span class=line>        stepSize = (rangeMax-rangeMin)/numSteps</span><br><span class=line>        <span class=keyword>for</span> j <span class=keyword>in</span> <span class=built_in>range</span>(-<span class=number>1</span>,<span class=built_in>int</span>(numSteps)+<span class=number>1</span>):<span class=comment>#loop over all range in current dimension</span></span><br><span class=line>            <span class=keyword>for</span> inequal <span class=keyword>in</span> [<span class=string>'lt'</span>, <span class=string>'gt'</span>]: <span class=comment>#go over less than and greater than</span></span><br><span class=line>                threshVal = (rangeMin + <span class=built_in>float</span>(j) * stepSize)</span><br><span class=line>                predictedVals = stumpClassify(dataMatrix,i,threshVal,inequal)<span class=comment>#call stump classify with i, j, lessThan</span></span><br><span class=line>                errArr = mat(ones((m,<span class=number>1</span>)))</span><br><span class=line>                errArr[predictedVals == labelMat] = <span class=number>0</span></span><br><span class=line>                weightedError = D.T*errArr  <span class=comment>#calc total error multiplied by D</span></span><br><span class=line>                <span class=comment>#print "split: dim %d, thresh %.2f, thresh ineqal: %s, the weighted error is %.3f" % (i, threshVal, inequal, weightedError)</span></span><br><span class=line>                <span class=keyword>if</span> weightedError < minError:</span><br><span class=line>                    minError = weightedError</span><br><span class=line>                    bestClasEst = predictedVals.copy()</span><br><span class=line>                    bestStump[<span class=string>'dim'</span>] = i</span><br><span class=line>                    bestStump[<span class=string>'thresh'</span>] = threshVal</span><br><span class=line>                    bestStump[<span class=string>'ineq'</span>] = inequal</span><br><span class=line>    <span class=keyword>return</span> bestStump,minError,bestClasEst</span><br><span class=line></span><br><span class=line></span><br><span class=line><span class=function><span class=keyword>def</span> <span class=title>adaBoostTrainDS</span>(<span class=params>dataArr,classLabels,numIt=<span class=number>40</span></span>):</span></span><br><span class=line>    weakClassArr = []</span><br><span class=line>    m = shape(dataArr)[<span class=number>0</span>]</span><br><span class=line>    D = mat(ones((m,<span class=number>1</span>))/m)   <span class=comment>#init D to all equal</span></span><br><span class=line>    aggClassEst = mat(zeros((m,<span class=number>1</span>)))</span><br><span class=line>    <span class=keyword>for</span> i <span class=keyword>in</span> <span class=built_in>range</span>(numIt):</span><br><span class=line>        bestStump,error,classEst = buildStump(dataArr,classLabels,D)<span class=comment>#build Stump</span></span><br><span class=line>        <span class=comment>#print "D:",D.T</span></span><br><span class=line>        alpha = <span class=built_in>float</span>(<span class=number>0.5</span>*log((<span class=number>1.0</span>-error)/<span class=built_in>max</span>(error,<span class=number>1e-16</span>)))<span class=comment>#calc alpha, throw in max(error,eps) to account for error=0</span></span><br><span class=line>        bestStump[<span class=string>'alpha'</span>] = alpha  </span><br><span class=line>        weakClassArr.append(bestStump)                  <span class=comment>#store Stump Params in Array</span></span><br><span class=line>        <span class=comment>#print "classEst: ",classEst.T</span></span><br><span class=line>        expon = multiply(-<span class=number>1</span>*alpha*mat(classLabels).T,classEst) <span class=comment>#exponent for D calc, getting messy</span></span><br><span class=line>        D = multiply(D,exp(expon))                              <span class=comment>#Calc New D for next iteration</span></span><br><span class=line>        D = D/D.<span class=built_in>sum</span>()</span><br><span class=line>        <span class=comment>#calc training error of all classifiers, if this is 0 quit for loop early (use break)</span></span><br><span class=line>        aggClassEst += alpha*classEst</span><br><span class=line>        <span class=comment>#print "aggClassEst: ",aggClassEst.T</span></span><br><span class=line>        aggErrors = multiply(sign(aggClassEst) != mat(classLabels).T,ones((m,<span class=number>1</span>)))</span><br><span class=line>        errorRate = aggErrors.<span class=built_in>sum</span>()/m</span><br><span class=line>        <span class=built_in>print</span> <span class=string>"total error: "</span>,errorRate</span><br><span class=line>        <span class=keyword>if</span> errorRate == <span class=number>0.0</span>: <span class=keyword>break</span></span><br><span class=line>    <span class=keyword>return</span> weakClassArr</span><br><span class=line></span><br><span class=line><span class=function><span class=keyword>def</span> <span class=title>adaClassify</span>(<span class=params>datToClass,classifierArr</span>):</span></span><br><span class=line>    dataMatrix = mat(datToClass)<span class=comment>#do stuff similar to last aggClassEst in adaBoostTrainDS</span></span><br><span class=line>    m = shape(dataMatrix)[<span class=number>0</span>]</span><br><span class=line>    aggClassEst = mat(zeros((m,<span class=number>1</span>)))</span><br><span class=line>    <span class=keyword>for</span> i <span class=keyword>in</span> <span class=built_in>range</span>(<span class=built_in>len</span>(classifierArr)):</span><br><span class=line>        classEst = stumpClassify(dataMatrix, classifierArr[i][<span class=string>'dim'</span>],\</span><br><span class=line>                                 classifierArr[i][<span class=string>'thresh'</span>],\</span><br><span class=line>                                 classifierArr[i][<span class=string>'ineq'</span>])<span class=comment>#call stump classify</span></span><br><span class=line>        aggClassEst += classifierArr[i][<span class=string>'alpha'</span>]*classEst</span><br><span class=line>        <span class=built_in>print</span> aggClassEst</span><br><span class=line>    <span class=keyword>return</span> sign(aggClassEst)</span><br><span class=line></span><br><span class=line><span class=function><span class=keyword>def</span> <span class=title>plotROC</span>(<span class=params>predStrengths, classLabels</span>):</span></span><br><span class=line>    <span class=keyword>import</span> matplotlib.pyplot <span class=keyword>as</span> plt</span><br><span class=line>    cur = (<span class=number>1.0</span>,<span class=number>1.0</span>) <span class=comment>#cursor</span></span><br><span class=line>    ySum = <span class=number>0.0</span> <span class=comment>#variable to calculate AUC</span></span><br><span class=line>    numPosClas = <span class=built_in>sum</span>(array(classLabels)==<span class=number>1.0</span>)</span><br><span class=line>    yStep = <span class=number>1</span>/<span class=built_in>float</span>(numPosClas); xStep = <span class=number>1</span>/<span class=built_in>float</span>(<span class=built_in>len</span>(classLabels)-numPosClas)</span><br><span class=line>    sortedIndicies = predStrengths.argsort()<span class=comment>#get sorted index, it's reverse</span></span><br><span class=line>    fig = plt.figure()</span><br><span class=line>    fig.clf()</span><br><span class=line>    ax = plt.subplot(<span class=number>111</span>)</span><br><span class=line>    <span class=comment>#loop through all the values, drawing a line segment at each point</span></span><br><span class=line>    <span class=keyword>for</span> index <span class=keyword>in</span> sortedIndicies.tolist()[<span class=number>0</span>]:</span><br><span class=line>        <span class=keyword>if</span> classLabels[index] == <span class=number>1.0</span>:</span><br><span class=line>            delX = <span class=number>0</span>; delY = yStep;</span><br><span class=line>        <span class=keyword>else</span>:</span><br><span class=line>            delX = xStep; delY = <span class=number>0</span>;</span><br><span class=line>            ySum += cur[<span class=number>1</span>]</span><br><span class=line>        <span class=comment>#draw line from cur to (cur[0]-delX,cur[1]-delY)</span></span><br><span class=line>        ax.plot([cur[<span class=number>0</span>],cur[<span class=number>0</span>]-delX],[cur[<span class=number>1</span>],cur[<span class=number>1</span>]-delY], c=<span class=string>'b'</span>)</span><br><span class=line>        cur = (cur[<span class=number>0</span>]-delX,cur[<span class=number>1</span>]-delY)</span><br><span class=line>    ax.plot([<span class=number>0</span>,<span class=number>1</span>],[<span class=number>0</span>,<span class=number>1</span>],<span class=string>'b--'</span>)</span><br><span class=line>    plt.xlabel(<span class=string>'False positive rate'</span>); plt.ylabel(<span class=string>'True positive rate'</span>)</span><br><span class=line>    plt.title(<span class=string>'ROC curve for AdaBoost horse colic detection system'</span>)</span><br><span class=line>    ax.axis([<span class=number>0</span>,<span class=number>1</span>,<span class=number>0</span>,<span class=number>1</span>])</span><br><span class=line>    plt.show()</span><br><span class=line>    <span class=built_in>print</span> <span class=string>"the Area Under the Curve is: "</span>,ySum*xStep</span><br><span class=line></span><br></pre></table></figure><h3 id=参考资料><a class=headerlink href=#参考资料 title=参考资料></a>参考资料</h3><ol><li><a href=https://machinelearningmastery.com/boosting-and-adaboost-for-machine-learning/ rel=noopener target=_blank>Boosting and AdaBoost for Machine Learning - MachineLearningMastery.com</a><li><a href=https://machinelearningmastery.com/gentle-introduction-xgboost-applied-machine-learning/ rel=noopener target=_blank>A Gentle Introduction to XGBoost for Applied Machine Learning - MachineLearningMastery.com</a></ol><link href=/css/spoiler.css rel=stylesheet><script async src=/js/spoiler.js></script></div><div><div><div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div></div></div><div class=reward-container><div>感谢阅读.</div><button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">打赏</button><div style="display: none;" id=qr><div style="display: inline-block;"><img alt="Sekyoro 微信支付" src=/images/wechatpay.png><p>微信支付</div></div></div><div><ul class=post-copyright><li class=post-copyright-author><strong>本文作者： </strong>Sekyoro<li class=post-copyright-link><strong>本文链接：</strong> <a href=https://www.sekyoro.top/2024/02/22/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9B%9E%E9%A1%BE-%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0/ title=机器学习回顾:集成学习>https://www.sekyoro.top/2024/02/22/机器学习回顾-集成学习/</a><li class=post-copyright-license><strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href=https://creativecommons.org/licenses/by-nc-sa/4.0/ rel=noopener target=_blank><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</ul></div><div class=followme><p>欢迎关注我的其它发布渠道<div class=social-list><div class=social-item><a class=social-link href=/images/wxqrcode.png target=_blank> <span class=icon> <i class="fab fa-weixin"></i> </span> <span class=label>WeChat</span> </a></div><div class=social-item><a class=social-link href=/images/website.png target=_blank> <span class=icon> <i class="fa fa-user"></i> </span> <span class=label>PersonalWebsite</span> </a></div><div class=social-item><a class=social-link href=https://my-astro-git-main-drowning-in-codes.vercel.app target=_blank> <span class=icon> <i class="fas fa-share"></i> </span> <span class=label>杂鱼分享</span> </a></div><div class=social-item><a class=social-link href=/atom.xml target=_blank> <span class=icon> <i class="fa fa-rss"></i> </span> <span class=label>RSS</span> </a></div></div></div><footer class=post-footer><div class=post-tags><a href=/tags/Ensemble-Learning/ rel=tag><i class="fa fa-tag"></i> Ensemble Learning</a></div><div class=post-nav><div class=post-nav-item><a href=/2024/02/19/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%9C%89%E7%94%A8%E7%9A%84%E5%BA%93%E4%BB%A5%E5%8F%8A%E4%BB%8B%E7%BB%8D/ rel=prev title=深度学习有用的库以及介绍> <i class="fa fa-chevron-left"></i> 深度学习有用的库以及介绍 </a></div><div class=post-nav-item><a href=/2024/02/23/%E5%86%8D%E5%9B%9E%E7%9C%8B%E6%89%A9%E6%95%A3%E6%A8%A1%E5%9E%8B/ rel=next title=再回看扩散模型> 再回看扩散模型 <i class="fa fa-chevron-right"></i> </a></div></div></footer></article></div><!-- 评论区 --><div class=comments><div data-id=city data-uid=MTAyMC81MzE5Ny8yOTY3Mg== id=lv-container></div></div><script>window.addEventListener('tabs:register', () => {
+\alpha_t=\frac12ln\frac{(1-TotalError)}{TotalError}</script><p>然后对权重进行更新</p>
+<script type="math/tex; mode=display">
+w_i=w_{i-1}*e^{\pm\alpha}</script><p>当预测输出和实际输出一致时（样本分类正确），Alpha为正。在这种情况下，我们减少了样权重，因为已经表现得很好了。</p>
+<p>当预测输出与实际类别不一致时（即样本分类错误），Alpha为负值。在这种情况下需要增加样本权重，以便在下一个树桩中不会重复相同的错误分类。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">Created on Nov 28, 2010</span></span><br><span class="line"><span class="string">Adaboost is short for Adaptive Boosting</span></span><br><span class="line"><span class="string">@author: Peter</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="keyword">from</span> numpy <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">loadSimpData</span>():</span><br><span class="line">    datMat = matrix([[ <span class="number">1.</span> ,  <span class="number">2.1</span>],</span><br><span class="line">        [ <span class="number">2.</span> ,  <span class="number">1.1</span>],</span><br><span class="line">        [ <span class="number">1.3</span>,  <span class="number">1.</span> ],</span><br><span class="line">        [ <span class="number">1.</span> ,  <span class="number">1.</span> ],</span><br><span class="line">        [ <span class="number">2.</span> ,  <span class="number">1.</span> ]])</span><br><span class="line">    classLabels = [<span class="number">1.0</span>, <span class="number">1.0</span>, -<span class="number">1.0</span>, -<span class="number">1.0</span>, <span class="number">1.0</span>]</span><br><span class="line">    <span class="keyword">return</span> datMat,classLabels</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">loadDataSet</span>(<span class="params">fileName</span>):      <span class="comment">#general function to parse tab -delimited floats</span></span><br><span class="line">    numFeat = <span class="built_in">len</span>(<span class="built_in">open</span>(fileName).readline().split(<span class="string">&#x27;\t&#x27;</span>)) <span class="comment">#get number of fields </span></span><br><span class="line">    dataMat = []; labelMat = []</span><br><span class="line">    fr = <span class="built_in">open</span>(fileName)</span><br><span class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> fr.readlines():</span><br><span class="line">        lineArr =[]</span><br><span class="line">        curLine = line.strip().split(<span class="string">&#x27;\t&#x27;</span>)</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(numFeat-<span class="number">1</span>):</span><br><span class="line">            lineArr.append(<span class="built_in">float</span>(curLine[i]))</span><br><span class="line">        dataMat.append(lineArr)</span><br><span class="line">        labelMat.append(<span class="built_in">float</span>(curLine[-<span class="number">1</span>]))</span><br><span class="line">    <span class="keyword">return</span> dataMat,labelMat</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">stumpClassify</span>(<span class="params">dataMatrix,dimen,threshVal,threshIneq</span>):<span class="comment">#just classify the data</span></span><br><span class="line">    retArray = ones((shape(dataMatrix)[<span class="number">0</span>],<span class="number">1</span>))</span><br><span class="line">    <span class="keyword">if</span> threshIneq == <span class="string">&#x27;lt&#x27;</span>:</span><br><span class="line">        retArray[dataMatrix[:,dimen] &lt;= threshVal] = -<span class="number">1.0</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        retArray[dataMatrix[:,dimen] &gt; threshVal] = -<span class="number">1.0</span></span><br><span class="line">    <span class="keyword">return</span> retArray</span><br><span class="line">    </span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">buildStump</span>(<span class="params">dataArr,classLabels,D</span>):</span><br><span class="line">    dataMatrix = mat(dataArr); labelMat = mat(classLabels).T</span><br><span class="line">    m,n = shape(dataMatrix)</span><br><span class="line">    numSteps = <span class="number">10.0</span>; bestStump = &#123;&#125;; bestClasEst = mat(zeros((m,<span class="number">1</span>)))</span><br><span class="line">    minError = inf <span class="comment">#init error sum, to +infinity</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):<span class="comment">#loop over all dimensions</span></span><br><span class="line">        rangeMin = dataMatrix[:,i].<span class="built_in">min</span>(); rangeMax = dataMatrix[:,i].<span class="built_in">max</span>();</span><br><span class="line">        stepSize = (rangeMax-rangeMin)/numSteps</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(-<span class="number">1</span>,<span class="built_in">int</span>(numSteps)+<span class="number">1</span>):<span class="comment">#loop over all range in current dimension</span></span><br><span class="line">            <span class="keyword">for</span> inequal <span class="keyword">in</span> [<span class="string">&#x27;lt&#x27;</span>, <span class="string">&#x27;gt&#x27;</span>]: <span class="comment">#go over less than and greater than</span></span><br><span class="line">                threshVal = (rangeMin + <span class="built_in">float</span>(j) * stepSize)</span><br><span class="line">                predictedVals = stumpClassify(dataMatrix,i,threshVal,inequal)<span class="comment">#call stump classify with i, j, lessThan</span></span><br><span class="line">                errArr = mat(ones((m,<span class="number">1</span>)))</span><br><span class="line">                errArr[predictedVals == labelMat] = <span class="number">0</span></span><br><span class="line">                weightedError = D.T*errArr  <span class="comment">#calc total error multiplied by D</span></span><br><span class="line">                <span class="comment">#print &quot;split: dim %d, thresh %.2f, thresh ineqal: %s, the weighted error is %.3f&quot; % (i, threshVal, inequal, weightedError)</span></span><br><span class="line">                <span class="keyword">if</span> weightedError &lt; minError:</span><br><span class="line">                    minError = weightedError</span><br><span class="line">                    bestClasEst = predictedVals.copy()</span><br><span class="line">                    bestStump[<span class="string">&#x27;dim&#x27;</span>] = i</span><br><span class="line">                    bestStump[<span class="string">&#x27;thresh&#x27;</span>] = threshVal</span><br><span class="line">                    bestStump[<span class="string">&#x27;ineq&#x27;</span>] = inequal</span><br><span class="line">    <span class="keyword">return</span> bestStump,minError,bestClasEst</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">adaBoostTrainDS</span>(<span class="params">dataArr,classLabels,numIt=<span class="number">40</span></span>):</span><br><span class="line">    weakClassArr = []</span><br><span class="line">    m = shape(dataArr)[<span class="number">0</span>]</span><br><span class="line">    D = mat(ones((m,<span class="number">1</span>))/m)   <span class="comment">#init D to all equal</span></span><br><span class="line">    aggClassEst = mat(zeros((m,<span class="number">1</span>)))</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(numIt):</span><br><span class="line">        bestStump,error,classEst = buildStump(dataArr,classLabels,D)<span class="comment">#build Stump</span></span><br><span class="line">        <span class="comment">#print &quot;D:&quot;,D.T</span></span><br><span class="line">        alpha = <span class="built_in">float</span>(<span class="number">0.5</span>*log((<span class="number">1.0</span>-error)/<span class="built_in">max</span>(error,<span class="number">1e-16</span>)))<span class="comment">#calc alpha, throw in max(error,eps) to account for error=0</span></span><br><span class="line">        bestStump[<span class="string">&#x27;alpha&#x27;</span>] = alpha  </span><br><span class="line">        weakClassArr.append(bestStump)                  <span class="comment">#store Stump Params in Array</span></span><br><span class="line">        <span class="comment">#print &quot;classEst: &quot;,classEst.T</span></span><br><span class="line">        expon = multiply(-<span class="number">1</span>*alpha*mat(classLabels).T,classEst) <span class="comment">#exponent for D calc, getting messy</span></span><br><span class="line">        D = multiply(D,exp(expon))                              <span class="comment">#Calc New D for next iteration</span></span><br><span class="line">        D = D/D.<span class="built_in">sum</span>()</span><br><span class="line">        <span class="comment">#calc training error of all classifiers, if this is 0 quit for loop early (use break)</span></span><br><span class="line">        aggClassEst += alpha*classEst</span><br><span class="line">        <span class="comment">#print &quot;aggClassEst: &quot;,aggClassEst.T</span></span><br><span class="line">        aggErrors = multiply(sign(aggClassEst) != mat(classLabels).T,ones((m,<span class="number">1</span>)))</span><br><span class="line">        errorRate = aggErrors.<span class="built_in">sum</span>()/m</span><br><span class="line">        <span class="built_in">print</span> <span class="string">&quot;total error: &quot;</span>,errorRate</span><br><span class="line">        <span class="keyword">if</span> errorRate == <span class="number">0.0</span>: <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">return</span> weakClassArr</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">adaClassify</span>(<span class="params">datToClass,classifierArr</span>):</span><br><span class="line">    dataMatrix = mat(datToClass)<span class="comment">#do stuff similar to last aggClassEst in adaBoostTrainDS</span></span><br><span class="line">    m = shape(dataMatrix)[<span class="number">0</span>]</span><br><span class="line">    aggClassEst = mat(zeros((m,<span class="number">1</span>)))</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(classifierArr)):</span><br><span class="line">        classEst = stumpClassify(dataMatrix, classifierArr[i][<span class="string">&#x27;dim&#x27;</span>],\</span><br><span class="line">                                 classifierArr[i][<span class="string">&#x27;thresh&#x27;</span>],\</span><br><span class="line">                                 classifierArr[i][<span class="string">&#x27;ineq&#x27;</span>])<span class="comment">#call stump classify</span></span><br><span class="line">        aggClassEst += classifierArr[i][<span class="string">&#x27;alpha&#x27;</span>]*classEst</span><br><span class="line">        <span class="built_in">print</span> aggClassEst</span><br><span class="line">    <span class="keyword">return</span> sign(aggClassEst)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">plotROC</span>(<span class="params">predStrengths, classLabels</span>):</span><br><span class="line">    <span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line">    cur = (<span class="number">1.0</span>,<span class="number">1.0</span>) <span class="comment">#cursor</span></span><br><span class="line">    ySum = <span class="number">0.0</span> <span class="comment">#variable to calculate AUC</span></span><br><span class="line">    numPosClas = <span class="built_in">sum</span>(array(classLabels)==<span class="number">1.0</span>)</span><br><span class="line">    yStep = <span class="number">1</span>/<span class="built_in">float</span>(numPosClas); xStep = <span class="number">1</span>/<span class="built_in">float</span>(<span class="built_in">len</span>(classLabels)-numPosClas)</span><br><span class="line">    sortedIndicies = predStrengths.argsort()<span class="comment">#get sorted index, it&#x27;s reverse</span></span><br><span class="line">    fig = plt.figure()</span><br><span class="line">    fig.clf()</span><br><span class="line">    ax = plt.subplot(<span class="number">111</span>)</span><br><span class="line">    <span class="comment">#loop through all the values, drawing a line segment at each point</span></span><br><span class="line">    <span class="keyword">for</span> index <span class="keyword">in</span> sortedIndicies.tolist()[<span class="number">0</span>]:</span><br><span class="line">        <span class="keyword">if</span> classLabels[index] == <span class="number">1.0</span>:</span><br><span class="line">            delX = <span class="number">0</span>; delY = yStep;</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            delX = xStep; delY = <span class="number">0</span>;</span><br><span class="line">            ySum += cur[<span class="number">1</span>]</span><br><span class="line">        <span class="comment">#draw line from cur to (cur[0]-delX,cur[1]-delY)</span></span><br><span class="line">        ax.plot([cur[<span class="number">0</span>],cur[<span class="number">0</span>]-delX],[cur[<span class="number">1</span>],cur[<span class="number">1</span>]-delY], c=<span class="string">&#x27;b&#x27;</span>)</span><br><span class="line">        cur = (cur[<span class="number">0</span>]-delX,cur[<span class="number">1</span>]-delY)</span><br><span class="line">    ax.plot([<span class="number">0</span>,<span class="number">1</span>],[<span class="number">0</span>,<span class="number">1</span>],<span class="string">&#x27;b--&#x27;</span>)</span><br><span class="line">    plt.xlabel(<span class="string">&#x27;False positive rate&#x27;</span>); plt.ylabel(<span class="string">&#x27;True positive rate&#x27;</span>)</span><br><span class="line">    plt.title(<span class="string">&#x27;ROC curve for AdaBoost horse colic detection system&#x27;</span>)</span><br><span class="line">    ax.axis([<span class="number">0</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">1</span>])</span><br><span class="line">    plt.show()</span><br><span class="line">    <span class="built_in">print</span> <span class="string">&quot;the Area Under the Curve is: &quot;</span>,ySum*xStep</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><ol>
+<li><a target="_blank" rel="noopener" href="https://machinelearningmastery.com/boosting-and-adaboost-for-machine-learning/">Boosting and AdaBoost for Machine Learning - MachineLearningMastery.com</a></li>
+<li><a target="_blank" rel="noopener" href="https://machinelearningmastery.com/gentle-introduction-xgboost-applied-machine-learning/">A Gentle Introduction to XGBoost for Applied Machine Learning - MachineLearningMastery.com</a></li>
+</ol>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
+    </div>
+
+    
+    
+    
+    <div>
+	
+     <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+     
+   </div>
+      
+
+        <div class="reward-container">
+  <div>感谢阅读.</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.png" alt="Sekyoro 微信支付">
+        <p>微信支付</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Sekyoro
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://www.sekyoro.top/2024/02/22/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9B%9E%E9%A1%BE-%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0/" title="机器学习回顾:集成学习">https://www.sekyoro.top/2024/02/22/机器学习回顾-集成学习/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/images/wxqrcode.png">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/images/website.png">
+            <span class="icon">
+              <i class="fa fa-user"></i>
+            </span>
+
+            <span class="label">PersonalWebsite</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="https://my-astro-git-main-drowning-in-codes.vercel.app">
+            <span class="icon">
+              <i class="fas fa-share"></i>
+            </span>
+
+            <span class="label">杂鱼分享</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Ensemble-Learning/" rel="tag"><i class="fa fa-tag"></i> Ensemble Learning</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/02/19/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%9C%89%E7%94%A8%E7%9A%84%E5%BA%93%E4%BB%A5%E5%8F%8A%E4%BB%8B%E7%BB%8D/" rel="prev" title="深度学习有用的库以及介绍">
+      <i class="fa fa-chevron-left"></i> 深度学习有用的库以及介绍
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2024/02/23/%E5%86%8D%E5%9B%9E%E7%9C%8B%E6%89%A9%E6%95%A3%E6%A8%A1%E5%9E%8B/" rel="next" title="再回看扩散模型">
+      再回看扩散模型 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+            <!-- 评论区 -->
+            
+          
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81MzE5Ny8yOTY3Mg=="></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
     let { activeClass } = CONFIG.comments;
     if (CONFIG.comments.storage) {
       activeClass = localStorage.getItem('comments_active') || activeClass;
@@ -53,7 +493,27 @@ w_i=w_{i-1}*e^{\pm\alpha}</script><p>当预测输出和实际输出一致时（�
       let commentClass = event.target.classList[1];
       localStorage.setItem('comments_active', commentClass);
     });
-  }</script></div><div class="toggle sidebar-toggle"><span class="toggle-line toggle-line-first"></span><span class="toggle-line toggle-line-middle"></span><span class="toggle-line toggle-line-last"></span></div><aside class=sidebar><div class=sidebar-inner><!-- canvas粒子时钟 --><div><canvas id=canvas style=width:60%;>当前浏览器不支持canvas，请更换浏览器后再试</canvas></div><script>(function(){
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+	
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+      	   
+          <!-- canvas粒子时钟 -->
+          <div style="">
+  <canvas id="canvas" style="width:60%;">当前浏览器不支持canvas，请更换浏览器后再试</canvas>
+</div>
+<script>
+(function(){
 
    var digit=
     [
@@ -311,31 +771,180 @@ if(canvas.getContext){
     },50);
 }
 
-})();</script><!-- require APlayer --><link href=https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css rel=stylesheet><script src=https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js></script><!-- require MetingJS --><script src=/js/meting-js.js></script><ul class="sidebar-nav motion-element"><li class=sidebar-nav-toc>文章目录<li class=sidebar-nav-overview>站点概览</ul><!--noindex--><div class="post-toc-wrap sidebar-panel"><div class="post-toc motion-element"><ol class=nav><li class="nav-item nav-level-3"><a class=nav-link href=#AdaBoost><span class=nav-number>1.</span> <span class=nav-text>AdaBoost</span></a><li class="nav-item nav-level-3"><a class=nav-link href=#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99><span class=nav-number>2.</span> <span class=nav-text>参考资料</span></a></ol></div></div><!--/noindex--><div class="site-overview-wrap sidebar-panel"><div class="site-author motion-element" itemprop=author itemscope itemtype=http://schema.org/Person><img alt=Sekyoro class=site-author-image itemprop=image src=https://i.loli.net/2021/05/17/YqoavnXdGTpPO9R.jpg><p class=site-author-name itemprop=name>Sekyoro<div class=site-description itemprop=description>什么也无法舍弃的人，什么也做不了.</div></div><div class="site-state-wrap motion-element"><nav class=site-state><div class="site-state-item site-state-posts"><a href=/archives/> <span class=site-state-item-count>267</span> <span class=site-state-item-name>日志</span> </a></div><div class="site-state-item site-state-categories"><a href=/categories/> <span class=site-state-item-count>16</span> <span class=site-state-item-name>分类</span></a></div><div class="site-state-item site-state-tags"><a href=/tags/> <span class=site-state-item-count>229</span> <span class=site-state-item-name>标签</span></a></div></nav></div><div class="links-of-author motion-element"><span class=links-of-author-item> <a title="Personal Website → http://proanimer.com" href=http://proanimer.com/ rel=noopener target=_blank><i class="fab fa-internet-explorer fa-fw"></i>Personal Website</a> </span><span class=links-of-author-item> <a title="GitHub → https://github.com/drowning-in-codes" href=https://github.com/drowning-in-codes rel=noopener target=_blank><i class="fab fa-github fa-fw"></i>GitHub</a> </span><span class=links-of-author-item> <a title="E-Mail → mailto:bukalala174@gmail.com" href=mailto:bukalala174@gmail.com rel=noopener target=_blank><i class="fa fa-envelope fa-fw"></i>E-Mail</a> </span><span class=links-of-author-item> <a title="wxPublicAccount → https://mp.weixin.qq.com/s?__biz=Mzg3ODY1MDkzMg==&mid=2247483770&idx=1&sn=fdf88faab01d5c219ac609570a21c9d6&chksm=cf113221f866bb373938cfca03cf095ff4fe1e4dc37d68ef5de4cd4876ee1260fca0c015a4d6&token=1096259873&lang=zh_CN#rd" href=https://mp.weixin.qq.com/s?__biz=Mzg3ODY1MDkzMg==&mid=2247483770&idx=1&sn=fdf88faab01d5c219ac609570a21c9d6&chksm=cf113221f866bb373938cfca03cf095ff4fe1e4dc37d68ef5de4cd4876ee1260fca0c015a4d6&token=1096259873&lang=zh_CN#rd rel=noopener target=_blank><i class="fab fa-weixin fa-fw"></i>wxPublicAccount</a> </span><span class=links-of-author-item> <a title="RSS → /atom.xml" href=/atom.xml><i class="fa fa-rss fa-fw"></i>RSS</a> </span><span class=links-of-author-item> <a title="CSDN → https://blog.csdn.net/aqwca" href=https://blog.csdn.net/aqwca rel=noopener target=_blank><i class="fa fa-handshake fa-fw"></i>CSDN</a> </span><span class=links-of-author-item> <a title="杂鱼分享 → https://my-astro-git-main-drowning-in-codes.vercel.app" href=https://my-astro-git-main-drowning-in-codes.vercel.app/ rel=noopener target=_blank><i class="fas fa-share fa-fw"></i>杂鱼分享</a> </span></div><div class="links-of-blogroll motion-element"><div class=links-of-blogroll-title><i class="fa fa-link fa-fw"></i> 友情链接</div><ul class=links-of-blogroll-list><li class=links-of-blogroll-item><a href=https://protool-ten.vercel.app/ rel=noopener target=_blank title=https://protool-ten.vercel.app/>protools</a><li class=links-of-blogroll-item><a href=https://my-astro-aokh-git-main-drowningincodes-projects.vercel.app/ rel=noopener target=_blank title=https://my-astro-aokh-git-main-drowningincodes-projects.vercel.app>archive</a><li class=links-of-blogroll-item><a href=https://www.lllomh.com/ rel=noopener target=_blank title=https://www.lllomh.com/>芈渡</a><li class=links-of-blogroll-item><a href=http://myqhs.top/ rel=noopener target=_blank title=http://myqhs.top/>myqhs</a></ul></div><div class="motion-element announcement"><div class=title></div><p class=content><p class=date></div></div><meting-js id=6856787487 order=random server=netease type=playlist> </meting-js><div class=widget-wrap><h3 class=widget-title style=margin:0>文章词云</h3><div class="widget tagcloud" id=myCanvasContainer><canvas height=250 id=resCanvas style=width:100% width=250><ul class=tag-list itemprop=keywords><li class=tag-list-item><a class=tag-list-link href=/tags/Ensemble-Learning/ rel=tag>Ensemble Learning</a><span class=tag-list-count>1</span></ul></canvas></div></div><script id=clustrmaps src=https://clustrmaps.com/map_v2.js?d=xQdGTxqARTBiNIwX2aUban-ixkj2s6VaZQWo-aVCgY8&cl=ffffff&w=a></script><div class="back-to-top motion-element"><i class="fa fa-arrow-up"></i><span>0%</span></div><!-- 边栏 --></div></aside><div id=sidebar-dimmer></div></div></main><footer class=footer><div class=footer-inner><div class=copyright>© Wed Apr 08 2020 08:00:00 GMT+0800 (中国标准时间) – <span itemprop=copyrightYear>2026</span><span class=with-love> <i class="fa fa-heart"></i> </span><span class=author itemprop=copyrightHolder>Sekyoro</span><span class=post-meta-divider>|</span><span class=post-meta-item-icon> <i class="fa fa-chart-area"></i> </span><span title=站点总字数>4.8m</span><span class=post-meta-divider>|</span><span class=post-meta-item-icon> <i class="fa fa-coffee"></i> </span><span title=站点阅读时长>72:44</span></div><script async src=https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js></script><span id=busuanzi_container_site_pv>总访问量<span id=busuanzi_value_site_pv></span>次</span><span class=post-meta-divider>|</span><span id=busuanzi_container_site_uv>总访客数<span id=busuanzi_value_site_uv></span>人</span><span class=post-meta-divider>|</span><!-- 不蒜子计数初始值纠正 --><script>document.addEventListener("DOMContentLoaded", function() {
-    var int = setInterval(fixCount, 50);  // 50ms周期检测函数
-    var countOffset = 20000;  // 初始化首次数据
-
-    function fixCount() {
-        var pvContainer = document.getElementById("busuanzi_container_site_pv");
-        if (pvContainer && pvContainer.style.display !== "none") {
-            var pvElement = document.getElementById("busuanzi_value_site_pv");
-            if (pvElement) {
-                pvElement.innerHTML = parseInt(pvElement.innerHTML) + countOffset;
-                clearInterval(int);
-            }
-        }
+})();
+</script>
         
-        var uvContainer = document.getElementById("busuanzi_container_site_uv");
-        if (uvContainer && window.getComputedStyle(uvContainer).display !== "none")
-        {
-            var uvElement = document.getElementById("busuanzi_value_site_uv");
-            if (uvElement) {
-                uvElement.innerHTML = parseInt(uvElement.innerHTML) + countOffset; // 加上初始数据 
-                clearInterval(int); // 停止检测
-            }
-        }
-    }
-});</script><div><span id=timeDate>载入天数...</span><span id=times>载入时分秒...</span><script>var now = new Date();
+
+<!-- require APlayer -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+<script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+<!-- require MetingJS -->
+  
+ <script src="/js/meting-js.js"></script>
+	  
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+	  
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#AdaBoost"><span class="nav-number">1.</span> <span class="nav-text">AdaBoost</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">2.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Sekyoro"
+      src="https://i.loli.net/2021/05/17/YqoavnXdGTpPO9R.jpg">
+  <p class="site-author-name" itemprop="name">Sekyoro</p>
+  <div class="site-description" itemprop="description">什么也无法舍弃的人，什么也做不了.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">267</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">229</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="http://proanimer.com/" title="Personal Website → http:&#x2F;&#x2F;proanimer.com" rel="noopener" target="_blank"><i class="fab fa-internet-explorer fa-fw"></i>Personal Website</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://github.com/drowning-in-codes" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;drowning-in-codes" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:bukalala174@gmail.com" title="E-Mail → mailto:bukalala174@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://mp.weixin.qq.com/s?__biz=Mzg3ODY1MDkzMg%3D%3D&mid=2247483770&idx=1&sn=fdf88faab01d5c219ac609570a21c9d6&chksm=cf113221f866bb373938cfca03cf095ff4fe1e4dc37d68ef5de4cd4876ee1260fca0c015a4d6&token=1096259873&lang=zh_CN#rd" title="wxPublicAccount → https:&#x2F;&#x2F;mp.weixin.qq.com&#x2F;s?__biz&#x3D;Mzg3ODY1MDkzMg&#x3D;&#x3D;&amp;mid&#x3D;2247483770&amp;idx&#x3D;1&amp;sn&#x3D;fdf88faab01d5c219ac609570a21c9d6&amp;chksm&#x3D;cf113221f866bb373938cfca03cf095ff4fe1e4dc37d68ef5de4cd4876ee1260fca0c015a4d6&amp;token&#x3D;1096259873&amp;lang&#x3D;zh_CN#rd" rel="noopener" target="_blank"><i class="fab fa-weixin fa-fw"></i>wxPublicAccount</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-rss fa-fw"></i>RSS</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/aqwca" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;aqwca" rel="noopener" target="_blank"><i class="fa fa-handshake fa-fw"></i>CSDN</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://my-astro-git-main-drowning-in-codes.vercel.app/" title="杂鱼分享 → https:&#x2F;&#x2F;my-astro-git-main-drowning-in-codes.vercel.app" rel="noopener" target="_blank"><i class="fas fa-share fa-fw"></i>杂鱼分享</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      友情链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://protool-ten.vercel.app/" title="https:&#x2F;&#x2F;protool-ten.vercel.app&#x2F;" rel="noopener" target="_blank">protools</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://my-astro-aokh-git-main-drowningincodes-projects.vercel.app/" title="https:&#x2F;&#x2F;my-astro-aokh-git-main-drowningincodes-projects.vercel.app" rel="noopener" target="_blank">archive</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.lllomh.com/" title="https:&#x2F;&#x2F;www.lllomh.com&#x2F;" rel="noopener" target="_blank">芈渡</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://myqhs.top/" title="http:&#x2F;&#x2F;myqhs.top&#x2F;" rel="noopener" target="_blank">myqhs</a>
+        </li>
+    </ul>
+  </div>
+
+
+  <div class="motion-element announcement">
+   <div class="title"></div>
+   <p class="content"> </p>
+   <p class="date">  </p>
+  </div>
+      </div>
+<meting-js
+	id="6856787487"
+	server="netease"
+	type="playlist"
+	order="random"
+	>
+</meting-js>
+			<div class="widget-wrap">
+    <h3 class="widget-title" style="margin:0">文章词云</h3>
+    <div id="myCanvasContainer" class="widget tagcloud">
+        <canvas width="250" height="250" id="resCanvas" style="width:100%">
+		<ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ensemble-Learning/" rel="tag">Ensemble Learning</a><span class="tag-list-count">1</span></li></ul>
+		</canvas>
+    </div>
+</div>
+		<script type="text/javascript" id="clustrmaps" src="//clustrmaps.com/map_v2.js?d=xQdGTxqARTBiNIwX2aUban-ixkj2s6VaZQWo-aVCgY8&cl=ffffff&w=a"></script>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+	 
+	 
+<!-- 边栏 -->
+
+
+	 
+
+	 
+	
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; Wed Apr 08 2020 08:00:00 GMT+0800 (中国标准时间) – 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Sekyoro</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">1.9m</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">115:22</span>
+</div>
+
+<div>
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date();
     function createtime() {
         var grt= new Date("04/08/2021 20:00:00");
         now.setTime(now.getTime()+250);
@@ -348,7 +957,68 @@ if(canvas.getContext){
         document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
         document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
     }
-setInterval("createtime()",250);</script></div><div class=busuanzi-count><script async data-pjax src=https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script><span style="display: none;" class=post-meta-item id=busuanzi_container_site_uv> <span class=post-meta-item-icon> <i class="fa fa-user"></i> </span> <span class=site-uv title=总访客量> <span id=busuanzi_value_site_uv></span> </span> </span><span class=post-meta-divider>|</span><span style="display: none;" class=post-meta-item id=busuanzi_container_site_pv> <span class=post-meta-item-icon> <i class="fa fa-eye"></i> </span> <span class=site-pv title=总访问量> <span id=busuanzi_value_site_pv></span> </span> </span></div></div></footer></div><script color=0,0,255 count=99 opacity=0.5 src=/lib/canvas-nest/canvas-nest.min.js zindex=-1></script><script src=/lib/anime.min.js></script><script src=https://cdn.jsdelivr.net/gh/theme-next/theme-next-pjax@0/pjax.min.js></script><script src=https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js></script><script src=https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js></script><script src=https://cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js></script><script src=https://cdn.jsdelivr.net/npm/velocity-animate@1/velocity.min.js></script><script src=https://cdn.jsdelivr.net/npm/velocity-animate@1/velocity.ui.min.js></script><script src=/js/utils.js></script><script src=/js/motion.js></script><script src=/js/schemes/pisces.js></script><script src=/js/next-boot.js></script><script src=/js/bookmark.js></script><script>var pjax = new Pjax({
+setInterval("createtime()",250);
+</script>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        总访客数<span id="busuanzi_value_site_uv"></span>人</span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+       总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/theme-next/theme-next-pjax@0/pjax.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/velocity-animate@1/velocity.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/velocity-animate@1/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+  <script>
+var pjax = new Pjax({
   selectors: [
     'head title',
     '#page-configurations',
@@ -436,7 +1106,15 @@ window.addEventListener('pjax:success', () => {
       console.log('TagCanvas initialization failed:', e);
     }
   }
-});</script><script data-pjax>(function(){
+});
+</script>
+
+
+
+
+  
+  <script data-pjax>
+    (function(){
       var canonicalURL, curProtocol;
       //Get the <link> tag
       var x=document.getElementsByTagName("link");
@@ -458,7 +1136,28 @@ window.addEventListener('pjax:success', () => {
       //Get current URL if the canonical URL does not exist
 	    if (!canonicalURL) canonicalURL = window.location.href;
 	    //Assign script content. Replace current URL with the canonical URL
-      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();</script><script src=https://cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js></script><script src=https://cdn.jsdelivr.net/npm/instantsearch.js@4/dist/instantsearch.production.min.js></script><script src=/js/algolia-search.js></script><script data-pjax>document.querySelectorAll('.pdfobject-container').forEach(element => {
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+  </script>
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
+<script src="//cdn.jsdelivr.net/npm/instantsearch.js@4/dist/instantsearch.production.min.js"></script>
+<script src="/js/algolia-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+<script data-pjax>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
   let url = element.dataset.target;
   let pdfOpenParams = {
     navpanes : 0,
@@ -475,7 +1174,27 @@ window.addEventListener('pjax:success', () => {
   } else {
     element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
   }
-});</script><div id=pjax><script charset=utf-8 defer src=/js/outdate.js></script></div><script charset=utf-8 defer src=/js/tagcanvas.js></script><script charset=utf-8 defer src=/js/tagcloud.js></script><script>NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+});
+</script>
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+  
+
+  <script  type="text/javascript" defer charset="utf-8" src="/js/outdate.js"></script>
+    </div>  
+  
+
+<script  type="text/javascript" defer charset="utf-8" src="/js/tagcanvas.js"></script>
+<script  type="text/javascript" defer charset="utf-8" src="/js/tagcloud.js"></script>
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
   window.livereOptions = {
     refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
   };
@@ -487,7 +1206,12 @@ window.addEventListener('pjax:success', () => {
     j.async = true;
     e.parentNode.insertBefore(j, e);
   })(document, 'script');
-});</script><script>var OriginTitile = document.title;
+});
+</script>
+ 
+
+<script>
+  var OriginTitile = document.title;
   var titleTime;
   document.addEventListener("visibilitychange", function() {
     if (document.hidden) {
@@ -499,6 +1223,9 @@ window.addEventListener('pjax:success', () => {
         document.title = OriginTitile;
       }, 2000);
     }
-  });</script><script src=/js/src/activate-power-mode.min.js></script><script>POWERMODE.colorful = true;
-    POWERMODE.shake = false;
-    document.body.addEventListener('input', POWERMODE);</script>
+  });
+</script>
+
+
+
+<script async>window.onload=function(){var a=document.createElement('script'),b=document.getElementsByTagName('script')[0];a.type='text/javascript',a.async=!0,a.src='/sw-register.js?v='+Date.now(),b.parentNode.insertBefore(a,b)};</script></body></html>

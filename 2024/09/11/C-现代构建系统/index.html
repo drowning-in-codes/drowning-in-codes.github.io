@@ -1,4 +1,20 @@
-<!doctypehtml><html lang=zh-CN><script defer src=/live2d-widget/autoload.js></script><meta charset=UTF-8><meta content=width=device-width,initial-scale=1,maximum-scale=2 name=viewport><meta content=#222 name=theme-color><meta content="Hexo 5.4.0" name=generator><link href=/images/blog_32px.png rel=apple-touch-icon sizes=180x180><link href=/images/blog_32px.png rel=icon sizes=32x32 type=image/png><link href=/images/blog_16px.png rel=icon sizes=16x16 type=image/png><link color=#222 href=/images/logo.svg rel=mask-icon><meta content=EPrJAp11bJwHULpQUaSNSZ8_3RcvTsPDAEGOME4pl1w name=google-site-verification><!-- Google tag (gtag.js) --><!-- 
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<script defer src="/live2d-widget/autoload.js"></script>
+
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 8.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/blog_32px.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/blog_32px.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/blog_16px.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="EPrJAp11bJwHULpQUaSNSZ8_3RcvTsPDAEGOME4pl1w">
+
+<!-- Google tag (gtag.js) -->
+<!-- 
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-VB21D8MKKW"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -6,14 +22,78 @@
   gtag('js', new Date());
 
   gtag('config', 'G-VB21D8MKKW');
-</script> --><!-- google adsense in head.swig --><script async crossorigin=anonymous src=https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4034523802263123></script><meta content=7226864CE87CE9DE8C008385273846FF name=msvalidate.01><meta content=code-fjFXVtiL7j name=baidu-site-verification><link href=/css/main.css rel=stylesheet><link as=style href=https://fonts.googleapis.com/css?family=Roboto%20Mono,Roboto:300,300italic,400,400italic,700,700italic|Roboto:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext onload=this.rel='stylesheet' rel=preload><link as=style href=https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css onload=this.rel='stylesheet' rel=preload><link href=https://fonts.googleapis.com/css?family=Noto+Serif+SC|Roboto&display=swap rel=stylesheet><link href=https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css rel=stylesheet><link href=https://cdn.jsdelivr.net/npm/pace-js@1/themes/blue/pace-theme-minimal.css rel=stylesheet><script src=https://cdn.jsdelivr.net/npm/pace-js@1/pace.min.js></script><script id=hexo-configurations>var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"www.sekyoro.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":240,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"appID":"0F9LEEVW82","apiKey":"78839e9f9be09d081c5c4da81975cd19","indexName":"sekyoblog_sec","hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};</script><link href=//cdn.bootcss.com/animate.css/3.5.0/animate.min.css rel=stylesheet><meta content="主要起因是我在逛Reddit帖子时,看到关于一些c++构建系统的评价. cmake似乎有些过于复杂,它与vcpkg,conan的包管理之间的”融合”可能在有些时候也显得麻烦. 一些人尝试了我没见过的选项, 所以这里主要试试除了cmake之外的构建工具(这些选项中个人目前看好xmake),除了xmake之外,还有The Meson Build system，About Spack - Spack，B" name=description><meta content=article property=og:type><meta content=xmake:另一个C++现代构建系统 property=og:title><meta content=https://www.sekyoro.top/2024/09/11/C-%E7%8E%B0%E4%BB%A3%E6%9E%84%E5%BB%BA%E7%B3%BB%E7%BB%9F/index.html property=og:url><meta content=Sekyoro的博客小屋 property=og:site_name><meta content="主要起因是我在逛Reddit帖子时,看到关于一些c++构建系统的评价. cmake似乎有些过于复杂,它与vcpkg,conan的包管理之间的”融合”可能在有些时候也显得麻烦. 一些人尝试了我没见过的选项, 所以这里主要试试除了cmake之外的构建工具(这些选项中个人目前看好xmake),除了xmake之外,还有The Meson Build system，About Spack - Spack，B" property=og:description><meta content=zh_CN property=og:locale><meta content=https://proanimer-img.oss-cn-shanghai.aliyuncs.com/alimg/image-20240911180835085.png property=og:image><meta content=https://proanimer-img.oss-cn-shanghai.aliyuncs.com/alimg/image-20240911181040866.png property=og:image><meta content=https://proanimer-img.oss-cn-shanghai.aliyuncs.com/alimg/image-20240911181547753.png property=og:image><meta content=https://proanimer-img.oss-cn-shanghai.aliyuncs.com/alimg/image-20240911181640286.png property=og:image><meta content=https://proanimer-img.oss-cn-shanghai.aliyuncs.com/alimg/image-20240912123855699.png property=og:image><meta content=https://proanimer-img.oss-cn-shanghai.aliyuncs.com/alimg/image-20240911232109031.png property=og:image><meta content=https://proanimer-img.oss-cn-shanghai.aliyuncs.com/alimg/image-20240911232412863.png property=og:image><meta content=https://proanimer-img.oss-cn-shanghai.aliyuncs.com/alimg/image-20240911230257291.png property=og:image><meta content=https://proanimer-img.oss-cn-shanghai.aliyuncs.com/alimg/image-20240911224541731.png property=og:image><meta content=https://proanimer-img.oss-cn-shanghai.aliyuncs.com/alimg/image-20240912092357159.png property=og:image><meta content=https://proanimer-img.oss-cn-shanghai.aliyuncs.com/alimg/image-20240912100635482.png property=og:image><meta content=https://proanimer-img.oss-cn-shanghai.aliyuncs.com/alimg/image-20240912121858364.png property=og:image><meta content=2024-09-11T09:22:10.000Z property=article:published_time><meta content=2024-09-14T10:42:43.084Z property=article:modified_time><meta content=Sekyoro property=article:author><meta content="c++ build" property=article:tag><meta content=summary name=twitter:card><meta content=https://proanimer-img.oss-cn-shanghai.aliyuncs.com/alimg/image-20240911180835085.png name=twitter:image><link href=https://www.sekyoro.top/2024/09/11/C-%E7%8E%B0%E4%BB%A3%E6%9E%84%E5%BB%BA%E7%B3%BB%E7%BB%9F/ rel=canonical><script id=page-configurations>// https://hexo.io/docs/variables.html
+</script> -->
+
+<!-- google adsense in head.swig -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4034523802263123"
+     crossorigin="anonymous"></script>
+  <meta name="msvalidate.01" content="7226864CE87CE9DE8C008385273846FF">
+  <meta name="baidu-site-verification" content="code-fjFXVtiL7j" />
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto Mono,Roboto:300,300italic,400,400italic,700,700italic|Roboto:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css">
+<link href="https://fonts.googleapis.com/css?family=Noto+Serif+SC|Roboto&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@1/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.sekyoro.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":240,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"appID":"0F9LEEVW82","apiKey":"78839e9f9be09d081c5c4da81975cd19","indexName":"sekyoblog_sec","hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+<link href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css" rel="stylesheet">
+  <meta name="description" content="主要起因是我在逛Reddit帖子时,看到关于一些c++构建系统的评价. cmake似乎有些过于复杂,它与vcpkg,conan的包管理之间的”融合”可能在有些时候也显得麻烦. 一些人尝试了我没见过的选项, 所以这里主要试试除了cmake之外的构建工具(这些选项中个人目前看好xmake),除了xmake之外,还有The Meson Build system，About Spack - Spack，B">
+<meta property="og:type" content="article">
+<meta property="og:title" content="xmake:另一个C++现代构建系统">
+<meta property="og:url" content="https://www.sekyoro.top/2024/09/11/C-%E7%8E%B0%E4%BB%A3%E6%9E%84%E5%BB%BA%E7%B3%BB%E7%BB%9F/index.html">
+<meta property="og:site_name" content="Sekyoro的博客小屋">
+<meta property="og:description" content="主要起因是我在逛Reddit帖子时,看到关于一些c++构建系统的评价. cmake似乎有些过于复杂,它与vcpkg,conan的包管理之间的”融合”可能在有些时候也显得麻烦. 一些人尝试了我没见过的选项, 所以这里主要试试除了cmake之外的构建工具(这些选项中个人目前看好xmake),除了xmake之外,还有The Meson Build system，About Spack - Spack，B">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://proanimer-img.oss-cn-shanghai.aliyuncs.com/alimg/image-20240911180835085.png">
+<meta property="og:image" content="https://proanimer-img.oss-cn-shanghai.aliyuncs.com/alimg/image-20240911181040866.png">
+<meta property="og:image" content="https://proanimer-img.oss-cn-shanghai.aliyuncs.com/alimg/image-20240911181547753.png">
+<meta property="og:image" content="https://proanimer-img.oss-cn-shanghai.aliyuncs.com/alimg/image-20240911181640286.png">
+<meta property="og:image" content="https://proanimer-img.oss-cn-shanghai.aliyuncs.com/alimg/image-20240912123855699.png">
+<meta property="og:image" content="https://proanimer-img.oss-cn-shanghai.aliyuncs.com/alimg/image-20240911232109031.png">
+<meta property="og:image" content="https://proanimer-img.oss-cn-shanghai.aliyuncs.com/alimg/image-20240911232412863.png">
+<meta property="og:image" content="https://proanimer-img.oss-cn-shanghai.aliyuncs.com/alimg/image-20240911230257291.png">
+<meta property="og:image" content="https://proanimer-img.oss-cn-shanghai.aliyuncs.com/alimg/image-20240911224541731.png">
+<meta property="og:image" content="https://proanimer-img.oss-cn-shanghai.aliyuncs.com/alimg/image-20240912092357159.png">
+<meta property="og:image" content="https://proanimer-img.oss-cn-shanghai.aliyuncs.com/alimg/image-20240912100635482.png">
+<meta property="og:image" content="https://proanimer-img.oss-cn-shanghai.aliyuncs.com/alimg/image-20240912121858364.png">
+<meta property="article:published_time" content="2024-09-11T09:22:10.000Z">
+<meta property="article:modified_time" content="2024-09-14T10:42:43.084Z">
+<meta property="article:author" content="Sekyoro">
+<meta property="article:tag" content="c++ build">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://proanimer-img.oss-cn-shanghai.aliyuncs.com/alimg/image-20240911180835085.png">
+
+<link rel="canonical" href="https://www.sekyoro.top/2024/09/11/C-%E7%8E%B0%E4%BB%A3%E6%9E%84%E5%BB%BA%E7%B3%BB%E7%BB%9F/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
     isHome : false,
     isPost : true,
     lang   : 'zh-CN'
-  };</script><title>xmake:另一个C++现代构建系统 | Sekyoro的博客小屋</title><noscript><style>.use-motion .brand,
+  };
+</script>
+
+  <title>xmake:另一个C++现代构建系统 | Sekyoro的博客小屋</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
   .use-motion .menu-item,
   .sidebar-inner,
   .use-motion .post-block,
@@ -30,7 +110,540 @@
   }
 
   .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }</style></noscript><link href=/atom.xml rel=alternate title=Sekyoro的博客小屋 type=application/atom+xml><body itemscope itemtype=http://schema.org/WebPage><canvas style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" class=fireworks></canvas><script defer src=https://cdn.bootcss.com/animejs/2.2.0/anime.min.js></script><script defer src=/js/src/fireworks.js></script><div class="container use-motion"><div class=headband></div><header class=header itemscope itemtype=http://schema.org/WPHeader><div class=header-inner><div class=site-brand-container><div class=site-nav-toggle><div aria-label=切换导航栏 class=toggle><span class="toggle-line toggle-line-first"></span><span class="toggle-line toggle-line-middle"></span><span class="toggle-line toggle-line-last"></span></div></div><div class=site-meta><a class=brand href=/ rel=start> <span class=logo-line-before><i></i></span> <h1 class=site-title>Sekyoro的博客小屋</h1> <span class=logo-line-after><i></i></span> </a></div><div class=site-nav-right><div class="toggle popup-trigger"><i class="fa fa-search fa-fw fa-lg"></i></div></div></div><nav class=site-nav><ul class="main-menu menu" id=menu><li class="menu-item menu-item-home"><a href=/ rel=section><i class="fa fa-home fa-fw"></i>首页</a><li class="menu-item menu-item-about"><a href=/about/ rel=section><i class="fa fa-user fa-fw"></i>关于</a><li class="menu-item menu-item-tags"><a href=/tags/ rel=section><i class="fa fa-tags fa-fw"></i>标签</a><li class="menu-item menu-item-categories"><a href=/categories/ rel=section><i class="fa fa-th fa-fw"></i>分类</a><li class="menu-item menu-item-archives"><a href=/archives/ rel=section><i class="fa fa-archive fa-fw"></i>归档</a><li class="menu-item menu-item-bangumis"><a href=/bangumis/ rel=section><i class="fa fa-film fa-fw"></i>追番</a><li class="menu-item menu-item-resume"><a href=/resume/ rel=section><i class="fa fa-file-pdf fa-fw"></i>简历</a><li class="menu-item menu-item-materials"><a href=/materials/ rel=section><i class="fa fa-book fa-fw"></i>学习资料</a><li class="menu-item menu-item-sitemap"><a href=/sitemap.xml rel=section><i class="fa fa-sitemap fa-fw"></i>站点地图</a><li class="menu-item menu-item-search"><a class=popup-trigger role=button><i class="fa fa-search fa-fw"></i>搜索 </a></ul></nav><div class=search-pop-overlay><div class="popup search-popup"><div class=search-header><span class=search-icon> <i class="fa fa-search"></i> </span><div class=search-input-container></div><span class=popup-btn-close> <i class="fa fa-times-circle"></i> </span></div><div class=algolia-results><div id=algolia-stats></div><div id=algolia-hits></div><div class=algolia-pagination id=algolia-pagination></div></div></div></div></div></header><a class="book-mark-link book-mark-link-fixed" role=button></a><main class=main><div class=main-inner><div class=content-wrap><div class="content post posts-expand"><article class=post-block itemscope itemtype=http://schema.org/Article lang=zh-CN><link href=https://www.sekyoro.top/2024/09/11/C-%E7%8E%B0%E4%BB%A3%E6%9E%84%E5%BB%BA%E7%B3%BB%E7%BB%9F/ itemprop=mainEntityOfPage><span hidden itemprop=author itemscope itemtype=http://schema.org/Person> <meta content=https://i.loli.net/2021/05/17/YqoavnXdGTpPO9R.jpg itemprop=image> <meta content=Sekyoro itemprop=name> <meta content=什么也无法舍弃的人，什么也做不了. itemprop=description> </span><span hidden itemprop=publisher itemscope itemtype=http://schema.org/Organization> <meta content=Sekyoro的博客小屋 itemprop=name> </span><header class=post-header><h1 itemprop="name headline" class=post-title>xmake:另一个C++现代构建系统</h1><div class=post-meta><span class=post-meta-item> <span class=post-meta-item-icon> <i class="far fa-calendar"></i> </span> <span class=post-meta-item-text>发表于</span> <time itemprop="dateCreated datePublished" title="创建时间：2024-09-11 17:22:10" datetime=2024-09-11T17:22:10+08:00>2024-09-11</time> </span><span class=post-meta-item> <span class=post-meta-item-icon> <i class="far fa-calendar-check"></i> </span> <span class=post-meta-item-text>更新于</span> <time title="修改时间：2024-09-14 18:42:43" datetime=2024-09-14T18:42:43+08:00 itemprop=dateModified>2024-09-14</time> </span><span style="display: none;" class=post-meta-item id=busuanzi_container_page_pv title=阅读次数> <span class=post-meta-item-icon> <i class="fa fa-eye"></i> </span> <span class=post-meta-item-text>阅读次数：</span> <span id=busuanzi_value_page_pv></span> </span><br><span class=post-meta-item title=本文字数> <span class=post-meta-item-icon> <i class="far fa-file-word"></i> </span> <span class=post-meta-item-text>本文字数：</span> <span>14k</span> </span><span class=post-meta-item title=阅读时长> <span class=post-meta-item-icon> <i class="far fa-clock"></i> </span> <span class=post-meta-item-text>阅读时长 ≈</span> <span>13 分钟</span> </span></div></header><div class=post-body itemprop=articleBody><div class=post-tags><a href=/tags/c-build/ rel=tag># c++ build</a></div><p>主要起因是我在逛Reddit帖子时,看到关于一些c++构建系统的评价. cmake似乎有些过于复杂,它与vcpkg,conan的包管理之间的”融合”可能在有些时候也显得麻烦. 一些人尝试了我没见过的选项,<p>所以这里主要试试除了cmake之外的构建工具(这些选项中个人目前看好xmake),除了<a href=https://xmake.io/#/getting_started rel=noopener target=_blank>xmake</a>之外,还有<a href=https://mesonbuild.com/ rel=noopener target=_blank>The Meson Build system</a>，<a href=https://spack.io/about/ rel=noopener target=_blank>About Spack - Spack</a>，<a href=https://bazel.google.cn/versions/7.3.0/about/intro?hl=zh-cn rel=noopener target=_blank>Bazel 简介 (google.cn)</a>等等.我选择xmake主要原因是其自带的包管理和方便的写法<br><span id=more></span><p>在进一步介绍xmake之前,有必要区分构建工具和包管理工具.c++目前常用的包管理工具有vcpkg,cpm以及conan,它们都有自己的registries,类似于node的npm,cargo的crates,python的pip registries,java的maven仓库. 都是社区或官方维护的库下载点,一般来允许用户注册后上传自己的包(不过考虑到c++生态是一堆轮子哥,用第三方库的人可能没有python,js一半多).<h2 id=纯纯FetchContent><a class=headerlink href=#纯纯FetchContent title=纯纯FetchContent></a>纯纯FetchContent</h2><figure class="highlight cmake"><table><tr><td class=gutter><pre><span class=line>1</span><br><span class=line>2</span><br><span class=line>3</span><br><span class=line>4</span><br><span class=line>5</span><br><span class=line>6</span><br><span class=line>7</span><br><span class=line>8</span><br><span class=line>9</span><br><span class=line>10</span><br><span class=line>11</span><br><span class=line>12</span><br><span class=line>13</span><br><span class=line>14</span><br><span class=line>15</span><br></pre><td class=code><pre><span class=line><span class=comment>## from https://cmakebyexample.dev/use-library-fetchcontent/</span></span><br><span class=line><span class=keyword>cmake_minimum_required</span>(VERSION <span class=number>3.28</span>)</span><br><span class=line><span class=keyword>project</span>(my-<span class=keyword>project</span>)</span><br><span class=line></span><br><span class=line><span class=keyword>include</span>(FetchContent)</span><br><span class=line>FetchContent_Declare(</span><br><span class=line>  cpr</span><br><span class=line>  GIT_REPOSITORY https://github.com/libcpr/cpr.git</span><br><span class=line>  <span class=comment># https://github.com/libcpr/cpr/releases</span></span><br><span class=line>  GIT_TAG <span class=number>1.10</span>.<span class=number>4</span>)</span><br><span class=line>FetchContent_MakeAvailable(cpr)</span><br><span class=line></span><br><span class=line><span class=keyword>add_executable</span>(my-app main.cpp)</span><br><span class=line><span class=keyword>target_compile_features</span>(my-app PUBLIC cxx_std_20)</span><br><span class=line><span class=keyword>target_link_libraries</span>(my-app PRIVATE cpr::cpr)</span><br></pre></table></figure><p>利用cmake内置功能,下载相应库.它需要从源代码构建curl.<blockquote><p>FetchContent 可让您直接在 CMake 项目中包含外部项目，从而更轻松地处理依赖关系，而无需用户单独下载和构建，或依赖系统级软件包管理器。它通过自动处理下载、构建和配置这些依赖项等任务，简化了将外部代码引入项目的过程。</blockquote><figure class="highlight cmake"><table><tr><td class=gutter><pre><span class=line>1</span><br><span class=line>2</span><br><span class=line>3</span><br><span class=line>4</span><br><span class=line>5</span><br><span class=line>6</span><br><span class=line>7</span><br><span class=line>8</span><br><span class=line>9</span><br><span class=line>10</span><br><span class=line>11</span><br></pre><td class=code><pre><span class=line><span class=keyword>include</span>(FetchContent)</span><br><span class=line></span><br><span class=line>FetchContent_Declare(</span><br><span class=line>    my_dependency</span><br><span class=line>    GIT_REPOSITORY https://github.com/example/my_dependency.git</span><br><span class=line>    GIT_TAG v1.<span class=number>0.0</span></span><br><span class=line>)</span><br><span class=line></span><br><span class=line>FetchContent_MakeAvailable(my_dependency)</span><br><span class=line></span><br><span class=line><span class=comment># Now you can use the components of 'my_dependency' in your project</span></span><br></pre></table></figure><h2 id=vcpkg><a class=headerlink href=#vcpkg title=vcpkg></a>vcpkg</h2><p>包仓库<a href=https://vcpkg.io/en/packages rel=noopener target=_blank>Browse public vcpkg packages</a><figure class="highlight sh"><table><tr><td class=gutter><pre><span class=line>1</span><br><span class=line>2</span><br></pre><td class=code><pre><span class=line>mkdir myModule && <span class=built_in>cd</span> myModule</span><br><span class=line>vcpkg --new application <span class=comment># 创建应用</span></span><br></pre></table></figure><p>在目录下生成了两个文件,<code>vcpkg.json</code>和<code>vcpkg-confuguration.json</code>分别用于存依赖信息和仓库信息.初始前者为空,后者<figure class="highlight json"><table><tr><td class=gutter><pre><span class=line>1</span><br><span class=line>2</span><br><span class=line>3</span><br><span class=line>4</span><br><span class=line>5</span><br><span class=line>6</span><br><span class=line>7</span><br><span class=line>8</span><br><span class=line>9</span><br><span class=line>10</span><br><span class=line>11</span><br><span class=line>12</span><br><span class=line>13</span><br><span class=line>14</span><br><span class=line>15</span><br></pre><td class=code><pre><span class=line>{</span><br><span class=line>  <span class=attr>"default-registry"</span>: {</span><br><span class=line>    <span class=attr>"kind"</span>: <span class=string>"git"</span>,</span><br><span class=line>    <span class=attr>"baseline"</span>: <span class=string>"9760ce6194ef51aa4faf77b6321e1280daa4545c"</span>,</span><br><span class=line>    <span class=attr>"repository"</span>: <span class=string>"https://github.com/microsoft/vcpkg"</span></span><br><span class=line>  },</span><br><span class=line>  <span class=attr>"registries"</span>: [</span><br><span class=line>    {</span><br><span class=line>      <span class=attr>"kind"</span>: <span class=string>"artifact"</span>,</span><br><span class=line>      <span class=attr>"location"</span>: <span class=string>"https://github.com/microsoft/vcpkg-ce-catalog/archive/refs/heads/main.zip"</span>,</span><br><span class=line>      <span class=attr>"name"</span>: <span class=string>"microsoft"</span></span><br><span class=line>    }</span><br><span class=line>  ]</span><br><span class=line>}</span><br><span class=line></span><br></pre></table></figure><p>默认的 <code>vcpkg-configuration.json</code> 文件引入了基线约束，指定了项目应使用的依赖项的最小版本,将 <code>vcpkg-configuration.json</code> 添加到代码控制中。<figure class="highlight sh"><table><tr><td class=gutter><pre><span class=line>1</span><br></pre><td class=code><pre><span class=line>vcpkg add port fmt</span><br></pre></table></figure><p>添加依赖信息,这里并没有下载包,所以直接引入头文件会报错的<p><img alt=image-20240911180835085 data-src=https://proanimer-img.oss-cn-shanghai.aliyuncs.com/alimg/image-20240911180835085.png><p>使用下面指令下载<code>vcpkg.json</code>中的包<figure class="highlight sh"><table><tr><td class=gutter><pre><span class=line>1</span><br></pre><td class=code><pre><span class=line>vcpkg install</span><br></pre></table></figure><p>还会贴心提示在cmake中如何使用<p><img alt=image-20240911181040866 data-src=https://proanimer-img.oss-cn-shanghai.aliyuncs.com/alimg/image-20240911181040866.png><p>vcpkg官方推荐使用<code>CMakePresets.json</code>配置进行构建<blockquote><p>使用预设，项目的顶层目录必须包含名为 CMakePresets.json 或 CMakeUserPresets.json 的文 件。若两个文件都存在，将先解析 CMakePresets.json，再解析 CMakeUserPresets.json。这两个文件 有相同的格式，但使用方式略有不同</blockquote><p><img alt=image-20240911181547753 data-src=https://proanimer-img.oss-cn-shanghai.aliyuncs.com/alimg/image-20240911181547753.png><p><img alt=image-20240911181640286 data-src=https://proanimer-img.oss-cn-shanghai.aliyuncs.com/alimg/image-20240911181640286.png><figure class="highlight dsconfig"><table><tr><td class=gutter><pre><span class=line>1</span><br><span class=line>2</span><br></pre><td class=code><pre><span class=line><span class=string>cmake</span> <span class=built_in>--listpresets</span> <span class=comment># 列出写的预设</span></span><br><span class=line><span class=string>cmake</span> <span class=built_in>--preset=name</span> <span class=comment>#选择某个预设</span></span><br></pre></table></figure><p>其要求写入缓存变量<code>CMAKE_TOOLCHAIN_FILE</code>就是本机安装的<code>vcpkg.cmake</code>,<p>如果你设置了<code>VCPKG_ROOT</code>环境变量,可以使用”$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake”<figure class="highlight json"><table><tr><td class=gutter><pre><span class=line>1</span><br><span class=line>2</span><br><span class=line>3</span><br><span class=line>4</span><br><span class=line>5</span><br><span class=line>6</span><br><span class=line>7</span><br><span class=line>8</span><br><span class=line>9</span><br><span class=line>10</span><br><span class=line>11</span><br><span class=line>12</span><br><span class=line>13</span><br><span class=line>14</span><br></pre><td class=code><pre><span class=line>{</span><br><span class=line>  <span class=attr>"version"</span>: <span class=number>3</span>,</span><br><span class=line>  <span class=attr>"configurePresets"</span>: [</span><br><span class=line>    {</span><br><span class=line>      <span class=attr>"name"</span>: <span class=string>"default"</span>,</span><br><span class=line>       <span class=attr>"displayname"</span>: <span class=string>"default"</span>,</span><br><span class=line>      <span class=attr>"generator"</span>: <span class=string>"Ninja"</span>, # 构建工具</span><br><span class=line>      <span class=attr>"binaryDir"</span>: <span class=string>"${sourceDir}/build"</span>, # 构建输出目录</span><br><span class=line>      <span class=attr>"cacheVariables"</span>: {</span><br><span class=line>        <span class=attr>"CMAKE_TOOLCHAIN_FILE"</span>: <span class=string>"&LTVCPKG_ROOT>/scripts/buildsystems/vcpkg.cmake"</span> #设置vcpkg工具链</span><br><span class=line>      }</span><br><span class=line>    }</span><br><span class=line>  ]</span><br><span class=line>}</span><br></pre></table></figure><p>version 字段指定要使用的 JSON 模式。版本 1 是 CMake 3.19 的第一个版本，只支持 configurePresets。版本 2 增加了 buildPresets 和 testPresets，CMake 3.20 开始支持; 版本 3 增加了 更多选项，CMake 3.21 开始支持。 可选的 cmakeMinimumRequired 字段可以用来定义构建此项目所需的 CMake 的最小版本。由于 最低要求通常也在 CMakeLists.txt 文件中说明，这通常会省略。 这三个列表:configurePresets、buildPresets 和 testPresets，每个列表都包含了用于配置、构建和 测试项目的配置。构建和测试的预置要求至少有一个配置预置，将在本节后面看到。 vendor 字段包含特定于供应商或 IDE 信息的可选映射。CMake 不解释该字段的内容<p>然后写上cmake文件,因为先使用preset会执行<figure class="highlight cmake"><table><tr><td class=gutter><pre><span class=line>1</span><br><span class=line>2</span><br><span class=line>3</span><br><span class=line>4</span><br><span class=line>5</span><br></pre><td class=code><pre><span class=line><span class=keyword>cmake_minimum_required</span>(VERSION <span class=number>3.23</span>)</span><br><span class=line><span class=keyword>project</span>(HelloWorld)</span><br><span class=line><span class=keyword>find_package</span>(fmt CONFIG REQUIRED) <span class=comment>#重点 find_package找包</span></span><br><span class=line><span class=keyword>add_executable</span>(HelloWorld main.cpp)</span><br><span class=line><span class=keyword>target_link_libraries</span>(HelloWorld PRIVATE fmt::fmt) <span class=comment>#进行链接</span></span><br></pre></table></figure><p>执行<code>cmake --preset=name</code>会进行构建,如果没有安装相应库,也会安装.所以上面的<code>vcpkg install</code>就没必要执行了.<p>我在使用时遇到了找不到实现的问题,这貌似需要设置vcpkg triplet,网上有一些triplets模板,简单来说需要设置一系列vcpkg变量<ul><li><a href=https://stackoverflow.com/questions/74422058/how-to-use-vcpkg-with-clang-on-linux rel=noopener target=_blank>How to use vcpkg with clang on linux? - Stack Overflow</a> 创建的自己的triplets<a href=https://learn.microsoft.com/zh-cn/vcpkg/users/examples/overlay-triplets-linux-dynamic rel=noopener target=_blank>使用覆盖三联密码 | Microsoft Learn</a><li><a href=https://github.com/microsoft/vcpkg/blob/master/docs/users/triplets.md rel=noopener target=_blank>vcpkg/docs/users/triplets.md at master · microsoft/vcpkg (github.com)</a><li><a href=https://learn.microsoft.com/zh-cn/vcpkg/concepts/triplets rel=noopener target=_blank>三元组 | Microsoft Learn</a>在windows默认的就是msvc的,难怪编译不过,我使用的时mingw…<li><a href=https://github.com/microsoft/vcpkg/blob/master/docs/users/triplets.md rel=noopener target=_blank>vcpkg/docs/users/triplets.md at master · microsoft/vcpkg (github.com)</a><li><a href=https://stackoverflow.com/questions/78962135/cmake-add-library-with-set-property-can-not-found-fmt-dll-on-windows/78962177?noredirect=1#comment139223613_78962177 rel=noopener target=_blank>c++ - cmake add_library with set_property can not found fmt dll on windows - Stack Overflow</a> 在windows上编译后将动态库拷贝一份到可执行程序同一个目录.<code>exe文件运行必须依赖同一目录(或者环境变量)下的dll</code></ul><p>一个简单的方法时设置<code>VCPKG_TARGET_TRIPLET</code>变量为”x64-mingw-dynamic”,表示使用mingw的动态库.或者使用<figure class="highlight sh"><table><tr><td class=gutter><pre><span class=line>1</span><br></pre><td class=code><pre><span class=line>vcpkg install fmt:x64-mingw-dynamic</span><br></pre></table></figure><p>可以设置 <code>VCPKG_TARGET_TRIPLET</code>(需要下载和使用的库的架构)和<code>VCPKG_HOST_TRIPLET</code>(生成自己的库需要的构建架构)来设置target和host的架构,使用<code>VCPKG_OVERLAY_TRIPLETS</code>使用社区的.<figure class="highlight sh"><table><tr><td class=gutter><pre><span class=line>1</span><br></pre><td class=code><pre><span class=line>vcpkg <span class=built_in>help</span> triplets </span><br></pre></table></figure><p>查看官方和社区提供的triplets.<h3 id=Triplets><a class=headerlink href=#Triplets title=Triplets></a>Triplets</h3><p>triplets指定平台架构,并按照对应的架构去设置toolchain,默认是在vcpkg/triplets下找一个符合平台的,比如<code>vcpkg install xxx:abcd</code>,其中abcd就是一个triplets,设置好triplet后清单模式下就去下载相应的包<p><img alt=image-20240912123855699 data-src=https://proanimer-img.oss-cn-shanghai.aliyuncs.com/alimg/image-20240912123855699.png style=zoom:50%;><blockquote><p>更新:如果你只是想用clang++编译器,在<code>CMakeLists.txt</code>project指令之前指定即可</blockquote><p>用于交叉编译的,也就是在宿主机上编译不同平台架构的程序/库.<p>默认triplets<ul><li>Windows: <code>x64-windows</code><li>Linux: <code>x64-linux</code><li>OSX: <code>x64-osx</code></ul><p>可以分别指定target-triplet和host-triplet设置对应需要的工具链名称,会根据对应的名字去vcpkg/triplets找,或者使用overlay-triplets覆盖目录<p>以上的问题可以总结为<ol><li><p>使用clang需要配置triplets,可以使用社区的</p> <p><a href=https://github.com/microsoft/vcpkg/issues/38042 rel=noopener target=_blank>How to compile vcpkg libraries using Clang? · Issue #38042 · microsoft/vcpkg (github.com)</a></p> <p><a href=https://learn.microsoft.com/zh-cn/vcpkg/users/examples/overlay-triplets-linux-dynamic rel=noopener target=_blank>使用覆盖三联密码 | Microsoft Learn</a></p> <p><a href=https://github.com/Neumann-A/my-vcpkg-triplets/tree/master rel=noopener target=_blank>Neumann-A/my-vcpkg-triplets: my collection of vcpkg triplets (github.com)</a></p></ol><p>我注意到社区中的triplets中很多使用了<code>VCPKG_CHAINLOAD_TOOLCHAIN_FILE</code>指定要使用的备用 CMake 工具链文件,如果设置将替代所有其他编译器检测逻辑.默认情况下工具链文件是从 <code>scripts/toolchains/</code> 适合平台选择的,使用<code>--overlay-triplets</code>选择一个目录进行覆盖<a href=https://learn.microsoft.com/zh-cn/vcpkg/users/examples/overlay-triplets-linux-dynamic rel=noopener target=_blank>使用覆盖三联密码 | Microsoft Learn</a><p><img alt=image-20240911232109031 data-src=https://proanimer-img.oss-cn-shanghai.aliyuncs.com/alimg/image-20240911232109031.png><blockquote><p>CMake 使用工具链实用程序来编译、link libraries和创建archives，并执行其他任务来进行构建。<p>可用的工具链由启用的语言决定。在正常编译中，<strong>CMake 会根据系统自省和默认值自动为主机编译确定工具链</strong>。在交叉编译情况下，可指定一个包含编译器和工具路径信息的工具链文件</blockquote><p>下面信息很重要,cmake在project()指令处查找可用的工具链,在<code>CMAKE_TOOLCHAIN_FILE</code>中处理vcpkg逻辑,其中将默认调用合适的vckpg/scripts/toolchains/中的toolchain<p><img alt=image-20240911232412863 data-src=https://proanimer-img.oss-cn-shanghai.aliyuncs.com/alimg/image-20240911232412863.png><ol><li>在windows上使用vcpkg安装得到的动态库如果想要自己放在一个统一的3rdparty目录,include目录和bin目录中再自己设置link</ol><p>需要放在可执行程序目录下,可以通过设置路径解决<p><a href=https://blog.csdn.net/Tracker647/article/details/142070768 rel=noopener target=_blank>CMake+MinGW+vcpkg项目引入三方库的两种方式（手动路径，vcpkg）-CSDN博客</a><p><a href=https://stackoverflow.com/questions/78962135/cmake-add-library-with-set-property-can-not-found-fmt-dll-on-windows/78962177?noredirect=1#comment139223613_78962177 rel=noopener target=_blank>c++ - cmake add_library with set_property can not found fmt dll on windows - Stack Overflow</a>注意需要设置链接的.lib和.dll库,通过<code>IMPORTED_IMPLIB</code>设置输出的.lib库<blockquote><ul><li><strong>IMPORTED_LOCATION</strong>：用于存储导入库的实际文件路径，通常是共享库或可执行文件的位置。<li><strong>IMPORTED_IMPLIB</strong>：用于存储导入库（导入库 .lib 文件）的路径，通常在 Windows 平台上使用。</ul></blockquote><p><img alt=image-20240911230257291 data-src=https://proanimer-img.oss-cn-shanghai.aliyuncs.com/alimg/image-20240911230257291.png><figure class="highlight cmake"><table><tr><td class=gutter><pre><span class=line>1</span><br><span class=line>2</span><br><span class=line>3</span><br><span class=line>4</span><br><span class=line>5</span><br><span class=line>6</span><br><span class=line>7</span><br><span class=line>8</span><br><span class=line>9</span><br><span class=line>10</span><br><span class=line>11</span><br><span class=line>12</span><br><span class=line>13</span><br><span class=line>14</span><br><span class=line>15</span><br><span class=line>16</span><br><span class=line>17</span><br></pre><td class=code><pre><span class=line><span class=keyword>cmake_minimum_required</span>(VERSION <span class=number>3.10</span>)</span><br><span class=line></span><br><span class=line><span class=keyword>project</span>(HelloWorld)</span><br><span class=line><span class=keyword>message</span>(<span class=string>"CMAKE_SOURCE_DIR: ${CMAKE_SOURCE_DIR}"</span>)</span><br><span class=line></span><br><span class=line><span class=keyword>add_executable</span>(HelloWorld main.cpp)</span><br><span class=line><span class=keyword>add_library</span>(fmt SHARED IMPORTED)</span><br><span class=line><span class=keyword>set_property</span>(<span class=keyword>TARGET</span> fmt PROPERTY IMPORTED_LOCATION <span class=variable>${CMAKE_SOURCE_DIR}</span>/<span class=number>3</span>rdparty/fmt_x64-mingw-dynamic/bin/libfmt.dll)</span><br><span class=line><span class=comment># 改变导入库的.dll的位置</span></span><br><span class=line><span class=keyword>target_include_directories</span>(fmt INTERFACE <span class=variable>${CMAKE_SOURCE_DIR}</span>/<span class=number>3</span>rdparty/fmt_x64-mingw-dynamic/<span class=keyword>include</span>)</span><br><span class=line></span><br><span class=line><span class=keyword>target_link_libraries</span>(HelloWorld fmt)</span><br><span class=line><span class=keyword>add_custom_command</span>(<span class=keyword>TARGET</span> HelloWorld POST_BUILD     <span class=comment>#-for copy libs in windows</span></span><br><span class=line>            <span class=keyword>COMMAND</span> <span class=variable>${CMAKE_COMMAND}</span> -E copy_if_different </span><br><span class=line>            <span class=variable>${CMAKE_SOURCE_DIR}</span>/<span class=number>3</span>rdparty/fmt_x64-mingw-dynamic/bin/libfmt.dll </span><br><span class=line>            <span class=variable>${CMAKE_SOURCE_DIR}</span>/build)</span><br><span class=line>            <span class=comment># 将输出动态库放在build目录下</span></span><br></pre></table></figure><p>需要添加设置<code>IMORTED_IMPLIB</code>路径<figure class="highlight cmake"><table><tr><td class=gutter><pre><span class=line>1</span><br><span class=line>2</span><br><span class=line>3</span><br><span class=line>4</span><br><span class=line>5</span><br></pre><td class=code><pre><span class=line><span class=keyword>add_library</span>(fmt SHARED IMPORTED)</span><br><span class=line><span class=keyword>set_property</span>(<span class=keyword>TARGET</span> fmt PROPERTY</span><br><span class=line>  IMPORTED_LOCATION <span class=variable>${CMAKE_SOURCE_DIR}</span>/<span class=number>3</span>rdparty/fmt_x64-mingw-dynamic/bin/libfmt.dll</span><br><span class=line>  IMORTED_IMPLIB <span class=variable>${CMAKE_SOURCE_DIR}</span>/<span class=number>3</span>rdparty/fmt_x64-mingw-dynamic/lib/libfmt.lib</span><br><span class=line>)</span><br></pre></table></figure><blockquote><p>注意,使用vcpkg自动引入需要设置build_type,这样第三方库的动态库.dll就放在对应位置不用改了.</blockquote><p>使用vcpkg时注意,<ol><li>设置<code>CMAKE_TOOLCHAIN_FILE</code>要在project指令之前</ol><p><img alt=image-20240911224541731 data-src=https://proanimer-img.oss-cn-shanghai.aliyuncs.com/alimg/image-20240911224541731.png><ol><li>使用find_package(xxx <strong>CONFIG</strong> REQUIRED)<li>推荐使用preset<li>设置<code>CMAKE_EXPORT_COMPILE_COMMANDS</code>为ON让clangd检测头文件目录</ol><figure class="highlight sh"><table><tr><td class=gutter><pre><span class=line>1</span><br></pre><td class=code><pre><span class=line>cmake -B build -S /my/project --preset debug</span><br></pre></table></figure><p>除了下载包之外,也有打包、发布等常用功能,已经满足常用需求了,cmake本身有cpack,但没有vcpkg提供的一些发布功能<p>要创建vcpkg包,首先创建manifest清单文件<figure class="highlight json"><table><tr><td class=gutter><pre><span class=line>1</span><br><span class=line>2</span><br><span class=line>3</span><br><span class=line>4</span><br><span class=line>5</span><br></pre><td class=code><pre><span class=line>{</span><br><span class=line>  <span class=attr>"name"</span>: <span class=string>"libogg"</span>,</span><br><span class=line>  <span class=attr>"version-string"</span>: <span class=string>"1.3.3"</span>,</span><br><span class=line>  <span class=attr>"description"</span>: <span class=string>"Ogg is a multimedia container format, and the native file and stream format for the Xiph.org multimedia codecs."</span></span><br><span class=line>}</span><br></pre></table></figure><p>在项目<code>vcpkg.json</code>中写上包内容,然后创建<code>portfile.cmake</code>,修改下面的配置<figure class="highlight crmsh"><table><tr><td class=gutter><pre><span class=line>1</span><br><span class=line>2</span><br><span class=line>3</span><br><span class=line>4</span><br><span class=line>5</span><br><span class=line>6</span><br><span class=line>7</span><br></pre><td class=code><pre><span class=line>vcpkg_from_github(</span><br><span class=line>    OUT_SOURCE_PATH SOURCE_PATH</span><br><span class=line>    REPO xiph/ogg</span><br><span class=line>    <span class=keyword>REF</span> v1.<span class=number>3.3</span></span><br><span class=line>    SHA512 <span class=number>0</span>bd6095d647530d4cb1f509eb5e99965a25cc3dd9b8125b93abd6b248255c890cf20710154bdec40568478eb5c4cde724abfb2eff1f3a04e63acef0fbbc9799b</span><br><span class=line>    HEAD_REF <span class=keyword>master</span></span><br><span class=line><span class=title>)</span></span><br></pre></table></figure><p>用于GitHub存储库路径的REPO,用于使用稳定标签/提交的REF，以及带有下载文件校验和的SHA512,别人使用时也使用vcpkg下载<figure class="highlight cmake"><table><tr><td class=gutter><pre><span class=line>1</span><br><span class=line>2</span><br><span class=line>3</span><br></pre><td class=code><pre><span class=line>vcpkg_cmake_configure(SOURCE_PATH <span class=variable>${SOURCE_PATH}</span>)</span><br><span class=line>vcpkg_cmake_install()</span><br><span class=line><span class=keyword>file</span>(<span class=keyword>INSTALL</span> <span class=string>"${SOURCE_PATH}/COPYING"</span> DESTINATION <span class=string>"${CURRENT_PACKAGES_DIR}/share/libogg"</span> RENAME copyright)</span><br></pre></table></figure><p>缺点就是微软文档实在烂,不是翻译的问题,英文原文的用词像是东拼西凑,感觉像是不停换人写出来的.<h2 id=CPM-cmake><a class=headerlink href=#CPM-cmake title=CPM.cmake></a>CPM.cmake</h2><p>轻量的包管理工具<a href=https://github.com/cpm-cmake/CPM.cmake rel=noopener target=_blank>cpm-cmake/CPM.cmake: 📦 CMake’s missing package manager. A small CMake script for setup-free, cross-platform, reproducible dependency management. (github.com)</a>,基于cmake的FetchContent.<p>你只需要<code>include</code>提供的<code>cpm.cmake</code>文件即可<figure class="highlight sh"><table><tr><td class=gutter><pre><span class=line>1</span><br><span class=line>2</span><br></pre><td class=code><pre><span class=line>mkdir -p cmake</span><br><span class=line>wget -O cmake/CPM.cmake https://github.com/cpm-cmake/CPM.cmake/releases/latest/download/get_cpm.cmake</span><br></pre></table></figure><p>此外也可以在cmake文件中下载<figure class="highlight cmake"><table><tr><td class=gutter><pre><span class=line>1</span><br><span class=line>2</span><br><span class=line>3</span><br><span class=line>4</span><br><span class=line>5</span><br><span class=line>6</span><br><span class=line>7</span><br><span class=line>8</span><br><span class=line>9</span><br><span class=line>10</span><br><span class=line>11</span><br><span class=line>12</span><br><span class=line>13</span><br><span class=line>14</span><br><span class=line>15</span><br></pre><td class=code><pre><span class=line>[...]</span><br><span class=line></span><br><span class=line><span class=comment># download CPM.cmake</span></span><br><span class=line><span class=keyword>file</span>(</span><br><span class=line>  DOWNLOAD</span><br><span class=line>  https://github.com/cpm-cmake/CPM.cmake/releases/download/v0.<span class=number>38.3</span>/CPM.cmake</span><br><span class=line>  <span class=variable>${CMAKE_CURRENT_BINARY_DIR}</span>/cmake/CPM.cmake</span><br><span class=line>  EXPECTED_HASH SHA256=cc155ce02e7945e7b8967ddfaff0b050e958a723ef7aad3766d368940cb15494</span><br><span class=line>)</span><br><span class=line><span class=keyword>include</span>(<span class=variable>${CMAKE_CURRENT_BINARY_DIR}</span>/cmake/CPM.cmake)</span><br><span class=line></span><br><span class=line><span class=comment># add dependencies here</span></span><br><span class=line>CPMAddPackage(...)</span><br><span class=line></span><br><span class=line>[...]</span><br></pre></table></figure><p>然后就能直接使用了,<figure class="highlight cmake"><table><tr><td class=gutter><pre><span class=line>1</span><br><span class=line>2</span><br><span class=line>3</span><br><span class=line>4</span><br><span class=line>5</span><br><span class=line>6</span><br><span class=line>7</span><br><span class=line>8</span><br></pre><td class=code><pre><span class=line>CPMAddPackage(</span><br><span class=line>  NAME          <span class=comment># The unique name of the dependency (should be the exported target's name)</span></span><br><span class=line>  VERSION       <span class=comment># The minimum version of the dependency (optional, defaults to 0)</span></span><br><span class=line>  PATCHES       <span class=comment># Patch files to be applied sequentially using patch and PATCH_OPTIONS (optional)</span></span><br><span class=line>  OPTIONS       <span class=comment># Configuration options passed to the dependency (optional)</span></span><br><span class=line>  DOWNLOAD_ONLY <span class=comment># If set, the project is downloaded, but not configured (optional)</span></span><br><span class=line>  [...]         <span class=comment># Origin parameters forwarded to FetchContent_Declare, see below</span></span><br><span class=line>)</span><br></pre></table></figure><p>来源可以由 GIT_REPOSITORY 指定，但也支持其他来源，如一般的URL。如果没有明确指定 GIT_TAG，则默认为 v(VERSION)，这是 git 项目的通用约定。另一方面，如果没有明确指定 VERSION，在某些常见情况下，CPM 可以根据 git 标签自动识别版本。GIT_TAG 也可以设置为特定的提交或分支名称（如 master），但不建议这样做，因为这样的软件包只有在缓存被清除时才会被更新<p>如果将附加的可选参数 EXCLUDE_FROM_ALL 设为真,则默认情况下不会编译依赖关系中定义的任何目标.<figure class="highlight cmake"><table><tr><td class=gutter><pre><span class=line>1</span><br><span class=line>2</span><br><span class=line>3</span><br><span class=line>4</span><br><span class=line>5</span><br><span class=line>6</span><br></pre><td class=code><pre><span class=line><span class=comment># A git package from a given uri with a version</span></span><br><span class=line>CPMAddPackage(<span class=string>"uri@version"</span>)</span><br><span class=line><span class=comment># A git package from a given uri with a git tag or commit hash</span></span><br><span class=line>CPMAddPackage(<span class=string>"uri#tag"</span>)</span><br><span class=line><span class=comment># A git package with both version and tag provided</span></span><br><span class=line>CPMAddPackage(<span class=string>"uri@version#tag"</span>)</span><br></pre></table></figure><p>与findpackage差别,在 CMake 项目中添加库的通常方法是调用 find_package(\<packagename>)，并与 \<packagename>_LIBRARIES 变量中定义的库进行链接。这种方法虽然简单，<strong>但可能会导致无法预测的编译，因为它需要在系统中安装库，而且不清楚添加的是哪个版本的库</strong>。此外，<strong>交叉编译项目（如mobile项目）也很困难</strong>，因为需要针对每个目标架构手动重建依赖关系。 <p>CPM.cmake 允许明确定义依赖关系，并从源代码构建依赖关系。请注意，该行为不同于 find_package，因为使用 CPM.cmake 添加软件包后，导出到父作用域的变量（如 \<packagename>_LIBRARIES ）将不可见。如果需要，可以手动实现该行为<a href=https://github.com/cpm-cmake/CPM.cmake/issues/132 rel=noopener target=_blank>find_package and CPMFindPackage have different behaviors · Issue #132 · cpm-cmake/CPM.cmake (github.com)</a>。 <p>与fech_content差别,CPM.cmake 会检查任何添加的依赖项的版本号，如果另一个依赖项需要更新版,则会发出警告。<br>离线编译： CPM.cmake 将覆盖 CMake 的下载和更新命令，如果本地有所有依赖项，则可在离线状态下配置新的构建。<br>自动浅层克隆：如果提供了版本标签（如 v2.2.0）并使用了 CPM_SOURCE_CACHE，CPM.cmake 将执行依赖关系的浅层克隆，这应比完全克隆更快，同时使用的存储空间更少。可重写：通过设置 CMake 标志，所有 CPMAddPackage 都可配置为使用 find_package，从而轻松集成到可能需要通过系统的软件包管理器进行本地版本控制的项目中。软件包锁定文件可实现更简便的跨依赖关系管理。<br>每次编译时，可使用 CMake CLI 参数覆盖依赖关系。</p> <figure class="highlight cmake"><table><tr><td class=gutter><pre><span class=line>1</span><br><span class=line>2</span><br><span class=line>3</span><br><span class=line>4</span><br><span class=line>5</span><br><span class=line>6</span><br><span class=line>7</span><br></pre><td class=code><pre><span class=line><span class=keyword>cmake_minimum_required</span>(VERSION <span class=number>3.28</span>)</span><br><span class=line><span class=keyword>project</span>(my-<span class=keyword>project</span>)</span><br><span class=line><span class=keyword>include</span>(cmake/CPM.cmake)</span><br><span class=line>CPMAddPackage(<span class=string>"gh:fmtlib/fmt#10.2.0"</span>)</span><br><span class=line><span class=keyword>add_executable</span>(my-app main.cpp)</span><br><span class=line><span class=keyword>target_compile_features</span>(my-app PRIVATE cxx_std_20)</span><br><span class=line><span class=keyword>target_link_libraries</span>(my-app fmt::fmt)</span><br></pre></table></figure> <p>上面的就使用<code>CPMAddPackage</code>添加了github上的fmtlib作者的fmt库,版本10.2.0</p> <p>更多例子<a href=https://github.com/cpm-cmake/CPM.cmake/tree/master/examples rel=noopener target=_blank>CPM.cmake/examples at master · cpm-cmake/CPM.cmake (github.com)</a></p> <h2 id=CONAN><a class=headerlink href=#CONAN title=CONAN></a>CONAN</h2><p>这里做简单介绍,conan有仓库中心<a href=https://conan.io/center rel=noopener target=_blank>Conan 2.0: C and C++ Open Source Package Manager</a></p> <figure class="highlight sh"><table><tr><td class=gutter><pre><span class=line>1</span><br></pre><td class=code><pre><span class=line>pip install conan</span><br></pre></table></figure> <p>在项目中创建<code>conanfile.txt</code>,</p> <figure class="highlight plaintext"><table><tr><td class=gutter><pre><span class=line>1</span><br><span class=line>2</span><br><span class=line>3</span><br><span class=line>4</span><br><span class=line>5</span><br><span class=line>6</span><br></pre><td class=code><pre><span class=line>[requires]</span><br><span class=line>zlib/1.2.11</span><br><span class=line></span><br><span class=line>[generators]</span><br><span class=line>CMakeDeps</span><br><span class=line>CMakeToolchain</span><br></pre></table></figure> <p>generators表示将使用CMakeDeps来生成关于Zlib库文件安装位置的信息，CMakeToolchain通过CMake工具链文件传递构建信息给CMake</p> <p>此外还要创建conan profile,里面提供本机系统信息,</p> <figure class="highlight sh"><table><tr><td class=gutter><pre><span class=line>1</span><br></pre><td class=code><pre><span class=line>conan profile detect --force</span><br></pre></table></figure> <p><img alt=image-20240912092357159 data-src=https://proanimer-img.oss-cn-shanghai.aliyuncs.com/alimg/image-20240912092357159.png></p> <p>生成的信息可以修改,比如改编译器</p> <figure class="highlight sh"><table><tr><td class=gutter><pre><span class=line>1</span><br></pre><td class=code><pre><span class=line>conan install . --output-folder=build --build=missing</span><br></pre></table></figure> <p>安装库,在build目录下会生成preset和conan_toolchain.cmake文件</p> <figure class="highlight cmake"><table><tr><td class=gutter><pre><span class=line>1</span><br><span class=line>2</span><br><span class=line>3</span><br><span class=line>4</span><br><span class=line>5</span><br><span class=line>6</span><br><span class=line>7</span><br></pre><td class=code><pre><span class=line><span class=keyword>cmake_minimum_required</span>(VERSION <span class=number>3.15</span>)</span><br><span class=line><span class=keyword>project</span>(compressor C)</span><br><span class=line></span><br><span class=line><span class=keyword>find_package</span>(ZLIB REQUIRED)</span><br><span class=line></span><br><span class=line><span class=keyword>add_executable</span>(<span class=variable>${PROJECT_NAME}</span> src/main.c)</span><br><span class=line><span class=keyword>target_link_libraries</span>(<span class=variable>${PROJECT_NAME}</span> ZLIB::ZLIB)</span><br></pre></table></figure> <p>再写个cmake文件,链接库</p> <figure class="highlight sh"><table><tr><td class=gutter><pre><span class=line>1</span><br><span class=line>2</span><br><span class=line>3</span><br><span class=line>4</span><br></pre><td class=code><pre><span class=line><span class=built_in>cd</span> build</span><br><span class=line><span class=comment># assuming Visual Studio 15 2017 is your VS version and that it matches your default profile</span></span><br><span class=line>cmake .. -G <span class=string>"Visual Studio 15 2017"</span> -DCMAKE_TOOLCHAIN_FILE=<span class=string>"conan_toolchain.cmake"</span></span><br><span class=line>cmake --build . --config Release</span><br></pre></table></figure> <p>利用toolchain文件导入包.</p> <p>上面讲的都是包管理工具(实际上脱离不了相应的构建工具),最大的问题就是两者分开了,但事实上完全可以放在一起,就像rust的cargo,<code>cargo build</code>,<code>cargo add</code></p> <h2 id=xmake><a class=headerlink href=#xmake title=xmake></a>xmake</h2><p>xmake包括了自带的构建工具和包管理,也有项目创建工具的功能.xmake使用lua配置. xmake create创建项目,可以选择语言和模板(竟然还包括zig)</p> <figure class="highlight sh"><table><tr><td class=gutter><pre><span class=line>1</span><br></pre><td class=code><pre><span class=line>xmake create --<span class=built_in>help</span></span><br></pre></table></figure> <p><img alt=image-20240912100635482 data-src=https://proanimer-img.oss-cn-shanghai.aliyuncs.com/alimg/image-20240912100635482.png></p> <figure class="highlight sh"><table><tr><td class=gutter><pre><span class=line>1</span><br></pre><td class=code><pre><span class=line>xmake create -P hello</span><br></pre></table></figure> <p>创建好后目录下有<code>xmake.lua</code>,使用xmake即可直接构建.<code>xmake run hello</code>运行程序,</p> <p>在<code>xmake.lua</code>中常见配置就是创建可执行程序,库,添加头文件,设置语言标准等.</p> <figure class="highlight lua"><table><tr><td class=gutter><pre><span class=line>1</span><br><span class=line>2</span><br><span class=line>3</span><br><span class=line>4</span><br><span class=line>5</span><br><span class=line>6</span><br><span class=line>7</span><br><span class=line>8</span><br><span class=line>9</span><br></pre><td class=code><pre><span class=line>target(<span class=string>"library"</span>)</span><br><span class=line>    set_kind(<span class=string>"shared"</span>) # 设置生成的类型</span><br><span class=line>    add_files(<span class=string>"src/library/*.c"</span>)</span><br><span class=line></span><br><span class=line>target(<span class=string>"test"</span>)</span><br><span class=line>    set_kind(<span class=string>"binary"</span>)</span><br><span class=line>    add_files(<span class=string>"src/*.c"</span>)</span><br><span class=line>    add_deps(<span class=string>"library"</span>) # 添加依赖</span><br><span class=line></span><br></pre></table></figure> <p>此外<code>add_headerfiles</code>添加头文件,<code>set_languages</code>设置语言版本.</p> <p><code>xmake f -p</code>表示配置架构</p> <figure class="highlight sh"><table><tr><td class=gutter><pre><span class=line>1</span><br><span class=line>2</span><br></pre><td class=code><pre><span class=line>xmake config -m debug xmake`</span><br><span class=line>xmake run -d hello</span><br></pre></table></figure> <p>可以进行debug</p> <figure class="highlight sh"><table><tr><td class=gutter><pre><span class=line>1</span><br></pre><td class=code><pre><span class=line>xmake f -p [macosx|linux|iphoneos ..] -a [x86_64|i386|arm64 ..] -m [debug|release]</span><br></pre></table></figure> <p>使用xmake配置项目,注意编译器设置</p> <figure class="highlight sh"><table><tr><td class=gutter><pre><span class=line>1</span><br></pre><td class=code><pre><span class=line>xmake f -p linux --sdk=/user/toolsdk --cxx=armv7-linux-clang++</span><br></pre></table></figure> <p>我在windows上使用clang++工具,配置llvm工具链即可</p> <figure class="highlight sh"><table><tr><td class=gutter><pre><span class=line>1</span><br><span class=line>2</span><br><span class=line>3</span><br></pre><td class=code><pre><span class=line>xmake f -p cross --toolchain=llvm --sdk=<span class=string>"C:\Program Files\LLVM"</span> </span><br><span class=line>xmake</span><br><span class=line>xmake run hello</span><br></pre></table></figure> <figure class="highlight sh"><table><tr><td class=gutter><pre><span class=line>1</span><br></pre><td class=code><pre><span class=line>xmake -v <span class=comment># 验证工具链配置</span></span><br></pre></table></figure> <p>或者使用mingw</p> <figure class="highlight sh"><table><tr><td class=gutter><pre><span class=line>1</span><br></pre><td class=code><pre><span class=line>xmake f -p mingw</span><br></pre></table></figure> <p>xmake官方有<code>`xmake-repo</code>仓库用于下载包,</p> <figure class="highlight lua"><table><tr><td class=gutter><pre><span class=line>1</span><br><span class=line>2</span><br><span class=line>3</span><br><span class=line>4</span><br><span class=line>5</span><br><span class=line>6</span><br></pre><td class=code><pre><span class=line>add_requires(<span class=string>"tbox 1.6.*"</span>, <span class=string>"libpng ~1.16"</span>, <span class=string>"zlib"</span>)</span><br><span class=line></span><br><span class=line>target(<span class=string>"test"</span>)</span><br><span class=line>    set_kind(<span class=string>"binary"</span>)</span><br><span class=line>    add_files(<span class=string>"src/*.c"</span>)</span><br><span class=line>    add_packages(<span class=string>"tbox"</span>, <span class=string>"libpng"</span>, <span class=string>"zlib"</span>)</span><br></pre></table></figure> <p>上面配置从官方仓库中添加了依赖,执行<code>xmake</code>进行构建,会拉取相关的源包，然后自动编译安装，最后编译项目，并链接依赖包,此外还可以设置第三方依赖,从vcpkg,conan等地方</p> <figure class="highlight lua"><table><tr><td class=gutter><pre><span class=line>1</span><br></pre><td class=code><pre><span class=line>add_requires(<span class=string>"vcpkg::zlib"</span>, <span class=string>"vcpkg::pcre2"</span>)</span><br></pre></table></figure> <p>此外还有独立的xrepo可用于下载包,可以指定平台,版本等,支持从vcpkg,conan中搜索下载.</p> <figure class="highlight sh"><table><tr><td class=gutter><pre><span class=line>1</span><br><span class=line>2</span><br><span class=line>3</span><br><span class=line>4</span><br><span class=line>5</span><br></pre><td class=code><pre><span class=line>xrepo install zlib tbox </span><br><span class=line>xrepo install <span class=string>"zlib >=1.2.0"</span> </span><br><span class=line>xrepo install -p iphoneos -a arm64 zlib</span><br><span class=line>xrepo install vcpkg::zlib </span><br><span class=line>xrepo install conan::zlib/1.2.11 </span><br></pre></table></figure> <p>我写了下面<code>xmake.lua</code></p> <figure class="highlight lua"><table><tr><td class=gutter><pre><span class=line>1</span><br><span class=line>2</span><br><span class=line>3</span><br><span class=line>4</span><br><span class=line>5</span><br><span class=line>6</span><br></pre><td class=code><pre><span class=line>add_rules(<span class=string>"mode.debug"</span>, <span class=string>"mode.release"</span>)</span><br><span class=line>add_requires(<span class=string>"fmt"</span>)</span><br><span class=line>target(<span class=string>"hello"</span>)</span><br><span class=line>    set_kind(<span class=string>"binary"</span>)</span><br><span class=line>	add_files(<span class=string>"src/*.cpp"</span>)</span><br><span class=line>	add_packages(<span class=string>"fmt::fmt"</span>)</span><br></pre></table></figure> <p>如果说vcpkg重点是选好triplet、toolchainfile,那么xmake也是配好toolchain</p> <p>我直接配置<code>xmake f -p windows</code>使用msvc能成功build,如果要使用clang,配置好平台和工具链即可,相比vcpkg要好一些,vcpkg官方对clang/llvm貌似没有那么上心,官方triplet都没有,只能用社区的</p> <figure class="highlight sh"><table><tr><td class=gutter><pre><span class=line>1</span><br><span class=line>2</span><br></pre><td class=code><pre><span class=line>xmake f -p windows  --toolchain=clang-cl </span><br><span class=line>xmake f -p windows  --toolchain=clang <span class=comment>#或者</span></span><br></pre></table></figure> <p><code>xmake show -l toolchains</code>查看所有的toolchains</p> <p>或者在<code>xmake.lua</code>中使用</p> <figure class="highlight lua"><table><tr><td class=gutter><pre><span class=line>1</span><br><span class=line>2</span><br><span class=line>3</span><br><span class=line>4</span><br><span class=line>5</span><br></pre><td class=code><pre><span class=line>set_plat(<span class=built_in>os</span>.host())</span><br><span class=line>set_arch(<span class=built_in>os</span>.arch())</span><br><span class=line>set_toochains(<span class=string>"clang"</span>)</span><br><span class=line># 或者直接统一设置</span><br><span class=line>set_toochains(<span class=string>"clang"</span>,{palt=<span class=built_in>os</span>.host(),arch=<span class=built_in>os</span>.arch()})</span><br></pre></table></figure> <p>目前还存在头文件无法识别的问题</p> <p><img alt=image-20240912121858364 data-src=https://proanimer-img.oss-cn-shanghai.aliyuncs.com/alimg/image-20240912121858364.png style=zoom:50%;></p> <figure class="highlight sh"><table><tr><td class=gutter><pre><span class=line>1</span><br></pre><td class=code><pre><span class=line>xmake project -k compile_commands</span><br></pre></table></figure> <p>参考作者给出的解决<a href=https://github.com/xmake-io/xmake-vscode/issues/40 rel=noopener target=_blank>支持为vscode-cpptools提供intellisense配置信息 · Issue #40 · xmake-io/xmake-vscode (github.com)</a>生成<code>compile_commands.json</code>包含编译器,工作目录和头文件目录等信息.</p> <figure class="highlight bash"><table><tr><td class=gutter><pre><span class=line>1</span><br><span class=line>2</span><br><span class=line>3</span><br><span class=line>4</span><br><span class=line>5</span><br></pre><td class=code><pre><span class=line>xmake project -k vsxmake -m <span class=string>"debug,release"</span> <span class=comment># New vsproj generator (Recommended)</span></span><br><span class=line>xmake project -k vs -m <span class=string>"debug,release"</span></span><br><span class=line>xmake project -k cmake</span><br><span class=line>xmake project -k ninja</span><br><span class=line>xmake project -k compile_commands</span><br></pre></table></figure> <p>因为目前就langd和vscode的intellisense能检测文件中头文件目录信息等,需要这个文件</p> <p>使用下来的体验就是写起来比cmake用的轻松,文档写的案例也比较全面.但是因为没有深度使用,一些细节不知道怎样.</p> <h2 id=总结><a class=headerlink href=#总结 title=总结></a>总结</h2><p>因为我已经在很多项目中使用了cmake,经验相对更多,xmake学习起来并不困难,搭配官方文档很容易搭建一个项目.</p> <p>但目前还是推荐使用cmake+vcpkg/cpm.cmake方案,因为更成熟,解决方案更多.</p> <link href=/css/spoiler.css rel=stylesheet><script async src=/js/spoiler.js></script> <div><div><div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div></div></div> <div class=reward-container><div>感谢阅读.</div><button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">打赏</button><div style="display: none;" id=qr><div style="display: inline-block;"><img alt="Sekyoro 微信支付" src=/images/wechatpay.png><p>微信支付</div></div></div> <div><ul class=post-copyright><li class=post-copyright-author><strong>本文作者： </strong>Sekyoro<li class=post-copyright-link><strong>本文链接：</strong> <a href=https://www.sekyoro.top/2024/09/11/C-%E7%8E%B0%E4%BB%A3%E6%9E%84%E5%BB%BA%E7%B3%BB%E7%BB%9F/ title=xmake:另一个C++现代构建系统>https://www.sekyoro.top/2024/09/11/C-现代构建系统/</a><li class=post-copyright-license><strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href=https://creativecommons.org/licenses/by-nc-sa/4.0/ rel=noopener target=_blank><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</ul></div> <div class=followme><p>欢迎关注我的其它发布渠道<div class=social-list><div class=social-item><a class=social-link href=/images/wxqrcode.png target=_blank> <span class=icon> <i class="fab fa-weixin"></i> </span> <span class=label>WeChat</span> </a></div><div class=social-item><a class=social-link href=/images/website.png target=_blank> <span class=icon> <i class="fa fa-user"></i> </span> <span class=label>PersonalWebsite</span> </a></div><div class=social-item><a class=social-link href=https://my-astro-git-main-drowning-in-codes.vercel.app target=_blank> <span class=icon> <i class="fas fa-share"></i> </span> <span class=label>杂鱼分享</span> </a></div><div class=social-item><a class=social-link href=/atom.xml target=_blank> <span class=icon> <i class="fa fa-rss"></i> </span> <span class=label>RSS</span> </a></div></div></div> <footer class=post-footer><div class=post-tags><a href=/tags/c-build/ rel=tag><i class="fa fa-tag"></i> c++ build</a></div><div class=post-nav><div class=post-nav-item><a href=/2024/09/11/Dear-ImGUI-%E4%B8%8D%E5%A4%AA%E4%B8%80%E6%A0%B7%E7%9A%84GUI/ rel=prev title=Dear-ImGUI:不太一样的GUI> <i class="fa fa-chevron-left"></i> Dear-ImGUI:不太一样的GUI </a></div><div class=post-nav-item><a title="build a mini project starter in Rust" href=/2024/09/15/build-a-mini-project-starter-in-Rust/ rel=next> build a mini project starter in Rust <i class="fa fa-chevron-right"></i> </a></div></div></footer> <!-- 评论区 --> <div class=comments><div data-id=city data-uid=MTAyMC81MzE5Ny8yOTY3Mg== id=lv-container></div></div> <script>window.addEventListener('tabs:register', () => {
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Sekyoro的博客小屋" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+
+
+  <div class="container use-motion">
+    <div class="headband"></div>
+	
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Sekyoro的博客小屋</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-bangumis">
+
+    <a href="/bangumis/" rel="section"><i class="fa fa-film fa-fw"></i>追番</a>
+
+  </li>
+        <li class="menu-item menu-item-resume">
+
+    <a href="/resume/" rel="section"><i class="fa fa-file-pdf fa-fw"></i>简历</a>
+
+  </li>
+        <li class="menu-item menu-item-materials">
+
+    <a href="/materials/" rel="section"><i class="fa fa-book fa-fw"></i>学习资料</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container"></div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="algolia-results">
+  <div id="algolia-stats"></div>
+  <div id="algolia-hits"></div>
+  <div id="algolia-pagination" class="algolia-pagination"></div>
+</div>
+
+      
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.sekyoro.top/2024/09/11/C-%E7%8E%B0%E4%BB%A3%E6%9E%84%E5%BB%BA%E7%B3%BB%E7%BB%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://i.loli.net/2021/05/17/YqoavnXdGTpPO9R.jpg">
+      <meta itemprop="name" content="Sekyoro">
+      <meta itemprop="description" content="什么也无法舍弃的人，什么也做不了.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sekyoro的博客小屋">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          xmake:另一个C++现代构建系统
+        </h1>
+
+        <div class="post-meta">
+		
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-09-11 17:22:10" itemprop="dateCreated datePublished" datetime="2024-09-11T17:22:10+08:00">2024-09-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-09-14 18:42:43" itemprop="dateModified" datetime="2024-09-14T18:42:43+08:00">2024-09-14</time>
+              </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>4.5k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span>16 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+        <div class="post-body" itemprop="articleBody">
+            <div class="post-tags">
+                <a href="/tags/c-build/" rel="tag"># c++ build</a>
+            </div>
+    
+          
+        <p>主要起因是我在逛Reddit帖子时,看到关于一些c++构建系统的评价. cmake似乎有些过于复杂,它与vcpkg,conan的包管理之间的”融合”可能在有些时候也显得麻烦. 一些人尝试了我没见过的选项,</p>
+<p>所以这里主要试试除了cmake之外的构建工具(这些选项中个人目前看好xmake),除了<a target="_blank" rel="noopener" href="https://xmake.io/#/getting_started">xmake</a>之外,还有<a target="_blank" rel="noopener" href="https://mesonbuild.com/">The Meson Build system</a>，<a target="_blank" rel="noopener" href="https://spack.io/about/">About Spack - Spack</a>，<a target="_blank" rel="noopener" href="https://bazel.google.cn/versions/7.3.0/about/intro?hl=zh-cn">Bazel 简介 (google.cn)</a>等等.我选择xmake主要原因是其自带的包管理和方便的写法<br><span id="more"></span></p>
+<p>在进一步介绍xmake之前,有必要区分构建工具和包管理工具.c++目前常用的包管理工具有vcpkg,cpm以及conan,它们都有自己的registries,类似于node的npm,cargo的crates,python的pip registries,java的maven仓库. 都是社区或官方维护的库下载点,一般来允许用户注册后上传自己的包(不过考虑到c++生态是一堆轮子哥,用第三方库的人可能没有python,js一半多).</p>
+<h2 id="纯纯FetchContent"><a href="#纯纯FetchContent" class="headerlink" title="纯纯FetchContent"></a>纯纯FetchContent</h2><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## from https://cmakebyexample.dev/use-library-fetchcontent/</span></span><br><span class="line"><span class="keyword">cmake_minimum_required</span>(VERSION <span class="number">3.28</span>)</span><br><span class="line"><span class="keyword">project</span>(my-<span class="keyword">project</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">include</span>(FetchContent)</span><br><span class="line">FetchContent_Declare(</span><br><span class="line">  cpr</span><br><span class="line">  GIT_REPOSITORY https://github.com/libcpr/cpr.git</span><br><span class="line">  <span class="comment"># https://github.com/libcpr/cpr/releases</span></span><br><span class="line">  GIT_TAG <span class="number">1.10</span>.<span class="number">4</span>)</span><br><span class="line">FetchContent_MakeAvailable(cpr)</span><br><span class="line"></span><br><span class="line"><span class="keyword">add_executable</span>(my-app main.cpp)</span><br><span class="line"><span class="keyword">target_compile_features</span>(my-app PUBLIC cxx_std_20)</span><br><span class="line"><span class="keyword">target_link_libraries</span>(my-app PRIVATE cpr::cpr)</span><br></pre></td></tr></table></figure>
+<p>利用cmake内置功能,下载相应库.它需要从源代码构建curl.</p>
+<blockquote>
+<p>FetchContent 可让您直接在 CMake 项目中包含外部项目，从而更轻松地处理依赖关系，而无需用户单独下载和构建，或依赖系统级软件包管理器。它通过自动处理下载、构建和配置这些依赖项等任务，简化了将外部代码引入项目的过程。</p>
+</blockquote>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">include</span>(FetchContent)</span><br><span class="line"></span><br><span class="line">FetchContent_Declare(</span><br><span class="line">    my_dependency</span><br><span class="line">    GIT_REPOSITORY https://github.com/example/my_dependency.git</span><br><span class="line">    GIT_TAG v1.<span class="number">0.0</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">FetchContent_MakeAvailable(my_dependency)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Now you can use the components of &#x27;my_dependency&#x27; in your project</span></span><br></pre></td></tr></table></figure>
+<h2 id="vcpkg"><a href="#vcpkg" class="headerlink" title="vcpkg"></a>vcpkg</h2><p>包仓库<a target="_blank" rel="noopener" href="https://vcpkg.io/en/packages">Browse public vcpkg packages</a></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> myModule &amp;&amp; <span class="built_in">cd</span> myModule</span><br><span class="line">vcpkg --new application <span class="comment"># 创建应用</span></span><br></pre></td></tr></table></figure>
+<p>在目录下生成了两个文件,<code>vcpkg.json</code>和<code>vcpkg-confuguration.json</code>分别用于存依赖信息和仓库信息.初始前者为空,后者</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;default-registry&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;kind&quot;</span><span class="punctuation">:</span> <span class="string">&quot;git&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;baseline&quot;</span><span class="punctuation">:</span> <span class="string">&quot;9760ce6194ef51aa4faf77b6321e1280daa4545c&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;repository&quot;</span><span class="punctuation">:</span> <span class="string">&quot;https://github.com/microsoft/vcpkg&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;registries&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;kind&quot;</span><span class="punctuation">:</span> <span class="string">&quot;artifact&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;location&quot;</span><span class="punctuation">:</span> <span class="string">&quot;https://github.com/microsoft/vcpkg-ce-catalog/archive/refs/heads/main.zip&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;microsoft&quot;</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line">  <span class="punctuation">]</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>默认的 <code>vcpkg-configuration.json</code> 文件引入了基线约束，指定了项目应使用的依赖项的最小版本,将 <code>vcpkg-configuration.json</code> 添加到代码控制中。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vcpkg add port <span class="built_in">fmt</span></span><br></pre></td></tr></table></figure>
+<p>添加依赖信息,这里并没有下载包,所以直接引入头文件会报错的</p>
+<p><img data-src="https://proanimer-img.oss-cn-shanghai.aliyuncs.com/alimg/image-20240911180835085.png" alt="image-20240911180835085"></p>
+<p>使用下面指令下载<code>vcpkg.json</code>中的包</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vcpkg install</span><br></pre></td></tr></table></figure>
+<p>还会贴心提示在cmake中如何使用</p>
+<p><img data-src="https://proanimer-img.oss-cn-shanghai.aliyuncs.com/alimg/image-20240911181040866.png" alt="image-20240911181040866"></p>
+<p>vcpkg官方推荐使用<code>CMakePresets.json</code>配置进行构建</p>
+<blockquote>
+<p>使用预设，项目的顶层目录必须包含名为 CMakePresets.json 或 CMakeUserPresets.json 的文 件。若两个文件都存在，将先解析 CMakePresets.json，再解析 CMakeUserPresets.json。这两个文件 有相同的格式，但使用方式略有不同</p>
+</blockquote>
+<p><img data-src="https://proanimer-img.oss-cn-shanghai.aliyuncs.com/alimg/image-20240911181547753.png" alt="image-20240911181547753"></p>
+<p><img data-src="https://proanimer-img.oss-cn-shanghai.aliyuncs.com/alimg/image-20240911181640286.png" alt="image-20240911181640286"></p>
+<figure class="highlight dsconfig"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">cmake</span> <span class="built_in">--listpresets</span> <span class="comment"># 列出写的预设</span></span><br><span class="line"><span class="string">cmake</span> <span class="built_in">--preset=name</span> <span class="comment">#选择某个预设</span></span><br></pre></td></tr></table></figure>
+<p>其要求写入缓存变量<code>CMAKE_TOOLCHAIN_FILE</code>就是本机安装的<code>vcpkg.cmake</code>,</p>
+<p>如果你设置了<code>VCPKG_ROOT</code>环境变量,可以使用”$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake”</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;version&quot;</span><span class="punctuation">:</span> <span class="number">3</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;configurePresets&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;default&quot;</span><span class="punctuation">,</span></span><br><span class="line">       <span class="attr">&quot;displayname&quot;</span><span class="punctuation">:</span> <span class="string">&quot;default&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;generator&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Ninja&quot;</span><span class="punctuation">,</span> # 构建工具</span><br><span class="line">      <span class="attr">&quot;binaryDir&quot;</span><span class="punctuation">:</span> <span class="string">&quot;$&#123;sourceDir&#125;/build&quot;</span><span class="punctuation">,</span> # 构建输出目录</span><br><span class="line">      <span class="attr">&quot;cacheVariables&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;CMAKE_TOOLCHAIN_FILE&quot;</span><span class="punctuation">:</span> <span class="string">&quot;&lt;VCPKG_ROOT&gt;/scripts/buildsystems/vcpkg.cmake&quot;</span> #设置vcpkg工具链</span><br><span class="line">      <span class="punctuation">&#125;</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line">  <span class="punctuation">]</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>version 字段指定要使用的 JSON 模式。版本 1 是 CMake 3.19 的第一个版本，只支持 configurePresets。版本 2 增加了 buildPresets 和 testPresets，CMake 3.20 开始支持; 版本 3 增加了 更多选项，CMake 3.21 开始支持。 可选的 cmakeMinimumRequired 字段可以用来定义构建此项目所需的 CMake 的最小版本。由于 最低要求通常也在 CMakeLists.txt 文件中说明，这通常会省略。 这三个列表:configurePresets、buildPresets 和 testPresets，每个列表都包含了用于配置、构建和 测试项目的配置。构建和测试的预置要求至少有一个配置预置，将在本节后面看到。 vendor 字段包含特定于供应商或 IDE 信息的可选映射。CMake 不解释该字段的内容</p>
+<p>然后写上cmake文件,因为先使用preset会执行</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">cmake_minimum_required</span>(VERSION <span class="number">3.23</span>)</span><br><span class="line"><span class="keyword">project</span>(HelloWorld)</span><br><span class="line"><span class="keyword">find_package</span>(fmt CONFIG REQUIRED) <span class="comment">#重点 find_package找包</span></span><br><span class="line"><span class="keyword">add_executable</span>(HelloWorld main.cpp)</span><br><span class="line"><span class="keyword">target_link_libraries</span>(HelloWorld PRIVATE fmt::fmt) <span class="comment">#进行链接</span></span><br></pre></td></tr></table></figure>
+<p>执行<code>cmake --preset=name</code>会进行构建,如果没有安装相应库,也会安装.所以上面的<code>vcpkg install</code>就没必要执行了.</p>
+<p>我在使用时遇到了找不到实现的问题,这貌似需要设置vcpkg triplet,网上有一些triplets模板,简单来说需要设置一系列vcpkg变量</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/74422058/how-to-use-vcpkg-with-clang-on-linux">How to use vcpkg with clang on linux? - Stack Overflow</a> 创建的自己的triplets<a target="_blank" rel="noopener" href="https://learn.microsoft.com/zh-cn/vcpkg/users/examples/overlay-triplets-linux-dynamic">使用覆盖三联密码 | Microsoft Learn</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/microsoft/vcpkg/blob/master/docs/users/triplets.md">vcpkg/docs/users/triplets.md at master · microsoft/vcpkg (github.com)</a></li>
+<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/zh-cn/vcpkg/concepts/triplets">三元组 | Microsoft Learn</a>在windows默认的就是msvc的,难怪编译不过,我使用的时mingw…</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/microsoft/vcpkg/blob/master/docs/users/triplets.md">vcpkg/docs/users/triplets.md at master · microsoft/vcpkg (github.com)</a></li>
+<li><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/78962135/cmake-add-library-with-set-property-can-not-found-fmt-dll-on-windows/78962177?noredirect=1#comment139223613_78962177">c++ - cmake add_library with set_property can not found fmt dll on windows - Stack Overflow</a> 在windows上编译后将动态库拷贝一份到可执行程序同一个目录.<code>exe文件运行必须依赖同一目录(或者环境变量)下的dll</code></li>
+</ul>
+<p>一个简单的方法时设置<code>VCPKG_TARGET_TRIPLET</code>变量为”x64-mingw-dynamic”,表示使用mingw的动态库.或者使用</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vcpkg install <span class="built_in">fmt</span>:x64-mingw-dynamic</span><br></pre></td></tr></table></figure>
+<p>可以设置 <code>VCPKG_TARGET_TRIPLET</code>(需要下载和使用的库的架构)和<code>VCPKG_HOST_TRIPLET</code>(生成自己的库需要的构建架构)来设置target和host的架构,使用<code>VCPKG_OVERLAY_TRIPLETS</code>使用社区的.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vcpkg <span class="built_in">help</span> triplets </span><br></pre></td></tr></table></figure>
+<p>查看官方和社区提供的triplets.</p>
+<h3 id="Triplets"><a href="#Triplets" class="headerlink" title="Triplets"></a>Triplets</h3><p>triplets指定平台架构,并按照对应的架构去设置toolchain,默认是在vcpkg/triplets下找一个符合平台的,比如<code>vcpkg install xxx:abcd</code>,其中abcd就是一个triplets,设置好triplet后清单模式下就去下载相应的包</p>
+<p><img data-src="https://proanimer-img.oss-cn-shanghai.aliyuncs.com/alimg/image-20240912123855699.png" alt="image-20240912123855699" style="zoom:50%;" /></p>
+<blockquote>
+<p>更新:如果你只是想用clang++编译器,在<code>CMakeLists.txt</code>project指令之前指定即可</p>
+</blockquote>
+<p>用于交叉编译的,也就是在宿主机上编译不同平台架构的程序/库.</p>
+<p>默认triplets</p>
+<ul>
+<li>Windows: <code>x64-windows</code></li>
+<li>Linux: <code>x64-linux</code></li>
+<li>OSX: <code>x64-osx</code></li>
+</ul>
+<p>可以分别指定target-triplet和host-triplet设置对应需要的工具链名称,会根据对应的名字去vcpkg/triplets找,或者使用overlay-triplets覆盖目录</p>
+<p>以上的问题可以总结为</p>
+<ol>
+<li><p>使用clang需要配置triplets,可以使用社区的</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/microsoft/vcpkg/issues/38042">How to compile vcpkg libraries using Clang? · Issue #38042 · microsoft/vcpkg (github.com)</a></p>
+<p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/zh-cn/vcpkg/users/examples/overlay-triplets-linux-dynamic">使用覆盖三联密码 | Microsoft Learn</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/Neumann-A/my-vcpkg-triplets/tree/master">Neumann-A/my-vcpkg-triplets: my collection of vcpkg triplets (github.com)</a></p>
+</li>
+</ol>
+<p>我注意到社区中的triplets中很多使用了<code>VCPKG_CHAINLOAD_TOOLCHAIN_FILE</code>指定要使用的备用 CMake 工具链文件,如果设置将替代所有其他编译器检测逻辑.默认情况下工具链文件是从 <code>scripts/toolchains/</code> 适合平台选择的,使用<code>--overlay-triplets</code>选择一个目录进行覆盖<a target="_blank" rel="noopener" href="https://learn.microsoft.com/zh-cn/vcpkg/users/examples/overlay-triplets-linux-dynamic">使用覆盖三联密码 | Microsoft Learn</a></p>
+<p><img data-src="https://proanimer-img.oss-cn-shanghai.aliyuncs.com/alimg/image-20240911232109031.png" alt="image-20240911232109031"></p>
+<blockquote>
+<p>CMake 使用工具链实用程序来编译、link libraries和创建archives，并执行其他任务来进行构建。</p>
+<p>可用的工具链由启用的语言决定。在正常编译中，<strong>CMake 会根据系统自省和默认值自动为主机编译确定工具链</strong>。在交叉编译情况下，可指定一个包含编译器和工具路径信息的工具链文件</p>
+</blockquote>
+<p>下面信息很重要,cmake在project()指令处查找可用的工具链,在<code>CMAKE_TOOLCHAIN_FILE</code>中处理vcpkg逻辑,其中将默认调用合适的vckpg/scripts/toolchains/中的toolchain</p>
+<p><img data-src="https://proanimer-img.oss-cn-shanghai.aliyuncs.com/alimg/image-20240911232412863.png" alt="image-20240911232412863"></p>
+<ol>
+<li>在windows上使用vcpkg安装得到的动态库如果想要自己放在一个统一的3rdparty目录,include目录和bin目录中再自己设置link</li>
+</ol>
+<p>需要放在可执行程序目录下,可以通过设置路径解决</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/Tracker647/article/details/142070768">CMake+MinGW+vcpkg项目引入三方库的两种方式（手动路径，vcpkg）-CSDN博客</a></p>
+<p><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/78962135/cmake-add-library-with-set-property-can-not-found-fmt-dll-on-windows/78962177?noredirect=1#comment139223613_78962177">c++ - cmake add_library with set_property can not found fmt dll on windows - Stack Overflow</a>注意需要设置链接的.lib和.dll库,通过<code>IMPORTED_IMPLIB</code>设置输出的.lib库</p>
+<blockquote>
+<ul>
+<li><strong>IMPORTED_LOCATION</strong>：用于存储导入库的实际文件路径，通常是共享库或可执行文件的位置。</li>
+<li><strong>IMPORTED_IMPLIB</strong>：用于存储导入库（导入库 .lib 文件）的路径，通常在 Windows 平台上使用。</li>
+</ul>
+</blockquote>
+<p><img data-src="https://proanimer-img.oss-cn-shanghai.aliyuncs.com/alimg/image-20240911230257291.png" alt="image-20240911230257291"></p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">cmake_minimum_required</span>(VERSION <span class="number">3.10</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">project</span>(HelloWorld)</span><br><span class="line"><span class="keyword">message</span>(<span class="string">&quot;CMAKE_SOURCE_DIR: $&#123;CMAKE_SOURCE_DIR&#125;&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">add_executable</span>(HelloWorld main.cpp)</span><br><span class="line"><span class="keyword">add_library</span>(fmt SHARED IMPORTED)</span><br><span class="line"><span class="keyword">set_property</span>(<span class="keyword">TARGET</span> fmt PROPERTY IMPORTED_LOCATION <span class="variable">$&#123;CMAKE_SOURCE_DIR&#125;</span>/<span class="number">3</span>rdparty/fmt_x64-mingw-dynamic/bin/libfmt.dll)</span><br><span class="line"><span class="comment"># 改变导入库的.dll的位置</span></span><br><span class="line"><span class="keyword">target_include_directories</span>(fmt INTERFACE <span class="variable">$&#123;CMAKE_SOURCE_DIR&#125;</span>/<span class="number">3</span>rdparty/fmt_x64-mingw-dynamic/<span class="keyword">include</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">target_link_libraries</span>(HelloWorld fmt)</span><br><span class="line"><span class="keyword">add_custom_command</span>(<span class="keyword">TARGET</span> HelloWorld POST_BUILD     <span class="comment">#-for copy libs in windows</span></span><br><span class="line">            <span class="keyword">COMMAND</span> <span class="variable">$&#123;CMAKE_COMMAND&#125;</span> -E copy_if_different </span><br><span class="line">            <span class="variable">$&#123;CMAKE_SOURCE_DIR&#125;</span>/<span class="number">3</span>rdparty/fmt_x64-mingw-dynamic/bin/libfmt.dll </span><br><span class="line">            <span class="variable">$&#123;CMAKE_SOURCE_DIR&#125;</span>/build)</span><br><span class="line">            <span class="comment"># 将输出动态库放在build目录下</span></span><br></pre></td></tr></table></figure>
+<p>需要添加设置<code>IMORTED_IMPLIB</code>路径</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">add_library</span>(fmt SHARED IMPORTED)</span><br><span class="line"><span class="keyword">set_property</span>(<span class="keyword">TARGET</span> fmt PROPERTY</span><br><span class="line">  IMPORTED_LOCATION <span class="variable">$&#123;CMAKE_SOURCE_DIR&#125;</span>/<span class="number">3</span>rdparty/fmt_x64-mingw-dynamic/bin/libfmt.dll</span><br><span class="line">  IMORTED_IMPLIB <span class="variable">$&#123;CMAKE_SOURCE_DIR&#125;</span>/<span class="number">3</span>rdparty/fmt_x64-mingw-dynamic/lib/libfmt.lib</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注意,使用vcpkg自动引入需要设置build_type,这样第三方库的动态库.dll就放在对应位置不用改了.</p>
+</blockquote>
+<p>使用vcpkg时注意,</p>
+<ol>
+<li>设置<code>CMAKE_TOOLCHAIN_FILE</code>要在project指令之前</li>
+</ol>
+<p><img data-src="https://proanimer-img.oss-cn-shanghai.aliyuncs.com/alimg/image-20240911224541731.png" alt="image-20240911224541731"></p>
+<ol>
+<li>使用find_package(xxx <strong>CONFIG</strong> REQUIRED)</li>
+<li>推荐使用preset</li>
+<li>设置<code>CMAKE_EXPORT_COMPILE_COMMANDS</code>为ON让clangd检测头文件目录</li>
+</ol>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cmake -B build -S /my/project --preset debug</span><br></pre></td></tr></table></figure>
+<p>除了下载包之外,也有打包、发布等常用功能,已经满足常用需求了,cmake本身有cpack,但没有vcpkg提供的一些发布功能</p>
+<p>要创建vcpkg包,首先创建manifest清单文件</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;libogg&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;version-string&quot;</span><span class="punctuation">:</span> <span class="string">&quot;1.3.3&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;description&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Ogg is a multimedia container format, and the native file and stream format for the Xiph.org multimedia codecs.&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>在项目<code>vcpkg.json</code>中写上包内容,然后创建<code>portfile.cmake</code>,修改下面的配置</p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">vcpkg_from_github(</span><br><span class="line">    OUT_SOURCE_PATH SOURCE_PATH</span><br><span class="line">    REPO xiph/ogg</span><br><span class="line">    <span class="keyword">REF</span> v1.<span class="number">3.3</span></span><br><span class="line">    SHA512 <span class="number">0</span>bd6095d647530d4cb1f509eb5e99965a25cc3dd9b8125b93abd6b248255c890cf20710154bdec40568478eb5c4cde724abfb2eff1f3a04e63acef0fbbc9799b</span><br><span class="line">    HEAD_REF <span class="keyword">master</span></span><br><span class="line"><span class="title">)</span></span><br></pre></td></tr></table></figure>
+<p>用于GitHub存储库路径的REPO,用于使用稳定标签/提交的REF，以及带有下载文件校验和的SHA512,别人使用时也使用vcpkg下载</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vcpkg_cmake_configure(SOURCE_PATH <span class="variable">$&#123;SOURCE_PATH&#125;</span>)</span><br><span class="line">vcpkg_cmake_install()</span><br><span class="line"><span class="keyword">file</span>(<span class="keyword">INSTALL</span> <span class="string">&quot;$&#123;SOURCE_PATH&#125;/COPYING&quot;</span> DESTINATION <span class="string">&quot;$&#123;CURRENT_PACKAGES_DIR&#125;/share/libogg&quot;</span> RENAME copyright)</span><br></pre></td></tr></table></figure>
+<p>缺点就是微软文档实在烂,不是翻译的问题,英文原文的用词像是东拼西凑,感觉像是不停换人写出来的.</p>
+<h2 id="CPM-cmake"><a href="#CPM-cmake" class="headerlink" title="CPM.cmake"></a>CPM.cmake</h2><p>轻量的包管理工具<a target="_blank" rel="noopener" href="https://github.com/cpm-cmake/CPM.cmake">cpm-cmake/CPM.cmake: 📦 CMake’s missing package manager. A small CMake script for setup-free, cross-platform, reproducible dependency management. (github.com)</a>,基于cmake的FetchContent.</p>
+<p>你只需要<code>include</code>提供的<code>cpm.cmake</code>文件即可</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> -p cmake</span><br><span class="line">wget -O cmake/CPM.cmake https://github.com/cpm-cmake/CPM.cmake/releases/latest/download/get_cpm.cmake</span><br></pre></td></tr></table></figure>
+<p>此外也可以在cmake文件中下载</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">[...]</span><br><span class="line"></span><br><span class="line"><span class="comment"># download CPM.cmake</span></span><br><span class="line"><span class="keyword">file</span>(</span><br><span class="line">  DOWNLOAD</span><br><span class="line">  https://github.com/cpm-cmake/CPM.cmake/releases/download/v0.<span class="number">38.3</span>/CPM.cmake</span><br><span class="line">  <span class="variable">$&#123;CMAKE_CURRENT_BINARY_DIR&#125;</span>/cmake/CPM.cmake</span><br><span class="line">  EXPECTED_HASH SHA256=cc155ce02e7945e7b8967ddfaff0b050e958a723ef7aad3766d368940cb15494</span><br><span class="line">)</span><br><span class="line"><span class="keyword">include</span>(<span class="variable">$&#123;CMAKE_CURRENT_BINARY_DIR&#125;</span>/cmake/CPM.cmake)</span><br><span class="line"></span><br><span class="line"><span class="comment"># add dependencies here</span></span><br><span class="line">CPMAddPackage(...)</span><br><span class="line"></span><br><span class="line">[...]</span><br></pre></td></tr></table></figure>
+<p>然后就能直接使用了,</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">CPMAddPackage(</span><br><span class="line">  NAME          <span class="comment"># The unique name of the dependency (should be the exported target&#x27;s name)</span></span><br><span class="line">  VERSION       <span class="comment"># The minimum version of the dependency (optional, defaults to 0)</span></span><br><span class="line">  PATCHES       <span class="comment"># Patch files to be applied sequentially using patch and PATCH_OPTIONS (optional)</span></span><br><span class="line">  OPTIONS       <span class="comment"># Configuration options passed to the dependency (optional)</span></span><br><span class="line">  DOWNLOAD_ONLY <span class="comment"># If set, the project is downloaded, but not configured (optional)</span></span><br><span class="line">  [...]         <span class="comment"># Origin parameters forwarded to FetchContent_Declare, see below</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>来源可以由 GIT_REPOSITORY 指定，但也支持其他来源，如一般的URL。如果没有明确指定 GIT_TAG，则默认为 v(VERSION)，这是 git 项目的通用约定。另一方面，如果没有明确指定 VERSION，在某些常见情况下，CPM 可以根据 git 标签自动识别版本。GIT_TAG 也可以设置为特定的提交或分支名称（如 master），但不建议这样做，因为这样的软件包只有在缓存被清除时才会被更新</p>
+<p>如果将附加的可选参数 EXCLUDE_FROM_ALL 设为真,则默认情况下不会编译依赖关系中定义的任何目标.</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># A git package from a given uri with a version</span></span><br><span class="line">CPMAddPackage(<span class="string">&quot;uri@version&quot;</span>)</span><br><span class="line"><span class="comment"># A git package from a given uri with a git tag or commit hash</span></span><br><span class="line">CPMAddPackage(<span class="string">&quot;uri#tag&quot;</span>)</span><br><span class="line"><span class="comment"># A git package with both version and tag provided</span></span><br><span class="line">CPMAddPackage(<span class="string">&quot;uri@version#tag&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p>与findpackage差别,在 CMake 项目中添加库的通常方法是调用 find_package(\<PackageName>)，并与 \<PackageName>_LIBRARIES 变量中定义的库进行链接。这种方法虽然简单，<strong>但可能会导致无法预测的编译，因为它需要在系统中安装库，而且不清楚添加的是哪个版本的库</strong>。此外，<strong>交叉编译项目（如mobile项目）也很困难</strong>，因为需要针对每个目标架构手动重建依赖关系。</p>
+<p>CPM.cmake 允许明确定义依赖关系，并从源代码构建依赖关系。请注意，该行为不同于 find_package，因为使用 CPM.cmake 添加软件包后，导出到父作用域的变量（如 \<PackageName>_LIBRARIES ）将不可见。如果需要，可以手动实现该行为<a target="_blank" rel="noopener" href="https://github.com/cpm-cmake/CPM.cmake/issues/132">find_package and CPMFindPackage have different behaviors · Issue #132 · cpm-cmake/CPM.cmake (github.com)</a>。</p>
+<p>与fech_content差别,CPM.cmake 会检查任何添加的依赖项的版本号，如果另一个依赖项需要更新版,则会发出警告。<br>离线编译： CPM.cmake 将覆盖 CMake 的下载和更新命令，如果本地有所有依赖项，则可在离线状态下配置新的构建。<br>自动浅层克隆：如果提供了版本标签（如 v2.2.0）并使用了 CPM_SOURCE_CACHE，CPM.cmake 将执行依赖关系的浅层克隆，这应比完全克隆更快，同时使用的存储空间更少。可重写：通过设置 CMake 标志，所有 CPMAddPackage 都可配置为使用 find_package，从而轻松集成到可能需要通过系统的软件包管理器进行本地版本控制的项目中。软件包锁定文件可实现更简便的跨依赖关系管理。<br>每次编译时，可使用 CMake CLI 参数覆盖依赖关系。</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">cmake_minimum_required</span>(VERSION <span class="number">3.28</span>)</span><br><span class="line"><span class="keyword">project</span>(my-<span class="keyword">project</span>)</span><br><span class="line"><span class="keyword">include</span>(cmake/CPM.cmake)</span><br><span class="line">CPMAddPackage(<span class="string">&quot;gh:fmtlib/fmt#10.2.0&quot;</span>)</span><br><span class="line"><span class="keyword">add_executable</span>(my-app main.cpp)</span><br><span class="line"><span class="keyword">target_compile_features</span>(my-app PRIVATE cxx_std_20)</span><br><span class="line"><span class="keyword">target_link_libraries</span>(my-app fmt::fmt)</span><br></pre></td></tr></table></figure>
+<p>上面的就使用<code>CPMAddPackage</code>添加了github上的fmtlib作者的fmt库,版本10.2.0</p>
+<p>更多例子<a target="_blank" rel="noopener" href="https://github.com/cpm-cmake/CPM.cmake/tree/master/examples">CPM.cmake/examples at master · cpm-cmake/CPM.cmake (github.com)</a></p>
+<h2 id="CONAN"><a href="#CONAN" class="headerlink" title="CONAN"></a>CONAN</h2><p>这里做简单介绍,conan有仓库中心<a target="_blank" rel="noopener" href="https://conan.io/center">Conan 2.0: C and C++ Open Source Package Manager</a></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install conan</span><br></pre></td></tr></table></figure>
+<p>在项目中创建<code>conanfile.txt</code>,</p>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[requires]</span><br><span class="line">zlib/1.2.11</span><br><span class="line"></span><br><span class="line">[generators]</span><br><span class="line">CMakeDeps</span><br><span class="line">CMakeToolchain</span><br></pre></td></tr></table></figure>
+<p>generators表示将使用CMakeDeps来生成关于Zlib库文件安装位置的信息，CMakeToolchain通过CMake工具链文件传递构建信息给CMake</p>
+<p>此外还要创建conan profile,里面提供本机系统信息,</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conan profile detect --force</span><br></pre></td></tr></table></figure>
+<p><img data-src="https://proanimer-img.oss-cn-shanghai.aliyuncs.com/alimg/image-20240912092357159.png" alt="image-20240912092357159"></p>
+<p>生成的信息可以修改,比如改编译器</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conan install . --output-folder=build --build=missing</span><br></pre></td></tr></table></figure>
+<p>安装库,在build目录下会生成preset和conan_toolchain.cmake文件</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">cmake_minimum_required</span>(VERSION <span class="number">3.15</span>)</span><br><span class="line"><span class="keyword">project</span>(compressor C)</span><br><span class="line"></span><br><span class="line"><span class="keyword">find_package</span>(ZLIB REQUIRED)</span><br><span class="line"></span><br><span class="line"><span class="keyword">add_executable</span>(<span class="variable">$&#123;PROJECT_NAME&#125;</span> src/main.c)</span><br><span class="line"><span class="keyword">target_link_libraries</span>(<span class="variable">$&#123;PROJECT_NAME&#125;</span> ZLIB::ZLIB)</span><br></pre></td></tr></table></figure>
+<p>再写个cmake文件,链接库</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> build</span><br><span class="line"><span class="comment"># assuming Visual Studio 15 2017 is your VS version and that it matches your default profile</span></span><br><span class="line">cmake .. -G <span class="string">&quot;Visual Studio 15 2017&quot;</span> -DCMAKE_TOOLCHAIN_FILE=<span class="string">&quot;conan_toolchain.cmake&quot;</span></span><br><span class="line">cmake --build . --config Release</span><br></pre></td></tr></table></figure>
+<p>利用toolchain文件导入包. </p>
+<p>上面讲的都是包管理工具(实际上脱离不了相应的构建工具),最大的问题就是两者分开了,但事实上完全可以放在一起,就像rust的cargo,<code>cargo build</code>,<code>cargo add</code></p>
+<h2 id="xmake"><a href="#xmake" class="headerlink" title="xmake"></a>xmake</h2><p>xmake包括了自带的构建工具和包管理,也有项目创建工具的功能.xmake使用lua配置. xmake create创建项目,可以选择语言和模板(竟然还包括zig)</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xmake create --<span class="built_in">help</span></span><br></pre></td></tr></table></figure>
+<p><img data-src="https://proanimer-img.oss-cn-shanghai.aliyuncs.com/alimg/image-20240912100635482.png" alt="image-20240912100635482"></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xmake create -P hello</span><br></pre></td></tr></table></figure>
+<p>创建好后目录下有<code>xmake.lua</code>,使用xmake即可直接构建.<code>xmake run hello</code>运行程序,</p>
+<p>在<code>xmake.lua</code>中常见配置就是创建可执行程序,库,添加头文件,设置语言标准等.</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">target(<span class="string">&quot;library&quot;</span>)</span><br><span class="line">    set_kind(<span class="string">&quot;shared&quot;</span>) # 设置生成的类型</span><br><span class="line">    add_files(<span class="string">&quot;src/library/*.c&quot;</span>)</span><br><span class="line"></span><br><span class="line">target(<span class="string">&quot;test&quot;</span>)</span><br><span class="line">    set_kind(<span class="string">&quot;binary&quot;</span>)</span><br><span class="line">    add_files(<span class="string">&quot;src/*.c&quot;</span>)</span><br><span class="line">    add_deps(<span class="string">&quot;library&quot;</span>) # 添加依赖</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>此外<code>add_headerfiles</code>添加头文件,<code>set_languages</code>设置语言版本.</p>
+<p><code>xmake f -p</code>表示配置架构</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">xmake config -m debug xmake`</span><br><span class="line">xmake run -d hello</span><br></pre></td></tr></table></figure>
+<p>可以进行debug</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xmake f -p [macosx|linux|iphoneos ..] -a [x86_64|i386|arm64 ..] -m [debug|release]</span><br></pre></td></tr></table></figure>
+<p>使用xmake配置项目,注意编译器设置</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xmake f -p linux --sdk=/user/toolsdk --cxx=armv7-linux-clang++</span><br></pre></td></tr></table></figure>
+<p>我在windows上使用clang++工具,配置llvm工具链即可</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">xmake f -p cross --toolchain=llvm --sdk=<span class="string">&quot;C:\Program Files\LLVM&quot;</span> </span><br><span class="line">xmake</span><br><span class="line">xmake run hello</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xmake -v <span class="comment"># 验证工具链配置</span></span><br></pre></td></tr></table></figure>
+<p>或者使用mingw</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xmake f -p mingw</span><br></pre></td></tr></table></figure>
+<p>xmake官方有<code>`xmake-repo</code>仓库用于下载包,</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">add_requires(<span class="string">&quot;tbox 1.6.*&quot;</span>, <span class="string">&quot;libpng ~1.16&quot;</span>, <span class="string">&quot;zlib&quot;</span>)</span><br><span class="line"></span><br><span class="line">target(<span class="string">&quot;test&quot;</span>)</span><br><span class="line">    set_kind(<span class="string">&quot;binary&quot;</span>)</span><br><span class="line">    add_files(<span class="string">&quot;src/*.c&quot;</span>)</span><br><span class="line">    add_packages(<span class="string">&quot;tbox&quot;</span>, <span class="string">&quot;libpng&quot;</span>, <span class="string">&quot;zlib&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p>上面配置从官方仓库中添加了依赖,执行<code>xmake</code>进行构建,会拉取相关的源包，然后自动编译安装，最后编译项目，并链接依赖包,此外还可以设置第三方依赖,从vcpkg,conan等地方</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">add_requires(<span class="string">&quot;vcpkg::zlib&quot;</span>, <span class="string">&quot;vcpkg::pcre2&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p>此外还有独立的xrepo可用于下载包,可以指定平台,版本等,支持从vcpkg,conan中搜索下载.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">xrepo install zlib tbox </span><br><span class="line">xrepo install <span class="string">&quot;zlib &gt;=1.2.0&quot;</span> </span><br><span class="line">xrepo install -p iphoneos -a arm64 zlib</span><br><span class="line">xrepo install vcpkg::zlib </span><br><span class="line">xrepo install conan::zlib/1.2.11 </span><br></pre></td></tr></table></figure>
+<p>我写了下面<code>xmake.lua</code></p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">add_rules(<span class="string">&quot;mode.debug&quot;</span>, <span class="string">&quot;mode.release&quot;</span>)</span><br><span class="line">add_requires(<span class="string">&quot;fmt&quot;</span>)</span><br><span class="line">target(<span class="string">&quot;hello&quot;</span>)</span><br><span class="line">    set_kind(<span class="string">&quot;binary&quot;</span>)</span><br><span class="line">	add_files(<span class="string">&quot;src/*.cpp&quot;</span>)</span><br><span class="line">	add_packages(<span class="string">&quot;fmt::fmt&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p>如果说vcpkg重点是选好triplet、toolchainfile,那么xmake也是配好toolchain</p>
+<p>我直接配置<code>xmake f -p windows</code>使用msvc能成功build,如果要使用clang,配置好平台和工具链即可,相比vcpkg要好一些,vcpkg官方对clang/llvm貌似没有那么上心,官方triplet都没有,只能用社区的</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">xmake f -p windows  --toolchain=clang-cl </span><br><span class="line">xmake f -p windows  --toolchain=clang <span class="comment">#或者</span></span><br></pre></td></tr></table></figure>
+<p><code>xmake show -l toolchains</code>查看所有的toolchains</p>
+<p>或者在<code>xmake.lua</code>中使用</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">set_plat(<span class="built_in">os</span>.host())</span><br><span class="line">set_arch(<span class="built_in">os</span>.arch())</span><br><span class="line">set_toochains(<span class="string">&quot;clang&quot;</span>)</span><br><span class="line"># 或者直接统一设置</span><br><span class="line">set_toochains(<span class="string">&quot;clang&quot;</span>,&#123;palt=<span class="built_in">os</span>.host(),arch=<span class="built_in">os</span>.arch()&#125;)</span><br></pre></td></tr></table></figure>
+<p>目前还存在头文件无法识别的问题</p>
+<p><img data-src="https://proanimer-img.oss-cn-shanghai.aliyuncs.com/alimg/image-20240912121858364.png" alt="image-20240912121858364" style="zoom:50%;" /></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xmake project -k compile_commands</span><br></pre></td></tr></table></figure>
+<p>参考作者给出的解决<a target="_blank" rel="noopener" href="https://github.com/xmake-io/xmake-vscode/issues/40">支持为vscode-cpptools提供intellisense配置信息 · Issue #40 · xmake-io/xmake-vscode (github.com)</a>生成<code>compile_commands.json</code>包含编译器,工作目录和头文件目录等信息.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">xmake project -k vsxmake -m <span class="string">&quot;debug,release&quot;</span> <span class="comment"># New vsproj generator (Recommended)</span></span><br><span class="line">xmake project -k vs -m <span class="string">&quot;debug,release&quot;</span></span><br><span class="line">xmake project -k cmake</span><br><span class="line">xmake project -k ninja</span><br><span class="line">xmake project -k compile_commands</span><br></pre></td></tr></table></figure>
+<p>因为目前就langd和vscode的intellisense能检测文件中头文件目录信息等,需要这个文件</p>
+<p>使用下来的体验就是写起来比cmake用的轻松,文档写的案例也比较全面.但是因为没有深度使用,一些细节不知道怎样.</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>因为我已经在很多项目中使用了cmake,经验相对更多,xmake学习起来并不困难,搭配官方文档很容易搭建一个项目.</p>
+<p>但目前还是推荐使用cmake+vcpkg/cpm.cmake方案,因为更成熟,解决方案更多.</p>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
+    </div>
+
+    
+    
+    
+    <div>
+	
+     <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+     
+   </div>
+      
+
+        <div class="reward-container">
+  <div>感谢阅读.</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.png" alt="Sekyoro 微信支付">
+        <p>微信支付</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Sekyoro
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://www.sekyoro.top/2024/09/11/C-%E7%8E%B0%E4%BB%A3%E6%9E%84%E5%BB%BA%E7%B3%BB%E7%BB%9F/" title="xmake:另一个C++现代构建系统">https://www.sekyoro.top/2024/09/11/C-现代构建系统/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/images/wxqrcode.png">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/images/website.png">
+            <span class="icon">
+              <i class="fa fa-user"></i>
+            </span>
+
+            <span class="label">PersonalWebsite</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="https://my-astro-git-main-drowning-in-codes.vercel.app">
+            <span class="icon">
+              <i class="fas fa-share"></i>
+            </span>
+
+            <span class="label">杂鱼分享</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/c-build/" rel="tag"><i class="fa fa-tag"></i> c++ build</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/09/11/Dear-ImGUI-%E4%B8%8D%E5%A4%AA%E4%B8%80%E6%A0%B7%E7%9A%84GUI/" rel="prev" title="Dear-ImGUI:不太一样的GUI">
+      <i class="fa fa-chevron-left"></i> Dear-ImGUI:不太一样的GUI
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2024/09/15/build-a-mini-project-starter-in-Rust/" rel="next" title="build a mini project starter in Rust">
+      build a mini project starter in Rust <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+            <!-- 评论区 -->
+            
+          
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81MzE5Ny8yOTY3Mg=="></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
     let { activeClass } = CONFIG.comments;
     if (CONFIG.comments.storage) {
       activeClass = localStorage.getItem('comments_active') || activeClass;
@@ -48,7 +661,27 @@
       let commentClass = event.target.classList[1];
       localStorage.setItem('comments_active', commentClass);
     });
-  }</script> <div class="toggle sidebar-toggle"><span class="toggle-line toggle-line-first"></span><span class="toggle-line toggle-line-middle"></span><span class="toggle-line toggle-line-last"></span></div> <aside class=sidebar><div class=sidebar-inner><!-- canvas粒子时钟 --><div><canvas id=canvas style=width:60%;>当前浏览器不支持canvas，请更换浏览器后再试</canvas></div><script>(function(){
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+	
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+      	   
+          <!-- canvas粒子时钟 -->
+          <div style="">
+  <canvas id="canvas" style="width:60%;">当前浏览器不支持canvas，请更换浏览器后再试</canvas>
+</div>
+<script>
+(function(){
 
    var digit=
     [
@@ -306,31 +939,180 @@ if(canvas.getContext){
     },50);
 }
 
-})();</script><!-- require APlayer --><link href=https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css rel=stylesheet><script src=https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js></script><!-- require MetingJS --><script src=/js/meting-js.js></script><ul class="sidebar-nav motion-element"><li class=sidebar-nav-toc>文章目录<li class=sidebar-nav-overview>站点概览</ul><!--noindex--><div class="post-toc-wrap sidebar-panel"><div class="post-toc motion-element"><ol class=nav><li class="nav-item nav-level-2"><a class=nav-link href=#%E7%BA%AF%E7%BA%AFFetchContent><span class=nav-number>1.</span> <span class=nav-text>纯纯FetchContent</span></a><li class="nav-item nav-level-2"><a class=nav-link href=#vcpkg><span class=nav-number>2.</span> <span class=nav-text>vcpkg</span></a><ol class=nav-child><li class="nav-item nav-level-3"><a class=nav-link href=#Triplets><span class=nav-number>2.1.</span> <span class=nav-text>Triplets</span></a></ol><li class="nav-item nav-level-2"><a class=nav-link href=#CPM-cmake><span class=nav-number>3.</span> <span class=nav-text>CPM.cmake</span></a><li class="nav-item nav-level-2"><a class=nav-link href=#CONAN><span class=nav-number>4.</span> <span class=nav-text>CONAN</span></a><li class="nav-item nav-level-2"><a class=nav-link href=#xmake><span class=nav-number>5.</span> <span class=nav-text>xmake</span></a><li class="nav-item nav-level-2"><a class=nav-link href=#%E6%80%BB%E7%BB%93><span class=nav-number>6.</span> <span class=nav-text>总结</span></a></ol></div></div><!--/noindex--><div class="site-overview-wrap sidebar-panel"><div class="site-author motion-element" itemprop=author itemscope itemtype=http://schema.org/Person><img alt=Sekyoro class=site-author-image itemprop=image src=https://i.loli.net/2021/05/17/YqoavnXdGTpPO9R.jpg><p class=site-author-name itemprop=name>Sekyoro<div class=site-description itemprop=description>什么也无法舍弃的人，什么也做不了.</div></div><div class="site-state-wrap motion-element"><nav class=site-state><div class="site-state-item site-state-posts"><a href=/archives/> <span class=site-state-item-count>267</span> <span class=site-state-item-name>日志</span> </a></div><div class="site-state-item site-state-categories"><a href=/categories/> <span class=site-state-item-count>16</span> <span class=site-state-item-name>分类</span></a></div><div class="site-state-item site-state-tags"><a href=/tags/> <span class=site-state-item-count>229</span> <span class=site-state-item-name>标签</span></a></div></nav></div><div class="links-of-author motion-element"><span class=links-of-author-item> <a title="Personal Website → http://proanimer.com" href=http://proanimer.com/ rel=noopener target=_blank><i class="fab fa-internet-explorer fa-fw"></i>Personal Website</a> </span><span class=links-of-author-item> <a title="GitHub → https://github.com/drowning-in-codes" href=https://github.com/drowning-in-codes rel=noopener target=_blank><i class="fab fa-github fa-fw"></i>GitHub</a> </span><span class=links-of-author-item> <a title="E-Mail → mailto:bukalala174@gmail.com" href=mailto:bukalala174@gmail.com rel=noopener target=_blank><i class="fa fa-envelope fa-fw"></i>E-Mail</a> </span><span class=links-of-author-item> <a title="wxPublicAccount → https://mp.weixin.qq.com/s?__biz=Mzg3ODY1MDkzMg==&mid=2247483770&idx=1&sn=fdf88faab01d5c219ac609570a21c9d6&chksm=cf113221f866bb373938cfca03cf095ff4fe1e4dc37d68ef5de4cd4876ee1260fca0c015a4d6&token=1096259873&lang=zh_CN#rd" href=https://mp.weixin.qq.com/s?__biz=Mzg3ODY1MDkzMg==&mid=2247483770&idx=1&sn=fdf88faab01d5c219ac609570a21c9d6&chksm=cf113221f866bb373938cfca03cf095ff4fe1e4dc37d68ef5de4cd4876ee1260fca0c015a4d6&token=1096259873&lang=zh_CN#rd rel=noopener target=_blank><i class="fab fa-weixin fa-fw"></i>wxPublicAccount</a> </span><span class=links-of-author-item> <a title="RSS → /atom.xml" href=/atom.xml><i class="fa fa-rss fa-fw"></i>RSS</a> </span><span class=links-of-author-item> <a title="CSDN → https://blog.csdn.net/aqwca" href=https://blog.csdn.net/aqwca rel=noopener target=_blank><i class="fa fa-handshake fa-fw"></i>CSDN</a> </span><span class=links-of-author-item> <a title="杂鱼分享 → https://my-astro-git-main-drowning-in-codes.vercel.app" href=https://my-astro-git-main-drowning-in-codes.vercel.app/ rel=noopener target=_blank><i class="fas fa-share fa-fw"></i>杂鱼分享</a> </span></div><div class="links-of-blogroll motion-element"><div class=links-of-blogroll-title><i class="fa fa-link fa-fw"></i> 友情链接</div><ul class=links-of-blogroll-list><li class=links-of-blogroll-item><a href=https://protool-ten.vercel.app/ rel=noopener target=_blank title=https://protool-ten.vercel.app/>protools</a><li class=links-of-blogroll-item><a href=https://my-astro-aokh-git-main-drowningincodes-projects.vercel.app/ rel=noopener target=_blank title=https://my-astro-aokh-git-main-drowningincodes-projects.vercel.app>archive</a><li class=links-of-blogroll-item><a href=https://www.lllomh.com/ rel=noopener target=_blank title=https://www.lllomh.com/>芈渡</a><li class=links-of-blogroll-item><a href=http://myqhs.top/ rel=noopener target=_blank title=http://myqhs.top/>myqhs</a></ul></div><div class="motion-element announcement"><div class=title></div><p class=content><p class=date></div></div><meting-js id=6856787487 order=random server=netease type=playlist> </meting-js><div class=widget-wrap><h3 class=widget-title style=margin:0>文章词云</h3><div class="widget tagcloud" id=myCanvasContainer><canvas height=250 id=resCanvas style=width:100% width=250><ul class=tag-list itemprop=keywords><li class=tag-list-item><a class=tag-list-link href=/tags/c-build/ rel=tag>c++ build</a><span class=tag-list-count>1</span></ul></canvas></div></div><script id=clustrmaps src=https://clustrmaps.com/map_v2.js?d=xQdGTxqARTBiNIwX2aUban-ixkj2s6VaZQWo-aVCgY8&cl=ffffff&w=a></script><div class="back-to-top motion-element"><i class="fa fa-arrow-up"></i><span>0%</span></div><!-- 边栏 --></div></aside> <div id=sidebar-dimmer></div> <footer class=footer><div class=footer-inner><div class=copyright>© Wed Apr 08 2020 08:00:00 GMT+0800 (中国标准时间) – <span itemprop=copyrightYear>2026</span><span class=with-love> <i class="fa fa-heart"></i> </span><span class=author itemprop=copyrightHolder>Sekyoro</span><span class=post-meta-divider>|</span><span class=post-meta-item-icon> <i class="fa fa-chart-area"></i> </span><span title=站点总字数>4.8m</span><span class=post-meta-divider>|</span><span class=post-meta-item-icon> <i class="fa fa-coffee"></i> </span><span title=站点阅读时长>72:44</span></div><script async src=https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js></script><span id=busuanzi_container_site_pv>总访问量<span id=busuanzi_value_site_pv></span>次</span><span class=post-meta-divider>|</span><span id=busuanzi_container_site_uv>总访客数<span id=busuanzi_value_site_uv></span>人</span><span class=post-meta-divider>|</span><!-- 不蒜子计数初始值纠正 --><script>document.addEventListener("DOMContentLoaded", function() {
-    var int = setInterval(fixCount, 50);  // 50ms周期检测函数
-    var countOffset = 20000;  // 初始化首次数据
-
-    function fixCount() {
-        var pvContainer = document.getElementById("busuanzi_container_site_pv");
-        if (pvContainer && pvContainer.style.display !== "none") {
-            var pvElement = document.getElementById("busuanzi_value_site_pv");
-            if (pvElement) {
-                pvElement.innerHTML = parseInt(pvElement.innerHTML) + countOffset;
-                clearInterval(int);
-            }
-        }
+})();
+</script>
         
-        var uvContainer = document.getElementById("busuanzi_container_site_uv");
-        if (uvContainer && window.getComputedStyle(uvContainer).display !== "none")
-        {
-            var uvElement = document.getElementById("busuanzi_value_site_uv");
-            if (uvElement) {
-                uvElement.innerHTML = parseInt(uvElement.innerHTML) + countOffset; // 加上初始数据 
-                clearInterval(int); // 停止检测
-            }
-        }
-    }
-});</script><div><span id=timeDate>载入天数...</span><span id=times>载入时分秒...</span><script>var now = new Date();
+
+<!-- require APlayer -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+<script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+<!-- require MetingJS -->
+  
+ <script src="/js/meting-js.js"></script>
+	  
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+	  
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%AF%E7%BA%AFFetchContent"><span class="nav-number">1.</span> <span class="nav-text">纯纯FetchContent</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vcpkg"><span class="nav-number">2.</span> <span class="nav-text">vcpkg</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Triplets"><span class="nav-number">2.1.</span> <span class="nav-text">Triplets</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CPM-cmake"><span class="nav-number">3.</span> <span class="nav-text">CPM.cmake</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CONAN"><span class="nav-number">4.</span> <span class="nav-text">CONAN</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#xmake"><span class="nav-number">5.</span> <span class="nav-text">xmake</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">6.</span> <span class="nav-text">总结</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Sekyoro"
+      src="https://i.loli.net/2021/05/17/YqoavnXdGTpPO9R.jpg">
+  <p class="site-author-name" itemprop="name">Sekyoro</p>
+  <div class="site-description" itemprop="description">什么也无法舍弃的人，什么也做不了.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">267</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">229</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="http://proanimer.com/" title="Personal Website → http:&#x2F;&#x2F;proanimer.com" rel="noopener" target="_blank"><i class="fab fa-internet-explorer fa-fw"></i>Personal Website</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://github.com/drowning-in-codes" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;drowning-in-codes" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:bukalala174@gmail.com" title="E-Mail → mailto:bukalala174@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://mp.weixin.qq.com/s?__biz=Mzg3ODY1MDkzMg%3D%3D&mid=2247483770&idx=1&sn=fdf88faab01d5c219ac609570a21c9d6&chksm=cf113221f866bb373938cfca03cf095ff4fe1e4dc37d68ef5de4cd4876ee1260fca0c015a4d6&token=1096259873&lang=zh_CN#rd" title="wxPublicAccount → https:&#x2F;&#x2F;mp.weixin.qq.com&#x2F;s?__biz&#x3D;Mzg3ODY1MDkzMg&#x3D;&#x3D;&amp;mid&#x3D;2247483770&amp;idx&#x3D;1&amp;sn&#x3D;fdf88faab01d5c219ac609570a21c9d6&amp;chksm&#x3D;cf113221f866bb373938cfca03cf095ff4fe1e4dc37d68ef5de4cd4876ee1260fca0c015a4d6&amp;token&#x3D;1096259873&amp;lang&#x3D;zh_CN#rd" rel="noopener" target="_blank"><i class="fab fa-weixin fa-fw"></i>wxPublicAccount</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-rss fa-fw"></i>RSS</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/aqwca" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;aqwca" rel="noopener" target="_blank"><i class="fa fa-handshake fa-fw"></i>CSDN</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://my-astro-git-main-drowning-in-codes.vercel.app/" title="杂鱼分享 → https:&#x2F;&#x2F;my-astro-git-main-drowning-in-codes.vercel.app" rel="noopener" target="_blank"><i class="fas fa-share fa-fw"></i>杂鱼分享</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      友情链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://protool-ten.vercel.app/" title="https:&#x2F;&#x2F;protool-ten.vercel.app&#x2F;" rel="noopener" target="_blank">protools</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://my-astro-aokh-git-main-drowningincodes-projects.vercel.app/" title="https:&#x2F;&#x2F;my-astro-aokh-git-main-drowningincodes-projects.vercel.app" rel="noopener" target="_blank">archive</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.lllomh.com/" title="https:&#x2F;&#x2F;www.lllomh.com&#x2F;" rel="noopener" target="_blank">芈渡</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://myqhs.top/" title="http:&#x2F;&#x2F;myqhs.top&#x2F;" rel="noopener" target="_blank">myqhs</a>
+        </li>
+    </ul>
+  </div>
+
+
+  <div class="motion-element announcement">
+   <div class="title"></div>
+   <p class="content"> </p>
+   <p class="date">  </p>
+  </div>
+      </div>
+<meting-js
+	id="6856787487"
+	server="netease"
+	type="playlist"
+	order="random"
+	>
+</meting-js>
+			<div class="widget-wrap">
+    <h3 class="widget-title" style="margin:0">文章词云</h3>
+    <div id="myCanvasContainer" class="widget tagcloud">
+        <canvas width="250" height="250" id="resCanvas" style="width:100%">
+		<ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/c-build/" rel="tag">c++ build</a><span class="tag-list-count">1</span></li></ul>
+		</canvas>
+    </div>
+</div>
+		<script type="text/javascript" id="clustrmaps" src="//clustrmaps.com/map_v2.js?d=xQdGTxqARTBiNIwX2aUban-ixkj2s6VaZQWo-aVCgY8&cl=ffffff&w=a"></script>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+	 
+	 
+<!-- 边栏 -->
+
+
+	 
+
+	 
+	
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; Wed Apr 08 2020 08:00:00 GMT+0800 (中国标准时间) – 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Sekyoro</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">1.9m</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">115:22</span>
+</div>
+
+<div>
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date();
     function createtime() {
         var grt= new Date("04/08/2021 20:00:00");
         now.setTime(now.getTime()+250);
@@ -343,7 +1125,68 @@ if(canvas.getContext){
         document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
         document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
     }
-setInterval("createtime()",250);</script></div><div class=busuanzi-count><script async data-pjax src=https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script><span style="display: none;" class=post-meta-item id=busuanzi_container_site_uv> <span class=post-meta-item-icon> <i class="fa fa-user"></i> </span> <span class=site-uv title=总访客量> <span id=busuanzi_value_site_uv></span> </span> </span><span class=post-meta-divider>|</span><span style="display: none;" class=post-meta-item id=busuanzi_container_site_pv> <span class=post-meta-item-icon> <i class="fa fa-eye"></i> </span> <span class=site-pv title=总访问量> <span id=busuanzi_value_site_pv></span> </span> </span></div></div></footer> <script color=0,0,255 count=99 opacity=0.5 src=/lib/canvas-nest/canvas-nest.min.js zindex=-1></script> <script src=/lib/anime.min.js></script> <script src=https://cdn.jsdelivr.net/gh/theme-next/theme-next-pjax@0/pjax.min.js></script> <script src=https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js></script> <script src=https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js></script> <script src=https://cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js></script> <script src=https://cdn.jsdelivr.net/npm/velocity-animate@1/velocity.min.js></script> <script src=https://cdn.jsdelivr.net/npm/velocity-animate@1/velocity.ui.min.js></script> <script src=/js/utils.js></script> <script src=/js/motion.js></script> <script src=/js/schemes/pisces.js></script> <script src=/js/next-boot.js></script> <script src=/js/bookmark.js></script> <script>var pjax = new Pjax({
+setInterval("createtime()",250);
+</script>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        总访客数<span id="busuanzi_value_site_uv"></span>人</span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+       总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/theme-next/theme-next-pjax@0/pjax.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/velocity-animate@1/velocity.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/velocity-animate@1/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+  <script>
+var pjax = new Pjax({
   selectors: [
     'head title',
     '#page-configurations',
@@ -431,7 +1274,15 @@ window.addEventListener('pjax:success', () => {
       console.log('TagCanvas initialization failed:', e);
     }
   }
-});</script> <script data-pjax>(function(){
+});
+</script>
+
+
+
+
+  
+  <script data-pjax>
+    (function(){
       var canonicalURL, curProtocol;
       //Get the <link> tag
       var x=document.getElementsByTagName("link");
@@ -453,7 +1304,28 @@ window.addEventListener('pjax:success', () => {
       //Get current URL if the canonical URL does not exist
 	    if (!canonicalURL) canonicalURL = window.location.href;
 	    //Assign script content. Replace current URL with the canonical URL
-      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();</script> <script src=https://cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js></script> <script src=https://cdn.jsdelivr.net/npm/instantsearch.js@4/dist/instantsearch.production.min.js></script> <script src=/js/algolia-search.js></script> <script data-pjax>document.querySelectorAll('.pdfobject-container').forEach(element => {
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+  </script>
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
+<script src="//cdn.jsdelivr.net/npm/instantsearch.js@4/dist/instantsearch.production.min.js"></script>
+<script src="/js/algolia-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+<script data-pjax>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
   let url = element.dataset.target;
   let pdfOpenParams = {
     navpanes : 0,
@@ -470,7 +1342,27 @@ window.addEventListener('pjax:success', () => {
   } else {
     element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
   }
-});</script> <div id=pjax><script charset=utf-8 defer src=/js/outdate.js></script></div> <script charset=utf-8 defer src=/js/tagcanvas.js></script> <script charset=utf-8 defer src=/js/tagcloud.js></script> <script>NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+});
+</script>
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+  
+
+  <script  type="text/javascript" defer charset="utf-8" src="/js/outdate.js"></script>
+    </div>  
+  
+
+<script  type="text/javascript" defer charset="utf-8" src="/js/tagcanvas.js"></script>
+<script  type="text/javascript" defer charset="utf-8" src="/js/tagcloud.js"></script>
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
   window.livereOptions = {
     refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
   };
@@ -482,7 +1374,12 @@ window.addEventListener('pjax:success', () => {
     j.async = true;
     e.parentNode.insertBefore(j, e);
   })(document, 'script');
-});</script> <script>var OriginTitile = document.title;
+});
+</script>
+ 
+
+<script>
+  var OriginTitile = document.title;
   var titleTime;
   document.addEventListener("visibilitychange", function() {
     if (document.hidden) {
@@ -494,6 +1391,9 @@ window.addEventListener('pjax:success', () => {
         document.title = OriginTitile;
       }, 2000);
     }
-  });</script> <script src=/js/src/activate-power-mode.min.js></script> <script>POWERMODE.colorful = true;
-    POWERMODE.shake = false;
-    document.body.addEventListener('input', POWERMODE);</script> 
+  });
+</script>
+
+
+
+<script async>window.onload=function(){var a=document.createElement('script'),b=document.getElementsByTagName('script')[0];a.type='text/javascript',a.async=!0,a.src='/sw-register.js?v='+Date.now(),b.parentNode.insertBefore(a,b)};</script></body></html>

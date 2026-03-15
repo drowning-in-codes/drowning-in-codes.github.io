@@ -1,4 +1,20 @@
-<!doctypehtml><html lang=zh-CN><script defer src=/live2d-widget/autoload.js></script><meta charset=UTF-8><meta content=width=device-width,initial-scale=1,maximum-scale=2 name=viewport><meta content=#222 name=theme-color><meta content="Hexo 5.4.0" name=generator><link href=/images/blog_32px.png rel=apple-touch-icon sizes=180x180><link href=/images/blog_32px.png rel=icon sizes=32x32 type=image/png><link href=/images/blog_16px.png rel=icon sizes=16x16 type=image/png><link color=#222 href=/images/logo.svg rel=mask-icon><meta content=EPrJAp11bJwHULpQUaSNSZ8_3RcvTsPDAEGOME4pl1w name=google-site-verification><!-- Google tag (gtag.js) --><!-- 
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<script defer src="/live2d-widget/autoload.js"></script>
+
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 8.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/blog_32px.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/blog_32px.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/blog_16px.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="EPrJAp11bJwHULpQUaSNSZ8_3RcvTsPDAEGOME4pl1w">
+
+<!-- Google tag (gtag.js) -->
+<!-- 
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-VB21D8MKKW"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -6,14 +22,67 @@
   gtag('js', new Date());
 
   gtag('config', 'G-VB21D8MKKW');
-</script> --><!-- google adsense in head.swig --><script async crossorigin=anonymous src=https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4034523802263123></script><meta content=7226864CE87CE9DE8C008385273846FF name=msvalidate.01><meta content=code-fjFXVtiL7j name=baidu-site-verification><link href=/css/main.css rel=stylesheet><link as=style href=https://fonts.googleapis.com/css?family=Roboto%20Mono,Roboto:300,300italic,400,400italic,700,700italic|Roboto:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext onload=this.rel='stylesheet' rel=preload><link as=style href=https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css onload=this.rel='stylesheet' rel=preload><link href=https://fonts.googleapis.com/css?family=Noto+Serif+SC|Roboto&display=swap rel=stylesheet><link href=https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css rel=stylesheet><link href=https://cdn.jsdelivr.net/npm/pace-js@1/themes/blue/pace-theme-minimal.css rel=stylesheet><script src=https://cdn.jsdelivr.net/npm/pace-js@1/pace.min.js></script><script id=hexo-configurations>var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"www.sekyoro.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":240,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"appID":"0F9LEEVW82","apiKey":"78839e9f9be09d081c5c4da81975cd19","indexName":"sekyoblog_sec","hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};</script><link href=//cdn.bootcss.com/animate.css/3.5.0/animate.min.css rel=stylesheet><meta content=llama3是meta开源的大模型,在开源大模型中占着重要地位,在这之前可能是Mistral,目前也有gemma2,Qwen2以及微软的Phi3等. name=description><meta content=article property=og:type><meta content=学习llama3 property=og:title><meta content=https://www.sekyoro.top/2024/07/08/%E5%AD%A6%E4%B9%A0llama3/index.html property=og:url><meta content=Sekyoro的博客小屋 property=og:site_name><meta content=llama3是meta开源的大模型,在开源大模型中占着重要地位,在这之前可能是Mistral,目前也有gemma2,Qwen2以及微软的Phi3等. property=og:description><meta content=zh_CN property=og:locale><meta content=https://pytorch.org/docs/stable/_images/SiLU.png property=og:image><meta content=2024-07-08T06:44:29.000Z property=article:published_time><meta content=2024-07-08T15:22:46.235Z property=article:modified_time><meta content=Sekyoro property=article:author><meta content=llm property=article:tag><meta content=summary name=twitter:card><meta content=https://pytorch.org/docs/stable/_images/SiLU.png name=twitter:image><link href=https://www.sekyoro.top/2024/07/08/%E5%AD%A6%E4%B9%A0llama3/ rel=canonical><script id=page-configurations>// https://hexo.io/docs/variables.html
+</script> -->
+
+<!-- google adsense in head.swig -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4034523802263123"
+     crossorigin="anonymous"></script>
+  <meta name="msvalidate.01" content="7226864CE87CE9DE8C008385273846FF">
+  <meta name="baidu-site-verification" content="code-fjFXVtiL7j" />
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto Mono,Roboto:300,300italic,400,400italic,700,700italic|Roboto:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css">
+<link href="https://fonts.googleapis.com/css?family=Noto+Serif+SC|Roboto&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@1/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.sekyoro.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":240,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"appID":"0F9LEEVW82","apiKey":"78839e9f9be09d081c5c4da81975cd19","indexName":"sekyoblog_sec","hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+<link href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css" rel="stylesheet">
+  <meta name="description" content="llama3是meta开源的大模型,在开源大模型中占着重要地位,在这之前可能是Mistral,目前也有gemma2,Qwen2以及微软的Phi3等.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="学习llama3">
+<meta property="og:url" content="https://www.sekyoro.top/2024/07/08/%E5%AD%A6%E4%B9%A0llama3/index.html">
+<meta property="og:site_name" content="Sekyoro的博客小屋">
+<meta property="og:description" content="llama3是meta开源的大模型,在开源大模型中占着重要地位,在这之前可能是Mistral,目前也有gemma2,Qwen2以及微软的Phi3等.">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://pytorch.org/docs/stable/_images/SiLU.png">
+<meta property="article:published_time" content="2024-07-08T06:44:29.000Z">
+<meta property="article:modified_time" content="2024-07-08T15:22:46.235Z">
+<meta property="article:author" content="Sekyoro">
+<meta property="article:tag" content="llm">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pytorch.org/docs/stable/_images/SiLU.png">
+
+<link rel="canonical" href="https://www.sekyoro.top/2024/07/08/%E5%AD%A6%E4%B9%A0llama3/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
     isHome : false,
     isPost : true,
     lang   : 'zh-CN'
-  };</script><title>学习llama3 | Sekyoro的博客小屋</title><noscript><style>.use-motion .brand,
+  };
+</script>
+
+  <title>学习llama3 | Sekyoro的博客小屋</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
   .use-motion .menu-item,
   .sidebar-inner,
   .use-motion .post-block,
@@ -30,7 +99,256 @@
   }
 
   .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }</style></noscript><link href=/atom.xml rel=alternate title=Sekyoro的博客小屋 type=application/atom+xml><body itemscope itemtype=http://schema.org/WebPage><canvas style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" class=fireworks></canvas><script defer src=https://cdn.bootcss.com/animejs/2.2.0/anime.min.js></script><script defer src=/js/src/fireworks.js></script><div class="container use-motion"><div class=headband></div><header class=header itemscope itemtype=http://schema.org/WPHeader><div class=header-inner><div class=site-brand-container><div class=site-nav-toggle><div aria-label=切换导航栏 class=toggle><span class="toggle-line toggle-line-first"></span><span class="toggle-line toggle-line-middle"></span><span class="toggle-line toggle-line-last"></span></div></div><div class=site-meta><a class=brand href=/ rel=start> <span class=logo-line-before><i></i></span> <h1 class=site-title>Sekyoro的博客小屋</h1> <span class=logo-line-after><i></i></span> </a></div><div class=site-nav-right><div class="toggle popup-trigger"><i class="fa fa-search fa-fw fa-lg"></i></div></div></div><nav class=site-nav><ul class="main-menu menu" id=menu><li class="menu-item menu-item-home"><a href=/ rel=section><i class="fa fa-home fa-fw"></i>首页</a><li class="menu-item menu-item-about"><a href=/about/ rel=section><i class="fa fa-user fa-fw"></i>关于</a><li class="menu-item menu-item-tags"><a href=/tags/ rel=section><i class="fa fa-tags fa-fw"></i>标签</a><li class="menu-item menu-item-categories"><a href=/categories/ rel=section><i class="fa fa-th fa-fw"></i>分类</a><li class="menu-item menu-item-archives"><a href=/archives/ rel=section><i class="fa fa-archive fa-fw"></i>归档</a><li class="menu-item menu-item-bangumis"><a href=/bangumis/ rel=section><i class="fa fa-film fa-fw"></i>追番</a><li class="menu-item menu-item-resume"><a href=/resume/ rel=section><i class="fa fa-file-pdf fa-fw"></i>简历</a><li class="menu-item menu-item-materials"><a href=/materials/ rel=section><i class="fa fa-book fa-fw"></i>学习资料</a><li class="menu-item menu-item-sitemap"><a href=/sitemap.xml rel=section><i class="fa fa-sitemap fa-fw"></i>站点地图</a><li class="menu-item menu-item-search"><a class=popup-trigger role=button><i class="fa fa-search fa-fw"></i>搜索 </a></ul></nav><div class=search-pop-overlay><div class="popup search-popup"><div class=search-header><span class=search-icon> <i class="fa fa-search"></i> </span><div class=search-input-container></div><span class=popup-btn-close> <i class="fa fa-times-circle"></i> </span></div><div class=algolia-results><div id=algolia-stats></div><div id=algolia-hits></div><div class=algolia-pagination id=algolia-pagination></div></div></div></div></div></header><a class="book-mark-link book-mark-link-fixed" role=button></a><main class=main><div class=main-inner><div class=content-wrap><div class="content post posts-expand"><article class=post-block itemscope itemtype=http://schema.org/Article lang=zh-CN><link href=https://www.sekyoro.top/2024/07/08/%E5%AD%A6%E4%B9%A0llama3/ itemprop=mainEntityOfPage><span hidden itemprop=author itemscope itemtype=http://schema.org/Person> <meta content=https://i.loli.net/2021/05/17/YqoavnXdGTpPO9R.jpg itemprop=image> <meta content=Sekyoro itemprop=name> <meta content=什么也无法舍弃的人，什么也做不了. itemprop=description> </span><span hidden itemprop=publisher itemscope itemtype=http://schema.org/Organization> <meta content=Sekyoro的博客小屋 itemprop=name> </span><header class=post-header><h1 itemprop="name headline" class=post-title>学习llama3</h1><div class=post-meta><span class=post-meta-item> <span class=post-meta-item-icon> <i class="far fa-calendar"></i> </span> <span class=post-meta-item-text>发表于</span> <time itemprop="dateCreated datePublished" title="创建时间：2024-07-08 14:44:29 / 修改时间：23:22:46" datetime=2024-07-08T14:44:29+08:00>2024-07-08</time> </span><span style="display: none;" class=post-meta-item id=busuanzi_container_page_pv title=阅读次数> <span class=post-meta-item-icon> <i class="fa fa-eye"></i> </span> <span class=post-meta-item-text>阅读次数：</span> <span id=busuanzi_value_page_pv></span> </span><br><span class=post-meta-item title=本文字数> <span class=post-meta-item-icon> <i class="far fa-file-word"></i> </span> <span class=post-meta-item-text>本文字数：</span> <span>11k</span> </span><span class=post-meta-item title=阅读时长> <span class=post-meta-item-icon> <i class="far fa-clock"></i> </span> <span class=post-meta-item-text>阅读时长 ≈</span> <span>10 分钟</span> </span></div></header><div class=post-body itemprop=articleBody><div class=post-tags><a href=/tags/llm/ rel=tag># llm</a></div><p>llama3是meta开源的大模型,在开源大模型中占着重要地位,在这之前可能是Mistral,目前也有gemma2,Qwen2以及微软的Phi3等.<br><span id=more></span><p>llama表现很不错,<a href=https://toloka.ai/llm-leaderboard/ rel=noopener target=_blank>LLM Leaderboard (toloka.ai)</a>,很多模型都是在它基础上微调得到的.<p>这里将llama介绍分为位置编码,transformer层,ffn层以及其中的norm的改进.<p>llama3相比于llama2,上下文窗口增大,tokenizer从sentencepiece变为tiktoken,token数也增多了.<div class=table-container><table><thead><tr><th><strong>Feature</strong><th><strong>LLaMa 2</strong><th><strong>LLaMa 3</strong><tbody><tr><td><strong>Training Data Size</strong><td>2 trillion tokens<td>15 trillion tokens (7x larger)<tr><td><strong>Context Window</strong><td>4K tokens<td>8k tokens<tr><td><strong>Focus Area</strong><td>General language understanding<td>Nuance, context, complex tasks<tr><td><strong>False Refusal Rate</strong><td>Higher<td>Lower<tr><td><strong>Response Diversity</strong><td>Lower<td>Higher<tr><td><strong>Code Generation</strong><td>Limited capability<td>Enhanced capability</table></div><h2 id=旋转位置编码><a class=headerlink href=#旋转位置编码 title=旋转位置编码></a>旋转位置编码</h2><blockquote><p>旋转位置嵌入（RoPE）是一种用于基于transformer模型的技术，可将位置信息纳入标记表示中。与依赖正弦和余弦函数的传统位置编码不同，<strong>RoPE 利用旋转矩阵来编码绝对和相对位置信息</strong>。这种方法的提出是为了提高位置嵌入在transformer中的有效性。Meta的LLaMA、清华的ChatGLM都采用了RoPE</blockquote><script type="math/tex; mode=display">
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Sekyoro的博客小屋" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+
+
+  <div class="container use-motion">
+    <div class="headband"></div>
+	
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Sekyoro的博客小屋</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-bangumis">
+
+    <a href="/bangumis/" rel="section"><i class="fa fa-film fa-fw"></i>追番</a>
+
+  </li>
+        <li class="menu-item menu-item-resume">
+
+    <a href="/resume/" rel="section"><i class="fa fa-file-pdf fa-fw"></i>简历</a>
+
+  </li>
+        <li class="menu-item menu-item-materials">
+
+    <a href="/materials/" rel="section"><i class="fa fa-book fa-fw"></i>学习资料</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container"></div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="algolia-results">
+  <div id="algolia-stats"></div>
+  <div id="algolia-hits"></div>
+  <div id="algolia-pagination" class="algolia-pagination"></div>
+</div>
+
+      
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.sekyoro.top/2024/07/08/%E5%AD%A6%E4%B9%A0llama3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://i.loli.net/2021/05/17/YqoavnXdGTpPO9R.jpg">
+      <meta itemprop="name" content="Sekyoro">
+      <meta itemprop="description" content="什么也无法舍弃的人，什么也做不了.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sekyoro的博客小屋">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          学习llama3
+        </h1>
+
+        <div class="post-meta">
+		
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2024-07-08 14:44:29 / 修改时间：23:22:46" itemprop="dateCreated datePublished" datetime="2024-07-08T14:44:29+08:00">2024-07-08</time>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>1.8k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span>6 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+        <div class="post-body" itemprop="articleBody">
+            <div class="post-tags">
+                <a href="/tags/llm/" rel="tag"># llm</a>
+            </div>
+    
+          
+        <p>llama3是meta开源的大模型,在开源大模型中占着重要地位,在这之前可能是Mistral,目前也有gemma2,Qwen2以及微软的Phi3等.<br><span id="more"></span></p>
+<p>llama表现很不错,<a target="_blank" rel="noopener" href="https://toloka.ai/llm-leaderboard/">LLM Leaderboard (toloka.ai)</a>,很多模型都是在它基础上微调得到的.</p>
+<p>这里将llama介绍分为位置编码,transformer层,ffn层以及其中的norm的改进.</p>
+<p>llama3相比于llama2,上下文窗口增大,tokenizer从sentencepiece变为tiktoken,token数也增多了.</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th><strong>Feature</strong></th>
+<th><strong>LLaMa 2</strong></th>
+<th><strong>LLaMa 3</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Training Data Size</strong></td>
+<td>2 trillion tokens</td>
+<td>15 trillion tokens (7x larger)</td>
+</tr>
+<tr>
+<td><strong>Context Window</strong></td>
+<td>4K tokens</td>
+<td>8k tokens</td>
+</tr>
+<tr>
+<td><strong>Focus Area</strong></td>
+<td>General language understanding</td>
+<td>Nuance, context, complex tasks</td>
+</tr>
+<tr>
+<td><strong>False Refusal Rate</strong></td>
+<td>Higher</td>
+<td>Lower</td>
+</tr>
+<tr>
+<td><strong>Response Diversity</strong></td>
+<td>Lower</td>
+<td>Higher</td>
+</tr>
+<tr>
+<td><strong>Code Generation</strong></td>
+<td>Limited capability</td>
+<td>Enhanced capability</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="旋转位置编码"><a href="#旋转位置编码" class="headerlink" title="旋转位置编码"></a>旋转位置编码</h2><blockquote>
+<p>旋转位置嵌入（RoPE）是一种用于基于transformer模型的技术，可将位置信息纳入标记表示中。与依赖正弦和余弦函数的传统位置编码不同，<strong>RoPE 利用旋转矩阵来编码绝对和相对位置信息</strong>。这种方法的提出是为了提高位置嵌入在transformer中的有效性。Meta的LLaMA、清华的ChatGLM都采用了RoPE</p>
+</blockquote>
+<script type="math/tex; mode=display">
 \begin{aligned}
 \mathrm{RoPE}(x,m)& =xe^{mi\theta} \\
 \langle\mathrm{RoPE}(q_j,m),\mathrm{RoPE}(k_j,n)\rangle & =\langle q_je^{mi\theta},k_je^{ni\theta}\rangle  \\
@@ -43,11 +361,178 @@
 &=q_jk_je^{mi\theta}\overline{e^{ni\theta}} \\
 &=q_jk_je^{(m-n)i\theta} \\
 &=\mathrm{RoPE}(q_jk_j,m-n)
-\end{aligned}</script><p>在llama3中代码如下<figure class="highlight python"><table><tr><td class=gutter><pre><span class=line>1</span><br><span class=line>2</span><br><span class=line>3</span><br><span class=line>4</span><br><span class=line>5</span><br><span class=line>6</span><br><span class=line>7</span><br><span class=line>8</span><br><span class=line>9</span><br><span class=line>10</span><br><span class=line>11</span><br><span class=line>12</span><br><span class=line>13</span><br><span class=line>14</span><br><span class=line>15</span><br><span class=line>16</span><br><span class=line>17</span><br><span class=line>18</span><br><span class=line>19</span><br><span class=line>20</span><br><span class=line>21</span><br><span class=line>22</span><br><span class=line>23</span><br><span class=line>24</span><br><span class=line>25</span><br><span class=line>26</span><br><span class=line>27</span><br><span class=line>28</span><br><span class=line>29</span><br><span class=line>30</span><br><span class=line>31</span><br><span class=line>32</span><br></pre><td class=code><pre><span class=line><span class=function><span class=keyword>def</span> <span class=title>precompute_freqs_cis</span>(<span class=params>dim: <span class=built_in>int</span>, end: <span class=built_in>int</span>, theta: <span class=built_in>float</span> = <span class=number>10000.0</span></span>):</span></span><br><span class=line>    freqs = <span class=number>1.0</span> / (theta ** (torch.arange(<span class=number>0</span>, dim, <span class=number>2</span>)[: (dim // <span class=number>2</span>)].<span class=built_in>float</span>() / dim)) <span class=comment># 一个位置上的特征</span></span><br><span class=line>    t = torch.arange(end, device=freqs.device, dtype=torch.float32)</span><br><span class=line>    freqs = torch.outer(t, freqs)</span><br><span class=line>    freqs_cis = torch.polar(torch.ones_like(freqs), freqs)  <span class=comment># complex64 # 得到e^freqs^ shape [T,dim//2]</span></span><br><span class=line>    <span class=keyword>return</span> freqs_cis</span><br><span class=line></span><br><span class=line>self.freqs_cis = precompute_freqs_cis(</span><br><span class=line>    params.dim // params.n_heads,</span><br><span class=line>    params.max_seq_len * <span class=number>2</span>,</span><br><span class=line>    params.rope_theta,</span><br><span class=line>)</span><br><span class=line></span><br><span class=line><span class=function><span class=keyword>def</span> <span class=title>reshape_for_broadcast</span>(<span class=params>freqs_cis: torch.Tensor, x: torch.Tensor</span>):</span></span><br><span class=line>    ndim = x.ndim</span><br><span class=line>    <span class=keyword>assert</span> <span class=number>0</span> <= <span class=number>1</span> < ndim</span><br><span class=line>    <span class=keyword>assert</span> freqs_cis.shape == (x.shape[<span class=number>1</span>], x.shape[-<span class=number>1</span>])</span><br><span class=line>    shape = [d <span class=keyword>if</span> i == <span class=number>1</span> <span class=keyword>or</span> i == ndim - <span class=number>1</span> <span class=keyword>else</span> <span class=number>1</span> <span class=keyword>for</span> i, d <span class=keyword>in</span> <span class=built_in>enumerate</span>(x.shape)]</span><br><span class=line>    <span class=keyword>return</span> freqs_cis.view(*shape)</span><br><span class=line><span class=function><span class=keyword>def</span> <span class=title>apply_rotary_emb</span>(<span class=params></span></span></span><br><span class=line><span class=params><span class=function>        xq: torch.Tensor,</span></span></span><br><span class=line><span class=params><span class=function>        xk: torch.Tensor,</span></span></span><br><span class=line><span class=params><span class=function>        freqs_cis: torch.Tensor,</span></span></span><br><span class=line><span class=params><span class=function></span>) -> <span class=type>Tuple</span>[torch.Tensor, torch.Tensor]:</span></span><br><span class=line>    xq_ = torch.view_as_complex(xq.<span class=built_in>float</span>().reshape(*xq.shape[:-<span class=number>1</span>], -<span class=number>1</span>, <span class=number>2</span>)) <span class=comment>#shape [bs,seq_len,dim//2,2] -> [bs,seq_len,dim]</span></span><br><span class=line>    xk_ = torch.view_as_complex(xk.<span class=built_in>float</span>().reshape(*xk.shape[:-<span class=number>1</span>], -<span class=number>1</span>, <span class=number>2</span>))<span class=comment>#shape [bs,seq_len,dim//2,2] -> [bs,seq_len,dim]</span></span><br><span class=line>    freqs_cis = reshape_for_broadcast(freqs_cis, xq_) <span class=comment># [1,seq_len,dim]</span></span><br><span class=line>    xq_out = torch.view_as_real(xq_ * freqs_cis).flatten(<span class=number>3</span>)<span class=comment>#[bs,seq_len,dim//2,2] type float32 -> </span></span><br><span class=line>    xk_out = torch.view_as_real(xk_ * freqs_cis).flatten(<span class=number>3</span>)</span><br><span class=line>    <span class=keyword>return</span> xq_out.type_as(xq), xk_out.type_as(xk)</span><br><span class=line></span><br><span class=line>xq, xk = apply_rotary_emb(xq, xk, freqs_cis=freqs_cis)</span><br></pre></table></figure><p>计算freqs_cis,其是一个复数,旋转编码通常应用在q和k上.</p><script type="math/tex; mode=display">
-\mathrm{RoPE}(x_m^{(1)},x_m^{(2)},m)=\begin{bmatrix}\cos(m\theta)&-\sin(m\theta)\\\sin(m\theta)&\cos(m\theta)\end{bmatrix}\begin{bmatrix}x_m^{(1)}\\x_m^{(2)}\end{bmatrix}=\begin{bmatrix}x_m^{(1)}\cos(m\theta)-x_m^{(2)}\sin(m\theta)\\x_m^{(2)}\cos(m\theta)+x_m^{(1)}\sin(m\theta)\end{bmatrix}\\\Theta=\theta_i=10,000^{-\frac{2(i-1)}d},where(i\in[1,2,\ldots,d])\text{ for the $\frac{d}{2}$ pairs of features.}</script><p>下面是另一种实现<figure class="highlight python"><table><tr><td class=gutter><pre><span class=line>1</span><br><span class=line>2</span><br><span class=line>3</span><br><span class=line>4</span><br><span class=line>5</span><br><span class=line>6</span><br><span class=line>7</span><br><span class=line>8</span><br><span class=line>9</span><br><span class=line>10</span><br><span class=line>11</span><br><span class=line>12</span><br><span class=line>13</span><br><span class=line>14</span><br><span class=line>15</span><br><span class=line>16</span><br><span class=line>17</span><br><span class=line>18</span><br><span class=line>19</span><br><span class=line>20</span><br><span class=line>21</span><br><span class=line>22</span><br><span class=line>23</span><br><span class=line>24</span><br><span class=line>25</span><br><span class=line>26</span><br><span class=line>27</span><br><span class=line>28</span><br><span class=line>29</span><br><span class=line>30</span><br><span class=line>31</span><br><span class=line>32</span><br><span class=line>33</span><br><span class=line>34</span><br><span class=line>35</span><br><span class=line>36</span><br><span class=line>37</span><br><span class=line>38</span><br><span class=line>39</span><br><span class=line>40</span><br><span class=line>41</span><br><span class=line>42</span><br><span class=line>43</span><br><span class=line>44</span><br><span class=line>45</span><br><span class=line>46</span><br><span class=line>47</span><br></pre><td class=code><pre><span class=line><span class=keyword>import</span> torch</span><br><span class=line><span class=keyword>import</span> torch.nn <span class=keyword>as</span> nn</span><br><span class=line></span><br><span class=line></span><br><span class=line><span class=class><span class=keyword>class</span> <span class=title>RotaryPositionalEmbeddings</span>(<span class=params>nn.Module</span>):</span></span><br><span class=line>    <span class=function><span class=keyword>def</span> <span class=title>__init__</span>(<span class=params>self, d: <span class=built_in>int</span>, base: <span class=built_in>int</span> = <span class=number>10_000</span></span>):</span></span><br><span class=line>        <span class=built_in>super</span>().__init__()</span><br><span class=line>        self.base = base</span><br><span class=line>        self.d = d</span><br><span class=line>        self.cos_cached = <span class=literal>None</span></span><br><span class=line>        self.sin_cached = <span class=literal>None</span></span><br><span class=line></span><br><span class=line>    <span class=function><span class=keyword>def</span> <span class=title>_build_cache</span>(<span class=params>self, x: torch.Tensor</span>):</span></span><br><span class=line>        <span class=keyword>if</span> self.cos_cached <span class=keyword>is</span> <span class=keyword>not</span> <span class=literal>None</span> <span class=keyword>and</span> x.shape[<span class=number>0</span>] <= self.cos_cached.shape[<span class=number>0</span>]:</span><br><span class=line>            <span class=keyword>return</span></span><br><span class=line>        seq_len = x.shape[<span class=number>0</span>]</span><br><span class=line>        <span class=comment># THETA = 10,000^(-2*i/d) or 1/10,000^(2i/d)</span></span><br><span class=line>        theta = <span class=number>1.</span> / (self.base ** (torch.arange(<span class=number>0</span>, self.d, <span class=number>2</span>).<span class=built_in>float</span>() / self.d)).to(x.device)</span><br><span class=line>        <span class=comment># Position index [0,1,...]</span></span><br><span class=line>        seq_idx = torch.arange(seq_len, device=x.device).<span class=built_in>float</span>().to(x.device)</span><br><span class=line></span><br><span class=line>        idx_theta = torch.einsum(<span class=string>'n,d->nd'</span>, seq_idx,</span><br><span class=line>                                 theta)  <span class=comment># Calculates m*(THETA) = [ [0, 0...], [THETA_1, THETA_2...THETA_d/2], ... [seq-1*(THETA_1), seq-1*(THETA_2)...] ]</span></span><br><span class=line></span><br><span class=line>        idx_theta2 = torch.cat([idx_theta, idx_theta],</span><br><span class=line>                               dim=<span class=number>1</span>)  <span class=comment># [THETA_1, THETA_2...THETA_d/2] -> [THETA_1, THETA_2...THETA_d]</span></span><br><span class=line>        self.cos_cached = idx_theta2.cos()[:, <span class=literal>None</span>, <span class=literal>None</span>, :]  <span class=comment># Cache [cosTHETA_1, cosTHETA_2...cosTHETA_d]</span></span><br><span class=line>        self.sin_cached = idx_theta2.sin()[:, <span class=literal>None</span>, <span class=literal>None</span>, :]  <span class=comment># cache [sinTHETA_1, sinTHETA_2...sinTHETA_d]</span></span><br><span class=line></span><br><span class=line>    <span class=function><span class=keyword>def</span> <span class=title>_neg_half</span>(<span class=params>self, x: torch.Tensor</span>):</span></span><br><span class=line>        d_2 = self.d // <span class=number>2</span></span><br><span class=line>        <span class=keyword>return</span> torch.cat([-x[:, :, :, d_2:], x[:, :, :, :d_2]], dim=-<span class=number>1</span>)</span><br><span class=line></span><br><span class=line>    <span class=function><span class=keyword>def</span> <span class=title>forward</span>(<span class=params>self, x: torch.Tensor</span>):</span></span><br><span class=line>        self._build_cache(x)</span><br><span class=line>        neg_half_x = self._neg_half(x)</span><br><span class=line>        x_rope = (x * self.cos_cached[:x.shape[<span class=number>0</span>]]) + (neg_half_x * self.sin_cached[:x.shape[<span class=number>0</span>]])</span><br><span class=line>        <span class=keyword>return</span> x_rope</span><br><span class=line></span><br><span class=line></span><br><span class=line><span class=keyword>if</span> __name__ == <span class=string>'__main__'</span>:</span><br><span class=line>    x = torch.tensor([[<span class=number>1</span>, <span class=number>2</span>, <span class=number>3</span>, <span class=number>4</span>], [<span class=number>4</span>, <span class=number>5</span>, <span class=number>6</span>, <span class=number>7</span>], [<span class=number>7</span>, <span class=number>8</span>, <span class=number>9</span>, <span class=number>10</span>]], dtype=torch.<span class=built_in>float</span>)</span><br><span class=line>    x = x[:, <span class=literal>None</span>, <span class=literal>None</span>, :]</span><br><span class=line></span><br><span class=line>    p = RotaryPositionalEmbeddings(<span class=number>4</span>)(x)</span><br><span class=line>    <span class=built_in>print</span>(p)</span><br><span class=line></span><br></pre></table></figure><script type="math/tex; mode=display">
-\begin{bmatrix}x_m^{(i)}\\x_m^{(i+d/2)}\end{bmatrix}=\begin{bmatrix}x_m^{(i)}\cos(m\theta_i)-x_m^{(i+d/2)}\sin(m\theta_i)\\x_m^{(i+d/2)}\cos(m\theta_i)+x_m^{(i)}\sin(m\theta_i)\end{bmatrix}</script><h2 id=RSMNorm><a class=headerlink href=#RSMNorm title=RSMNorm></a>RSMNorm</h2><p>另一种规范化的方式,方法是在2019年的论文中提出的<a href=https://arxiv.org/pdf/1910.07467 rel=noopener target=_blank>1910.07467 (arxiv.org)</a><figure class="highlight python"><table><tr><td class=gutter><pre><span class=line>1</span><br><span class=line>2</span><br><span class=line>3</span><br><span class=line>4</span><br><span class=line>5</span><br><span class=line>6</span><br><span class=line>7</span><br><span class=line>8</span><br><span class=line>9</span><br><span class=line>10</span><br><span class=line>11</span><br><span class=line>12</span><br><span class=line>13</span><br></pre><td class=code><pre><span class=line><span class=class><span class=keyword>class</span> <span class=title>RMSNorm</span>(<span class=params>torch.nn.Module</span>):</span></span><br><span class=line>    <span class=function><span class=keyword>def</span> <span class=title>__init__</span>(<span class=params>self, dim: <span class=built_in>int</span>, eps: <span class=built_in>float</span> = <span class=number>1e-6</span></span>):</span></span><br><span class=line>        <span class=built_in>super</span>().__init__()</span><br><span class=line>        self.eps = eps</span><br><span class=line>        self.weight = nn.Parameter(torch.ones(dim))</span><br><span class=line></span><br><span class=line>    <span class=function><span class=keyword>def</span> <span class=title>_norm</span>(<span class=params>self, x</span>):</span></span><br><span class=line>        <span class=keyword>return</span> x * torch.rsqrt(x.<span class=built_in>pow</span>(<span class=number>2</span>).mean(-<span class=number>1</span>, keepdim=<span class=literal>True</span>) + self.eps)</span><br><span class=line></span><br><span class=line>    <span class=function><span class=keyword>def</span> <span class=title>forward</span>(<span class=params>self, x</span>):</span></span><br><span class=line>        output = self._norm(x.<span class=built_in>float</span>()).type_as(x)</span><br><span class=line>        <span class=keyword>return</span> output * self.weight</span><br><span class=line></span><br></pre></table></figure><script type="math/tex; mode=display">
-y=\frac{x}{\sqrt{\text{RMS}[x]+\epsilon}}*\gamma</script><p>在llama3中,有三个地方使用,在attention,ffn以及在所有transformer layer之后,<figure class="highlight python"><table><tr><td class=gutter><pre><span class=line>1</span><br><span class=line>2</span><br></pre><td class=code><pre><span class=line>h = x + self.attention(self.attention_norm(x), start_pos, freqs_cis, mask)</span><br><span class=line>out = h + self.feed_forward(self.ffn_norm(h))</span><br></pre></table></figure><h2 id=GroupQuery-Attention-amp-amp-KVcache><a title="GroupQuery Attention&&KVcache" class=headerlink href=#GroupQuery-Attention-amp-amp-KVcache></a>GroupQuery Attention&&KVcache</h2><p>GroupQuery:query的head数是kv的head数的若干倍.<p>KV cache:在生成新的token时,K和V往往改变不大,也就不需要怎么计算,所以只需要存下计算的值即可.这是节约显存的操作.<figure class="highlight python"><table><tr><td class=gutter><pre><span class=line>1</span><br><span class=line>2</span><br><span class=line>3</span><br><span class=line>4</span><br><span class=line>5</span><br><span class=line>6</span><br><span class=line>7</span><br><span class=line>8</span><br><span class=line>9</span><br><span class=line>10</span><br><span class=line>11</span><br><span class=line>12</span><br><span class=line>13</span><br><span class=line>14</span><br><span class=line>15</span><br><span class=line>16</span><br><span class=line>17</span><br><span class=line>18</span><br><span class=line>19</span><br><span class=line>20</span><br><span class=line>21</span><br><span class=line>22</span><br><span class=line>23</span><br><span class=line>24</span><br><span class=line>25</span><br><span class=line>26</span><br><span class=line>27</span><br><span class=line>28</span><br><span class=line>29</span><br><span class=line>30</span><br><span class=line>31</span><br><span class=line>32</span><br><span class=line>33</span><br><span class=line>34</span><br><span class=line>35</span><br><span class=line>36</span><br><span class=line>37</span><br><span class=line>38</span><br><span class=line>39</span><br><span class=line>40</span><br><span class=line>41</span><br><span class=line>42</span><br><span class=line>43</span><br><span class=line>44</span><br><span class=line>45</span><br><span class=line>46</span><br><span class=line>47</span><br><span class=line>48</span><br><span class=line>49</span><br><span class=line>50</span><br><span class=line>51</span><br><span class=line>52</span><br><span class=line>53</span><br><span class=line>54</span><br><span class=line>55</span><br><span class=line>56</span><br><span class=line>57</span><br><span class=line>58</span><br><span class=line>59</span><br><span class=line>60</span><br><span class=line>61</span><br><span class=line>62</span><br><span class=line>63</span><br><span class=line>64</span><br><span class=line>65</span><br><span class=line>66</span><br><span class=line>67</span><br><span class=line>68</span><br><span class=line>69</span><br><span class=line>70</span><br><span class=line>71</span><br><span class=line>72</span><br><span class=line>73</span><br><span class=line>74</span><br><span class=line>75</span><br><span class=line>76</span><br><span class=line>77</span><br><span class=line>78</span><br><span class=line>79</span><br><span class=line>80</span><br><span class=line>81</span><br><span class=line>82</span><br><span class=line>83</span><br><span class=line>84</span><br><span class=line>85</span><br><span class=line>86</span><br><span class=line>87</span><br><span class=line>88</span><br><span class=line>89</span><br><span class=line>90</span><br><span class=line>91</span><br><span class=line>92</span><br><span class=line>93</span><br><span class=line>94</span><br><span class=line>95</span><br><span class=line>96</span><br><span class=line>97</span><br><span class=line>98</span><br><span class=line>99</span><br><span class=line>100</span><br><span class=line>101</span><br></pre><td class=code><pre><span class=line><span class=class><span class=keyword>class</span> <span class=title>Attention</span>(<span class=params>nn.Module</span>):</span></span><br><span class=line>    <span class=function><span class=keyword>def</span> <span class=title>__init__</span>(<span class=params>self, args: ModelArgs</span>):</span></span><br><span class=line>        <span class=built_in>super</span>().__init__()</span><br><span class=line>        self.n_kv_heads = args.n_heads <span class=keyword>if</span> args.n_kv_heads <span class=keyword>is</span> <span class=literal>None</span> <span class=keyword>else</span> args.n_kv_heads</span><br><span class=line>        model_parallel_size = fs_init.get_model_parallel_world_size()</span><br><span class=line>        self.n_local_heads = args.n_heads // model_parallel_size</span><br><span class=line>        self.n_local_kv_heads = self.n_kv_heads // model_parallel_size</span><br><span class=line>        self.n_rep = self.n_local_heads // self.n_local_kv_heads</span><br><span class=line>        self.head_dim = args.dim // args.n_heads</span><br><span class=line></span><br><span class=line>        self.wq = ColumnParallelLinear(</span><br><span class=line>            args.dim,</span><br><span class=line>            args.n_heads * self.head_dim,</span><br><span class=line>            bias=<span class=literal>False</span>,</span><br><span class=line>            gather_output=<span class=literal>False</span>,</span><br><span class=line>            init_method=<span class=keyword>lambda</span> x: x,</span><br><span class=line>        )</span><br><span class=line>        self.wk = ColumnParallelLinear(</span><br><span class=line>            args.dim,</span><br><span class=line>            self.n_kv_heads * self.head_dim,</span><br><span class=line>            bias=<span class=literal>False</span>,</span><br><span class=line>            gather_output=<span class=literal>False</span>,</span><br><span class=line>            init_method=<span class=keyword>lambda</span> x: x,</span><br><span class=line>        )</span><br><span class=line>        self.wv = ColumnParallelLinear(</span><br><span class=line>            args.dim,</span><br><span class=line>            self.n_kv_heads * self.head_dim,</span><br><span class=line>            bias=<span class=literal>False</span>,</span><br><span class=line>            gather_output=<span class=literal>False</span>,</span><br><span class=line>            init_method=<span class=keyword>lambda</span> x: x,</span><br><span class=line>        )</span><br><span class=line>        self.wo = RowParallelLinear(</span><br><span class=line>            args.n_heads * self.head_dim,</span><br><span class=line>            args.dim,</span><br><span class=line>            bias=<span class=literal>False</span>,</span><br><span class=line>            input_is_parallel=<span class=literal>True</span>,</span><br><span class=line>            init_method=<span class=keyword>lambda</span> x: x,</span><br><span class=line>        )</span><br><span class=line></span><br><span class=line>        self.cache_k = torch.zeros(</span><br><span class=line>            (</span><br><span class=line>                args.max_batch_size,</span><br><span class=line>                args.max_seq_len,</span><br><span class=line>                self.n_local_kv_heads,</span><br><span class=line>                self.head_dim,</span><br><span class=line>            )</span><br><span class=line>        ).cuda()</span><br><span class=line>        self.cache_v = torch.zeros(</span><br><span class=line>            (</span><br><span class=line>                args.max_batch_size,</span><br><span class=line>                args.max_seq_len,</span><br><span class=line>                self.n_local_kv_heads,</span><br><span class=line>                self.head_dim,</span><br><span class=line>            )</span><br><span class=line>        ).cuda()</span><br><span class=line></span><br><span class=line>    <span class=function><span class=keyword>def</span> <span class=title>forward</span>(<span class=params></span></span></span><br><span class=line><span class=params><span class=function>            self,</span></span></span><br><span class=line><span class=params><span class=function>            x: torch.Tensor,</span></span></span><br><span class=line><span class=params><span class=function>            start_pos: <span class=built_in>int</span>,</span></span></span><br><span class=line><span class=params><span class=function>            freqs_cis: torch.Tensor,</span></span></span><br><span class=line><span class=params><span class=function>            mask: <span class=type>Optional</span>[torch.Tensor],</span></span></span><br><span class=line><span class=params><span class=function>    </span>):</span></span><br><span class=line>        bsz, seqlen, _ = x.shape</span><br><span class=line>        xq, xk, xv = self.wq(x), self.wk(x), self.wv(x)</span><br><span class=line></span><br><span class=line>        xq = xq.view(bsz, seqlen, self.n_local_heads, self.head_dim)</span><br><span class=line>        xk = xk.view(bsz, seqlen, self.n_local_kv_heads, self.head_dim)</span><br><span class=line>        xv = xv.view(bsz, seqlen, self.n_local_kv_heads, self.head_dim)</span><br><span class=line></span><br><span class=line>        xq, xk = apply_rotary_emb(xq, xk, freqs_cis=freqs_cis)</span><br><span class=line></span><br><span class=line>        self.cache_k = self.cache_k.to(xq)</span><br><span class=line>        self.cache_v = self.cache_v.to(xq)</span><br><span class=line></span><br><span class=line>        self.cache_k[:bsz, start_pos: start_pos + seqlen] = xk</span><br><span class=line>        self.cache_v[:bsz, start_pos: start_pos + seqlen] = xv</span><br><span class=line></span><br><span class=line>        keys = self.cache_k[:bsz, : start_pos + seqlen]</span><br><span class=line>        values = self.cache_v[:bsz, : start_pos + seqlen]</span><br><span class=line></span><br><span class=line>        <span class=comment># repeat k/v heads if n_kv_heads < n_heads</span></span><br><span class=line>        keys = repeat_kv(</span><br><span class=line>            keys, self.n_rep</span><br><span class=line>        )  <span class=comment># (bs, cache_len + seqlen, n_local_heads, head_dim)</span></span><br><span class=line>        values = repeat_kv(</span><br><span class=line>            values, self.n_rep</span><br><span class=line>        )  <span class=comment># (bs, cache_len + seqlen, n_local_heads, head_dim)</span></span><br><span class=line></span><br><span class=line>        xq = xq.transpose(<span class=number>1</span>, <span class=number>2</span>)  <span class=comment># (bs, n_local_heads, seqlen, head_dim)</span></span><br><span class=line>        keys = keys.transpose(<span class=number>1</span>, <span class=number>2</span>)  <span class=comment># (bs, n_local_heads, cache_len + seqlen, head_dim)</span></span><br><span class=line>        values = values.transpose(</span><br><span class=line>            <span class=number>1</span>, <span class=number>2</span></span><br><span class=line>        )  <span class=comment># (bs, n_local_heads, cache_len + seqlen, head_dim)</span></span><br><span class=line>        scores = torch.matmul(xq, keys.transpose(<span class=number>2</span>, <span class=number>3</span>)) / math.sqrt(self.head_dim)</span><br><span class=line>        <span class=keyword>if</span> mask <span class=keyword>is</span> <span class=keyword>not</span> <span class=literal>None</span>:</span><br><span class=line>            scores = scores + mask  <span class=comment># (bs, n_local_heads, seqlen, cache_len + seqlen)</span></span><br><span class=line>        scores = F.softmax(scores.<span class=built_in>float</span>(), dim=-<span class=number>1</span>).type_as(xq)</span><br><span class=line>        output = torch.matmul(scores, values)  <span class=comment># (bs, n_local_heads, seqlen, head_dim)</span></span><br><span class=line>        output = output.transpose(<span class=number>1</span>, <span class=number>2</span>).contiguous().view(bsz, seqlen, -<span class=number>1</span>)</span><br><span class=line>        <span class=keyword>return</span> self.wo(output)</span><br></pre></table></figure><h2 id=Transformer><a class=headerlink href=#Transformer title=Transformer></a>Transformer</h2><figure class="highlight python"><table><tr><td class=gutter><pre><span class=line>1</span><br><span class=line>2</span><br><span class=line>3</span><br><span class=line>4</span><br><span class=line>5</span><br><span class=line>6</span><br><span class=line>7</span><br><span class=line>8</span><br><span class=line>9</span><br><span class=line>10</span><br><span class=line>11</span><br><span class=line>12</span><br><span class=line>13</span><br><span class=line>14</span><br><span class=line>15</span><br><span class=line>16</span><br><span class=line>17</span><br><span class=line>18</span><br><span class=line>19</span><br><span class=line>20</span><br><span class=line>21</span><br><span class=line>22</span><br><span class=line>23</span><br><span class=line>24</span><br><span class=line>25</span><br><span class=line>26</span><br><span class=line>27</span><br><span class=line>28</span><br><span class=line>29</span><br><span class=line>30</span><br><span class=line>31</span><br><span class=line>32</span><br><span class=line>33</span><br><span class=line>34</span><br><span class=line>35</span><br><span class=line>36</span><br><span class=line>37</span><br><span class=line>38</span><br><span class=line>39</span><br><span class=line>40</span><br><span class=line>41</span><br><span class=line>42</span><br><span class=line>43</span><br><span class=line>44</span><br><span class=line>45</span><br><span class=line>46</span><br><span class=line>47</span><br><span class=line>48</span><br><span class=line>49</span><br><span class=line>50</span><br><span class=line>51</span><br><span class=line>52</span><br><span class=line>53</span><br><span class=line>54</span><br><span class=line>55</span><br><span class=line>56</span><br><span class=line>57</span><br><span class=line>58</span><br><span class=line>59</span><br><span class=line>60</span><br><span class=line>61</span><br><span class=line>62</span><br><span class=line>63</span><br><span class=line>64</span><br><span class=line>65</span><br><span class=line>66</span><br><span class=line>67</span><br><span class=line>68</span><br><span class=line>69</span><br><span class=line>70</span><br><span class=line>71</span><br><span class=line>72</span><br><span class=line>73</span><br><span class=line>74</span><br><span class=line>75</span><br><span class=line>76</span><br><span class=line>77</span><br><span class=line>78</span><br><span class=line>79</span><br><span class=line>80</span><br><span class=line>81</span><br><span class=line>82</span><br></pre><td class=code><pre><span class=line><span class=class><span class=keyword>class</span> <span class=title>Transformer</span>(<span class=params>nn.Module</span>):</span></span><br><span class=line>    <span class=function><span class=keyword>def</span> <span class=title>__init__</span>(<span class=params>self, params: ModelArgs</span>):</span></span><br><span class=line>        <span class=built_in>super</span>().__init__()</span><br><span class=line>        self.params = params</span><br><span class=line>        self.vocab_size = params.vocab_size</span><br><span class=line>        self.n_layers = params.n_layers</span><br><span class=line></span><br><span class=line>        self.tok_embeddings = VocabParallelEmbedding(</span><br><span class=line>            params.vocab_size, params.dim, init_method=<span class=keyword>lambda</span> x: x</span><br><span class=line>        )</span><br><span class=line></span><br><span class=line>        self.layers = torch.nn.ModuleList()</span><br><span class=line>        <span class=keyword>for</span> layer_id <span class=keyword>in</span> <span class=built_in>range</span>(params.n_layers):</span><br><span class=line>            self.layers.append(TransformerBlock(layer_id, params))</span><br><span class=line></span><br><span class=line>        self.norm = RMSNorm(params.dim, eps=params.norm_eps)</span><br><span class=line>        self.output = ColumnParallelLinear(</span><br><span class=line>            params.dim, params.vocab_size, bias=<span class=literal>False</span>, init_method=<span class=keyword>lambda</span> x: x</span><br><span class=line>        )</span><br><span class=line></span><br><span class=line>        self.freqs_cis = precompute_freqs_cis(</span><br><span class=line>            params.dim // params.n_heads,</span><br><span class=line>            params.max_seq_len * <span class=number>2</span>,</span><br><span class=line>            params.rope_theta,</span><br><span class=line>        )</span><br><span class=line><span class=meta>    @torch.inference_mode()</span></span><br><span class=line>    <span class=function><span class=keyword>def</span> <span class=title>forward</span>(<span class=params>self, tokens: torch.Tensor, start_pos: <span class=built_in>int</span></span>):</span></span><br><span class=line>        _bsz, seqlen = tokens.shape</span><br><span class=line>        h = self.tok_embeddings(tokens)</span><br><span class=line>        self.freqs_cis = self.freqs_cis.to(h.device)</span><br><span class=line>        freqs_cis = self.freqs_cis[start_pos: start_pos + seqlen]</span><br><span class=line></span><br><span class=line>        mask = <span class=literal>None</span></span><br><span class=line>        <span class=keyword>if</span> seqlen > <span class=number>1</span>:</span><br><span class=line>            mask = torch.full((seqlen, seqlen), <span class=built_in>float</span>(<span class=string>"-inf"</span>), device=tokens.device)</span><br><span class=line></span><br><span class=line>            mask = torch.triu(mask, diagonal=<span class=number>1</span>)</span><br><span class=line></span><br><span class=line>            <span class=comment># When performing key-value caching, we compute the attention scores</span></span><br><span class=line>            <span class=comment># only for the new sequence. Thus, the matrix of scores is of size</span></span><br><span class=line>            <span class=comment># (seqlen, cache_len + seqlen), and the only masked entries are (i, j) for</span></span><br><span class=line>            <span class=comment># j > cache_len + i, since row i corresponds to token cache_len + i.</span></span><br><span class=line>            mask = torch.hstack(</span><br><span class=line>                [torch.zeros((seqlen, start_pos), device=tokens.device), mask]</span><br><span class=line>            ).type_as(h)</span><br><span class=line></span><br><span class=line>        <span class=keyword>for</span> layer <span class=keyword>in</span> self.layers:</span><br><span class=line>            h = layer(h, start_pos, freqs_cis, mask)</span><br><span class=line>        h = self.norm(h)</span><br><span class=line>        output = self.output(h).<span class=built_in>float</span>()</span><br><span class=line>        <span class=keyword>return</span> output</span><br><span class=line></span><br><span class=line></span><br><span class=line><span class=class><span class=keyword>class</span> <span class=title>TransformerBlock</span>(<span class=params>nn.Module</span>):</span></span><br><span class=line>    <span class=function><span class=keyword>def</span> <span class=title>__init__</span>(<span class=params>self, layer_id: <span class=built_in>int</span>, args: ModelArgs</span>):</span></span><br><span class=line>        <span class=built_in>super</span>().__init__()</span><br><span class=line>        self.n_heads = args.n_heads</span><br><span class=line>        self.dim = args.dim</span><br><span class=line>        self.head_dim = args.dim // args.n_heads</span><br><span class=line>        self.attention = Attention(args)</span><br><span class=line>        self.feed_forward = FeedForward(</span><br><span class=line>            dim=args.dim,</span><br><span class=line>            hidden_dim=<span class=number>4</span> * args.dim,</span><br><span class=line>            multiple_of=args.multiple_of,</span><br><span class=line>            ffn_dim_multiplier=args.ffn_dim_multiplier,</span><br><span class=line>        )</span><br><span class=line>        self.layer_id = layer_id</span><br><span class=line>        self.attention_norm = RMSNorm(args.dim, eps=args.norm_eps)</span><br><span class=line>        self.ffn_norm = RMSNorm(args.dim, eps=args.norm_eps)</span><br><span class=line>   	</span><br><span class=line>    <span class=function><span class=keyword>def</span> <span class=title>forward</span>(<span class=params></span></span></span><br><span class=line><span class=params><span class=function>            self,</span></span></span><br><span class=line><span class=params><span class=function>            x: torch.Tensor,</span></span></span><br><span class=line><span class=params><span class=function>            start_pos: <span class=built_in>int</span>,</span></span></span><br><span class=line><span class=params><span class=function>            freqs_cis: torch.Tensor,</span></span></span><br><span class=line><span class=params><span class=function>            mask: <span class=type>Optional</span>[torch.Tensor],</span></span></span><br><span class=line><span class=params><span class=function>    </span>):</span></span><br><span class=line>        h = x + self.attention(self.attention_norm(x), start_pos, freqs_cis, mask)</span><br><span class=line>        out = h + self.feed_forward(self.ffn_norm(h))</span><br><span class=line>        <span class=keyword>return</span> out</span><br><span class=line></span><br><span class=line></span><br></pre></table></figure><h3 id=silu激活函数><a class=headerlink href=#silu激活函数 title=silu激活函数></a>silu激活函数</h3><figure class="highlight python"><table><tr><td class=gutter><pre><span class=line>1</span><br><span class=line>2</span><br><span class=line>3</span><br><span class=line>4</span><br><span class=line>5</span><br><span class=line>6</span><br><span class=line>7</span><br><span class=line>8</span><br><span class=line>9</span><br><span class=line>10</span><br><span class=line>11</span><br><span class=line>12</span><br><span class=line>13</span><br><span class=line>14</span><br><span class=line>15</span><br><span class=line>16</span><br><span class=line>17</span><br><span class=line>18</span><br><span class=line>19</span><br><span class=line>20</span><br><span class=line>21</span><br><span class=line>22</span><br><span class=line>23</span><br><span class=line>24</span><br><span class=line>25</span><br><span class=line>26</span><br><span class=line>27</span><br></pre><td class=code><pre><span class=line><span class=class><span class=keyword>class</span> <span class=title>FeedForward</span>(<span class=params>nn.Module</span>):</span></span><br><span class=line>    <span class=function><span class=keyword>def</span> <span class=title>__init__</span>(<span class=params></span></span></span><br><span class=line><span class=params><span class=function>            self,</span></span></span><br><span class=line><span class=params><span class=function>            dim: <span class=built_in>int</span>,</span></span></span><br><span class=line><span class=params><span class=function>            hidden_dim: <span class=built_in>int</span>,</span></span></span><br><span class=line><span class=params><span class=function>            multiple_of: <span class=built_in>int</span>,</span></span></span><br><span class=line><span class=params><span class=function>            ffn_dim_multiplier: <span class=type>Optional</span>[<span class=built_in>float</span>],</span></span></span><br><span class=line><span class=params><span class=function>    </span>):</span></span><br><span class=line>        <span class=built_in>super</span>().__init__()</span><br><span class=line>        hidden_dim = <span class=built_in>int</span>(<span class=number>2</span> * hidden_dim / <span class=number>3</span>)</span><br><span class=line>        <span class=comment># custom dim factor multiplier</span></span><br><span class=line>        <span class=keyword>if</span> ffn_dim_multiplier <span class=keyword>is</span> <span class=keyword>not</span> <span class=literal>None</span>:</span><br><span class=line>            hidden_dim = <span class=built_in>int</span>(ffn_dim_multiplier * hidden_dim)</span><br><span class=line>        hidden_dim = multiple_of * ((hidden_dim + multiple_of - <span class=number>1</span>) // multiple_of)</span><br><span class=line></span><br><span class=line>        self.w1 = ColumnParallelLinear(</span><br><span class=line>            dim, hidden_dim, bias=<span class=literal>False</span>, gather_output=<span class=literal>False</span>, init_method=<span class=keyword>lambda</span> x: x</span><br><span class=line>        )</span><br><span class=line>        self.w2 = RowParallelLinear(</span><br><span class=line>            hidden_dim, dim, bias=<span class=literal>False</span>, input_is_parallel=<span class=literal>True</span>, init_method=<span class=keyword>lambda</span> x: x</span><br><span class=line>        )</span><br><span class=line>        self.w3 = ColumnParallelLinear(</span><br><span class=line>            dim, hidden_dim, bias=<span class=literal>False</span>, gather_output=<span class=literal>False</span>, init_method=<span class=keyword>lambda</span> x: x</span><br><span class=line>        )</span><br><span class=line></span><br><span class=line>    <span class=function><span class=keyword>def</span> <span class=title>forward</span>(<span class=params>self, x</span>):</span></span><br><span class=line>        <span class=keyword>return</span> self.w2(F.silu(self.w1(x)) * self.w3(x)) <span class=comment>#注意这里与一般的ffn差别,F.silu(self.w1(x))起了类似gate的作用</span></span><br></pre></table></figure><p><img alt=../_images/SiLU.png data-src=https://pytorch.org/docs/stable/_images/SiLU.png style=zoom:67%;></p><script type="math/tex; mode=display">
-silu(x)=x*σ(x)</script><h3 id=参考资料><a class=headerlink href=#参考资料 title=参考资料></a>参考资料</h3><ol><li><a href=https://github.com/naklecha/llama3-from-scratch rel=noopener target=_blank>naklecha/llama3-from-scratch: llama3 implementation one matrix multiplication at a time (github.com)</a><li><a href=https://github.com/meta-llama/llama3 rel=noopener target=_blank>github.com</a><li><a href=https://github.com/aju22/RoPE-PyTorch/blob/main/RoPE.ipynb rel=noopener target=_blank>RoPE-PyTorch/RoPE.ipynb at main · aju22/RoPE-PyTorch (github.com)</a><li><a href=https://nn.labml.ai/transformers/rope/index.html rel=noopener target=_blank>Rotary Positional Embeddings (RoPE) (labml.ai)</a><li><a href=https://mett29.github.io/posts/kv-cache/ rel=noopener target=_blank>What is the KV cache? | Matt Log (mett29.github.io)</a></ol><link href=/css/spoiler.css rel=stylesheet><script async src=/js/spoiler.js></script></div><div><div><div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div></div></div><div class=popular-posts-header>相关文章</div><ul class=popular-posts><li class=popular-posts-item><div class=popular-posts-title><a href=\2023\09\28\大模型微调\ rel=bookmark>大模型微调</a></div></ul><div class=reward-container><div>感谢阅读.</div><button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">打赏</button><div style="display: none;" id=qr><div style="display: inline-block;"><img alt="Sekyoro 微信支付" src=/images/wechatpay.png><p>微信支付</div></div></div><div><ul class=post-copyright><li class=post-copyright-author><strong>本文作者： </strong>Sekyoro<li class=post-copyright-link><strong>本文链接：</strong> <a href=https://www.sekyoro.top/2024/07/08/%E5%AD%A6%E4%B9%A0llama3/ title=学习llama3>https://www.sekyoro.top/2024/07/08/学习llama3/</a><li class=post-copyright-license><strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href=https://creativecommons.org/licenses/by-nc-sa/4.0/ rel=noopener target=_blank><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</ul></div><div class=followme><p>欢迎关注我的其它发布渠道<div class=social-list><div class=social-item><a class=social-link href=/images/wxqrcode.png target=_blank> <span class=icon> <i class="fab fa-weixin"></i> </span> <span class=label>WeChat</span> </a></div><div class=social-item><a class=social-link href=/images/website.png target=_blank> <span class=icon> <i class="fa fa-user"></i> </span> <span class=label>PersonalWebsite</span> </a></div><div class=social-item><a class=social-link href=https://my-astro-git-main-drowning-in-codes.vercel.app target=_blank> <span class=icon> <i class="fas fa-share"></i> </span> <span class=label>杂鱼分享</span> </a></div><div class=social-item><a class=social-link href=/atom.xml target=_blank> <span class=icon> <i class="fa fa-rss"></i> </span> <span class=label>RSS</span> </a></div></div></div><footer class=post-footer><div class=post-tags><a href=/tags/llm/ rel=tag><i class="fa fa-tag"></i> llm</a></div><div class=post-nav><div class=post-nav-item><a title="from grad to tensor" href=/2024/07/08/from-grad-to-tensor/ rel=prev> <i class="fa fa-chevron-left"></i> from grad to tensor </a></div><div class=post-nav-item><a title="BTMC:重返Modern Cpp" href=/2024/07/21/BTMC-%E9%87%8D%E8%BF%94Modern-Cpp/ rel=next> BTMC:重返Modern Cpp <i class="fa fa-chevron-right"></i> </a></div></div></footer></article></div><!-- 评论区 --><div class=comments><div data-id=city data-uid=MTAyMC81MzE5Ny8yOTY3Mg== id=lv-container></div></div><script>window.addEventListener('tabs:register', () => {
+\end{aligned}</script><p>在llama3中代码如下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">precompute_freqs_cis</span>(<span class="params">dim: <span class="built_in">int</span>, end: <span class="built_in">int</span>, theta: <span class="built_in">float</span> = <span class="number">10000.0</span></span>):</span><br><span class="line">    freqs = <span class="number">1.0</span> / (theta ** (torch.arange(<span class="number">0</span>, dim, <span class="number">2</span>)[: (dim // <span class="number">2</span>)].<span class="built_in">float</span>() / dim)) <span class="comment"># 一个位置上的特征</span></span><br><span class="line">    t = torch.arange(end, device=freqs.device, dtype=torch.float32)</span><br><span class="line">    freqs = torch.outer(t, freqs)</span><br><span class="line">    freqs_cis = torch.polar(torch.ones_like(freqs), freqs)  <span class="comment"># complex64 # 得到e^freqs^ shape [T,dim//2]</span></span><br><span class="line">    <span class="keyword">return</span> freqs_cis</span><br><span class="line"></span><br><span class="line"><span class="variable language_">self</span>.freqs_cis = precompute_freqs_cis(</span><br><span class="line">    params.dim // params.n_heads,</span><br><span class="line">    params.max_seq_len * <span class="number">2</span>,</span><br><span class="line">    params.rope_theta,</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">reshape_for_broadcast</span>(<span class="params">freqs_cis: torch.Tensor, x: torch.Tensor</span>):</span><br><span class="line">    ndim = x.ndim</span><br><span class="line">    <span class="keyword">assert</span> <span class="number">0</span> &lt;= <span class="number">1</span> &lt; ndim</span><br><span class="line">    <span class="keyword">assert</span> freqs_cis.shape == (x.shape[<span class="number">1</span>], x.shape[-<span class="number">1</span>])</span><br><span class="line">    shape = [d <span class="keyword">if</span> i == <span class="number">1</span> <span class="keyword">or</span> i == ndim - <span class="number">1</span> <span class="keyword">else</span> <span class="number">1</span> <span class="keyword">for</span> i, d <span class="keyword">in</span> <span class="built_in">enumerate</span>(x.shape)]</span><br><span class="line">    <span class="keyword">return</span> freqs_cis.view(*shape)</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">apply_rotary_emb</span>(<span class="params"></span></span><br><span class="line"><span class="params">        xq: torch.Tensor,</span></span><br><span class="line"><span class="params">        xk: torch.Tensor,</span></span><br><span class="line"><span class="params">        freqs_cis: torch.Tensor,</span></span><br><span class="line"><span class="params"></span>) -&gt; <span class="type">Tuple</span>[torch.Tensor, torch.Tensor]:</span><br><span class="line">    xq_ = torch.view_as_complex(xq.<span class="built_in">float</span>().reshape(*xq.shape[:-<span class="number">1</span>], -<span class="number">1</span>, <span class="number">2</span>)) <span class="comment">#shape [bs,seq_len,dim//2,2] -&gt; [bs,seq_len,dim]</span></span><br><span class="line">    xk_ = torch.view_as_complex(xk.<span class="built_in">float</span>().reshape(*xk.shape[:-<span class="number">1</span>], -<span class="number">1</span>, <span class="number">2</span>))<span class="comment">#shape [bs,seq_len,dim//2,2] -&gt; [bs,seq_len,dim]</span></span><br><span class="line">    freqs_cis = reshape_for_broadcast(freqs_cis, xq_) <span class="comment"># [1,seq_len,dim]</span></span><br><span class="line">    xq_out = torch.view_as_real(xq_ * freqs_cis).flatten(<span class="number">3</span>)<span class="comment">#[bs,seq_len,dim//2,2] type float32 -&gt; </span></span><br><span class="line">    xk_out = torch.view_as_real(xk_ * freqs_cis).flatten(<span class="number">3</span>)</span><br><span class="line">    <span class="keyword">return</span> xq_out.type_as(xq), xk_out.type_as(xk)</span><br><span class="line"></span><br><span class="line">xq, xk = apply_rotary_emb(xq, xk, freqs_cis=freqs_cis)</span><br></pre></td></tr></table></figure>
+<p>计算freqs_cis,其是一个复数,旋转编码通常应用在q和k上.</p>
+<script type="math/tex; mode=display">
+\mathrm{RoPE}(x_m^{(1)},x_m^{(2)},m)=\begin{bmatrix}\cos(m\theta)&-\sin(m\theta)\\\sin(m\theta)&\cos(m\theta)\end{bmatrix}\begin{bmatrix}x_m^{(1)}\\x_m^{(2)}\end{bmatrix}=\begin{bmatrix}x_m^{(1)}\cos(m\theta)-x_m^{(2)}\sin(m\theta)\\x_m^{(2)}\cos(m\theta)+x_m^{(1)}\sin(m\theta)\end{bmatrix}\\\Theta=\theta_i=10,000^{-\frac{2(i-1)}d},where(i\in[1,2,\ldots,d])\text{ for the $\frac{d}{2}$ pairs of features.}</script><p>下面是另一种实现</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> torch.nn <span class="keyword">as</span> nn</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">RotaryPositionalEmbeddings</span>(nn.Module):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, d: <span class="built_in">int</span>, base: <span class="built_in">int</span> = <span class="number">10_000</span></span>):</span><br><span class="line">        <span class="built_in">super</span>().__init__()</span><br><span class="line">        <span class="variable language_">self</span>.base = base</span><br><span class="line">        <span class="variable language_">self</span>.d = d</span><br><span class="line">        <span class="variable language_">self</span>.cos_cached = <span class="literal">None</span></span><br><span class="line">        <span class="variable language_">self</span>.sin_cached = <span class="literal">None</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">_build_cache</span>(<span class="params">self, x: torch.Tensor</span>):</span><br><span class="line">        <span class="keyword">if</span> <span class="variable language_">self</span>.cos_cached <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span> <span class="keyword">and</span> x.shape[<span class="number">0</span>] &lt;= <span class="variable language_">self</span>.cos_cached.shape[<span class="number">0</span>]:</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        seq_len = x.shape[<span class="number">0</span>]</span><br><span class="line">        <span class="comment"># THETA = 10,000^(-2*i/d) or 1/10,000^(2i/d)</span></span><br><span class="line">        theta = <span class="number">1.</span> / (<span class="variable language_">self</span>.base ** (torch.arange(<span class="number">0</span>, <span class="variable language_">self</span>.d, <span class="number">2</span>).<span class="built_in">float</span>() / <span class="variable language_">self</span>.d)).to(x.device)</span><br><span class="line">        <span class="comment"># Position index [0,1,...]</span></span><br><span class="line">        seq_idx = torch.arange(seq_len, device=x.device).<span class="built_in">float</span>().to(x.device)</span><br><span class="line"></span><br><span class="line">        idx_theta = torch.einsum(<span class="string">&#x27;n,d-&gt;nd&#x27;</span>, seq_idx,</span><br><span class="line">                                 theta)  <span class="comment"># Calculates m*(THETA) = [ [0, 0...], [THETA_1, THETA_2...THETA_d/2], ... [seq-1*(THETA_1), seq-1*(THETA_2)...] ]</span></span><br><span class="line"></span><br><span class="line">        idx_theta2 = torch.cat([idx_theta, idx_theta],</span><br><span class="line">                               dim=<span class="number">1</span>)  <span class="comment"># [THETA_1, THETA_2...THETA_d/2] -&gt; [THETA_1, THETA_2...THETA_d]</span></span><br><span class="line">        <span class="variable language_">self</span>.cos_cached = idx_theta2.cos()[:, <span class="literal">None</span>, <span class="literal">None</span>, :]  <span class="comment"># Cache [cosTHETA_1, cosTHETA_2...cosTHETA_d]</span></span><br><span class="line">        <span class="variable language_">self</span>.sin_cached = idx_theta2.sin()[:, <span class="literal">None</span>, <span class="literal">None</span>, :]  <span class="comment"># cache [sinTHETA_1, sinTHETA_2...sinTHETA_d]</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">_neg_half</span>(<span class="params">self, x: torch.Tensor</span>):</span><br><span class="line">        d_2 = <span class="variable language_">self</span>.d // <span class="number">2</span></span><br><span class="line">        <span class="keyword">return</span> torch.cat([-x[:, :, :, d_2:], x[:, :, :, :d_2]], dim=-<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, x: torch.Tensor</span>):</span><br><span class="line">        <span class="variable language_">self</span>._build_cache(x)</span><br><span class="line">        neg_half_x = <span class="variable language_">self</span>._neg_half(x)</span><br><span class="line">        x_rope = (x * <span class="variable language_">self</span>.cos_cached[:x.shape[<span class="number">0</span>]]) + (neg_half_x * <span class="variable language_">self</span>.sin_cached[:x.shape[<span class="number">0</span>]])</span><br><span class="line">        <span class="keyword">return</span> x_rope</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    x = torch.tensor([[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>], [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>], [<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>]], dtype=torch.<span class="built_in">float</span>)</span><br><span class="line">    x = x[:, <span class="literal">None</span>, <span class="literal">None</span>, :]</span><br><span class="line"></span><br><span class="line">    p = RotaryPositionalEmbeddings(<span class="number">4</span>)(x)</span><br><span class="line">    <span class="built_in">print</span>(p)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<script type="math/tex; mode=display">
+\begin{bmatrix}x_m^{(i)}\\x_m^{(i+d/2)}\end{bmatrix}=\begin{bmatrix}x_m^{(i)}\cos(m\theta_i)-x_m^{(i+d/2)}\sin(m\theta_i)\\x_m^{(i+d/2)}\cos(m\theta_i)+x_m^{(i)}\sin(m\theta_i)\end{bmatrix}</script><h2 id="RSMNorm"><a href="#RSMNorm" class="headerlink" title="RSMNorm"></a>RSMNorm</h2><p>另一种规范化的方式,方法是在2019年的论文中提出的<a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1910.07467">1910.07467 (arxiv.org)</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">RMSNorm</span>(torch.nn.Module):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, dim: <span class="built_in">int</span>, eps: <span class="built_in">float</span> = <span class="number">1e-6</span></span>):</span><br><span class="line">        <span class="built_in">super</span>().__init__()</span><br><span class="line">        <span class="variable language_">self</span>.eps = eps</span><br><span class="line">        <span class="variable language_">self</span>.weight = nn.Parameter(torch.ones(dim))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">_norm</span>(<span class="params">self, x</span>):</span><br><span class="line">        <span class="keyword">return</span> x * torch.rsqrt(x.<span class="built_in">pow</span>(<span class="number">2</span>).mean(-<span class="number">1</span>, keepdim=<span class="literal">True</span>) + <span class="variable language_">self</span>.eps)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, x</span>):</span><br><span class="line">        output = <span class="variable language_">self</span>._norm(x.<span class="built_in">float</span>()).type_as(x)</span><br><span class="line">        <span class="keyword">return</span> output * <span class="variable language_">self</span>.weight</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<script type="math/tex; mode=display">
+y=\frac{x}{\sqrt{\text{RMS}[x]+\epsilon}}*\gamma</script><p>在llama3中,有三个地方使用,在attention,ffn以及在所有transformer layer之后,</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">h = x + <span class="variable language_">self</span>.attention(<span class="variable language_">self</span>.attention_norm(x), start_pos, freqs_cis, mask)</span><br><span class="line">out = h + <span class="variable language_">self</span>.feed_forward(<span class="variable language_">self</span>.ffn_norm(h))</span><br></pre></td></tr></table></figure>
+<h2 id="GroupQuery-Attention-amp-amp-KVcache"><a href="#GroupQuery-Attention-amp-amp-KVcache" class="headerlink" title="GroupQuery Attention&amp;&amp;KVcache"></a>GroupQuery Attention&amp;&amp;KVcache</h2><p>GroupQuery:query的head数是kv的head数的若干倍.</p>
+<p>KV cache:在生成新的token时,K和V往往改变不大,也就不需要怎么计算,所以只需要存下计算的值即可.这是节约显存的操作.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Attention</span>(nn.Module):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, args: ModelArgs</span>):</span><br><span class="line">        <span class="built_in">super</span>().__init__()</span><br><span class="line">        <span class="variable language_">self</span>.n_kv_heads = args.n_heads <span class="keyword">if</span> args.n_kv_heads <span class="keyword">is</span> <span class="literal">None</span> <span class="keyword">else</span> args.n_kv_heads</span><br><span class="line">        model_parallel_size = fs_init.get_model_parallel_world_size()</span><br><span class="line">        <span class="variable language_">self</span>.n_local_heads = args.n_heads // model_parallel_size</span><br><span class="line">        <span class="variable language_">self</span>.n_local_kv_heads = <span class="variable language_">self</span>.n_kv_heads // model_parallel_size</span><br><span class="line">        <span class="variable language_">self</span>.n_rep = <span class="variable language_">self</span>.n_local_heads // <span class="variable language_">self</span>.n_local_kv_heads</span><br><span class="line">        <span class="variable language_">self</span>.head_dim = args.dim // args.n_heads</span><br><span class="line"></span><br><span class="line">        <span class="variable language_">self</span>.wq = ColumnParallelLinear(</span><br><span class="line">            args.dim,</span><br><span class="line">            args.n_heads * <span class="variable language_">self</span>.head_dim,</span><br><span class="line">            bias=<span class="literal">False</span>,</span><br><span class="line">            gather_output=<span class="literal">False</span>,</span><br><span class="line">            init_method=<span class="keyword">lambda</span> x: x,</span><br><span class="line">        )</span><br><span class="line">        <span class="variable language_">self</span>.wk = ColumnParallelLinear(</span><br><span class="line">            args.dim,</span><br><span class="line">            <span class="variable language_">self</span>.n_kv_heads * <span class="variable language_">self</span>.head_dim,</span><br><span class="line">            bias=<span class="literal">False</span>,</span><br><span class="line">            gather_output=<span class="literal">False</span>,</span><br><span class="line">            init_method=<span class="keyword">lambda</span> x: x,</span><br><span class="line">        )</span><br><span class="line">        <span class="variable language_">self</span>.wv = ColumnParallelLinear(</span><br><span class="line">            args.dim,</span><br><span class="line">            <span class="variable language_">self</span>.n_kv_heads * <span class="variable language_">self</span>.head_dim,</span><br><span class="line">            bias=<span class="literal">False</span>,</span><br><span class="line">            gather_output=<span class="literal">False</span>,</span><br><span class="line">            init_method=<span class="keyword">lambda</span> x: x,</span><br><span class="line">        )</span><br><span class="line">        <span class="variable language_">self</span>.wo = RowParallelLinear(</span><br><span class="line">            args.n_heads * <span class="variable language_">self</span>.head_dim,</span><br><span class="line">            args.dim,</span><br><span class="line">            bias=<span class="literal">False</span>,</span><br><span class="line">            input_is_parallel=<span class="literal">True</span>,</span><br><span class="line">            init_method=<span class="keyword">lambda</span> x: x,</span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">        <span class="variable language_">self</span>.cache_k = torch.zeros(</span><br><span class="line">            (</span><br><span class="line">                args.max_batch_size,</span><br><span class="line">                args.max_seq_len,</span><br><span class="line">                <span class="variable language_">self</span>.n_local_kv_heads,</span><br><span class="line">                <span class="variable language_">self</span>.head_dim,</span><br><span class="line">            )</span><br><span class="line">        ).cuda()</span><br><span class="line">        <span class="variable language_">self</span>.cache_v = torch.zeros(</span><br><span class="line">            (</span><br><span class="line">                args.max_batch_size,</span><br><span class="line">                args.max_seq_len,</span><br><span class="line">                <span class="variable language_">self</span>.n_local_kv_heads,</span><br><span class="line">                <span class="variable language_">self</span>.head_dim,</span><br><span class="line">            )</span><br><span class="line">        ).cuda()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params"></span></span><br><span class="line"><span class="params">            self,</span></span><br><span class="line"><span class="params">            x: torch.Tensor,</span></span><br><span class="line"><span class="params">            start_pos: <span class="built_in">int</span>,</span></span><br><span class="line"><span class="params">            freqs_cis: torch.Tensor,</span></span><br><span class="line"><span class="params">            mask: <span class="type">Optional</span>[torch.Tensor],</span></span><br><span class="line"><span class="params">    </span>):</span><br><span class="line">        bsz, seqlen, _ = x.shape</span><br><span class="line">        xq, xk, xv = <span class="variable language_">self</span>.wq(x), <span class="variable language_">self</span>.wk(x), <span class="variable language_">self</span>.wv(x)</span><br><span class="line"></span><br><span class="line">        xq = xq.view(bsz, seqlen, <span class="variable language_">self</span>.n_local_heads, <span class="variable language_">self</span>.head_dim)</span><br><span class="line">        xk = xk.view(bsz, seqlen, <span class="variable language_">self</span>.n_local_kv_heads, <span class="variable language_">self</span>.head_dim)</span><br><span class="line">        xv = xv.view(bsz, seqlen, <span class="variable language_">self</span>.n_local_kv_heads, <span class="variable language_">self</span>.head_dim)</span><br><span class="line"></span><br><span class="line">        xq, xk = apply_rotary_emb(xq, xk, freqs_cis=freqs_cis)</span><br><span class="line"></span><br><span class="line">        <span class="variable language_">self</span>.cache_k = <span class="variable language_">self</span>.cache_k.to(xq)</span><br><span class="line">        <span class="variable language_">self</span>.cache_v = <span class="variable language_">self</span>.cache_v.to(xq)</span><br><span class="line"></span><br><span class="line">        <span class="variable language_">self</span>.cache_k[:bsz, start_pos: start_pos + seqlen] = xk</span><br><span class="line">        <span class="variable language_">self</span>.cache_v[:bsz, start_pos: start_pos + seqlen] = xv</span><br><span class="line"></span><br><span class="line">        keys = <span class="variable language_">self</span>.cache_k[:bsz, : start_pos + seqlen]</span><br><span class="line">        values = <span class="variable language_">self</span>.cache_v[:bsz, : start_pos + seqlen]</span><br><span class="line"></span><br><span class="line">        <span class="comment"># repeat k/v heads if n_kv_heads &lt; n_heads</span></span><br><span class="line">        keys = repeat_kv(</span><br><span class="line">            keys, <span class="variable language_">self</span>.n_rep</span><br><span class="line">        )  <span class="comment"># (bs, cache_len + seqlen, n_local_heads, head_dim)</span></span><br><span class="line">        values = repeat_kv(</span><br><span class="line">            values, <span class="variable language_">self</span>.n_rep</span><br><span class="line">        )  <span class="comment"># (bs, cache_len + seqlen, n_local_heads, head_dim)</span></span><br><span class="line"></span><br><span class="line">        xq = xq.transpose(<span class="number">1</span>, <span class="number">2</span>)  <span class="comment"># (bs, n_local_heads, seqlen, head_dim)</span></span><br><span class="line">        keys = keys.transpose(<span class="number">1</span>, <span class="number">2</span>)  <span class="comment"># (bs, n_local_heads, cache_len + seqlen, head_dim)</span></span><br><span class="line">        values = values.transpose(</span><br><span class="line">            <span class="number">1</span>, <span class="number">2</span></span><br><span class="line">        )  <span class="comment"># (bs, n_local_heads, cache_len + seqlen, head_dim)</span></span><br><span class="line">        scores = torch.matmul(xq, keys.transpose(<span class="number">2</span>, <span class="number">3</span>)) / math.sqrt(<span class="variable language_">self</span>.head_dim)</span><br><span class="line">        <span class="keyword">if</span> mask <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">            scores = scores + mask  <span class="comment"># (bs, n_local_heads, seqlen, cache_len + seqlen)</span></span><br><span class="line">        scores = F.softmax(scores.<span class="built_in">float</span>(), dim=-<span class="number">1</span>).type_as(xq)</span><br><span class="line">        output = torch.matmul(scores, values)  <span class="comment"># (bs, n_local_heads, seqlen, head_dim)</span></span><br><span class="line">        output = output.transpose(<span class="number">1</span>, <span class="number">2</span>).contiguous().view(bsz, seqlen, -<span class="number">1</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">self</span>.wo(output)</span><br></pre></td></tr></table></figure>
+<h2 id="Transformer"><a href="#Transformer" class="headerlink" title="Transformer"></a>Transformer</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Transformer</span>(nn.Module):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, params: ModelArgs</span>):</span><br><span class="line">        <span class="built_in">super</span>().__init__()</span><br><span class="line">        <span class="variable language_">self</span>.params = params</span><br><span class="line">        <span class="variable language_">self</span>.vocab_size = params.vocab_size</span><br><span class="line">        <span class="variable language_">self</span>.n_layers = params.n_layers</span><br><span class="line"></span><br><span class="line">        <span class="variable language_">self</span>.tok_embeddings = VocabParallelEmbedding(</span><br><span class="line">            params.vocab_size, params.dim, init_method=<span class="keyword">lambda</span> x: x</span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">        <span class="variable language_">self</span>.layers = torch.nn.ModuleList()</span><br><span class="line">        <span class="keyword">for</span> layer_id <span class="keyword">in</span> <span class="built_in">range</span>(params.n_layers):</span><br><span class="line">            <span class="variable language_">self</span>.layers.append(TransformerBlock(layer_id, params))</span><br><span class="line"></span><br><span class="line">        <span class="variable language_">self</span>.norm = RMSNorm(params.dim, eps=params.norm_eps)</span><br><span class="line">        <span class="variable language_">self</span>.output = ColumnParallelLinear(</span><br><span class="line">            params.dim, params.vocab_size, bias=<span class="literal">False</span>, init_method=<span class="keyword">lambda</span> x: x</span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">        <span class="variable language_">self</span>.freqs_cis = precompute_freqs_cis(</span><br><span class="line">            params.dim // params.n_heads,</span><br><span class="line">            params.max_seq_len * <span class="number">2</span>,</span><br><span class="line">            params.rope_theta,</span><br><span class="line">        )</span><br><span class="line"><span class="meta">    @torch.inference_mode()</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, tokens: torch.Tensor, start_pos: <span class="built_in">int</span></span>):</span><br><span class="line">        _bsz, seqlen = tokens.shape</span><br><span class="line">        h = <span class="variable language_">self</span>.tok_embeddings(tokens)</span><br><span class="line">        <span class="variable language_">self</span>.freqs_cis = <span class="variable language_">self</span>.freqs_cis.to(h.device)</span><br><span class="line">        freqs_cis = <span class="variable language_">self</span>.freqs_cis[start_pos: start_pos + seqlen]</span><br><span class="line"></span><br><span class="line">        mask = <span class="literal">None</span></span><br><span class="line">        <span class="keyword">if</span> seqlen &gt; <span class="number">1</span>:</span><br><span class="line">            mask = torch.full((seqlen, seqlen), <span class="built_in">float</span>(<span class="string">&quot;-inf&quot;</span>), device=tokens.device)</span><br><span class="line"></span><br><span class="line">            mask = torch.triu(mask, diagonal=<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">            <span class="comment"># When performing key-value caching, we compute the attention scores</span></span><br><span class="line">            <span class="comment"># only for the new sequence. Thus, the matrix of scores is of size</span></span><br><span class="line">            <span class="comment"># (seqlen, cache_len + seqlen), and the only masked entries are (i, j) for</span></span><br><span class="line">            <span class="comment"># j &gt; cache_len + i, since row i corresponds to token cache_len + i.</span></span><br><span class="line">            mask = torch.hstack(</span><br><span class="line">                [torch.zeros((seqlen, start_pos), device=tokens.device), mask]</span><br><span class="line">            ).type_as(h)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> layer <span class="keyword">in</span> <span class="variable language_">self</span>.layers:</span><br><span class="line">            h = layer(h, start_pos, freqs_cis, mask)</span><br><span class="line">        h = <span class="variable language_">self</span>.norm(h)</span><br><span class="line">        output = <span class="variable language_">self</span>.output(h).<span class="built_in">float</span>()</span><br><span class="line">        <span class="keyword">return</span> output</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">TransformerBlock</span>(nn.Module):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, layer_id: <span class="built_in">int</span>, args: ModelArgs</span>):</span><br><span class="line">        <span class="built_in">super</span>().__init__()</span><br><span class="line">        <span class="variable language_">self</span>.n_heads = args.n_heads</span><br><span class="line">        <span class="variable language_">self</span>.dim = args.dim</span><br><span class="line">        <span class="variable language_">self</span>.head_dim = args.dim // args.n_heads</span><br><span class="line">        <span class="variable language_">self</span>.attention = Attention(args)</span><br><span class="line">        <span class="variable language_">self</span>.feed_forward = FeedForward(</span><br><span class="line">            dim=args.dim,</span><br><span class="line">            hidden_dim=<span class="number">4</span> * args.dim,</span><br><span class="line">            multiple_of=args.multiple_of,</span><br><span class="line">            ffn_dim_multiplier=args.ffn_dim_multiplier,</span><br><span class="line">        )</span><br><span class="line">        <span class="variable language_">self</span>.layer_id = layer_id</span><br><span class="line">        <span class="variable language_">self</span>.attention_norm = RMSNorm(args.dim, eps=args.norm_eps)</span><br><span class="line">        <span class="variable language_">self</span>.ffn_norm = RMSNorm(args.dim, eps=args.norm_eps)</span><br><span class="line">   	</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params"></span></span><br><span class="line"><span class="params">            self,</span></span><br><span class="line"><span class="params">            x: torch.Tensor,</span></span><br><span class="line"><span class="params">            start_pos: <span class="built_in">int</span>,</span></span><br><span class="line"><span class="params">            freqs_cis: torch.Tensor,</span></span><br><span class="line"><span class="params">            mask: <span class="type">Optional</span>[torch.Tensor],</span></span><br><span class="line"><span class="params">    </span>):</span><br><span class="line">        h = x + <span class="variable language_">self</span>.attention(<span class="variable language_">self</span>.attention_norm(x), start_pos, freqs_cis, mask)</span><br><span class="line">        out = h + <span class="variable language_">self</span>.feed_forward(<span class="variable language_">self</span>.ffn_norm(h))</span><br><span class="line">        <span class="keyword">return</span> out</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="silu激活函数"><a href="#silu激活函数" class="headerlink" title="silu激活函数"></a>silu激活函数</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">FeedForward</span>(nn.Module):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params"></span></span><br><span class="line"><span class="params">            self,</span></span><br><span class="line"><span class="params">            dim: <span class="built_in">int</span>,</span></span><br><span class="line"><span class="params">            hidden_dim: <span class="built_in">int</span>,</span></span><br><span class="line"><span class="params">            multiple_of: <span class="built_in">int</span>,</span></span><br><span class="line"><span class="params">            ffn_dim_multiplier: <span class="type">Optional</span>[<span class="built_in">float</span>],</span></span><br><span class="line"><span class="params">    </span>):</span><br><span class="line">        <span class="built_in">super</span>().__init__()</span><br><span class="line">        hidden_dim = <span class="built_in">int</span>(<span class="number">2</span> * hidden_dim / <span class="number">3</span>)</span><br><span class="line">        <span class="comment"># custom dim factor multiplier</span></span><br><span class="line">        <span class="keyword">if</span> ffn_dim_multiplier <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">            hidden_dim = <span class="built_in">int</span>(ffn_dim_multiplier * hidden_dim)</span><br><span class="line">        hidden_dim = multiple_of * ((hidden_dim + multiple_of - <span class="number">1</span>) // multiple_of)</span><br><span class="line"></span><br><span class="line">        <span class="variable language_">self</span>.w1 = ColumnParallelLinear(</span><br><span class="line">            dim, hidden_dim, bias=<span class="literal">False</span>, gather_output=<span class="literal">False</span>, init_method=<span class="keyword">lambda</span> x: x</span><br><span class="line">        )</span><br><span class="line">        <span class="variable language_">self</span>.w2 = RowParallelLinear(</span><br><span class="line">            hidden_dim, dim, bias=<span class="literal">False</span>, input_is_parallel=<span class="literal">True</span>, init_method=<span class="keyword">lambda</span> x: x</span><br><span class="line">        )</span><br><span class="line">        <span class="variable language_">self</span>.w3 = ColumnParallelLinear(</span><br><span class="line">            dim, hidden_dim, bias=<span class="literal">False</span>, gather_output=<span class="literal">False</span>, init_method=<span class="keyword">lambda</span> x: x</span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, x</span>):</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">self</span>.w2(F.silu(<span class="variable language_">self</span>.w1(x)) * <span class="variable language_">self</span>.w3(x)) <span class="comment">#注意这里与一般的ffn差别,F.silu(self.w1(x))起了类似gate的作用</span></span><br></pre></td></tr></table></figure>
+<p><img data-src="https://pytorch.org/docs/stable/_images/SiLU.png" alt="../_images/SiLU.png" style="zoom:67%;" /></p>
+<script type="math/tex; mode=display">
+silu(x)=x*σ(x)</script><h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><ol>
+<li><a target="_blank" rel="noopener" href="https://github.com/naklecha/llama3-from-scratch">naklecha/llama3-from-scratch: llama3 implementation one matrix multiplication at a time (github.com)</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/meta-llama/llama3">github.com</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/aju22/RoPE-PyTorch/blob/main/RoPE.ipynb">RoPE-PyTorch/RoPE.ipynb at main · aju22/RoPE-PyTorch (github.com)</a></li>
+<li><a target="_blank" rel="noopener" href="https://nn.labml.ai/transformers/rope/index.html">Rotary Positional Embeddings (RoPE) (labml.ai)</a></li>
+<li><a target="_blank" rel="noopener" href="https://mett29.github.io/posts/kv-cache/">What is the KV cache? | Matt Log (mett29.github.io)</a></li>
+</ol>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
+    </div>
+
+    
+    
+    
+    <div>
+	
+     <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+     
+   </div>
+      
+  <div class="popular-posts-header">相关文章</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2023\09\28\大模型微调\" rel="bookmark">大模型微调</a></div>
+    </li>
+  </ul>
+
+        <div class="reward-container">
+  <div>感谢阅读.</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.png" alt="Sekyoro 微信支付">
+        <p>微信支付</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Sekyoro
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://www.sekyoro.top/2024/07/08/%E5%AD%A6%E4%B9%A0llama3/" title="学习llama3">https://www.sekyoro.top/2024/07/08/学习llama3/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/images/wxqrcode.png">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/images/website.png">
+            <span class="icon">
+              <i class="fa fa-user"></i>
+            </span>
+
+            <span class="label">PersonalWebsite</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="https://my-astro-git-main-drowning-in-codes.vercel.app">
+            <span class="icon">
+              <i class="fas fa-share"></i>
+            </span>
+
+            <span class="label">杂鱼分享</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/llm/" rel="tag"><i class="fa fa-tag"></i> llm</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/07/08/from-grad-to-tensor/" rel="prev" title="from grad to tensor">
+      <i class="fa fa-chevron-left"></i> from grad to tensor
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2024/07/21/BTMC-%E9%87%8D%E8%BF%94Modern-Cpp/" rel="next" title="BTMC:重返Modern Cpp">
+      BTMC:重返Modern Cpp <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+            <!-- 评论区 -->
+            
+          
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81MzE5Ny8yOTY3Mg=="></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
     let { activeClass } = CONFIG.comments;
     if (CONFIG.comments.storage) {
       activeClass = localStorage.getItem('comments_active') || activeClass;
@@ -65,7 +550,27 @@ silu(x)=x*σ(x)</script><h3 id=参考资料><a class=headerlink href=#参考资�
       let commentClass = event.target.classList[1];
       localStorage.setItem('comments_active', commentClass);
     });
-  }</script></div><div class="toggle sidebar-toggle"><span class="toggle-line toggle-line-first"></span><span class="toggle-line toggle-line-middle"></span><span class="toggle-line toggle-line-last"></span></div><aside class=sidebar><div class=sidebar-inner><!-- canvas粒子时钟 --><div><canvas id=canvas style=width:60%;>当前浏览器不支持canvas，请更换浏览器后再试</canvas></div><script>(function(){
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+	
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+      	   
+          <!-- canvas粒子时钟 -->
+          <div style="">
+  <canvas id="canvas" style="width:60%;">当前浏览器不支持canvas，请更换浏览器后再试</canvas>
+</div>
+<script>
+(function(){
 
    var digit=
     [
@@ -323,31 +828,180 @@ if(canvas.getContext){
     },50);
 }
 
-})();</script><!-- require APlayer --><link href=https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css rel=stylesheet><script src=https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js></script><!-- require MetingJS --><script src=/js/meting-js.js></script><ul class="sidebar-nav motion-element"><li class=sidebar-nav-toc>文章目录<li class=sidebar-nav-overview>站点概览</ul><!--noindex--><div class="post-toc-wrap sidebar-panel"><div class="post-toc motion-element"><ol class=nav><li class="nav-item nav-level-2"><a class=nav-link href=#%E6%97%8B%E8%BD%AC%E4%BD%8D%E7%BD%AE%E7%BC%96%E7%A0%81><span class=nav-number>1.</span> <span class=nav-text>旋转位置编码</span></a><li class="nav-item nav-level-2"><a class=nav-link href=#RSMNorm><span class=nav-number>2.</span> <span class=nav-text>RSMNorm</span></a><li class="nav-item nav-level-2"><a class=nav-link href=#GroupQuery-Attention-amp-amp-KVcache><span class=nav-number>3.</span> <span class=nav-text>GroupQuery Attention&&KVcache</span></a><li class="nav-item nav-level-2"><a class=nav-link href=#Transformer><span class=nav-number>4.</span> <span class=nav-text>Transformer</span></a><ol class=nav-child><li class="nav-item nav-level-3"><a class=nav-link href=#silu%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0><span class=nav-number>4.1.</span> <span class=nav-text>silu激活函数</span></a><li class="nav-item nav-level-3"><a class=nav-link href=#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99><span class=nav-number>4.2.</span> <span class=nav-text>参考资料</span></a></ol></ol></div></div><!--/noindex--><div class="site-overview-wrap sidebar-panel"><div class="site-author motion-element" itemprop=author itemscope itemtype=http://schema.org/Person><img alt=Sekyoro class=site-author-image itemprop=image src=https://i.loli.net/2021/05/17/YqoavnXdGTpPO9R.jpg><p class=site-author-name itemprop=name>Sekyoro<div class=site-description itemprop=description>什么也无法舍弃的人，什么也做不了.</div></div><div class="site-state-wrap motion-element"><nav class=site-state><div class="site-state-item site-state-posts"><a href=/archives/> <span class=site-state-item-count>267</span> <span class=site-state-item-name>日志</span> </a></div><div class="site-state-item site-state-categories"><a href=/categories/> <span class=site-state-item-count>16</span> <span class=site-state-item-name>分类</span></a></div><div class="site-state-item site-state-tags"><a href=/tags/> <span class=site-state-item-count>229</span> <span class=site-state-item-name>标签</span></a></div></nav></div><div class="links-of-author motion-element"><span class=links-of-author-item> <a title="Personal Website → http://proanimer.com" href=http://proanimer.com/ rel=noopener target=_blank><i class="fab fa-internet-explorer fa-fw"></i>Personal Website</a> </span><span class=links-of-author-item> <a title="GitHub → https://github.com/drowning-in-codes" href=https://github.com/drowning-in-codes rel=noopener target=_blank><i class="fab fa-github fa-fw"></i>GitHub</a> </span><span class=links-of-author-item> <a title="E-Mail → mailto:bukalala174@gmail.com" href=mailto:bukalala174@gmail.com rel=noopener target=_blank><i class="fa fa-envelope fa-fw"></i>E-Mail</a> </span><span class=links-of-author-item> <a title="wxPublicAccount → https://mp.weixin.qq.com/s?__biz=Mzg3ODY1MDkzMg==&mid=2247483770&idx=1&sn=fdf88faab01d5c219ac609570a21c9d6&chksm=cf113221f866bb373938cfca03cf095ff4fe1e4dc37d68ef5de4cd4876ee1260fca0c015a4d6&token=1096259873&lang=zh_CN#rd" href=https://mp.weixin.qq.com/s?__biz=Mzg3ODY1MDkzMg==&mid=2247483770&idx=1&sn=fdf88faab01d5c219ac609570a21c9d6&chksm=cf113221f866bb373938cfca03cf095ff4fe1e4dc37d68ef5de4cd4876ee1260fca0c015a4d6&token=1096259873&lang=zh_CN#rd rel=noopener target=_blank><i class="fab fa-weixin fa-fw"></i>wxPublicAccount</a> </span><span class=links-of-author-item> <a title="RSS → /atom.xml" href=/atom.xml><i class="fa fa-rss fa-fw"></i>RSS</a> </span><span class=links-of-author-item> <a title="CSDN → https://blog.csdn.net/aqwca" href=https://blog.csdn.net/aqwca rel=noopener target=_blank><i class="fa fa-handshake fa-fw"></i>CSDN</a> </span><span class=links-of-author-item> <a title="杂鱼分享 → https://my-astro-git-main-drowning-in-codes.vercel.app" href=https://my-astro-git-main-drowning-in-codes.vercel.app/ rel=noopener target=_blank><i class="fas fa-share fa-fw"></i>杂鱼分享</a> </span></div><div class="links-of-blogroll motion-element"><div class=links-of-blogroll-title><i class="fa fa-link fa-fw"></i> 友情链接</div><ul class=links-of-blogroll-list><li class=links-of-blogroll-item><a href=https://protool-ten.vercel.app/ rel=noopener target=_blank title=https://protool-ten.vercel.app/>protools</a><li class=links-of-blogroll-item><a href=https://my-astro-aokh-git-main-drowningincodes-projects.vercel.app/ rel=noopener target=_blank title=https://my-astro-aokh-git-main-drowningincodes-projects.vercel.app>archive</a><li class=links-of-blogroll-item><a href=https://www.lllomh.com/ rel=noopener target=_blank title=https://www.lllomh.com/>芈渡</a><li class=links-of-blogroll-item><a href=http://myqhs.top/ rel=noopener target=_blank title=http://myqhs.top/>myqhs</a></ul></div><div class="motion-element announcement"><div class=title></div><p class=content><p class=date></div></div><meting-js id=6856787487 order=random server=netease type=playlist> </meting-js><div class=widget-wrap><h3 class=widget-title style=margin:0>文章词云</h3><div class="widget tagcloud" id=myCanvasContainer><canvas height=250 id=resCanvas style=width:100% width=250><ul class=tag-list itemprop=keywords><li class=tag-list-item><a class=tag-list-link href=/tags/llm/ rel=tag>llm</a><span class=tag-list-count>2</span></ul></canvas></div></div><script id=clustrmaps src=https://clustrmaps.com/map_v2.js?d=xQdGTxqARTBiNIwX2aUban-ixkj2s6VaZQWo-aVCgY8&cl=ffffff&w=a></script><div class="back-to-top motion-element"><i class="fa fa-arrow-up"></i><span>0%</span></div><!-- 边栏 --></div></aside><div id=sidebar-dimmer></div></div></main><footer class=footer><div class=footer-inner><div class=copyright>© Wed Apr 08 2020 08:00:00 GMT+0800 (中国标准时间) – <span itemprop=copyrightYear>2026</span><span class=with-love> <i class="fa fa-heart"></i> </span><span class=author itemprop=copyrightHolder>Sekyoro</span><span class=post-meta-divider>|</span><span class=post-meta-item-icon> <i class="fa fa-chart-area"></i> </span><span title=站点总字数>4.8m</span><span class=post-meta-divider>|</span><span class=post-meta-item-icon> <i class="fa fa-coffee"></i> </span><span title=站点阅读时长>72:44</span></div><script async src=https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js></script><span id=busuanzi_container_site_pv>总访问量<span id=busuanzi_value_site_pv></span>次</span><span class=post-meta-divider>|</span><span id=busuanzi_container_site_uv>总访客数<span id=busuanzi_value_site_uv></span>人</span><span class=post-meta-divider>|</span><!-- 不蒜子计数初始值纠正 --><script>document.addEventListener("DOMContentLoaded", function() {
-    var int = setInterval(fixCount, 50);  // 50ms周期检测函数
-    var countOffset = 20000;  // 初始化首次数据
-
-    function fixCount() {
-        var pvContainer = document.getElementById("busuanzi_container_site_pv");
-        if (pvContainer && pvContainer.style.display !== "none") {
-            var pvElement = document.getElementById("busuanzi_value_site_pv");
-            if (pvElement) {
-                pvElement.innerHTML = parseInt(pvElement.innerHTML) + countOffset;
-                clearInterval(int);
-            }
-        }
+})();
+</script>
         
-        var uvContainer = document.getElementById("busuanzi_container_site_uv");
-        if (uvContainer && window.getComputedStyle(uvContainer).display !== "none")
-        {
-            var uvElement = document.getElementById("busuanzi_value_site_uv");
-            if (uvElement) {
-                uvElement.innerHTML = parseInt(uvElement.innerHTML) + countOffset; // 加上初始数据 
-                clearInterval(int); // 停止检测
-            }
-        }
-    }
-});</script><div><span id=timeDate>载入天数...</span><span id=times>载入时分秒...</span><script>var now = new Date();
+
+<!-- require APlayer -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+<script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+<!-- require MetingJS -->
+  
+ <script src="/js/meting-js.js"></script>
+	  
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+	  
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%97%8B%E8%BD%AC%E4%BD%8D%E7%BD%AE%E7%BC%96%E7%A0%81"><span class="nav-number">1.</span> <span class="nav-text">旋转位置编码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RSMNorm"><span class="nav-number">2.</span> <span class="nav-text">RSMNorm</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GroupQuery-Attention-amp-amp-KVcache"><span class="nav-number">3.</span> <span class="nav-text">GroupQuery Attention&amp;&amp;KVcache</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Transformer"><span class="nav-number">4.</span> <span class="nav-text">Transformer</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#silu%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0"><span class="nav-number">4.1.</span> <span class="nav-text">silu激活函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">4.2.</span> <span class="nav-text">参考资料</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Sekyoro"
+      src="https://i.loli.net/2021/05/17/YqoavnXdGTpPO9R.jpg">
+  <p class="site-author-name" itemprop="name">Sekyoro</p>
+  <div class="site-description" itemprop="description">什么也无法舍弃的人，什么也做不了.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">267</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">229</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="http://proanimer.com/" title="Personal Website → http:&#x2F;&#x2F;proanimer.com" rel="noopener" target="_blank"><i class="fab fa-internet-explorer fa-fw"></i>Personal Website</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://github.com/drowning-in-codes" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;drowning-in-codes" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:bukalala174@gmail.com" title="E-Mail → mailto:bukalala174@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://mp.weixin.qq.com/s?__biz=Mzg3ODY1MDkzMg%3D%3D&mid=2247483770&idx=1&sn=fdf88faab01d5c219ac609570a21c9d6&chksm=cf113221f866bb373938cfca03cf095ff4fe1e4dc37d68ef5de4cd4876ee1260fca0c015a4d6&token=1096259873&lang=zh_CN#rd" title="wxPublicAccount → https:&#x2F;&#x2F;mp.weixin.qq.com&#x2F;s?__biz&#x3D;Mzg3ODY1MDkzMg&#x3D;&#x3D;&amp;mid&#x3D;2247483770&amp;idx&#x3D;1&amp;sn&#x3D;fdf88faab01d5c219ac609570a21c9d6&amp;chksm&#x3D;cf113221f866bb373938cfca03cf095ff4fe1e4dc37d68ef5de4cd4876ee1260fca0c015a4d6&amp;token&#x3D;1096259873&amp;lang&#x3D;zh_CN#rd" rel="noopener" target="_blank"><i class="fab fa-weixin fa-fw"></i>wxPublicAccount</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-rss fa-fw"></i>RSS</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/aqwca" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;aqwca" rel="noopener" target="_blank"><i class="fa fa-handshake fa-fw"></i>CSDN</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://my-astro-git-main-drowning-in-codes.vercel.app/" title="杂鱼分享 → https:&#x2F;&#x2F;my-astro-git-main-drowning-in-codes.vercel.app" rel="noopener" target="_blank"><i class="fas fa-share fa-fw"></i>杂鱼分享</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      友情链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://protool-ten.vercel.app/" title="https:&#x2F;&#x2F;protool-ten.vercel.app&#x2F;" rel="noopener" target="_blank">protools</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://my-astro-aokh-git-main-drowningincodes-projects.vercel.app/" title="https:&#x2F;&#x2F;my-astro-aokh-git-main-drowningincodes-projects.vercel.app" rel="noopener" target="_blank">archive</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.lllomh.com/" title="https:&#x2F;&#x2F;www.lllomh.com&#x2F;" rel="noopener" target="_blank">芈渡</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://myqhs.top/" title="http:&#x2F;&#x2F;myqhs.top&#x2F;" rel="noopener" target="_blank">myqhs</a>
+        </li>
+    </ul>
+  </div>
+
+
+  <div class="motion-element announcement">
+   <div class="title"></div>
+   <p class="content"> </p>
+   <p class="date">  </p>
+  </div>
+      </div>
+<meting-js
+	id="6856787487"
+	server="netease"
+	type="playlist"
+	order="random"
+	>
+</meting-js>
+			<div class="widget-wrap">
+    <h3 class="widget-title" style="margin:0">文章词云</h3>
+    <div id="myCanvasContainer" class="widget tagcloud">
+        <canvas width="250" height="250" id="resCanvas" style="width:100%">
+		<ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/llm/" rel="tag">llm</a><span class="tag-list-count">2</span></li></ul>
+		</canvas>
+    </div>
+</div>
+		<script type="text/javascript" id="clustrmaps" src="//clustrmaps.com/map_v2.js?d=xQdGTxqARTBiNIwX2aUban-ixkj2s6VaZQWo-aVCgY8&cl=ffffff&w=a"></script>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+	 
+	 
+<!-- 边栏 -->
+
+
+	 
+
+	 
+	
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; Wed Apr 08 2020 08:00:00 GMT+0800 (中国标准时间) – 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Sekyoro</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">1.9m</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">115:22</span>
+</div>
+
+<div>
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date();
     function createtime() {
         var grt= new Date("04/08/2021 20:00:00");
         now.setTime(now.getTime()+250);
@@ -360,7 +1014,68 @@ if(canvas.getContext){
         document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
         document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
     }
-setInterval("createtime()",250);</script></div><div class=busuanzi-count><script async data-pjax src=https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script><span style="display: none;" class=post-meta-item id=busuanzi_container_site_uv> <span class=post-meta-item-icon> <i class="fa fa-user"></i> </span> <span class=site-uv title=总访客量> <span id=busuanzi_value_site_uv></span> </span> </span><span class=post-meta-divider>|</span><span style="display: none;" class=post-meta-item id=busuanzi_container_site_pv> <span class=post-meta-item-icon> <i class="fa fa-eye"></i> </span> <span class=site-pv title=总访问量> <span id=busuanzi_value_site_pv></span> </span> </span></div></div></footer></div><script color=0,0,255 count=99 opacity=0.5 src=/lib/canvas-nest/canvas-nest.min.js zindex=-1></script><script src=/lib/anime.min.js></script><script src=https://cdn.jsdelivr.net/gh/theme-next/theme-next-pjax@0/pjax.min.js></script><script src=https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js></script><script src=https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js></script><script src=https://cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js></script><script src=https://cdn.jsdelivr.net/npm/velocity-animate@1/velocity.min.js></script><script src=https://cdn.jsdelivr.net/npm/velocity-animate@1/velocity.ui.min.js></script><script src=/js/utils.js></script><script src=/js/motion.js></script><script src=/js/schemes/pisces.js></script><script src=/js/next-boot.js></script><script src=/js/bookmark.js></script><script>var pjax = new Pjax({
+setInterval("createtime()",250);
+</script>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        总访客数<span id="busuanzi_value_site_uv"></span>人</span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+       总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/theme-next/theme-next-pjax@0/pjax.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/velocity-animate@1/velocity.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/velocity-animate@1/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+  <script>
+var pjax = new Pjax({
   selectors: [
     'head title',
     '#page-configurations',
@@ -448,7 +1163,15 @@ window.addEventListener('pjax:success', () => {
       console.log('TagCanvas initialization failed:', e);
     }
   }
-});</script><script data-pjax>(function(){
+});
+</script>
+
+
+
+
+  
+  <script data-pjax>
+    (function(){
       var canonicalURL, curProtocol;
       //Get the <link> tag
       var x=document.getElementsByTagName("link");
@@ -470,7 +1193,28 @@ window.addEventListener('pjax:success', () => {
       //Get current URL if the canonical URL does not exist
 	    if (!canonicalURL) canonicalURL = window.location.href;
 	    //Assign script content. Replace current URL with the canonical URL
-      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();</script><script src=https://cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js></script><script src=https://cdn.jsdelivr.net/npm/instantsearch.js@4/dist/instantsearch.production.min.js></script><script src=/js/algolia-search.js></script><script data-pjax>document.querySelectorAll('.pdfobject-container').forEach(element => {
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+  </script>
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
+<script src="//cdn.jsdelivr.net/npm/instantsearch.js@4/dist/instantsearch.production.min.js"></script>
+<script src="/js/algolia-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+<script data-pjax>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
   let url = element.dataset.target;
   let pdfOpenParams = {
     navpanes : 0,
@@ -487,7 +1231,27 @@ window.addEventListener('pjax:success', () => {
   } else {
     element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
   }
-});</script><div id=pjax><script charset=utf-8 defer src=/js/outdate.js></script></div><script charset=utf-8 defer src=/js/tagcanvas.js></script><script charset=utf-8 defer src=/js/tagcloud.js></script><script>NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+});
+</script>
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+  
+
+  <script  type="text/javascript" defer charset="utf-8" src="/js/outdate.js"></script>
+    </div>  
+  
+
+<script  type="text/javascript" defer charset="utf-8" src="/js/tagcanvas.js"></script>
+<script  type="text/javascript" defer charset="utf-8" src="/js/tagcloud.js"></script>
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
   window.livereOptions = {
     refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
   };
@@ -499,7 +1263,12 @@ window.addEventListener('pjax:success', () => {
     j.async = true;
     e.parentNode.insertBefore(j, e);
   })(document, 'script');
-});</script><script>var OriginTitile = document.title;
+});
+</script>
+ 
+
+<script>
+  var OriginTitile = document.title;
   var titleTime;
   document.addEventListener("visibilitychange", function() {
     if (document.hidden) {
@@ -511,6 +1280,9 @@ window.addEventListener('pjax:success', () => {
         document.title = OriginTitile;
       }, 2000);
     }
-  });</script><script src=/js/src/activate-power-mode.min.js></script><script>POWERMODE.colorful = true;
-    POWERMODE.shake = false;
-    document.body.addEventListener('input', POWERMODE);</script>
+  });
+</script>
+
+
+
+<script async>window.onload=function(){var a=document.createElement('script'),b=document.getElementsByTagName('script')[0];a.type='text/javascript',a.async=!0,a.src='/sw-register.js?v='+Date.now(),b.parentNode.insertBefore(a,b)};</script></body></html>
