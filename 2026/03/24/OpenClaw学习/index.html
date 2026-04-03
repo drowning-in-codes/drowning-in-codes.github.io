@@ -1,0 +1,473 @@
+<!doctype html><html lang=zh-CN><script defer src=/live2d-widget/autoload.js></script><meta charset=UTF-8><meta content="width=device-width,initial-scale=1,maximum-scale=2" name=viewport><meta content=#222 name=theme-color><meta content="Hexo 8.1.1" name=generator><link href=/images/blog_32px.png rel=apple-touch-icon sizes=180x180><link href=/images/blog_32px.png rel=icon sizes=32x32 type=image/png><link href=/images/blog_16px.png rel=icon sizes=16x16 type=image/png><link color=#222 href=/images/logo.svg rel=mask-icon><meta content=EPrJAp11bJwHULpQUaSNSZ8_3RcvTsPDAEGOME4pl1w name=google-site-verification><!-- Google tag (gtag.js) --><!-- 
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-VB21D8MKKW"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-VB21D8MKKW');
+</script> --><!-- google adsense in head.swig --><script src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4034523802263123" async crossorigin></script><meta content=7226864CE87CE9DE8C008385273846FF name=msvalidate.01><meta content=code-fjFXVtiL7j name=baidu-site-verification><link href=/css/main.css rel=stylesheet><link href="https://fonts.googleapis.com/css?family=Roboto%20Mono,Roboto:300,300italic,400,400italic,700,700italic|Roboto:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext" onload="this.rel='stylesheet'" as=style rel=preload><link onload="this.rel='stylesheet'" as=style href=https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css rel=preload><link href="https://fonts.googleapis.com/css?family=Noto+Serif+SC|Roboto&display=swap" rel=stylesheet><link href=https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css rel=stylesheet><link href=https://cdn.jsdelivr.net/npm/pace-js@1/themes/blue/pace-theme-minimal.css rel=stylesheet><script src=https://cdn.jsdelivr.net/npm/pace-js@1/pace.min.js></script><script id=hexo-configurations>var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.sekyoro.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":240,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"appID":"0F9LEEVW82","apiKey":"78839e9f9be09d081c5c4da81975cd19","indexName":"sekyoblog_sec","hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};</script><link href=//cdn.bootcss.com/animate.css/3.5.0/animate.min.css rel=stylesheet><meta content=最近OpenClaw(原moltbot)实在是大火了一把，有如当时DeepSeek的国内热潮。但是DeepSeek模型的训练、微调包括前端的数据集收集和清理等都不是一般人能负担的，而OpenClaw不仅代码开源，在Agent开发的工程技术上也提供了一些实践，由此引入了一波”养虾潮”。 name=description><meta content=article property=og:type><meta content=OpenClaw学习与实战 property=og:title><meta content=https://www.sekyoro.top/2026/03/24/OpenClaw%E5%AD%A6%E4%B9%A0/index.html property=og:url><meta content=Sekyoro的博客小屋 property=og:site_name><meta content=最近OpenClaw(原moltbot)实在是大火了一把，有如当时DeepSeek的国内热潮。但是DeepSeek模型的训练、微调包括前端的数据集收集和清理等都不是一般人能负担的，而OpenClaw不仅代码开源，在Agent开发的工程技术上也提供了一些实践，由此引入了一波”养虾潮”。 property=og:description><meta content=zh_CN property=og:locale><meta content=https://files.seeusercontent.com/2026/03/24/y4qO/image-20260324145811017.png property=og:image><meta content=2026-03-24T05:49:47.000Z property=article:published_time><meta content=2026-03-26T16:31:46.225Z property=article:modified_time><meta content=Sekyoro property=article:author><meta content=Agent property=article:tag><meta content=OpenClaw property=article:tag><meta content=summary name=twitter:card><meta content=https://files.seeusercontent.com/2026/03/24/y4qO/image-20260324145811017.png name=twitter:image><link href=https://www.sekyoro.top/2026/03/24/OpenClaw%E5%AD%A6%E4%B9%A0/ rel=canonical><script id=page-configurations>// https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };</script><script async src=/lib/fireworks.js></script><title>OpenClaw学习与实战 | Sekyoro的博客小屋</title><noscript><style>.use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }</style></noscript><link href=/atom.xml rel=alternate title=Sekyoro的博客小屋 type=application/atom+xml><body itemscope itemtype=http://schema.org/WebPage><div class="container use-motion"><div class=headband></div><header class=header itemscope itemtype=http://schema.org/WPHeader><div class=header-inner><div class=site-brand-container><div class=site-nav-toggle><div aria-label=切换导航栏 class=toggle><span class="toggle-line toggle-line-first"></span><span class="toggle-line toggle-line-middle"></span><span class="toggle-line toggle-line-last"></span></div></div><div class=site-meta><a class=brand href=/ rel=start> <span class=logo-line-before><i></i></span> <h1 class=site-title>Sekyoro的博客小屋</h1> <span class=logo-line-after><i></i></span> </a></div><div class=site-nav-right><div class="toggle popup-trigger"><i class="fa fa-search fa-fw fa-lg"></i></div></div></div><nav class=site-nav><ul class="main-menu menu" id=menu><li class="menu-item menu-item-home"><a href=/ rel=section><i class="fa fa-home fa-fw"></i>首页</a><li class="menu-item menu-item-about"><a href=/about/ rel=section><i class="fa fa-user fa-fw"></i>关于</a><li class="menu-item menu-item-tags"><a href=/tags/ rel=section><i class="fa fa-tags fa-fw"></i>标签</a><li class="menu-item menu-item-categories"><a href=/categories/ rel=section><i class="fa fa-th fa-fw"></i>分类</a><li class="menu-item menu-item-archives"><a href=/archives/ rel=section><i class="fa fa-archive fa-fw"></i>归档</a><li class="menu-item menu-item-bangumis"><a href=/bangumis/ rel=section><i class="fa fa-film fa-fw"></i>追番</a><li class="menu-item menu-item-resume"><a href=/resume/ rel=section><i class="fa fa-file-pdf fa-fw"></i>简历</a><li class="menu-item menu-item-materials"><a href=/materials/ rel=section><i class="fa fa-book fa-fw"></i>学习资料</a><li class="menu-item menu-item-sitemap"><a href=/sitemap.xml rel=section><i class="fa fa-sitemap fa-fw"></i>站点地图</a><li class="menu-item menu-item-search"><a class=popup-trigger role=button><i class="fa fa-search fa-fw"></i>搜索 </a></ul></nav><div class=search-pop-overlay><div class="popup search-popup"><div class=search-header><span class=search-icon> <i class="fa fa-search"></i> </span><div class=search-input-container></div><span class=popup-btn-close> <i class="fa fa-times-circle"></i> </span></div><div class=algolia-results><div id=algolia-stats></div><div id=algolia-hits></div><div class=algolia-pagination id=algolia-pagination></div></div></div></div></div></header><a class="book-mark-link book-mark-link-fixed" role=button></a><main class=main><div class=main-inner><div class=content-wrap><div class="content post posts-expand"><article class=post-block itemscope itemtype=http://schema.org/Article lang=zh-CN><link href=https://www.sekyoro.top/2026/03/24/OpenClaw%E5%AD%A6%E4%B9%A0/ itemprop=mainEntityOfPage><span hidden itemprop=author itemscope itemtype=http://schema.org/Person> <meta content=https://i.loli.net/2021/05/17/YqoavnXdGTpPO9R.jpg itemprop=image> <meta content=Sekyoro itemprop=name> <meta content=什么也无法舍弃的人，什么也做不了. itemprop=description> </span><span hidden itemprop=publisher itemscope itemtype=http://schema.org/Organization> <meta content=Sekyoro的博客小屋 itemprop=name> </span><header class=post-header><h1 itemprop="name headline" class=post-title>OpenClaw学习与实战</h1><div class=post-meta><span class=post-meta-item> <span class=post-meta-item-icon> <i class="far fa-calendar"></i> </span> <span class=post-meta-item-text>发表于</span> <time itemprop="dateCreated datePublished" title="创建时间：2026-03-24 13:49:47" datetime=2026-03-24T13:49:47+08:00>2026-03-24</time> </span><span class=post-meta-item> <span class=post-meta-item-icon> <i class="far fa-calendar-check"></i> </span> <span class=post-meta-item-text>更新于</span> <time title="修改时间：2026-03-27 00:31:46" datetime=2026-03-27T00:31:46+08:00 itemprop=dateModified>2026-03-27</time> </span><span style="display: none;" class=post-meta-item id=busuanzi_container_page_pv title=阅读次数> <span class=post-meta-item-icon> <i class="fa fa-eye"></i> </span> <span class=post-meta-item-text>阅读次数：</span> <span id=busuanzi_value_page_pv></span> </span><br><span class=post-meta-item title=本文字数> <span class=post-meta-item-icon> <i class="far fa-file-word"></i> </span> <span>7.3k</span> </span><span class=post-meta-item title=阅读时长> <span class=post-meta-item-icon> <i class="far fa-clock"></i> </span> <span>27 分钟</span> </span></div></header><div class=post-body itemprop=articleBody><div class=post-tags><a href=/tags/OpenClaw/ rel=tag># OpenClaw</a><a href=/tags/Agent/ rel=tag># Agent</a></div><p>最近OpenClaw(原moltbot)实在是大火了一把，有如当时DeepSeek的国内热潮。但是DeepSeek模型的训练、微调包括前端的数据集收集和清理等都不是一般人能负担的，而OpenClaw不仅代码开源，在Agent开发的工程技术上也提供了一些实践，由此引入了一波”养虾潮”。</p><span id=more></span><p>早期Langchain,llamaIndex以及AutoGen等都封装了一系列工具调用、记忆机制、分块策略以及结构化输出等。<blockquote><p>目前langchain团队有Deep Agents,LangGraph,LangSmith以及LangChain等开源框架,都与AI应用开发与部署相关。</blockquote><p>但这些框架都是用于开发AI产品的，实际的AI应用又往往依附具体平台。OpenClaw在我看来的一个优势就是开源，使得其与多个IM系统通信(当然，前提是这些IM公司也愿意支持)，更加实用。下面具体介绍其重要组件。<h1 id=网关><a class=headerlink href=#网关 title=网关></a>网关</h1><p>Gateway 是一个<strong>常驻后台的消息路由服务</strong>。它负责接收各个客户端的消息，例如QQ,微信，发送给Agent，然后再分发响应。核心思想是“<strong>单网关、多端接入</strong>”。它不像传统的单一程序，而是一个分布式设计的通信枢纽。具体来说，通过websocket并约定消息格式与clients通信。<p><strong>唯一性</strong>：一台主机上只能运行一个 Gateway 进程。<p><strong>职责</strong>：它统一管理所有的通信插件（WhatsApp, Telegram, Slack, Discord, Signal 等）。它是唯一一个直接维护这些第三方平台 Session 的地方。<p><strong>通信</strong>：通过 WebSocket（默认端口 <code>18789</code>）与外界沟通。<p><img alt=image-20260324145811017 data-src=https://files.seeusercontent.com/2026/03/24/y4qO/image-20260324145811017.png><p>虽然都连接到 Gateway，但身份不同：<ul><li><strong>Clients (客户端)</strong>：如 Mac 应用、CLI 命令行工具或 Web 界面。它们发送命令（如“发消息”），并接收事件（如“助手正在回复”）。<li><strong>Nodes (节点)</strong>：这是 OpenClaw 的特色。你可以把你的手机（iOS/Android）或另一台电脑作为“Node”接入。它们提供硬件能力，比如调用摄像头 (<code>camera.*</code>)、获取位置 (<code>location.get</code>) 或屏幕录制。<li><strong>WebChat</strong>：一个简单的网页端聊天界面，直接通过 WebSocket 接口与网关通信</ul><h1 id=运行时><a class=headerlink href=#运行时 title=运行时></a>运行时</h1><p>Agent 运行必须有一个工作区目录（默认在 <code>agents.defaults.workspace</code>）。<ul><li><strong>唯一性</strong>：这是 Agent 唯一的“工作目录 (CWD)”。<li><strong>作用</strong>：所有的工具操作、文件读取、上下文注入都发生在这里。</ul><p>当一个Agent启动时，它会干哪些事情？<p>首先，OpenClaw包含一系列配置文件，工作区文件<code>~/.openclaw/openclaw.json</code>配置启动端口和模式等。另外工作区目录还包含一系列md文件用于设置Agent个性、工作流程和使用的工具等。<ul><li><strong><code>AGENTS.md</code></strong>：核心运行指令和“长期记忆”。<li><strong><code>SOUL.md</code></strong>：定义 Agent 的性格、语气和行为边界（灵魂）。<li><strong><code>IDENTITY.md</code></strong>：Agent 的名字、图标和基本人设。<li><strong><code>USER.md</code></strong>：你的个人信息，方便 Agent 称呼你。<li><strong><code>BOOTSTRAP.md</code></strong>：初次运行时的引导流程（完成后会被自动删除）。</ul><p><strong>注入逻辑：</strong> 在每个会话的第一轮，OpenClaw 会把这些文件的内容直接塞进模型的 <strong>Context</strong> 里。空文件会被跳过。大文件会被截断并加上标记，以便提示信息保持简洁.如果文件缺失，OpenClaw 会注入一条“缺失文件”标记行.<p>会话记录以 JSONL 格式存储在：<code>~/.openclaw/agents/&lt;agentId>/sessions/&lt;SessionId>.jsonl</code><h2 id=工具-Tools-与-技能-Skills><a title="工具 (Tools) 与 技能 (Skills)" class=headerlink href=#工具-Tools-与-技能-Skills></a>工具 (Tools) 与 技能 (Skills)</h2><ul><li><strong>内置工具</strong>：如 <code>read</code>（读）、<code>write</code>（写）、<code>exec</code>（执行命令）等。这些是 Agent 与系统交互的基础。<li><strong>技能 (Skills)</strong>：这是更高级的功能模块，可以从三个地方加载：<ol><li>软件自带。<li>用户本地路径 (<code>~/.openclaw/skills</code>)。<li>工作区内部路径。</ol></ul><p>OpenClaw 的 Agent 运行时是建立在 <strong>Pi agent core</strong> 之上的，它负责：<ul><li><strong>会话管理</strong>：对话历史存放在 <code>~/.openclaw/agents/&lt;agentId>/sessions/</code> 下，以 <code>.jsonl</code> 格式存储。<li><strong>流式转向 (Steering while streaming)</strong>：这是个高级功能。当 Agent 正在说话或执行工具时，如果你发送新消息，OpenClaw 可以配置如何“插嘴”或“引导”它。</ul><h1 id=Agent-Loop><a title="Agent Loop" class=headerlink href=#Agent-Loop></a>Agent Loop</h1><p><strong>Agent Loop（智能体循环）</strong> 是将静态的 AI 模型转化为动态“智能体”的核心机制。它不只是简单的一问一答，而是一个<strong>自动化的、闭环的执行过程</strong>。<p>Agent Loop 是 Agent 运行的“真实”生命周期：从接收消息到执行动作，再到最终回复。 在 OpenClaw 中，这通常是一个<strong>序列化（Serialized）</strong>的过程，确保每个会话（Session）在同一时间只有一个逻辑在运行，防止工具调用产生冲突或竞态条件。<p>一次完整的循环包含以下五个关键步骤：<ol><li><strong>输入与归一化 (Intake)</strong>：<ul><li>接收来自 WhatsApp、Telegram 等渠道的消息。<li>将语音、图片等非结构化数据转化为模型可理解的文本和附件。</ul><li><strong>上下文组装 (Context Assembly)</strong>：<ul><li>动态加载 <code>AGENTS.md</code>、<code>SOUL.md</code> 和会话历史。<li>注入当前可用的 <strong>Tools（工具）</strong> 和 <strong>Skills（技能）</strong> 列表。</ul><li><strong>模型推理 (Model Inference)</strong>：<ul><li>将组装好的上下文发送给大模型（如 GPT-4o 或 Claude）。<li>模型决定：是直接回复用户，还是需要<strong>调用工具</strong>。</ul><li><strong>工具执行 (Tool Execution)</strong>：<ul><li>如果模型请求调用工具（如 <code>exec</code> 运行代码或 <code>read</code> 读取文件），OpenClaw 的后端会代为执行。<li><strong>结果回填</strong>：将工具执行的输出（Output）作为新的上下文反馈给模型。</ul><li><strong>持续迭代与持久化 (Loop & Persistence)</strong>：<ul><li>模型看到工具结果后，可能决定发起下一次工具调用，或者结束循环。<li>所有的交互过程（包括隐藏的工具调用）都会存入 <code>.jsonl</code> 会话文件</ul></ol><p>为了保证稳定性，OpenClaw 引入了 <strong>Lane Queue（车道队列）</strong> 系统：<ul><li><strong>顺序执行</strong>：默认情况下，同一会话的任务是按顺序排队的。这防止了 Agent 在还没读完文件 A 的时候就开始修改文件 A。<li><strong>三种模式</strong>：<ul><li><code>collect</code>：收集一段时间内的消息，一次性处理。<li><code>steer</code>：在 Agent 运行过程中注入新指令（转向）。<li><code>followup</code>：当前任务结束后立刻开始下一个任务。</ul></ul><p>OpenClaw 的 Loop 支持 <strong>Partial Replies（部分回复）</strong>：<ul><li>当模型在“思考”或调用长耗时工具时，它会向客户端流式推送事件。<li><strong>Block Streaming</strong>：可以将回复拆分成段落，每完成一段就发送一次，提升用户感知的响应速度。</ul><h1 id=系统提示词><a class=headerlink href=#系统提示词 title=系统提示词></a>系统提示词</h1><p><strong>系统提示词</strong> 是 OpenClaw 每次运行智能体时自动构建的“操作指令集”。它不像普通的聊天机器人那样只有一段固定的文字，而是由多个<strong>动态模块</strong>拼装而成的。<p>OpenClaw 的系统提示词是<strong>权属归网关（Gateway）所有</strong>的，意味着它会根据你当前的运行环境（时间、工作区文件、已安装的技能）实时生成。其核心目标是在有限的上下文窗口内，为模型提供最精准的“行动指南”<p>一个标准的 OpenClaw 系统提示词通常按顺序包含以下板块：<ul><li><strong>Tooling (工具集)</strong>：当前可用工具的列表及其简短描述。这是 Agent 能“干活”的前提。<li><strong>Safety (安全守则)</strong>：防止模型产生越权行为或试图绕过监管的简短提醒。<li><strong>Skills (技能索引)</strong>：告诉模型目前有哪些技能可用，以及如何通过 <code>SKILL.md</code> 按需加载详细指令。<li><strong>Workspace (工作区)</strong>：明确告知模型当前的运行目录（<code>agents.defaults.workspace</code>）。<li><strong>Project Context (项目上下文)</strong>：自动注入工作区中的引导文件（如 <code>AGENTS.md</code>、<code>SOUL.md</code>、<code>USER.md</code>）。<li><strong>Runtime Metadata (运行时元数据)</strong>：包含当前时间（本地/UTC）、主机操作系统、所用模型名称、当前的“思考深度”等级。</ul><p>上下文注入逻辑，OpenClaw 会扫描工作区，并将特定的 Markdown 文件内容注入提示词：<ul><li>如果文件<strong>存在</strong>：内容会被读入，如果文件太大（超过 20,000 字符），系统会自动截断并加上 <code>[TRUNCATED]</code> 标记。<li>如果文件<strong>缺失</strong>：系统会注入一行“Missing file”标记，提示模型该部分信息缺失。</ul><h1 id=上下文><a class=headerlink href=#上下文 title=上下文></a>上下文</h1><p>简单来说，Context 就是 <strong>OpenClaw 在单次运行中发送给 AI 模型的所有信息总和</strong>。<p>Context 受到模型“上下文窗口”（Token 限制）的约束。它不同于“Memory（存储在磁盘上的长期记忆）”，Context 仅指<strong>当前模型窗口内可见的内容</strong>。<p>它主要由三部分组成：<ul><li><strong>系统提示词 (System Prompt)</strong>：由 OpenClaw 自动构建，包含规则、工具列表、技能列表、当前时间、运行状态以及注入的工作区文件。<li><strong>对话历史 (Conversation History)</strong>：当前会话中你与助手的往返消息。<li><strong>工具调用与附件</strong>：命令的输出结果、读取的文件内容、图片/音频等</ul><p>每次运行都会重新构建系统提示词，其中最特别的是 <strong>项目上下文 (Project Context)</strong>。它会自动注入工作区中的特定文件（如果存在）：<ul><li><code>AGENTS.md</code> / <code>SOUL.md</code>（定义性格/灵魂）<li><code>TOOLS.md</code> / <code>IDENTITY.md</code>（定义工具和身份）<li><code>USER.md</code>（用户信息）<li><code>BOOTSTRAP.md</code>（首次运行引导）</ul><blockquote><p><strong>注意：</strong> 为了防止撑爆上下文，大文件会被自动截断（默认每个文件 20,000 字符）。</blockquote><p>注意skills和tools的差别，两者对上下文窗口的占用：<ul><li><strong>技能 (Skills)</strong>：系统提示词只包含技能的名称和简短描述。模型只有在需要时才会去按需读取具体的 <code>SKILL.md</code> 指令，这样可以节省空间。<li><strong>工具 (Tools)</strong>：工具的开销是双重的。一是系统提示词里的文字描述，二是 <strong>JSON Schema（工具定义）</strong>。即使你在对话中看不见这些 JSON 代码，它们依然会占用大量的 Token。</ul><p>可以通过斜杠命令实时监控和优化上下文：<ul><li><code>/status</code>：快速查看当前窗口有多满。<li><code>/context list</code>：列出当前注入的文件及其大小，查看是否被截断。<li><code>/context detail</code>：深入分析哪些工具或技能占用了最多的空间。<li><code>/compact</code>：<strong>压缩指令</strong>。将旧的对话历史总结为一个精简的条目，从而释放窗口空间。</ul><h1 id=上下文引擎><a class=headerlink href=#上下文引擎 title=上下文引擎></a>上下文引擎</h1><p>Context Engine 是一个可插拔的模块，它的唯一任务是：<strong>把散落在各处的数据（对话历史、文件、工具结果）按照优先级和 Token 限制，拼成最终发给模型的那个长字符串。</strong><p>当模型准备运行（Run）时，上下文引擎会执行以下操作：<ul><li><strong>分层堆叠</strong>：它按照预定义的顺序堆叠内容：<code>系统提示词</code> -> <code>项目上下文文件</code> -> <code>被裁剪的历史记录</code> -> <code>最新的用户消息</code>。<li><strong>Token 预算分配</strong>：它会计算每个部分占用了多少 Token。如果超标，它负责决定<strong>先扔掉谁</strong>。<ul><li><em>通常策略：</em> 优先保留系统指令和最近的几轮对话，裁剪掉中间陈旧的工具执行结果</ul></ul><h2 id=压缩-Compaction><a title="压缩 (Compaction)" class=headerlink href=#压缩-Compaction></a>压缩 (Compaction)</h2><p>这是解决“记不住事”和“Token 太贵”的核心技术。<ul><li><strong>触发时机</strong>：当对话历史接近模型上限（比如 32k 的 80%）时。<li><strong>执行方式</strong>：引擎会调用一个后台模型，把旧的 10 轮对话<strong>总结成一段话</strong>，然后替换掉原来的 10 轮细节。<li><strong>持久化</strong>：压缩后的总结会存入 <code>.jsonl</code> 会话文件中，确保下次加载时依然有效。</ul><h1 id=Agent-Workspace><a title="Agent Workspace" class=headerlink href=#Agent-Workspace></a>Agent Workspace</h1><p><strong>Agent Workspace（智能体工作区）</strong> 是智能体赖以生存的“物理世界”。如果把智能体比作一个程序员，那么 Workspace 就是他的这台电脑和当前打开的项目目录。它是所有工具操作、文件读写和上下文注入的<strong>唯一基准点</strong>。<p>在 OpenClaw 启动时，它会指定一个目录作为 <code>agents.defaults.workspace</code>。<ul><li><strong>封闭性</strong>：智能体的所有相对路径操作（如 <code>read("file.txt")</code>）都相对于这个目录。<li><strong>权限限制</strong>：出于安全考虑，智能体通常被禁止跳出这个目录去修改系统文件</ul><p>一个健康的工作区通常包含以下几个关键部分：<div class=table-container><table><thead><tr><th><strong>文件/目录</strong><th><strong>作用</strong><tbody><tr><td><strong><code>AGENTS.md</code></strong><td>长期指令、任务清单和重要记忆。<tr><td><strong><code>SOUL.md</code></strong><td>核心性格、语气准则和行为边界。<tr><td><strong><code>USER.md</code></strong><td>关于你的信息（偏好、姓名、习惯）。<tr><td><strong><code>TOOLS.md</code></strong><td>你对工具使用的特殊要求（例如：“用 <code>curl</code> 时必须加 <code>-L</code>”）。<tr><td><strong><code>skills/</code></strong><td>存放所有 <code>SKILL.md</code> 的文件夹。<tr><td><strong><code>scratchpad/</code></strong><td>智能体存放临时文件、代码片段或中间数据的地方</table></div><h3 id=动态注入逻辑><a class=headerlink href=#动态注入逻辑 title=动态注入逻辑></a>动态注入逻辑</h3><p>在 OpenClaw 的架构中，并没有一个持久不变的“大脑状态”。每一轮你发消息给 Agent，<strong>Context Engine（上下文引擎）</strong> 都会执行一次“组装”动作：<ul><li><strong>第一轮对话（开启新会话）</strong>：<ul><li>读取 <code>AGENTS.md</code>, <code>SOUL.md</code>, <code>USER.md</code> 等全部内容。<li>如果是新工作区，还会读取并执行 <code>BOOTSTRAP.md</code>。<li><strong>结果</strong>：Agent 处于最清醒、最完整的人设状态。</ul><li><p><strong>连续的后续对话（第 2, 3… N 轮）</strong>：</p> <ul><li><strong>依然会读取</strong> <code>SOUL.md</code> 和 <code>AGENTS.md</code>（确保人设不走样）。<li><strong>叠加</strong> 之前的对话历史（Transcript）。<li><strong>按需读取</strong> 之前提到过的 <code>SKILL.md</code>（如果还没被裁剪掉）。</ul> <p><strong>System Prompt</strong> 的来源：</p><li><p><strong>启动扫描</strong>：每次对话开始前，OpenClaw 会扫描工作区。</p><li><strong>自动读取</strong>：它会自动读取上述 <code>.md</code> 文件并拼装进提示词。<li><strong>截断机制</strong>：如果文件太大（默认超过 20,000 字符），OpenClaw 会执行“安全截断”，防止 Token 溢出。</ul><p>OpenClaw 引入了 <strong>Sandbox</strong> 概念来保护你的工作区：<ul><li><strong>Main Workspace</strong>：主会话使用的默认目录。<li><strong>Session Workspace</strong>：如果开启了沙箱模式，每个新会话可以拥有自己独立的子目录（在 <code>workspaceRoot</code> 下）。这防止了不同任务之间互相“污染”代码或配置。</ul><h2 id=启动><a class=headerlink href=#启动 title=启动></a>启动</h2><p>当你第一次启动 Agent 时，OpenClaw 会在你的工作区（默认 <code>~/.openclaw/workspace</code>）执行以下动作：<ol><li><strong>投放种子文件</strong>：自动生成 <code>AGENTS.md</code>、<code>IDENTITY.md</code>、<code>USER.md</code> 和关键的 <strong><code>BOOTSTRAP.md</code></strong>。<li><strong>开启 Q&A 仪式</strong>：Agent 会主动问你一系列问题（一次一个），比如“你希望我怎么称呼你？”、“我的主要任务是什么？”。<li><strong>写入“记忆”</strong>：它会把你的回答实时写入到 <code>IDENTITY.md</code>（它的名字/人设）、<code>USER.md</code>（你的偏好）和 <code>SOUL.md</code>（它的语气/边界）中。<li><strong>焚毁指令</strong>：一旦仪式完成，<strong><code>BOOTSTRAP.md</code> 会被自动删除</strong>，确保这个过程不会在下次启动时重复运行</ol><h1 id=会话与记忆机制><a class=headerlink href=#会话与记忆机制 title=会话与记忆机制></a>会话与记忆机制</h1><p><strong>Session（会话）</strong> 是系统管理对话状态、隔离上下文和持久化记忆的核心单位。<p>OpenClaw 对 Session 的持久化分为两个层面，确保了即使程序重启，对话和状态也不会丢失：<ul><li><strong>Session Store (<code>sessions.json</code>)</strong>：<ul><li>存储所有会话的<strong>元数据</strong>（如 Session ID、最后活跃时间、使用的模型、当前的 Token 计数等）。<li>这是网关（Gateway）快速索引会话的“账本”。</ul><li><strong>Transcript (<code>&lt;sessionId>.jsonl</code>)</strong>：<ul><li>存储真实的<strong>对话记录</strong>。<li>采用 <strong>JSONL（每行一个 JSON 对象）</strong> 格式，包含用户消息、助手回复以及隐藏的工具调用过程。<li>这是一个“树状结构”，每一条记录都有 ID 和父级 ID，支持复杂的追溯。</ul></ul><h3 id=会话隔离与路由-Routing><a title="会话隔离与路由 (Routing)" class=headerlink href=#会话隔离与路由-Routing></a>会话隔离与路由 (Routing)</h3><p>OpenClaw 通过 <code>sessionKey</code> 来决定一条新消息应该进入哪个会话：<ul><li><strong>私聊 (Direct Messages)</strong>：通常合并为一个主会话（<code>main</code>），由 <code>session.dmScope</code> 参数控制。<li><strong>群组/频道 (Groups/Channels)</strong>：每个群组或频道通常会获得独立的 <code>sessionKey</code>，确保不同群组之间的对话上下文不会互相污染。<li><strong>线程 (Threads)</strong>：在 Slack 或 Discord 等支持线程的平台上，每个 Thread 也会被视为独立的 Session。</ul><p>Session 并不是永恒不变的，它有明确的<strong>刷新机制</strong>：<ul><li><strong>手动重置</strong>：通过 <code>/new</code> 或 <code>/reset</code> 命令强制开启一个全新的 Session ID。<li><strong>每日自动重置</strong>：默认在当地时间 <strong>凌晨 4:00</strong> 进行。如果最后一次活动早于这个时间，下一条消息将自动触发新会话。<li><strong>闲置重置</strong>：可以配置 <code>idleMinutes</code>，如果在设定的时间内没有互动，会话将过期。</ul><p>为了防止 Session 文件无限增长导致性能下降，OpenClaw 会执行：<ul><li><strong>自动压缩 (Auto-Compaction)</strong>：当会话接近模型的上下文窗口限制时，引擎会运行一个“静默轮次”，总结重要信息并清理冗余的工具调用细节。<li><strong>持久化笔记</strong>：在丢弃细节前，Agent 会被提醒将关键事实写入 <code>AGENTS.md</code> 或 <code>USER.md</code>，实现从“短期会话”到“长期记忆”的转化。</ul><h1 id=会话裁剪><a class=headerlink href=#会话裁剪 title=会话裁剪></a>会话裁剪</h1><p><strong>Session Pruning（会话裁剪）</strong> 是一种为了节省 Token 成本、优化缓存效率而设计的“内存即时清理”机制。它和你之前看到的 <strong>Compaction（压缩）</strong> 有本质区别：压缩是永久性的总结，而裁剪是<strong>临时性的剔除</strong>。<p><strong>即时清理，不改存档</strong><ul><li><strong>不改硬盘</strong>：裁剪只发生在发送给 AI 模型的那一瞬间。它<strong>不会</strong>修改你硬盘里的 <code>.jsonl</code> 会话文件。<li><strong>目标对象</strong>：它专门针对旧的 <strong>Tool Results（工具执行结果）</strong>。用户和助手的对话文字永远不会被裁剪。</ul><p><strong>为什么需要裁剪？</strong>（主要针对 Anthropic 模型）<p>这个功能主要是为 Anthropic（如 Claude 系列）的 <strong>Prompt Caching（提示词缓存）</strong> 优化的：<ul><li><strong>节省写缓存成本</strong>：如果一个会话闲置了一段时间，缓存会失效。下次请求时，如果不裁剪掉那些冗余的旧工具输出（比如之前执行过的一大段代码运行结果），你就得为这些旧数据的重新写入付全额的钱。<li><strong>TTL 机制</strong>：默认情况下，如果距离上次调用超过 5 分钟（<code>ttl: "5m"</code>），裁剪就会触发，清理掉不再需要的旧数据，只保留最近几轮的上下文。</ul><p><strong>裁剪的两种手段</strong><ul><li><strong>Soft-trim（软裁剪）</strong>：针对超大的工具输出，只保留开头和结尾，中间用 <code>...</code> 代替。<li><strong>Hard-clear（硬清理）</strong>：直接把整个工具输出替换为 <code>[Old tool result content cleared]</code>。</ul><p><strong>裁剪的保护规则</strong>（哪些不删）<p>OpenClaw 非常谨慎，以下内容会被保护：<ul><li><strong>最近的消息</strong>：默认保留最后 3 轮助手的对话（<code>keepLastAssistants: 3</code>），确保模型不会因为丢失最近的工具结果而变傻。<li><strong>多媒体内容</strong>：包含图片的工具结果<strong>永远不会</strong>被裁剪。<li><strong>对话文字</strong>：你和 Agent 说的话永远是完整的。</ul><div class=table-container><table><thead><tr><th><strong>维度</strong><th><strong>Session Pruning (裁剪)</strong><th><strong>Compaction (压缩)</strong><tbody><tr><td><strong>持久性</strong><td><strong>暂时的</strong>（仅限本次请求）<td><strong>永久的</strong>（写入历史文件）<tr><td><strong>内容变化</strong><td>只是<strong>删除</strong>旧的工具输出<td>将旧对话<strong>总结</strong>成一小段话<tr><td><strong>主要目的</strong><td>降低缓存写入成本、保持窗口整洁<td>彻底释放 Token 空间，解决长时记忆问题</table></div><h1 id=会话工具><a class=headerlink href=#会话工具 title=会话工具></a>会话工具</h1><p><strong>Session Tools（会话工具）</strong> 是一组专门为 AI Agent 设计的功能，允许 AI 能够“感知”并“操作”不同的对话上下文。简单来说，这套工具让 AI 不再局限于当前的这一段对话，而是可以查看其他历史记录、列出活跃会话，甚至主动给另一个会话发送消息。<h3 id=核心工具集><a class=headerlink href=#核心工具集 title=核心工具集></a>核心工具集</h3><p>AI 可以调用以下四个具体的函数：<ul><li><strong><code>sessions_list</code></strong>：列出当前的会话。AI 可以通过它看到有哪些活跃的群聊、私聊或任务（Cron）。<li><strong><code>sessions_history</code></strong>：获取指定会话的历史记录（Transcript）。这对于 AI 回溯之前的决策或获取跨会话的信息至关重要。<li><strong><code>sessions_send</code></strong>：向另一个会话发送消息。这实现了 <strong>“Agent 间通信”</strong>，例如一个负责调度的 AI 让另一个负责执行的 AI 去干活。<li><strong><code>sessions_spawn</code></strong>：产生一个<strong>隔离的子会话</strong>。AI 可以创建一个“分身”去处理特定的子任务，处理完后再把结果汇报回来，而不会污染主会话的上下文</ul><p>为了准确操作，OpenClaw 为不同类型的会话定义了唯一的 Key：<ul><li><strong><code>main</code></strong>：指代当前 Agent 的主对话。<li><strong><code>agent:&lt;id>:&lt;channel>:group:&lt;id></code></strong>：群组对话的标识。<li><strong><code>cron:&lt;id></code></strong>：定时任务产生的会话。<li><strong><code>node-&lt;id></code></strong>：特定节点（如硬件设备）的会话。</ul><h1 id=记忆机制><a class=headerlink href=#记忆机制 title=记忆机制></a>记忆机制</h1><p><strong>Memory（记忆）</strong> 机制并不是指 AI 模型本身的参数，也不是简单的数据库存储，而是一套<strong>基于文件系统的持久化长短期记忆系统</strong>。<p>OpenClaw 将记忆存储在配置的工作空间（如 <code>/root/.picoclaw/workspace</code>）中，采用人类可读的 <strong>Markdown</strong> 格式：<ul><li><strong>短期/日常记忆 (<code>memory/YYYY-MM-DD.md</code>)</strong>：<ul><li>这是一个“追加模式”的日志。<li>每天会自动生成一个文件，记录当天的重要事件、对话摘要或运行笔记。<li>系统在每次会话开始时，默认会读取“今天”和“昨天”的日志。</ul><li><strong>长期/核心记忆 (<code>MEMORY.md</code>)</strong>：<ul><li>存放经过整理的、长期有效的客观事实、用户偏好或关键决策。<li>AI 会在需要时检索此文件。</ul></ul><p>AI 并不是“被动”拥有记忆，而是通过以下两个工具主动管理：<ul><li><strong><code>memory_search</code></strong>：语义搜索。即使 AI 问的问题和记录的文字不完全一样，系统也会通过向量索引（Vector Index）找到最相关的片段。<li><strong><code>memory_get</code></strong>：精准读取。AI 可以指定读取某个 Markdown 文件的特定行。</ul><p><strong>自动冲刷机制</strong><p>这是 OpenClaw 的一个精妙设计。由于 AI 的对话上下文（Context Window）有限，当对话太长需要进行“压缩（Compaction）”时，系统会执行以下操作：<ol><li><strong>静默触发</strong>：在正式丢弃旧对话之前，系统会给 AI 发送一个隐藏指令。<li><strong>整理笔记</strong>：AI 会把即将被遗忘的对话中“值得记住”的部分提取出来，写入 <code>memory/YYYY-MM-DD.md</code>。<li><strong>清空缓存</strong>：确认写入磁盘后，系统才安全地清理内存中的对话历史。<ul><li><em>注：这由 <code>agents.defaults.compaction.memoryFlush</code> 控制。</em></ul></ol><p>为了让记忆搜索更聪明，OpenClaw 支持为这些 Markdown 文件建立向量索引：<ul><li><strong>支持多种后端</strong>：你可以使用 OpenAI, Gemini, Ollama 或本地 GGUF 模型来生成嵌入（Embeddings）。<li><strong>混合搜索</strong>：结合了关键词匹配（BM25）和语义匹配，确保 AI 能快速找回信息。</ul><div class=table-container><table><thead><tr><th><strong>特性</strong><th><strong>会话 (Session)</strong><th><strong>记忆 (Memory)</strong><tbody><tr><td><strong>物理形态</strong><td><code>sessions/&lt;id>.json</code> (全量原始数据)<td><code>workspace/memory/*.md</code> (Markdown 文本)<tr><td><strong>生命周期</strong><td>随对话增长。过长时会被“压缩”或“修剪”。<td>永久存储。除非你手动删除文件。<tr><td><strong>AI 的感知</strong><td>每一轮对话都在“重读”历史记录。<td>AI 需要通过“搜索”或“回溯”才能想起。<tr><td><strong>存储内容</strong><td>所有的废话、工具报错、原始 JSON。<td>只有事实、结论、偏好和重要摘要。<tr><td><strong>Token 消耗</strong><td><strong>高</strong>。历史越长，每一泡对话越贵。<td><strong>低</strong>。只在需要时检索相关的片段注入。</table></div><p><strong>Compaction（压缩/精简）</strong> 是解决“对话太长导致 AI 变傻或 Token 爆表”的核心技术。<p>当对话轮数过多，超出了大模型（LLM）的<strong>上下文窗口（Context Window）</strong>限制时，OpenClaw 会启动这个流程，将旧的对话“脱水”成精华摘要，从而为新对话腾出空间。<p><strong>自动化与手动触发</strong><ul><li><strong>自动压缩 (Auto-compaction)</strong>：<ul><li><strong>触发条件</strong>：当会话消耗的 Token 接近模型的上限（Context Window）时自动触发。<li><strong>表现</strong>：在 Verbose 模式下你会看到 <code>🧹 Auto-compaction complete</code>。</ul><li><strong>手动压缩</strong>：<ul><li>你可以直接在聊天框输入 <strong><code>/compact</code></strong>。<li>进阶用法：<strong><code>/compact 重点保留关于 Docker 部署的决策</code></strong>。这会指导 AI 在压缩时重点关注你指定的信息。</ul></ul><p>在<code>openclaw.json</code> (或 <code>config.toml</code>) 中，可以通过 <code>agents.defaults.compaction</code> 进行精细控制：<ul><li><strong><code>model</code></strong>：你可以指定一个专门用于压缩的模型。例如，平时用本地的 Ollama 聊天，但压缩时调用 <code>Claude 3.5 Sonnet</code> 以获得更高质量的摘要。<li><strong><code>identifierPolicy</code></strong>：<ul><li><code>strict</code>（默认）：强制要求 AI 在摘要中保留所有的 ID（如 Session ID、File ID），防止压缩后 AI 找不到文件。</ul><li><strong><code>memoryFlush</code></strong>：<ul><li>在压缩发生前的瞬间，系统会触发一次“记忆冲刷”，提醒 AI 将重要事实写入 <code>memory/YYYY-MM-DD.md</code> 或 <code>MEMORY.md</code>。</ul></ul><div class=table-container><table><thead><tr><th><strong>特性</strong><th><strong>Compaction (压缩)</strong><th><strong>Pruning (修剪)</strong><tbody><tr><td><strong>操作对象</strong><td>所有的对话文本<td>主要是<strong>工具执行结果</strong> (Tool Results)<tr><td><strong>处理方式</strong><td>总结、概括<td>直接截断、丢弃冗余部分<tr><td><strong>持久化</strong><td>写入磁盘 JSONL 文件<td>往往只在内存中处理，不一定持久化<tr><td><strong>目的</strong><td>维持长期的上下文理解<td>防止单个巨大的工具输出（如读取 1MB 文件）撑爆上下文</table></div><h1 id=多智能体><a class=headerlink href=#多智能体 title=多智能体></a>多智能体</h1><p>在 OpenClaw 中，一个 Agent 被视为一个<strong>独立的“大脑”</strong>。<ul><li><strong>完全隔离</strong>：每个 Agent 拥有自己独立的配置目录（<code>agentDir</code>）、系统提示词（System Prompt）、工作空间、会话记录和授权信息。<li><strong>多身份运行</strong>：一个运行中的 Gateway（网关）可以同时挂载多个 Agent，它们可以并排运行，互不干扰。</ul><p>单智能体在复杂场景下的局限性：<ul><li><strong>防止“提示词意大利面”</strong>：当任务太复杂时，单智能体的提示词会变得臃肿且难以维护。多智能体允许你将逻辑拆分成更短、更聚焦的模块。<li><strong>分布式记忆</strong>：每个子 Agent 只维护自己负责领域的上下文，降低了长文本带来的成本和幻觉。<li><strong>并行处理</strong>：多个 Agent 可以同时执行不相关的子任务，提高效率。</ul><p>OpenClaw 提供了三种典型的协作架构，开发者可以通过 YAML 文件进行声明式配置：<ul><li><strong>编排模式 (Orchestrator Pattern)</strong>： 有一个“主智能体”作为入口，它接收用户请求，分析任务，然后分派给下属的“子智能体”去执行，最后汇总结果返回。<li><strong>点对点模式 (Peer-to-Peer Pattern)</strong>： Agent 之间是平等的，它们可以根据任务需要互相通信和移交任务，没有中心化的控制者。<li><strong>层级模式 (Hierarchical Pattern)</strong>： 类似于公司架构，有多个层级的管理。例如：总监 Agent 下面有组长 Agent，组长再带执行 Agent。</ul><p>Gateway 如何处理输入：<ul><li><strong>路由绑定</strong>：可以将不同的通讯渠道（比如两个不同的 WhatsApp 号码或 Telegram 机器人）绑定到不同的 Agent 上。<li><strong>身份隔离</strong>：即使用同一个网关，不同的用户可以通过不同的身份标识访问不同的 Agent 实例，确保隐私和数据不混淆。</ul><h1 id=重试策略><a class=headerlink href=#重试策略 title=重试策略></a>重试策略</h1><p>OpenClaw 的重试逻辑遵循三个原则：<ul><li><strong>粒度适中</strong>：重试针对单个 HTTP 请求（如发一条消息），而不是整个复杂的任务流。<li><strong>保证顺序</strong>：只重试当前失败的步骤，确保消息队列的顺序不乱。<li><strong>避免副作用</strong>：尽量避免在重试时重复执行可能导致双重扣费或重复发帖的非幂等操作</ul><p>OpenClaw 通常执行以下默认行为：<ul><li><strong>尝试次数</strong>：默认 3 次。<li><strong>最大延迟上限</strong>：30,000 毫秒（30秒）。<li><strong>抖动 (Jitter)</strong>：0.1 (10%)。通过加入随机随机延迟，防止多个 Agent 同时重试导致“惊群效应”打垮服务器。</ul><p>当模型由于“上下文窗口溢出”（Context Overflow）而报错时，OpenClaw 会：<ol><li>自动触发 <strong>Compaction（压缩）</strong> 总结之前的对话。<li>清理空间后，<strong>自动重新提交</strong> 原始请求，而无需用户手动重试。</ol><h1 id=Claw实战><a class=headerlink href=#Claw实战 title=Claw实战></a>Claw实战</h1><p>由于OpenClaw需求内存还是大一些，这里使用<a href=https://github.com/zeroclaw-labs/zeroclaw rel=noopener target=_blank>zeroclaw</a>,使用Rust编写，更轻量。<p>使用docker安装<figure class="highlight sh"><table><tr><td class=gutter><pre><span class=line>1</span><br><span class=line>2</span><br></pre><td class=code><pre><span class=line>git <span class=built_in>clone</span> https://github.com/zeroclaw-labs/zeroclaw.git</span><br><span class=line><span class=built_in>cd</span> zeroclaw</span><br></pre></table></figure><p>修改<code>docker-compose.yaml</code>文件，修改<figure class="highlight yaml"><table><tr><td class=gutter><pre><span class=line>1</span><br><span class=line>2</span><br><span class=line>3</span><br><span class=line>4</span><br><span class=line>5</span><br><span class=line>6</span><br></pre><td class=code><pre><span class=line><span class=attr>services:</span></span><br><span class=line>  <span class=attr>zeroclaw:</span></span><br><span class=line>    <span class=comment># 将这行：</span></span><br><span class=line>    <span class=comment># image: ghcr.io/zeroclaw-labs/zeroclaw:latest</span></span><br><span class=line>    <span class=comment># 更改为：</span></span><br><span class=line>    <span class=attr>image:</span> <span class=string>ghcr.io/zeroclaw-labs/zeroclaw:debian</span></span><br></pre></table></figure><p>同时增加环境变量启动IP地址<figure class="highlight yaml"><table><tr><td class=gutter><pre><span class=line>1</span><br></pre><td class=code><pre><span class=line><span class=string>ZEROCLAW_GATEWAY_HOST=0.0.0.0</span></span><br></pre></table></figure><p>然后启动,并通过<code>docker exec</code>或<code>docker attach</code>执行命令。<figure class="highlight sh"><table><tr><td class=gutter><pre><span class=line>1</span><br></pre><td class=code><pre><span class=line>docker compose up -d</span><br></pre></table></figure><p>可以考虑创建QQ和飞书通道。<h2 id=结合QQ与Skills发送当天新闻><a class=headerlink href=#结合QQ与Skills发送当天新闻 title=结合QQ与Skills发送当天新闻></a>结合QQ与Skills发送当天新闻</h2><p>通过cron可以设置定时任务,同时结合skills使得模型能复用流程、经验以及使用function calling获取数据。<p>开源skiils:<a href=https://skills.sh/ rel=noopener target=_blank>The Agent Skills Directory</a><p><a href=https://clawhub.ai/skills rel=noopener target=_blank>ClawHub</a><p>这里主要使用到<a href=https://clawhub.ai/steipete/summarize rel=noopener target=_blank>Summarize</a>和<a href=https://clawhub.ai/joargp/news-summary rel=noopener target=_blank>News Summary — ClawHub</a><p>然后设置cron,可以通过命令,但还是推荐直接与AI对话创建<figure class="highlight sh"><table><tr><td class=gutter><pre><span class=line>1</span><br></pre><td class=code><pre><span class=line>zeroclaw cron add</span><br></pre></table></figure><figure class="highlight nginx"><table><tr><td class=gutter><pre><span class=line>1</span><br><span class=line>2</span><br></pre><td class=code><pre><span class=line><span class=attribute>zeroclaw</span> agent</span><br><span class=line>增加一个每天早上<span class=number>9</span>点半推送新闻给QQ的cron任务</span><br></pre></table></figure><p>这样模型会调用提供给它的cron增加任务命令，而这些命令反而没有暴露给用户。<p>此外还可以找到很多新奇的skill,比如让模型自我思考、进化，通过skill查找或生成skill,以及视频网站热门监控<a href=https://clawhub.ai/jacobzwj/bilibili-hot-monitor rel=noopener target=_blank>B站 (bilibili) 热门视频监控 — ClawHub</a>。 这不禁让人们联想到软件开发中的扩展，从原本的用户上传代码插件再到直接上传一个md文件搭配一些脚本，例如增加一个skill，爬取新闻网站，也许这就是未来吧。<h1 id=参考资料><a class=headerlink href=#参考资料 title=参考资料></a>参考资料</h1><ol><li><a href=https://docs.openclaw.ai/zh-CN rel=noopener target=_blank>OpenClaw - OpenClaw</a><li><a href=https://docs.langchain.com/oss/python/langchain/overview rel=noopener target=_blank>LangChain overview - Docs by LangChain</a><li><a href=https://github.com/zeroclaw-labs/zeroclaw/wiki/13.1-docker-deployment rel=noopener target=_blank>Docker Deployment · zeroclaw-labs/zeroclaw Wiki</a><li><a href=https://www.cnblogs.com/peacemaple/p/19620712 rel=noopener target=_blank>用 ZeroClaw 结合 SNS 打造每日新闻邮件推送助手 - zhaojie10 - 博客园</a><li><a href=https://www.ruanyifeng.com/blog/2026/03/weekly-issue-387.html rel=noopener target=_blank>科技爱好者周刊（第 387 期）：你是领先的 - 阮一峰的网络日志</a></ol><link href=/css/spoiler.css rel=stylesheet><script async src=/js/spoiler.js></script></div><div><div><div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div></div></div><div class=reward-container><div>感谢阅读.</div><button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">打赏</button><div style="display: none;" id=qr><div style="display: inline-block;"><img alt="Sekyoro 微信支付" src=/images/wechatpay.png><p>微信支付</div></div></div><div><ul class=post-copyright><li class=post-copyright-author><strong>本文作者： </strong>Sekyoro<li class=post-copyright-link><strong>本文链接：</strong> <a href=https://www.sekyoro.top/2026/03/24/OpenClaw%E5%AD%A6%E4%B9%A0/ title=OpenClaw学习与实战>https://www.sekyoro.top/2026/03/24/OpenClaw学习/</a><li class=post-copyright-license><strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href=https://creativecommons.org/licenses/by-nc-sa/4.0/ rel=noopener target=_blank><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</ul></div><div class=followme><p>欢迎关注我的其它发布渠道<div class=social-list><div class=social-item><a class=social-link href=/images/wxqrcode.png target=_blank> <span class=icon> <i class="fab fa-weixin"></i> </span> <span class=label>WeChat</span> </a></div><div class=social-item><a class=social-link href=/images/website.png target=_blank> <span class=icon> <i class="fa fa-user"></i> </span> <span class=label>PersonalWebsite</span> </a></div><div class=social-item><a class=social-link href=https://my-astro-git-main-drowning-in-codes.vercel.app target=_blank> <span class=icon> <i class="fas fa-share"></i> </span> <span class=label>杂鱼分享</span> </a></div><div class=social-item><a class=social-link href=/atom.xml target=_blank> <span class=icon> <i class="fa fa-rss"></i> </span> <span class=label>RSS</span> </a></div></div></div><footer class=post-footer><div class=post-tags><a href=/tags/OpenClaw/ rel=tag><i class="fa fa-tag"></i> OpenClaw</a><a href=/tags/Agent/ rel=tag><i class="fa fa-tag"></i> Agent</a></div><div class=post-nav><div class=post-nav-item><a href=/2026/03/20/%E9%A1%B9%E7%9B%AE%E5%9C%BA%E6%99%AF%E6%89%A9%E5%B1%95/ rel=prev title=项目场景扩展(一)> <i class="fa fa-chevron-left"></i> 项目场景扩展(一) </a></div><div class=post-nav-item><a href=/2026/04/02/%E9%A1%B9%E7%9B%AE%E5%9C%BA%E6%99%AF%E6%89%A9%E5%B1%95-%E4%BA%8C/ rel=next title=项目场景扩展(二)> 项目场景扩展(二) <i class="fa fa-chevron-right"></i> </a></div></div></footer></article></div><!-- 评论区 --><div class=comments><div data-uid="MTAyMC81MzE5Ny8yOTY3Mg==" data-id=city id=lv-container></div></div><script>window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }</script></div><div class="toggle sidebar-toggle"><span class="toggle-line toggle-line-first"></span><span class="toggle-line toggle-line-middle"></span><span class="toggle-line toggle-line-last"></span></div><aside class=sidebar><div class=sidebar-inner><!-- canvas粒子时钟 --><div><canvas id=canvas style=width:60%;>当前浏览器不支持canvas，请更换浏览器后再试</canvas></div><script>(function(){
+
+   var digit=
+    [
+        [
+            [0,0,1,1,1,0,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,0,1,1,0],
+            [0,0,1,1,1,0,0]
+        ],//0
+        [
+            [0,0,0,1,1,0,0],
+            [0,1,1,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [1,1,1,1,1,1,1]
+        ],//1
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,1,1],
+            [1,1,1,1,1,1,1]
+        ],//2
+        [
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//3
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,0],
+            [0,0,1,1,1,1,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,1,1,0],
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,1]
+        ],//4
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,1,1,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//5
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//6
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0]
+        ],//7
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//8
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,1,1,0,0,0,0]
+        ],//9
+        [
+            [0,0,0,0,0,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,0,0,0]
+        ]//:
+    ];
+
+var canvas = document.getElementById('canvas');
+
+if(canvas.getContext){
+    var cxt = canvas.getContext('2d');
+    //声明canvas的宽高
+    var H = 100,W = 700;
+    canvas.height = H;
+    canvas.width = W;
+    cxt.fillStyle = '#f00';
+    cxt.fillRect(10,10,50,50);
+
+    //存储时间数据
+    var data = [];
+    //存储运动的小球
+    var balls = [];
+    //设置粒子半径
+    var R = canvas.height/20-1;
+    (function(){
+        var temp = /(\d)(\d):(\d)(\d):(\d)(\d)/.exec(new Date());
+        //存储时间数字，由十位小时、个位小时、冒号、十位分钟、个位分钟、冒号、十位秒钟、个位秒钟这7个数字组成
+        data.push(temp[1],temp[2],10,temp[3],temp[4],10,temp[5],temp[6]);
+    })();
+
+    /*生成点阵数字*/
+    function renderDigit(index,num){
+        for(var i = 0; i < digit[num].length; i++){
+            for(var j = 0; j < digit[num][i].length; j++){
+                if(digit[num][i][j] == 1){
+                    cxt.beginPath();
+                    cxt.arc(14*(R+2)*index + j*2*(R+1)+(R+1),i*2*(R+1)+(R+1),R,0,2*Math.PI);
+                    cxt.closePath();
+                    cxt.fill();
+                }
+            }
+        }
+    }
+
+    /*更新时钟*/
+    function updateDigitTime(){
+        var changeNumArray = [];
+        var temp = /(\d)(\d):(\d)(\d):(\d)(\d)/.exec(new Date());
+        var NewData = [];
+        NewData.push(temp[1],temp[2],10,temp[3],temp[4],10,temp[5],temp[6]);
+        for(var i = data.length-1; i >=0 ; i--){
+            //时间发生变化
+            if(NewData[i] !== data[i]){
+                //将变化的数字值和在data数组中的索引存储在changeNumArray数组中
+                changeNumArray.push(i+'_'+(Number(data[i])+1)%10);
+            }
+        }
+        //增加小球
+        for(var i = 0; i< changeNumArray.length; i++){
+            addBalls.apply(this,changeNumArray[i].split('_'));
+        }
+        data = NewData.concat();
+    }
+
+    /*更新小球状态*/
+    function updateBalls(){
+        for(var i = 0; i < balls.length; i++){
+            balls[i].stepY += balls[i].disY;
+            balls[i].x += balls[i].stepX;
+            balls[i].y += balls[i].stepY;
+            if(balls[i].x > W + R || balls[i].y > H + R){
+                balls.splice(i,1);
+                i--;
+            }
+        }
+    }
+
+    /*增加要运动的小球*/
+    function addBalls(index,num){
+        var numArray = [1,2,3];
+        var colorArray =  ["#3BE","#09C","#A6C","#93C","#9C0","#690","#FB3","#F80","#F44","#C00"];
+        for(var i = 0; i < digit[num].length; i++){
+            for(var j = 0; j < digit[num][i].length; j++){
+                if(digit[num][i][j] == 1){
+                    var ball = {
+                        x:14*(R+2)*index + j*2*(R+1)+(R+1),
+                        y:i*2*(R+1)+(R+1),
+                        stepX:Math.floor(Math.random() * 4 -2),
+                        stepY:-2*numArray[Math.floor(Math.random()*numArray.length)],
+                        color:colorArray[Math.floor(Math.random()*colorArray.length)],
+                        disY:1
+                    };
+                    balls.push(ball);
+                }
+            }
+        }
+    }
+
+    /*渲染*/
+    function render(){
+        //重置画布宽度，达到清空画布的效果
+        canvas.height = 100;
+        //渲染时钟
+        for(var i = 0; i < data.length; i++){
+            renderDigit(i,data[i]);
+        }
+        //渲染小球
+        for(var i = 0; i < balls.length; i++){
+            cxt.beginPath();
+            cxt.arc(balls[i].x,balls[i].y,R,0,2*Math.PI);
+            cxt.fillStyle = balls[i].color;
+            cxt.closePath();
+            cxt.fill();
+        }
+    }
+
+    clearInterval(oTimer);
+    var oTimer = setInterval(function(){
+        //更新时钟
+        updateDigitTime();
+        //更新小球状态
+        updateBalls();
+        //渲染
+        render();
+    },50);
+}
+
+})();</script><!-- require APlayer --><link href=https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css rel=stylesheet><script src=https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js></script><!-- require MetingJS --><script src=/js/meting-js.js></script><ul class="sidebar-nav motion-element"><li class=sidebar-nav-toc>文章目录<li class=sidebar-nav-overview>站点概览</ul><!--noindex--><div class="post-toc-wrap sidebar-panel"><div class="post-toc motion-element"><ol class=nav><li class="nav-item nav-level-1"><a class=nav-link href=#%E7%BD%91%E5%85%B3><span class=nav-number>1.</span> <span class=nav-text>网关</span></a><li class="nav-item nav-level-1"><a class=nav-link href=#%E8%BF%90%E8%A1%8C%E6%97%B6><span class=nav-number>2.</span> <span class=nav-text>运行时</span></a><ol class=nav-child><li class="nav-item nav-level-2"><a class=nav-link href=#%E5%B7%A5%E5%85%B7-Tools-%E4%B8%8E-%E6%8A%80%E8%83%BD-Skills><span class=nav-number>2.1.</span> <span class=nav-text>工具 (Tools) 与 技能 (Skills)</span></a></ol><li class="nav-item nav-level-1"><a class=nav-link href=#Agent-Loop><span class=nav-number>3.</span> <span class=nav-text>Agent Loop</span></a><li class="nav-item nav-level-1"><a class=nav-link href=#%E7%B3%BB%E7%BB%9F%E6%8F%90%E7%A4%BA%E8%AF%8D><span class=nav-number>4.</span> <span class=nav-text>系统提示词</span></a><li class="nav-item nav-level-1"><a class=nav-link href=#%E4%B8%8A%E4%B8%8B%E6%96%87><span class=nav-number>5.</span> <span class=nav-text>上下文</span></a><li class="nav-item nav-level-1"><a class=nav-link href=#%E4%B8%8A%E4%B8%8B%E6%96%87%E5%BC%95%E6%93%8E><span class=nav-number>6.</span> <span class=nav-text>上下文引擎</span></a><ol class=nav-child><li class="nav-item nav-level-2"><a class=nav-link href=#%E5%8E%8B%E7%BC%A9-Compaction><span class=nav-number>6.1.</span> <span class=nav-text>压缩 (Compaction)</span></a></ol><li class="nav-item nav-level-1"><a class=nav-link href=#Agent-Workspace><span class=nav-number>7.</span> <span class=nav-text>Agent Workspace</span></a><ol class=nav-child><li class="nav-item nav-level-3"><a class=nav-link href=#%E5%8A%A8%E6%80%81%E6%B3%A8%E5%85%A5%E9%80%BB%E8%BE%91><span class=nav-number>7.1.</span> <span class=nav-text>动态注入逻辑</span></a><li class="nav-item nav-level-2"><a class=nav-link href=#%E5%90%AF%E5%8A%A8><span class=nav-number>7.2.</span> <span class=nav-text>启动</span></a></ol><li class="nav-item nav-level-1"><a class=nav-link href=#%E4%BC%9A%E8%AF%9D%E4%B8%8E%E8%AE%B0%E5%BF%86%E6%9C%BA%E5%88%B6><span class=nav-number>8.</span> <span class=nav-text>会话与记忆机制</span></a><ol class=nav-child><li class="nav-item nav-level-3"><a class=nav-link href=#%E4%BC%9A%E8%AF%9D%E9%9A%94%E7%A6%BB%E4%B8%8E%E8%B7%AF%E7%94%B1-Routing><span class=nav-number>8.1.</span> <span class=nav-text>会话隔离与路由 (Routing)</span></a></ol><li class="nav-item nav-level-1"><a class=nav-link href=#%E4%BC%9A%E8%AF%9D%E8%A3%81%E5%89%AA><span class=nav-number>9.</span> <span class=nav-text>会话裁剪</span></a><li class="nav-item nav-level-1"><a class=nav-link href=#%E4%BC%9A%E8%AF%9D%E5%B7%A5%E5%85%B7><span class=nav-number>10.</span> <span class=nav-text>会话工具</span></a><ol class=nav-child><li class="nav-item nav-level-3"><a class=nav-link href=#%E6%A0%B8%E5%BF%83%E5%B7%A5%E5%85%B7%E9%9B%86><span class=nav-number>10.1.</span> <span class=nav-text>核心工具集</span></a></ol><li class="nav-item nav-level-1"><a class=nav-link href=#%E8%AE%B0%E5%BF%86%E6%9C%BA%E5%88%B6><span class=nav-number>11.</span> <span class=nav-text>记忆机制</span></a><li class="nav-item nav-level-1"><a class=nav-link href=#%E5%A4%9A%E6%99%BA%E8%83%BD%E4%BD%93><span class=nav-number>12.</span> <span class=nav-text>多智能体</span></a><li class="nav-item nav-level-1"><a class=nav-link href=#%E9%87%8D%E8%AF%95%E7%AD%96%E7%95%A5><span class=nav-number>13.</span> <span class=nav-text>重试策略</span></a><li class="nav-item nav-level-1"><a class=nav-link href=#Claw%E5%AE%9E%E6%88%98><span class=nav-number>14.</span> <span class=nav-text>Claw实战</span></a><ol class=nav-child><li class="nav-item nav-level-2"><a class=nav-link href=#%E7%BB%93%E5%90%88QQ%E4%B8%8ESkills%E5%8F%91%E9%80%81%E5%BD%93%E5%A4%A9%E6%96%B0%E9%97%BB><span class=nav-number>14.1.</span> <span class=nav-text>结合QQ与Skills发送当天新闻</span></a></ol><li class="nav-item nav-level-1"><a class=nav-link href=#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99><span class=nav-number>15.</span> <span class=nav-text>参考资料</span></a></ol></div></div><!--/noindex--><div class="site-overview-wrap sidebar-panel"><div class="site-author motion-element" itemprop=author itemscope itemtype=http://schema.org/Person><img alt=Sekyoro class=site-author-image itemprop=image src=https://i.loli.net/2021/05/17/YqoavnXdGTpPO9R.jpg><p class=site-author-name itemprop=name>Sekyoro<div class=site-description itemprop=description>什么也无法舍弃的人，什么也做不了.</div></div><div class="site-state-wrap motion-element"><nav class=site-state><div class="site-state-item site-state-posts"><a href=/archives/> <span class=site-state-item-count>270</span> <span class=site-state-item-name>日志</span> </a></div><div class="site-state-item site-state-categories"><a href=/categories/> <span class=site-state-item-count>16</span> <span class=site-state-item-name>分类</span></a></div><div class="site-state-item site-state-tags"><a href=/tags/> <span class=site-state-item-count>231</span> <span class=site-state-item-name>标签</span></a></div></nav></div><div class="links-of-author motion-element"><span class=links-of-author-item> <a title="Personal Website → http://proanimer.com" href=http://proanimer.com/ rel=noopener target=_blank><i class="fab fa-internet-explorer fa-fw"></i>Personal Website</a> </span><span class=links-of-author-item> <a title="GitHub → https://github.com/drowning-in-codes" href=https://github.com/drowning-in-codes rel=noopener target=_blank><i class="fab fa-github fa-fw"></i>GitHub</a> </span><span class=links-of-author-item> <a title="E-Mail → mailto:bukalala174@gmail.com" href=mailto:bukalala174@gmail.com rel=noopener target=_blank><i class="fa fa-envelope fa-fw"></i>E-Mail</a> </span><span class=links-of-author-item> <a href="https://mp.weixin.qq.com/s?__biz=Mzg3ODY1MDkzMg%3D%3D&mid=2247483770&idx=1&sn=fdf88faab01d5c219ac609570a21c9d6&chksm=cf113221f866bb373938cfca03cf095ff4fe1e4dc37d68ef5de4cd4876ee1260fca0c015a4d6&token=1096259873&lang=zh_CN#rd" title="wxPublicAccount → https://mp.weixin.qq.com/s?__biz=Mzg3ODY1MDkzMg==&mid=2247483770&idx=1&sn=fdf88faab01d5c219ac609570a21c9d6&chksm=cf113221f866bb373938cfca03cf095ff4fe1e4dc37d68ef5de4cd4876ee1260fca0c015a4d6&token=1096259873&lang=zh_CN#rd" rel=noopener target=_blank><i class="fab fa-weixin fa-fw"></i>wxPublicAccount</a> </span><span class=links-of-author-item> <a title="RSS → /atom.xml" href=/atom.xml><i class="fa fa-rss fa-fw"></i>RSS</a> </span><span class=links-of-author-item> <a title="CSDN → https://blog.csdn.net/aqwca" href=https://blog.csdn.net/aqwca rel=noopener target=_blank><i class="fa fa-handshake fa-fw"></i>CSDN</a> </span><span class=links-of-author-item> <a title="杂鱼分享 → https://my-astro-git-main-drowning-in-codes.vercel.app" href=https://my-astro-git-main-drowning-in-codes.vercel.app/ rel=noopener target=_blank><i class="fas fa-share fa-fw"></i>杂鱼分享</a> </span></div><div class="links-of-blogroll motion-element"><div class=links-of-blogroll-title><i class="fa fa-link fa-fw"></i> 友情链接</div><ul class=links-of-blogroll-list><li class=links-of-blogroll-item><a href=https://protool-ten.vercel.app/ rel=noopener target=_blank title=https://protool-ten.vercel.app/>protools</a><li class=links-of-blogroll-item><a href=https://my-astro-aokh-git-main-drowningincodes-projects.vercel.app/ rel=noopener target=_blank title=https://my-astro-aokh-git-main-drowningincodes-projects.vercel.app>archive</a><li class=links-of-blogroll-item><a href=https://www.lllomh.com/ rel=noopener target=_blank title=https://www.lllomh.com/>芈渡</a><li class=links-of-blogroll-item><a href=http://myqhs.top/ rel=noopener target=_blank title=http://myqhs.top/>myqhs</a></ul></div><div class="motion-element announcement"><div class=title></div><p class=content><p class=date></div></div><meting-js id=6856787487 order=random server=netease type=playlist> </meting-js><div class=widget-wrap><h3 class=widget-title style=margin:0>文章词云</h3><div class="widget tagcloud" id=myCanvasContainer><canvas height=250 id=resCanvas style=width:100% width=250><ul class=tag-list itemprop=keywords><li class=tag-list-item><a class=tag-list-link href=/tags/Agent/ rel=tag>Agent</a><span class=tag-list-count>1</span><li class=tag-list-item><a class=tag-list-link href=/tags/OpenClaw/ rel=tag>OpenClaw</a><span class=tag-list-count>1</span></ul></canvas></div></div><script src="https://clustrmaps.com/map_v2.js?d=xQdGTxqARTBiNIwX2aUban-ixkj2s6VaZQWo-aVCgY8&cl=ffffff&w=a" id=clustrmaps></script><div class="back-to-top motion-element"><i class="fa fa-arrow-up"></i><span>0%</span></div><!-- 边栏 --></div></aside><div id=sidebar-dimmer></div></div></main><footer class=footer><div class=footer-inner><div class=copyright>© Wed Apr 08 2020 08:00:00 GMT+0800 (中国标准时间) – <span itemprop=copyrightYear>2026</span><span class=with-love> <i class="fa fa-heart"></i> </span><span class=author itemprop=copyrightHolder>Sekyoro</span><span class=post-meta-divider>|</span><span class=post-meta-item-icon> <i class="fa fa-chart-area"></i> </span><span title=站点总字数>2m</span><span class=post-meta-divider>|</span><span class=post-meta-item-icon> <i class="fa fa-coffee"></i> </span><span title=站点阅读时长>121:58</span></div><div><span id=timeDate>载入天数...</span><span id=times>载入时分秒...</span><script>var now = new Date();
+    function createtime() {
+        var grt= new Date("04/08/2021 20:00:00");
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+    }
+setInterval("createtime()",250);</script></div><div class=busuanzi-count><script async data-pjax src=https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script><span style="display: none;" class=post-meta-item id=busuanzi_container_site_uv> <span class=post-meta-item-icon> <i class="fa fa-user"></i> </span> <span class=site-uv title=总访客量> 总访客数<span id=busuanzi_value_site_uv></span>人</span> </span><span class=post-meta-divider>|</span><span style="display: none;" class=post-meta-item id=busuanzi_container_site_pv> <span class=post-meta-item-icon> <i class="fa fa-eye"></i> </span> <span class=site-pv title=总访问量> 总访问量<span id=busuanzi_value_site_pv></span>次</span> </span></div></div></footer></div><script color=0,0,255 count=99 opacity=0.5 src=/lib/canvas-nest/canvas-nest.min.js zindex=-1></script><script src=https://cdn.jsdelivr.net/npm/animejs@3.1.0/lib/anime.min.js></script><script src=https://cdn.jsdelivr.net/gh/theme-next/theme-next-pjax@0/pjax.min.js></script><script src=https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js></script><script src=https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js></script><script src=https://cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js></script><script src=https://cdn.jsdelivr.net/npm/velocity-animate@1/velocity.min.js></script><script src=https://cdn.jsdelivr.net/npm/velocity-animate@1/velocity.ui.min.js></script><script src=/js/utils.js></script><script src=/js/motion.js></script><script src=/js/schemes/pisces.js></script><script src=/js/next-boot.js></script><script src=/js/bookmark.js></script><script>var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax',
+	 '.widget-wrap'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+ 
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+  
+  // Reinitialize TagCanvas for tag cloud
+  if (typeof TagCanvas !== 'undefined' && document.getElementById('resCanvas')) {
+    try {
+      TagCanvas.textFont = 'Trebuchet MS, Helvetica';
+      TagCanvas.textColour = '#333';
+      TagCanvas.textHeight = 20;
+      TagCanvas.outlineColour = '#E2E1D1';
+      TagCanvas.maxSpeed = 0.3;
+      TagCanvas.freezeActive = true;
+      TagCanvas.outlineMethod = 'block';
+      TagCanvas.minBrightness = 0.2;
+      TagCanvas.depth = 0.92;
+      TagCanvas.pulsateTo = 0.6;
+      TagCanvas.initial = [0.1,-0.1];
+      TagCanvas.decel = 0.98;
+      TagCanvas.reverse = true;
+      TagCanvas.hideTags = false;
+      TagCanvas.shadow = '#ccf';
+      TagCanvas.shadowBlur = 3;
+      TagCanvas.weight = false;
+      TagCanvas.imageScale = null;
+      TagCanvas.fadeIn = 1000;
+      TagCanvas.clickToFront = 600;
+      TagCanvas.lock = false;
+      TagCanvas.Start('resCanvas');
+      TagCanvas.tc['resCanvas'].Wheel(true);
+    } catch(e) {
+      console.log('TagCanvas initialization failed:', e);
+    }
+  }
+});</script><script data-pjax>(function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();</script><script src=https://cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js></script><script src=https://cdn.jsdelivr.net/npm/instantsearch.js@4/dist/instantsearch.production.min.js></script><script src=/js/algolia-search.js></script><script data-pjax>document.querySelectorAll('.pdfobject-container').forEach(element => {
+  let url = element.dataset.target;
+  let pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  let pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  let fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});</script><div id=pjax><script charset=utf-8 defer src=/js/outdate.js></script></div><script charset=utf-8 defer src=/js/tagcanvas.js></script><script charset=utf-8 defer src=/js/tagcloud.js></script><script>NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});</script><script>var OriginTitile = document.title;
+  var titleTime;
+  document.addEventListener("visibilitychange", function() {
+    if (document.hidden) {
+      document.title = "(つェ⊂)我藏好了哦~" + OriginTitile;
+      clearTimeout(titleTime);
+    } else {
+      document.title = "(*´∇｀*) 被你发现啦~" + OriginTitile;
+      titleTime = setTimeout(function() {
+        document.title = OriginTitile;
+      }, 2000);
+    }
+  });</script>
